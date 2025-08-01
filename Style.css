@@ -201,3 +201,54 @@ h1, h2 {
   gap: 30px;
   margin-top: 30px;
 }
+.product-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 280px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.product-card h3 {
+  margin: 10px 0 5px;
+  color: #1a3c2d;
+}
+
+.product-card p {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.product-card span {
+  display: block;
+  font-weight: bold;
+  margin: 8px 0;
+  color: #2d624a;
+}
+
+.product-card button {
+  background-color: #1a3c2d;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-card button:hover {
+  background-color: #2d624a;
+}
