@@ -71,5 +71,12 @@
   <footer>
     <p>&copy; 2025 Green-Therapy CBD Shop. Tous droits réservés.</p>
   </footer>
+  <script>
+  document.querySelectorAll('.buy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      window.location.href = 'mailto:greentherapy06@gmail.com?subject=Achat CBD&body=Bonjour, je souhaite acheter ce produit :';
+    });
+  });
+  </script>
 </body>
           </html>
