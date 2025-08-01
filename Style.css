@@ -111,3 +111,30 @@ footer {
   font-size: 0.9rem;
   border-top: 1px solid #333;
   }
+/* --- Responsive mobile --- */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .product-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  .product-card img {
+    height: auto;
+    max-height: 250px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px 10px;
+  }
+}
