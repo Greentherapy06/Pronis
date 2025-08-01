@@ -178,3 +178,26 @@ nav ul li a:hover {
     align-items: center;
   }
 }
+section {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ccc;
+}
+
+section:nth-of-type(even) {
+  background-color: #ffffff;
+}
+
+h1, h2 {
+  color: #1a3c2d;
+  font-family: 'Arial', sans-serif;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
