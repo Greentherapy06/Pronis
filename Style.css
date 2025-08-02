@@ -325,3 +325,19 @@ form button:hover {
     text-align: center;
   }
 }
+/* 🎨 Style premium pour les boutons */
+button {
+  background: linear-gradient(90deg, gold, #d4af37);
+  color: black;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #ffd700, #c9a635);
+}
