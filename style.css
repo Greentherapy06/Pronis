@@ -1,362 +1,135 @@
+/* 🌱 --- STYLE GLOBAL --- */
 body {
-  background: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-  background-color: #f2f7f3;
-  font-family: Arial, sans-serif;
-}/* STYLE NOIR & OR - Green-Therapy */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0f0f0f;
-  color: #f4f4f4;
-}
-font-family: 'Montserrat', sans-serif;
-
-header {
-  background-color: #1a1a1a;
-  padding: 20px;
-  text-align: center;
-  border-bottom: 2px solid gold;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
 }
 
-header h1 {
-  margin: 0;
-  color: gold;
-  font-size: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
+/* 🌱 --- HEADER / NAVIGATION --- */
 nav {
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  padding: 15px 0;
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(27, 67, 50, 0.95); /* vert profond avec légère transparence */
+    color: white;
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    z-index: 100;
 }
 
 nav a {
-  color: gold;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: white;
+    color: #A5D6A7; /* vert clair au survol */
 }
 
+/* 🌱 --- SECTIONS --- */
 section {
-  padding: 60px 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-section h2 {
-  text-align: center;
-  color: gold;
-  font-size: 1.8rem;
-  margin-bottom: 30px;
-  border-bottom: 1px solid gold;
-  padding-bottom: 10px;
-}
-
-.product-grid {
-  display: grid;
-  gap: 30px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.product {
-  background-color: #1c1c1c;
-  padding: 20px;
-  border: 1px solid #333;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.05);
-  transition: transform 0.2s;
-}
-
-.product:hover {
-  transform: translateY(-5px);
-}
-
-.product img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 15px;
-}
-
-.product h3 {
-  color: gold;
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}
-
-.product p {
-  font-size: 0.95rem;
-  color: #ddd;
-}
-
-.product .price {
-  color: gold;
-  font-weight: bold;
-  margin-top: 10px;
-  font-size: 1.1rem;
-}
-
-footer {
-  background-color: #000;
-  color: #aaa;
-  text-align: center;
-  padding: 30px 10px;
-  font-size: 0.9rem;
-  border-top: 1px solid #333;
-  }
-/* --- Responsive mobile --- */
-@media screen and (max-width: 768px) {
-  body {
-    font-size: 16px;
-    padding: 10px;
-  }
-
-  header nav ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .product-list {
-    grid-template-columns: 1fr !important;
-  }
-
-  .product-card img {
-    height: auto;
-    max-height: 250px;
-  }
-
-  footer {
+    max-width: 1100px;
+    margin: 100px auto 50px auto;
+    padding: 20px;
     text-align: center;
-    padding: 20px 10px;
-  }
-}
-/* 🌿 Style du menu de navigation */
-nav {
-  background-color: #1a3c2d;
-  padding: 15px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 999;
 }
 
-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* 🌱 --- TITRES --- */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #1b4332;
 }
 
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-family: 'Arial', sans-serif;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
+h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #2e5f44;
 }
 
-nav ul li a:hover {
-  background-color: #2d624a;
+h3 {
+    font-size: 1.3rem;
+    color: #333;
 }
 
-/* 📱 Responsive - Affichage mobile */
-@media screen and (max-width: 600px) {
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-section {
-  padding: 60px 20px;
-  text-align: center;
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #ccc;
-}
-
-section:nth-of-type(even) {
-  background-color: #ffffff;
-}
-
-h1, h2 {
-  color: #1a3c2d;
-  font-family: 'Arial', sans-serif;
-}
-
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
-}
+/* 🌱 --- PRODUITS --- */
 .product-card {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  width: 280px;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.2s ease;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    width: 280px;
+    vertical-align: top;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
-  transform: scale(1.03);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 .product-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.product-card h3 {
-  margin: 10px 0 5px;
-  color: #1a3c2d;
-}
-
-.product-card p {
-  font-size: 0.9em;
-  color: #555;
-}
-
-.product-card span {
-  display: block;
-  font-weight: bold;
-  margin: 8px 0;
-  color: #2d624a;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
 .product-card button {
-  background-color: #1a3c2d;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    background: #1b4332;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .product-card button:hover {
-  background-color: #2d624a;
-}
-html {
-  scroll-behavior: smooth;
-}
-form {
-  max-width: 500px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    background: #2e5f44;
 }
 
-form input, form textarea {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+/* 🌱 --- CONTACT --- */
+#contact p {
+    font-size: 1.1rem;
+    margin: 8px 0;
 }
 
-form button {
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+#contact a {
+    color: #1b4332;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-form button:hover {
-  background-color: #45a049;
-}
-/* --------------------------- */
-/* ✅ RESPONSIVE POUR MOBILE 📱 */
-@media screen and (max-width: 768px) {
-  body {
-    padding: 10px;
-    font-size: 16px;
-  }
-
-  header nav ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .product-card {
-    width: 100%;
-    max-width: 300px;
-    margin: auto;
-    margin-bottom: 20px;
-  }
-
-  .product-list {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  form {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-  }
-
-  footer {
-    font-size: 14px;
-    text-align: center;
-  }
-}
-/* 🎨 Style premium pour les boutons */
-button {
-  background: linear-gradient(90deg, gold, #d4af37);
-  color: black;
-  font-weight: bold;
-  padding: 12px 20px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
+#contact a:hover {
+    text-decoration: underline;
 }
 
-button:hover {
-  transform: scale(1.05);
-  background: linear-gradient(90deg, #ffd700, #c9a635);
-}
-section {
-  padding: 60px 20px;
-  text-align: center;
-  border-bottom: 1px solid #333;
+/* 🌱 --- RESPONSIVE DESIGN (MOBILE) --- */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .product-card {
+        width: 90%;
+    }
 }
 
-section:nth-child(even) {
-  background-color: #111;
-  color: #fff;
-}
 
-section:nth-child(odd) {
-  background-color: #1c1c1c;
-  color: #f4f4f4;
-}
-
-h1, h2 {
-  color: gold;
-}
+    
+  
