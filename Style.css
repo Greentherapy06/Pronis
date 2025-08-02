@@ -341,3 +341,22 @@ button:hover {
   transform: scale(1.05);
   background: linear-gradient(90deg, #ffd700, #c9a635);
 }
+section {
+  padding: 60px 20px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+section:nth-child(even) {
+  background-color: #111;
+  color: #fff;
+}
+
+section:nth-child(odd) {
+  background-color: #1c1c1c;
+  color: #f4f4f4;
+}
+
+h1, h2 {
+  color: gold;
+}
