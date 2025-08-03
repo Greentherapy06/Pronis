@@ -140,3 +140,11 @@ h2 {
 .contact h2 {
   color: #d4af37;
 }
+/* ✅ GRID PRODUITS - 2 colonnes PC, 1 colonne mobile */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+}
