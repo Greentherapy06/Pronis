@@ -1,266 +1,59 @@
 /* === STYLE GLOBAL === */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #f5f5f5;
-    color: #222;
-    line-height: 1.6;
-}
-
-/* === HEADER GLOBAL === */
-header {
-  display: flex;
-  justify-content: space-between; /* logo à gauche, bouton à droite */
-  align-items: center; /* centre tout verticalement */
-  background-color: #000; /* fond noir */
-  padding: 10px 20px;
-}
-
-/* === LOGO + TEXTE === */
-.logo-container {
-  display: flex;
-  align-items: center; /* aligne logo et texte au centre */
-  gap: 15px; /* espace entre logo et texte */
-}
-
-/* === LOGO === */
-.logo {
-  width: 80px; /* taille du logo */
-  height: auto;
-  border: none;
-  background: none;
-  box-shadow: none;
-}
-
-/* === TEXTE GREEN-THERAPY === */
-.logo-container h1 {
-  font-size: 28px;
-  font-weight: bold;
-  color: #d4af37; /* doré luxe */
   margin: 0;
-  line-height: 1;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f5f5;
+  line-height: 1.6;
+  color: #222;
 }
 
-/* === BOUTON PANIER === */
-.panier-btn {
-  background-color: #d4af37;
-  color: #000;
-  font-weight: bold;
-  padding: 8px 15px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.panier-btn:hover {
-  background-color: #b8962e;
-}
-
-/* === LOGO + TEXTE === */
-.logo-container {
-    display: flex;
-    align-items: center;   /* ✅ centre logo + texte verticalement */
-    gap: 15px;             /* ✅ espace entre le logo et “Green-Therapy” */
-}
-
-/* === LOGO === */
-.logo {
-    width: 90px;        /* ✅ agrandit un peu plus le logo */
-    height: auto;
-    border: none !important;    /* ✅ supprime le cercle doré */
-    box-shadow: none !important;
-    background: none !important;
-    border-radius: 0;   /* ✅ empêche qu’un rond se recrée */
-}
-
-/* === TEXTE “GREEN-THERAPY” === */
-h1 {
-    font-size: 28px;
-    font-weight: bold;
-    color: #d4af37; /* doré luxe */
-    margin: 0;
-}
-
-/* === BOUTON PANIER === */
-.snipcart-checkout {
-    background-color: #d4af37;
-    color: #000;
-    font-weight: bold;
-    padding: 8px 15px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-.snipcart-checkout:hover {
-    background-color: #b8962e;
-}
-
-/* === NAVIGATION === */
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 10px;
-    flex: 1 1 100%;
-    text-align: center;
-}
-
-nav a {
-    color: #d4af37;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    transition: 0.3s ease;
-}
-nav a:hover {
-    color: #fff;
-}
-
-/* === SECTIONS === */
-h2 {
-    color: #d4af37;
-    text-align: center;
-    font-size: 22px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
-.section {
-    padding: 20px;
-    text-align: center;
-}
-
-/* === PRODUITS === */
-.product-card {
-    background-color: #fff;
-    margin: 15px auto;
-    padding: 15px;
-    max-width: 320px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.product-card img {
-    width: 100%;
-    border-radius: 12px;
-}
-
-/* Nom du produit */
-.product-card h3 {
-    color: #000;
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-/* Prix produit */
-.price {
-    font-size: 18px;
-    font-weight: bold;
-    color: #d4af37;
-}
-
-/* Bouton ajouter au panier */
-.product-card button {
-    background-color: #d4af37;
-    color: #000;
-    font-weight: bold;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-.product-card button:hover {
-    background-color: #b8962e;
-}
-
-/* === CONTACT === */
-#contact {
-    background-color: #000;
-    padding: 30px 15px;
-    margin-top: 30px;
-}
-#contact h2 {
-    color: #d4af37;
-}
-#contact p {
-    color: #fff;
-    font-size: 16px;
-}
-/* --- HEADER FLEX FIX --- */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* ✅ Centre le logo et le texte sur la même ligne */
-    background-color: #000;
-    padding: 10px 20px;
-    flex-wrap: nowrap; /* ✅ empêche le texte de passer en dessous */
-}
-
-/* --- LOGO + TEXTE --- */
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* ✅ espace entre logo et texte */
-}
-
-/* --- LOGO --- */
-.logo {
-    width: 80px;  /* ✅ taille propre du logo */
-    height: auto;
-    border: none;
-    box-shadow: none;
-    background: none;
-}
-
-/* --- TEXTE “Green-Therapy” --- */
-.logo-container h1 {
-    font-size: 28px;
-    font-weight: bold;
-    color: #d4af37; /* doré luxe */
-    margin: 0;
-    line-height: 1;
-}
-/* === HEADER GLOBAL === */
+/* === HEADER === */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #000;    /* 🔥 Noir luxe */
-  padding: 10px 20px;
-  flex-wrap: nowrap;
+  background-color: #000;
+  padding: 15px 25px;
+  flex-wrap: wrap;
 }
 
-/* === LOGO + TEXTE === */
+/* LOGO + TEXTE */
 .logo-container {
   display: flex;
-  flex-direction: row;       /* 🔥 Texte sur la même ligne que le logo */
   align-items: center;
-  gap: 15px;                 /* 🔥 Espace entre le logo et le texte */
+  gap: 12px;
 }
 
-/* === LOGO === */
 .logo {
-  width: 90px;               /* ✅ Taille du logo */
+  width: 80px;
   height: auto;
-  border: none;
-  box-shadow: none;
-  background: none;
 }
 
-/* === TEXTE "GREEN-THERAPY" === */
 .logo-container h1 {
   font-size: 28px;
   font-weight: bold;
-  color: #d4af37;           /* ✅ Doré luxe */
+  color: #d4af37;
   margin: 0;
-  line-height: 1;
-  white-space: nowrap;      /* ✅ Empêche Green- et Therapy de passer sur 2 lignes */
+  white-space: nowrap;
+}
+
+/* === NAVIGATION === */
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: #d4af37;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  transition: 0.3s ease;
+}
+
+nav a:hover {
+  color: #fff;
 }
 
 /* === BOUTON PANIER === */
@@ -268,29 +61,82 @@ header {
   background-color: #d4af37;
   color: #000;
   font-weight: bold;
-  padding: 8px 15px;
+  padding: 10px 18px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
   transition: 0.3s ease;
 }
+
 .panier-btn:hover {
   background-color: #b8962e;
 }
 
-/* === NAVIGATION === */
-nav {
-  display: flex;
-  gap: 20px;
-  margin-left: auto;
+/* === SECTIONS === */
+.section {
+  padding: 30px 20px;
+  text-align: center;
 }
-nav a {
+
+h2 {
   color: #d4af37;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 16px;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+/* === PRODUITS === */
+.product-card {
+  background-color: #fff;
+  margin: 15px auto;
+  padding: 15px;
+  max-width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.product-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #000;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d4af37;
+}
+
+/* Bouton ajouter au panier */
+.product-card button {
+  background-color: #d4af37;
+  color: #000;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
   transition: 0.3s ease;
 }
-nav a:hover {
+
+.product-card button:hover {
+  background-color: #b8962e;
+}
+
+/* === CONTACT === */
+.contact {
+  background-color: #000;
   color: #fff;
+  margin-top: 20px;
+  padding: 30px 15px;
+  border-radius: 12px;
+}
+.contact h2 {
+  color: #d4af37;
 }
