@@ -13,34 +13,37 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000; /* fond noir chic */
+    background-color: #000; /* fond noir */
     padding: 10px 20px;
+    flex-wrap: wrap;
 }
 
-/* Conteneur logo + texte */
+/* === LOGO + TEXTE === */
 .logo-container {
     display: flex;
-    align-items: center;
-    gap: 15px; /* espace entre logo et texte */
+    align-items: center;   /* ✅ centre logo + texte verticalement */
+    gap: 15px;             /* ✅ espace entre le logo et “Green-Therapy” */
 }
 
-/* Logo */
+/* === LOGO === */
 .logo {
-    width: 80px;   /* ✅ agrandi le logo */
+    width: 90px;        /* ✅ agrandit un peu plus le logo */
     height: auto;
-    border-radius: 50%;
-    border: none;  /* ✅ enlève le cercle doré */
+    border: none !important;    /* ✅ supprime le cercle doré */
+    box-shadow: none !important;
+    background: none !important;
+    border-radius: 0;   /* ✅ empêche qu’un rond se recrée */
 }
 
-/* Texte à droite du logo */
+/* === TEXTE “GREEN-THERAPY” === */
 h1 {
     font-size: 28px;
     font-weight: bold;
-    color: #d4af37; /* texte doré */
+    color: #d4af37; /* doré luxe */
     margin: 0;
 }
 
-/* Bouton panier */
+/* === BOUTON PANIER === */
 .snipcart-checkout {
     background-color: #d4af37;
     color: #000;
@@ -61,6 +64,8 @@ nav {
     justify-content: center;
     gap: 20px;
     margin-top: 10px;
+    flex: 1 1 100%;
+    text-align: center;
 }
 
 nav a {
@@ -74,7 +79,7 @@ nav a:hover {
     color: #fff;
 }
 
-/* === TITRES DE SECTION === */
+/* === SECTIONS === */
 h2 {
     color: #d4af37;
     text-align: center;
@@ -83,7 +88,6 @@ h2 {
     margin-bottom: 10px;
 }
 
-/* === SECTIONS === */
 .section {
     padding: 20px;
     text-align: center;
