@@ -1,32 +1,26 @@
-/* 🌿 RESET DE BASE */
-* {
+/* 🌱 STYLE GLOBAL */
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
-}
-
-body {
-  background-color: #f9f9f9;
-  color: #1B4332;
+  background-color: #f8f8f8;
+  color: #333;
   line-height: 1.6;
 }
 
-/* 🌿 HEADER */
+/* 🌱 HEADER */
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #14532d;
+  color: white;
   position: sticky;
   top: 0;
-  background-color: #1B4332;
-  color: white;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
-/* 🌿 LOGO */
 .logo-container {
   display: flex;
   align-items: center;
@@ -35,63 +29,66 @@ header {
 .logo {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
   margin-right: 10px;
+  border-radius: 50%;
+  background-color: white;
 }
 
 .site-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
 }
 
-/* 🌿 NAVIGATION */
+/* 🌱 NAVIGATION */
 nav a {
+  color: white;
   margin: 0 10px;
   text-decoration: none;
-  color: white;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #95D5B2;
+  color: #a7f3d0;
 }
 
-/* 🛒 BOUTON PANIER */
+/* 🌱 BOUTON PANIER */
 .panier-btn {
-  background-color: #FFD700;
-  color: #1B4332;
-  padding: 8px 15px;
+  background-color: #facc15;
   border: none;
-  border-radius: 5px;
-  font-weight: bold;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
 .panier-btn:hover {
-  background-color: #FFC107;
+  background-color: #eab308;
 }
 
-/* 🌿 SECTIONS */
+/* 🌱 SECTIONS */
 .section {
-  padding: 50px 20px;
+  padding: 40px 20px;
   text-align: center;
 }
 
-/* 🌿 PRODUITS */
+.section h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #14532d;
+}
+
+/* 🌱 PRODUITS */
 .product-card {
-  background: white;
-  border-radius: 15px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin: 20px auto;
   max-width: 350px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-  transform: scale(1.03);
+  text-align: center;
 }
 
 .product-card img {
@@ -103,45 +100,47 @@ nav a:hover {
 .product-card h3 {
   font-size: 20px;
   margin: 10px 0;
+  color: #14532d;
 }
 
 .product-card p {
-  color: #555;
-  font-size: 14px;
+  margin: 5px 0;
+  font-size: 16px;
 }
 
 .product-card span {
-  display: block;
-  margin: 10px 0;
   font-weight: bold;
-  color: #1B4332;
+  font-size: 18px;
+  color: #111;
 }
 
-/* 🛒 BOUTON AJOUTER AU PANIER */
+/* 🌱 BOUTON "AJOUTER AU PANIER" */
 .snipcart-add-item {
-  background-color: #1B4332;
+  display: inline-block;
+  background-color: #16a34a;
   color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 16px;
+  border-radius: 8px;
   cursor: pointer;
+  border: none;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
 .snipcart-add-item:hover {
-  background-color: #2D6A4F;
+  background-color: #15803d;
 }
 
-/* 📱 RESPONSIVE */
+/* 🌱 RESPONSIVE (Mobile) */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    text-align: center;
-  }
-
   nav {
-    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .product-card {
+    max-width: 90%;
   }
 }
-  
