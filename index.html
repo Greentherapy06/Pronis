@@ -3,104 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green-Therapy • Boutique CBD Premium</title>
+  <title>Green-Therapy - Boutique CBD Premium</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- Snipcart (JS + CSS) -->
-  <script async src="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.js"></script>
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.css" />
-</head>
+  <!-- ✅ SCRIPT SNIPCART AVEC TA CLÉ API -->
+  <script>
+    window.SnipcartSettings = {
+        publicApiKey: 'MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3',
+        loadStrategy: 'on-user-interaction',
+        currency: 'eur'
+    };
 
+    (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
+  </script>
+</head>
 <body>
 
-  <!-- 🌿 HEADER -->
+  <!-- ✅ HEADER -->
   <header>
-    <div class="logo-container">
-      <img src="logo.png" alt="Green-Therapy Logo" class="logo">
-      <span class="site-title">Green-Therapy</span>
-    </div>
-    <nav>
-      <a href="#home">🏡 Accueil</a>
-      <a href="#produits">🛍 Produits</a>
-      <a href="#a-propos">ℹ️ À propos</a>
-      <a href="#contact">✉️ Contact</a>
-    </nav>
-    <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
+    <h1>🛒 Green-Therapy - Test Snipcart</h1>
+    <button class="snipcart-checkout">Voir le panier</button>
   </header>
 
-  <!-- 🏠 SECTION ACCUEIL -->
-  <section id="home" class="section">
-    <h1>🌱 Green-Therapy - Boutique CBD Premium en Italie et au Portugal 🌱</h1>
-    <p>Qualité italienne et portugaise, bien-être assuré ! Découvrez notre sélection de CBD premium.</p>
+  <!-- ✅ SECTION PRODUIT TEST -->
+  <section>
+    <h2>Produit Test</h2>
+    <p>Prix : 9,90 €</p>
+    <button 
+      class="snipcart-add-item"
+      data-item-id="test-produit"
+      data-item-name="CBD Test"
+      data-item-price="9.90"
+      data-item-url="/"
+      data-item-description="Produit CBD de test">
+      ➕ Ajouter au panier
+    </button>
   </section>
 
-  <!-- 🛍 SECTION PRODUITS -->
-  <section id="produits" class="section">
-    <h2>Nos Produits</h2>
-
-    <!-- Produit 1 -->
-    <div class="product-card">
-      <img src="amnesia-cbd.jpg" alt="Fleur de CBD Amnesia premium d’Italie" style="width:200px;">
-      <h3>🌿 Fleur CBD Amnesia premium d’Italie</h3>
-      <p>Fleur premium 🇮🇹</p>
-      <span>À partir de 8,90 €</span>
-      <button class="snipcart-add-item"
-        data-item-id="amnesia-cbd"
-        data-item-name="Fleur CBD Amnesia"
-        data-item-price="8.90"
-        data-item-url="/"
-        data-item-description="Fleur CBD premium d’Italie">
-        ➕ Ajouter au panier
-      </button>
-    </div>
-
-    <!-- Produit 2 -->
-    <div class="product-card">
-      <img src="cherry-cbd.jpg" alt="Fleur de CBD Cherry fruitée et intense" style="width:200px;">
-      <h3>🍒 Fleur CBD Cherry fruitée et intense</h3>
-      <p>Fleur fruitée 🇮🇹</p>
-      <span>À partir de 9,90 €</span>
-      <button class="snipcart-add-item"
-        data-item-id="cherry-cbd"
-        data-item-name="Fleur CBD Cherry"
-        data-item-price="9.90"
-        data-item-url="/"
-        data-item-description="Fleur CBD Cherry fruitée et intense">
-        ➕ Ajouter au panier
-      </button>
-    </div>
-
-    <!-- Produit 3 -->
-    <div class="product-card">
-      <img src="resine-cbd.jpg" alt="Résine CBD Hash naturelle" style="width:200px;">
-      <h3>🧱 Résine CBD Hash naturelle</h3>
-      <p>Résine naturelle 🇮🇹</p>
-      <span>À partir de 7,50 €</span>
-      <button class="snipcart-add-item"
-        data-item-id="resine-cbd"
-        data-item-name="Résine CBD Hash"
-        data-item-price="7.50"
-        data-item-url="/"
-        data-item-description="Résine CBD Hash naturelle">
-        ➕ Ajouter au panier
-      </button>
-    </div>
-  </section>
-
-  <!-- 📞 SECTION CONTACT -->
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>📧 Email : <a href="mailto:greentherapy06@gmail.com">greentherapy06@gmail.com</a></p>
-    <p>📸 Instagram : @GreenTherapy06</p>
-  </section>
-
-  <!-- 🔑 Snipcart container avec API Key (TEST) -->
-  <div hidden id="snipcart"
-    data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
-    data-currency="eur"
-    data-config-modal-style="side">
-  </div>
+  <!-- ✅ SNIPCART DIV OBLIGATOIRE -->
+  <div hidden id="snipcart" data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"></div>
 
 </body>
 </html>
