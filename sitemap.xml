@@ -5,17 +5,17 @@
   <!-- Version française -->
   <url>
     <loc>https://greentherapy06.github.io/Green-therapy-cbd/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://greentherapy06.github.io/Green-therapy-cbd/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://greentherapy06.github.io/Green-therapy-cbd/pt/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://greentherapy06.github.io/Green-therapy-cbd/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://greentherapy06.github.io/Green-therapy-cbd/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://greentherapy06.github.io/Green-therapy-cbd/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://greentherapy06.github.io/Green-therapy-cbd/"/>
   </url>
 
   <!-- Version portugaise -->
   <url>
     <loc>https://greentherapy06.github.io/Green-therapy-cbd/pt/</loc>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://greentherapy06.github.io/Green-therapy-cbd/pt/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://greentherapy06.github.io/Green-therapy-cbd/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://greentherapy06.github.io/Green-therapy-cbd/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://greentherapy06.github.io/Green-therapy-cbd/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://greentherapy06.github.io/Green-therapy-cbd/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://greentherapy06.github.io/Green-therapy-cbd/"/>
   </url>
 
 </urlset>
