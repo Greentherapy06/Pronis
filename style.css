@@ -31,11 +31,12 @@ header {
 }
 
 .logo-container h1 {
-  font-size: 28px;
-  font-weight: bold;
-  color: #d4af37;
-  margin: 0;
-  white-space: nowrap;
+    font-size: 28px;
+    font-weight: bold;
+    color: #d4af37;
+    margin: 0;
+    line-height: 1;
+    margin-left: 20px; /* ✅ décale le texte vers la droite */
 }
 
 /* === NAVIGATION === */
