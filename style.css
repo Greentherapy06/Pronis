@@ -1,135 +1,111 @@
-/* 🌱 --- STYLE GLOBAL --- */
+/* 🌿 Style global */
 body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
-    line-height: 1.6;
+    text-align: center;
 }
 
-/* 🌱 --- HEADER / NAVIGATION --- */
+/* 🌿 Navigation */
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(27, 67, 50, 0.95); /* vert profond avec légère transparence */
+    background-color: #1b4332;
     color: white;
-    padding: 15px 0;
+    padding: 15px;
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    z-index: 100;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* 🌿 Liens du menu */
 nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.1rem;
+    margin: 0 10px;
     transition: color 0.3s ease;
 }
 
 nav a:hover {
-    color: #A5D6A7; /* vert clair au survol */
+    color: #b7e4c7;
 }
 
-/* 🌱 --- SECTIONS --- */
-section {
-    max-width: 1100px;
-    margin: 100px auto 50px auto;
-    padding: 20px;
-    text-align: center;
-}
-
-/* 🌱 --- TITRES --- */
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    color: #1b4332;
-}
-
-h2 {
-    font-size: 2rem;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    color: #2e5f44;
-}
-
-h3 {
-    font-size: 1.3rem;
-    color: #333;
-}
-
-/* 🌱 --- PRODUITS --- */
+/* 🌿 Section produits */
 .product-card {
-    background: white;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     padding: 20px;
-    margin: 20px;
-    display: inline-block;
-    width: 280px;
-    vertical-align: top;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px auto;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
+/* 🌿 Boutons Acheter */
+.snipcart-add-item {
+    background-color: #2d6a4f;
+    color: white;
+    font-weight: bold;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.snipcart-add-item:hover {
+    background-color: #40916c;
+    transform: scale(1.05);
+}
+
+/* 🌿 Bouton Voir le panier */
+.snipcart-checkout {
+    background-color: #ffba08;
+    color: #1b4332;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.snipcart-checkout:hover {
+    background-color: #ffd166;
+}
+
+/* 🌿 Images produits */
 .product-card img {
     width: 100%;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
 }
 
-.product-card button {
-    background: #1b4332;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.product-card button:hover {
-    background: #2e5f44;
-}
-
-/* 🌱 --- CONTACT --- */
-#contact p {
-    font-size: 1.1rem;
-    margin: 8px 0;
-}
-
-#contact a {
+/* 🌿 Titre section */
+h2 {
+    margin-top: 30px;
+    font-size: 26px;
     color: #1b4332;
-    text-decoration: none;
-    font-weight: bold;
 }
 
-#contact a:hover {
-    text-decoration: underline;
+h3 {
+    font-size: 20px;
+    margin: 10px 0;
 }
 
-/* 🌱 --- RESPONSIVE DESIGN (MOBILE) --- */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-
+/* 🌿 Responsive */
+@media screen and (max-width: 768px) {
     .product-card {
         width: 90%;
     }
 }
-
 
     
   
