@@ -3,95 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green-Therapy - Boutique CBD Premium</title>
+  <title>Green-Therapy - CBD Premium</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- ✅ Snipcart (version officielle) -->
+  <!-- ✅ Snipcart -->
   <script async src="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.js"></script>
   <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.css" />
 </head>
 <body>
 
   <!-- ✅ HEADER -->
-  <header style="background:#0b3d2e; padding:12px; color:white; display:flex; justify-content:space-between; align-items:center;">
-    <div style="display:flex; align-items:center; gap:10px;">
-      <img src="logo.png" alt="Green-Therapy Logo" style="height:50px;">
-      <h1 style="margin:0;">Green-Therapy</h1>
+  <header class="header">
+    <div class="logo-container">
+      <img src="logo.png" alt="Green-Therapy Logo" class="logo">
+      <h1 class="site-title">Green-Therapy</h1>
     </div>
-    <button class="snipcart-checkout" style="background:#ffeb3b; color:black; padding:8px 14px; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">
-      🛒 Voir le panier
-    </button>
+    <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
   </header>
 
   <!-- ✅ SECTION ACCUEIL -->
-  <section style="padding:20px; text-align:center;">
-    <h2>🌱 Green-Therapy - Boutique CBD Premium en Italie et au Portugal 🌱</h2>
+  <section class="intro">
+    <h2>🌱 Green-Therapy - Boutique CBD Premium 🌱</h2>
     <p>Qualité italienne et portugaise, bien-être assuré ! Découvrez notre sélection de CBD premium.</p>
   </section>
 
   <!-- ✅ SECTION PRODUITS -->
-  <section style="padding:20px;">
-    <h2 style="text-align:center;">Nos Produits</h2>
+  <section class="products">
+    <h2>Nos Produits</h2>
 
     <!-- ✅ PRODUIT 1 -->
-    <div style="margin-bottom:25px; text-align:center;">
-      <img src="amnesia-cbd.webp" alt="Fleur CBD Amnesia" style="width:180px; border-radius:8px;">
+    <div class="product-card">
+      <img src="amnesia-cbd.webp" alt="Fleur CBD Amnesia">
       <h3>🌿 Fleur CBD Amnesia</h3>
-      <p>Prix : <strong>8,90 €</strong></p>
-      <button 
-        class="snipcart-add-item"
+      <p class="price">8,90 €</p>
+      <button class="snipcart-add-item add-btn"
         data-item-id="amnesia-cbd"
         data-item-name="Fleur CBD Amnesia"
         data-item-price="8.90"
         data-item-url="/"
-        data-item-description="Fleur de CBD premium d’Italie"
-        style="background:#2e7d32; color:white; padding:8px 14px; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">
+        data-item-description="Fleur de CBD premium d’Italie">
         ➕ Ajouter au panier
       </button>
     </div>
 
     <!-- ✅ PRODUIT 2 -->
-    <div style="margin-bottom:25px; text-align:center;">
-      <img src="cherry-cbd.webp" alt="Fleur CBD Cherry" style="width:180px; border-radius:8px;">
+    <div class="product-card">
+      <img src="cherry-cbd.webp" alt="Fleur CBD Cherry">
       <h3>🍒 Fleur CBD Cherry</h3>
-      <p>Prix : <strong>9,90 €</strong></p>
-      <button 
-        class="snipcart-add-item"
+      <p class="price">9,90 €</p>
+      <button class="snipcart-add-item add-btn"
         data-item-id="cherry-cbd"
         data-item-name="Fleur CBD Cherry"
         data-item-price="9.90"
         data-item-url="/"
-        data-item-description="Fleur CBD Cherry fruitée et intense"
-        style="background:#2e7d32; color:white; padding:8px 14px; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">
+        data-item-description="Fleur CBD Cherry fruitée et intense">
         ➕ Ajouter au panier
       </button>
     </div>
 
     <!-- ✅ PRODUIT 3 -->
-    <div style="margin-bottom:25px; text-align:center;">
-      <img src="resine-cbd.webp" alt="Résine CBD Hash" style="width:180px; border-radius:8px;">
+    <div class="product-card">
+      <img src="resine-cbd.webp" alt="Résine CBD Hash">
       <h3>🧱 Résine CBD Hash</h3>
-      <p>Prix : <strong>7,50 €</strong></p>
-      <button 
-        class="snipcart-add-item"
+      <p class="price">7,50 €</p>
+      <button class="snipcart-add-item add-btn"
         data-item-id="resine-cbd"
         data-item-name="Résine CBD Hash"
         data-item-price="7.50"
         data-item-url="/"
-        data-item-description="Résine CBD Hash naturelle"
-        style="background:#2e7d32; color:white; padding:8px 14px; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">
+        data-item-description="Résine CBD Hash naturelle">
         ➕ Ajouter au panier
       </button>
     </div>
   </section>
 
   <!-- ✅ FOOTER -->
-  <footer style="background:#0b3d2e; color:white; padding:10px; text-align:center;">
+  <footer class="footer">
     <p>© 2025 Green-Therapy. Tous droits réservés.</p>
   </footer>
 
-  <!-- ✅ Snipcart API Key -->
+  <!-- ✅ SNIPCART API -->
   <div hidden id="snipcart"
        data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
        data-config-modal-style="side"
