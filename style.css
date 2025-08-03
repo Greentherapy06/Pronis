@@ -8,14 +8,54 @@ body {
     line-height: 1.6;
 }
 
-/* === HEADER === */
+/* === HEADER GLOBAL === */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000; /* fond noir */
-    padding: 10px 20px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between; /* logo à gauche, bouton à droite */
+  align-items: center; /* centre tout verticalement */
+  background-color: #000; /* fond noir */
+  padding: 10px 20px;
+}
+
+/* === LOGO + TEXTE === */
+.logo-container {
+  display: flex;
+  align-items: center; /* aligne logo et texte au centre */
+  gap: 15px; /* espace entre logo et texte */
+}
+
+/* === LOGO === */
+.logo {
+  width: 80px; /* taille du logo */
+  height: auto;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+/* === TEXTE GREEN-THERAPY === */
+.logo-container h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #d4af37; /* doré luxe */
+  margin: 0;
+  line-height: 1;
+}
+
+/* === BOUTON PANIER === */
+.panier-btn {
+  background-color: #d4af37;
+  color: #000;
+  font-weight: bold;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.panier-btn:hover {
+  background-color: #b8962e;
 }
 
 /* === LOGO + TEXTE === */
