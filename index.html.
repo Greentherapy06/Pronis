@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green-Therapy – CBD Premium Portugal</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- ✅ CSS Snipcart -->
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" />
+</head>
+
+<body>
+
+  <!-- ✅ HEADER -->
+  <header>
+    <div class="logo-container">
+      <img src="../logo-rond.png" alt="Green Therapy Logo" class="logo" loading="lazy" width="80" height="80">
+      <h1>Green-Therapy</h1>
+    </div>
+
+    <!-- ✅ NAVIGATION -->
+    <nav>
+      <a href="#home">🏠 Início</a>
+      <a href="#produtos">🛍️ Produtos</a>
+      <a href="#contato">✉️ Contato</a>
+      <a href="../index.html">🇫🇷 Français</a>
+    </nav>
+
+    <!-- ✅ BOTÃO CARRINHO -->
+    <button class="snipcart-checkout panier-btn">🛒 Ver carrinho</button>
+  </header>
+
+  <!-- ✅ SEÇÃO INÍCIO -->
+  <section id="home" class="section">
+    <h2>🌿 Green-Therapy – CBD Premium</h2>
+    <p>Qualidade italiana, bem-estar garantido. Descubra a nossa seleção de produtos CBD premium.</p>
+  </section>
+
+  <!-- ✅ SEÇÃO PRODUTOS -->
+  <section id="produtos" class="section">
+    <h2>🛍️ Os Nossos Produtos</h2>
+    <div class="product-grid">
+
+      <!-- ✅ PRODUTO 1 -->
+      <div class="product-card">
+        <picture>
+          <source srcset="../amnesia-cbd.webp" type="image/webp">
+          <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia" class="product-img" loading="lazy" width="400" height="400">
+        </picture>
+        <h3>🌿 Flor CBD Amnesia</h3>
+        <p class="price">8,90 €</p>
+        <button 
+          class="snipcart-add-item"
+          data-item-id="amnesia-cbd"
+          data-item-name="Flor CBD Amnesia"
+          data-item-price="8.90"
+          data-item-url="/pt/"
+          data-item-description="Flor CBD premium de Itália">
+          ➕ Adicionar ao carrinho
+        </button>
+      </div>
+
+      <!-- ✅ PRODUTO 2 -->
+      <div class="product-card">
+        <picture>
+          <source srcset="../resine-cbd.webp" type="image/webp">
+          <img src="../resine-cbd.jpg" alt="Resina CBD Hash" class="product-img" loading="lazy" width="400" height="400">
+        </picture>
+        <h3>🌿 Resina CBD Hash</h3>
+        <p class="price">7,50 €</p>
+        <button 
+          class="snipcart-add-item"
+          data-item-id="resine-cbd"
+          data-item-name="Resina CBD Hash"
+          data-item-price="7.50"
+          data-item-url="/pt/"
+          data-item-description="Resina CBD premium de Itália">
+          ➕ Adicionar ao carrinho
+        </button>
+      </div>
+
+      <!-- ✅ PRODUTO 3 -->
+      <div class="product-card">
+        <picture>
+          <source srcset="../cherry-cbd.webp" type="image/webp">
+          <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry" class="product-img" loading="lazy" width="400" height="400">
+        </picture>
+        <h3>🍒 Flor CBD Cherry</h3>
+        <p class="price">9,50 €</p>
+        <button 
+          class="snipcart-add-item"
+          data-item-id="cherry-cbd"
+          data-item-name="Flor CBD Cherry"
+          data-item-price="9.50"
+          data-item-url="/pt/"
+          data-item-description="Flor CBD Cherry premium de Itália">
+          ➕ Adicionar ao carrinho
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ✅ SEÇÃO CONTATO -->
+  <section id="contato" class="section">
+    <h2>✉️ Contato</h2>
+    <p>Fale conosco para qualquer dúvida ou pedido especial.</p>
+    <p>📧 Email : greentherapy06@gmail.com</p>
+  </section>
+
+  <!-- ✅ SNIPCART DIV OBRIGATÓRIA -->
+  <div hidden id="snipcart" 
+       data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
+       data-config-modal-style="side">
+  </div>
+
+  <!-- ✅ Script Snipcart (no final do body) -->
+  <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
+
+</body>
+</html>
