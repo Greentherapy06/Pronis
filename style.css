@@ -152,3 +152,37 @@ h2 {
     color: #fff;
     font-size: 16px;
 }
+/* --- HEADER FLEX FIX --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* ✅ Centre le logo et le texte sur la même ligne */
+    background-color: #000;
+    padding: 10px 20px;
+    flex-wrap: nowrap; /* ✅ empêche le texte de passer en dessous */
+}
+
+/* --- LOGO + TEXTE --- */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* ✅ espace entre logo et texte */
+}
+
+/* --- LOGO --- */
+.logo {
+    width: 80px;  /* ✅ taille propre du logo */
+    height: auto;
+    border: none;
+    box-shadow: none;
+    background: none;
+}
+
+/* --- TEXTE “Green-Therapy” --- */
+.logo-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #d4af37; /* doré luxe */
+    margin: 0;
+    line-height: 1;
+}
