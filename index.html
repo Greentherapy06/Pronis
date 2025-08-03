@@ -6,12 +6,9 @@
   <title>Green-Therapy – CBD Premium</title>
   <link rel="stylesheet" href="style.css">
 
-  <!-- ✅ Snipcart CDN (chargé directement et non en différé) -->
-  <script src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" />
-
-  <!-- ✅ SEO META -->
-  <meta name="description" content="Green-Therapy – CBD premium en France. Fleurs, résines et huiles de CBD de haute qualité.">
+  <!-- ✅ Snipcart Script & Style -->
+  <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css">
 </head>
 <body>
 
@@ -21,13 +18,6 @@
       <img src="logo-rond.png" alt="Green Therapy Logo" class="logo" loading="lazy" width="80" height="80">
       <h1>Green-Therapy</h1>
     </div>
-
-    <!-- ✅ MENU NAVIGATION -->
-    <nav>
-      <a href="#home">🏠 Accueil</a>
-      <a href="#produits">🛍 Produits</a>
-      <a href="#contact">✉️ Contact</a>
-    </nav>
 
     <!-- ✅ BOUTON PANIER -->
     <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
@@ -56,7 +46,7 @@
           data-item-id="amnesia-cbd"
           data-item-name="Fleur CBD Amnesia"
           data-item-price="8.90"
-          data-item-url="/"
+          data-item-url="https://greentherapy06.github.io/Green-therapy-cbd/"
           data-item-description="Fleur CBD premium d’Italie">
           ➕ Ajouter au panier
         </button>
@@ -74,7 +64,7 @@
           data-item-id="resine-cbd"
           data-item-name="Résine CBD Hash"
           data-item-price="7.50"
-          data-item-url="/"
+          data-item-url="https://greentherapy06.github.io/Green-therapy-cbd/"
           data-item-description="Résine CBD premium d’Italie">
           ➕ Ajouter au panier
         </button>
@@ -92,7 +82,7 @@
           data-item-id="cherry-cbd"
           data-item-name="Fleur CBD Cherry"
           data-item-price="9.50"
-          data-item-url="/"
+          data-item-url="https://greentherapy06.github.io/Green-therapy-cbd/"
           data-item-description="Fleur CBD Cherry premium d’Italie">
           ➕ Ajouter au panier
         </button>
@@ -109,7 +99,10 @@
   </section>
 
   <!-- ✅ SNIPCART CONTAINER OBLIGATOIRE -->
-  <div hidden id="snipcart" data-api-key="MjUwNWU1NDctZmQwOCO0YW EwLTIxMTMtMWMwZmYyWI5Mzd hNjM4ODk3NzU4MjkzMjE0MDQ3"></div>
+  <div hidden id="snipcart"
+       data-api-key="MjUwNWU1NDctZmQwOCO0YW EwLTIxMTMtMWMwZmYyWI5Mzd hNjM4ODk3NzU4MjkzMjE0MDQ3"
+       data-config-add-product-behavior="none">
+  </div>
 
 </body>
 </html>
