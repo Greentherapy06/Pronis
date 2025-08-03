@@ -1,97 +1,83 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green-Therapy - CBD Premium</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green-Therapy - CBD Premium</title>
+  <link rel="stylesheet" href="style.css">
 
-    <!-- Snipcart -->
-    <script async src="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.js"></script>
-    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.css" />
-
-    <!-- API Key -->
-    <div hidden id="snipcart" data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"></div>
+  <!-- Snipcart (Panier) -->
+  <script async src="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.js"></script>
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.css" />
+  <div hidden id="snipcart" data-api-key="YOUR_API_KEY"></div>
 </head>
 <body>
 
-    <!-- === HEADER === -->
-<header>
-  <div class="logo-container">
-    <img src="logo.jpg" alt="Green Therapy Logo" class="logo">
-    <h1>Green-Therapy</h1>
-  </div>
+  <!-- ✅ HEADER -->
+  <header>
+    <!-- Logo + texte -->
+    <div class="logo-container">
+      <img src="logo.jpg" alt="Green Therapy Logo" class="logo">
+      <h1>Green-Therapy</h1>
+    </div>
 
-  <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
+    <!-- Menu de navigation -->
+    <nav>
+      <a href="#home">🏠 Accueil</a>
+      <a href="#produits">🛍️ Produits</a>
+      <a href="#contact">✉️ Contact</a>
+    </nav>
 
-  <nav>
-    <a href="#home">🏠 Accueil</a>
-    <a href="#produits">🛍️ Produits</a>
-    <a href="#contact">✉️ Contact</a>
-  </nav>
-</header>
-    
-    <!-- SECTION ACCUEIL -->
-    <section id="home" class="section">
-        <h2>🌿 Green-Therapy - CBD Premium</h2>
-        <p>Qualité italienne bien-être assuré.<br> Découvrez notre sélection de produits CBD premium.</p>
-    </section>
+    <!-- Bouton Panier -->
+    <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
+  </header>
 
-    <!-- SECTION PRODUITS -->
-    <section id="produits" class="section">
-        <h2>🛍️ Nos Produits</h2>
+  <!-- ✅ SECTION ACCUEIL -->
+  <section id="home" class="section">
+    <h2>🌿 Green-Therapy - CBD Premium</h2>
+    <p>Qualité italienne bien-être assuré. Découvrez notre sélection de produits CBD premium.</p>
+  </section>
 
-        <!-- Produit 1 -->
-        <div class="product-card">
-            <img src="amnesia-cbd.jpg" alt="Fleur CBD Amnesia">
-            <h3>🌿 Fleur CBD Amnesia 🇮🇹</h3>
-            <p class="price">8,90 €</p>
-            <button class="snipcart-add-item"
-                data-item-id="amnesia-cbd"
-                data-item-name="Fleur CBD Amnesia"
-                data-item-price="8.90"
-                data-item-url="/"
-                data-item-description="Fleur CBD premium d’Italie">
-                ➕ Ajouter au panier
-            </button>
-        </div>
+  <!-- ✅ SECTION PRODUITS -->
+  <section id="produits" class="section">
+    <h2>🛍️ Nos Produits</h2>
 
-        <!-- Produit 2 -->
-        <div class="product-card">
-            <img src="cherry-cbd.jpg" alt="Fleur CBD Cherry">
-            <h3>🍒 Fleur CBD Cherry 🇮🇹</h3>
-            <p class="price">9,90 €</p>
-            <button class="snipcart-add-item"
-                data-item-id="cherry-cbd"
-                data-item-name="Fleur CBD Cherry"
-                data-item-price="9.90"
-                data-item-url="/"
-                data-item-description="Fleur CBD Cherry fruitée et intense">
-                ➕ Ajouter au panier
-            </button>
-        </div>
+    <!-- Produit exemple -->
+    <div class="product-card">
+      <img src="amnesia-cbd.jpg" alt="Fleur CBD Amnesia">
+      <h3>🌿 Fleur CBD Amnesia</h3>
+      <p class="price">8,90 €</p>
+      <button class="snipcart-add-item"
+        data-item-id="amnesia-cbd"
+        data-item-name="Fleur CBD Amnesia"
+        data-item-price="8.90"
+        data-item-url="/"
+        data-item-description="Fleur CBD premium d’Italie">
+        ➕ Ajouter au panier
+      </button>
+    </div>
 
-        <!-- Produit 3 -->
-        <div class="product-card">
-            <img src="resine-cbd.jpg" alt="Résine CBD Hash">
-            <h3>🌴 Résine CBD Hash 🇮🇹</h3>
-            <p class="price">7,50 €</p>
-            <button class="snipcart-add-item"
-                data-item-id="resine-cbd"
-                data-item-name="Résine CBD Hash"
-                data-item-price="7.50"
-                data-item-url="/"
-                data-item-description="Résine CBD naturelle">
-                ➕ Ajouter au panier
-            </button>
-        </div>
-    </section>
+    <div class="product-card">
+      <img src="resine-cbd.jpg" alt="Résine CBD Hash">
+      <h3>🧱 Résine CBD Hash</h3>
+      <p class="price">7,50 €</p>
+      <button class="snipcart-add-item"
+        data-item-id="resine-cbd"
+        data-item-name="Résine CBD Hash"
+        data-item-price="7.50"
+        data-item-url="/"
+        data-item-description="Résine CBD naturelle">
+        ➕ Ajouter au panier
+      </button>
+    </div>
 
-    <!-- SECTION CONTACT -->
-    <section id="contact" class="section">
-        <h2>📧 Contact</h2>
-        <p>Pour toute question, envoyez-nous un email : <strong>contact@green-therapy.fr</strong></p>
-    </section>
+  </section>
+
+  <!-- ✅ SECTION CONTACT -->
+  <section id="contact" class="section contact">
+    <h2>📩 Contact</h2>
+    <p>Pour toute question, envoyez-nous un email : <strong>contact@green-therapy.fr</strong></p>
+  </section>
 
 </body>
 </html>
