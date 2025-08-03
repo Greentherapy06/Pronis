@@ -13,74 +13,97 @@
 </head>
 <body>
 
-  <!-- ✅ HEADER -->
+  <!-- ✅ HEADER FIXE -->
   <header class="header">
     <div class="logo-container">
       <img src="logo.png" alt="Green-Therapy Logo" class="logo">
       <h1 class="site-title">Green-Therapy</h1>
     </div>
-    <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
+
+    <nav class="nav-links">
+      <a href="#home">🏠 Accueil</a>
+      <a href="#products">🛍 Produits</a>
+      <a href="#about">ℹ️ À propos</a>
+      <a href="#contact">📞 Contact</a>
+    </nav>
+
+    <button class="snipcart-checkout cart-btn">🛒 Voir le panier</button>
   </header>
 
   <!-- ✅ SECTION ACCUEIL -->
-  <section class="intro">
-    <h2>🌱 Green-Therapy - Boutique CBD Premium 🌱</h2>
-    <p>Qualité italienne et portugaise, bien-être assuré ! Découvrez notre sélection de CBD premium.</p>
+  <section id="home" class="intro">
+    <h2>🌱 Bienvenue chez Green-Therapy 🌱</h2>
+    <p>Votre boutique CBD premium avec des produits issus d’Italie et du Portugal. Livraison rapide 🇮🇹🇵🇹</p>
   </section>
 
   <!-- ✅ SECTION PRODUITS -->
-  <section class="products">
+  <section id="products" class="products">
     <h2>Nos Produits</h2>
+    <div class="product-grid">
 
-    <!-- ✅ PRODUIT 1 -->
-    <div class="product-card">
-      <img src="amnesia-cbd.webp" alt="Fleur CBD Amnesia">
-      <h3>🌿 Fleur CBD Amnesia</h3>
-      <p class="price">8,90 €</p>
-      <button class="snipcart-add-item add-btn"
-        data-item-id="amnesia-cbd"
-        data-item-name="Fleur CBD Amnesia"
-        data-item-price="8.90"
-        data-item-url="/"
-        data-item-description="Fleur de CBD premium d’Italie">
-        ➕ Ajouter au panier
-      </button>
-    </div>
+      <!-- ✅ PRODUIT 1 -->
+      <div class="product-card">
+        <img src="amnesia-cbd.webp" alt="Fleur CBD Amnesia">
+        <h3>🌿 Fleur CBD Amnesia</h3>
+        <p class="price">8,90 €</p>
+        <button class="snipcart-add-item add-btn"
+          data-item-id="amnesia-cbd"
+          data-item-name="Fleur CBD Amnesia"
+          data-item-price="8.90"
+          data-item-url="/"
+          data-item-description="Fleur de CBD premium d’Italie">
+          ➕ Ajouter au panier
+        </button>
+      </div>
 
-    <!-- ✅ PRODUIT 2 -->
-    <div class="product-card">
-      <img src="cherry-cbd.webp" alt="Fleur CBD Cherry">
-      <h3>🍒 Fleur CBD Cherry</h3>
-      <p class="price">9,90 €</p>
-      <button class="snipcart-add-item add-btn"
-        data-item-id="cherry-cbd"
-        data-item-name="Fleur CBD Cherry"
-        data-item-price="9.90"
-        data-item-url="/"
-        data-item-description="Fleur CBD Cherry fruitée et intense">
-        ➕ Ajouter au panier
-      </button>
-    </div>
+      <!-- ✅ PRODUIT 2 -->
+      <div class="product-card">
+        <img src="cherry-cbd.webp" alt="Fleur CBD Cherry">
+        <h3>🍒 Fleur CBD Cherry</h3>
+        <p class="price">9,90 €</p>
+        <button class="snipcart-add-item add-btn"
+          data-item-id="cherry-cbd"
+          data-item-name="Fleur CBD Cherry"
+          data-item-price="9.90"
+          data-item-url="/"
+          data-item-description="Fleur CBD Cherry fruitée et intense">
+          ➕ Ajouter au panier
+        </button>
+      </div>
 
-    <!-- ✅ PRODUIT 3 -->
-    <div class="product-card">
-      <img src="resine-cbd.webp" alt="Résine CBD Hash">
-      <h3>🧱 Résine CBD Hash</h3>
-      <p class="price">7,50 €</p>
-      <button class="snipcart-add-item add-btn"
-        data-item-id="resine-cbd"
-        data-item-name="Résine CBD Hash"
-        data-item-price="7.50"
-        data-item-url="/"
-        data-item-description="Résine CBD Hash naturelle">
-        ➕ Ajouter au panier
-      </button>
+      <!-- ✅ PRODUIT 3 -->
+      <div class="product-card">
+        <img src="resine-cbd.webp" alt="Résine CBD Hash">
+        <h3>🧱 Résine CBD Hash</h3>
+        <p class="price">7,50 €</p>
+        <button class="snipcart-add-item add-btn"
+          data-item-id="resine-cbd"
+          data-item-name="Résine CBD Hash"
+          data-item-price="7.50"
+          data-item-url="/"
+          data-item-description="Résine CBD Hash naturelle">
+          ➕ Ajouter au panier
+        </button>
+      </div>
     </div>
+  </section>
+
+  <!-- ✅ SECTION À PROPOS -->
+  <section id="about" class="about">
+    <h2>ℹ️ À propos de nous</h2>
+    <p>Green-Therapy est une boutique dédiée au bien-être naturel. Nos produits CBD sont issus de cultures responsables, en Italie et au Portugal.</p>
+  </section>
+
+  <!-- ✅ SECTION CONTACT -->
+  <section id="contact" class="contact">
+    <h2>📞 Contact</h2>
+    <p>Email : <a href="mailto:greentherapy06@gmail.com">greentherapy06@gmail.com</a></p>
+    <p>Instagram : @GreenTherapy06</p>
   </section>
 
   <!-- ✅ FOOTER -->
   <footer class="footer">
-    <p>© 2025 Green-Therapy. Tous droits réservés.</p>
+    <p>© 2025 Green-Therapy - Tous droits réservés</p>
   </footer>
 
   <!-- ✅ SNIPCART API -->
