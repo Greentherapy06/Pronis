@@ -1,24 +1,32 @@
-/* 🌱 STYLE GLOBAL */
-body {
-  font-family: Arial, sans-serif;
+/* ✅ Reset */
+* {
   margin: 0;
   padding: 0;
-  background-color: #f8f8f8;
-  color: #333;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* ✅ Body */
+body {
+  background: #f7f7f7;
+  color: #222;
   line-height: 1.6;
 }
 
-/* 🌱 HEADER */
+/* ✅ Header */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  background-color: #14532d;
+  background: #0b3d0b;
   color: white;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 15px 20px;
+}
+
+.logo {
+  width: 50px;
+  margin-right: 10px;
+  border-radius: 50%;
 }
 
 .logo-container {
@@ -26,121 +34,68 @@ header {
   align-items: center;
 }
 
-.logo {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-  border-radius: 50%;
-  background-color: white;
-}
-
-.site-title {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-/* 🌱 NAVIGATION */
-nav a {
+nav a, .panier-btn {
+  margin-left: 15px;
   color: white;
-  margin: 0 10px;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s ease;
 }
 
-nav a:hover {
-  color: #a7f3d0;
-}
-
-/* 🌱 BOUTON PANIER */
 .panier-btn {
-  background-color: #facc15;
+  background: #ffd700;
+  color: #222;
+  padding: 8px 12px;
   border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
 }
 
-.panier-btn:hover {
-  background-color: #eab308;
-}
-
-/* 🌱 SECTIONS */
+/* ✅ Section */
 .section {
   padding: 40px 20px;
   text-align: center;
 }
 
-.section h2 {
-  font-size: 26px;
-  margin-bottom: 20px;
-  color: #14532d;
+/* ✅ Produits */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
 }
 
-/* 🌱 PRODUITS */
 .product-card {
-  background-color: white;
+  background: white;
+  padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 350px;
-  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.product-card img {
+.product-img {
   width: 100%;
+  height: 200px;
+  object-fit: cover;
   border-radius: 10px;
-  margin-bottom: 10px;
 }
 
-.product-card h3 {
-  font-size: 20px;
-  margin: 10px 0;
-  color: #14532d;
-}
-
-.product-card p {
-  margin: 5px 0;
-  font-size: 16px;
-}
-
-.product-card span {
-  font-weight: bold;
+.price {
   font-size: 18px;
-  color: #111;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
-/* 🌱 BOUTON "AJOUTER AU PANIER" */
+/* ✅ Bouton Ajouter au panier */
 .snipcart-add-item {
-  display: inline-block;
-  background-color: #16a34a;
+  background: #228B22;
   color: white;
-  padding: 10px 20px;
-  margin-top: 10px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 10px;
   border: none;
+  border-radius: 5px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  width: 100%;
 }
 
 .snipcart-add-item:hover {
-  background-color: #15803d;
-}
-
-/* 🌱 RESPONSIVE (Mobile) */
-@media (max-width: 768px) {
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .product-card {
-    max-width: 90%;
-  }
+  background: #1e7a1e;
 }
