@@ -1,71 +1,68 @@
-/* 🌿 RESET DE BASE */
+/* 🎯 RESET CSS de base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
 body {
-  background-color: #f7f7f7;
-  color: #1a1a1a;
+  background-color: #f9f9f9;
+  color: #222;
   line-height: 1.6;
   font-size: 16px;
 }
 
 /* 🌿 HEADER */
 header {
-  background-color: #064e3b; /* Vert foncé CBD */
-  padding: 15px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-
-/* 🌿 Logo + Titre */
-.header-container {
+  background-color: #064e3b; /* vert foncé premium */
+  color: white;
+  padding: 15px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1100px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-  width: 60px;
   height: 60px;
+  width: 60px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 12px;
+  object-fit: cover;
 }
 
-.site-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-}
-
-/* 🌿 Panier */
-.panier-btn {
-  background-color: #ffdd00;
-  color: #1a1a1a;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
-}
-.panier-btn:hover {
+/* 🛒 BOUTON PANIER */
+.cart-btn {
   background-color: #facc15;
+  color: #222;
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-/* 🌿 NAVIGATION */
+.cart-btn:hover {
+  background-color: #eab308;
+}
+
+/* 📌 NAVIGATION */
 nav {
-  margin-top: 10px;
   display: flex;
   gap: 15px;
 }
@@ -74,119 +71,92 @@ nav a {
   text-decoration: none;
   color: white;
   font-weight: bold;
-  padding: 8px 12px;
-  background-color: #065f46;
+  padding: 8px 14px;
   border-radius: 6px;
-  transition: 0.3s;
+  transition: background 0.3s ease;
 }
 
 nav a:hover {
-  background-color: #047857;
+  background-color: #065f46;
 }
 
-/* 🌿 SECTIONS */
+/* 🏠 SECTIONS GÉNÉRALES */
 section {
   padding: 40px 20px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-/* 🌿 TITRES */
-h2 {
-  font-size: 28px;
-  color: #064e3b;
-  margin-bottom: 15px;
-}
-
-p {
-  margin-bottom: 20px;
-}
-
-/* 🌿 GRILLE PRODUITS */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-/* 🌿 CARTE PRODUIT */
-.product-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   text-align: center;
-  transition: transform 0.3s ease;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #064e3b;
+}
+
+/* 🛍 PRODUITS */
+.product-card {
+  background-color: white;
+  width: 90%;
+  max-width: 350px;
+  margin: 25px auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
-/* 🌿 IMAGE PRODUIT */
-.product-img {
+/* 📸 IMAGES PRODUITS */
+.product-image {
   width: 100%;
   height: 220px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 15px;
 }
 
-/* 🌿 NOM PRODUIT */
-h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-/* 🌿 PRIX */
+/* 💲 PRIX */
 .price {
-  font-size: 18px;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #065f46;
-  margin-bottom: 15px;
+  margin: 10px 0;
 }
 
-/* 🌿 BOUTON AJOUTER AU PANIER */
+/* ➕ BOUTON AJOUTER AU PANIER */
 .snipcart-add-item {
   background-color: #065f46;
   color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
   font-weight: bold;
-  transition: background 0.3s;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
 }
 
 .snipcart-add-item:hover {
   background-color: #047857;
 }
 
-/* 🌿 CONTACT */
-#contact {
-  text-align: center;
-}
-
-#contact a {
-  color: #065f46;
-  font-weight: bold;
-  text-decoration: none;
-}
-#contact a:hover {
-  text-decoration: underline;
-}
-
-/* 🌿 RESPONSIVE */
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    gap: 10px;
+/* 📱 RESPONSIVE DESIGN */
+@media (min-width: 768px) {
+  nav {
+    gap: 25px;
   }
 
-  nav {
-    flex-wrap: wrap;
-    justify-content: center;
+  #produits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
+
+  .product-card {
+    width: 300px;
   }
 }
