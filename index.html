@@ -3,24 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green-Therapy - Boutique CBD Premium</title>
+  <title>Green-Therapy • Boutique CBD Premium</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- Snipcart (v3) -->
+  <!-- Snipcart (JS + CSS) -->
   <script async src="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.js"></script>
   <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.3/default/snipcart.css" />
 </head>
+
 <body>
 
-  <!-- ✅ Snipcart avec ta clé API -->
-  <div hidden id="snipcart"
-       data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyAWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
-       data-currency="eur"
-       data-config-modal-style="side">
-  </div>
-
-  <!-- ✅ HEADER -->
+  <!-- 🌿 HEADER -->
   <header>
     <div class="logo-container">
       <img src="logo.png" alt="Green-Therapy Logo" class="logo">
@@ -28,78 +22,85 @@
     </div>
     <nav>
       <a href="#home">🏡 Accueil</a>
-      <a href="#produits">🛍️ Produits</a>
+      <a href="#produits">🛍 Produits</a>
       <a href="#a-propos">ℹ️ À propos</a>
       <a href="#contact">✉️ Contact</a>
     </nav>
     <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
   </header>
 
-  <!-- ✅ SECTION ACCUEIL -->
+  <!-- 🏠 SECTION ACCUEIL -->
   <section id="home" class="section">
     <h1>🌱 Green-Therapy - Boutique CBD Premium en Italie et au Portugal 🌱</h1>
     <p>Qualité italienne et portugaise, bien-être assuré ! Découvrez notre sélection de CBD premium.</p>
   </section>
 
-  <!-- ✅ SECTION PRODUITS -->
+  <!-- 🛍 SECTION PRODUITS -->
   <section id="produits" class="section">
     <h2>Nos Produits</h2>
 
-    <!-- 🥇 Produit 1 -->
+    <!-- Produit 1 -->
     <div class="product-card">
       <img src="amnesia-cbd.jpg" alt="Fleur de CBD Amnesia premium d’Italie" style="width:200px;">
       <h3>🌿 Fleur CBD Amnesia premium d’Italie</h3>
       <p>Fleur premium 🇮🇹</p>
       <span>À partir de 8,90 €</span>
       <button class="snipcart-add-item"
-              data-item-id="amnesia-cbd"
-              data-item-name="Fleur CBD Amnesia"
-              data-item-price="8.90"
-              data-item-url="/"
-              data-item-description="Fleur CBD premium d’Italie">
+        data-item-id="amnesia-cbd"
+        data-item-name="Fleur CBD Amnesia"
+        data-item-price="8.90"
+        data-item-url="/"
+        data-item-description="Fleur CBD premium d’Italie">
         ➕ Ajouter au panier
       </button>
     </div>
 
-    <!-- 🥈 Produit 2 -->
+    <!-- Produit 2 -->
     <div class="product-card">
       <img src="cherry-cbd.jpg" alt="Fleur de CBD Cherry fruitée et intense" style="width:200px;">
       <h3>🍒 Fleur CBD Cherry fruitée et intense</h3>
-      <p>Fleur fruitée 🇵🇹</p>
+      <p>Fleur fruitée 🇮🇹</p>
       <span>À partir de 9,90 €</span>
       <button class="snipcart-add-item"
-              data-item-id="cherry-cbd"
-              data-item-name="Fleur CBD Cherry"
-              data-item-price="9.90"
-              data-item-url="/"
-              data-item-description="Fleur CBD Cherry fruitée et intense">
+        data-item-id="cherry-cbd"
+        data-item-name="Fleur CBD Cherry"
+        data-item-price="9.90"
+        data-item-url="/"
+        data-item-description="Fleur CBD Cherry fruitée et intense">
         ➕ Ajouter au panier
       </button>
     </div>
 
-    <!-- 🥉 Produit 3 -->
+    <!-- Produit 3 -->
     <div class="product-card">
       <img src="resine-cbd.jpg" alt="Résine CBD Hash naturelle" style="width:200px;">
       <h3>🧱 Résine CBD Hash naturelle</h3>
-      <p>Résine naturelle 🇵🇹</p>
+      <p>Résine naturelle 🇮🇹</p>
       <span>À partir de 7,50 €</span>
       <button class="snipcart-add-item"
-              data-item-id="resine-cbd"
-              data-item-name="Résine CBD Hash"
-              data-item-price="7.50"
-              data-item-url="/"
-              data-item-description="Résine CBD Hash naturelle">
+        data-item-id="resine-cbd"
+        data-item-name="Résine CBD Hash"
+        data-item-price="7.50"
+        data-item-url="/"
+        data-item-description="Résine CBD Hash naturelle">
         ➕ Ajouter au panier
       </button>
     </div>
   </section>
 
-  <!-- ✅ SECTION CONTACT -->
+  <!-- 📞 SECTION CONTACT -->
   <section id="contact" class="section">
-    <h2>📞 Contact</h2>
-    <p>Email : <a href="mailto:greentherapy06@gmail.com">greentherapy06@gmail.com</a></p>
-    <p>Instagram : @GreenTherapy06</p>
+    <h2>Contact</h2>
+    <p>📧 Email : <a href="mailto:greentherapy06@gmail.com">greentherapy06@gmail.com</a></p>
+    <p>📸 Instagram : @GreenTherapy06</p>
   </section>
+
+  <!-- 🔑 Snipcart container avec API Key (TEST) -->
+  <div hidden id="snipcart"
+    data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
+    data-currency="eur"
+    data-config-modal-style="side">
+  </div>
 
 </body>
 </html>
