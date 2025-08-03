@@ -6,13 +6,12 @@
   <title>Green-Therapy – CBD Premium</title>
   <link rel="stylesheet" href="style.css">
 
-  <!-- ✅ Snipcart CDN -->
-  <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
+  <!-- ✅ Snipcart CDN (chargé directement et non en différé) -->
+  <script src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
   <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" />
 
   <!-- ✅ SEO META -->
   <meta name="description" content="Green-Therapy – CBD premium en France. Fleurs, résines et huiles de CBD de haute qualité.">
-  <meta name="google-site-verification" content="NzPw9caxLTf1hXzhpU7zW_Ez3Fvj03ld800XU9gFUSQ">
 </head>
 <body>
 
@@ -23,9 +22,22 @@
       <h1>Green-Therapy</h1>
     </div>
 
+    <!-- ✅ MENU NAVIGATION -->
+    <nav>
+      <a href="#home">🏠 Accueil</a>
+      <a href="#produits">🛍 Produits</a>
+      <a href="#contact">✉️ Contact</a>
+    </nav>
+
     <!-- ✅ BOUTON PANIER -->
     <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
   </header>
+
+  <!-- ✅ SECTION ACCUEIL -->
+  <section id="home" class="section">
+    <h2>🌿 Green-Therapy – CBD Premium</h2>
+    <p>Qualité italienne, bien-être assuré. Découvrez notre sélection de produits CBD premium.</p>
+  </section>
 
   <!-- ✅ SECTION PRODUITS -->
   <section id="produits" class="section">
@@ -96,8 +108,8 @@
     <p>Email : greentherapy06@gmail.com</p>
   </section>
 
-  <!-- ✅ Snipcart container obligatoire -->
-  <div hidden id="snipcart" data-api-key="MjUwNWU1NDctZmQwOCO0YWEwLTIxMTMtMWMxZmYyYWJl5Mzd..."></div>
+  <!-- ✅ SNIPCART CONTAINER OBLIGATOIRE -->
+  <div hidden id="snipcart" data-api-key="MjUwNWU1NDctZmQwOCO0YW EwLTIxMTMtMWMwZmYyWI5Mzd hNjM4ODk3NzU4MjkzMjE0MDQ3"></div>
 
 </body>
 </html>
