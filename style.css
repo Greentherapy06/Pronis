@@ -21,20 +21,20 @@ header {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px; /* espace entre logo et texte */
 }
 
 /* Logo */
 .logo {
-    width: 60px;
+    width: 80px;   /* ✅ agrandi le logo */
     height: auto;
     border-radius: 50%;
-    border: 2px solid #d4af37; /* contour doré */
+    border: none;  /* ✅ enlève le cercle doré */
 }
 
-/* Texte du logo */
+/* Texte à droite du logo */
 h1 {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     color: #d4af37; /* texte doré */
     margin: 0;
@@ -52,7 +52,7 @@ h1 {
     transition: 0.3s ease;
 }
 .snipcart-checkout:hover {
-    background-color: #b8962e; /* doré plus foncé au survol */
+    background-color: #b8962e;
 }
 
 /* === NAVIGATION === */
