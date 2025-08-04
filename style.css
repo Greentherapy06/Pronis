@@ -31,12 +31,12 @@ header {
 }
 
 .logo-container h1 {
-    font-size: 28px;
-    font-weight: bold;
-    color: #d4af37;
-    margin: 0;
-    line-height: 1;
-    margin-left: 20px; /* ✅ décale le texte vers la droite */
+  font-size: 28px;
+  font-weight: bold;
+  color: #d4af37;
+  margin: 0;
+  line-height: 1;
+  margin-left: 20px;
 }
 
 /* === NAVIGATION === */
@@ -58,19 +58,17 @@ nav a:hover {
 }
 
 /* === BOUTON PANIER === */
-.panier-btn {
-  background-color: #d4af37;
-  color: #000;
-  font-weight: bold;
-  padding: 10px 18px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s ease;
+.header-panier {
+  text-align: center;
+  margin-top: 10px;
 }
 
-.panier-btn:hover {
-  background-color: #b8962e;
+.panier-btn {
+  background: none;
+  border: none;
+  color: #d4af37;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 /* === SECTIONS === */
@@ -86,6 +84,14 @@ h2 {
 }
 
 /* === PRODUITS === */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+}
+
 .product-card {
   background-color: #fff;
   margin: 15px auto;
@@ -113,7 +119,6 @@ h2 {
   color: #d4af37;
 }
 
-/* Bouton ajouter au panier */
 .product-card button {
   background-color: #d4af37;
   color: #000;
@@ -141,11 +146,9 @@ h2 {
 .contact h2 {
   color: #d4af37;
 }
-/* ✅ GRID PRODUITS - 2 colonnes PC, 1 colonne mobile */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  justify-items: center;
-  margin-top: 20px;
+
+/* ✅ CORRECTIF POUR SNIPCART (empêche le blocage au chargement) */
+.snipcart-checkout {
+  all: unset;
+  cursor: pointer;
 }
