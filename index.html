@@ -6,36 +6,13 @@
   <title>Green-Therapy – CBD Premium</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" />
-
-  <!-- ✅ CONFIGURATION Snipcart -->
-  <script>
-    window.SnipcartSettings = {
-      publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
-      loadStrategy: "on-user-interaction"
-    };
-  </script>
-
-  <style>
-    .header-panier {
-      text-align: left;
-      margin-top: 10px;
-      margin-left: 90px;
-    }
-    .panier-btn {
-      background: none;
-      border: none;
-      color: #d4af37;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 
 <body>
   <!-- ✅ HEADER -->
   <header>
     <div class="logo-container">
-      <img src="logo-rond.png" alt="Logo Green Therapy" class="logo" loading="lazy" width="80" height="80" />
+      <img src="logo-rond.png" alt="Green Therapy Logo" class="logo" loading="lazy" width="80" height="80" />
       <h1>Green-Therapy</h1>
     </div>
 
@@ -70,11 +47,11 @@
         <h3>🌿 Fleur CBD Amnesia</h3>
         <p class="price">8,90 €</p>
         <button class="snipcart-add-item"
-          data-item-id="amnesia-cbd"
-          data-item-name="Fleur CBD Amnesia"
-          data-item-price="8.90"
-          data-item-url="/"
-          data-item-description="Fleur CBD premium d’Italie">
+                data-item-id="amnesia-cbd"
+                data-item-name="Fleur CBD Amnesia"
+                data-item-price="8.90"
+                data-item-url="https://greentherapy06.github.io/Green-therapy-cbd/"
+                data-item-description="Fleur CBD premium d’Italie">
           ➕ Ajouter au panier
         </button>
       </div>
@@ -87,11 +64,11 @@
         <h3>🌿 Résine CBD Hash</h3>
         <p class="price">7,50 €</p>
         <button class="snipcart-add-item"
-          data-item-id="resine-cbd"
-          data-item-name="Résine CBD Hash"
-          data-item-price="7.50"
-          data-item-url="/"
-          data-item-description="Résine CBD premium d’Italie">
+                data-item-id="resine-cbd"
+                data-item-name="Résine CBD Hash"
+                data-item-price="7.50"
+                data-item-url="https://greentherapy06.github.io/Green-therapy-cbd/"
+                data-item-description="Résine CBD premium d’Italie">
           ➕ Ajouter au panier
         </button>
       </div>
@@ -104,11 +81,11 @@
         <h3>🍒 Fleur CBD Cherry</h3>
         <p class="price">9,50 €</p>
         <button class="snipcart-add-item"
-          data-item-id="cherry-cbd"
-          data-item-name="Fleur CBD Cherry"
-          data-item-price="9.50"
-          data-item-url="/"
-          data-item-description="Fleur CBD Cherry premium d’Italie">
+                data-item-id="cherry-cbd"
+                data-item-name="Fleur CBD Cherry"
+                data-item-price="9.50"
+                data-item-url="https://greentherapy06.github.io/Green-therapy-cbd/"
+                data-item-description="Fleur CBD Cherry premium d’Italie">
           ➕ Ajouter au panier
         </button>
       </div>
@@ -123,14 +100,14 @@
     <p>📧 Email : greentherapy06@gmail.com</p>
   </section>
 
-  <!-- ✅ SNIPCART DIV -->
+  <!-- ✅ SNIPCART DIV obligatoire -->
   <div hidden id="snipcart"
-    data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
-    data-config-modal-style="side"
-    data-currency="eur">
+       data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5Mzdh"
+       data-config-modal-style="side"
+       data-currency="eur">
   </div>
 
-  <!-- ✅ SNIPCART SCRIPT -->
+  <!-- ✅ SCRIPT Snipcart placé à la fin -->
   <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
 </body>
 </html>
