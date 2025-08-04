@@ -6,7 +6,9 @@
   <title>Green-Therapy – CBD Premium</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="style.css" /></noscript>
+
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
 
@@ -30,10 +32,6 @@
       color: #d4af37;
       font-size: 16px;
       cursor: pointer;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
     }
   </style>
 </head>
@@ -138,6 +136,6 @@
   </div>
 
   <!-- Script Snipcart -->
-  <script defer src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
+  <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
 </body>
 </html>
