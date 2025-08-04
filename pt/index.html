@@ -20,35 +20,31 @@
     </div>
 
     <!-- ✅ NAVIGATION -->
-    <nav style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-      <!-- Ligne 1 : les liens -->
-      <div style="display: flex; gap: 25px;">
-        <a href="#home">🏠 Início</a>
-        <a href="#produtos">🛍️ Produtos</a>
-        <a href="#contato">✉️ Contato</a>
-        <a href="../index.html">🇫🇷 Français</a>
-      </div>
-
-      <!-- Ligne 2 : bouton panier centré -->
-      <button class="snipcart-checkout panier-btn" 
-        style="background: none; border: none; color: #d4af37; font-size: 16px; cursor: pointer;">
-        🛒 Ver carrinho
-      </button>
+    <nav>
+      <a href="#home">🏠 Início</a>
+      <a href="#produtos">🛍️ Produtos</a>
+      <a href="#contato">✉️ Contato</a>
+      <a href="../index.html">🇫🇷 Français</a>
     </nav>
+
+    <!-- ✅ BOUTON PANIER -->
+    <div class="header-panier">
+      <button class="snipcart-checkout panier-btn">🛒 Ver carrinho</button>
+    </div>
   </header>
 
-  <!-- ✅ SECTION ACCUEIL -->
+  <!-- ✅ SECTION INÍCIO -->
   <section id="home" class="section">
     <h2>🌿 Green-Therapy – CBD Premium</h2>
     <p>Qualidade italiana, bem-estar garantido. Descubra a nossa seleção de produtos CBD premium.</p>
   </section>
 
-  <!-- ✅ SECTION PRODUITS -->
+  <!-- ✅ SECTION PRODUTOS -->
   <section id="produtos" class="section">
     <h2>🛍️ Os Nossos Produtos</h2>
     <div class="product-grid">
 
-      <!-- ✅ PRODUIT 1 -->
+      <!-- ✅ PRODUTO 1 -->
       <div class="product-card">
         <picture>
           <source srcset="../amnesia-cbd.webp" type="image/webp">
@@ -67,7 +63,7 @@
         </button>
       </div>
 
-      <!-- ✅ PRODUIT 2 -->
+      <!-- ✅ PRODUTO 2 -->
       <div class="product-card">
         <picture>
           <source srcset="../resine-cbd.webp" type="image/webp">
@@ -86,7 +82,7 @@
         </button>
       </div>
 
-      <!-- ✅ PRODUIT 3 -->
+      <!-- ✅ PRODUTO 3 -->
       <div class="product-card">
         <picture>
           <source srcset="../cherry-cbd.webp" type="image/webp">
@@ -108,20 +104,20 @@
     </div>
   </section>
 
-  <!-- ✅ SECTION CONTACT -->
+  <!-- ✅ SECTION CONTATO -->
   <section id="contato" class="section">
     <h2>✉️ Contato</h2>
     <p>Fale conosco para qualquer dúvida ou pedido especial.</p>
     <p>📧 Email : greentherapy06@gmail.com</p>
   </section>
 
-  <!-- ✅ SNIPCART DIV OBLIGATOIRE -->
+  <!-- ✅ SNIPCART DIV OBLIGATÓRIO -->
   <div hidden id="snipcart" 
        data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
        data-config-modal-style="side">
   </div>
 
-  <!-- ✅ Script Snipcart -->
+  <!-- ✅ Script Snipcart (tout en bas du body) -->
   <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
 
 </body>
