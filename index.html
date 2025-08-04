@@ -1,50 +1,25 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green-Therapy – CBD Premium</title>  <!-- ✅ CSS -->  <link rel="stylesheet" href="style.css">  <!-- ✅ Snipcart Settings (clé test publique) -->  <script>
-    window.SnipcartSettings = {
-      publicApiKey: 'MjUwNWU1NDctZmQwOC00YmYzLTg4YTUtNGJmZDI2YzNkNGRk',
-      loadStrategy: 'on-user-interaction'
-    };
-  </script>  <!-- ✅ Script & CSS Snipcart (chargement manuel) -->  <script>
-    function chargerSnipcart() {
-      if (!window.snipcartLoaded) {
-        window.snipcartLoaded = true;
-        const script = document.createElement('script');
-        script.src = 'https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js';
-        script.async = true;
-        document.body.appendChild(script);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Green-Therapy – CBD Premium</title>
+  <meta name="description" content="Fleurs et résines CBD de qualité, livrées au Portugal.">
 
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css';
-        document.head.appendChild(link);
-      }
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('panier-btn').addEventListener('click', chargerSnipcart);
-      document.querySelectorAll('.snipcart-add-item').forEach(btn => {
-        btn.addEventListener('click', chargerSnipcart);
-      });
-    });
-  </script>  <style>
-    .header-panier {
-      text-align: left;
-      margin-top: 10px;
-      margin-left: 90px;
-    }
-    .panier-btn {
-      background: none;
-      border: none;
-      color: #d4af37;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style></head>
-<body>  <!-- ✅ HEADER -->  <header>
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    window.SnipcartSettings = {
+      publicApiKey: 'MjUwNWU1NDctZmQwOC00Ym...', // remplace avec ta clé complète
+      loadStrategy: 'manual'
+    };
+  </script>
+</head>
+
+<body>
+  <header>
     <div class="logo-container">
-      <img src="logo-rond.png" alt="Green Therapy Logo" width="80" height="80">
+      <img src="logo-rond.png" alt="Logo Green Therapy" width="80" height="80" />
       <h1>Green-Therapy</h1>
     </div>
     <nav>
@@ -53,27 +28,80 @@
       <a href="#contact">✉️ Contact</a>
       <a href="pt/index.html">🇵🇹 Portugais</a>
     </nav>
-    <div class="header-panier">
-      <button id="panier-btn" class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
+    <div class="panier-center">
+      <button id="panier-btn" class="snipcart-checkout">🛒 Voir le panier</button>
     </div>
-  </header>  <!-- ✅ SECTION PRODUITS -->  <section id="produits">
+  </header>
+
+  <section id="home">
+    <h2>🌿 Green-Therapy – CBD Premium</h2>
+    <p>Qualité italienne, bien-être assuré. Découvrez notre sélection de produits CBD premium.</p>
+  </section>
+
+  <section id="produits">
     <h2>🛍️ Nos Produits</h2>
-    <div class="product-grid"><div class="product-card">
-    <img src="amnesia-cbd.jpg" alt="Fleur CBD Amnesia" width="300">
-    <h3>🌿 Fleur CBD Amnesia</h3>
-    <p class="price">8,90 €</p>
-    <button 
-      class="snipcart-add-item"
-      data-item-id="amnesia-cbd"
-      data-item-name="Fleur CBD Amnesia"
-      data-item-price="8.90"
-      data-item-url="/"
-      data-item-description="Fleur CBD premium">
-      ➕ Ajouter au panier
-    </button>
-  </div>
+    <div class="product-grid">
 
-</div>
+      <div class="product-card">
+        <img src="amnesia-cbd.jpg" alt="Fleur CBD Amnesia" width="300" height="300"/>
+        <h3>🌿 Fleur CBD Amnesia</h3>
+        <p class="price">8,90 €</p>
+        <button 
+          class="snipcart-add-item"
+          data-item-id="amnesia-cbd"
+          data-item-name="Fleur CBD Amnesia"
+          data-item-price="8.90"
+          data-item-url="/"
+          data-item-description="Fleur CBD premium d’Italie">
+          ➕ Ajouter au panier
+        </button>
+      </div>
 
-  </section>  <!-- ✅ SNIPCART DIV -->  <div hidden id="snipcart" data-api-key="MjUwNWU1NDctZmQwOC00YmYzLTg4YTUtNGJmZDI2YzNkNGRk" data-config-modal-style="side"></div></body>
+      <div class="product-card">
+        <img src="resine-cbd.jpg" alt="Résine CBD Hash" width="300" height="300"/>
+        <h3>🌿 Résine CBD Hash</h3>
+        <p class="price">7,50 €</p>
+        <button 
+          class="snipcart-add-item"
+          data-item-id="resine-cbd"
+          data-item-name="Résine CBD Hash"
+          data-item-price="7.50"
+          data-item-url="/"
+          data-item-description="Résine CBD premium d’Italie">
+          ➕ Ajouter au panier
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>✉️ Contact</h2>
+    <p>📧 greentherapy06@gmail.com</p>
+  </section>
+
+  <div hidden id="snipcart" data-api-key="MjUwNWU1NDctZmQwOC00Ym..." data-config-modal-style="side"></div>
+
+  <script>
+    function chargerSnipcart() {
+      if (!window.snipcartLoaded) {
+        window.snipcartLoaded = true;
+        const script = document.createElement("script");
+        script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
+        script.async = true;
+        document.body.appendChild(script);
+
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css";
+        document.head.appendChild(link);
+      }
+    }
+
+    document.getElementById("panier-btn").addEventListener("click", chargerSnipcart);
+    document.querySelectorAll(".snipcart-add-item").forEach(btn => {
+      btn.addEventListener("click", chargerSnipcart);
+    });
+  </script>
+</body>
 </html>
