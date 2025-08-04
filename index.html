@@ -6,13 +6,28 @@
   <title>Green-Therapy – CBD Premium</title>
   <link rel="stylesheet" href="style.css">
 
-  <!-- ✅ Snipcart sera chargé plus tard -->
+  <!-- ✅ Snipcart sera chargé plus tard (lazy load) -->
   <script>
     window.SnipcartSettings = {
       publicApiKey: 'TA_CLE_API_ICI',
-      loadStrategy: 'manual' // 🚀 On empêche le chargement automatique
+      loadStrategy: 'manual'
     };
   </script>
+
+  <style>
+    /* ✅ Ajustement du bouton panier sous Produits & Contact */
+    .header-panier {
+      text-align: center;
+      margin-top: 5px;
+    }
+    .panier-btn {
+      background: none;
+      border: none;
+      color: #d4af37; /* doré comme les autres textes */
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
@@ -32,8 +47,10 @@
       <a href="pt/index.html">🇵🇹 Portugais</a>
     </nav>
 
-    <!-- ✅ BOUTON PANIER -->
-    <button id="panier-btn" class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
+    <!-- ✅ BOUTON PANIER CENTRÉ SOUS PRODUITS & CONTACT -->
+    <div class="header-panier">
+      <button id="panier-btn" class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
+    </div>
   </header>
 
   <!-- ✅ SECTION ACCUEIL -->
