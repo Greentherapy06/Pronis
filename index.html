@@ -35,41 +35,26 @@
 
   <!-- ✅ CSS EXISTANT -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css">
 
-  <!-- ✅ Données structurées (schema.org pour Google) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Store",
-    "name": "Green-Therapy",
-    "image": "https://greentherapy06.github.io/logo.jpg",
-    "description": "Boutique en ligne de CBD premium au Portugal. Fleurs et résines de qualité.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "PT"
-    }
-  }
-  </script>
-
-  <!-- ✅ Snipcart Lazy Load -->
+  <!-- ✅ Snipcart config -->
   <script>
     window.SnipcartSettings = {
-      publicApiKey: 'TA_CLE_API_ICI',  /* 🔑 à remplacer par ta clé Snipcart */
-      loadStrategy: 'manual'
+      publicApiKey: 'MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3',
+      loadStrategy: 'on-user-interaction'
     };
   </script>
 
   <style>
-    /* ✅ On garde ton style EXACTEMENT comme il est */
     .header-panier {
       text-align: left;
       margin-top: 10px;
-      margin-left: 90px; /* bouton centré sous Produits & Contact */
+      margin-left: 90px;
     }
     .panier-btn {
       background: none;
       border: none;
-      color: #d4af37; /* doré comme les autres textes */
+      color: #d4af37;
       font-size: 16px;
       cursor: pointer;
     }
@@ -77,15 +62,12 @@
 </head>
 
 <body>
-
-  <!-- ✅ HEADER -->
   <header>
     <div class="logo-container">
       <img src="logo-rond.png" alt="Green Therapy Logo" class="logo" loading="lazy" width="80" height="80">
       <h1>Green-Therapy</h1>
     </div>
 
-    <!-- ✅ NAVIGATION -->
     <nav>
       <a href="#home">🏠 Accueil</a>
       <a href="#produits">🛍️ Produits</a>
@@ -93,24 +75,19 @@
       <a href="pt/index.html">🇵🇹 Portugais</a>
     </nav>
 
-    <!-- ✅ BOUTON PANIER CENTRÉ SOUS PRODUITS & CONTACT -->
     <div class="header-panier">
       <button id="panier-btn" class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
     </div>
   </header>
 
-  <!-- ✅ SECTION ACCUEIL -->
   <section id="home" class="section">
     <h2>🌿 Green-Therapy – CBD Premium</h2>
     <p>Qualité italienne, bien-être assuré. Découvrez notre sélection de produits CBD premium.</p>
   </section>
 
-  <!-- ✅ SECTION PRODUITS -->
   <section id="produits" class="section">
     <h2>🛍️ Nos Produits</h2>
     <div class="product-grid">
-
-      <!-- ✅ PRODUIT 1 -->
       <div class="product-card">
         <picture>
           <source srcset="amnesia-cbd.webp" type="image/webp">
@@ -129,7 +106,6 @@
         </button>
       </div>
 
-      <!-- ✅ PRODUIT 2 -->
       <div class="product-card">
         <picture>
           <source srcset="resine-cbd.webp" type="image/webp">
@@ -148,7 +124,6 @@
         </button>
       </div>
 
-      <!-- ✅ PRODUIT 3 -->
       <div class="product-card">
         <picture>
           <source srcset="cherry-cbd.webp" type="image/webp">
@@ -166,45 +141,23 @@
           ➕ Ajouter au panier
         </button>
       </div>
-
     </div>
   </section>
 
-  <!-- ✅ SECTION CONTACT -->
   <section id="contact" class="section">
     <h2>✉️ Contact</h2>
     <p>Contactez-nous pour toute question ou commande spéciale.</p>
     <p>📧 Email : greentherapy06@gmail.com</p>
   </section>
 
-  <!-- ✅ SNIPCART DIV OBLIGATOIRE -->
-  <div hidden id="snipcart" 
-       data-api-key="TA_CLE_API_ICI"
-       data-config-modal-style="side">
+  <!-- ✅ SNIPCART DIV -->
+  <div hidden id="snipcart"
+       data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
+       data-config-modal-style="side"
+       data-currency="eur">
   </div>
 
-  <!-- ✅ SCRIPT Snipcart (lazy load au clic) -->
-  <script>
-    function chargerSnipcart() {
-      if (!window.snipcartLoaded) {
-        window.snipcartLoaded = true;
-        const script = document.createElement("script");
-        script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
-        script.async = true;
-        document.body.appendChild(script);
-
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css";
-        document.head.appendChild(link);
-      }
-    }
-
-    document.getElementById("panier-btn").addEventListener("click", chargerSnipcart);
-    document.querySelectorAll(".snipcart-add-item").forEach(btn => {
-      btn.addEventListener("click", chargerSnipcart);
-    });
-  </script>
-
+  <!-- ✅ SCRIPT -->
+  <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
 </body>
 </html>
