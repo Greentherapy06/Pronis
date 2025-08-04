@@ -20,15 +20,21 @@
     </div>
 
     <!-- ✅ NAVIGATION -->
-    <nav>
-      <a href="#home">🏠 Início</a>
-      <a href="#produtos">🛍️ Produtos</a>
-      <a href="#contato">✉️ Contato</a>
-      <a href="../index.html">🇫🇷 Français</a>
-    </nav>
+    <nav style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+      <!-- Ligne 1 : les liens -->
+      <div style="display: flex; gap: 25px;">
+        <a href="#home">🏠 Início</a>
+        <a href="#produtos">🛍️ Produtos</a>
+        <a href="#contato">✉️ Contato</a>
+        <a href="../index.html">🇫🇷 Français</a>
+      </div>
 
-    <!-- ✅ BOUTON PANIER -->
-    <button class="snipcart-checkout panier-btn">🛒 Ver carrinho</button>
+      <!-- Ligne 2 : bouton panier centré -->
+      <button class="snipcart-checkout panier-btn" 
+        style="background: none; border: none; color: #d4af37; font-size: 16px; cursor: pointer;">
+        🛒 Ver carrinho
+      </button>
+    </nav>
   </header>
 
   <!-- ✅ SECTION ACCUEIL -->
@@ -42,13 +48,13 @@
     <h2>🛍️ Os Nossos Produtos</h2>
     <div class="product-grid">
 
-      <!-- ✅ PRODUTO 1 -->
+      <!-- ✅ PRODUIT 1 -->
       <div class="product-card">
         <picture>
           <source srcset="../amnesia-cbd.webp" type="image/webp">
           <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia" class="product-img" loading="lazy" width="400" height="400">
         </picture>
-        <h3>🌿 Flor CBD Amnesia 🇮🇹</h3>
+        <h3>🌿 Flor CBD Amnesia</h3>
         <p class="price">8,90 €</p>
         <button 
           class="snipcart-add-item"
@@ -61,13 +67,13 @@
         </button>
       </div>
 
-      <!-- ✅ PRODUTO 2 -->
+      <!-- ✅ PRODUIT 2 -->
       <div class="product-card">
         <picture>
           <source srcset="../resine-cbd.webp" type="image/webp">
           <img src="../resine-cbd.jpg" alt="Resina CBD Hash" class="product-img" loading="lazy" width="400" height="400">
         </picture>
-        <h3>🌴 Resina CBD Hash 🇮🇹</h3>
+        <h3>🌿 Resina CBD Hash</h3>
         <p class="price">7,50 €</p>
         <button 
           class="snipcart-add-item"
@@ -80,13 +86,13 @@
         </button>
       </div>
 
-      <!-- ✅ PRODUTO 3 -->
+      <!-- ✅ PRODUIT 3 -->
       <div class="product-card">
         <picture>
           <source srcset="../cherry-cbd.webp" type="image/webp">
           <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry" class="product-img" loading="lazy" width="400" height="400">
         </picture>
-        <h3>🍒 Flor CBD Cherry 🇮🇹</h3>
+        <h3>🍒 Flor CBD Cherry</h3>
         <p class="price">9,50 €</p>
         <button 
           class="snipcart-add-item"
@@ -115,7 +121,7 @@
        data-config-modal-style="side">
   </div>
 
-  <!-- ✅ Script Snipcart (juste avant la fin du body) -->
+  <!-- ✅ Script Snipcart -->
   <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
 
 </body>
