@@ -6,10 +6,11 @@
   <title>Green-Therapy – CBD Premium</title>
 
   <!-- CSS -->
-  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="style.css" /></noscript>
+  <link rel="preload" href="style.css" as="style" />
+  <link rel="stylesheet" href="style.css" />
 
-  <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <!-- Snipcart CSS Preload -->
+  <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
 
   <!-- Snipcart Configuration -->
@@ -20,20 +21,9 @@
     };
   </script>
 
-  <style>
-    .header-panier {
-      text-align: left;
-      margin-top: 10px;
-      margin-left: 90px;
-    }
-    .panier-btn {
-      background: none;
-      border: none;
-      color: #d4af37;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+  <!-- Preconnect pour performance -->
+  <link rel="preconnect" href="https://cdn.snipcart.com" />
+  <link rel="dns-prefetch" href="https://cdn.snipcart.com" />
 </head>
 
 <body>
@@ -122,7 +112,7 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section">
+  <section id="contact" class="section contact">
     <h2>✉️ Contact</h2>
     <p>Contactez-nous pour toute question ou commande spéciale.</p>
     <p>📧 Email : greentherapy06@gmail.com</p>
