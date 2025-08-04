@@ -6,7 +6,7 @@
   <title>Green-Therapy – CBD Premium</title>
   <link rel="stylesheet" href="style.css">
 
-  <!-- ✅ Snipcart sera chargé plus tard (lazy load) -->
+  <!-- ✅ Snipcart configuration -->
   <script>
     window.SnipcartSettings = {
       publicApiKey: 'TA_CLE_API_ICI',
@@ -17,14 +17,14 @@
   <style>
     /* ✅ Ajustement du bouton panier sous Produits & Contact */
     .header-panier {
-      text-align: left; /* On aligne à gauche d'abord */
+      text-align: left;
       margin-top: 10px;
-      margin-left: 90px; /* ✅ Décalage vers la droite pour bien centrer sous Produits & Contact */
+      margin-left: 90px;
     }
     .panier-btn {
       background: none;
       border: none;
-      color: #d4af37; /* doré comme les autres textes */
+      color: #d4af37;
       font-size: 16px;
       cursor: pointer;
     }
@@ -48,7 +48,7 @@
       <a href="pt/index.html">🇵🇹 Portugais</a>
     </nav>
 
-    <!-- ✅ BOUTON PANIER CENTRÉ SOUS PRODUITS & CONTACT -->
+    <!-- ✅ BOUTON PANIER -->
     <div class="header-panier">
       <button id="panier-btn" class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
     </div>
@@ -138,7 +138,7 @@
        data-config-modal-style="side">
   </div>
 
-  <!-- ✅ SCRIPT pour charger Snipcart UNIQUEMENT si besoin -->
+  <!-- ✅ SCRIPT pour charger Snipcart si bouton cliqué -->
   <script>
     function chargerSnipcart() {
       if (!window.snipcartLoaded) {
@@ -155,7 +155,10 @@
       }
     }
 
+    // ✅ Charge Snipcart si on clique sur "Voir le panier"
     document.getElementById("panier-btn").addEventListener("click", chargerSnipcart);
+
+    // ✅ Charge Snipcart si on clique sur "Ajouter au panier"
     document.querySelectorAll(".snipcart-add-item").forEach(btn => {
       btn.addEventListener("click", chargerSnipcart);
     });
