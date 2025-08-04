@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" />
 
+  <!-- ✅ CONFIGURATION Snipcart -->
+  <script>
+    window.SnipcartSettings = {
+      publicApiKey: 'MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3',
+      loadStrategy: 'on-user-interaction'
+    };
+  </script>
+  <script defer src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
+
   <style>
     .header-panier {
       text-align: left;
@@ -115,14 +124,11 @@
     <p>📧 Email : greentherapy06@gmail.com</p>
   </section>
 
-  <!-- ✅ DIV SNIPCART OBLIGATOIRE -->
+  <!-- ✅ DIV SNIPCART -->
   <div hidden id="snipcart" 
        data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
        data-config-modal-style="side"
        data-currency="eur">
   </div>
-
-  <!-- ✅ SCRIPT Snipcart placé à la fin -->
-  <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
 </body>
 </html>
