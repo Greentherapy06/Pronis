@@ -28,3 +28,8 @@
   font-size: 14px;
   text-align: right;
 }
+.avis-stars {
+  color: #ffd700; /* or #d4af37 pour rester dans ta charte */
+  font-size: 18px;
+  margin-bottom: 5px;
+}
