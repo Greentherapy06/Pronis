@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Green-Therapy – CBD Premium</title>
+  <title>Green-Therapy – CBD Premium Portugal</title>
+  <meta name="description" content="Green-Therapy – Flores, resinas e óleos CBD premium. Produtos 100% legais em Portugal.">
   <link rel="stylesheet" href="../style.css">
 
-  <!-- ✅ Snipcart será carregado depois (lazy load) -->
+  <!-- ✅ Snipcart sera chargé plus tard (lazy load) -->
   <script>
     window.SnipcartSettings = {
       publicApiKey: 'TA_CLE_API_ICI',
@@ -15,16 +16,16 @@
   </script>
 
   <style>
-    /* ✅ Ajuste do botão do carrinho embaixo de Produtos & Contato */
+    /* ✅ Ajustement du bouton panier sous Produtos & Contato */
     .header-panier {
       text-align: left;
       margin-top: 10px;
-      margin-left: 90px; /* ✅ deslocamento para alinhar entre Produtos & Contato */
+      margin-left: 90px; /* ✅ Aligné comme la version FR */
     }
     .panier-btn {
       background: none;
       border: none;
-      color: #d4af37; /* dourado como os outros textos */
+      color: #d4af37; /* doré comme les autres textes */
       font-size: 16px;
       cursor: pointer;
     }
@@ -33,14 +34,14 @@
 
 <body>
 
-  <!-- ✅ CABEÇALHO -->
+  <!-- ✅ HEADER -->
   <header>
     <div class="logo-container">
       <img src="../logo-rond.png" alt="Green Therapy Logo" class="logo" loading="lazy" width="80" height="80">
       <h1>Green-Therapy</h1>
     </div>
 
-    <!-- ✅ NAVEGAÇÃO -->
+    <!-- ✅ NAVIGATION -->
     <nav>
       <a href="#home">🏠 Início</a>
       <a href="#produtos">🛍️ Produtos</a>
@@ -48,19 +49,19 @@
       <a href="../index.html">🇫🇷 Français</a>
     </nav>
 
-    <!-- ✅ BOTÃO DO CARRINHO CENTRALIZADO -->
+    <!-- ✅ BOUTON PANIER CENTRÉ SOUS PRODUITS & CONTATO -->
     <div class="header-panier">
       <button id="panier-btn" class="snipcart-checkout panier-btn">🛒 Ver carrinho</button>
     </div>
   </header>
 
-  <!-- ✅ SEÇÃO INÍCIO -->
+  <!-- ✅ SECTION INÍCIO -->
   <section id="home" class="section">
     <h2>🌿 Green-Therapy – CBD Premium</h2>
     <p>Qualidade italiana, bem-estar garantido. Descubra a nossa seleção de produtos CBD premium.</p>
   </section>
 
-  <!-- ✅ SEÇÃO PRODUTOS -->
+  <!-- ✅ SECTION PRODUTOS -->
   <section id="produtos" class="section">
     <h2>🛍️ Os Nossos Produtos</h2>
     <div class="product-grid">
@@ -125,22 +126,22 @@
     </div>
   </section>
 
-  <!-- ✅ SEÇÃO CONTATO -->
+  <!-- ✅ SECTION CONTATO -->
   <section id="contato" class="section">
     <h2>✉️ Contato</h2>
-    <p>Entre em contato para qualquer dúvida ou pedido especial.</p>
+    <p>Contacte-nos para qualquer dúvida ou pedido especial.</p>
     <p>📧 Email : greentherapy06@gmail.com</p>
   </section>
 
-  <!-- ✅ SNIPCART DIV OBRIGATÓRIO -->
+  <!-- ✅ SNIPCART DIV OBLIGATOIRE -->
   <div hidden id="snipcart" 
        data-api-key="TA_CLE_API_ICI"
        data-config-modal-style="side">
   </div>
 
-  <!-- ✅ SCRIPT para carregar Snipcart APENAS quando necessário -->
+  <!-- ✅ SCRIPT pour charger Snipcart UNIQUEMENT si besoin -->
   <script>
-    function carregarSnipcart() {
+    function chargerSnipcart() {
       if (!window.snipcartLoaded) {
         window.snipcartLoaded = true;
         const script = document.createElement("script");
@@ -155,9 +156,9 @@
       }
     }
 
-    document.getElementById("panier-btn").addEventListener("click", carregarSnipcart);
+    document.getElementById("panier-btn").addEventListener("click", chargerSnipcart);
     document.querySelectorAll(".snipcart-add-item").forEach(btn => {
-      btn.addEventListener("click", carregarSnipcart);
+      btn.addEventListener("click", chargerSnipcart);
     });
   </script>
 
