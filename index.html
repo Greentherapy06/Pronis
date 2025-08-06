@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
   <link rel="preconnect" href="https://app.snipcart.com" crossorigin>
 
-  <!-- ✅ CSS -->
+  <!-- ✅ CSS : on remonte d’un dossier -->
   <link rel="stylesheet" href="style.css" />
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
@@ -54,7 +54,7 @@
   <!-- Header -->
   <header>
     <div class="logo-container">
-      <img src="logo-rond.png" alt="Logo Green Therapy" class="logo" loading="lazy" width="80" height="80" />
+      <img src="logo-rond.png" alt="Logo Green Therapy" class="logo" loading="lazy" width="80" height="80" fetchpriority="high" />
       <h1>Green-Therapy</h1>
     </div>
 
@@ -176,7 +176,7 @@
     data-currency="eur">
   </div>
 
-  <!-- Loader -->
+  <!-- Loader Optimisé -->
   <script>
     let snipcartLoaded = false;
     function loadSnipcart() {
@@ -184,12 +184,14 @@
       snipcartLoaded = true;
       const script = document.createElement("script");
       script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
-      script.async = true;
+      script.defer = true;
       document.body.appendChild(script);
     }
 
-    window.addEventListener("scroll", loadSnipcart, { once: true });
-    document.addEventListener("click", loadSnipcart, { once: true });
+    const triggers = ["scroll", "mousemove", "touchstart", "keydown"];
+    triggers.forEach(evt =>
+      window.addEventListener(evt, loadSnipcart, { once: true, passive: true })
+    );
   </script>
 
   <footer style="text-align:center; padding:20px; font-size:14px;">
@@ -198,4 +200,4 @@
     <a href="cookies.html">Cookies</a>
   </footer>
 </body>
-          </html>
+  </html>
