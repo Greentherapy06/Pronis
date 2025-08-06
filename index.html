@@ -5,16 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Green-Therapy – CBD Premium</title>
 
-  <!-- ✅ Balises SEO ajoutées -->
-  <meta name="description" content="Green-Therapy propose des fleurs de CBD premium, huiles full spectrum et résines naturelles en provenance d’Italie. Livraison rapide. Qualité certifiée.">
-  <meta name="keywords" content="CBD premium, fleur CBD, huile CBD full spectrum, résine CBD, Green-Therapy, CBD Italie, boutique CBD">
-  <meta name="author" content="Green-Therapy">
-  <meta property="og:title" content="Green-Therapy – CBD Premium">
-  <meta property="og:description" content="Fleurs, huiles et résines de CBD haut de gamme issues d’Italie. Livraison rapide. Qualité certifiée.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://greentherapy06.github.io/Green-therapy-cbd/">
-  <meta property="og:image" content="https://greentherapy06.github.io/Green-therapy-cbd/logo-rond.png">
-
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
@@ -43,8 +33,6 @@
     }
   </style>
 </head>
-
-<!-- 📌 Le reste du fichier est laissé 100 % identique -->
 
 <body>
   <!-- Header -->
@@ -75,9 +63,125 @@
     </span>
   </h2>
   <p>Spécialiste du CBD depuis 2019, nous sélectionnons en Italie des fleurs de CBD premium, huiles de CBD full spectrum, résines et infusions. Découvrez des produits naturels et de qualité pour un moment de détente authentique.</p>
-  <p>vente interdit au mineur 🔞</p>
 </section>
 
+  <!-- Produits -->
+  <section id="produits" class="section">
+    <h2>🛍️ Nos Produits</h2>
+    <div class="product-grid">
 
+      <div class="product-card">
+        <picture>
+          <source srcset="amnesia-cbd.webp" type="image/webp" />
+          <img src="amnesia-cbd.jpg" alt="Fleur CBD Amnesia" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🌿 Fleur CBD Amnesia 🇮🇹</h3>
+        <p class="price">8,90 €</p>
+        <button class="snipcart-add-item"
+          data-item-id="amnesia-cbd"
+          data-item-name="Fleur CBD Amnesia"
+          data-item-price="8.90"
+          data-item-url="/"
+          data-item-description="Fleur CBD premium d’Italie">
+          ➕ Ajouter au panier
+        </button>
+      </div>
+
+      <div class="product-card">
+        <picture>
+          <source srcset="resine-cbd.webp" type="image/webp" />
+          <img src="resine-cbd.jpg" alt="Résine CBD Hash" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🌴 Résine CBD Hash 🇮🇹</h3>
+        <p class="price">7,50 €</p>
+        <button class="snipcart-add-item"
+          data-item-id="resine-cbd"
+          data-item-name="Résine CBD Hash"
+          data-item-price="7.50"
+          data-item-url="/"
+          data-item-description="Résine CBD premium d’Italie">
+          ➕ Ajouter au panier
+        </button>
+      </div>
+
+      <div class="product-card">
+        <picture>
+          <source srcset="cherry-cbd.webp" type="image/webp" />
+          <img src="cherry-cbd.jpg" alt="Fleur CBD Cherry" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🍒 Fleur CBD Cherry 🇮🇹</h3>
+        <p class="price">9,50 €</p>
+        <button class="snipcart-add-item"
+          data-item-id="cherry-cbd"
+          data-item-name="Fleur CBD Cherry"
+          data-item-price="9.50"
+          data-item-url="/"
+          data-item-description="Fleur CBD Cherry premium d’Italie">
+          ➕ Ajouter au panier
+        </button>
+      </div>
+
+    </div>
+  </section>
+  <!-- ✅ AVIS CLIENTS -->
+<section id="avis" class="section">
+  <h2>⭐ Avis Clients</h2>
+  <div class="avis-grid">
+
+    <div class="avis-card">
+      <p class="avis-texte">“Livraison rapide et discrète, fleurs d’une qualité exceptionnelle. Je recommande à 100 % !”</p>
+      <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+      <p class="avis-nom">– Julien M.</p>
+    </div>
+
+    <div class="avis-card">
+      <p class="avis-texte">“Une vraie découverte ! L’huile CBD m’aide à mieux dormir. Service client très réactif.”</p>
+      <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+      <p class="avis-nom">– Sophie L.</p>
+    </div>
+
+    <div class="avis-card">
+      <p class="avis-texte">“Excellent rapport qualité-prix. Le goût, l’odeur, la détente... tout y est.”</p>
+      <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+      <p class="avis-nom">– Karim B.</p>
+    </div>
+
+  </div>
+</section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2>✉️ Contact</h2>
+    <p>Contactez-nous pour toute question ou commande spéciale.</p>
+    <p>📧 Email : greentherapy06@gmail.com</p>
+  </section>
+
+  <!-- Snipcart -->
+  <div hidden id="snipcart"
+    data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
+    data-config-modal-style="side"
+    data-currency="eur">
+  </div>
+
+  <!-- Chargement dynamique de Snipcart -->
+  <script>
+    let snipcartLoaded = false;
+    function loadSnipcart() {
+      if (snipcartLoaded) return;
+      snipcartLoaded = true;
+      const script = document.createElement("script");
+      script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    window.addEventListener("scroll", loadSnipcart, { once: true });
+    document.addEventListener("click", loadSnipcart, { once: true });
+  </script>
+  <footer style="text-align:center; padding:20px; font-size:14px;">
+  <a href="mentions-legales.html">Mentions légales</a> | 
+  <a href="politique-confidentialite.html">Politique de confidentialité</a> | 
+  <a href="cookies.html">Cookies</a>
+  </footer>
 </body>
-</html>
+  </html>
