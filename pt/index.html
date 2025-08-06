@@ -20,8 +20,8 @@
   <link rel="preconnect" href="https://app.snipcart.com" crossorigin>
 
   <!-- ✅ CSS : on remonte d’un dossier -->
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+  <link rel="stylesheet" href="../style.css" media="all" />
+  <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
 
   <!-- Snipcart Configuration -->
@@ -32,6 +32,7 @@
     };
   </script>
 
+  <!-- ✅ Style local -->
   <style>
     .header-panier {
       text-align: left;
@@ -46,6 +47,8 @@
       cursor: pointer;
     }
   </style>
+
+  <!-- ✅ hreflang -->
   <link rel="alternate" href="https://greentherapy06.github.io/Green-therapy-cbd/" hreflang="fr" />
   <link rel="alternate" href="https://greentherapy06.github.io/Green-therapy-cbd/pt/" hreflang="pt" />
 </head>
@@ -185,6 +188,7 @@
       const script = document.createElement("script");
       script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
       script.async = true;
+      script.defer = true;
       document.body.appendChild(script);
     }
 
@@ -198,4 +202,4 @@
     <a href="../cookies.html">Cookies</a>
   </footer>
 </body>
-</html>
+                                                                                                                           </html>
