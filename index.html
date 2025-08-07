@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -6,14 +7,28 @@
   <meta name="description" content="Spécialiste du CBD premium depuis 2019 : fleurs, résines, huiles et infusions de haute qualité. Produits naturels sélectionnés en Italie.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Green-Therapy">
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />  <!-- Préconnexion CDN -->  <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>  <!-- CSS principal -->  <link rel="stylesheet" href="style.css" />  <!-- CSS Snipcart préchargé -->  <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
-  <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>  <!-- Snipcart Configuration -->  <script>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- Préconnexion CDN -->
+  <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- CSS Snipcart préchargé -->
+  <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
+  <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
+
+  <!-- Snipcart Configuration -->
+  <script>
     window.SnipcartSettings = {
       publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
       loadStrategy: "on-user-interaction"
     };
-  </script>  <style>
+  </script>
+
+  <style>
     .header-panier {
       text-align: left;
       margin-top: 10px;
@@ -26,7 +41,8 @@
       font-size: 16px;
       cursor: pointer;
     }
-  </style></head>
+  </style>
+</head>
 <body>
   <header>
     <div class="logo-container">
@@ -42,7 +58,9 @@
     <div class="header-panier">
       <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
     </div>
-  </header>  <section id="home" class="section">
+  </header>
+
+  <section id="home" class="section">
     <h2>
       <span style="display: inline-block; text-align: center;">
         <span style="display: block;">🌿 Green-Therapy 🌿</span>
@@ -50,60 +68,76 @@
       </span>
     </h2>
     <p>Spécialiste du CBD depuis 2019, nous sélectionnons en Italie des fleurs de CBD premium, des huiles de CBD full spectrum, des résines et des infusions. Découvrez des produits naturels et de qualité pour un moment de détente authentique.</p>
-  </section>  <section id="produits" class="section">
+  </section>
+
+  <section id="produits" class="section">
     <h2>🛍️ Nos Produits</h2>
     <div class="product-grid">
+
+      <!-- Produit 1 -->
       <div class="product-card">
         <picture>
           <source srcset="amnesia-cbd.webp" type="image/webp" />
           <img src="amnesia-cbd.jpg" alt="Fleur CBD Amnesia - Italie" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
-        <h3>🌿 Fleur CBD Amnesia 2g 🇮🇹</h3>
-        <p class="price">8,90 €</p>
-        <button class="snipcart-add-item"
-          data-item-id="amnesia-cbd"
-          data-item-name="Fleur CBD Amnesia"
-          data-item-price="8.90"
-          data-item-url="/"
-          data-item-description="Fleur CBD premium d’Italie">
+        <h3>🌿 Fleur CBD Amnesia 🇮🇹</h3>
+        <p class="price">À partir de 8,90 €</p>
+        <select id="amnesia-quantite">
+          <option value="2" selected>2g – 8,90 €</option>
+          <option value="4">4g – 17,00 €</option>
+          <option value="6">6g – 24,00 €</option>
+          <option value="8">8g – 30,00 €</option>
+          <option value="10">10g – 40,00 €</option>
+        </select>
+        <button onclick="ajouterProduit('amnesia-cbd', 'Fleur CBD Amnesia', 'Fleur CBD premium d’Italie', 'amnesia-quantite')">
           ➕ Ajouter au panier
         </button>
-      </div><div class="product-card">
-    <picture>
-      <source srcset="resine-cbd.webp" type="image/webp" />
-      <img src="resine-cbd.jpg" alt="Résine CBD Hash - Italie" class="product-img" loading="lazy" width="400" height="400" />
-    </picture>
-    <h3>🌴 Résine CBD Hash 2g 🇮🇹</h3>
-    <p class="price">7,50 €</p>
-    <button class="snipcart-add-item"
-      data-item-id="resine-cbd"
-      data-item-name="Résine CBD Hash"
-      data-item-price="7.50"
-      data-item-url="/"
-      data-item-description="Résine CBD premium d’Italie">
-      ➕ Ajouter au panier
-    </button>
-  </div>
+      </div>
 
-  <div class="product-card">
-    <picture>
-      <source srcset="cherry-cbd.webp" type="image/webp" />
-      <img src="cherry-cbd.jpg" alt="Fleur CBD Cherry - Italie" class="product-img" loading="lazy" width="400" height="400" />
-    </picture>
-    <h3>🍒 Fleur CBD Cherry 2g 🇮🇹</h3>
-    <p class="price">9,50 €</p>
-    <button class="snipcart-add-item"
-      data-item-id="cherry-cbd"
-      data-item-name="Fleur CBD Cherry"
-      data-item-price="9.50"
-      data-item-url="/"
-      data-item-description="Fleur CBD Cherry premium d’Italie">
-      ➕ Ajouter au panier
-    </button>
-  </div>
-</div>
+      <!-- Produit 2 -->
+      <div class="product-card">
+        <picture>
+          <source srcset="resine-cbd.webp" type="image/webp" />
+          <img src="resine-cbd.jpg" alt="Résine CBD Hash - Italie" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🌴 Résine CBD Hash 🇮🇹</h3>
+        <p class="price">À partir de 7,50 €</p>
+        <select id="resine-quantite">
+          <option value="2" selected>2g – 7,50 €</option>
+          <option value="4">4g – 14,00 €</option>
+          <option value="6">6g – 20,00 €</option>
+          <option value="8">8g – 26,00 €</option>
+          <option value="10">10g – 32,00 €</option>
+        </select>
+        <button onclick="ajouterProduit('resine-cbd', 'Résine CBD Hash', 'Résine CBD premium d’Italie', 'resine-quantite')">
+          ➕ Ajouter au panier
+        </button>
+      </div>
 
-  </section>  <section id="avis" class="section">
+      <!-- Produit 3 -->
+      <div class="product-card">
+        <picture>
+          <source srcset="cherry-cbd.webp" type="image/webp" />
+          <img src="cherry-cbd.jpg" alt="Fleur CBD Cherry - Italie" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🍒 Fleur CBD Cherry 🇮🇹</h3>
+        <p class="price">À partir de 9,50 €</p>
+        <select id="cherry-quantite">
+          <option value="2" selected>2g – 9,50 €</option>
+          <option value="4">4g – 18,00 €</option>
+          <option value="6">6g – 26,00 €</option>
+          <option value="8">8g – 33,00 €</option>
+          <option value="10">10g – 40,00 €</option>
+        </select>
+        <button onclick="ajouterProduit('cherry-cbd', 'Fleur CBD Cherry', 'Fleur CBD Cherry premium d’Italie', 'cherry-quantite')">
+          ➕ Ajouter au panier
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="avis" class="section">
     <h2>⭐ Avis Clients</h2>
     <div class="avis-grid">
       <div class="avis-card">
@@ -122,15 +156,63 @@
         <p class="avis-nom">– Karim B.</p>
       </div>
     </div>
-  </section>  <section id="contact" class="section">
+  </section>
+
+  <section id="contact" class="section">
     <h2>✉️ Contact</h2>
     <p>Contactez-nous pour toute question ou demande spéciale.</p>
     <p><a href="mailto:greentherapy06@gmail.com">📧 greentherapy06@gmail.com</a></p>
-  </section>  <div hidden id="snipcart"
+  </section>
+
+  <div hidden id="snipcart"
     data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
     data-config-modal-style="side"
     data-currency="eur">
-  </div>  <script>
+  </div>
+
+  <!-- Script pour ajouter les bons produits selon quantité -->
+  <script>
+    const prixParProduit = {
+      "amnesia-cbd": {
+        2: 8.90,
+        4: 17.00,
+        6: 24.00,
+        8: 30.00,
+        10: 40.00
+      },
+      "resine-cbd": {
+        2: 7.50,
+        4: 14.00,
+        6: 20.00,
+        8: 26.00,
+        10: 32.00
+      },
+      "cherry-cbd": {
+        2: 9.50,
+        4: 18.00,
+        6: 26.00,
+        8: 33.00,
+        10: 40.00
+      }
+    };
+
+    function ajouterProduit(idBase, nomBase, description, selectId) {
+      const quantite = document.getElementById(selectId).value;
+      const prix = prixParProduit[idBase][quantite];
+      const id = `${idBase}-${quantite}g`;
+      const nom = `${nomBase} ${quantite}g`;
+
+      Snipcart.api.cart.items.add({
+        id,
+        name: nom,
+        price: prix,
+        url: '/',
+        description
+      });
+    }
+  </script>
+
+  <script>
     let snipcartLoaded = false;
     function loadSnipcart() {
       if (snipcartLoaded) return;
@@ -142,7 +224,9 @@
     }
     window.addEventListener("scroll", loadSnipcart, { once: true });
     document.addEventListener("click", loadSnipcart, { once: true });
-  </script>  <footer style="text-align:center; padding:20px; font-size:14px;">
+  </script>
+
+  <footer style="text-align:center; padding:20px; font-size:14px;">
     <a href="mentions-legales.html">Mentions légales</a> |
     <a href="politique-confidentialite.html">Politique de confidentialité</a> |
     <a href="cookies.html">Cookies</a>
