@@ -42,6 +42,22 @@
       font-size: 16px;
       cursor: pointer;
     }
+    /* Style du bouton Ajouter au panier */
+    .btn-ajouter-panier {
+      background-color: black;
+      color: #d4af37;
+      border: none;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-ajouter-panier:hover {
+      opacity: 0.85;
+    }
   </style>
 </head>
 
@@ -96,8 +112,8 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button onclick="ajouterProduit('amnesia-cbd','Fleur CBD Amnesia','Fleur CBD premium d’Italie','amnesia-quantite')">
-          ➕ Ajouter au panier
+        <button class="btn-ajouter-panier" onclick="ajouterProduit('amnesia-cbd','Fleur CBD Amnesia','Fleur CBD premium d’Italie','amnesia-quantite')">
+          🛒 Ajouter au panier
         </button>
       </div>
 
@@ -116,8 +132,8 @@
           <option value="8">8g – 26,00 €</option>
           <option value="10">10g – 32,00 €</option>
         </select>
-        <button onclick="ajouterProduit('resine-cbd','Résine CBD Hash','Résine CBD premium d’Italie','resine-quantite')">
-          ➕ Ajouter au panier
+        <button class="btn-ajouter-panier" onclick="ajouterProduit('resine-cbd','Résine CBD Hash','Résine CBD premium d’Italie','resine-quantite')">
+          🛒 Ajouter au panier
         </button>
       </div>
 
@@ -136,8 +152,8 @@
           <option value="8">8g – 33,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button onclick="ajouterProduit('cherry-cbd','Fleur CBD Cherry','Fleur CBD Cherry premium d’Italie','cherry-quantite')">
-          ➕ Ajouter au panier
+        <button class="btn-ajouter-panier" onclick="ajouterProduit('cherry-cbd','Fleur CBD Cherry','Fleur CBD Cherry premium d’Italie','cherry-quantite')">
+          🛒 Ajouter au panier
         </button>
       </div>
 
