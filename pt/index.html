@@ -28,15 +28,23 @@
     };
   </script>
 
-  <!-- Règles locales -->
+  <!-- Regras locais -->
   <style>
     .header-panier{ text-align:left; margin-top:10px; margin-left:100px; }
     .panier-btn{ background:none; border:none; color:#d4af37; font-size:16px; cursor:pointer; }
 
     .product-card .cta-cart{
-      background:#000; color:#d4af37; font-weight:700;
-      padding:8px 12px; border-radius:8px; border:1px solid #000;
-      cursor:pointer; transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem;
+      background:#000;
+      color:#d4af37;
+      font-weight:700;
+      padding:8px 12px;
+      border-radius:8px;
+      border:1px solid #000;
+      cursor:pointer;
+      transition:opacity .2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
     }
     .product-card .cta-cart:hover{ opacity:.9; }
 
@@ -84,7 +92,7 @@
     <div class="product-grid">
 
       <!-- Produto 1 -->
-      <div class="product-card" data-id="amnesia-cbd" data-stock="10">
+      <div class="product-card" data-id="amnesia-cbd" data-stock="0">
         <picture>
           <source srcset="../amnesia-cbd.webp" type="image/webp" />
           <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400" />
@@ -182,51 +190,47 @@
     data-currency="eur">
   </div>
 
-  <!-- Preços + Stock + Snipcart -->
+  <!-- Preços + Stock + Snipcart (unificado) -->
   <script>
     const prixParProduit = {
       "amnesia-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "resine-cbd":  {2: 7.50, 4: 14.00, 6: 20.00, 8: 26.00, 10: 32.00},
       "cherry-cbd":  {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00}
     };
+    const LANG = (document.documentElement.lang || 'pt').toLowerCase();
+    const TXT = LANG.startsWith('pt')
+      ? { instock: 'Em stock: ', out: 'Esgotado' }
+      : { instock: 'En stock : ', out: 'Rupture de stock' };
 
-    /* STOCKS (0 = esgotado). Altera só os números aqui. */
-    const stock = {
-      "amnesia-cbd": 0,
-      "resine-cbd":  0,
-      "cherry-cbd":  0
-    };
+    function getStock(id) {
+      const card = document.querySelector(`.product-card[data-id="${id}"]`);
+      if (!card) return 0;
+      const n = parseInt(card.getAttribute('data-stock'), 10);
+      return isNaN(n) ? 0 : n;
+    }
 
     function renderStocks(){
       document.querySelectorAll('.product-card').forEach(card => {
         const id = card.dataset.id;
-        if(!id) return;
+        if (!id) return;
 
         let label = card.querySelector('.stock-label');
-        if(!label){
+        if (!label){
           label = document.createElement('div');
           label.className = 'stock-label';
           card.appendChild(label);
         }
-
         const btn = card.querySelector('.cta-cart');
+        const n = getStock(id);
 
-        if (stock[id] <= 0){
-          label.textContent = 'Esgotado';
+        if (n <= 0){
+          label.textContent = TXT.out;
           label.classList.remove('stock-in'); label.classList.add('stock-out');
-          if (btn){
-            btn.setAttribute('disabled','disabled');
-            btn.classList.add('btn-disabled');
-            btn.title = 'Esgotado';
-          }
+          if (btn){ btn.setAttribute('disabled','disabled'); btn.classList.add('btn-disabled'); btn.title = TXT.out; }
         } else {
-          label.textContent = 'Em stock: ' + stock[id];
+          label.textContent = TXT.instock + n;
           label.classList.remove('stock-out'); label.classList.add('stock-in');
-          if (btn){
-            btn.removeAttribute('disabled');
-            btn.classList.remove('btn-disabled');
-            btn.removeAttribute('title');
-          }
+          if (btn){ btn.removeAttribute('disabled'); btn.classList.remove('btn-disabled'); btn.removeAttribute('title'); }
         }
       });
     }
@@ -243,8 +247,8 @@
     }
 
     function ajouterProduit(idBase, nomBase, description, selectId) {
-      if (stock[idBase] <= 0){
-        alert('Esgotado');
+      if (getStock(idBase) <= 0){
+        alert(TXT.out);
         return;
       }
       const quantite = document.getElementById(selectId).value;
@@ -258,7 +262,7 @@
     }
   </script>
 
-  <!-- Chargement différé Snipcart -->
+  <!-- Carregamento adiado do Snipcart -->
   <script>
     let snipcartLoaded = false;
     function loadSnipcart() {
