@@ -48,6 +48,12 @@
       gap:.5rem;
     }
     .product-card .cta-cart:hover{ opacity:.9; }
+
+    /* étiquette stock (injection JS) */
+    .stock-label{ margin-top:6px; font-size:.9rem; }
+    .stock-out{ color:#b00020; }
+    .stock-in{ color:#2e7d32; }
+    .btn-disabled{ opacity:.55; cursor:not-allowed; }
   </style>
 </head>
 
@@ -88,7 +94,7 @@
     <div class="product-grid">
 
       <!-- Produit 1 -->
-      <div class="product-card">
+      <div class="product-card" data-id="amnesia-cbd" data-stock="0">
         <picture>
           <source srcset="amnesia-cbd.webp" type="image/webp" />
           <img src="amnesia-cbd.jpg" alt="Fleur CBD Amnesia - Italie" class="product-img" loading="lazy" width="400" height="400" />
@@ -108,7 +114,7 @@
       </div>
 
       <!-- Produit 2 -->
-      <div class="product-card">
+      <div class="product-card" data-id="resine-cbd" data-stock="0">
         <picture>
           <source srcset="resine-cbd.webp" type="image/webp" />
           <img src="resine-cbd.jpg" alt="Résine CBD Hash - Italie" class="product-img" loading="lazy" width="400" height="400" />
@@ -128,7 +134,7 @@
       </div>
 
       <!-- Produit 3 -->
-      <div class="product-card">
+      <div class="product-card" data-id="cherry-cbd" data-stock="0">
         <picture>
           <source srcset="cherry-cbd.webp" type="image/webp" />
           <img src="cherry-cbd.jpg" alt="Fleur CBD Cherry - Italie" class="product-img" loading="lazy" width="400" height="400" />
@@ -186,14 +192,64 @@
     data-currency="eur">
   </div>
 
-  <!-- Prix selon quantité + ajout Snipcart -->
+  <!-- Prix + Stock + Ajout Snipcart -->
   <script>
+    /* Prix par quantité (inchangé) */
     const prixParProduit = {
       "amnesia-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "resine-cbd":  {2: 7.50, 4: 14.00, 6: 20.00, 8: 26.00, 10: 32.00},
       "cherry-cbd":  {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00}
     };
 
+    /* === STOCKS MANUELS (à modifier en 2 secondes) ===
+       Mets ici tes niveaux de stock. 0 = rupture (bouton désactivé).
+    */
+    const stock = {
+      "amnesia-cbd": 0,
+      "resine-cbd":  0,
+      "cherry-cbd":  0
+    };
+
+    /* Affichage/MAJ de l'état de stock (sans toucher au HTML) */
+    function renderStocks(){
+      document.querySelectorAll('.product-card').forEach(card => {
+        const id = card.dataset.id;
+        if(!id) return;
+
+        // créer/repérer l'étiquette
+        let label = card.querySelector('.stock-label');
+        if(!label){
+          label = document.createElement('div');
+          label.className = 'stock-label';
+          card.appendChild(label);
+        }
+
+        // bouton du produit (le seul .cta-cart dans la carte)
+        const btn = card.querySelector('.cta-cart');
+
+        if (stock[id] <= 0){
+          label.textContent = 'Rupture de stock';
+          label.classList.remove('stock-in'); label.classList.add('stock-out');
+          if (btn){
+            btn.setAttribute('disabled','disabled');
+            btn.classList.add('btn-disabled');
+            btn.title = 'Rupture de stock';
+          }
+        } else {
+          label.textContent = 'En stock : ' + stock[id];
+          label.classList.remove('stock-out'); label.classList.add('stock-in');
+          if (btn){
+            btn.removeAttribute('disabled');
+            btn.classList.remove('btn-disabled');
+            btn.removeAttribute('title');
+          }
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderStocks);
+
+    /* Chargement Snipcart à la demande (inchangé) */
     function ensureSnipcartReady(cb){
       if (window.Snipcart && window.Snipcart.api) return cb();
       if (typeof loadSnipcart === 'function') loadSnipcart();
@@ -204,7 +260,13 @@
       }, 100);
     }
 
+    /* Ajout au panier avec vérif stock (ne décrémente pas : tu changes
+       le nombre ici quand tu reçois du stock, c’est tout.) */
     function ajouterProduit(idBase, nomBase, description, selectId) {
+      if (stock[idBase] <= 0){
+        alert('Rupture de stock');
+        return;
+      }
       const quantite = document.getElementById(selectId).value;
       const prix = prixParProduit[idBase][quantite];
       const id = `${idBase}-${quantite}g`;
