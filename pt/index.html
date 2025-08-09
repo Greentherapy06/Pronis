@@ -7,14 +7,14 @@
   <meta name="description" content="Especialista em CBD premium desde 2019: flores, resinas, óleos e infusões de alta qualidade. Produtos naturais selecionados na Itália.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Green-Therapy">
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 
   <!-- Préconnexion CDN -->
   <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 
   <!-- CSS principal -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
 
   <!-- CSS Snipcart préchargé -->
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
@@ -28,28 +28,18 @@
     };
   </script>
 
-  <!-- Regras locais -->
+  <!-- Règles locales -->
   <style>
     .header-panier{ text-align:left; margin-top:10px; margin-left:100px; }
     .panier-btn{ background:none; border:none; color:#d4af37; font-size:16px; cursor:pointer; }
 
-    /* Botão preto + texto dourado para adicionar ao carrinho */
     .product-card .cta-cart{
-      background:#000;
-      color:#d4af37;
-      font-weight:700;
-      padding:8px 12px;
-      border-radius:8px;
-      border:1px solid #000;
-      cursor:pointer;
-      transition:opacity .2s ease;
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
+      background:#000; color:#d4af37; font-weight:700;
+      padding:8px 12px; border-radius:8px; border:1px solid #000;
+      cursor:pointer; transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem;
     }
     .product-card .cta-cart:hover{ opacity:.9; }
 
-    /* etiqueta de estoque */
     .stock-label{ margin-top:6px; font-size:.9rem; }
     .stock-out{ color:#b00020; }
     .stock-in{ color:#2e7d32; }
@@ -58,10 +48,10 @@
 </head>
 
 <body>
-  <!-- Cabeçalho -->
+  <!-- Header -->
   <header>
     <div class="logo-container">
-      <img src="logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
+      <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
       <h1>Green-Therapy</h1>
     </div>
 
@@ -96,8 +86,8 @@
       <!-- Produto 1 -->
       <div class="product-card" data-id="amnesia-cbd" data-stock="0">
         <picture>
-          <source srcset="amnesia-cbd.webp" type="image/webp" />
-          <img src="amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400" />
+          <source srcset="../amnesia-cbd.webp" type="image/webp" />
+          <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌿 Flor CBD Amnesia 🇮🇹</h3>
         <p class="price">A partir de 8,90 €</p>
@@ -116,8 +106,8 @@
       <!-- Produto 2 -->
       <div class="product-card" data-id="resine-cbd" data-stock="0">
         <picture>
-          <source srcset="resine-cbd.webp" type="image/webp" />
-          <img src="resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" width="400" height="400" />
+          <source srcset="../resine-cbd.webp" type="image/webp" />
+          <img src="../resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌴 Resina CBD Hash 🇮🇹</h3>
         <p class="price">A partir de 7,50 €</p>
@@ -136,8 +126,8 @@
       <!-- Produto 3 -->
       <div class="product-card" data-id="cherry-cbd" data-stock="0">
         <picture>
-          <source srcset="cherry-cbd.webp" type="image/webp" />
-          <img src="cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" width="400" height="400" />
+          <source srcset="../cherry-cbd.webp" type="image/webp" />
+          <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🍒 Flor CBD Cherry 🇮🇹</h3>
         <p class="price">A partir de 9,50 €</p>
@@ -156,9 +146,9 @@
     </div>
   </section>
 
-  <!-- Avaliações -->
+  <!-- Opiniões -->
   <section id="avis" class="section">
-    <h2>⭐ Avaliações de Clientes</h2>
+    <h2>⭐ Opiniões de Clientes</h2>
     <div class="avis-grid">
       <div class="avis-card">
         <p class="avis-texte">“Entrega rápida e discreta, flores de qualidade excepcional. Recomendo 100%!”</p>
@@ -192,7 +182,7 @@
     data-currency="eur">
   </div>
 
-  <!-- Script de preços e estoque -->
+  <!-- Preços + Stock + Snipcart -->
   <script>
     const prixParProduit = {
       "amnesia-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
@@ -200,6 +190,7 @@
       "cherry-cbd":  {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00}
     };
 
+    /* STOCKS (0 = esgotado). Altera só os números aqui. */
     const stock = {
       "amnesia-cbd": 0,
       "resine-cbd":  0,
@@ -210,13 +201,16 @@
       document.querySelectorAll('.product-card').forEach(card => {
         const id = card.dataset.id;
         if(!id) return;
+
         let label = card.querySelector('.stock-label');
         if(!label){
           label = document.createElement('div');
           label.className = 'stock-label';
           card.appendChild(label);
         }
+
         const btn = card.querySelector('.cta-cart');
+
         if (stock[id] <= 0){
           label.textContent = 'Esgotado';
           label.classList.remove('stock-in'); label.classList.add('stock-out');
@@ -236,7 +230,6 @@
         }
       });
     }
-
     document.addEventListener('DOMContentLoaded', renderStocks);
 
     function ensureSnipcartReady(cb){
@@ -258,13 +251,14 @@
       const prix = prixParProduit[idBase][quantite];
       const id = `${idBase}-${quantite}g`;
       const nom = `${nomBase} ${quantite}g`;
+
       ensureSnipcartReady(() => {
         Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
       });
     }
   </script>
 
-  <!-- Carregamento Snipcart -->
+  <!-- Chargement différé Snipcart -->
   <script>
     let snipcartLoaded = false;
     function loadSnipcart() {
@@ -280,9 +274,9 @@
   </script>
 
   <footer style="text-align:center; padding:20px; font-size:14px;">
-    <a href="mentions-legales.html">Aviso legal</a> |
-    <a href="politique-confidentialite.html">Política de Privacidade</a> |
-    <a href="cookies.html">Cookies</a>
+    <a href="../mentions-legales.html">Aviso legal</a> |
+    <a href="../politique-confidentialite.html">Política de Privacidade</a> |
+    <a href="../cookies.html">Cookies</a>
   </footer>
 </body>
 </html>
