@@ -33,7 +33,7 @@
     .header-panier{ text-align:left; margin-top:10px; margin-left:100px; }
     .panier-btn{ background:none; border:none; color:#d4af37; font-size:16px; cursor:pointer; }
 
-    /* Bouton noir + texte doré pour l'ajout au panier */
+    /* Bouton noir + texte doré pour l'ajout ao carrinho */
     .product-card .cta-cart{
       background:#000;
       color:#d4af37;
@@ -211,7 +211,7 @@
       const nom = `${nomBase} ${quantite}g`;
 
       ensureSnipcartReady(() => {
-        Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
+        Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: 'https://green-therapy.pt', description });
       });
     }
   </script>
