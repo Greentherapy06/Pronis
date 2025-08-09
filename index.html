@@ -28,35 +28,17 @@
     };
   </script>
 
-  <!-- CSS interne: groupée -->
+  <!-- CSS interne (ajout style du bouton uniquement) -->
   <style>
-    .header-panier {
-      text-align: left;
-      margin-top: 10px;
-      margin-left: 100px;
-    }
-    .panier-btn {
-      background: none;
-      border: none;
-      color: #d4af37;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    /* Style du bouton Ajouter au panier */
-    .btn-ajouter-panier {
-      background-color: black;
-      color: #d4af37;
-      border: none;
-      padding: 8px 12px;
-      font-size: 14px;
-      cursor: pointer;
-      border-radius: 4px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .btn-ajouter-panier:hover {
-      opacity: 0.85;
+    .header-panier{ text-align:left; margin-top:10px; margin-left:100px; }
+    .panier-btn{ background:none; border:none; color:#d4af37; font-size:16px; cursor:pointer; }
+
+    /* Bouton “Ajouter au panier” noir + doré */
+    .product-card button.cta-panier{
+      background:#000; color:#d4af37; border:1px solid #000;
+      font-weight:700; padding:8px 12px; border-radius:8px;
+      display:inline-flex; align-items:center; gap:8px; justify-content:center;
+      cursor:pointer;
     }
   </style>
 </head>
@@ -112,8 +94,13 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="btn-ajouter-panier" onclick="ajouterProduit('amnesia-cbd','Fleur CBD Amnesia','Fleur CBD premium d’Italie','amnesia-quantite')">
-          🛒 Ajouter au panier
+        <button class="cta-panier" onclick="ajouterProduit('amnesia-cbd','Fleur CBD Amnesia','Fleur CBD premium d’Italie','amnesia-quantite')">
+          <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M2 3h2l2 10h11l3-7H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="19" r="1.5" fill="currentColor"/>
+            <circle cx="18" cy="19" r="1.5" fill="currentColor"/>
+          </svg>
+          Ajouter au panier
         </button>
       </div>
 
@@ -132,8 +119,13 @@
           <option value="8">8g – 26,00 €</option>
           <option value="10">10g – 32,00 €</option>
         </select>
-        <button class="btn-ajouter-panier" onclick="ajouterProduit('resine-cbd','Résine CBD Hash','Résine CBD premium d’Italie','resine-quantite')">
-          🛒 Ajouter au panier
+        <button class="cta-panier" onclick="ajouterProduit('resine-cbd','Résine CBD Hash','Résine CBD premium d’Italie','resine-quantite')">
+          <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M2 3h2l2 10h11l3-7H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="19" r="1.5" fill="currentColor"/>
+            <circle cx="18" cy="19" r="1.5" fill="currentColor"/>
+          </svg>
+          Ajouter au panier
         </button>
       </div>
 
@@ -152,8 +144,13 @@
           <option value="8">8g – 33,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="btn-ajouter-panier" onclick="ajouterProduit('cherry-cbd','Fleur CBD Cherry','Fleur CBD Cherry premium d’Italie','cherry-quantite')">
-          🛒 Ajouter au panier
+        <button class="cta-panier" onclick="ajouterProduit('cherry-cbd','Fleur CBD Cherry','Fleur CBD Cherry premium d’Italie','cherry-quantite')">
+          <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M2 3h2l2 10h11l3-7H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="19" r="1.5" fill="currentColor"/>
+            <circle cx="18" cy="19" r="1.5" fill="currentColor"/>
+          </svg>
+          Ajouter au panier
         </button>
       </div>
 
@@ -219,7 +216,6 @@
       const prix = prixParProduit[idBase][quantite];
       const id = `${idBase}-${quantite}g`;
       const nom = `${nomBase} ${quantite}g`;
-
       ensureSnipcartReady(() => {
         Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
       });
@@ -247,4 +243,4 @@
     <a href="cookies.html">Cookies</a>
   </footer>
 </body>
-</html>
+            </html>
