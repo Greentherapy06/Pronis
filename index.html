@@ -28,32 +28,26 @@
     };
   </script>
 
-  <!-- Petites règles locales (légères) -->
+  <!-- Règles locales (légères, sans impacter les perfs) -->
   <style>
     .header-panier{ text-align:left; margin-top:10px; margin-left:100px; }
     .panier-btn{ background:none; border:none; color:#d4af37; font-size:16px; cursor:pointer; }
-
-    .product-card .cta-cart{
-      background:#000; color:#d4af37; font-weight:700; padding:8px 12px;
-      border-radius:8px; border:1px solid #000; cursor:pointer;
-      transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem;
-    }
+    .product-card .cta-cart{ background:#000; color:#d4af37; font-weight:700; padding:8px 12px; border-radius:8px; border:1px solid #000; cursor:pointer; transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem; }
     .product-card .cta-cart:hover{ opacity:.9; }
-
     .stock-label{ margin-top:6px; font-size:.9rem; }
     .stock-out{ color:#b00020; }
     .stock-in{ color:#2e7d32; }
     .btn-disabled{ opacity:.55; cursor:not-allowed; }
 
-    /* ——— Bloc infos légal + livraison ——— */
-    .legal-one{ margin:0 auto; text-align:center; font-size:.95rem; opacity:.88; }
-    .legal-one .thc{ white-space:nowrap; } /* empêche “THC < 0,3 %” de passer à la ligne */
-    .sub-note{ text-align:center; margin:.2rem 0 .4rem; font-size:1.05rem; }
-    .rule{ width:56px; height:2px; background:#e8e8e8; border-radius:2px; margin:.4rem auto .6rem; }
-    .shipping-note{ text-align:center; font-size:.95rem; line-height:1.45; margin:0; }
+    /* Bloc infos premium (identique au PT) */
+    .info-notes{ max-width:760px; margin:.35rem auto .6rem; text-align:center; }
+    .info-notes .rule{ width:56px; height:2px; background:#e8e8e8; border-radius:2px; margin:.4rem auto .6rem; }
+    .legal-note{ font-size:.95rem; opacity:.88; margin:0; }
+    .legal-sub{ margin:.15rem 0 0; font-size:.95rem; line-height:1.45; }
+    .shipping-note{ margin:.35rem 0 0; font-size:.95rem; line-height:1.45; }
     .shipping-note .label{ font-variant:all-small-caps; letter-spacing:.04em; color:#8c7a49; }
-    .ship-price{ font-weight:700; color:#d4af37; }
-    @media (max-width:480px){ .legal-one{ font-size:clamp(.86rem,3.8vw,.95rem); } }
+    .shipping-note .price{ font-weight:700; color:#d4af37; }
+    .nowrap{ white-space:nowrap; }
   </style>
 </head>
 
@@ -79,7 +73,12 @@
 
   <!-- Accueil -->
   <section id="home" class="section">
-    <h2>🌿 Green-Therapy 🌿<br/>CBD Premium</h2>
+    <h2>
+      <span style="display:inline-block; text-align:center;">
+        <span style="display:block;">🌿 Green-Therapy 🌿</span>
+        <span style="display:block;">CBD Premium</span>
+      </span>
+    </h2>
     <p>Spécialiste du CBD depuis 2019, nous sélectionnons en Italie des fleurs de CBD premium, huiles de CBD full spectrum, résines et infusions. Découvrez des produits naturels et de qualité pour un moment de détente authentique.</p>
   </section>
 
@@ -87,16 +86,17 @@
   <section id="produits" class="section">
     <h2>🛍️ Nos Produits</h2>
 
-    <!-- Note légale + livraison (identique au PT, très léger) -->
-    <p class="legal-one">Conformément à la législation de l’UE :
-      <span class="thc">THC &lt; 0,3&nbsp;%</span>
-    </p>
-    <p class="sub-note">sans effets psychoactifs</p>
-    <div class="rule"></div>
-    <p class="shipping-note"><span class="label">LIVRAISON AU PORTUGAL PAR CTT</span> — Forfait fixe : <span class="ship-price">4,90&nbsp;€</span></p>
+    <!-- Bloc infos premium (FR) -->
+    <div class="info-notes">
+      <p class="legal-note">
+        <span class="nowrap">Conformément à la législation de l’UE : THC &lt; 0,3%</span>
+      </p>
+      <p class="legal-sub">sans effets psychoactifs.</p>
+      <div class="rule"></div>
+      <p class="shipping-note"><span class="label">LIVRAISON AU PORTUGAL PAR CTT</span> — Forfait fixe : <span class="price">4,90&nbsp;€</span></p>
+    </div>
 
     <div class="product-grid">
-
       <!-- Produit 1 -->
       <div class="product-card" data-id="amnesia-cbd" data-stock="0">
         <picture>
@@ -104,10 +104,11 @@
           <img src="amnesia-cbd.jpg" alt="Fleur CBD Amnesia - Italie" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌿 Fleur CBD Amnesia 🇮🇹</h3>
+        <!-- description au-dessus du prix -->
         <p style="margin:.4rem 0 .2rem 0;">
           Profil aromatique citronné et terreux, récolte et manucure à la main en Italie.
           Séchage lent qui préserve la <em>couleur naturelle du chanvre</em> et le goût authentique.
-          Parfaite pour se détendre en fin de journée.
+          Parfaite pour décompresser en fin de journée. <strong>THC &lt; 0,3%</strong>.
         </p>
         <p class="price">À partir de 8,90 €</p>
         <select id="amnesia-quantite" aria-label="Choisir la quantité pour Fleur CBD Amnesia">
@@ -130,8 +131,9 @@
         </picture>
         <h3>🌴 Résine CBD Hash 🇮🇹</h3>
         <p style="margin:.4rem 0 .2rem 0;">
-          Texture crémeuse, notes d’épices et de pin. Fabrication artisanale avec
-          <em>pressage à froid</em> pour préserver les terpènes. Goût rond et relaxant.
+          Texture crémeuse et notes d’épices et de pin. Fabrication artisanale avec
+          <em>pressage à froid</em> pour conserver les terpènes. Origine Italie,
+          saveur ronde et relaxante. <strong>THC &lt; 0,3%</strong>.
         </p>
         <p class="price">À partir de 7,50 €</p>
         <select id="resine-quantite" aria-label="Choisir la quantité pour Résine CBD Hash">
@@ -155,7 +157,8 @@
         <h3>🍒 Fleur CBD Cherry 🇮🇹</h3>
         <p style="margin:.4rem 0 .2rem 0;">
           Notes fruitées de cerise mûre, fleurs denses et résineuses.
-          Culture contrôlée en Italie pour une saveur douce et nette, finale souple.
+          Culture contrôlée en Italie pour un goût doux et propre, à la finale souple.
+          <strong>THC &lt; 0,3%</strong>.
         </p>
         <p class="price">À partir de 9,50 €</p>
         <select id="cherry-quantite" aria-label="Choisir la quantité pour Fleur CBD Cherry">
@@ -169,7 +172,6 @@
           🛒 Ajouter au panier
         </button>
       </div>
-
     </div>
   </section>
 
@@ -202,14 +204,14 @@
     <p><a href="mailto:greentherapy06@gmail.com" title="Envoyez-nous un e-mail">📧 greentherapy06@gmail.com</a></p>
   </section>
 
-  <!-- Snipcart (hidden) -->
+  <!-- Snipcart (caché) -->
   <div hidden id="snipcart"
     data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
     data-config-modal-style="side"
     data-currency="eur">
   </div>
 
-  <!-- Prix + Stock + Ajout Snipcart (unifié) -->
+  <!-- Prix + Stock + Ajout Snipcart -->
   <script>
     const prixParProduit = {
       "amnesia-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
@@ -230,9 +232,7 @@
 
     function renderStocks(){
       document.querySelectorAll('.product-card').forEach(card => {
-        const id = card.dataset.id;
-        if (!id) return;
-
+        const id = card.dataset.id; if (!id) return;
         let label = card.querySelector('.stock-label');
         if (!label){
           label = document.createElement('div');
@@ -241,7 +241,6 @@
         }
         const btn = card.querySelector('.cta-cart');
         const n = getStock(id);
-
         if (n <= 0){
           label.textContent = TXT.out;
           label.classList.remove('stock-in'); label.classList.add('stock-out');
@@ -266,15 +265,11 @@
     }
 
     function ajouterProduit(idBase, nomBase, description, selectId) {
-      if (getStock(idBase) <= 0){
-        alert(TXT.out);
-        return;
-      }
+      if (getStock(idBase) <= 0){ alert(TXT.out); return; }
       const quantite = document.getElementById(selectId).value;
       const prix = prixParProduit[idBase][quantite];
       const id = `${idBase}-${quantite}g`;
       const nom = `${nomBase} ${quantite}g`;
-
       ensureSnipcartReady(() => {
         Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
       });
@@ -302,4 +297,4 @@
     <a href="cookies.html">Cookies</a>
   </footer>
 </body>
-  </html>
+</html>
