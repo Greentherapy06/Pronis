@@ -28,16 +28,44 @@
     };
   </script>
 
-  <!-- Regras locais -->
+  <!-- Regras locais + bloc “premium” (léger, sans impact perf) -->
   <style>
     .header-panier{ text-align:left; margin-top:10px; margin-left:100px; }
     .panier-btn{ background:none; border:none; color:#d4af37; font-size:16px; cursor:pointer; }
-    .product-card .cta-cart{ background:#000; color:#d4af37; font-weight:700; padding:8px 12px; border-radius:8px; border:1px solid #000; cursor:pointer; transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem; }
+
+    .product-card .cta-cart{
+      background:#000; color:#d4af37; font-weight:700; padding:8px 12px;
+      border-radius:8px; border:1px solid #000; cursor:pointer;
+      transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem;
+    }
     .product-card .cta-cart:hover{ opacity:.9; }
+
     .stock-label{ margin-top:6px; font-size:.9rem; }
     .stock-out{ color:#b00020; }
     .stock-in{ color:#2e7d32; }
     .btn-disabled{ opacity:.55; cursor:not-allowed; }
+
+    /* ——— Bloc infos premium ——— */
+    .info-notes{
+      max-width: 760px;
+      margin: .35rem auto .6rem;
+      text-align: center;
+    }
+    .info-notes .rule{
+      width:56px; height:2px; background:#e8e8e8; border-radius:2px;
+      margin:.4rem auto .6rem;
+    }
+    .legal-note{
+      font-size:.95rem; opacity:.88; margin:0;
+    }
+    .shipping-note{
+      margin:.15rem 0 0;
+      font-size:.95rem; line-height:1.45;
+    }
+    .shipping-note .label{
+      font-variant:all-small-caps; letter-spacing:.04em; color:#8c7a49;
+    }
+    .shipping-note .price{ font-weight:700; color:#d4af37; }
   </style>
 </head>
 
@@ -45,7 +73,7 @@
   <!-- Header -->
   <header>
     <div class="logo-container">
-      <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" decoding="async" width="80" height="80" />
+      <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
       <h1>Green-Therapy</h1>
     </div>
 
@@ -75,14 +103,13 @@
   <!-- Produtos -->
   <section id="produits" class="section">
     <h2>🛍️ Nossos Produtos</h2>
-    <!-- Nota legal curta -->
-    <p style="font-size:.9rem;opacity:.85;margin-top:-6px;">
-      Conforme a legislação da UE: <strong>THC &lt; 0,3%</strong> • sem efeitos psicoativos.
-    </p>
-    <!-- NOTA FRETE CTT (déplacée ici) -->
-    <p style="font-size:.9rem; opacity:.85; margin-top:6px; text-align:center;">
-      📦 Entrega em Portugal por CTT – <strong>Taxa fixa: 4,90 €</strong>
-    </p>
+
+    <!-- Bloc infos premium : note légale + frais CTT centrés, élégants -->
+    <div class="info-notes">
+      <p class="legal-note">Conforme a legislação da UE: <strong>THC &lt; 0,3%</strong> • sem efeitos psicoativos.</p>
+      <div class="rule"></div>
+      <p class="shipping-note"><span class="label">Entrega em Portugal por CTT</span> — Taxa fixa: <span class="price">4,90 €</span></p>
+    </div>
 
     <div class="product-grid">
 
@@ -90,10 +117,9 @@
       <div class="product-card" data-id="amnesia-cbd" data-stock="0">
         <picture>
           <source srcset="../amnesia-cbd.webp" type="image/webp" />
-          <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" decoding="async" width="400" height="400" />
+          <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌿 Flor CBD Amnesia 🇮🇹</h3>
-        <!-- descrição acima do preço -->
         <p style="margin:.4rem 0 .2rem 0;">
           Perfil aromático cítrico e terroso, colhida e aparada à mão na Itália.
           Secagem lenta que preserva a <em>cor natural do cânhamo</em> e o sabor autêntico.
@@ -116,10 +142,9 @@
       <div class="product-card" data-id="resine-cbd" data-stock="0">
         <picture>
           <source srcset="../resine-cbd.webp" type="image/webp" />
-          <img src="../resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" decoding="async" width="400" height="400" />
+          <img src="../resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌴 Resina CBD Hash 🇮🇹</h3>
-        <!-- descrição acima do preço -->
         <p style="margin:.4rem 0 .2rem 0;">
           Textura cremosa e aromas de especiarias e pinho. Produção artesanal com
           <em>prensagem a frio</em> para conservar os terpenos. Origem Itália,
@@ -142,10 +167,9 @@
       <div class="product-card" data-id="cherry-cbd" data-stock="0">
         <picture>
           <source srcset="../cherry-cbd.webp" type="image/webp" />
-          <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" decoding="async" width="400" height="400" />
+          <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🍒 Flor CBD Cherry 🇮🇹</h3>
-        <!-- descrição acima do preço -->
         <p style="margin:.4rem 0 .2rem 0;">
           Notas frutadas de cereja madura, flores densas e resinosas.
           Cultivo controlado na Itália para um sabor doce e limpo, com final suave.
@@ -194,9 +218,8 @@
     <h2>✉️ Contato</h2>
     <p>Entre em contato conosco para qualquer dúvida ou pedido especial.</p>
     <p><a href="mailto:greentherapy06@gmail.com" title="Envie-nos um e-mail">📧 greentherapy06@gmail.com</a></p>
-    <!-- Rappel frais de livraison (conservé) -->
     <p style="font-size:.9rem;opacity:.85;margin-top:6px;">
-      📦 Entrega em Portugal por CTT – <strong>Taxa fixa: 4,90 €</strong>
+      <span class="shipping-note"><span class="label">Entrega em Portugal por CTT</span> — Taxa fixa: <span class="price">4,90 €</span></span>
     </p>
   </section>
 
@@ -209,7 +232,7 @@
 
   <!-- Preços + Stock + Snipcart (unificado) -->
   <script>
-    const prixParProduit = {
+    const prixParProduto = {
       "amnesia-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "resine-cbd":  {2: 7.50, 4: 14.00, 6: 20.00, 8: 26.00, 10: 32.00},
       "cherry-cbd":  {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00}
@@ -228,9 +251,7 @@
 
     function renderStocks(){
       document.querySelectorAll('.product-card').forEach(card => {
-        const id = card.dataset.id;
-        if (!id) return;
-
+        const id = card.dataset.id; if (!id) return;
         let label = card.querySelector('.stock-label');
         if (!label){
           label = document.createElement('div');
@@ -264,15 +285,11 @@
     }
 
     function ajouterProduit(idBase, nomBase, description, selectId) {
-      if (getStock(idBase) <= 0){
-        alert(TXT.out);
-        return;
-      }
+      if (getStock(idBase) <= 0){ alert(TXT.out); return; }
       const quantite = document.getElementById(selectId).value;
-      const prix = prixParProduit[idBase][quantite];
+      const prix = prixParProduto[idBase][quantite];
       const id = `${idBase}-${quantite}g`;
       const nom = `${nomBase} ${quantite}g`;
-
       ensureSnipcartReady(() => {
         Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
       });
@@ -300,5 +317,4 @@
     <a href="../cookies.html">Cookies</a>
   </footer>
 </body>
-</html>
-```0
+            </html>
