@@ -8,88 +8,58 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="Green-Therapy">
   <link rel="icon" href="../favicon.ico" type="image/x-icon" />
-
-  <!-- Pré-conexão CDN -->
   <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-
-  <!-- CSS principal -->
   <link rel="stylesheet" href="../style.css" />
-
-  <!-- CSS Snipcart pré-carregado -->
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
-
-  <!-- Configuração Snipcart -->
   <script>
     window.SnipcartSettings = {
       publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
       loadStrategy: "on-user-interaction"
     };
   </script>
-
-  <!-- Regras locais + bloco “premium” -->
   <style>
     .header-panier{ text-align:left; margin-top:10px; margin-left:100px; }
     .panier-btn{ background:none; border:none; color:#d4af37; font-size:16px; cursor:pointer; }
-
-    .product-card .cta-cart{
-      background:#000; color:#d4af37; font-weight:700; padding:8px 12px;
-      border-radius:8px; border:1px solid #000; cursor:pointer;
-      transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem;
-    }
+    .product-card .cta-cart{ background:#000; color:#d4af37; font-weight:700; padding:8px 12px; border-radius:8px; border:1px solid #000; cursor:pointer; transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem; }
     .product-card .cta-cart:hover{ opacity:.9; }
-
     .stock-label{ margin-top:6px; font-size:.9rem; }
     .stock-out{ color:#b00020; }
     .stock-in{ color:#2e7d32; }
     .btn-disabled{ opacity:.55; cursor:not-allowed; }
 
-    .info-notes{
-      max-width: 760px;
-      margin: .35rem auto .6rem;
-      text-align: center;
-    }
-    .info-notes .rule{
-      width:56px; height:2px; background:#e8e8e8; border-radius:2px;
-      margin:.4rem auto .6rem;
-    }
+    /* Bloc infos premium (identique au FR) */
+    .info-notes{ max-width:760px; margin:.35rem auto .6rem; text-align:center; }
+    .info-notes .rule{ width:56px; height:2px; background:#e8e8e8; border-radius:2px; margin:.4rem auto .6rem; }
     .legal-note{ font-size:.95rem; opacity:.88; margin:0; }
     .legal-sub{ font-size:1.05rem; margin:.25rem 0 0; }
-    .shipping-note{
-      margin:.15rem 0 0;
-      font-size:.95rem; line-height:1.45;
-    }
-    .shipping-note .label{
-      font-variant:all-small-caps; letter-spacing:.04em; color:#8c7a49;
-    }
+    .shipping-note{ margin:.15rem 0 0; font-size:.95rem; line-height:1.45; }
+    .shipping-note .label{ font-variant:all-small-caps; letter-spacing:.04em; color:#8c7a49; }
     .shipping-note .price{ font-weight:700; color:#d4af37; }
 
+    /* Empêche le retour à la ligne entre THC et 0,3% */
     .nowrap{ white-space:nowrap; }
   </style>
 </head>
 
 <body>
-  <!-- Header -->
   <header>
     <div class="logo-container">
       <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
       <h1>Green-Therapy</h1>
     </div>
-
     <nav>
       <a href="#home">🏠 Início</a>
       <a href="#produits">🛍️ Produtos</a>
       <a href="#contact">✉️ Contato</a>
       <a href="../index.html" hreflang="fr">🇫🇷 Francês</a>
     </nav>
-
     <div class="header-panier">
       <button class="snipcart-checkout panier-btn">🛒 Ver carrinho</button>
     </div>
   </header>
 
-  <!-- Início -->
   <section id="home" class="section">
     <h2>
       <span style="display:inline-block; text-align:center;">
@@ -100,21 +70,18 @@
     <p>Especialista em CBD desde 2019, selecionamos na Itália flores de CBD premium, óleos de CBD full spectrum, resinas e infusões. Descubra produtos naturais e de qualidade para um momento de relaxamento autêntico.</p>
   </section>
 
-  <!-- Produtos -->
   <section id="produits" class="section">
     <h2>🛍️ Nossos Produtos</h2>
 
-    <!-- Bloco infos premium -->
+    <!-- Bloc infos premium -->
     <div class="info-notes">
-      <p class="legal-note">De acordo com a legislação da UE: <span class="nowrap"><strong>THC &lt; 0,3%</strong></span></p>
+      <p class="legal-note">Conforme a legislação da UE: <span class="nowrap"><strong>THC &lt; 0,3%</strong></span></p>
       <p class="legal-sub">sem efeitos psicoativos</p>
       <div class="rule"></div>
-      <p class="shipping-note"><span class="label">Entrega em Portugal via CTT</span> — Taxa fixa: <span class="price">4,90&nbsp;€</span></p>
+      <p class="shipping-note"><span class="label">Entrega em Portugal por CTT</span> — Taxa fixa: <span class="price">4,90&nbsp;€</span></p>
     </div>
 
     <div class="product-grid">
-
-      <!-- Produto 1 -->
       <div class="product-card" data-id="amnesia-cbd" data-stock="0">
         <picture>
           <source srcset="../amnesia-cbd.webp" type="image/webp" />
@@ -134,12 +101,9 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('amnesia-cbd','Flor CBD Amnesia','Flor CBD premium da Itália','amnesia-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
+        <button class="cta-cart" onclick="ajouterProduit('amnesia-cbd','Flor CBD Amnesia','Flor CBD premium da Itália','amnesia-quantite')">🛒 Adicionar ao carrinho</button>
       </div>
 
-      <!-- Produto 2 -->
       <div class="product-card" data-id="resine-cbd" data-stock="0">
         <picture>
           <source srcset="../resine-cbd.webp" type="image/webp" />
@@ -159,12 +123,9 @@
           <option value="8">8g – 26,00 €</option>
           <option value="10">10g – 32,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('resine-cbd','Resina CBD Hash','Resina CBD premium da Itália','resine-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
+        <button class="cta-cart" onclick="ajouterProduit('resine-cbd','Resina CBD Hash','Resina CBD premium da Itália','resine-quantite')">🛒 Adicionar ao carrinho</button>
       </div>
 
-      <!-- Produto 3 -->
       <div class="product-card" data-id="cherry-cbd" data-stock="0">
         <picture>
           <source srcset="../cherry-cbd.webp" type="image/webp" />
@@ -184,44 +145,26 @@
           <option value="8">8g – 33,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('cherry-cbd','Flor CBD Cherry','Flor CBD Cherry premium da Itália','cherry-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
+        <button class="cta-cart" onclick="ajouterProduit('cherry-cbd','Flor CBD Cherry','Flor CBD Cherry premium da Itália','cherry-quantite')">🛒 Adicionar ao carrinho</button>
       </div>
-
     </div>
   </section>
 
-  <!-- Avaliações -->
   <section id="avis" class="section">
     <h2>⭐ Opiniões de Clientes</h2>
     <div class="avis-grid">
-      <div class="avis-card">
-        <p class="avis-texte">“Entrega rápida e discreta, flores de qualidade excepcional. Recomendo 100%!”</p>
-        <div class="avis-stars" aria-label="Avaliação 5 estrelas">⭐⭐⭐⭐⭐</div>
-        <p class="avis-nom">– Julien M.</p>
-      </div>
-      <div class="avis-card">
-        <p class="avis-texte">“Uma verdadeira descoberta! O óleo de CBD ajuda-me a dormir melhor. Atendimento excelente.”</p>
-        <div class="avis-stars" aria-label="Avaliação 5 estrelas">⭐⭐⭐⭐⭐</div>
-        <p class="avis-nom">– Sophie L.</p>
-      </div>
-      <div class="avis-card">
-        <p class="avis-texte">“Excelente relação qualidade/preço. Sabor, aroma, relaxamento… tudo perfeito.”</p>
-        <div class="avis-stars" aria-label="Avaliação 5 estrelas">⭐⭐⭐⭐⭐</div>
-        <p class="avis-nom">– Karim B.</p>
-      </div>
+      <div class="avis-card"><p class="avis-texte">“Entrega rápida e discreta, flores de qualidade excepcional. Recomendo 100%!”</p><div class="avis-stars" aria-label="Avaliação 5 estrelas">⭐⭐⭐⭐⭐</div><p class="avis-nom">– Julien M.</p></div>
+      <div class="avis-card"><p class="avis-texte">“Uma verdadeira descoberta! O óleo de CBD ajuda-me a dormir melhor. Atendimento excelente.”</p><div class="avis-stars" aria-label="Avaliação 5 estrelas">⭐⭐⭐⭐⭐</div><p class="avis-nom">– Sophie L.</p></div>
+      <div class="avis-card"><p class="avis-texte">“Excelente relação qualidade/preço. Sabor, aroma, relaxamento… tudo perfeito.”</p><div class="avis-stars" aria-label="Avaliação 5 estrelas">⭐⭐⭐⭐⭐</div><p class="avis-nom">– Karim B.</p></div>
     </div>
   </section>
 
-  <!-- Contato -->
   <section id="contact" class="section">
     <h2>✉️ Contato</h2>
     <p>Entre em contato conosco para qualquer dúvida ou pedido especial.</p>
     <p><a href="mailto:greentherapy06@gmail.com" title="Envie-nos um e-mail">📧 greentherapy06@gmail.com</a></p>
   </section>
 
-  <!-- Snipcart -->
   <div hidden id="snipcart"
     data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
     data-config-modal-style="side"
@@ -235,76 +178,41 @@
       "cherry-cbd":  {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00}
     };
     const LANG = (document.documentElement.lang || 'pt').toLowerCase();
-    const TXT = LANG.startsWith('pt')
-      ? { instock: 'Em stock: ', out: 'Esgotado' }
-      : { instock: 'En stock : ', out: 'Rupture de stock' };
+    const TXT = LANG.startsWith('pt') ? { instock: 'Em stock: ', out: 'Esgotado' } : { instock: 'En stock : ', out: 'Rupture de stock' };
 
-    function getStock(id) {
-      const card = document.querySelector(`.product-card[data-id="${id}"]`);
-      if (!card) return 0;
-      const n = parseInt(card.getAttribute('data-stock'), 10);
-      return isNaN(n) ? 0 : n;
-    }
-
+    function getStock(id){ const card=document.querySelector(`.product-card[data-id="${id}"]`); if(!card) return 0; const n=parseInt(card.getAttribute('data-stock'),10); return isNaN(n)?0:n; }
     function renderStocks(){
-      document.querySelectorAll('.product-card').forEach(card => {
-        const id = card.dataset.id; if (!id) return;
-        let label = card.querySelector('.stock-label');
-        if (!label){
-          label = document.createElement('div');
-          label.className = 'stock-label';
-          card.appendChild(label);
-        }
-        const btn = card.querySelector('.cta-cart');
-        const n = getStock(id);
-
-        if (n <= 0){
-          label.textContent = TXT.out;
-          label.classList.remove('stock-in'); label.classList.add('stock-out');
-          if (btn){ btn.setAttribute('disabled','disabled'); btn.classList.add('btn-disabled'); btn.title = TXT.out; }
-        } else {
-          label.textContent = TXT.instock + n;
-          label.classList.remove('stock-out'); label.classList.add('stock-in');
-          if (btn){ btn.removeAttribute('disabled'); btn.classList.remove('btn-disabled'); btn.removeAttribute('title'); }
-        }
+      document.querySelectorAll('.product-card').forEach(card=>{
+        const id=card.dataset.id; if(!id) return;
+        let label=card.querySelector('.stock-label'); if(!label){ label=document.createElement('div'); label.className='stock-label'; card.appendChild(label); }
+        const btn=card.querySelector('.cta-cart'); const n=getStock(id);
+        if(n<=0){ label.textContent=TXT.out; label.classList.remove('stock-in'); label.classList.add('stock-out'); if(btn){ btn.setAttribute('disabled','disabled'); btn.classList.add('btn-disabled'); btn.title=TXT.out; } }
+        else { label.textContent=TXT.instock+n; label.classList.remove('stock-out'); label.classList.add('stock-in'); if(btn){ btn.removeAttribute('disabled'); btn.classList.remove('btn-disabled'); btn.removeAttribute('title'); } }
       });
     }
     document.addEventListener('DOMContentLoaded', renderStocks);
 
     function ensureSnipcartReady(cb){
-      if (window.Snipcart && window.Snipcart.api) return cb();
-      if (typeof loadSnipcart === 'function') loadSnipcart();
-      const start = Date.now();
-      const t = setInterval(() => {
-        if (window.Snipcart && window.Snipcart.api) { clearInterval(t); cb(); }
-        if (Date.now() - start > 5000) { clearInterval(t); }
-      }, 100);
+      if(window.Snipcart && window.Snipcart.api) return cb();
+      if(typeof loadSnipcart==='function') loadSnipcart();
+      const start=Date.now(); const t=setInterval(()=>{ if(window.Snipcart && window.Snipcart.api){ clearInterval(t); cb(); } if(Date.now()-start>5000){ clearInterval(t); } },100);
     }
 
-    function ajouterProduit(idBase, nomBase, description, selectId) {
-      if (getStock(idBase) <= 0){ alert(TXT.out); return; }
-      const quantite = document.getElementById(selectId).value;
-      const prix = prixParProduit[idBase][quantite];
-      const id = `${idBase}-${quantite}g`;
-      const nom = `${nomBase} ${quantite}g`;
-      ensureSnipcartReady(() => {
-        Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
-      });
+    function ajouterProduit(idBase, nomBase, description, selectId){
+      if(getStock(idBase)<=0){ alert(TXT.out); return; }
+      const quantite=document.getElementById(selectId).value;
+      const prix=prixParProduit[idBase][quantite];
+      const id=`${idBase}-${quantite}g`;
+      const nom=`${nomBase} ${quantite}g`;
+      ensureSnipcartReady(()=>{ Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description }); });
     }
   </script>
 
   <script>
-    let snipcartLoaded = false;
-    function loadSnipcart() {
-      if (snipcartLoaded) return;
-      snipcartLoaded = true;
-      const script = document.createElement("script");
-      script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-    window.addEventListener("scroll", loadSnipcart, { once: true });
-    document.addEventListener("click", loadSnipcart, { once: true });
+    let snipcartLoaded=false;
+    function loadSnipcart(){ if(snipcartLoaded) return; snipcartLoaded=true; const script=document.createElement("script"); script.src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"; script.async=true; document.body.appendChild(script); }
+    window.addEventListener("scroll", loadSnipcart, { once:true });
+    document.addEventListener("click", loadSnipcart, { once:true });
   </script>
 
   <footer style="text-align:center; padding:20px; font-size:14px;">
@@ -313,4 +221,4 @@
     <a href="../cookies.html">Cookies</a>
   </footer>
 </body>
-</html>
+  </html>
