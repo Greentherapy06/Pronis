@@ -32,22 +32,8 @@
   <style>
     .header-panier{ text-align:left; margin-top:10px; margin-left:100px; }
     .panier-btn{ background:none; border:none; color:#d4af37; font-size:16px; cursor:pointer; }
-
-    .product-card .cta-cart{
-      background:#000;
-      color:#d4af37;
-      font-weight:700;
-      padding:8px 12px;
-      border-radius:8px;
-      border:1px solid #000;
-      cursor:pointer;
-      transition:opacity .2s ease;
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
-    }
+    .product-card .cta-cart{ background:#000; color:#d4af37; font-weight:700; padding:8px 12px; border-radius:8px; border:1px solid #000; cursor:pointer; transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem; }
     .product-card .cta-cart:hover{ opacity:.9; }
-
     .stock-label{ margin-top:6px; font-size:.9rem; }
     .stock-out{ color:#b00020; }
     .stock-in{ color:#2e7d32; }
@@ -89,6 +75,11 @@
   <!-- Produtos -->
   <section id="produits" class="section">
     <h2>🛍️ Nossos Produtos</h2>
+    <!-- Nota legal curta -->
+    <p style="font-size:.9rem;opacity:.85;margin-top:-6px;">
+      Conforme a legislação da UE: <strong>THC &lt; 0,3%</strong> • sem efeitos psicoativos.
+    </p>
+
     <div class="product-grid">
 
       <!-- Produto 1 -->
@@ -98,6 +89,12 @@
           <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌿 Flor CBD Amnesia 🇮🇹</h3>
+        <!-- descrição acima do preço -->
+        <p style="margin:.4rem 0 .2rem 0;">
+          Perfil aromático cítrico e terroso, colhida e aparada à mão na Itália.
+          Secagem lenta que preserva a <em>cor natural do cânhamo</em> e o sabor autêntico.
+          Perfeita para relaxar ao fim do dia. <strong>THC &lt; 0,3%</strong>.
+        </p>
         <p class="price">A partir de 8,90 €</p>
         <select id="amnesia-quantite" aria-label="Escolher quantidade para Flor CBD Amnesia">
           <option value="2" selected>2g – 8,90 €</option>
@@ -118,6 +115,12 @@
           <img src="../resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌴 Resina CBD Hash 🇮🇹</h3>
+        <!-- descrição acima do preço -->
+        <p style="margin:.4rem 0 .2rem 0;">
+          Textura cremosa e aromas de especiarias e pinho. Produção artesanal com
+          <em>prensagem a frio</em> para conservar os terpenos. Origem Itália,
+          sabor redondo e relaxante. <strong>THC &lt; 0,3%</strong>.
+        </p>
         <p class="price">A partir de 7,50 €</p>
         <select id="resine-quantite" aria-label="Escolher quantidade para Resina CBD Hash">
           <option value="2" selected>2g – 7,50 €</option>
@@ -138,6 +141,12 @@
           <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🍒 Flor CBD Cherry 🇮🇹</h3>
+        <!-- descrição acima do preço -->
+        <p style="margin:.4rem 0 .2rem 0;">
+          Notas frutadas de cereja madura, flores densas e resinosas.
+          Cultivo controlado na Itália para um sabor doce e limpo, com final suave.
+          <strong>THC &lt; 0,3%</strong>.
+        </p>
         <p class="price">A partir de 9,50 €</p>
         <select id="cherry-quantite" aria-label="Escolher quantidade para Flor CBD Cherry">
           <option value="2" selected>2g – 9,50 €</option>
