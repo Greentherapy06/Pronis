@@ -280,14 +280,12 @@
     }
     document.addEventListener('DOMContentLoaded', renderStocks);
 
+    // ---- CORRECTIF: attendre Snipcart proprement puis ajouter l'article
     function ensureSnipcartReady(cb){
-      if (window.Snipcart && window.Snipcart.api) return cb();
-      if (typeof loadSnipcart === 'function') loadSnipcart();
-      const start = Date.now();
-      const t = setInterval(() => {
-        if (window.Snipcart && window.Snipcart.api) { clearInterval(t); cb(); }
-        if (Date.now() - start > 5000) { clearInterval(t); }
-      }, 100);
+      if (window.Snipcart && window.Snipcart.api) { cb(); return; }
+      loadSnipcart();
+      const onReady = () => { document.removeEventListener('snipcart.ready', onReady); cb(); };
+      document.addEventListener('snipcart.ready', onReady, { once: true });
     }
 
     function ajouterProduit(idBase, nomBase, description, selectId) {
@@ -313,4 +311,14 @@
       script.async = true;
       document.body.appendChild(script);
     }
-    window.addEventListener("scroll", loadSnipcart, { once
+    window.addEventListener("scroll", loadSnipcart, { once: true });
+    document.addEventListener("click", loadSnipcart, { once: true });
+  </script>
+
+  <footer style="text-align:center; padding:20px; font-size:14px;">
+    <a href="../mentions-legales.html">Mentions légales</a> |
+    <a href="../politique-confidentialite.html">Politique de confidentialité</a> |
+    <a href="../cookies.html">Cookies</a>
+  </footer>
+</body>
+</html>
