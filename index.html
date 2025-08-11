@@ -3,58 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>À propos – Green-Therapy | CBD Premium</title>
-  <meta name="description" content="À propos de Green-Therapy : spécialiste du CBD premium depuis 2019. Sélection rigoureuse en Italie, conformité UE (THC < 0,3 %), service client réactif, livraison rapide.">
+  <title>Green-Therapy – CBD Premium</title>
+  <meta name="description" content="Spécialiste du CBD premium depuis 2019 : fleurs, résines, huiles et infusions de haute qualité. Produits naturels sélectionnés en Italie.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Green-Therapy">
   <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 
-  <!-- Préconnexion CDN (cohérent avec l'index) -->
+  <!-- Préconnexion CDN -->
   <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 
   <!-- CSS principal -->
   <link rel="stylesheet" href="../style.css" />
 
-  <!-- Petites règles locales (légères) -->
+  <!-- CSS Snipcart préchargé -->
+  <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
+  <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
+
+  <!-- Snipcart Configuration -->
+  <script>
+    window.SnipcartSettings = {
+      publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
+      loadStrategy: "on-user-interaction"
+    };
+  </script>
+
+  <!-- Règles locales + bloc “premium” (léger) -->
   <style>
     .header-panier{ text-align:left; margin-top:10px; margin-left:100px; }
     .panier-btn{ background:none; border:none; color:#d4af37; font-size:16px; cursor:pointer; }
 
-    .page-hero{
-      text-align:center; padding:32px 16px;
+    .product-card .cta-cart{
+      background:#000; color:#d4af37; font-weight:700; padding:8px 12px;
+      border-radius:8px; border:1px solid #000; cursor:pointer;
+      transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem;
     }
-    .page-hero h2{ margin:0 0 8px 0; }
-    .subtle{ opacity:.9; }
+    .product-card .cta-cart:hover{ opacity:.9; }
 
+    .stock-label{ margin-top:6px; font-size:.9rem; }
+    .stock-out{ color:#b00020; }
+    .stock-in{ color:#2e7d32; }
+    .btn-disabled{ opacity:.55; cursor:not-allowed; }
+
+    /* Bloc infos premium */
     .info-notes{
-      max-width:760px; margin:.5rem auto 1.25rem; text-align:center;
+      max-width: 760px;
+      margin: .35rem auto .6rem;
+      text-align: center;
     }
     .info-notes .rule{
       width:56px; height:2px; background:#e8e8e8; border-radius:2px;
-      margin:.5rem auto .8rem;
+      margin:.4rem auto .6rem;
     }
-    .legal-note{ font-size:.95rem; opacity:.9; margin:0; }
+    .legal-note{ font-size:.95rem; opacity:.88; margin:0; }
     .legal-sub{ font-size:1.05rem; margin:.25rem 0 0; }
-
-    .grid{
-      display:grid; gap:16px;
-      grid-template-columns: repeat(1,minmax(0,1fr));
+    .shipping-note{
+      margin:.15rem 0 0;
+      font-size:.95rem; line-height:1.45;
     }
-    @media (min-width: 768px){
-      .grid-3{ grid-template-columns: repeat(3,minmax(0,1fr)); }
-      .grid-2{ grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .shipping-note .label{
+      font-variant:all-small-caps; letter-spacing:.04em; color:#8c7a49;
     }
-    .card{
-      border:1px solid #eee; border-radius:12px; padding:16px;
-    }
-    .card h3{ margin-top:0; }
-
-    .cta-row{ text-align:center; margin-top:20px; }
-    .btn{
-      display:inline-block; padding:10px 14px; border-radius:8px;
-      text-decoration:none; font-weight:700; border:1px solid #000; background:#000; color:#d4af37;
-    }
+    .shipping-note .price{ font-weight:700; color:#d4af37; }
 
     /* Assure que “THC < 0,3%” reste sur UNE ligne */
     .nowrap{ white-space:nowrap; }
@@ -70,95 +80,236 @@
     </div>
 
     <nav>
-      <a href="../index.html">🏠 Accueil</a>
-      <a href="../index.html#produits">🛍️ Produits</a>
-      <a href="../index.html#contact">✉️ Contact</a>
+      <a href="#home">🏠 Accueil</a>
+      <a href="#produits">🛍️ Produits</a>
+      <a href="#contact">✉️ Contact</a>
       <a href="../pt/index.html" hreflang="pt">🇵🇹 Portugais</a>
     </nav>
 
-    <!-- (Pas de bouton panier ici pour ne rien charger d'inutile) -->
+    <div class="header-panier">
+      <button class="snipcart-checkout panier-btn">🛒 Voir le panier</button>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section class="page-hero section">
-    <h2>À propos de Green‑Therapy</h2>
-    <p class="subtle">CBD Premium • Qualité • Transparence • Proximité</p>
+  <!-- Accueil -->
+  <section id="home" class="section">
+    <h2>
+      <span style="display:inline-block; text-align:center;">
+        <span style="display:block;">🌿 Green-Therapy 🌿</span>
+        <span style="display:block;">CBD Premium</span>
+      </span>
+    </h2>
+    <p>Spécialiste du CBD depuis 2019, nous sélectionnons en Italie des fleurs de CBD premium, huiles de CBD full spectrum, résines et infusions. Découvrez des produits naturels et de qualité pour un moment de détente authentique.</p>
   </section>
 
-  <!-- Note légale (même présentation que l’index FR) -->
-  <section class="section">
+  <!-- Produits -->
+  <section id="produits" class="section">
+    <h2>🛍️ Nos Produits</h2>
+
+    <!-- Bloc infos premium : note légale + frais CTT centrés -->
     <div class="info-notes">
-      <p class="legal-note">Conformément à la législation de l’UE : <span class="nowrap"><strong>THC &lt; 0,3%</strong></span></p>
+      <p class="legal-note">Conformément à la législation de l’UE : <span class="nowrap"><strong>THC &lt; 0,3% 🇪🇺</strong></span></p>
       <p class="legal-sub">sans effets psychoactifs</p>
       <div class="rule"></div>
+      <p class="shipping-note"><span class="label">Livraison Mondial relay</span> — Forfait fixe : <span class="price">4,50&nbsp;€</span></p>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- Produit 1 -->
+      <div class="product-card" data-id="amnesia-cbd" data-stock="0">
+        <picture>
+          <source srcset="../amnesia-cbd.webp" type="image/webp" />
+          <img src="../amnesia-cbd.jpg" alt="Fleur CBD Amnesia - Italie" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🌿 Fleur CBD Amnesia 🇮🇹</h3>
+        <p style="margin:.4rem 0 .2rem 0;">
+          Profil aromatique citronné et terreux, récoltée et manucurée à la main en Italie.
+          Séchage lent qui préserve la <em>couleur naturelle du chanvre</em> et le goût authentique.
+          Parfaite pour se détendre en fin de journée. <strong>THC &lt; 0,3%</strong>.
+        </p>
+        <p class="price">À partir de 8,90 €</p>
+        <select id="amnesia-quantite" aria-label="Choisir la quantité pour Fleur CBD Amnesia">
+          <option value="2" selected>2g – 8,90 €</option>
+          <option value="4">4g – 17,00 €</option>
+          <option value="6">6g – 24,00 €</option>
+          <option value="8">8g – 30,00 €</option>
+          <option value="10">10g – 40,00 €</option>
+        </select>
+        <button class="cta-cart" onclick="ajouterProduit('amnesia-cbd','Fleur CBD Amnesia','Fleur CBD premium d’Italie','amnesia-quantite')">
+          🛒 Ajouter au panier
+        </button>
+      </div>
+
+      <!-- Produit 2 -->
+      <div class="product-card" data-id="resine-cbd" data-stock="0">
+        <picture>
+          <source srcset="../resine-cbd.webp" type="image/webp" />
+          <img src="../resine-cbd.jpg" alt="Résine CBD Hash - Italie" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🌴 Résine CBD Hash 🇮🇹</h3>
+        <p style="margin:.4rem 0 .2rem 0;">
+          Texture crémeuse et arômes d’épices et de pin. Fabrication artisanale avec
+          <em>pressage à froid</em> pour conserver les terpènes. Origine Italie,
+          saveur ronde et relaxante. <strong>THC &lt; 0,3%</strong>.
+        </p>
+        <p class="price">À partir de 7,50 €</p>
+        <select id="resine-quantite" aria-label="Choisir la quantité pour Résine CBD Hash">
+          <option value="2" selected>2g – 7,50 €</option>
+          <option value="4">4g – 14,00 €</option>
+          <option value="6">6g – 20,00 €</option>
+          <option value="8">8g – 26,00 €</option>
+          <option value="10">10g – 32,00 €</option>
+        </select>
+        <button class="cta-cart" onclick="ajouterProduit('resine-cbd','Résine CBD Hash','Résine CBD premium d’Italie','resine-quantite')">
+          🛒 Ajouter au panier
+        </button>
+      </div>
+
+      <!-- Produit 3 -->
+      <div class="product-card" data-id="cherry-cbd" data-stock="0">
+        <picture>
+          <source srcset="../cherry-cbd.webp" type="image/webp" />
+          <img src="../cherry-cbd.jpg" alt="Fleur CBD Cherry - Italie" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🍒 Fleur CBD Cherry 🇮🇹</h3>
+        <p style="margin:.4rem 0 .2rem 0;">
+          Notes fruitées de cerise mûre, fleurs denses et résineuses.
+          Culture contrôlée en Italie pour une saveur douce et propre, à la finale soyeuse.
+          <strong>THC &lt; 0,3%</strong>.
+        </p>
+        <p class="price">À partir de 9,50 €</p>
+        <select id="cherry-quantite" aria-label="Choisir la quantité pour Fleur CBD Cherry">
+          <option value="2" selected>2g – 9,50 €</option>
+          <option value="4">4g – 18,00 €</option>
+          <option value="6">6g – 26,00 €</option>
+          <option value="8">8g – 33,00 €</option>
+          <option value="10">10g – 40,00 €</option>
+        </select>
+        <button class="cta-cart" onclick="ajouterProduit('cherry-cbd','Fleur CBD Cherry','Fleur CBD Cherry premium d’Italie','cherry-quantite')">
+          🛒 Ajouter au panier
+        </button>
+      </div>
+
     </div>
   </section>
 
-  <!-- Présentation -->
-  <section class="section">
-    <div class="grid grid-2">
-      <div class="card">
-        <h3>Notre mission</h3>
-        <p>
-          Depuis 2019, nous sélectionnons des fleurs, résines, huiles et infusions de CBD
-          premium directement en Italie. Notre objectif : proposer un CBD légal, naturel
-          et constant en qualité, pour un moment de détente authentique au quotidien.
-        </p>
+  <!-- Avis -->
+  <section id="avis" class="section">
+    <h2>⭐ Avis Clients</h2>
+    <div class="avis-grid">
+      <div class="avis-card">
+        <p class="avis-texte">« Livraison rapide et discrète, fleurs d’une qualité exceptionnelle. Je recommande à 100 %! »</p>
+        <div class="avis-stars" aria-label="Note 5 étoiles">⭐⭐⭐⭐⭐</div>
+        <p class="avis-nom">– Julien M.</p>
       </div>
-      <div class="card">
-        <h3>Notre exigence</h3>
-        <p>
-          Récolte et manucure à la main, séchage lent, profils aromatiques préservés,
-          et lots vérifiés. Chaque produit est choisi pour sa finesse et sa régularité,
-          dans le respect des normes européennes.
-        </p>
+      <div class="avis-card">
+        <p class="avis-texte">« Une vraie découverte ! L’huile de CBD m’aide à mieux dormir. Service excellent. »</p>
+        <div class="avis-stars" aria-label="Note 5 étoiles">⭐⭐⭐⭐⭐</div>
+        <p class="avis-nom">– Sophie L.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- Valeurs -->
-  <section class="section">
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Qualité</h3>
-        <p>Des variétés soignées, des procédés maîtrisés et une traçabilité claire.</p>
-      </div>
-      <div class="card">
-        <h3>Transparence</h3>
-        <p>Informations claires, conformité UE <span class="nowrap">(<strong>THC &lt; 0,3%</strong>)</span> et conseils honnêtes.</p>
-      </div>
-      <div class="card">
-        <h3>Service</h3>
-        <p>Réponses rapides, livraison soignée, et écoute de vos besoins.</p>
+      <div class="avis-card">
+        <p class="avis-texte">« Excellent rapport qualité/prix. Goût, arômes, détente… tout est parfait. »</p>
+        <div class="avis-stars" aria-label="Note 5 étoiles">⭐⭐⭐⭐⭐</div>
+        <p class="avis-nom">– Karim B.</p>
       </div>
     </div>
   </section>
 
-  <!-- Engagements -->
-  <section class="section">
-    <div class="grid grid-2">
-      <div class="card">
-        <h3>Conformité & sérénité</h3>
-        <p>
-          Tous nos produits respectent la réglementation européenne, sans effets
-          psychoactifs. Nous privilégions des partenaires italiens de confiance,
-          pour une qualité stable tout au long de l’année.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Proximité & conseils</h3>
-        <p>
-          Un doute sur une variété ou un format ? Écrivez‑nous :
-          <a href="mailto:greentherapy06@gmail.com">greentherapy06@gmail.com</a>.
-          Nous vous orientons simplement, sans surpromesse.
-        </p>
-      </div>
-    </div>
-
-    <div class="cta-row">
-      <a class="btn" href="../index.html#produits">Découvrir nos produits</a>
-    </div>
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2>✉️ Contact</h2>
+    <p>Contactez‑nous pour toute question ou demande spéciale.</p>
+    <p><a href="mailto:greentherapy06@gmail.com" title="Envoyez‑nous un e‑mail">📧 greentherapy06@gmail.com</a></p>
   </section>
+
+  <!-- Snipcart (hidden) -->
+  <div hidden id="snipcart"
+    data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
+    data-config-modal-style="side"
+    data-currency="eur">
+  </div>
+
+  <!-- Prix + Stock + Snipcart (unifié) -->
+  <script>
+    const prixParProduit = {
+      "amnesia-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
+      "resine-cbd":  {2: 7.50, 4: 14.00, 6: 20.00, 8: 26.00, 10: 32.00},
+      "cherry-cbd":  {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00}
+    };
+    const LANG = (document.documentElement.lang || 'fr').toLowerCase();
+    const TXT = LANG.startsWith('fr')
+      ? { instock: 'En stock : ', out: 'Rupture de stock' }
+      : { instock: 'Em stock: ', out: 'Esgotado' };
+
+    function getStock(id) {
+      const card = document.querySelector(`.product-card[data-id="${id}"]`);
+      if (!card) return 0;
+      const n = parseInt(card.getAttribute('data-stock'), 10);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function renderStocks(){
+      document.querySelectorAll('.product-card').forEach(card => {
+        const id = card.dataset.id; if (!id) return;
+        let label = card.querySelector('.stock-label');
+        if (!label){
+          label = document.createElement('div');
+          label.className = 'stock-label';
+          card.appendChild(label);
+        }
+        const btn = card.querySelector('.cta-cart');
+        const n = getStock(id);
+
+        if (n <= 0){
+          label.textContent = TXT.out;
+          label.classList.remove('stock-in'); label.classList.add('stock-out');
+          if (btn){ btn.setAttribute('disabled','disabled'); btn.classList.add('btn-disabled'); btn.title = TXT.out; }
+        } else {
+          label.textContent = TXT.instock + n;
+          label.classList.remove('stock-out'); label.classList.add('stock-in');
+          if (btn){ btn.removeAttribute('disabled'); btn.classList.remove('btn-disabled'); btn.removeAttribute('title'); }
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', renderStocks);
+
+    function ensureSnipcartReady(cb){
+      if (window.Snipcart && window.Snipcart.api) return cb();
+      if (typeof loadSnipcart === 'function') loadSnipcart();
+      const start = Date.now();
+      const t = setInterval(() => {
+        if (window.Snipcart && window.Snipcart.api) { clearInterval(t); cb(); }
+        if (Date.now() - start > 5000) { clearInterval(t); }
+      }, 100);
+    }
+
+    function ajouterProduit(idBase, nomBase, description, selectId) {
+      if (getStock(idBase) <= 0){ alert(TXT.out); return; }
+      const quantite = document.getElementById(selectId).value;
+      const prix = prixParProduit[idBase][quantite];
+      const id = `${idBase}-${quantite}g`;
+      const nom = `${nomBase} ${quantite}g`;
+      ensureSnipcartReady(() => {
+        Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
+      });
+    }
+  </script>
+
+  <!-- Chargement différé Snipcart -->
+  <script>
+    let snipcartLoaded = false;
+    function loadSnipcart() {
+      if (snipcartLoaded) return;
+      snipcartLoaded = true;
+      const script = document.createElement("script");
+      script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    window.addEventListener("scroll", loadSnipcart, { once: true });
+    document.addEventListener("click", loadSnipcart, { once: true });
+  </script>
 
   <footer style="text-align:center; padding:20px; font-size:14px;">
     <a href="../mentions-legales.html">Mentions légales</a> |
