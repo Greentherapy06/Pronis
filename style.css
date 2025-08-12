@@ -13,8 +13,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Ancien fond noir remplacé par une image */
-    background: url('URL_DE_TON_IMAGE') no-repeat center center/cover;
+    /* Fond noir remplacé par une image */
+    background: url('images.webp') no-repeat center center/cover;
     padding: 15px 25px;
     flex-wrap: wrap;
 }
