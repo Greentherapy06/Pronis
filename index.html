@@ -57,32 +57,6 @@
 
     /* “THC < 0,3%” não quebra */
     .nowrap{ white-space:nowrap; }
-
-    /* ===========================
-       OVERRIDES PREMIUM HEADER
-       (uniquement l'entête)
-       =========================== */
-    header{
-      position: relative;
-      background: url('../images.webp') center/cover no-repeat; /* garantit l'image dans l'entête */
-    }
-    /* voile blanc léger pour lisibilité en noir */
-    header::before{
-      content:"";
-      position:absolute; inset:0;
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(1px);
-    }
-    /* place le contenu au-dessus du voile */
-    header > *, header .logo-container, header nav, header .header-panier { position: relative; z-index: 1; }
-
-    /* menu + panier en noir dans l'entête */
-    header nav a,
-    header .panier-btn{
-      color:#111 !important;
-      text-shadow:none !important;
-      font-weight:700;
-    }
   </style>
 </head>
 
@@ -136,7 +110,7 @@
       <div class="product-card" data-id="amnesia-cbd" data-stock="10">
         <picture>
           <source srcset="../amnesia-cbd.webp" type="image/webp" />
-          <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400" />
+        <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌿 Flor CBD Amnesia 🇮🇹</h3>
         <p style="margin:.4rem 0 .2rem 0;">
@@ -334,20 +308,18 @@
   </script>
 
   <footer style="text-align:center; padding:20px; font-size:14px;">
-    <a href="./aviso-legal.html">Aviso legal</a> |
-    <a href="./politica-privacidade.html">Política de Privacidade</a> |
-    <a href="./cookies.html">Cookies</a> |
-    <a href="./cgv.html">CGV</a> |
+  <a href="./aviso-legal.html">Aviso legal</a> |
+  <a href="./politica-privacidade.html">Política de Privacidade</a> |
+  <a href="./cookies.html">Cookies</a> |
+  <a href="./cgv.html">CGV</a>
     <a href="./flores-cbd.html">Flores CBD</a> | 
-    <a href="./oleos-cbd.html">Óleos CBD</a> | 
-    <a href="./oleo-cbd-beneficios.html">Benefícios do Óleo CBD</a> | 
-    <a href="./comprar-cbd-online.html">Comprar CBD Online</a> | 
-    <a href="./guia-cbd.html">Guia CBD</a> | 
-    <a href="./cbd-portugal.html">CBD Portugal</a> | 
-    <a href="./cbd-legalidade.html">Legalidade do CBD</a> | 
-    <a href="./cbd-relaxamento.html">CBD Relaxamento</a> | 
-    <a href="./infusoes-cbd.html">Infusões CBD</a> | 
-    <a href="./resinas-cbd.html">Resinas CBD</a>
+<a href="./oleos-cbd.html">Óleos CBD</a> | 
+<a href="./oleo-cbd-beneficios.html">Benefícios do Óleo CBD</a> | 
+<a href="./comprar-cbd-online.html">Comprar CBD Online</a> | 
+<a href="./guia-cbd.html">Guia CBD</a> | 
+<a href="./cbd-portugal.html">CBD Portugal</a> | 
+<a href="./cbd-legalidade.html">Legalidade do CBD</a> | 
+<a href="./cbd-relaxamento.html">CBD Relaxamento</a> | 
+<a href="./infusoes-cbd.html">Infusões CBD</a> | 
+<a href="./resinas-cbd.html">Resinas CBD</a>
   </footer>
-</body>
-</html>
