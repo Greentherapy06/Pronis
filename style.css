@@ -212,7 +212,7 @@ header, nav, .logo-container,
     width:100%;
     display:flex;
     justify-content:center;
-    margin-top:-4px; /* ajuste finement si besoin: -6px / -2px / 0 */
+    margin-top:-6px; /* ajuste finement si besoin: -6px / -2px / 0 */
   }
   .header-panier .panier-btn{
     display:inline-flex;
