@@ -37,30 +37,17 @@ header{
   height:auto;
 }
 
-/* Décalage du bloc logo + titre sur desktop (aucun décalage) */
-@media (min-width: 769px){
-  .logo-container{
-    position:relative;
-    left:0;
-  }
-}
-
-@media (max-width: 768px){
-  .logo-container h1{
-    transform: translateX(20px); /* au lieu de 20px */
-  }
-}
-
-/* Titre premium */
+/* Déplacement du titre pour tous les écrans */
 .logo-container h1{
   font-family:'Playfair Display',serif;
   font-size:28px;
   font-weight:700;
   color:#000000;
-  margin:0 0 0 20px;
+  margin:0;
   line-height:1;
   letter-spacing:1px;
   text-shadow:0 1px 2px rgba(0,0,0,0.18);
+  transform: translateX(40px); /* ajuste la valeur pour centrer exactement */
 }
 
 /* Navigation */
@@ -199,10 +186,9 @@ header, nav, .logo-container,
   box-sizing:border-box;
 }
 
-/* (FIX) sélecteur universel rétabli */
 * { box-sizing:border-box; }
 
-/* Nav mobile : garder tous les liens sur une seule ligne */
+/* Nav mobile */
 @media (max-width: 480px){
   header{ padding:12px 12px; }
   .logo{ width:56px; }
@@ -222,29 +208,16 @@ header, nav, .logo-container,
   nav a::before{ display:none; }
 }
 
-/* (FIX) Bloc “Ver carrinho” : commentaire et accolades corrigés */
+/* Ver carrinho centré */
 @media (max-width: 768px){
   .header-panier{
     width:100%;
     display:flex;
     justify-content:center;
-    margin-top:-6px; /* ajuste finement si besoin: -6px / -2px / 0 */
+    margin-top:-6px;
   }
   .header-panier .panier-btn{
     display:inline-flex;
     justify-content:center;
   }
 }
-
-/* =============================== */
-/* AJOUTS ULTRA LÉGERS – MOBILE   */
-/* =============================== */
-@media (max-width: 768px){
-  /* 1) Ne pas couper la fin de “Green-Therapy” */
-  .logo-container{ overflow:visible; white-space:nowrap; }
-
-  /* 2) (Optionnel) Petit décalage du titre vers la droite
-        — augmente/diminue la valeur selon ton œil.
-        Mets 0px si tu veux désactiver. */
-  .logo-container h1{ transform:translateX(20px); }
-  }
