@@ -223,3 +223,28 @@ img, picture, video, iframe {
 * {
   box-sizing: border-box;
 }
+/* --- NAV MOBILE : garder tous les liens (dont "Français") sur une seule ligne --- */
+@media (max-width: 480px){
+  header{ padding:12px 12px; }
+
+  .logo{ width:56px; }
+  .logo-container h1{ font-size:22px; margin-left:8px; }
+
+  /* La barre de nav tient sur une seule ligne */
+  nav{
+    flex: 1 1 auto;
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    flex-wrap:nowrap;          /* ne passe plus à la ligne */
+  }
+
+  nav a{
+    font-size:14px;            /* un peu plus compact */
+    white-space:nowrap;        /* chaque lien reste d'un seul bloc */
+    letter-spacing:.5px;
+  }
+
+  /* On retire les petites icônes pour gagner de la place sur mobile */
+  nav a::before{ display:none; }
+}
