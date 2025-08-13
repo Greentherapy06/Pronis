@@ -82,7 +82,7 @@ nav a{
   gap:6px;
   transition:.3s;
 }
-nav a[href="#home"]::before{ content:"\f015"; font-family:"Font Awesome 5 Free"; font-weight:1200; font-size:24px; }
+nav a[href="#home"]::before{ content:"\f015"; font-family:"Font Awesome 5 Free"; font-weight:2200; font-size:24px; }
 nav a[href="#produits"]::before{ content:"\f290"; font-family:"Font Awesome 5 Free"; font-weight:1200; font-size:14px; }
 nav a[href="#contact"]::before{ content:"\f0e0"; font-family:"Font Awesome 5 Free"; font-weight:1200; font-size:14px; }
 nav a[href="/fr/"]::before{ content:"\f024"; font-family:"Font Awesome 5 Free"; font-weight:1200; font-size:14px; }
