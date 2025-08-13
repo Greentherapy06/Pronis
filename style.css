@@ -192,3 +192,34 @@ img, picture, video, iframe {
 
 /* Sécurise les grilles/cartes sur mobile */
 .product-card { max-width: 100%; }
+/* === PATCH ANTI-OVERFLOW (coupe définitivement la bande blanche) === */
+html, body {
+  width: 100%;
+  /* 'clip' est plus fiable sur mobile modernes ; fallback 'hidden' */
+  overflow-x: clip;
+  overflow-x: hidden;
+}
+
+header, nav, .logo-container,
+.section, .product-grid, .avis-grid, footer {
+  max-width: 100%;
+  overflow-x: clip;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+img, picture, video, iframe {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Sécurise les cartes/grilles sur mobile : pas plus large que l'écran */
+.product-card {
+  max-width: 100%;
+}
+
+/* Évite toute “largeur viewport” qui inclut la scrollbar sur certains mobiles */
+* {
+  box-sizing: border-box;
+}
