@@ -248,17 +248,19 @@ img, picture, video, iframe {
   /* On retire les petites icônes pour gagner de la place sur mobile */
   nav a::before{ display:none; }
 }
-/* Évite toute “largeur viewport” qui inclut la scrollbar sur certains navigateurs */
-*{
-  box-sizing: border-box;
-}
-
-/* Centre "Ver carrinho" sous le menu sur mobile uniquement */
+/* Centre "Ver carrinho" aligné au menu sur mobile */
 @media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   .header-panier {
-    width: 100%;
-    text-align: center;
-    margin-top: 5px; /* petit espace au-dessus */
+    margin-top: 5px;
   }
   .header-panier .panier-btn {
     display: inline-flex;
