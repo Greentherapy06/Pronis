@@ -34,7 +34,7 @@ header{
 .logo-container{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:16px;
 
   /* AJOUT: ne pas couper la fin du mot */
   overflow:visible !important;
