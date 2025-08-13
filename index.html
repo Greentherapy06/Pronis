@@ -30,27 +30,32 @@
 
   <!-- Regras locais + bloc “premium” -->
   <style>
+    /* Image de fond de l’en-tête (identique) */
     header {
       background: url('../images.webp') no-repeat center center/cover;
     }
 
+    /* Menu en noir (identique) */
     nav a {
-      color: #000; /* Menu en noir */
+      color: #000;
     }
 
+    /* Bloc panier : on enlève le décalage à gauche et on centre */
     .header-panier{ 
-      text-align:left; 
-      margin-top:10px; 
-      margin-left:100px; 
+      text-align: center; 
+      margin-top: 10px; 
+      margin-left: 0;              /* <- supprimé : évite le décalage */
+      width: 100%;
     }
     .panier-btn{ 
-      background:none; 
-      border:none; 
-      color:#000; /* Panier en noir */
-      font-size:16px; 
-      cursor:pointer; 
+      background: none; 
+      border: none; 
+      color: #000;                 /* Panier en noir (identique) */
+      font-size: 16px; 
+      cursor: pointer; 
     }
 
+    /* CTA des cartes produit (identique) */
     .product-card .cta-cart{
       background:#000; 
       color:#d4af37; 
@@ -71,7 +76,7 @@
     .stock-in{ color:#2e7d32; }
     .btn-disabled{ opacity:.55; cursor:not-allowed; }
 
-    /* ——— Bloc infos premium ——— */
+    /* ——— Bloc infos premium (identique) ——— */
     .info-notes{ max-width:760px; margin:.35rem auto .6rem; text-align:center; }
     .info-notes .rule{ width:56px; height:2px; background:#e8e8e8; border-radius:2px; margin:.4rem auto .6rem; }
     .legal-note{ font-size:.95rem; opacity:.88; margin:0; }
@@ -83,6 +88,22 @@
 
     /* “THC < 0,3%” não quebra */
     .nowrap{ white-space:nowrap; }
+
+    /* ——— Centrage précis du panier sous le menu sur mobile ——— */
+    @media (max-width: 768px){
+      /* Le conteneur du panier s’aligne sous la nav et se centre */
+      .header-panier{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin-top: 6px;           /* petit espace sous la nav */
+      }
+      .header-panier .panier-btn{
+        display:inline-flex;
+        justify-content:center;
+        align-items:center;
+      }
+    }
   </style>
 </head>
 
@@ -305,7 +326,7 @@
 
     function ajouterProduit(idBase, nomBase, description, selectId) {
       if (getStock(idBase) <= 0){ alert(TXT.out); return; }
-      const quantite = document.getElementById(selectId).value;
+      const quantite = document.getElementById(selectId).value;  
       const prix = prixParProduit[idBase][quantite];
       const id = `${idBase}-${quantite}g`;
       const nom = `${nomBase} ${quantite}g`;
@@ -328,7 +349,8 @@
     window.addEventListener("scroll", loadSnipcart, { once: true });
     document.addEventListener("click", loadSnipcart, { once: true });
   </script>
-  <!-- Liens internes SEO -->
+
+  <!-- Liens internes SEO (inchangés) -->
   <!DOCTYPE html>
 <html lang="pt">
 <head>
