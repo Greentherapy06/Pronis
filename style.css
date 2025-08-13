@@ -40,7 +40,7 @@ height:auto;
 @media (min-width: 769px) {
   .logo-container {
     position: relative;
-    left: 100px; /* ajuste ici selon le rendu souhaité */
+    left: 0px; /* ajuste ici selon le rendu souhaité */
   }
 }
 
