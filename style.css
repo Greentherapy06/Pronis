@@ -25,7 +25,7 @@ header{
   padding:15px 25px;
   flex-wrap:wrap;
 
-  /* AJOUT: sert de référence au centrage du titre + évite la coupe */
+  /* Référence pour le centrage du titre + on évite toute coupe du h1 */
   position:relative;
   overflow:visible !important;
 }
@@ -36,7 +36,7 @@ header{
   align-items:center;
   gap:12px;
 
-  /* AJOUT: ne pas couper la fin du mot */
+  /* Le titre ne doit jamais être rogné */
   overflow:visible !important;
 }
 .logo{
@@ -47,21 +47,21 @@ header{
 /* Titre premium — CENTRÉ indépendamment du logo/menu, sur tous écrans */
 .logo-container h1{
   font-family:'Playfair Display',serif;
-  font-size:60px;
+  font-size:60px;              /* taille desktop/tablette conservée */
   font-weight:700;
   color:#000000;
-  margin:0; /* on neutralise l’ancienne marge pour un centrage propre */
+  margin:0;                    /* neutralise l’ancienne marge pour un centrage propre */
   line-height:1;
   letter-spacing:1px;
   text-shadow:0 1px 2px rgba(0,0,0,0.18);
 
-  /* AJOUT: centrage absolu dans tout le header + affichage complet */
-  position:absolute;          /* le h1 est sorti du flux flex */
+  /* Centrage absolu dans le header + affichage complet */
+  position:absolute;           /* sorti du flux flex du .logo-container */
   left:50%;
-  transform: translateX(calc(-50% + 10px));
-  white-space:nowrap;         /* jamais sur 2 lignes */
-  z-index:2;                  /* passe visuellement devant le menu si chevauchement */
-  pointer-events:none;        /* n’empêche pas de cliquer sur les liens en dessous */
+  transform: translateX(calc(-50% + 10px)); /* petit décalage à droite conservé */
+  white-space:nowrap;          /* jamais sur 2 lignes */
+  z-index:2;                   /* devant le menu si chevauchement */
+  pointer-events:none;         /* les liens du menu restent cliquables */
 }
 
 /* Navigation */
@@ -69,7 +69,6 @@ nav{
   display:flex;
   gap:25px;
 }
-
 nav a{
   color:#000;
   text-decoration:none;
@@ -186,7 +185,7 @@ h2{ color:#d4af37; font-size:24px; margin-bottom:15px; }
 .avis-nom{ font-weight:700; color:#d4af37; font-size:14px; text-align:right; }
 .avis-stars{ color:#ffd700; font-size:18px; margin-bottom:5px; }
 
-/* Patch anti-overflow */
+/* Patch anti-overflow global (on garde pour le reste du site) */
 html, body { max-width:100%; overflow-x:hidden; }
 header, footer, .section, .product-grid, .avis-grid { width:100%; max-width:100vw; }
 img, picture, video, iframe { display:block; max-width:100%; height:auto; }
@@ -194,7 +193,7 @@ img, picture, video, iframe { display:block; max-width:100%; height:auto; }
 header, nav, .logo-container,
 .section, .product-grid, .avis-grid, footer {
   max-width:100%;
-  overflow-x:hidden; /* on garde ça pour le reste du site */
+  overflow-x:hidden;
   box-sizing:border-box;
 }
 
@@ -205,7 +204,7 @@ header, nav, .logo-container,
 @media (max-width: 480px){
   header{ padding:12px 12px; }
   .logo{ width:56px; }
-  .logo-container h1{ font-size:22px; /* taille un peu plus petite sur très petits écrans */ }
+  .logo-container h1{ font-size:22px; } /* taille mobile conservée */
   nav{
     flex:1 1 auto;
     display:flex;
@@ -233,4 +232,4 @@ header, nav, .logo-container,
     display:inline-flex;
     justify-content:center;
   }
-  }
+}
