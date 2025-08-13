@@ -275,6 +275,31 @@
         </button>
       </div>
 
+      <!-- Produto 6 (NOVO) -->
+      <div class="product-card" data-id="gelato-cbd" data-stock="10">
+        <picture>
+          <source srcset="../gelato-cbd.webp" type="image/webp" />
+          <img src="../gelato-cbd.webp" alt="Flor CBD Gelato - Itália" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🌿 Flor CBD Gelato 🇮🇹</h3>
+        <p style="margin:.4rem 0 .2rem 0;">
+          Perfil aromático cremoso com notas <em>doces e frutadas</em>, final suave e limpo.
+          Colheita e manicure à mão, secagem lenta que preserva os terpenos e a cor natural.
+          Origem Itália. <strong>THC &lt; 0,3%</strong>.
+        </p>
+        <p class="price">A partir de 8,90 €</p>
+        <select id="gelato-quantite" aria-label="Escolher a quantidade para Flor CBD Gelato">
+          <option value="2" selected>2g – 8,90 €</option>
+          <option value="4">4g – 17,00 €</option>
+          <option value="6">6g – 24,00 €</option>
+          <option value="8">8g – 30,00 €</option>
+          <option value="10">10g – 40,00 €</option>
+        </select>
+        <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD premium da Itália','gelato-quantite')">
+          🛒 Adicionar ao carrinho
+        </button>
+      </div>
+
     </div>
   </section>
 
@@ -322,11 +347,12 @@
 
   <script>
     const prixParProduit = {
-      "amnesia-cbd":  {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-      "resine-cbd":   {2: 7.50, 4: 14.00, 6: 20.00, 8: 26.00, 10: 32.00},
-      "cherry-cbd":   {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00},
-      "charas-cbd":   {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-      "cali-dream-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00} /* mêmes prix que Amnesia */
+      "amnesia-cbd":    {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
+      "resine-cbd":     {2: 7.50, 4: 14.00, 6: 20.00, 8: 26.00, 10: 32.00},
+      "cherry-cbd":     {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00},
+      "charas-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
+      "cali-dream-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
+      "gelato-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00}  /* mêmes prix que Amnesia */
     };
     const LANG = (document.documentElement.lang || 'pt').toLowerCase();
     const TXT = LANG.startsWith('pt')
@@ -402,3 +428,4 @@
   </script>
 </body>
 </html>
+```0
