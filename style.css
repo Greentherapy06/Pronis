@@ -36,6 +36,21 @@ gap:12px;
 width:100px;
 height:auto;
 }
+/* Décalage du bloc logo + titre sur desktop */
+@media (min-width: 769px) {
+  .logo-container {
+    position: relative;
+    left: 50px; /* ajuste ici selon le rendu souhaité */
+  }
+}
+
+/* Sur mobile : pas de décalage */
+@media (max-width: 768px) {
+  .logo-container {
+    position: relative;
+    left: 0;
+  }
+}
 
 /* Titre premium */
 .logo-container h1{
