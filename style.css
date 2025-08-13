@@ -240,3 +240,16 @@ nav{
   position: relative;
   z-index: 1;                    /* sous le titre pour éviter le chevauchement visuel */
 }
+/* --- PATCH ANTI-COUPE pour le titre dans le header --- */
+header{ overflow: visible !important; }                /* ne coupe plus à droite */
+.logo-container{ overflow: visible !important; min-width: 0; }
+
+.logo-container h1{
+  white-space: nowrap;     /* une seule ligne */
+  flex-shrink: 0;          /* ne se compresse pas */
+  min-width: max-content;  /* garde toute sa largeur */
+  position: relative;
+  z-index: 2;              /* au-dessus des liens du menu si chevauchement visuel */
+  transform: none !important; /* annule d’anciens translateX si présents */
+}
+nav{ position: relative; z-index: 1; }                 /* reste derrière le titre */
