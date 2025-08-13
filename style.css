@@ -30,7 +30,7 @@ flex-wrap:wrap;
 .logo-container{
 display:flex;
 align-items:center;
-gap:12px;
+gap:50px;
 }
 .logo{
 width:80px;
