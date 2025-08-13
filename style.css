@@ -47,7 +47,7 @@ header{
 /* Titre premium — CENTRÉ indépendamment du logo/menu, sur tous écrans */
 .logo-container h1{
   font-family:'Playfair Display',serif;
-  font-size:40px;
+  font-size:60px;
   font-weight:700;
   color:#000000;
   margin:0; /* on neutralise l’ancienne marge pour un centrage propre */
