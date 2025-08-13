@@ -24,20 +24,25 @@ header{
     url('images.webp') center/cover no-repeat;
   padding:15px 25px;
   flex-wrap:wrap;
+  position: relative; /* nécessaire pour centrer le logo-container */
 }
 
-/* Logo + titre */
+/* Logo + titre centré sur toutes tailles */
 .logo-container{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display:flex;
   align-items:center;
   gap:12px;
+  white-space: nowrap;
 }
 .logo{
   width:80px;
   height:auto;
 }
 
-/* Déplacement du titre pour tous les écrans */
+/* Titre premium */
 .logo-container h1{
   font-family:'Playfair Display',serif;
   font-size:28px;
@@ -47,7 +52,6 @@ header{
   line-height:1;
   letter-spacing:1px;
   text-shadow:0 1px 2px rgba(0,0,0,0.18);
-  transform: translateX(40px); /* ajuste la valeur pour centrer exactement */
 }
 
 /* Navigation */
@@ -69,10 +73,10 @@ nav a{
   gap:6px;
   transition:.3s;
 }
-nav a[href="#home"]::before{ content:"\f015"; font-family:"Font Awesome 5 Free"; font-weight:1200; font-size:14px; }
-nav a[href="#produits"]::before{ content:"\f290"; font-family:"Font Awesome 5 Free"; font-weight:1200; font-size:14px; }
-nav a[href="#contact"]::before{ content:"\f0e0"; font-family:"Font Awesome 5 Free"; font-weight:1200; font-size:14px; }
-nav a[href="/fr/"]::before{ content:"\f024"; font-family:"Font Awesome 5 Free"; font-weight:1200; font-size:14px; }
+nav a[href="#home"]::before{ content:"\f015"; font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px; }
+nav a[href="#produits"]::before{ content:"\f290"; font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px; }
+nav a[href="#contact"]::before{ content:"\f0e0"; font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px; }
+nav a[href="/fr/"]::before{ content:"\f024"; font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px; }
 
 nav a:hover{ color:#333; }
 
@@ -186,9 +190,10 @@ header, nav, .logo-container,
   box-sizing:border-box;
 }
 
+/* (FIX) sélecteur universel rétabli */
 * { box-sizing:border-box; }
 
-/* Nav mobile */
+/* Nav mobile : garder tous les liens sur une seule ligne */
 @media (max-width: 480px){
   header{ padding:12px 12px; }
   .logo{ width:56px; }
@@ -208,7 +213,7 @@ header, nav, .logo-container,
   nav a::before{ display:none; }
 }
 
-/* Ver carrinho centré */
+/* Bloc “Ver carrinho” */
 @media (max-width: 768px){
   .header-panier{
     width:100%;
@@ -221,35 +226,3 @@ header, nav, .logo-container,
     justify-content:center;
   }
 }
-/* --- Patch : afficher "Green-Therapy" en entier, sans bouger sa place --- */
-.logo-container{
-  overflow: visible !important;  /* ne coupe plus la fin du mot */
-  min-width: 0;                  /* autorise le contenu à dépasser la largeur flex */
-  position: relative;
-  z-index: 2;                    /* au-dessus du menu */
-}
-
-.logo-container h1{
-  white-space: nowrap;           /* reste sur une seule ligne */
-  flex-shrink: 0;                /* ne se compresse pas */
-  transform: none !important;    /* annule d’anciennes tentatives de translateX */
-  margin: 0 0 0 20px;            /* marge d’origine à gauche */
-}
-
-nav{
-  position: relative;
-  z-index: 1;                    /* sous le titre pour éviter le chevauchement visuel */
-}
-/* --- PATCH ANTI-COUPE pour le titre dans le header --- */
-header{ overflow: visible !important; }                /* ne coupe plus à droite */
-.logo-container{ overflow: visible !important; min-width: 0; }
-
-.logo-container h1{
-  white-space: nowrap;     /* une seule ligne */
-  flex-shrink: 0;          /* ne se compresse pas */
-  min-width: max-content;  /* garde toute sa largeur */
-  position: relative;
-  z-index: 2;              /* au-dessus des liens du menu si chevauchement visuel */
-  transform: none !important; /* annule d’anciens translateX si présents */
-}
-nav{ position: relative; z-index: 1; }                 /* reste derrière le titre */
