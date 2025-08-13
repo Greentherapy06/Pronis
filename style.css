@@ -26,14 +26,6 @@ header{
   flex-wrap:wrap;
 }
 
-/* === AJOUT : recadrage de l'image sur mobile pour placer "Green-Therapy" entre la bouteille et les pierres === */
-@media (max-width: 768px){
-  header{
-    background-position: 38% center; /* ajuste entre 38% et 48% si besoin */
-  }
-}
-/* === FIN AJOUT === */
-
 /* Logo + titre */
 .logo-container{
   display:flex;
@@ -55,20 +47,6 @@ header{
   line-height:1;
   letter-spacing:1px;
   text-shadow:0 1px 2px rgba(0,0,0,0.18);
-}
-/* Déplacer uniquement le titre, sans impacter le menu */
-@media (max-width: 768px){
-  .logo-container h1{
-    display:inline-block;         /* garantit que le transform s'applique proprement */
-    transform: translateX(24px);  /* ajuste 10→60px selon le rendu */
-  }
-}
-
-/* Optionnel : ajustement sur desktop aussi */
-@media (min-width: 769px){
-  .logo-container h1{
-    transform: translateX(40px);  /* ajuste 20→80px si besoin */
-  }
 }
 
 /* Navigation */
@@ -241,3 +219,24 @@ header, nav, .logo-container,
     justify-content:center;
   }
 }
+
+/* ===================== */
+/* AJOUTS ciblés (mobile) */
+/* ===================== */
+@media (max-width: 768px){
+  /* 1) Empêcher la coupure du titre (la fin “py”) */
+  .logo-container{
+    overflow: visible; /* override du overflow-x:hidden plus haut */
+  }
+
+  /* 2) Décaler légèrement la ligne sous le titre (le menu) vers la gauche */
+  nav{
+    margin-left: -10px; /* léger décalage à gauche, ajuste -6px à -16px selon rendu */
+  }
+
+  /* 3) Améliorer la lisibilité du menu sur l'image du header */
+  header nav a{
+    text-shadow: 0 1px 2px rgba(255,255,255,.65); /* halo clair discret */
+  }
+}
+/* ===== FIN AJOUTS ===== */
