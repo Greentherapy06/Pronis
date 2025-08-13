@@ -29,7 +29,7 @@ header{
 /* === AJOUT : recadrage de l'image sur mobile pour placer "Green-Therapy" entre la bouteille et les pierres === */
 @media (max-width: 768px){
   header{
-    background-position: 42% center; /* ajuste entre 38% et 48% si besoin */
+    background-position: 48% center; /* ajuste entre 38% et 48% si besoin */
   }
 }
 /* === FIN AJOUT === */
