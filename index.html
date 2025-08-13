@@ -12,6 +12,11 @@
   <!-- Pré-conexão CDN -->
   <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <!-- Perf: gstatic + DNS prefetch -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <!-- Perf: preload du visuel hero -->
+  <link rel="preload" as="image" href="../images.webp" fetchpriority="high">
 
   <!-- CSS principal -->
   <link rel="stylesheet" href="../style.css" />
@@ -102,6 +107,12 @@
         justify-content:center;
         align-items:center;
       }
+    }
+
+    /* Perf: ne calcule/peint les sections que lorsqu’elles deviennent visibles */
+    #produits, #about, #avis, #contact{
+      content-visibility:auto;
+      contain-intrinsic-size:800px; /* évite tout CLS en réservant la place */
     }
   </style>
 </head>
@@ -426,51 +437,16 @@
     window.addEventListener("scroll", loadSnipcart, { once: true });
     document.addEventListener("click", loadSnipcart, { once: true });
   </script>
-  <!DOCTYPE html>
-<html lang="pt">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Condições Gerais de Venda – Green‑Therapy</title>
-  <meta name="description" content="Condições Gerais de Venda da Green‑Therapy: preços, IVA, pagamento, envio, devoluções e responsabilidade." />
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Green‑Therapy">
-  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
-  <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="stylesheet" href="../style.css" />
-</head>
-<body>
-  <header>
-    <div class="logo-container">
-      <img src="../logo-rond.png" alt="Logo Green‑Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
-      <h1>Green‑Therapy</h1>
-    </div>
-    <nav>
-      <a href="./index.html#home">
-      <a href="./index.html#produits">
-      <a href="./index.html#contact">
-      <a href="../index.html" hreflang="fr">
-    </nav>
-  </header>
-  <footer style="text-align:center; padding:20px; font-size:14px;">
-    <a href="./aviso-legal.html">Aviso legal</a> |
-    <a href="./politica-privacidade.html">Política de Privacidade</a> |
-    <a href="./cookies.html">Cookies</a> |
-    <a href="./cgv.html">CGV</a>
-    <a href="./flores-cbd.html">Flores CBD</a> | 
-<a href="./oleos-cbd.html">Óleos CBD</a> | 
-<a href="./oleo-cbd-beneficios.html">Benefícios do Óleo CBD</a> | 
-<a href="./comprar-cbd-online.html">Comprar CBD Online</a> | 
-<a href="./guia-cbd.html">Guia CBD</a> | 
-<a href="./cbd-portugal.html">CBD Portugal</a> | 
-<a href="./cbd-legalidade.html">Legalidade do CBD</a> | 
-<a href="./cbd-relaxamento.html">CBD Relaxamento</a> | 
-<a href="./infusoes-cbd.html">Infusões CBD</a> | 
-<a href="./resinas-cbd.html">Resinas CBD</a>
-  </footer>
+
+  <!-- Perf: applique decoding async + lazy à toutes les images (sauf le hero déjà préchargé) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('img').forEach(function (img, i) {
+        if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+        if (!img.hasAttribute('loading'))  img.setAttribute('loading', 'lazy');
+        if (i > 0 && !img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','low');
+      });
+    });
+  </script>
 </body>
 </html>
-</body>
-</html>
-```0
