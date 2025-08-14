@@ -3,7 +3,7 @@
 
 """
 Génère des pages HTML (FR) à partir des flux concurrents.
-- Lit les JSON:  data/<slug>/cbd_competitor.json
+- Lit les JSON:  fr/data/<slug>/cbd_competitor.json
 - Écrit:          fr/nouveautes/index.html + fr/nouveautes/<slug>.html
 """
 
@@ -11,14 +11,14 @@ import os, json, html
 from datetime import datetime
 
 # --- Où lire/écrire ---
-DATA_DIR = "data"
-OUT_DIR  = os.path.join("fr", "nouveautes")   # << doit matcher le chemin du workflow
+DATA_DIR = os.path.join("fr", "data")       # <— aligne avec le workflow de collecte
+OUT_DIR  = os.path.join("fr", "nouveautes")
 
-# --- Slugs et jolis noms (doivent correspondre à tes dossiers data/<slug>) ---
+# --- Slugs (doivent correspondre au YAML) ---
 SLUGS = [
     "cbdf",         # CBD.fr
-    "cbdoo",        # CBDOO
     "cannaca",      # CannaCA
+    "cbdoo",        # CBDOO
     "deli-hemp",    # Deli Hemp
     "greenvertus",  # GreenVertus
     "lelab",        # Le Lab CBD Shop
@@ -26,24 +26,22 @@ SLUGS = [
 
 NICE_NAME = {
     "cbdf":        "CBD.fr",
-    "cbdoo":       "CBDOO",
     "cannaca":     "CannaCA",
+    "cbdoo":       "CBDOO",
     "deli-hemp":   "Deli Hemp",
     "greenvertus": "GreenVertus",
     "lelab":       "Le Lab CBD Shop",
 }
 
-# --- Un peu de maillage interne (liens vers TES pages) ---
+# --- Maillage interne vers TES pages ---
 INTERNAL_LINKS = [
-    ("Fleurs de CBD", "/fr/fleurs-cbd.html"),
-    ("Résines de CBD", "/fr/resines-cbd.html"),
-    ("Huiles de CBD", "/fr/oleos-cbd.html"),
-    ("Infusions de CBD", "/fr/infusions-cbd.html"),
-    ("Guide CBD", "/fr/guia-cbd.html"),
-    ("Comparer CBD en ligne", "/fr/comprar-cbd-online.html"),
+    ("Fleurs de CBD", "/fleurs-cbd.html"),
+    ("Résines de CBD", "/resines-cbd.html"),
+    ("Huiles de CBD", "/oleos-cbd.html"),
+    ("Infusions de CBD", "/infusions-cbd.html"),
+    ("Guide CBD", "/guia-cbd.html"),
+    ("Comparer CBD en ligne", "/comparar-cbd-online.html"),
 ]
-
-# ==== Helpers HTML ====
 
 def page_header(title, description=""):
     return f"""<!doctype html>
@@ -79,8 +77,6 @@ def block_internal_links():
     links = " ".join(f'<a href="{html.escape(url)}">{html.escape(txt)}</a>' for txt, url in INTERNAL_LINKS)
     return f'<p class="tags">{links}</p>'
 
-# ==== Lecture JSON ====
-
 def read_items(slug, limit=60):
     p = os.path.join(DATA_DIR, slug, "cbd_competitor.json")
     if not os.path.isfile(p):
@@ -88,18 +84,15 @@ def read_items(slug, limit=60):
     try:
         with open(p, "r", encoding="utf-8") as f:
             data = json.load(f)
-            # data attendu: [{"url": "...", "lastmod": "..."}]
-            res = []
-            for it in data[:limit]:
-                url = it.get("url") or ""
-                last = it.get("lastmod") or ""
-                if url:
-                    res.append({"url": url, "lastmod": last})
-            return res
+        res = []
+        for it in data[:limit]:
+            url = it.get("url") or ""
+            last = it.get("lastmod") or ""
+            if url:
+                res.append({"url": url, "lastmod": last})
+        return res
     except Exception:
         return []
-
-# ==== Génération ====
 
 def render_list(title, items):
     rows = []
@@ -152,10 +145,8 @@ def build_index():
     write_file(os.path.join(OUT_DIR, "index.html"), content)
 
 def main():
-    # une page par concurrent
     for slug in SLUGS:
         build_competitor_page(slug)
-    # index
     build_index()
     print(f"Pages générées dans {OUT_DIR}/")
 
