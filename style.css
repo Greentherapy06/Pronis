@@ -34,7 +34,7 @@ header{
 .logo-container{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:24px;
 
   /* Le titre ne doit jamais être rogné */
   overflow:visible !important;
