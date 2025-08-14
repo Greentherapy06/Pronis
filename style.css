@@ -233,5 +233,25 @@ header, nav, .logo-container,
     justify-content:center;
   }
   }
-.logo{ width: 96px; }  /* si tu le veux un peu plus présent (90 → 96) */
-/* .logo{ width: 84px; }   si tu préfères alléger la gauche */
+/* === OVERRIDES SÉCURISÉS (faciles à retirer) === */
+:root {
+  /* Taille responsive du titre : min 42px, max 120px */
+  --brand-title-size: clamp(42px, 6vw, 120px);
+}
+
+header .logo-container h1{
+  font-size: var(--brand-title-size) !important; /* force la taille */
+  font-weight: 800 !important;                  /* plus gras */
+  letter-spacing: 0.5px;                        /* un poil plus serré */
+  text-shadow: 0 2px 4px rgba(0,0,0,.15);       /* léger relief */
+}
+
+header .logo{
+  width: 110px !important;                      /* logo un peu plus grand (ajuste 90–130) */
+  height: auto;
+}
+
+/* Option : menu un peu plus gras pour équilibre visuel */
+header nav a{
+  font-weight: 700;
+}
