@@ -14,12 +14,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - { name: "CBD.fr",               slug: "cbdf",     domain: "https://www.cbd.fr" }
-          - { name: "CannaCA",              slug: "cannaca",  domain: "https://cannaca.fr" }
-          - { name: "CBDOO",                slug: "cbdoo",    domain: "https://cbdoo.fr" }
-          - { name: "Deli Hemp",            slug: "deli-hemp",domain: "https://www.deli-hemp.fr" }
-          - { name: "GreenVertus",          slug: "greenvertus", domain: "https://www.greenvertus.fr" }
-          - { name: "Le Lab CBD Shop",      slug: "lelab",    domain: "https://lelab-shop.com" }
+          - { name: "CBD.fr",               slug: "cbdf",       domain: "https://www.cbd.fr" }
+          - { name: "CannaCA",              slug: "cannaca",    domain: "https://cannaca.fr" }
+          - { name: "CBDOO",                slug: "cbdoo",      domain: "https://cbdoo.fr" }
+          - { name: "Deli Hemp",            slug: "deli-hemp",  domain: "https://www.deli-hemp.fr" }
+          - { name: "GreenVertus",          slug: "greenvertus",domain: "https://www.greenvertus.fr" }
+          - { name: "Le Lab CBD Shop",      slug: "lelab",      domain: "https://lelab-shop.com" }
 
     steps:
       - name: Checkout
