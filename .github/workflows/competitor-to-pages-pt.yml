@@ -1,11 +1,11 @@
 name: Build competitor pages (PT)
 
 on:
-  # Se lance automatiquement quand le feed PT se termine
+  # Auto quand le feed PT se termine
   workflow_run:
     workflows: ["Build competitor feed (PT)"]
     types: [completed]
-  # Et on peut aussi le lancer à la main
+  # Lancement manuel possible
   workflow_dispatch: {}
 
 permissions:
@@ -13,7 +13,10 @@ permissions:
 
 jobs:
   build:
+    # Ne continue que si le workflow précédent a réussi
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,7 +36,7 @@ jobs:
       - name: Generate PT pages
         run: |
           mkdir -p scripts
-          # au cas où le fichier n'existe pas encore dans la VM (tu l'as bien commité normalement)
+          # au cas où (le vrai script doit déjà être commité)
           python -c "open('scripts/pt_generate_pages.py').close()" || true
           python scripts/pt_generate_pages.py
 
@@ -43,7 +46,8 @@ jobs:
             git config --global safe.directory "$GITHUB_WORKSPACE"
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add pt/novidades/**/*.html pt/novidades/*.html || true
+            # ajoute TOUT le dossier de sortie
+            git add -A pt/novidades || true
             git commit -m "Gerar páginas PT a partir dos concorrentes" || true
             git pull --rebase --autostash || true
             git push || true
