@@ -3,7 +3,7 @@ name: Build competitor feed (PT)
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "15 */6 * * *"  # toutes les 6h
+    - cron: "15 */6 * * *"   # toutes les 6h (décalé de 15 min vs FR)
 
 permissions:
   contents: write
@@ -15,11 +15,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - { name: "CBWEED Portugal", slug: "cbweed",       domain: "https://cbweed.pt" }
+          - { name: "CBWEED Portugal", slug: "cbweed",      domain: "https://cbweed.pt" }
           - { name: "CBD-Portugal.pt",  slug: "cbd-portugal", domain: "https://cbd-portugal.pt" }
-          - { name: "Doctor CBD",       slug: "doctorcbd",    domain: "https://doctorcbd.pt" }
-          - { name: "Mama Kana",        slug: "mamakana",     domain: "https://mamakana.pt" }
-          - { name: "CBDSOL",           slug: "cbdsol",       domain: "https://cbdsol.pt" }
+          - { name: "Doctor CBD",       slug: "doctorcbd",  domain: "https://doctorcbd.pt" }
+          - { name: "Mama Kana",        slug: "mamakana",   domain: "https://mamakana.pt" }
+          - { name: "CBDSOL",           slug: "cbdsol",     domain: "https://cbdsol.pt" }
 
     steps:
       - name: Checkout
@@ -35,38 +35,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Debug – list files
-        run: |
-          pwd
-          ls -la
-          echo "----- data/"
-          ls -la data || true
-
       - name: Run harvester for ${{ matrix.name }}
         run: |
           mkdir -p data/${{ matrix.slug }}
           python ./stealth_competitor_feed.py \
-            --domain "${{ matrix.domain }}" \
+            --domain   "${{ matrix.domain }}" \
             --out-json "data/${{ matrix.slug }}/cbd_competitor.json" \
-            --out-rss  "data/${{ matrix.slug }}/cbd_competitor.rss" || true
+            --out-rss  "data/${{ matrix.slug }}/cbd_competitor.rss"
 
       - name: Commit changes (if any)
         run: |
-          set -e
-          JSON="data/${{ matrix.slug }}/cbd_competitor.json"
-          RSS="data/${{ matrix.slug }}/cbd_competitor.rss"
-
-          if [ -e "$JSON" ] || [ -e "$RSS" ]; then
+          if [ -n "$(git status --porcelain)" ]; then
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            [ -e "$JSON" ] && git add "$JSON" || true
-            [ -e "$RSS" ]  && git add "$RSS"  || true
-            if [ -n "$(git status --porcelain)" ]; then
-              git commit -m "Update competitor feed (PT) - ${{ matrix.name }}"
-              git push
-            else
-              echo "Nothing to commit for ${{ matrix.name }}"
-            fi
+            git add data/**/cbd_competitor.json data/**/cbd_competitor.rss
+            git commit -m "Update competitor feed (PT) - ${{ matrix.name }}"
+            git push
           else
-            echo "No output files for ${{ matrix.name }}; skipping commit"
+            echo "No changes to commit"
           fi
