@@ -39,7 +39,7 @@ jobs:
         run: |
           mkdir -p data/${{ matrix.slug }}
           python ./stealth_competitor_feed.py \
-            --domain   "${{ matrix.domain }}" \
+            --domain "${{ matrix.domain }}" \
             --out-json "data/${{ matrix.slug }}/cbd_competitor.json" \
             --out-rss  "data/${{ matrix.slug }}/cbd_competitor.rss"
 
@@ -50,6 +50,7 @@ jobs:
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add data/**/cbd_competitor.json data/**/cbd_competitor.rss
             git commit -m "Update competitor feed (PT) - ${{ matrix.name }}"
+            git pull --rebase
             git push
           else
             echo "No changes to commit"
