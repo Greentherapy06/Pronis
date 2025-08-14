@@ -13,13 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         include:
-          - { name: "CBWEED Portugal", slug: "cbweed",      domain: "https://cbweed.pt" }
-          - { name: "CBD-Portugal.pt",  slug: "cbd-portugal", domain: "https://cbd-portugal.pt" }
-          - { name: "Doctor CBD",       slug: "doctorcbd",  domain: "https://doctorcbd.pt" }
-          - { name: "Mama Kana",        slug: "mamakana",   domain: "https://mamakana.pt" }
-          - { name: "CBDSOL",           slug: "cbdsol",     domain: "https://cbdsol.pt" }
+          - { name: "CBWEED Portugal", slug: "cbweed",       domain: "https://cbweed.pt" }
+          - { name: "CBD-Portugal.pt", slug: "cbd-portugal", domain: "https://cbd-portugal.pt" }
+          - { name: "Doctor CBD",       slug: "doctorcbd",   domain: "https://doctorcbd.pt" }
+          - { name: "Mama Kana",        slug: "mamakana",    domain: "https://mamakana.pt" }
+          - { name: "CBDSOL",           slug: "cbdsol",      domain: "https://cbdsol.pt" }
 
     steps:
       - name: Checkout
@@ -36,6 +37,7 @@ jobs:
           pip install requests
 
       - name: Run harvester for ${{ matrix.name }}
+        continue-on-error: true
         run: |
           mkdir -p data/${{ matrix.slug }}
           python ./stealth_competitor_feed.py \
@@ -50,7 +52,8 @@ jobs:
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add data/**/cbd_competitor.json data/**/cbd_competitor.rss
             git commit -m "Update competitor feed (PT) - ${{ matrix.name }}"
-            git pull --rebase
+            # récupère les derniers commits distants pour éviter 'fetch first'
+            git pull --rebase --autostash || true
             git push
           else
             echo "No changes to commit"
