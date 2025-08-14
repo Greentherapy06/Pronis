@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import json, time
+import os, json, time, argparse
 from datetime import datetime
 from urllib.parse import urlparse
 import requests
@@ -11,10 +11,15 @@ UA   = "CompetitorFeedBot/1.0 (+contact: you@example.com)"
 HDRS = {"User-Agent": UA, "Accept": "*/*"}
 TIMEOUT = 20
 
-# Sitemaps probables sur cbd.fr
+# Sitemaps probables
 SITEMAP_CANDIDATES = [
     "/sitemap.xml",
     "/sitemap_index.xml",
+    "/sitemap-index.xml",
+    "/sitemap1.xml",
+    "/product-sitemap.xml",
+    "/page-sitemap.xml",
+    "/category-sitemap.xml",
     "/as4_seositemap-1.xml",
     "/as4_seositemap-2.xml",
     "/as4_seositemap-3.xml",
@@ -22,18 +27,18 @@ SITEMAP_CANDIDATES = [
     "/as4_seositemap-15.xml",
 ]
 
-# Mots/chemins à garder (tu peux en ajouter)
+# Mots/chemins à garder (FR principalement)
 KEYWORDS = [
-    "78fleurs-de-cbd","fleur","fleurs",
-    "84huiles-de-cbd","huile","huiles",
-    "resine","résine","hash","gelule","gélule","infusion",
+    "78fleurs-de-cbd","fleur","fleurs","fleur-cbd","fleurs-cbd",
+    "84huiles-de-cbd","huile","huiles","huile-cbd","huiles-cbd",
+    "resine","résine","hash","gelule","gélule","infusion","tisanes",
     "/product","/products/","/produit","/boutique","/shop","/s/"
 ]
 
 def fetch(url):
     try:
         r = requests.get(url, headers=HDRS, timeout=TIMEOUT)
-        if r.status_code == 200:
+        if r.status_code == 200 and r.text:
             return r.text
     except requests.RequestException:
         pass
@@ -51,7 +56,7 @@ def expand_index(txt):
     return [n.text.strip() for n in root.findall(".//{*}sitemap/{*}loc") if n.text]
 
 def is_interesting(url):
-    u = url.lower()
+    u = (url or "").lower()
     return any(k in u for k in KEYWORDS)
 
 def gather_from_urlset(root):
@@ -66,12 +71,11 @@ def gather_from_urlset(root):
         items.append({"url": link, "lastmod": lastmod})
     return items
 
-def harvest(domain="https://www.cbd.fr"):
+def harvest(domain):
     base = domain if domain.startswith("http") else "https://" + domain
     parsed = urlparse(base)
     root = f"{parsed.scheme}://{parsed.netloc}"
-    items=[]
-    seen=set()
+    items=[]; seen=set()
 
     # découvrir les sitemaps
     to_probe=set()
@@ -82,7 +86,7 @@ def harvest(domain="https://www.cbd.fr"):
         to_probe.add(url)
         for child in expand_index(txt):
             to_probe.add(child)
-        time.sleep(0.5)
+        time.sleep(0.4)
 
     # récolter
     for sm in sorted(to_probe):
@@ -90,12 +94,12 @@ def harvest(domain="https://www.cbd.fr"):
         if not txt: continue
         r = parse_xml(txt)
         if r is None: continue
-        if r.tag.endswith("urlset"):
+        if r.tag.lower().endswith("urlset"):
             for it in gather_from_urlset(r):
                 if it["url"] in seen: continue
                 seen.add(it["url"])
                 items.append(it)
-        time.sleep(0.5)
+        time.sleep(0.3)
 
     # trier par date si dispo
     items.sort(key=lambda x: x["lastmod"] or "", reverse=True)
@@ -111,7 +115,7 @@ def write_rss(items, path, title, link):
         "<description>Flux discret généré depuis les sitemaps concurrents</description>",
         f"<lastBuildDate>{now}</lastBuildDate>",
     ]
-    for it in items[:200]:
+    for it in items[:300]:
         parts += [
             "<item>",
             f"<title><![CDATA[{it['url']}]]></title>",
@@ -120,23 +124,33 @@ def write_rss(items, path, title, link):
             "</item>"
         ]
     parts.append("</channel></rss>")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path,"w",encoding="utf-8") as f: f.write("\n".join(parts))
 
 def main():
-    items = harvest("https://www.cbd.fr")
-    # dossier de sortie (dans /fr/data/)
-    out_json = "fr/data/cbd_competitor.json"
-    out_rss  = "fr/data/cbd_competitor.rss"
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--domain", required=True, help="Domaine concurrent, ex: https://www.cbd.fr")
+    ap.add_argument("--out-json", required=True, help="Chemin de sortie JSON")
+    ap.add_argument("--out-rss",  required=True, help="Chemin de sortie RSS")
+    args = ap.parse_args()
 
-    # créer le dossier si besoin
-    import os
-    os.makedirs("fr/data", exist_ok=True)
+    items = harvest(args.domain)
 
-    with open(out_json,"w",encoding="utf-8") as f:
+    os.makedirs(os.path.dirname(args.out_json), exist_ok=True)
+    with open(args.out_json,"w",encoding="utf-8") as f:
         json.dump(items, f, ensure_ascii=False, indent=2)
 
-    write_rss(items, out_rss, "Flux concurrent — cbd.fr", "https://www.cbd.fr")
-    print(f"Écrit {len(items)} items → {out_json} & {out_rss}")
+    write_rss(items, args.out_rss, f"Flux concurrent — {args.domain}", args.domain)
+    print(f"Écrit {len(items)} items → {args.out_json} & {args.out_rss}")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        # fallback doux : crée des fichiers vides si erreur
+        import traceback
+        print("Harvester FR error:", e)
+        os.makedirs("fr/data/_errors", exist_ok=True)
+        with open("fr/data/_errors/last_error.txt","w",encoding="utf-8") as f:
+            f.write(str(e))
+        traceback.print_exc()
