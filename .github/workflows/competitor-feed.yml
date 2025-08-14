@@ -24,7 +24,7 @@ jobs:
 
       - name: Run harvester
         run: |
-          python scripts/stealth_competitor_feed.py
+          python fr/stealth_competitor_feed.py
 
       - name: Commit changes (if any)
         run: |
