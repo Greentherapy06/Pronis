@@ -3,7 +3,7 @@ name: Build competitor feed (FR)
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "0 */6 * * *"   # toutes les 6h
+    - cron: "0 */6 * * *"
 
 permissions:
   contents: write
@@ -11,16 +11,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        include:
-          - { name: "CBD.fr",          slug: "cbdf",       domain: "https://www.cbd.fr" }
-          - { name: "CBDOO",           slug: "cbdoo",      domain: "https://www.cbdoo.fr" }
-          - { name: "CannaCA",         slug: "cannaca",    domain: "https://www.cannaca.fr" }
-          - { name: "Deli Hemp",       slug: "deli-hemp",  domain: "https://www.deli-hemp.fr" }
-          - { name: "GreenVertus",     slug: "greenvertus",domain: "https://www.greenvertus.fr" }
-          - { name: "Le Lab CBD Shop", slug: "lelab",      domain: "https://www.lelab-cbd.fr" }
 
     steps:
       - name: Checkout
@@ -38,13 +28,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Run harvester (FR) — ${{ matrix.name }}
+      - name: Run harvester (FR)
         run: |
-          mkdir -p data/${{ matrix.slug }}
+          mkdir -p data/cbdf
           python fr/stealth_competitor_feed.py \
-            --domain "${{ matrix.domain }}" \
-            --out-json "data/${{ matrix.slug }}/cbd_competitor.json" \
-            --out-rss  "data/${{ matrix.slug }}/cbd_competitor.rss"
+            --domain "https://www.cbd.fr" \
+            --out-json "data/cbdf/cbd_competitor.json" \
+            --out-rss  "data/cbdf/cbd_competitor.rss"
 
       - name: Commit changes (if any)
         run: |
@@ -52,8 +42,8 @@ jobs:
             git config --global safe.directory "$GITHUB_WORKSPACE"
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add data/**/cbd_competitor.json data/**/cbd_competitor.rss || true
-            git commit -m "Update competitor feed (FR) - ${{ matrix.name }}" || true
+            git add data/cbdf/cbd_competitor.json data/cbdf/cbd_competitor.rss || true
+            git commit -m "Update competitor feed (FR)" || true
             git pull --rebase --autostash || true
             git push || true
           else
