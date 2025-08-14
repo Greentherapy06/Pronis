@@ -1,0 +1,48 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Flux concurrent (interne)</title>
+<style>
+  body{font-family:system-ui;margin:2rem}
+  input,select{padding:.4rem}
+  .row{border-bottom:1px solid #eee;padding:.4rem 0;display:grid;grid-template-columns:1fr auto}
+  .muted{color:#666}
+</style>
+<h1>Flux concurrent — cbd.fr</h1>
+<p class="muted">Lecture locale de <code>/fr/data/cbd_competitor.json</code></p>
+<div>
+  Filtre: <input id="q" placeholder="fleur, huile, etc.">
+  Tri:
+  <select id="sort">
+    <option value="date_desc">Date (récent → ancien)</option>
+    <option value="date_asc">Date (ancien → récent)</option>
+    <option value="url_asc">URL (A→Z)</option>
+    <option value="url_desc">URL (Z→A)</option>
+  </select>
+</div>
+<div id="list"></div>
+<script>
+const $q=document.getElementById('q'), $sort=document.getElementById('sort'), $list=document.getElementById('list');
+let DATA=[];
+fetch('./data/cbd_competitor.json').then(r=>r.json()).then(d=>{DATA=d; render();});
+function applyFilters(){
+  const q=($q.value||'').toLowerCase();
+  let arr=DATA.filter(it=>!q||it.url.toLowerCase().includes(q));
+  const s=$sort.value;
+  if(s==='date_desc') arr.sort((a,b)=>(b.lastmod||'')>(a.lastmod||'')?1:-1);
+  if(s==='date_asc')  arr.sort((a,b)=>(a.lastmod||'')>(b.lastmod||'')?1:-1);
+  if(s==='url_asc')   arr.sort((a,b)=>a.url.localeCompare(b.url));
+  if(s==='url_desc')  arr.sort((a,b)=>b.url.localeCompare(a.url));
+  return arr;
+}
+function render(){
+  const arr=applyFilters();
+  $list.innerHTML='';
+  arr.forEach(it=>{
+    const d=document.createElement('div'); d.className='row';
+    d.innerHTML=`<a href="${it.url}" target="_blank">${it.url}</a>
+                 <span class="muted">${it.lastmod||'—'}</span>`;
+    $list.appendChild(d);
+  });
+}
+$q.oninput=render; $sort.onchange=render;
+</script>
