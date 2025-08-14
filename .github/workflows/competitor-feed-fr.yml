@@ -38,14 +38,12 @@ jobs:
           pip install requests
 
       - name: Run harvester – ${{ matrix.name }}
-        continue-on-error: true
         run: |
           mkdir -p "fr/data/${{ matrix.slug }}"
           python fr/stealth_competitor_feed.py \
             --domain "${{ matrix.domain }}" \
             --out-json "fr/data/${{ matrix.slug }}/cbd_competitor.json" \
-            --out-rss  "fr/data/${{ matrix.slug }}/cbd_competitor.rss" \
-            || true
+            --out-rss  "fr/data/${{ matrix.slug }}/cbd_competitor.rss"
 
       - name: Commit changes (if any)
         run: |
