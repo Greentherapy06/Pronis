@@ -34,7 +34,7 @@ header{
 .logo-container{
   display:flex;
   align-items:center;
-  gap:24px;
+  gap:12px;
 
   /* Le titre ne doit jamais être rogné */
   overflow:visible !important;
@@ -47,7 +47,7 @@ header{
 /* Titre premium — CENTRÉ indépendamment du logo/menu, sur tous écrans */
 .logo-container h1{
   font-family:'Playfair Display',serif;
-  font-size:120px;              /* taille desktop/tablette conservée */
+  font-size:100px;              /* taille desktop/tablette conservée */
   font-weight:700;
   color:#000000;
   margin:0;                    /* neutralise l’ancienne marge pour un centrage propre */
