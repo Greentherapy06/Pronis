@@ -1,230 +1,245 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fleurs CBD – Veille Concurrents | Green-Therapy</title>
-  <meta name="description" content="Veille automatique des concurrents Fleurs CBD : derniers articles et mises à jour agrégés depuis leurs flux RSS/Atom.">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Green-Therapy">
-  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
-
-  <!-- Préconnexions (perf) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
-  <link rel="preconnect" href="https://api.allorigins.win" crossorigin>
-
-  <!-- CSS principal du site -->
-  <link rel="stylesheet" href="../style.css" />
-
+  <meta charset="utf-8" />
+  <title>Flux concurrent (cbd.fr) — Fleurs CBD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    /* Garde l’image d’en-tête du site */
-    header{ background:url('../images.webp') no-repeat center center/cover; }
-
-    /* Petite grille propre pour les cartes actu */
-    .feed-wrap{ max-width:1000px; margin:24px auto; padding:0 16px; }
-    .feed-toolbar{ display:flex; gap:.75rem; align-items:center; justify-content:space-between; flex-wrap:wrap; }
-    .feed-toolbar small{ opacity:.8; }
-    .feed-grid{ display:grid; grid-template-columns:1fr; gap:14px; margin-top:14px; }
-    @media (min-width:720px){ .feed-grid{ grid-template-columns:1fr 1fr; } }
-    .feed-card{
-      border:1px solid #eee; border-radius:14px; padding:14px 16px; background:#fff;
-      box-shadow:0 1px 2px rgba(0,0,0,.03);
-    }
-    .feed-card h3{ font-size:1.05rem; margin:0 0 .35rem; line-height:1.35; }
-    .feed-meta{ font-size:.9rem; opacity:.85; display:flex; gap:.5rem; flex-wrap:wrap; }
-    .badge{ font-size:.75rem; border:1px solid #e6e6e6; padding:2px 8px; border-radius:999px; white-space:nowrap; }
-    .feed-actions{ display:flex; gap:.5rem; margin-top:.5rem; }
-    .btn{ border:1px solid #000; background:#000; color:#d4af37; padding:6px 10px; border-radius:8px; cursor:pointer; }
-    .btn.secondary{ background:#fff; color:#000; }
-    .empty{ text-align:center; opacity:.8; padding:18px 8px; }
-    .spinner{ width:22px; height:22px; border:3px solid #e9e9e9; border-top:3px solid #000; border-radius:50%; animation:spin 1s linear infinite; display:inline-block; vertical-align:middle; }
-    @keyframes spin{ to{ transform:rotate(360deg);} }
-
-    /* Perf d’affichage paresseux */
-    #feed{ content-visibility:auto; contain-intrinsic-size:800px; }
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    body { margin: 2rem; }
+    h1 { margin: 0 0 1rem; font-size: 1.5rem; }
+    .row { display: grid; grid-template-columns: 1fr auto auto; gap: .5rem 1rem; align-items: center; padding: .5rem 0; border-bottom: 1px solid #eee; }
+    .row a { text-decoration: none; }
+    .bad { color: #a00; }
+    .muted { color: #666; font-size: .9em; }
+    .controls { display: flex; gap: .5rem; flex-wrap: wrap; margin: .5rem 0 1rem; }
+    input, select, button { padding: .5rem .6rem; }
+    .pill { border: 1px solid #ddd; border-radius: 999px; padding: .2rem .6rem; font-size: .85em; }
+    #status { margin:.5rem 0 1rem; }
+    #list { border-top: 1px solid #eee; }
   </style>
 </head>
 <body>
-  <!-- Header (identique au site) -->
-  <header>
-    <div class="logo-container">
-      <img src="../logo-rond.png" alt="Logo Green-Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
-      <h1>Green-Therapy</h1>
-    </div>
-    <nav>
-      <a href="./index.html#home"> Accueil</a>
-      <a href="./index.html#produits"> Produits</a>
-      <a href="./index.html#contact"> Contact</a>
-      <a href="/fr/" hreflang="fr">🇨🇵 Français</a>
-    </nav>
-  </header>
+  <h1>Flux concurrent — cbd.fr</h1>
+  <p class="muted">
+    Ce widget récupère les dernières URLs produits / catégories depuis les <b>sitemaps</b> de cbd.fr et les affiche comme un flux léger.
+  </p>
 
-  <section class="section">
-    <div class="feed-wrap" id="feed">
-      <h2>📰 Veille – Fleurs CBD (concurrents)</h2>
-      <div class="feed-toolbar">
-        <small id="lastUpdate">Chargement des flux… <span class="spinner" aria-hidden="true"></span></small>
-        <div>
-          <button class="btn secondary" id="btnRefresh" type="button">Rafraîchir</button>
-          <button class="btn secondary" id="btnClear" type="button">Vider le cache</button>
-        </div>
-      </div>
+  <div class="controls">
+    <label>Filtre URL: <input id="q" placeholder="ex: /78fleurs-de-cbd ou /s/" /></label>
+    <label>Tri:
+      <select id="sort">
+        <option value="date_desc">Date (récent → ancien)</option>
+        <option value="date_asc">Date (ancien → récent)</option>
+        <option value="url_asc">URL (A → Z)</option>
+        <option value="url_desc">URL (Z → A)</option>
+      </select>
+    </label>
+    <button id="refresh">Rafraîchir</button>
+    <span class="pill">Source: sitemaps cbd.fr</span>
+  </div>
 
-      <div id="feedGrid" class="feed-grid" aria-live="polite"></div>
-      <div id="feedEmpty" class="empty" hidden>Aucune actualité trouvée pour l’instant.</div>
-    </div>
-  </section>
-
-  <footer style="text-align:center; padding:20px; font-size:14px;">
-    <a href="./mentions-legales.html">Mentions légales</a> |
-    <a href="./politique-confidentialite.html">Politique de confidentialité</a> |
-    <a href="./cookies.html">Cookies</a> |
-    <a href="./cgv.html">CGV</a>
-    <a href="/fr/fleurs-cbd.html">Fleurs CBD</a>
-  </footer>
+  <div id="status" class="muted">Chargement…</div>
+  <div id="list" role="list"></div>
 
   <script>
-    // 1) RENSEIGNE ICI les flux de tes concurrents (RSS/Atom)
-    //    Exemple : "https://exemple.com/feed", "https://exemple.com/rss.xml"
-    const COMPETITOR_FEEDS = [
-      { name: "Concurrent A", url: "https://exemple-a.com/feed" },
-      { name: "Concurrent B", url: "https://exemple-b.com/rss.xml" },
-      { name: "Concurrent C", url: "https://exemple-c.com/feed" }
+    // --- Réglages ---
+    const DOMAIN = "https://www.cbd.fr";
+    // Endpoints candidats repérés sur cbd.fr
+    const SITEMAP_CANDIDATES = [
+      "/sitemap.xml",
+      "/sitemap_index.xml",
+      "/as4_seositemap-1.xml",   // catégories/produits (module SEO)
+      "/as4_seositemap-2.xml",
+      "/as4_seositemap-3.xml",
+      "/as4_seositemap-10.xml",
+      "/as4_seositemap-15.xml"
     ];
-    const ITEMS_PER_SOURCE = 6;         // nombre d’articles par source
-    const CACHE_TTL_MINUTES = 15;       // durée de cache (LocalStorage)
 
-    const $grid = document.getElementById('feedGrid');
-    const $empty = document.getElementById('feedEmpty');
-    const $last = document.getElementById('lastUpdate');
-    const $btnRefresh = document.getElementById('btnRefresh');
-    const $btnClear = document.getElementById('btnClear');
+    // Proxy CORS gratuit (remplacez par le vôtre en prod)
+    const CORS = "https://api.allorigins.win/raw?url=";
 
-    const CACHE_KEY = 'gt_feed_cache_v1';
+    const $status = document.getElementById("status");
+    const $list   = document.getElementById("list");
+    const $q      = document.getElementById("q");
+    const $sort   = document.getElementById("sort");
+    const $refresh= document.getElementById("refresh");
 
-    function fmtDate(d){
-      try{
-        return new Intl.DateTimeFormat('fr-FR', { dateStyle:'medium', timeStyle:'short' }).format(d);
-      }catch(e){ return d.toLocaleString(); }
+    // Heuristique: on ne garde que des URLs "intéressantes" (produits / catégories / contenus)
+    function isInteresting(url) {
+      const u = url.toLowerCase();
+      return (
+        u.includes("/products/") ||
+        u.includes("/product/")  ||
+        u.includes("/produit")   ||
+        u.includes("/s/")        ||  // pages marketing sur cbd.fr
+        u.includes("/78fleurs-de-cbd") ||
+        u.includes("/84huiles-de-cbd") ||
+        u.includes("/gélules") || u.includes("/gelules") ||
+        u.includes("/hash") || u.includes("/resines") ||
+        u.includes("/fleurs") ||
+        u.includes("/blog")
+      );
     }
 
-    function getFromCache(){
-      try{
-        const raw = localStorage.getItem(CACHE_KEY);
-        if(!raw) return null;
-        const obj = JSON.parse(raw);
-        if(!obj || !obj.time || !obj.items) return null;
-        const ageMin = (Date.now() - obj.time) / 60000;
-        if(ageMin > CACHE_TTL_MINUTES) return null;
-        return obj;
-      }catch(e){ return null; }
-    }
-    function saveToCache(items){
-      try{
-        localStorage.setItem(CACHE_KEY, JSON.stringify({ time: Date.now(), items }));
-      }catch(e){}
+    async function fetchText(url) {
+      const proxied = CORS + encodeURIComponent(url);
+      const r = await fetch(proxied, { headers: { "Accept": "text/*" }});
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return await r.text();
     }
 
-    async function fetchViaAllOrigins(url){
-      const api = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
-      const res = await fetch(api);
-      if(!res.ok) throw new Error('Erreur réseau ' + res.status);
-      const data = await res.json();
-      return data.contents;
+    function parseXml(xmlString) {
+      return new window.DOMParser().parseFromString(xmlString, "application/xml");
     }
 
-    function parseFeed(xmlString, sourceName){
+    function extractFromUrlset(doc) {
+      // <urlset><url><loc>…</loc><lastmod>…</lastmod></url></urlset>
       const out = [];
-      const doc = new DOMParser().parseFromString(xmlString, 'text/xml');
+      doc.querySelectorAll("urlset > url").forEach(node => {
+        const loc = node.querySelector("loc")?.textContent?.trim();
+        if (!loc) return;
+        if (!isInteresting(loc)) return;
+        const lastmod = node.querySelector("lastmod")?.textContent?.trim() || null;
+        out.push({ url: loc, lastmod });
+      });
+      return out;
+    }
 
-      // Essaye RSS <item>, sinon Atom <entry>
-      let nodes = [...doc.querySelectorAll('item')];
-      if(nodes.length === 0) nodes = [...doc.querySelectorAll('entry')];
+    function extractFromSitemapIndex(doc) {
+      // <sitemapindex><sitemap><loc>…</loc></sitemap>…
+      const urls = [];
+      doc.querySelectorAll("sitemapindex > sitemap > loc").forEach(n => {
+        const loc = n.textContent.trim();
+        urls.push(loc);
+      });
+      return urls;
+    }
 
-      for(const node of nodes.slice(0, ITEMS_PER_SOURCE)){
-        const get = sel => (node.querySelector(sel) ? node.querySelector(sel).textContent.trim() : '');
-        const title = get('title') || '(Sans titre)';
-        let link = get('link');
-        // Atom peut imbriquer <link href="...">
-        if(!link){
-          const l = node.querySelector('link[href]');
-          if(l) link = l.getAttribute('href') || '';
+    async function fetchOneSitemap(url) {
+      try {
+        const xml = await fetchText(url);
+        const doc = parseXml(xml);
+
+        // Erreurs XML ?
+        const parserError = doc.querySelector("parsererror");
+        if (parserError) throw new Error("XML invalide");
+
+        // sitemap index ?
+        if (doc.querySelector("sitemapindex")) {
+          const children = extractFromSitemapIndex(doc);
+          let items = [];
+          for (const sm of children) {
+            try {
+              const childXml = await fetchText(sm);
+              const childDoc = parseXml(childXml);
+              items = items.concat(extractFromUrlset(childDoc));
+            } catch (_e) {
+              // ignore un sous-sitemap en erreur
+            }
+          }
+          return items;
         }
-        const dateStr = get('pubDate') || get('updated') || get('published') || get('dc\\:date') || get('date');
-        const date = dateStr ? new Date(dateStr) : new Date(0);
 
-        out.push({
-          title,
-          link,
-          date,
-          source: sourceName
-        });
+        // urlset classique
+        if (doc.querySelector("urlset")) {
+          return extractFromUrlset(doc);
+        }
+
+        return [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function dedupe(items) {
+      const seen = new Set();
+      const out = [];
+      for (const it of items) {
+        const key = it.url;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push(it);
       }
       return out;
     }
 
-    function render(items){
-      $grid.innerHTML = '';
-      if(!items || items.length === 0){
-        $empty.hidden = false;
+    function render(items) {
+      $list.innerHTML = "";
+      if (!items.length) {
+        $list.innerHTML = `<div class="bad">Aucun item trouvé.</div>`;
         return;
       }
-      $empty.hidden = true;
-
-      // Trie par date décroissante
-      items.sort((a,b) => b.date - a.date);
-
-      for(const it of items){
-        const card = document.createElement('article');
-        card.className = 'feed-card';
-        card.innerHTML = `
-          <h3><a href="${it.link}" target="_blank" rel="noopener nofollow">${escapeHtml(it.title)}</a></h3>
-          <div class="feed-meta">
-            <span class="badge">${escapeHtml(it.source)}</span>
-            <time datetime="${it.date.toISOString()}">${fmtDate(it.date)}</time>
-          </div>
-          <div class="feed-actions">
-            <a class="btn secondary" href="${it.link}" target="_blank" rel="noopener nofollow">Ouvrir</a>
-          </div>
-        `;
-        $grid.appendChild(card);
+      for (const it of items) {
+        const row = document.createElement("div");
+        row.className = "row";
+        const a = document.createElement("a");
+        a.href = it.url;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = it.url.replace(/^https?:\/\/(www\.)?/, "");
+        const d = document.createElement("div");
+        d.className = "muted";
+        d.textContent = it.lastmod ? new Date(it.lastmod).toLocaleString() : "—";
+        const host = document.createElement("div");
+        host.className = "muted";
+        try {
+          host.textContent = new URL(it.url).pathname;
+        } catch (_) {
+          host.textContent = "";
+        }
+        row.appendChild(a);
+        row.appendChild(d);
+        row.appendChild(host);
+        $list.appendChild(row);
       }
-      $last.textContent = 'Dernière mise à jour : ' + fmtDate(new Date());
     }
 
-    function escapeHtml(s){
-      return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    function applyFilters(items) {
+      const q = ($q.value || "").toLowerCase().trim();
+      let filtered = items;
+      if (q) {
+        filtered = filtered.filter(it => it.url.toLowerCase().includes(q));
+      }
+      const mode = $sort.value;
+      filtered = filtered.slice();
+      if (mode === "date_desc") filtered.sort((a,b)=>(b.lastmod||"") > (a.lastmod||"") ? 1 : -1);
+      if (mode === "date_asc")  filtered.sort((a,b)=>(a.lastmod||"") > (b.lastmod||"") ? 1 : -1);
+      if (mode === "url_asc")   filtered.sort((a,b)=>a.url.localeCompare(b.url));
+      if (mode === "url_desc")  filtered.sort((a,b)=>b.url.localeCompare(a.url));
+      return filtered;
     }
 
-    async function loadFeeds({force=false} = {}){
-      if(!force){
-        const cached = getFromCache();
-        if(cached){ render(cached.items.map(x => ({...x, date:new Date(x.date)}))); return; }
-      }
-
-      $last.innerHTML = 'Chargement des flux… <span class="spinner" aria-hidden="true"></span>';
-      const allItems = [];
-
-      for(const feed of COMPETITOR_FEEDS){
-        try{
-          const xml = await fetchViaAllOrigins(feed.url);
-          const items = parseFeed(xml, feed.name);
-          allItems.push(...items);
-        }catch(err){
-          console.warn('Flux en erreur:', feed.url, err);
+    async function load() {
+      $status.textContent = "Chargement des sitemaps de cbd.fr…";
+      let all = [];
+      // 1) On tente les sitemaps candidats directs
+      for (const path of SITEMAP_CANDIDATES) {
+        const url = DOMAIN + path;
+        const items = await fetchOneSitemap(url);
+        if (items.length) {
+          all = all.concat(items);
         }
       }
+      // 2) Si /sitemap.xml contient un index, il sera déjà suivi par fetchOneSitemap()
 
-      saveToCache(allItems);
-      render(allItems);
+      all = dedupe(all);
+
+      $status.textContent = `Trouvés: ${all.length} items (avant filtre).`;
+
+      const renderNow = () => render(applyFilters(all));
+      renderNow();
+
+      $q.addEventListener("input", renderNow);
+      $sort.addEventListener("change", renderNow);
+      $refresh.addEventListener("click", () => load()); // recharger au besoin
     }
 
-    $btnRefresh.addEventListener('click', () => loadFeeds({force:true}));
-    $btnClear.addEventListener('click', () => { localStorage.removeItem(CACHE_KEY); loadFeeds({force:true}); });
-
-    // Démarrage
-    loadFeeds();
+    load();
   </script>
+
+  <p class="muted" style="margin-top:2rem">
+    ⚖️ Respectez les <a href="https://www.cbd.fr/conditions-d-utilisation" target="_blank" rel="noopener">conditions d’utilisation</a> et robots.txt du site concurrent. Ce widget n’extrait que des URLs publiques listées dans les sitemaps.
+  </p>
 </body>
-  </html>
+</html>
