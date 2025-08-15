@@ -324,3 +324,59 @@ header{ position: relative; } /* au cas où */
 @media (max-width:480px){
   .brand-title{ font-size:28px; top:64px; }
 }
+/* ====== Panneau de réglages (ajouter à la fin du fichier) ====== */
+:root{
+  /* Logo */
+  --logo-w: 100px;      /* taille du logo (augmente ou diminue) */
+  --logo-mx: 0px;       /* décalage horizontal du logo (+ = droite) */
+  --logo-my: 0px;       /* décalage vertical du logo (+ = bas) */
+
+  /* Titre (nom du site) */
+  --brand-size: clamp(42px, 6vw, 120px); /* taille du nom */
+  --brand-shift-x: 0px; /* décalage du nom vers la droite/gauche */
+  /* si tu veux aussi le monter/descendre, mets un margin-top
+     directement sur .brand-title plus bas */
+
+  /* Ligne de menu (INÍCIO / PRODUTOS / …) */
+  --nav-mx: 0px;   /* décalage horizontal du menu */
+  --nav-my: 0px;   /* décalage vertical du menu */
+
+  /* Panier */
+  --cart-mx: 0px;  /* décalage horizontal du bloc panier */
+  --cart-my: 0px;  /* décalage vertical du bloc panier */
+}
+
+/* Logo : taille + placement fin */
+.logo{ width: var(--logo-w) !important; height:auto; }
+.logo-container{ margin-left: var(--logo-mx); margin-top: var(--logo-my); }
+
+/* Nom du site : reste centré mais on peut le “pousser” à droite/gauche */
+.brand-title{
+  font-size: var(--brand-size) !important;
+  width: max-content;          /* le titre prend juste la largeur du texte */
+  margin: 0 auto;              /* centré */
+  transform: translateX(var(--brand-shift-x)); /* +px => va à droite */
+  /* Si besoin de le descendre/remonter : active la ligne suivante et change la valeur */
+  /* margin-top: 0px; */
+}
+
+/* Ligne de menu : on décale simplement avec des marges */
+header nav{
+  margin-left: var(--nav-mx);
+  margin-top: var(--nav-my);
+}
+
+/* Panier : idem */
+.header-panier{
+  margin-left: var(--cart-mx);
+  margin-top: var(--cart-my);
+}
+
+/* (Optionnel) réglages différents sur mobile : décommente/ajuste si tu veux */
+@media (max-width: 480px){
+  :root{
+    /* exemple : pousser un peu le nom vers la droite sur mobile */
+    /* --brand-shift-x: 16px; */
+    /* tu peux aussi réduire le logo : --logo-w: 56px; */
+  }
+}
