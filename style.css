@@ -37,7 +37,7 @@
   --logo-my: 0px;       /* décalage vertical du logo (+ = bas) */
 
   /* Titre (nom du site) */
-  --brand-size: clamp(42px, 6vw, 120px); /* taille du nom */
+  --brand-size: clamp(42px, 6vw, 100px); /* taille du nom */
   --brand-shift-x: 0px;    /* pousse à droite/gauche (positif = droite) */
   --brand-top: min(9.4vw, 90px); /* hauteur du nom dans le header */
 
