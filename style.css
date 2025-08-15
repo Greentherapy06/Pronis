@@ -1,132 +1,102 @@
 /* =========================================================
-   Fonts (externes)
+   Fonts
    ========================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 /* =========================================================
-   Variables (rendu identique, juste centralisé)
+   Variables (centralisées)
    ========================================================= */
 :root{
   /* Couleurs */
-  --bg: #f5f5f5;
-  --text: #222;
-  --black: #000;
-  --gold: #d4af37;
-  --gold-strong: #b8962e;
+  --bg:#f5f5f5;
+  --text:#222;
+  --black:#000;
+  --gold:#d4af37;
+  --gold-strong:#b8962e;
 
   /* Typo / tailles */
-  --body-font: 'Poppins', sans-serif;
-  --brand-font: 'Playfair Display', serif;
-  --brand-title-size: clamp(42px, 6vw, 120px);
-  --nav-size: 16px;
-  --nav-size-sm: 14px;
+  --body-font:'Poppins',sans-serif;
+  --brand-font:'Playfair Display',serif;
+  --brand-title-size:clamp(42px,6vw,120px);
+  --nav-size:16px;
+  --nav-size-sm:14px;
 
   /* Layout */
-  --radius: 12px;
-  --gap: 20px;
-  --header-pad-y: 15px;
-  --header-pad-x: 25px;
-  --logo-w: 100px; /* réglable 90–130 */
-
-  /* Décalage horizontal facultatif du nom (0px = parfaitement centré) */
-  --brand-shift-x: 10px;
+  --radius:12px;
+  --gap:20px;
+  --header-pad-y:15px;
+  --header-pad-x:25px;
+  --logo-w:100px;           /* ← taille du logo */
+  --brand-shift-x:0px;      /* ← décalage horizontal du nom (+ = droite) */
 
   /* Ombres */
-  --text-shadow: 0 2px 4px rgba(0,0,0,.15);
-  --card-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  --card-shadow-strong: 0 4px 12px rgba(0,0,0,0.08);
+  --text-shadow:0 2px 4px rgba(0,0,0,.15);
+  --card-shadow:0 2px 6px rgba(0,0,0,.08);
+  --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
 }
 
 /* =========================================================
    Base
    ========================================================= */
 *{ box-sizing:border-box; }
-html, body{ max-width:100%; overflow-x:hidden; }
+html,body{ max-width:100%; overflow-x:hidden; }
 body{
-  margin:0;
-  padding:0;
+  margin:0; padding:0;
   font-family:var(--body-font);
   background-color:var(--bg);
-  line-height:1.6;
-  color:var(--text);
+  line-height:1.6; color:var(--text);
 }
-img, picture, video, iframe{ display:block; max-width:100%; height:auto; }
+img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
 
 /* =========================================================
-   Header (image de fond + bande blanche soft)
+   Header (hero)
    ========================================================= */
 header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   background:
-    linear-gradient(0deg, rgba(255,255,255,0.65), rgba(255,255,255,0.65)),
+    linear-gradient(0deg, rgba(255,255,255,.65), rgba(255,255,255,.65)),
     url('images.webp') center/cover no-repeat;
   padding:var(--header-pad-y) var(--header-pad-x);
   flex-wrap:wrap;
-  position:relative;
-  overflow:visible !important;
+  position:relative;        /* nécessaire pour le centrage absolu du H1 */
+  overflow:visible;
 }
 
-/* =========================================================
-   Logo + Titre
-   ========================================================= */
-.logo-container{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  overflow:visible !important;
-}
-.logo{
-  width:var(--logo-w) !important;
-  height:auto;
-}
+/* Logo */
+.logo-container{ display:flex; align-items:center; gap:12px; }
+.logo{ width:var(--logo-w); height:auto; }
 
-/* Titre premium — centré indépendamment du logo/menu
-   (on supporte H1 dans .logo-container ET .brand-title) */
-.logo-container h1,
+/* Nom du site — parfaitement centré */
 .brand-title{
-  font-family:var(--brand-font);
-  font-size:var(--brand-title-size) !important;
-  font-weight:800 !important;
-  color:#000000;
-  margin:0;
-  line-height:1;
-  letter-spacing:0.5px;
-  text-shadow:var(--text-shadow);
   position:absolute;
   left:50%;
-  transform: translateX(calc(-50% + var(--brand-shift-x))); /* centrage + petit décalage réglable */
-  white-space:nowrap;
-  z-index:2;
-  pointer-events:none;
+  top:clamp(48px, 9vw, 90px);
+  transform:translateX(calc(-50% + var(--brand-shift-x)));
+  margin:0; white-space:nowrap; z-index:2; pointer-events:none;
+
+  font-family:var(--brand-font);
+  font-size:var(--brand-title-size);
+  font-weight:800; line-height:1;
+  letter-spacing:.5px; color:#000; text-shadow:var(--text-shadow);
 }
 
-/* =========================================================
-   Navigation
-   ========================================================= */
+/* Navigation */
 nav{ display:flex; gap:25px; }
 nav a{
-  color:var(--black);
-  text-decoration:none;
-  font-weight:700;
-  font-size:var(--nav-size);
-  letter-spacing:1px;
-  text-transform:uppercase;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  transition:.3s;
+  color:var(--black); text-decoration:none;
+  font-weight:700; font-size:var(--nav-size);
+  letter-spacing:1px; text-transform:uppercase;
+  display:flex; align-items:center; gap:6px; transition:.3s;
 }
 nav a[href="#home"]::before,
 nav a[href="#produits"]::before,
 nav a[href="#contact"]::before,
 nav a[href="/fr/"]::before{
-  font-family:"Font Awesome 5 Free";
-  font-weight:900;
-  font-size:14px;
+  font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px;
 }
 nav a[href="#home"]::before{ content:"\f015"; }
 nav a[href="#produits"]::before{ content:"\f290"; }
@@ -134,168 +104,82 @@ nav a[href="#contact"]::before{ content:"\f0e0"; }
 nav a[href="/fr/"]::before{ content:"\f024"; }
 nav a:hover{ color:#333; }
 
-/* Panier en-tête */
+/* Panier (entête) */
 .header-panier{ text-align:center; margin-top:10px; }
-
-/* Bouton panier doré sur fond noir */
 .panier-btn{
-  background:var(--black);
-  color:var(--gold);
+  background:var(--black); color:var(--gold);
   border:1px solid var(--gold);
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:14px;
-  font-weight:600;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  cursor:pointer;
-  transition:.25s ease-in-out;
+  padding:6px 12px; border-radius:20px;
+  font-size:14px; font-weight:600;
+  display:inline-flex; align-items:center; gap:6px;
+  cursor:pointer; transition:.25s ease-in-out;
 }
-.panier-btn:hover{
-  background:var(--gold);
-  color:var(--black);
-  border-color:var(--black);
-}
+.panier-btn:hover{ background:var(--gold); color:var(--black); border-color:var(--black); }
 
 /* =========================================================
-   Sections génériques
+   Sections / produits
    ========================================================= */
 .section{ padding:30px 20px; text-align:center; }
 h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 
-/* =========================================================
-   Grille produits
-   ========================================================= */
 .product-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:var(--gap);
-  justify-items:center;
-  margin-top:20px;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:var(--gap); justify-items:center; margin-top:20px;
 }
 .product-card{
-  background:#fff;
-  margin:15px auto;
-  padding:15px;
-  max-width:320px;
-  border-radius:var(--radius);
-  box-shadow:var(--card-shadow);
-  text-align:center;
+  background:#fff; margin:15px auto; padding:15px; max-width:320px;
+  border-radius:var(--radius); box-shadow:var(--card-shadow); text-align:center;
 }
 .product-card img{ width:100%; border-radius:var(--radius); }
 .product-card h3{ font-size:18px; margin:10px 0; color:#000; }
 .price{ font-size:18px; font-weight:700; color:var(--gold); }
 
-/* Bouton produit (style par défaut) */
-.product-card button{
-  background:var(--gold);
-  color:var(--black);
-  font-weight:700;
-  padding:8px 12px;
-  border-radius:8px;
-  border:none;
-  margin-top:10px;
-  cursor:pointer;
-  transition:.3s;
-}
-.product-card button:hover{ background:var(--gold-strong); }
-
-/* >>> FORCING GLOBAL: même rendu FR/PT = fond noir + texte doré */
+/* Bouton produit – noir/doré identique FR/PT */
 .product-card .cta-cart{
-  background: var(--black) !important;
-  color: var(--gold) !important;
-  border: 1px solid var(--black);
-  font-weight:700;
-  padding:8px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  transition:opacity .2s ease;
-  display:inline-flex;
-  align-items:center;
-  gap:.5rem;
+  background:var(--black) !important;
+  color:var(--gold) !important;
+  border:1px solid var(--black);
+  font-weight:700; padding:8px 12px; border-radius:8px; cursor:pointer;
+  transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem;
 }
 .product-card .cta-cart:hover{ opacity:.9; }
 .product-card .cta-cart.btn-disabled,
 .product-card .cta-cart[disabled]{ opacity:.55; cursor:not-allowed; }
 
-/* =========================================================
-   Bloc contact
-   ========================================================= */
+/* Contact */
 .contact{
-  background:var(--black);
-  color:#fff;
-  margin-top:20px;
-  padding:30px 15px;
-  border-radius:var(--radius);
+  background:var(--black); color:#fff; margin-top:20px;
+  padding:30px 15px; border-radius:var(--radius);
 }
 .contact h2{ color:var(--gold); }
 
-/* Snipcart : bouton neutre cliquable */
+/* Snipcart trigger */
 .snipcart-checkout{ all:unset; cursor:pointer; }
 
-/* =========================================================
-   Avis
-   ========================================================= */
-.avis-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:var(--gap);
-  margin-top:20px;
+/* Sécurité anti-overflow */
+header, footer, .section, .product-grid, .avis-grid{
+  width:100%; max-width:100vw; overflow-x:hidden; box-sizing:border-box;
 }
-.avis-card{
-  background-color:#fff;
-  padding:20px;
-  border-radius:var(--radius);
-  box-shadow:var(--card-shadow-strong);
-  font-style:italic;
-  color:#444;
-}
+
+/* Avis */
+.avis-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--gap); margin-top:20px; }
+.avis-card{ background:#fff; padding:20px; border-radius:var(--radius); box-shadow:var(--card-shadow-strong); font-style:italic; color:#444; }
 .avis-texte{ font-size:16px; margin-bottom:10px; line-height:1.5; }
 .avis-nom{ font-weight:700; color:var(--gold); font-size:14px; text-align:right; }
 .avis-stars{ color:#ffd700; font-size:18px; margin-bottom:5px; }
 
-/* Sécurité anti-overflow */
-header, footer, .section, .product-grid, .avis-grid{
-  width:100%;
-  max-width:100vw;
-  overflow-x:hidden;
-  box-sizing:border-box;
-}
-
 /* =========================================================
-   Media queries
+   Responsive
    ========================================================= */
-@media (max-width: 480px){
+@media (max-width:480px){
   header{ padding:12px 12px; }
   .logo{ width:56px; }
-  .logo-container h1,
-  .brand-title{ font-size:22px !important; }
-  nav{
-    flex:1 1 auto;
-    display:flex;
-    justify-content:flex-end;
-    gap:12px;
-    flex-wrap:nowrap;
-  }
-  nav a{
-    font-size:var(--nav-size-sm);
-    white-space:nowrap;
-    letter-spacing:.5px;
-  }
+  .brand-title{ font-size:22px; top:64px; }
+  nav{ flex:1 1 auto; justify-content:flex-end; gap:12px; flex-wrap:nowrap; }
+  nav a{ font-size:var(--nav-size-sm); white-space:nowrap; letter-spacing:.5px; }
   nav a::before{ display:none; }
 }
-
-/* “Ver carrinho” centré sur mobile (<=768px) */
-@media (max-width: 768px){
-  .header-panier{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    margin-top:-6px;
-  }
-  .header-panier .panier-btn{
-    display:inline-flex;
-    justify-content:center;
-  }
+@media (max-width:768px){
+  .header-panier{ width:100%; display:flex; justify-content:center; margin-top:-6px; }
+  .header-panier .panier-btn{ display:inline-flex; justify-content:center; }
 }
