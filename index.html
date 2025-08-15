@@ -19,7 +19,7 @@
   <link rel="preload" as="image" href="../images.webp" fetchpriority="high">
 
   <!-- CSS principal (cache-bust) -->
-  <link rel="stylesheet" href="../style.css?v=18" />
+  <link rel="stylesheet" href="../style.css?v=12" />
 
   <!-- Snipcart CSS (préchargé) -->
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
@@ -33,22 +33,27 @@
     };
   </script>
 </head>
+
 <body>
   <!-- HEADER -->
   <header>
+    <!-- Logo (seul dans le conteneur) -->
     <div class="logo-container">
-      <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" width="80" height="80" loading="lazy">
+      <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
     </div>
 
+    <!-- Nom du site (centré, même markup que la version FR) -->
     <h1 class="brand-title">Green-Therapy</h1>
 
+    <!-- Menu -->
     <nav>
-      <a href="#home">Início</a>
-      <a href="#produits">Produtos</a>
-      <a href="#contact">Contato</a>
-      <a href="/fr/" hreflang="fr">Français</a>
+      <a href="#home"> Início</a>
+      <a href="#produits"> Produtos</a>
+      <a href="#contact"> Contato</a>
+      <a href="/fr/" hreflang="fr">🇨🇵 Français</a>
     </nav>
 
+    <!-- Panier -->
     <div class="header-panier">
       <button class="snipcart-checkout panier-btn">Ver carrinho</button>
     </div>
@@ -186,7 +191,7 @@
         <h3>🌿 Flor CBD Cali Dream 🇮🇹</h3>
         <p style="margin:.4rem 0 .2rem 0;">
           Perfil aromático elegante com toques <em>florais e frutados</em>, final suave e limpo.
-          Colheita e manicure à mão, secagem lenta para preservar os terpenes e a cor natural.
+          Colheita e manicure à mão, secagem lenta para preservar os terpenos e a cor natural.
           Origem Itália. <strong>THC &lt; 0,3%</strong>.
         </p>
         <p class="price">A partir de 8,90 €</p>
@@ -371,4 +376,4 @@
     <a href="./cgv.html">CGV</a>
   </footer>
 </body>
-  </html>
+</html>
