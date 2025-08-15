@@ -17,8 +17,8 @@
   --radius:12px; --gap:20px; --header-pad-y:15px; --header-pad-x:25px;
 
   /* Réglages LOGO / NOM / MENU / PANIER (déplacements simples) */
-  --logo-w:180px;    /* taille du logo */
-  --logo-mx:160px;     /* décalage logo horizontal (+ = droite) */
+  --logo-w:100px;    /* taille du logo */
+  --logo-mx:0px;     /* décalage logo horizontal (+ = droite) */
   --logo-my:0px;     /* décalage logo vertical (+ = bas) */
 
   --title-mx:0px;    /* décalage nom horizontal (+ = droite) */
@@ -28,7 +28,7 @@
   --nav-my:0px;      /* décalage menu vertical */
 
   --cart-mx:0px;     /* décalage panier horizontal */
-  --cart-my:100px;     /* décalage panier vertical */
+  --cart-my:0px;     /* décalage panier vertical */
 }
 
 /* ============= Base ============= */
@@ -148,4 +148,4 @@ header, footer, .section, .product-grid, .avis-grid{ width:100%; max-width:100vw
 /* ============= Mobile tout petit (affinage) ============= */
 @media (max-width: 480px){
   .logo{ width:56px !important; }
-   }
+}
