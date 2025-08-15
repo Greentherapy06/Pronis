@@ -79,11 +79,11 @@ header{
   height:auto;
 }
 
-/* Titre premium — parfaitement centré et un peu plus HAUT */
+/* Titre premium — parfaitement centré et PLUS HAUT */
 .brand-title{
   position:absolute;
   left:50%;
-  top: clamp(36px, 7.5vw, 72px); /* ← plus haut qu’avant */
+  top: clamp(28px, 6.3vw, 56px); /* ↑ plus haut qu’avant, proche du logo */
   transform: translateX(calc(-50% + var(--brand-shift-x)));
   margin:0;
   white-space:nowrap;
@@ -252,7 +252,7 @@ header, footer, .section, .product-grid, .avis-grid{
   .logo{ width:56px; }
   .brand-title{
     font-size:22px;
-    top:46px; /* plus haut sur mobile */
+    top:40px; /* ↑ encore un peu plus haut sur mobile */
   }
   nav{
     flex:1 1 auto;
