@@ -18,7 +18,7 @@
 
   /* Réglages LOGO / NOM / MENU / PANIER (déplacements simples) */
   --logo-w:100px;    /* taille du logo */
-  --logo-mx:120px;     /* décalage logo horizontal (+ = droite) */
+  --logo-mx:160px;     /* décalage logo horizontal (+ = droite) */
   --logo-my:0px;     /* décalage logo vertical (+ = bas) */
 
   --title-mx:0px;    /* décalage nom horizontal (+ = droite) */
@@ -28,7 +28,7 @@
   --nav-my:0px;      /* décalage menu vertical */
 
   --cart-mx:0px;     /* décalage panier horizontal */
-  --cart-my:60px;     /* décalage panier vertical */
+  --cart-my:100px;     /* décalage panier vertical */
 }
 
 /* ============= Base ============= */
