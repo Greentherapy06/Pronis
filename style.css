@@ -132,7 +132,7 @@ nav a[href="/fr/"]::before{ content:"\f024"; }
 nav a:hover{ color:#333; }
 
 /* Panier en-tête */
-.header-panier{ text-align:center; margin-top:10px; }
+.header-panier{ text-align:center; margin-top:0px; }
 
 /* Bouton panier doré sur fond noir */
 .panier-btn{
