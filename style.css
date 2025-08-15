@@ -300,3 +300,58 @@ header, footer, .section, .product-grid, .avis-grid{
     justify-content:center;
   }
 }
+/* === OVERRIDES FINAUX (coller tout en bas) ========================= */
+/* Réglages de base (desktop) */
+:root{
+  --brand-title-min: 42px;   /* taille mini du H1 */
+  --brand-title-vw: 6vw;     /* taille fluide */
+  --brand-title-max: 120px;  /* taille maxi du H1 (PC) */
+  --logo-w: 100px;           /* largeur logo (PC) */
+  --nav-size: 16px;          /* taille menu (PC) */
+  --gap: 16px;               /* espace logo <-> menu */
+}
+
+/* Titre centré indépendamment du logo/menu */
+header .logo-container h1{
+  font-size: clamp(var(--brand-title-min), var(--brand-title-vw), var(--brand-title-max)) !important;
+  font-weight: 800;
+  letter-spacing: .5px;
+  white-space: nowrap;
+  text-shadow: 0 2px 4px rgba(0,0,0,.15);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);   /* centré au pixel près */
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Logo + menu */
+header .logo{ width: var(--logo-w) !important; height:auto; }
+header .logo-container{ gap: var(--gap); }
+header nav a{ font-size: var(--nav-size); font-weight:700; }
+
+/* Paliers responsives (tu n’édites que ces variables) */
+@media (max-width: 1024px){
+  :root{
+    --brand-title-max: 96px;
+    --logo-w: 90px;
+  }
+}
+@media (max-width: 768px){
+  :root{
+    --brand-title-max: 64px;
+    --brand-title-vw: 9vw;
+    --logo-w: 68px;
+    --nav-size: 14px;
+    --gap: 12px;
+  }
+}
+@media (max-width: 480px){
+  :root{
+    --brand-title-max: 42px;
+    --logo-w: 56px;
+    --nav-size: 13px;
+    --gap: 10px;
+  }
+}
+/* ================================================================== */
