@@ -95,7 +95,7 @@ header{
   text-shadow:var(--text-shadow);
   position:absolute;
   left:50%;
-  transform: translateX(calc(-50% + 80px)); /* décale légèrement à droite */
+  transform: translateX(calc(-50% + 70px)); /* décale légèrement à droite */
   white-space:nowrap;
   z-index:2;
   pointer-events:none;
