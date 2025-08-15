@@ -28,8 +28,8 @@
   --gap:20px;
   --header-pad-y:15px;
   --header-pad-x:25px;
-  --logo-w:100px;           /* ← taille du logo */
-  --brand-shift-x:0px;      /* ← décalage horizontal du nom (+ = droite) */
+  --logo-w:100px;            /* taille du logo */
+  --brand-shift-x:0px;       /* décalage horizontal du nom (+ = droite) */
 
   /* Ombres */
   --text-shadow:0 2px 4px rgba(0,0,0,.15);
@@ -62,7 +62,7 @@ header{
     url('images.webp') center/cover no-repeat;
   padding:var(--header-pad-y) var(--header-pad-x);
   flex-wrap:wrap;
-  position:relative;        /* nécessaire pour le centrage absolu du H1 */
+  position:relative;     /* pour positionner le H1 au centre */
   overflow:visible;
 }
 
@@ -70,7 +70,7 @@ header{
 .logo-container{ display:flex; align-items:center; gap:12px; }
 .logo{ width:var(--logo-w); height:auto; }
 
-/* Nom du site — parfaitement centré */
+/* Nom du site — parfaitement centré et indépendant du logo/menu */
 .brand-title{
   position:absolute;
   left:50%;
@@ -182,4 +182,4 @@ header, footer, .section, .product-grid, .avis-grid{
 @media (max-width:768px){
   .header-panier{ width:100%; display:flex; justify-content:center; margin-top:-6px; }
   .header-panier .panier-btn{ display:inline-flex; justify-content:center; }
-}
+           }
