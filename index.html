@@ -18,17 +18,24 @@
   <!-- Hero en priorité -->
   <link rel="preload" as="image" href="../images.webp" fetchpriority="high">
 
-  <!-- CSS principal (avec bust de cache) -->
-  <link rel="stylesheet" href="../style.css?v=9" />
+  <!-- CSS principal (cache-bust) -->
+  <link rel="stylesheet" href="../style.css?v=12" />
 
   <!-- Snipcart CSS (préchargé) -->
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
 
-  <!-- PT = mêmes réglages que FR (aucun changement de style) -->
+  <!-- Snipcart -->
+  <script>
+    window.SnipcartSettings = {
+      publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
+      loadStrategy: "on-user-interaction"
+    };
+  </script>
+
+  <!-- PT = mêmes réglages que FR + centrage du titre -->
   <style>
     html[lang="pt"]{
-      /* mêmes valeurs que la FR pour garantir l’alignement */
       --logo-w: 100px;
       --logo-mx: 0px;   --logo-my: 0px;
       --brand-size: clamp(42px, 6vw, 120px);
@@ -39,15 +46,13 @@
     /* Fond du header identique */
     header{ background: url('../images.webp') no-repeat center center/cover; }
     nav a{ color:#000; }
-  </style>
 
-  <!-- Snipcart -->
-  <script>
-    window.SnipcartSettings = {
-      publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
-      loadStrategy: "on-user-interaction"
-    };
-  </script>
+    /* >>> Correction clé : même centrage que FR (conserve -50% + ton décalage) */
+    .brand-title{
+      left:50%;
+      transform: translateX(calc(-50% + var(--brand-shift-x)));
+    }
+  </style>
 </head>
 
 <body>
@@ -99,7 +104,6 @@
     </div>
 
     <div class="product-grid">
-      <!-- (tes cartes produits inchangées) -->
       <!-- Produto 1 -->
       <div class="product-card" data-id="amnesia-cbd" data-stock="0">
         <picture>
@@ -208,7 +212,7 @@
         <h3>🌿 Flor CBD Cali Dream 🇮🇹</h3>
         <p style="margin:.4rem 0 .2rem 0;">
           Perfil aromático elegante com toques <em>florais e frutados</em>, final suave e limpo.
-          Colheita e manicure à mão, secagem lenta para preservar os terpenos e a cor natural.
+          Colheita e manicure à mão, secagem lenta para preservar os terpenes e a cor natural.
           Origem Itália. <strong>THC &lt; 0,3%</strong>.
         </p>
         <p class="price">A partir de 8,90 €</p>
