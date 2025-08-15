@@ -300,3 +300,27 @@ header, footer, .section, .product-grid, .avis-grid{
     justify-content:center;
   }
 }
+/* Titre centré dans le header */
+header{ position: relative; } /* au cas où */
+
+.brand-title{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:min(9.4vw, 90px);   /* ajuste si besoin : 70–110px */
+  font-family:var(--brand-font);
+  font-size:var(--brand-title-size);
+  font-weight:800;
+  color:#000;
+  margin:0;
+  line-height:1;
+  letter-spacing:.5px;
+  text-shadow:var(--text-shadow);
+  pointer-events:none;    /* ne bloque pas les liens du menu */
+  white-space:nowrap;
+  z-index:2;
+}
+
+@media (max-width:480px){
+  .brand-title{ font-size:28px; top:64px; }
+}
