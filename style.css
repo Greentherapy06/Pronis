@@ -355,3 +355,28 @@ header, footer, .section, .product-grid, .avis-grid{
     justify-content:center;
   }
 }
+/* ===== Forcer les couleurs des boutons ===== */
+
+/* Ajouter au panier : fond noir, texte doré */
+.product-card .cta-cart{
+  background:#000 !important;
+  color:#d4af37 !important;
+  border:1px solid #000 !important;
+}
+.product-card .cta-cart:hover{
+  background:#000 !important;   /* on garde le noir */
+  color:#d4af37 !important;
+  opacity:.9;
+}
+
+/* Bouton "Voir le panier" (en-tête) : même style */
+.panier-btn{
+  background:#000 !important;
+  color:#d4af37 !important;
+  border:1px solid #d4af37 !important;
+}
+.panier-btn:hover{
+  background:#d4af37 !important;
+  color:#000 !important;
+  border-color:#000 !important;
+}
