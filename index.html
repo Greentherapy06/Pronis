@@ -9,22 +9,39 @@
   <meta name="author" content="Green-Therapy">
   <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 
-  <!-- Pré-conexão CDN -->
+  <!-- Pré-conexões -->
   <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <!-- Perf: preload du visuel hero -->
+
+  <!-- Hero en priorité -->
   <link rel="preload" as="image" href="../images.webp" fetchpriority="high">
 
-  <!-- CSS principal -->
-  <link rel="stylesheet" href="../style.css" />
+  <!-- CSS principal (avec bust de cache) -->
+  <link rel="stylesheet" href="../style.css?v=9" />
 
   <!-- Snipcart CSS (préchargé) -->
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
 
-  <!-- Snipcart Configuration -->
+  <!-- PT = mêmes réglages que FR (aucun changement de style) -->
+  <style>
+    html[lang="pt"]{
+      /* mêmes valeurs que la FR pour garantir l’alignement */
+      --logo-w: 100px;
+      --logo-mx: 0px;   --logo-my: 0px;
+      --brand-size: clamp(42px, 6vw, 120px);
+      --brand-shift-x: 0px;
+      --nav-mx: 0px;    --nav-my: 0px;
+      --cart-mx: 0px;   --cart-my: 0px;
+    }
+    /* Fond du header identique */
+    header{ background: url('../images.webp') no-repeat center center/cover; }
+    nav a{ color:#000; }
+  </style>
+
+  <!-- Snipcart -->
   <script>
     window.SnipcartSettings = {
       publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
@@ -34,23 +51,27 @@
 </head>
 
 <body>
-  <!-- HEADER (Grid : logo gauche, nom centré au-dessus, menu+panier à droite) -->
+  <!-- HEADER -->
   <header>
+    <!-- Logo -->
     <div class="logo-container">
       <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
     </div>
 
+    <!-- Nom du site (centré, identique à FR) -->
     <h1 class="brand-title">Green-Therapy</h1>
 
+    <!-- Menu -->
     <nav>
       <a href="#home"> Início</a>
       <a href="#produits"> Produtos</a>
       <a href="#contact"> Contato</a>
-      <a href="/fr/" hreflang="fr"> Français</a>
+      <a href="/fr/" hreflang="fr">🇨🇵 Français</a>
     </nav>
 
+    <!-- Panier -->
     <div class="header-panier">
-      <button class="snipcart-checkout panier-btn">   Ver carrinho</button>
+      <button class="snipcart-checkout panier-btn">Ver carrinho</button>
     </div>
   </header>
 
@@ -69,7 +90,6 @@
   <section id="produits" class="section">
     <h2>🛍️ Nossos Produtos</h2>
 
-    <!-- Infos premium -->
     <div class="info-notes">
       <p class="legal-note">Conforme a legislação da UE :</p>
       <p class="legal-mid"><span class="nowrap"><strong>THC &lt; 0,3% 🇪🇺</strong></span></p>
@@ -79,6 +99,7 @@
     </div>
 
     <div class="product-grid">
+      <!-- (tes cartes produits inchangées) -->
       <!-- Produto 1 -->
       <div class="product-card" data-id="amnesia-cbd" data-stock="0">
         <picture>
@@ -354,7 +375,7 @@
     document.addEventListener("click", loadSnipcart, { once: true });
   </script>
 
-  <!-- Perf: applique decoding async + lazy à toutes les images (sauf le hero déjà préchargé) -->
+  <!-- Lazy/decoding pour toutes les images -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       document.querySelectorAll('img').forEach(function (img, i) {
@@ -372,4 +393,4 @@
     <a href="./cgv.html">CGV</a>
   </footer>
 </body>
-</html>
+  </html>
