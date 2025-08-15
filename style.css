@@ -1,20 +1,64 @@
-/* Fonts */
+/* =========================================================
+   Fonts (externes)
+   ========================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
-/* Base */
+/* =========================================================
+   Variables (rendu identique, juste centralisé)
+   ========================================================= */
+:root{
+  /* Couleurs */
+  --bg: #f5f5f5;
+  --text: #222;
+  --black: #000;
+  --gold: #d4af37;
+  --gold-strong: #b8962e;
+
+  /* Typo / tailles */
+  --body-font: 'Poppins', sans-serif;
+  --brand-font: 'Playfair Display', serif;
+  /* min 42px, max 120px (identique à ton override) */
+  --brand-title-size: clamp(42px, 6vw, 120px);
+  --nav-size: 16px;
+  --nav-size-sm: 14px;
+
+  /* Layout */
+  --radius: 12px;
+  --gap: 20px;
+  --header-pad-y: 15px;
+  --header-pad-x: 25px;
+  --logo-w: 110px; /* = override actuel (réglable 90–130) */
+
+  /* Ombres */
+  --text-shadow: 0 2px 4px rgba(0,0,0,.15);
+  --card-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  --card-shadow-strong: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+*{ box-sizing:border-box; }
+
+html, body{ max-width:100%; overflow-x:hidden; }
+
 body{
   margin:0;
   padding:0;
-  font-family:'Poppins',sans-serif;
-  background-color:#f5f5f5;
+  font-family:var(--body-font);
+  background-color:var(--bg);
   line-height:1.6;
-  color:#222;
-  overflow-x:hidden; /* Empêche la bande blanche horizontale */
+  color:var(--text);
 }
 
-/* Header avec image de fond */
+/* Images & médias sécurisés */
+img, picture, video, iframe{ display:block; max-width:100%; height:auto; }
+
+/* =========================================================
+   Header (image de fond + bande blanche soft)
+   ========================================================= */
 header{
   display:flex;
   justify-content:space-between;
@@ -22,58 +66,62 @@ header{
   background:
     linear-gradient(0deg, rgba(255,255,255,0.65), rgba(255,255,255,0.65)),
     url('images.webp') center/cover no-repeat;
-  padding:15px 25px;
+  padding:var(--header-pad-y) var(--header-pad-x);
   flex-wrap:wrap;
 
-  /* Référence pour le centrage du titre + on évite toute coupe du h1 */
+  /* Nécessaire pour centrer le H1 en absolu sans le rogner */
   position:relative;
   overflow:visible !important;
 }
 
-/* Logo + titre */
+/* =========================================================
+   Logo + Titre
+   ========================================================= */
 .logo-container{
   display:flex;
   align-items:center;
   gap:12px;
-
-  /* Le titre ne doit jamais être rogné */
-  overflow:visible !important;
+  overflow:visible !important; /* pour éviter toute coupe du h1 */
 }
+
 .logo{
-  width:90px;
+  width:var(--logo-w) !important;  /* override souhaité */
   height:auto;
 }
 
-/* Titre premium — CENTRÉ indépendamment du logo/menu, sur tous écrans */
+/* Titre premium — centré indépendamment du logo/menu */
 .logo-container h1{
-  font-family:'Playfair Display',serif;
-  font-size:100px;              /* taille desktop/tablette conservée */
-  font-weight:700;
+  font-family:var(--brand-font);
+  font-size:var(--brand-title-size) !important; /* force la taille responsive */
+  font-weight:800 !important; /* un peu plus gras que 700 (rendu identique visuel attendu) */
   color:#000000;
-  margin:0;                    /* neutralise l’ancienne marge pour un centrage propre */
+  margin:0;
   line-height:1;
-  letter-spacing:1px;
-  text-shadow:0 1px 2px rgba(0,0,0,0.18);
+  letter-spacing:0.5px;
+  text-shadow:var(--text-shadow);
 
-  /* Centrage absolu dans le header + affichage complet */
-  position:absolute;           /* sorti du flux flex du .logo-container */
+  /* Centrage absolu */
+  position:absolute;     /* sorti du flux flex du .logo-container */
   left:50%;
   transform: translateX(calc(-50% + 20px)); /* petit décalage à droite conservé */
-  white-space:nowrap;          /* jamais sur 2 lignes */
-  z-index:2;                   /* devant le menu si chevauchement */
-  pointer-events:none;         /* les liens du menu restent cliquables */
+  white-space:nowrap;     /* jamais sur 2 lignes */
+  z-index:2;              /* devant le menu si chevauchement */
+  pointer-events:none;    /* liens du menu cliquables */
 }
 
-/* Navigation */
+/* =========================================================
+   Navigation
+   ========================================================= */
 nav{
   display:flex;
   gap:25px;
 }
+
 nav a{
-  color:#000;
+  color:var(--black);
   text-decoration:none;
-  font-weight:600;
-  font-size:16px;
+  font-weight:700;            /* override “un peu plus gras” */
+  font-size:var(--nav-size);
   letter-spacing:1px;
   text-transform:uppercase;
   display:flex;
@@ -81,10 +129,21 @@ nav a{
   gap:6px;
   transition:.3s;
 }
-nav a[href="#home"]::before{ content:"\f015"; font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px; }
-nav a[href="#produits"]::before{ content:"\f290"; font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px; }
-nav a[href="#contact"]::before{ content:"\f0e0"; font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px; }
-nav a[href="/fr/"]::before{ content:"\f024"; font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px; }
+
+nav a[href="#home"]::before,
+nav a[href="#produits"]::before,
+nav a[href="#contact"]::before,
+nav a[href="/fr/"]::before{
+  font-family:"Font Awesome 5 Free";
+  font-weight:900;
+  font-size:14px;
+}
+
+nav a[href="#home"]::before{ content:"\f015"; }
+nav a[href="#produits"]::before{ content:"\f290"; }
+nav a[href="#contact"]::before{ content:"\f0e0"; }
+nav a[href="/fr/"]::before{ content:"\f024"; }
+
 nav a:hover{ color:#333; }
 
 /* Panier en-tête */
@@ -95,9 +154,9 @@ nav a:hover{ color:#333; }
 
 /* Bouton panier doré sur fond noir */
 .panier-btn{
-  background:#000;
-  color:#d4af37;
-  border:1px solid #d4af37;
+  background:var(--black);
+  color:var(--gold);
+  border:1px solid var(--gold);
   padding:6px 12px;
   border-radius:20px;
   font-size:14px;
@@ -109,40 +168,45 @@ nav a:hover{ color:#333; }
   transition:.25s ease-in-out;
 }
 .panier-btn:hover{
-  background:#d4af37;
-  color:#000;
-  border-color:#000;
+  background:var(--gold);
+  color:var(--black);
+  border-color:var(--black);
 }
 
-/* Sections */
+/* =========================================================
+   Sections génériques
+   ========================================================= */
 .section{ padding:30px 20px; text-align:center; }
-h2{ color:#d4af37; font-size:24px; margin-bottom:15px; }
+h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 
-/* Grille produits */
+/* =========================================================
+   Grille produits
+   ========================================================= */
 .product-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
+  gap:var(--gap);
   justify-items:center;
   margin-top:20px;
 }
+
 .product-card{
   background:#fff;
   margin:15px auto;
   padding:15px;
   max-width:320px;
-  border-radius:12px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+  border-radius:var(--radius);
+  box-shadow:var(--card-shadow);
   text-align:center;
 }
-.product-card img{ width:100%; border-radius:12px; }
+.product-card img{ width:100%; border-radius:var(--radius); }
 .product-card h3{ font-size:18px; margin:10px 0; color:#000; }
-.price{ font-size:18px; font-weight:700; color:#d4af37; }
+.price{ font-size:18px; font-weight:700; color:var(--gold); }
 
 /* Bouton produit */
 .product-card button{
-  background:#d4af37;
-  color:#000;
+  background:var(--gold);
+  color:var(--black);
   font-weight:700;
   padding:8px 12px;
   border-radius:8px;
@@ -151,60 +215,63 @@ h2{ color:#d4af37; font-size:24px; margin-bottom:15px; }
   cursor:pointer;
   transition:.3s;
 }
-.product-card button:hover{ background:#b8962e; }
+.product-card button:hover{ background:var(--gold-strong); }
 
-/* Bloc contact */
+/* =========================================================
+   Bloc contact
+   ========================================================= */
 .contact{
-  background:#000;
+  background:var(--black);
   color:#fff;
   margin-top:20px;
   padding:30px 15px;
-  border-radius:12px;
+  border-radius:var(--radius);
 }
-.contact h2{ color:#d4af37; }
+.contact h2{ color:var(--gold); }
 
-/* Snipcart reset bouton */
+/* Snipcart : bouton neutre cliquable */
 .snipcart-checkout{ all:unset; cursor:pointer; }
 
-/* Avis */
+/* =========================================================
+   Avis
+   ========================================================= */
 .avis-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
+  gap:var(--gap);
   margin-top:20px;
 }
 .avis-card{
   background-color:#fff;
   padding:20px;
-  border-radius:12px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  border-radius:var(--radius);
+  box-shadow:var(--card-shadow-strong);
   font-style:italic;
   color:#444;
 }
 .avis-texte{ font-size:16px; margin-bottom:10px; line-height:1.5; }
-.avis-nom{ font-weight:700; color:#d4af37; font-size:14px; text-align:right; }
+.avis-nom{ font-weight:700; color:var(--gold); font-size:14px; text-align:right; }
 .avis-stars{ color:#ffd700; font-size:18px; margin-bottom:5px; }
 
-/* Patch anti-overflow global (on garde pour le reste du site) */
-html, body { max-width:100%; overflow-x:hidden; }
-header, footer, .section, .product-grid, .avis-grid { width:100%; max-width:100vw; }
-img, picture, video, iframe { display:block; max-width:100%; height:auto; }
-.product-card { max-width:100%; }
-header, nav, .logo-container,
-.section, .product-grid, .avis-grid, footer {
-  max-width:100%;
+/* =========================================================
+   Sécurité “anti-overflow” pour les gros conteneurs
+   (on garde tel quel pour éviter les cassures latérales)
+   ========================================================= */
+header, footer, .section, .product-grid, .avis-grid{
+  width:100%;
+  max-width:100vw;
   overflow-x:hidden;
   box-sizing:border-box;
 }
 
-/* Sélecteur universel */
-* { box-sizing:border-box; }
-
-/* Nav mobile */
+/* =========================================================
+   Media queries
+   ========================================================= */
+/* Mobile (<=480px) */
 @media (max-width: 480px){
   header{ padding:12px 12px; }
   .logo{ width:56px; }
-  .logo-container h1{ font-size:22px; } /* taille mobile conservée */
+  .logo-container h1{ font-size:22px !important; } /* “taille mobile conservée” */
   nav{
     flex:1 1 auto;
     display:flex;
@@ -213,14 +280,14 @@ header, nav, .logo-container,
     flex-wrap:nowrap;
   }
   nav a{
-    font-size:14px;
+    font-size:var(--nav-size-sm);
     white-space:nowrap;
     letter-spacing:.5px;
   }
   nav a::before{ display:none; }
 }
 
-/* “Ver carrinho” centré sur mobile */
+/* “Ver carrinho” centré sur mobile (<=768px) */
 @media (max-width: 768px){
   .header-panier{
     width:100%;
@@ -232,26 +299,4 @@ header, nav, .logo-container,
     display:inline-flex;
     justify-content:center;
   }
-  }
-/* === OVERRIDES SÉCURISÉS (faciles à retirer) === */
-:root {
-  /* Taille responsive du titre : min 42px, max 120px */
-  --brand-title-size: clamp(42px, 6vw, 120px);
-}
-
-header .logo-container h1{
-  font-size: var(--brand-title-size) !important; /* force la taille */
-  font-weight: 800 !important;                  /* plus gras */
-  letter-spacing: 0.5px;                        /* un poil plus serré */
-  text-shadow: 0 2px 4px rgba(0,0,0,.15);       /* léger relief */
-}
-
-header .logo{
-  width: 110px !important;                      /* logo un peu plus grand (ajuste 90–130) */
-  height: auto;
-}
-
-/* Option : menu un peu plus gras pour équilibre visuel */
-header nav a{
-  font-weight: 700;
 }
