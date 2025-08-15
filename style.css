@@ -20,7 +20,7 @@
   --body-font: 'Poppins', sans-serif;
   --brand-font: 'Playfair Display', serif;
   /* min 42px, max 120px (identique à ton override) */
-  --brand-title-size: clamp(42px, 6vw, 120px);
+  --brand-title-size: clamp(42px, 6vw, 160px);
   --nav-size: 16px;
   --nav-size-sm: 14px;
 
