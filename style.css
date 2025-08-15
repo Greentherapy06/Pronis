@@ -29,7 +29,7 @@
   --gap: 20px;
   --header-pad-y: 15px;
   --header-pad-x: 25px;
-  --logo-w: 110px; /* = override actuel (réglable 90–130) */
+  --logo-w: 100px; /* = override actuel (réglable 90–130) */
 
   /* Ombres */
   --text-shadow: 0 2px 4px rgba(0,0,0,.15);
