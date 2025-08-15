@@ -17,7 +17,7 @@
   --radius:12px; --gap:20px; --header-pad-y:15px; --header-pad-x:25px;
 
   /* Réglages LOGO / NOM / MENU / PANIER (déplacements simples) */
-  --logo-w:120px;    /* taille du logo */
+  --logo-w:180px;    /* taille du logo */
   --logo-mx:160px;     /* décalage logo horizontal (+ = droite) */
   --logo-my:0px;     /* décalage logo vertical (+ = bas) */
 
