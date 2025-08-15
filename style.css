@@ -333,7 +333,7 @@ header{ position: relative; } /* au cas où */
 
   /* Titre (nom du site) */
   --brand-size: clamp(42px, 6vw, 120px); /* taille du nom */
-  --brand-shift-x: 10px; /* décalage du nom vers la droite/gauche */
+  --brand-shift-x: 30px; /* décalage du nom vers la droite/gauche */
   /* si tu veux aussi le monter/descendre, mets un margin-top
      directement sur .brand-title plus bas */
 
