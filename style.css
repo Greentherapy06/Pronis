@@ -18,7 +18,7 @@
 
   /* Réglages LOGO / NOM / MENU / PANIER (déplacements simples) */
   --logo-w:100px;    /* taille du logo */
-  --logo-mx:70px;     /* décalage logo horizontal (+ = droite) */
+  --logo-mx:120px;     /* décalage logo horizontal (+ = droite) */
   --logo-my:0px;     /* décalage logo vertical (+ = bas) */
 
   --title-mx:0px;    /* décalage nom horizontal (+ = droite) */
