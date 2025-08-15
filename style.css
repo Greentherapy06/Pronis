@@ -29,7 +29,7 @@
   --gap: 20px;
   --header-pad-y: 15px;
   --header-pad-x: 25px;
-  --logo-w: 100px; /* = override actuel (réglable 90–130) */
+  --logo-w: 110px; /* = override actuel (réglable 90–130) */
 
   /* Ombres */
   --text-shadow: 0 2px 4px rgba(0,0,0,.15);
@@ -299,28 +299,4 @@ header, footer, .section, .product-grid, .avis-grid{
     display:inline-flex;
     justify-content:center;
   }
-}
-/* === OVERRIDES FINAUX (coller tout en bas) ========================= */
-/* Réglages de base (desktop) */
-:root{
-  --brand-title-min: 42px;   /* taille mini du H1 */
-  --brand-title-vw: 6vw;     /* taille fluide */
-  --brand-title-max: 120px;  /* taille maxi du H1 (PC) */
-  --logo-w: 100px;           /* largeur logo (PC) */
-  --nav-size: 16px;          /* taille menu (PC) */
-  --gap: 16px;               /* espace logo <-> menu */
-}
-
-/* Titre centré indépendamment du logo/menu */
-header .logo-container h1{
-  font-size: clamp(var(--brand-title-min), var(--brand-title-vw), var(--brand-title-max)) !important;
-  font-weight: 800;
-  letter-spacing: .5px;
-  white-space: nowrap;
-  text-shadow: 0 2px 4px rgba(0,0,0,.15);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);   /* centré au pixel près */
-  z-index: 2;
-  pointer-events: none;
 }
