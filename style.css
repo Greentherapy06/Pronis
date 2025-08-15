@@ -30,6 +30,9 @@
   --header-pad-x: 25px;
   --logo-w: 100px; /* réglable 90–130 */
 
+  /* Décalage horizontal facultatif du nom (0px = parfaitement centré) */
+  --brand-shift-x: 0px;
+
   /* Ombres */
   --text-shadow: 0 2px 4px rgba(0,0,0,.15);
   --card-shadow: 0 2px 6px rgba(0,0,0,0.08);
@@ -95,7 +98,7 @@ header{
   text-shadow:var(--text-shadow);
   position:absolute;
   left:50%;
-  transform: translateX(calc(-50% + 80px)); /* décale légèrement à droite */
+  transform: translateX(calc(-50% + var(--brand-shift-x))); /* centrage + petit décalage réglable */
   white-space:nowrap;
   z-index:2;
   pointer-events:none;
@@ -295,11 +298,4 @@ header, footer, .section, .product-grid, .avis-grid{
     display:inline-flex;
     justify-content:center;
   }
-}
-/* Fix ultra-minimal : recentrer le nom à 100% */
-header{ position:relative; }
-.logo-container{ position:relative; }
-.logo-container h1, .brand-title{
-  position:absolute; left:50%; transform:translateX(-50%);
-  margin:0; white-space:nowrap;
 }
