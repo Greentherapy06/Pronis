@@ -31,7 +31,7 @@
   --logo-w: 100px; /* réglable 90–130 */
 
   /* Décalage horizontal facultatif du nom (0px = parfaitement centré) */
-  --brand-shift-x: 0px;
+  --brand-shift-x: 10px;
 
   /* Ombres */
   --text-shadow: 0 2px 4px rgba(0,0,0,.15);
