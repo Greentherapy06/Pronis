@@ -296,3 +296,10 @@ header, footer, .section, .product-grid, .avis-grid{
     justify-content:center;
   }
 }
+/* Fix ultra-minimal : recentrer le nom à 100% */
+header{ position:relative; }
+.logo-container{ position:relative; }
+.logo-container h1, .brand-title{
+  position:absolute; left:50%; transform:translateX(-50%);
+  margin:0; white-space:nowrap;
+}
