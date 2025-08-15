@@ -6,7 +6,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 /* =========================================================
-   Variables (centralisées)
+   Variables centralisées (mêmes valeurs FR/PT)
    ========================================================= */
 :root{
   /* Couleurs */
@@ -19,7 +19,7 @@
   /* Typo / tailles */
   --body-font:'Poppins',sans-serif;
   --brand-font:'Playfair Display',serif;
-  --brand-title-size:clamp(42px,6vw,120px);
+  --brand-title-size:clamp(42px,6vw,120px);  /* taille du nom responsive */
   --nav-size:16px;
   --nav-size-sm:14px;
 
@@ -28,13 +28,11 @@
   --gap:20px;
   --header-pad-y:15px;
   --header-pad-x:25px;
-  --logo-w:100px;            /* taille du logo */
-  --brand-shift-x:0px;       /* décalage horizontal du nom (+ = droite) */
 
-  /* Ombres */
-  --text-shadow:0 2px 4px rgba(0,0,0,.15);
-  --card-shadow:0 2px 6px rgba(0,0,0,.08);
-  --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
+  /* Réglages que TU peux bouger facilement */
+  --logo-w:100px;          /* taille du logo */
+  --brand-shift-x:0px;     /* décalage horizontal du nom (+ = droite) */
+  --cart-my:0px;           /* décalage vertical du panier (+ = bas) */
 }
 
 /* =========================================================
@@ -62,7 +60,7 @@ header{
     url('images.webp') center/cover no-repeat;
   padding:var(--header-pad-y) var(--header-pad-x);
   flex-wrap:wrap;
-  position:relative;     /* pour positionner le H1 au centre */
+  position:relative;        /* nécessaire pour le centrage absolu du H1 */
   overflow:visible;
 }
 
@@ -70,7 +68,7 @@ header{
 .logo-container{ display:flex; align-items:center; gap:12px; }
 .logo{ width:var(--logo-w); height:auto; }
 
-/* Nom du site — parfaitement centré et indépendant du logo/menu */
+/* Nom du site — parfaitement centré (et ajustable avec --brand-shift-x) */
 .brand-title{
   position:absolute;
   left:50%;
@@ -81,7 +79,7 @@ header{
   font-family:var(--brand-font);
   font-size:var(--brand-title-size);
   font-weight:800; line-height:1;
-  letter-spacing:.5px; color:#000; text-shadow:var(--text-shadow);
+  letter-spacing:.5px; color:#000; text-shadow:0 2px 4px rgba(0,0,0,.15);
 }
 
 /* Navigation */
@@ -105,7 +103,7 @@ nav a[href="/fr/"]::before{ content:"\f024"; }
 nav a:hover{ color:#333; }
 
 /* Panier (entête) */
-.header-panier{ text-align:center; margin-top:10px; }
+.header-panier{ text-align:center; margin-top:calc(10px + var(--cart-my)); }
 .panier-btn{
   background:var(--black); color:var(--gold);
   border:1px solid var(--gold);
@@ -122,19 +120,20 @@ nav a:hover{ color:#333; }
 .section{ padding:30px 20px; text-align:center; }
 h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 
+/* Grille produits */
 .product-grid{
   display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:var(--gap); justify-items:center; margin-top:20px;
 }
 .product-card{
   background:#fff; margin:15px auto; padding:15px; max-width:320px;
-  border-radius:var(--radius); box-shadow:var(--card-shadow); text-align:center;
+  border-radius:var(--radius); box-shadow:0 2px 6px rgba(0,0,0,.08); text-align:center;
 }
 .product-card img{ width:100%; border-radius:var(--radius); }
 .product-card h3{ font-size:18px; margin:10px 0; color:#000; }
 .price{ font-size:18px; font-weight:700; color:var(--gold); }
 
-/* Bouton produit – noir/doré identique FR/PT */
+/* Bouton produit – noir/doré (FR et PT identiques) */
 .product-card .cta-cart{
   background:var(--black) !important;
   color:var(--gold) !important;
@@ -163,7 +162,7 @@ header, footer, .section, .product-grid, .avis-grid{
 
 /* Avis */
 .avis-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--gap); margin-top:20px; }
-.avis-card{ background:#fff; padding:20px; border-radius:var(--radius); box-shadow:var(--card-shadow-strong); font-style:italic; color:#444; }
+.avis-card{ background:#fff; padding:20px; border-radius:var(--radius); box-shadow:0 4px 12px rgba(0,0,0,.08); font-style:italic; color:#444; }
 .avis-texte{ font-size:16px; margin-bottom:10px; line-height:1.5; }
 .avis-nom{ font-weight:700; color:var(--gold); font-size:14px; text-align:right; }
 .avis-stars{ color:#ffd700; font-size:18px; margin-bottom:5px; }
@@ -180,6 +179,6 @@ header, footer, .section, .product-grid, .avis-grid{
   nav a::before{ display:none; }
 }
 @media (max-width:768px){
-  .header-panier{ width:100%; display:flex; justify-content:center; margin-top:-6px; }
+  .header-panier{ width:100%; display:flex; justify-content:center; margin-top:calc(-6px + var(--cart-my)); }
   .header-panier .panier-btn{ display:inline-flex; justify-content:center; }
-           }
+}
