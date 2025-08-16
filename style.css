@@ -1,38 +1,32 @@
 /* =========================================================
-   Fonts (externes)
+   Fonts
    ========================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 /* =========================================================
-   Variables (identiques FR/PT)
+   Variables globales
    ========================================================= */
 :root{
   /* Couleurs */
-  --bg:#f5f5f5;
-  --text:#222;
-  --black:#000;
-  --gold:#d4af37;
-  --gold-strong:#b8962e;
+  --bg:#f5f5f5; --text:#222; --black:#000;
+  --gold:#d4af37; --gold-strong:#b8962e;
 
   /* Typo / tailles */
   --body-font:'Poppins',sans-serif;
   --brand-font:'Playfair Display',serif;
   --brand-title-size:clamp(42px,6vw,120px);
-  --nav-size:16px;
-  --nav-size-sm:14px;
+  --nav-size:16px; --nav-size-sm:14px;
 
   /* Layout */
-  --radius:12px;
-  --gap:20px;
-  --header-pad-y:15px;
-  --header-pad-x:25px;
+  --radius:12px; --gap:20px;
+  --header-pad-y:15px; --header-pad-x:25px;
   --logo-w:100px;
 
-  /* Réglages titre */
-  --brand-top:clamp(48px,9vw,90px);   /* FR parfait (réf 21:10 mobile) */
-  --brand-shift-x:0px;                /* 0 = exactement centré */
+  /* Position du titre (plus HAUT) + centrage fin */
+  --brand-top:clamp(30px,7.2vw,68px);   /* FR */
+  --brand-shift-x:0px;
 
   /* Ombres */
   --text-shadow:0 2px 4px rgba(0,0,0,.15);
@@ -40,10 +34,10 @@
   --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
 }
 
-/* ---- Micro-ajustement PT pour caler au millimètre comme FR ---- */
+/* Micro-ajustement PT pour coller FR au pixel près */
 html[lang="pt"]{
-  --brand-top:clamp(42px,8.6vw,84px);  /* un chouïa plus haut que la valeur globale */
-  --brand-shift-x:0px;                 /* laisse le centrage parfait */
+  --brand-top:clamp(28px,6.9vw,64px);
+  --brand-shift-x:0px;
 }
 
 /* =========================================================
@@ -52,10 +46,8 @@ html[lang="pt"]{
 *{ box-sizing:border-box; }
 html,body{ max-width:100%; overflow-x:hidden; }
 body{
-  margin:0; padding:0;
-  font-family:var(--body-font);
-  background-color:var(--bg);
-  line-height:1.6; color:var(--text);
+  margin:0; padding:0; font-family:var(--body-font);
+  background-color:var(--bg); line-height:1.6; color:var(--text);
 }
 img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
 
@@ -63,45 +55,41 @@ img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
    Header (image claire, pas de voile)
    ========================================================= */
 header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  display:flex; flex-wrap:wrap;
+  justify-content:space-between; align-items:center;
   background:url('images.webp') center/cover no-repeat;
   padding:var(--header-pad-y) var(--header-pad-x);
-  flex-wrap:wrap;
-  position:relative; /* pour centrer le H1 en absolu */
-  overflow:visible;
+  position:relative; overflow:visible;
 }
 
 /* Logo */
 .logo-container{ display:flex; align-items:center; gap:12px; }
 .logo{ width:var(--logo-w); height:auto; }
 
-/* Nom du site — identique FR/PT, parfaitement centré */
+/* Titre — absolument centré, plus haut */
 .brand-title{
-  position:absolute;
-  left:50%;
-  top:var(--brand-top);
+  position:absolute; left:50%; top:var(--brand-top);
   transform:translateX(calc(-50% + var(--brand-shift-x)));
   margin:0; white-space:nowrap; z-index:2; pointer-events:none;
-
   font-family:var(--brand-font);
-  font-size:var(--brand-title-size);
-  font-weight:800; line-height:1;
+  font-size:var(--brand-title-size); font-weight:800; line-height:1;
   letter-spacing:.5px; color:#000; text-shadow:var(--text-shadow);
 }
 
-/* Navigation */
-nav{ display:flex; gap:25px; }
+/* =========================================================
+   Navigation (sous le titre, centré, sans chevauchement)
+   ========================================================= */
+nav{
+  display:flex; gap:25px;
+  flex-basis:100%;                  /* passe à la ligne */
+  justify-content:center;
+  margin-top:calc(var(--brand-top) + 18px);  /* place le menu SOUS le H1 */
+}
 nav a{
-  color:var(--black);
-  text-decoration:none;
-  font-weight:700;
-  font-size:var(--nav-size);
-  letter-spacing:1px;
-  text-transform:uppercase;
-  display:flex; align-items:center; gap:6px;
-  transition:.3s;
+  color:var(--black); text-decoration:none;
+  font-weight:700; font-size:var(--nav-size);
+  letter-spacing:1px; text-transform:uppercase;
+  display:flex; align-items:center; gap:6px; transition:.3s;
 }
 nav a[href="#home"]::before,
 nav a[href="#produits"]::before,
@@ -115,15 +103,19 @@ nav a[href="#contact"]::before{ content:"\f0e0"; }
 nav a[href="/fr/"]::before{ content:"\f024"; }
 nav a:hover{ color:#333; }
 
-/* Panier (entête) */
-.header-panier{ text-align:center; margin-top:10px; }
+/* Lien panier — aligné sous le menu, centré */
+.header-panier{
+  flex-basis:100%;
+  display:flex; justify-content:center;
+  margin-top:8px;
+}
 .panier-btn{
   background:var(--black); color:var(--gold);
   border:1px solid var(--gold);
   padding:6px 12px; border-radius:20px;
   font-size:14px; font-weight:600;
   display:inline-flex; align-items:center; gap:6px;
-  cursor:pointer; transition:.25s ease-in-out;
+  cursor:pointer; transition:.25s;
 }
 .panier-btn:hover{ background:var(--gold); color:var(--black); border-color:var(--black); }
 
@@ -145,7 +137,7 @@ h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 .product-card h3{ font-size:18px; margin:10px 0; color:#000; }
 .price{ font-size:18px; font-weight:700; color:var(--gold); }
 
-/* Bouton produit – noir/doré (identique FR/PT) */
+/* Bouton produit – noir/doré identique FR/PT */
 .product-card .cta-cart{
   background:var(--black) !important;
   color:var(--gold) !important;
@@ -157,11 +149,8 @@ h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 .product-card .cta-cart.btn-disabled,
 .product-card .cta-cart[disabled]{ opacity:.55; cursor:not-allowed; }
 
-/* Contact */
-.contact{
-  background:var(--black); color:#fff; margin-top:20px;
-  padding:30px 15px; border-radius:var(--radius);
-}
+/* Bloc contact */
+.contact{ background:var(--black); color:#fff; margin-top:20px; padding:30px 15px; border-radius:var(--radius); }
 .contact h2{ color:var(--gold); }
 
 /* Snipcart trigger */
@@ -185,12 +174,8 @@ header, footer, .section, .product-grid, .avis-grid{
 @media (max-width:480px){
   header{ padding:12px 12px; }
   .logo{ width:56px; }
-  .brand-title{ font-size:22px; top:64px; }
-  nav{ flex:1 1 auto; justify-content:flex-end; gap:12px; flex-wrap:nowrap; }
+  .brand-title{ font-size:22px; }  /* top déjà géré par --brand-top */
+  nav{ gap:12px; }
   nav a{ font-size:var(--nav-size-sm); white-space:nowrap; letter-spacing:.5px; }
   nav a::before{ display:none; }
-}
-@media (max-width:768px){
-  .header-panier{ width:100%; display:flex; justify-content:center; margin-top:-6px; }
-  .header-panier .panier-btn{ display:inline-flex; justify-content:center; }
 }
