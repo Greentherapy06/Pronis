@@ -1,12 +1,12 @@
 /* =========================================================
-   Fonts (externes)
+   Fonts
    ========================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 /* =========================================================
-   Variables (mêmes valeurs FR/PT)
+   Variables globales
    ========================================================= */
 :root{
   /* Couleurs */
@@ -24,16 +24,20 @@
   --header-pad-y:15px; --header-pad-x:25px;
   --logo-w:100px;
 
-  /* Placement header (clé !) */
-  --brand-top:34px;          /* position verticale du H1 */
-  --brand-shift-x:0px;       /* micro-décalage horizontal du H1 (+ = droite) */
-  --gap-title-nav:10px;      /* écart H1 -> nav */
-  --gap-nav-panier:12px;     /* écart nav -> bouton panier */
+  /* Position du titre (HAUT) + centrage fin */
+  --brand-top:clamp(26px,7vw,64px);      /* FR par défaut */
+  --brand-shift-x:0px;                   /* + droite | - gauche */
 
   /* Ombres */
   --text-shadow:0 2px 4px rgba(0,0,0,.15);
   --card-shadow:0 2px 6px rgba(0,0,0,.08);
   --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
+}
+
+/* Micro-ajustement PT pour caler au pixel près */
+html[lang="pt"]{
+  --brand-top:clamp(24px,6.8vw,60px);
+  --brand-shift-x:0px;
 }
 
 /* =========================================================
@@ -42,63 +46,57 @@
 *{ box-sizing:border-box; }
 html,body{ max-width:100%; overflow-x:hidden; }
 body{
-  margin:0; padding:0;
-  font-family:var(--body-font);
-  background-color:var(--bg);
-  color:var(--text); line-height:1.6;
+  margin:0; padding:0; font-family:var(--body-font);
+  background-color:var(--bg); line-height:1.6; color:var(--text);
 }
 img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
 
 /* =========================================================
-   Header (image claire, PAS de voile)
+   Header – image claire, structure en lignes
    ========================================================= */
 header{
-  position:relative; z-index:1;
-  display:flex; align-items:center; justify-content:space-between;
+  /* Pas de voile : image nette */
   background:url('images.webp') center/cover no-repeat;
-  padding:var(--header-pad-y) var(--header-pad-x);
-  min-height:220px; /* assure de la place pour H1 + nav + bouton */
+  position:relative; overflow:visible;
+
+  /* On réserve l'espace du titre pour éviter tout chevauchement */
+  padding: var(--header-pad-y) var(--header-pad-x);
+  padding-top: calc(
+    var(--brand-top) + (var(--brand-title-size) * 0.95) + 20px
+  );
+
+  display:flex; flex-wrap:wrap;
+  justify-content:space-between; align-items:center;
 }
 
-/* Logo (à gauche, non absolu) */
+/* Logo */
 .logo-container{ display:flex; align-items:center; gap:12px; }
 .logo{ width:var(--logo-w); height:auto; }
 
-/* ----- Titre, Nav, Panier : centrés et empilés ----- */
-
-/* Titre */
-.logo-container h1,
-.brand-title{
-  position:absolute;
-  left:50%;
-  top:var(--brand-top);
+/* ===== Titre — parfaitement centré, plus haut ===== */
+.brand-title,
+.logo-container > h1{
+  position:absolute; left:50%; top:var(--brand-top);
   transform:translateX(calc(-50% + var(--brand-shift-x)));
-  margin:0; white-space:nowrap; pointer-events:none; z-index:2;
+  margin:0; white-space:nowrap; z-index:2; pointer-events:none;
 
   font-family:var(--brand-font);
-  font-size:var(--brand-title-size);
-  font-weight:800; line-height:1;
+  font-size:var(--brand-title-size); font-weight:800; line-height:1;
   letter-spacing:.5px; color:#000; text-shadow:var(--text-shadow);
 }
 
-/* Nav sous le H1, centrée */
+/* ===== Navigation — juste SOUS le titre, centrée ===== */
 nav{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  top:calc(var(--brand-top) + var(--brand-title-size) + var(--gap-title-nav));
-  display:flex; gap:25px; z-index:2;
+  flex-basis:100%;                /* nouvelle ligne */
+  display:flex; gap:25px; justify-content:center;
+  margin-top:0;                   /* l’espace est géré par padding-top du header */
 }
 nav a{
   color:var(--black); text-decoration:none;
   font-weight:700; font-size:var(--nav-size);
   letter-spacing:1px; text-transform:uppercase;
-  display:flex; align-items:center; gap:6px;
-  transition:.3s;
+  display:flex; align-items:center; gap:6px; transition:.3s;
 }
-nav a:hover{ color:#333; }
-
-/* Icônes (si tu veux les garder) */
 nav a[href="#home"]::before,
 nav a[href="#produits"]::before,
 nav a[href="#contact"]::before,
@@ -109,14 +107,13 @@ nav a[href="#home"]::before{ content:"\f015"; }
 nav a[href="#produits"]::before{ content:"\f290"; }
 nav a[href="#contact"]::before{ content:"\f0e0"; }
 nav a[href="/fr/"]::before{ content:"\f024"; }
+nav a:hover{ color:#333; }
 
-/* Bouton panier centré sous la nav */
+/* ===== Lien panier — SOUS le menu, centré ===== */
 .header-panier{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  top:calc(var(--brand-top) + var(--brand-title-size) + var(--gap-title-nav) + var(--gap-nav-panier));
-  z-index:2;
+  flex-basis:100%;
+  display:flex; justify-content:center;
+  margin-top:8px;
 }
 .panier-btn{
   background:var(--black); color:var(--gold);
@@ -124,7 +121,7 @@ nav a[href="/fr/"]::before{ content:"\f024"; }
   padding:6px 12px; border-radius:20px;
   font-size:14px; font-weight:600;
   display:inline-flex; align-items:center; gap:6px;
-  cursor:pointer; transition:.25s ease-in-out;
+  cursor:pointer; transition:.25s;
 }
 .panier-btn:hover{ background:var(--gold); color:var(--black); border-color:var(--black); }
 
@@ -146,9 +143,10 @@ h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 .product-card h3{ font-size:18px; margin:10px 0; color:#000; }
 .price{ font-size:18px; font-weight:700; color:var(--gold); }
 
-/* CTA produit — noir/doré identique FR/PT */
+/* Bouton produit (noir/doré identique FR/PT) */
 .product-card .cta-cart{
-  background:var(--black) !important; color:var(--gold) !important;
+  background:var(--black) !important;
+  color:var(--gold) !important;
   border:1px solid var(--black);
   font-weight:700; padding:8px 12px; border-radius:8px; cursor:pointer;
   transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem;
@@ -157,17 +155,14 @@ h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 .product-card .cta-cart.btn-disabled,
 .product-card .cta-cart[disabled]{ opacity:.55; cursor:not-allowed; }
 
-/* Contact */
-.contact{
-  background:var(--black); color:#fff; margin-top:20px;
-  padding:30px 15px; border-radius:var(--radius);
-}
+/* Bloc contact */
+.contact{ background:var(--black); color:#fff; margin-top:20px; padding:30px 15px; border-radius:var(--radius); }
 .contact h2{ color:var(--gold); }
 
-/* Snipcart trigger neutre */
+/* Snipcart trigger */
 .snipcart-checkout{ all:unset; cursor:pointer; }
 
-/* Sécurité overflow */
+/* Sécurité anti-overflow */
 header, footer, .section, .product-grid, .avis-grid{
   width:100%; max-width:100vw; overflow-x:hidden; box-sizing:border-box;
 }
@@ -183,16 +178,10 @@ header, footer, .section, .product-grid, .avis-grid{
    Responsive
    ========================================================= */
 @media (max-width:480px){
+  header{ padding-left:12px; padding-right:12px; }
   .logo{ width:56px; }
-  /* rapproche un peu tout sur mobile */
-  :root{
-    --brand-top:22px;
-    --gap-title-nav:6px;
-    --gap-nav-panier:10px;
-  }
-  nav a{ font-size:var(--nav-size-sm); letter-spacing:.5px; }
+  .brand-title, .logo-container > h1{ font-size:22px; }
+  nav{ gap:12px; }
+  nav a{ font-size:var(--nav-size-sm); white-space:nowrap; letter-spacing:.5px; }
   nav a::before{ display:none; }
 }
-@media (max-width:768px){
-  .header-panier .panier-btn{ display:inline-flex; justify-content:center; }
-                  }
