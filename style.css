@@ -197,4 +197,4 @@ header, footer, .section, .product-grid, .avis-grid{
   nav{ gap:12px; }
   nav a{ font-size:var(--nav-size-sm); white-space:nowrap; letter-spacing:.5px; }
   nav a::before{ display:none; }
-}
+   }
