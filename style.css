@@ -19,29 +19,31 @@
   --brand-title-size:clamp(42px,6vw,120px);
   --nav-size:16px; --nav-size-sm:14px;
 
-  /* Layout */
+  /* Layout généraux */
   --radius:12px; --gap:20px;
-  --header-pad-y:15px; --header-pad-x:25px;
+  --header-pad-x:25px;
+
+  /* Ancrages du header */
   --logo-w:100px;
-
-  /* Position du titre + centrage fin */
-  --brand-top:clamp(26px,7vw,64px);
-  --brand-shift-x:0px;
-
-  /* Espace entre le titre et la NAV (0 = collé, négatif = nav plus haute) */
-  --brand-gap-nav:6px;
+  --brand-top:clamp(26px,7vw,64px);     /* hauteur du H1 */
+  --brand-shift-x:0px;                   /* micro-décalage H1 si besoin */
+  --brand-gap-nav:6px;                   /* écart H1 -> NAV (négatif = +haut) */
+  --nav-height:34px;                     /* hauteur approximative de la nav */
+  --panier-gap:10px;                     /* écart NAV -> panier */
 
   /* Ombres */
   --text-shadow:0 2px 4px rgba(0,0,0,.15);
   --card-shadow:0 2px 6px rgba(0,0,0,.08);
   --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
+
+  /* Calcul pratique (ne rien toucher) */
+  --nav-top: calc(var(--brand-top) + (var(--brand-title-size)*0.95) + var(--brand-gap-nav));
 }
 
-/* Micro-ajustement PT : nav encore plus proche du titre */
+/* Micro-ajustement pour PT : nav encore plus proche du titre */
 html[lang="pt"]{
   --brand-top:clamp(24px,6.8vw,60px);
-  --brand-shift-x:0px;
-  --brand-gap-nav:-8px;   /* <- remonte INÍCIO juste sous le nom */
+  --brand-gap-nav:-8px;  /* remonte INÍCIO pour coller visuellement au H1 */
 }
 
 /* =========================================================
@@ -56,43 +58,43 @@ body{
 img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
 
 /* =========================================================
-   Header – image claire, structure en lignes
+   Header – image claire + calage absolu du H1, NAV, panier
    ========================================================= */
 header{
-  background:url('images.webp') center/cover no-repeat; /* image nette */
   position:relative; overflow:visible;
+  background:url('images.webp') center/cover no-repeat;
 
-  /* Réserve la place du titre + l’écart nav */
-  padding: var(--header-pad-y) var(--header-pad-x);
-  padding-top: calc(
-    var(--brand-top) + (var(--brand-title-size) * 0.95) + var(--brand-gap-nav)
-  );
+  /* On réserve la place sous le H1 pour NAV + panier */
+  padding-left:var(--header-pad-x); padding-right:var(--header-pad-x);
+  padding-top: calc(var(--nav-top) + var(--nav-height) + var(--panier-gap) + 40px);
+  padding-bottom: 16px;
 
-  display:flex; flex-wrap:wrap;
-  justify-content:space-between; align-items:center;
+  display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center;
 }
 
 /* Logo */
-.logo-container{ display:flex; align-items:center; gap:12px; }
+.logo-container{ display:flex; align-items:center; gap:12px; z-index:2; }
 .logo{ width:var(--logo-w); height:auto; }
 
-/* ===== Titre — parfaitement centré, en haut ===== */
+/* ===== Titre — parfaitement centré en haut ===== */
 .brand-title,
 .logo-container > h1{
-  position:absolute; left:50%; top:var(--brand-top);
+  position:absolute; z-index:3;
+  left:50%; top:var(--brand-top);
   transform:translateX(calc(-50% + var(--brand-shift-x)));
-  margin:0; white-space:nowrap; z-index:2; pointer-events:none;
+  margin:0; white-space:nowrap; pointer-events:none;
 
   font-family:var(--brand-font);
   font-size:var(--brand-title-size); font-weight:800; line-height:1;
   letter-spacing:.5px; color:#000; text-shadow:var(--text-shadow);
 }
 
-/* ===== Navigation — juste SOUS le titre, centrée ===== */
+/* ===== NAV — centrée pile SOUS le titre ===== */
 nav{
-  flex-basis:100%;
-  display:flex; gap:25px; justify-content:center;
-  margin-top:0;               /* l’écart est géré par --brand-gap-nav */
+  position:absolute; z-index:3;
+  left:50%; top:var(--nav-top);
+  transform:translateX(-50%);
+  display:flex; gap:25px; align-items:center; justify-content:center;
 }
 nav a{
   color:var(--black); text-decoration:none;
@@ -112,11 +114,12 @@ nav a[href="#contact"]::before{ content:"\f0e0"; }
 nav a[href="/fr/"]::before{ content:"\f024"; }
 nav a:hover{ color:#333; }
 
-/* ===== Lien panier — SOUS la nav, centré ===== */
+/* ===== Panier — centré SOUS la nav ===== */
 .header-panier{
-  flex-basis:100%;
-  display:flex; justify-content:center;
-  margin-top:8px;
+  position:absolute; z-index:3;
+  left:50%;
+  top: calc(var(--nav-top) + var(--nav-height) + var(--panier-gap));
+  transform:translateX(-50%);
 }
 .panier-btn{
   background:var(--black); color:var(--gold);
@@ -148,8 +151,7 @@ h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 
 /* Bouton produit (noir/doré identique FR/PT) */
 .product-card .cta-cart{
-  background:var(--black) !important;
-  color:var(--gold) !important;
+  background:var(--black) !important; color:var(--gold) !important;
   border:1px solid var(--black);
   font-weight:700; padding:8px 12px; border-radius:8px; cursor:pointer;
   transition:opacity .2s ease; display:inline-flex; align-items:center; gap:.5rem;
@@ -181,10 +183,9 @@ header, footer, .section, .product-grid, .avis-grid{
    Responsive
    ========================================================= */
 @media (max-width:480px){
-  header{ padding-left:12px; padding-right:12px; }
   .logo{ width:56px; }
   .brand-title, .logo-container > h1{ font-size:22px; }
   nav{ gap:12px; }
   nav a{ font-size:var(--nav-size-sm); white-space:nowrap; letter-spacing:.5px; }
   nav a::before{ display:none; }
-   }
+}
