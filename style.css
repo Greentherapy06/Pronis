@@ -223,3 +223,32 @@ header, footer, .section, .product-grid, .avis-grid{
   text-transform:none;
   letter-spacing:0;
 }
+/* === Livraison / Entrega : mêmes styles FR & PT === */
+.shipping-note{
+  text-align:center;
+  margin-top:12px;
+
+  /* typo identique au FR */
+  font-family: var(--body-font);
+  font-size:14px;           /* même taille que FR */
+  line-height:1.2;
+  letter-spacing:.08em;
+  text-transform:uppercase; /* tout en capitales comme FR */
+  color:#8b7b55;            /* gris-doré du FR */
+}
+
+.shipping-note .label{
+  font-weight:700;          /* même graisse que FR */
+  color:#8b7b55;
+}
+
+/* prix en doré, plus grand comme sur FR */
+.shipping-note .price{
+  display:inline-block;
+  margin-left:.35rem;
+  font-weight:800;
+  font-size:18px;           /* même taille que FR pour le prix */
+  letter-spacing:0;
+  text-transform:none;
+  color: var(--gold);       /* doré */
+}
