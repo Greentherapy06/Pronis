@@ -24,13 +24,13 @@
   --header-pad-y:15px; --header-pad-x:25px;
   --logo-w:100px;
 
-  /* Position titre + ajustements fins */
-  --brand-top:clamp(26px,7vw,64px);   /* FR (défaut) */
-  --brand-shift-x:0px;
-
-  /* Position du menu sous le titre */
-  --nav-lift:0px;       /* décalage vertical (– = monte) */
-  --nav-shift-x:0px;    /* décalage horizontal (+ = droite) */
+  /* Placement */
+  --brand-top:clamp(26px,7vw,64px);   /* Titre (plus haut) */
+  --brand-shift-x:0px;                /* fin centrage titre */
+  --nav-lift:-10px;                   /* remonte la ligne du menu */
+  --nav-shift-x:0px;                  /* petit décalage horizontal du menu */
+  --logo-top:clamp(10px,2vw,18px);    /* ↑ remonte le logo */
+  --cart-gap:clamp(14px,2.2vh,22px);  /* ↓ espace au-dessus du lien panier */
 
   /* Ombres */
   --text-shadow:0 2px 4px rgba(0,0,0,.15);
@@ -38,21 +38,13 @@
   --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
 }
 
-/* ====== Micro-ajustements page PT (tous écrans) ====== */
+/* Identique FR/PT: on ne modifie pas les variables pour PT */
 html[lang="pt"]{
   --brand-top:clamp(26px,7vw,64px);
-  --brand-shift-x:0px;
-  --nav-lift:-48px;      /* monte la ligne INÍCIO/PRODUTOS… */
-  --nav-shift-x:8px;     /* pousse légèrement vers la droite */
-}
-
-/* ====== Affinage sur mobile PT (<=480px) ======
-   un chouïa plus haut et un peu plus à droite */
-@media (max-width:480px){
-  html[lang="pt"]{
-    --nav-lift:-54px;
-    --nav-shift-x:10px;
-  }
+  --nav-lift:-10px;
+  --nav-shift-x:0px;
+  --logo-top:clamp(10px,2vw,18px);
+  --cart-gap:clamp(14px,2.2vh,22px);
 }
 
 /* =========================================================
@@ -67,27 +59,31 @@ body{
 img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
 
 /* =========================================================
-   Header – image claire, structure en lignes
+   Header – image claire
    ========================================================= */
 header{
   background:url('images.webp') center/cover no-repeat;
   position:relative; overflow:visible;
 
-  /* réserve pour le H1 */
+  /* On réserve l'espace du titre (évite chevauchements) */
   padding: var(--header-pad-y) var(--header-pad-x);
-  padding-top: calc(
-    var(--brand-top) + (var(--brand-title-size) * 0.95) + 20px
-  );
+  padding-top: calc(var(--brand-top) + (var(--brand-title-size) * 0.95) + 20px);
 
   display:flex; flex-wrap:wrap;
   justify-content:space-between; align-items:center;
 }
 
-/* Logo */
-.logo-container{ display:flex; align-items:center; gap:12px; }
+/* Logo – ABSOLU en haut à gauche */
+.logo-container{
+  position:absolute;
+  top:var(--logo-top);
+  left:var(--header-pad-x);
+  display:flex; align-items:center; gap:12px;
+  z-index:3;
+}
 .logo{ width:var(--logo-w); height:auto; }
 
-/* Titre — centré premium */
+/* Titre — parfaitement centré et haut */
 .brand-title,
 .logo-container > h1{
   position:absolute; left:50%; top:var(--brand-top);
@@ -99,12 +95,13 @@ header{
   letter-spacing:.5px; color:#000; text-shadow:var(--text-shadow);
 }
 
-/* Navigation — juste sous le titre, centrée */
+/* Navigation — CENTRÉ sous le titre */
 nav{
-  flex-basis:100%;
+  flex-basis:100%;                 /* nouvelle ligne */
   display:flex; gap:25px; justify-content:center;
-  margin-top:0;
-  transform:translateX(var(--nav-shift-x)) translateY(var(--nav-lift));
+  position:relative;
+  top:var(--nav-lift);             /* remonte la ligne du menu */
+  transform:translateX(var(--nav-shift-x));
 }
 nav a{
   color:var(--black); text-decoration:none;
@@ -124,12 +121,11 @@ nav a[href="#contact"]::before{ content:"\f0e0"; }
 nav a[href="/fr/"]::before{ content:"\f024"; }
 nav a:hover{ color:#333; }
 
-/* Lien panier — suit la ligne du menu (verticalement) */
+/* Lien panier — DESCENDU pour un bel équilibre */
 .header-panier{
   flex-basis:100%;
   display:flex; justify-content:center;
-  margin-top:8px;
-  transform:translateY(var(--nav-lift));
+  margin-top:var(--cart-gap);
 }
 .panier-btn{
   background:var(--black); color:var(--gold);
@@ -159,7 +155,7 @@ h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 .product-card h3{ font-size:18px; margin:10px 0; color:#000; }
 .price{ font-size:18px; font-weight:700; color:var(--gold); }
 
-/* Bouton produit – noir/doré identique FR/PT */
+/* Bouton produit – noir/doré */
 .product-card .cta-cart{
   background:var(--black) !important;
   color:var(--gold) !important;
@@ -172,9 +168,7 @@ h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 .product-card .cta-cart[disabled]{ opacity:.55; cursor:not-allowed; }
 
 /* Bloc contact */
-.contact{
-  background:var(--black); color:#fff; margin-top:20px; padding:30px 15px; border-radius:var(--radius);
-}
+.contact{ background:var(--black); color:#fff; margin-top:20px; padding:30px 15px; border-radius:var(--radius); }
 .contact h2{ color:var(--gold); }
 
 /* Snipcart trigger */
@@ -193,11 +187,16 @@ header, footer, .section, .product-grid, .avis-grid{
 .avis-stars{ color:#ffd700; font-size:18px; margin-bottom:5px; }
 
 /* =========================================================
-   Responsive générique
+   Responsive
    ========================================================= */
 @media (max-width:480px){
   header{ padding-left:12px; padding-right:12px; }
   .logo{ width:56px; }
+
+  /* micro-ajustements mobile */
+  :root{ --logo-top:12px; --cart-gap:20px; --nav-lift:-10px; }
+  html[lang="pt"]{ --logo-top:12px; --cart-gap:20px; --nav-lift:-10px; }
+
   .brand-title, .logo-container > h1{ font-size:22px; }
   nav{ gap:12px; }
   nav a{ font-size:var(--nav-size-sm); white-space:nowrap; letter-spacing:.5px; }
