@@ -24,12 +24,12 @@
   --header-pad-y:15px; --header-pad-x:25px;
   --logo-w:100px;
 
-  /* Positionnement titre + espacements verticaux du header */
-  --brand-top:clamp(26px,7vw,64px);  /* hauteur du titre (FR par défaut)   */
-  --brand-shift-x:0px;               /* micro décalage horizontal du titre */
-  --title-space-mult:0.70;           /* réserve sous le titre               */
-  --gap-title-nav:6px;               /* Titre -> Nav                        */
-  --gap-nav-panier:10px;             /* Nav -> bouton panier                */
+  /* Position du titre + centrage fin */
+  --brand-top:clamp(26px,7vw,64px);  /* hauteur du H1 sous le haut du header (FR) */
+  --brand-shift-x:0px;               /* + = décaler un peu à droite, - = gauche */
+
+  /* Décalage vertical fin du menu (0 = FR) */
+  --nav-lift:0px;
 
   /* Ombres */
   --text-shadow:0 2px 4px rgba(0,0,0,.15);
@@ -37,13 +37,10 @@
   --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
 }
 
-/* Micro-ajustement PT pour reproduire le rendu FR au pixel près */
+/* Micro-ajustement PT pour coller au rendu FR (menu un poil plus haut) */
 html[lang="pt"]{
-  --brand-top:clamp(24px,6.6vw,60px);
-  --title-space-mult:0.68;  /* plus petit = nav remonte légèrement */
-  --gap-title-nav:6px;
-  --gap-nav-panier:10px;
-  --brand-shift-x:0px;
+  --brand-top:clamp(26px,7vw,64px); /* même placement du titre que FR */
+  --nav-lift:-12px;                 /* remonte la ligne INÍCIO/PRODUTOS… */
 }
 
 /* =========================================================
@@ -58,17 +55,17 @@ body{
 img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
 
 /* =========================================================
-   Header – image claire, structure en lignes
+   Header – image claire, structure en lignes (H1 > NAV > PANIER)
    ========================================================= */
 header{
-  /* Image nette (pas de voile) */
+  /* Pas de voile blanc : image nette */
   background:url('images.webp') center/cover no-repeat;
   position:relative; overflow:visible;
 
-  /* On réserve l’espace au-dessus pour le titre + la nav */
+  /* On réserve l'espace du H1 pour éviter tout chevauchement */
   padding: var(--header-pad-y) var(--header-pad-x);
   padding-top: calc(
-    var(--brand-top) + (var(--brand-title-size) * var(--title-space-mult)) + var(--gap-title-nav)
+    var(--brand-top) + (var(--brand-title-size) * 0.95) + 20px
   );
 
   display:flex; flex-wrap:wrap;
@@ -79,7 +76,7 @@ header{
 .logo-container{ display:flex; align-items:center; gap:12px; }
 .logo{ width:var(--logo-w); height:auto; }
 
-/* ===== Titre — parfaitement centré et un peu plus haut ===== */
+/* ----- Titre parfaitement centré (au-dessus du menu) ----- */
 .brand-title,
 .logo-container > h1{
   position:absolute; left:50%; top:var(--brand-top);
@@ -91,11 +88,12 @@ header{
   letter-spacing:.5px; color:#000; text-shadow:var(--text-shadow);
 }
 
-/* ===== Navigation — juste sous le titre, centrée ===== */
+/* ----- Navigation (juste SOUS le titre, centrée) ----- */
 nav{
-  flex-basis:100%;                     /* casse la ligne sous le titre      */
+  flex-basis:100%;                  /* nouvelle ligne */
   display:flex; gap:25px; justify-content:center;
-  margin-top:0;                        /* géré par padding-top du header    */
+  margin-top:0;                     /* l’espace vient du padding-top du header */
+  transform: translateY(var(--nav-lift));
 }
 nav a{
   color:var(--black); text-decoration:none;
@@ -106,22 +104,20 @@ nav a{
 nav a[href="#home"]::before,
 nav a[href="#produits"]::before,
 nav a[href="#contact"]::before,
-nav a[href="/fr/"]::before,
-nav a[href="/pt/"]::before{
+nav a[href="/fr/"]::before{
   font-family:"Font Awesome 5 Free"; font-weight:900; font-size:14px;
 }
 nav a[href="#home"]::before{ content:"\f015"; }
 nav a[href="#produits"]::before{ content:"\f290"; }
 nav a[href="#contact"]::before{ content:"\f0e0"; }
 nav a[href="/fr/"]::before{ content:"\f024"; }
-nav a[href="/pt/"]::before{ content:"\f024"; }
 nav a:hover{ color:#333; }
 
-/* ===== Lien panier — SOUS la nav, centré ===== */
+/* ----- Lien/bouton panier (ENCORE en dessous) ----- */
 .header-panier{
   flex-basis:100%;
   display:flex; justify-content:center;
-  margin-top:var(--gap-nav-panier);
+  margin-top:8px;
 }
 .panier-btn{
   background:var(--black); color:var(--gold);
@@ -151,7 +147,7 @@ h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 .product-card h3{ font-size:18px; margin:10px 0; color:#000; }
 .price{ font-size:18px; font-weight:700; color:var(--gold); }
 
-/* Bouton produit – noir/doré identique FR/PT */
+/* Bouton produit – noir/doré (identique FR/PT) */
 .product-card .cta-cart{
   background:var(--black) !important;
   color:var(--gold) !important;
