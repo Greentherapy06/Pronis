@@ -24,9 +24,12 @@
   --header-pad-y:15px; --header-pad-x:25px;
   --logo-w:100px;
 
-  /* Position du titre (HAUT) + centrage fin */
-  --brand-top:clamp(26px,7vw,64px);      /* FR par défaut */
-  --brand-shift-x:0px;                   /* + droite | - gauche */
+  /* Position/espaces du header */
+  --brand-top:clamp(26px,7vw,64px); /* position verticale du titre (FR par défaut) */
+  --brand-shift-x:0px;              /* + droite | - gauche */
+  --title-space-mult:0.90;          /* réserve sous le titre (hauteur_titre * mult) */
+  --gap-title-nav:12px;             /* espace Titre → Nav */
+  --gap-nav-panier:14px;            /* espace Nav → Panier */
 
   /* Ombres */
   --text-shadow:0 2px 4px rgba(0,0,0,.15);
@@ -34,9 +37,12 @@
   --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
 }
 
-/* Micro-ajustement PT pour caler au pixel près */
+/* Micro-ajustement PT pour coller à la FR, mais nav un poil plus haut */
 html[lang="pt"]{
   --brand-top:clamp(24px,6.8vw,60px);
+  --title-space-mult:0.80;
+  --gap-title-nav:8px;
+  --gap-nav-panier:10px;
   --brand-shift-x:0px;
 }
 
@@ -55,14 +61,14 @@ img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
    Header – image claire, structure en lignes
    ========================================================= */
 header{
-  /* Pas de voile : image nette */
+  /* Image nette (pas de voile) */
   background:url('images.webp') center/cover no-repeat;
   position:relative; overflow:visible;
 
   /* On réserve l'espace du titre pour éviter tout chevauchement */
   padding: var(--header-pad-y) var(--header-pad-x);
   padding-top: calc(
-    var(--brand-top) + (var(--brand-title-size) * 0.95) + 20px
+    var(--brand-top) + (var(--brand-title-size) * var(--title-space-mult)) + var(--gap-title-nav)
   );
 
   display:flex; flex-wrap:wrap;
@@ -89,7 +95,7 @@ header{
 nav{
   flex-basis:100%;                /* nouvelle ligne */
   display:flex; gap:25px; justify-content:center;
-  margin-top:0;                   /* l’espace est géré par padding-top du header */
+  margin-top:0;                   /* l’espace est géré par padding-top */
 }
 nav a{
   color:var(--black); text-decoration:none;
@@ -113,7 +119,7 @@ nav a:hover{ color:#333; }
 .header-panier{
   flex-basis:100%;
   display:flex; justify-content:center;
-  margin-top:8px;
+  margin-top:var(--gap-nav-panier);
 }
 .panier-btn{
   background:var(--black); color:var(--gold);
@@ -185,3 +191,4 @@ header, footer, .section, .product-grid, .avis-grid{
   nav a{ font-size:var(--nav-size-sm); white-space:nowrap; letter-spacing:.5px; }
   nav a::before{ display:none; }
 }
+```0
