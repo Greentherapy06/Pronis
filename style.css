@@ -67,11 +67,11 @@ header{
   justify-content:space-between; align-items:center;
 }
 
-/* ===== Titre – remonte un peu ===== */
+/* ===== Titre – position ajustée ===== */
 .brand-title,
 .logo-container > h1{
   position:absolute; left:50%; 
-  top: calc(var(--brand-top) + 15px);  /* modifié ici */
+  top: calc(var(--brand-top) + 22px);  /* ajusté ici */
   transform:translateX(calc(-50% + var(--brand-shift-x)));
   margin:0; white-space:nowrap; z-index:2; pointer-events:none;
 
