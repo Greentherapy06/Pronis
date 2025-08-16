@@ -24,9 +24,12 @@
   --header-pad-y:15px; --header-pad-x:25px;
   --logo-w:100px;
 
-  /* Position du titre (HAUT) + centrage fin */
-  --brand-top:clamp(26px,7vw,64px);      /* FR par défaut */
-  --brand-shift-x:0px;                   /* + droite | - gauche */
+  /* Position du titre + centrage fin */
+  --brand-top:clamp(26px,7vw,64px);
+  --brand-shift-x:0px;
+
+  /* NOUVEAU : Espace entre le titre et la NAV (réduis pour monter la nav) */
+  --brand-gap-nav:6px;
 
   /* Ombres */
   --text-shadow:0 2px 4px rgba(0,0,0,.15);
@@ -34,10 +37,11 @@
   --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
 }
 
-/* Micro-ajustement PT pour caler au pixel près */
+/* Micro-ajustement PT au pixel près */
 html[lang="pt"]{
   --brand-top:clamp(24px,6.8vw,60px);
   --brand-shift-x:0px;
+  --brand-gap-nav:4px;          /* PT un tout petit peu plus haut */
 }
 
 /* =========================================================
@@ -55,14 +59,14 @@ img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
    Header – image claire, structure en lignes
    ========================================================= */
 header{
-  /* Pas de voile : image nette */
+  /* Image nette (pas de voile) */
   background:url('images.webp') center/cover no-repeat;
   position:relative; overflow:visible;
 
-  /* On réserve l'espace du titre pour éviter tout chevauchement */
+  /* On réserve juste la place du titre + petit gap de nav */
   padding: var(--header-pad-y) var(--header-pad-x);
   padding-top: calc(
-    var(--brand-top) + (var(--brand-title-size) * 0.95) + 20px
+    var(--brand-top) + (var(--brand-title-size) * 0.95) + var(--brand-gap-nav)
   );
 
   display:flex; flex-wrap:wrap;
@@ -87,9 +91,9 @@ header{
 
 /* ===== Navigation — juste SOUS le titre, centrée ===== */
 nav{
-  flex-basis:100%;                /* nouvelle ligne */
+  flex-basis:100%;
   display:flex; gap:25px; justify-content:center;
-  margin-top:0;                   /* l’espace est géré par padding-top du header */
+  margin-top:0;              /* l’écart est géré par --brand-gap-nav */
 }
 nav a{
   color:var(--black); text-decoration:none;
