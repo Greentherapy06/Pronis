@@ -69,9 +69,21 @@ header{
   justify-content:space-between; align-items:center;
 }
 
-/* Logo */
-.logo-container{ display:flex; align-items:center; gap:12px; }
-.logo{ width:var(--logo-w); height:auto; }
+/* Logo centré sous le titre */
+.logo-container {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--brand-top) + var(--brand-title-size) + 20px);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+}
+.logo {
+  width: var(--logo-w);
+  height: auto;
+}
 
 /* ===== Titre — parfaitement centré, plus haut ===== */
 .brand-title,
