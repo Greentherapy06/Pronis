@@ -71,7 +71,7 @@ header{
 .brand-title,
 .logo-container > h1{
   position:absolute; left:50%; 
-  top: calc(var(--brand-top) - 10px);
+  top: calc(var(--brand-top) + 30px);
   transform:translateX(calc(-50% + var(--brand-shift-x)));
   margin:0; white-space:nowrap; z-index:2; pointer-events:none;
 
