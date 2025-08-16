@@ -24,13 +24,9 @@
   --header-pad-y:15px; --header-pad-x:25px;
   --logo-w:100px;
 
-  /* Placement */
-  --brand-top:clamp(26px,7vw,64px);   /* Titre (plus haut) */
-  --brand-shift-x:0px;                /* fin centrage titre */
-  --nav-lift:-10px;                   /* remonte la ligne du menu */
-  --nav-shift-x:0px;                  /* petit décalage horizontal du menu */
-  --logo-top:clamp(10px,2vw,18px);    /* ↑ remonte le logo */
-  --cart-gap:clamp(14px,2.2vh,22px);  /* ↓ espace au-dessus du lien panier */
+  /* Position du titre (HAUT) + centrage fin */
+  --brand-top:clamp(26px,7vw,64px);      /* FR par défaut */
+  --brand-shift-x:0px;                   /* + droite | - gauche */
 
   /* Ombres */
   --text-shadow:0 2px 4px rgba(0,0,0,.15);
@@ -38,13 +34,10 @@
   --card-shadow-strong:0 4px 12px rgba(0,0,0,.08);
 }
 
-/* Identique FR/PT: on ne modifie pas les variables pour PT */
+/* Micro-ajustement PT pour caler au pixel près */
 html[lang="pt"]{
-  --brand-top:clamp(26px,7vw,64px);
-  --nav-lift:-10px;
-  --nav-shift-x:0px;
-  --logo-top:clamp(10px,2vw,18px);
-  --cart-gap:clamp(14px,2.2vh,22px);
+  --brand-top:clamp(26px,7vw,64px);      /* même valeur que FR */
+  --brand-shift-x:0px;
 }
 
 /* =========================================================
@@ -59,31 +52,28 @@ body{
 img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
 
 /* =========================================================
-   Header – image claire
+   Header – image claire, structure en lignes
    ========================================================= */
 header{
+  /* Pas de voile : image nette */
   background:url('images.webp') center/cover no-repeat;
   position:relative; overflow:visible;
 
-  /* On réserve l'espace du titre (évite chevauchements) */
+  /* On réserve l'espace du titre pour éviter tout chevauchement */
   padding: var(--header-pad-y) var(--header-pad-x);
-  padding-top: calc(var(--brand-top) + (var(--brand-title-size) * 0.95) + 20px);
+  padding-top: calc(
+    var(--brand-top) + (var(--brand-title-size) * 0.95) + 20px
+  );
 
   display:flex; flex-wrap:wrap;
   justify-content:space-between; align-items:center;
 }
 
-/* Logo – ABSOLU en haut à gauche */
-.logo-container{
-  position:absolute;
-  top:var(--logo-top);
-  left:var(--header-pad-x);
-  display:flex; align-items:center; gap:12px;
-  z-index:3;
-}
+/* Logo */
+.logo-container{ display:flex; align-items:center; gap:12px; }
 .logo{ width:var(--logo-w); height:auto; }
 
-/* Titre — parfaitement centré et haut */
+/* ===== Titre — parfaitement centré, plus haut ===== */
 .brand-title,
 .logo-container > h1{
   position:absolute; left:50%; top:var(--brand-top);
@@ -95,13 +85,11 @@ header{
   letter-spacing:.5px; color:#000; text-shadow:var(--text-shadow);
 }
 
-/* Navigation — CENTRÉ sous le titre */
+/* ===== Navigation — juste SOUS le titre, centrée ===== */
 nav{
-  flex-basis:100%;                 /* nouvelle ligne */
+  flex-basis:100%;                /* nouvelle ligne */
   display:flex; gap:25px; justify-content:center;
-  position:relative;
-  top:var(--nav-lift);             /* remonte la ligne du menu */
-  transform:translateX(var(--nav-shift-x));
+  margin-top:0;                   /* l’espace est géré par padding-top du header */
 }
 nav a{
   color:var(--black); text-decoration:none;
@@ -121,11 +109,11 @@ nav a[href="#contact"]::before{ content:"\f0e0"; }
 nav a[href="/fr/"]::before{ content:"\f024"; }
 nav a:hover{ color:#333; }
 
-/* Lien panier — DESCENDU pour un bel équilibre */
+/* ===== Lien panier — SOUS le menu, centré ===== */
 .header-panier{
   flex-basis:100%;
   display:flex; justify-content:center;
-  margin-top:var(--cart-gap);
+  margin-top:8px;
 }
 .panier-btn{
   background:var(--black); color:var(--gold);
@@ -155,7 +143,7 @@ h2{ color:var(--gold); font-size:24px; margin-bottom:15px; }
 .product-card h3{ font-size:18px; margin:10px 0; color:#000; }
 .price{ font-size:18px; font-weight:700; color:var(--gold); }
 
-/* Bouton produit – noir/doré */
+/* Bouton produit (noir/doré identique FR/PT) */
 .product-card .cta-cart{
   background:var(--black) !important;
   color:var(--gold) !important;
@@ -192,11 +180,6 @@ header, footer, .section, .product-grid, .avis-grid{
 @media (max-width:480px){
   header{ padding-left:12px; padding-right:12px; }
   .logo{ width:56px; }
-
-  /* micro-ajustements mobile */
-  :root{ --logo-top:12px; --cart-gap:20px; --nav-lift:-10px; }
-  html[lang="pt"]{ --logo-top:12px; --cart-gap:20px; --nav-lift:-10px; }
-
   .brand-title, .logo-container > h1{ font-size:22px; }
   nav{ gap:12px; }
   nav a{ font-size:var(--nav-size-sm); white-space:nowrap; letter-spacing:.5px; }
