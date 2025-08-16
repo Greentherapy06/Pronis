@@ -30,35 +30,26 @@ header {
   background: url('images.webp') center/cover no-repeat;
   padding: var(--header-pad-y) var(--header-pad-x);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   position: relative;
   overflow: visible;
 }
 
-/* Conteneur logo + nom, en colonne */
+/* Logo centré en haut */
 .logo-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  left: auto;
-  top: auto;
-  transform: none;
-  width: auto;
-  z-index: 3;
+  justify-content: center;
+  width: 100%;
 }
-
-/* Logo */
 .logo {
   width: var(--logo-w);
   height: auto;
 }
 
-/* Nom juste en dessous du logo */
+/* Nom sous le logo */
 .brand-title {
-  margin: 10px 0 0 0; /* petit espace au-dessus */
+  margin: 12px 0 20px 0;
   font-family: var(--brand-font);
   font-size: var(--brand-title-size);
   font-weight: 800;
@@ -68,17 +59,15 @@ header {
   color: #000;
   text-shadow: var(--text-shadow);
   pointer-events: none;
-  position: relative; /* position naturelle */
-  top: 8px; /* décalage léger vers le bas */
 }
 
-/* Navigation centrée sous le groupe logo + nom */
+/* Menu sous le nom */
 nav {
-  flex-basis: 100%;
+  width: 100%;
   display: flex;
-  gap: 25px;
   justify-content: center;
-  margin-top: 0;
+  gap: 25px;
+  margin-bottom: 10px;
 }
 nav a {
   color: var(--black);
@@ -96,12 +85,12 @@ nav a:hover {
   color: #333;
 }
 
-/* Lien panier centré sous la nav */
+/* Bouton panier en dernier, centré */
 .header-panier {
-  flex-basis: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 8px;
+  margin: 0 0 12px 0;
 }
 .panier-btn {
   background: var(--black);
@@ -130,8 +119,6 @@ nav a:hover {
   }
   .brand-title {
     font-size: 22px;
-    top: auto;
-    position: relative;
     pointer-events: auto;
   }
   nav {
