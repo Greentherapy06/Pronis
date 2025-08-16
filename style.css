@@ -62,7 +62,7 @@ header{
   /* On réserve l'espace du titre pour éviter tout chevauchement */
   padding: var(--header-pad-y) var(--header-pad-x);
   padding-top: calc(
-    var(--brand-top) + (var(--brand-title-size) * 0.95) + 20px
+    var(--brand-top) + (var(--brand-title-size) * 0.95) + 26px
   );
 
   display:flex; flex-wrap:wrap;
