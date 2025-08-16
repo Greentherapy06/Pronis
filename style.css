@@ -41,7 +41,7 @@
 html[lang="pt"]{
   --brand-top:clamp(26px,7vw,64px); /* même position de titre que FR */
   --brand-shift-x:0px;
-  --nav-lift:-26px;                 /* ← remonte la ligne INÍCIO/PRODUTOS… */
+  --nav-lift:-28px;                 /* ← remonte la ligne INÍCIO/PRODUTOS… */
 }
 
 /* =========================================================
