@@ -25,7 +25,7 @@
   --logo-w:100px;
 
   /* Position du titre (HAUT) + centrage fin */
-  --brand-top:clamp(26px,7vw,64px);      /* FR par défaut */
+  --brand-top:clamp(26px,7vw,64px);
   --brand-shift-x:0px;                   /* + droite | - gauche */
 
   /* Ombres */
@@ -36,7 +36,7 @@
 
 /* Micro-ajustement PT pour caler au pixel près */
 html[lang="pt"]{
-  --brand-top:clamp(26px,7vw,64px);      /* même valeur que FR */
+  --brand-top:clamp(26px,7vw,64px);
   --brand-shift-x:0px;
 }
 
@@ -55,11 +55,9 @@ img,picture,video,iframe{ display:block; max-width:100%; height:auto; }
    Header – image claire, structure en lignes
    ========================================================= */
 header{
-  /* Pas de voile : image nette */
   background:url('images.webp') center/cover no-repeat;
   position:relative; overflow:visible;
 
-  /* On réserve l'espace du titre pour éviter tout chevauchement */
   padding: var(--header-pad-y) var(--header-pad-x);
   padding-top: calc(
     var(--brand-top) + (var(--brand-title-size) * 0.95) + 26px
@@ -69,11 +67,25 @@ header{
   justify-content:space-between; align-items:center;
 }
 
-/* Logo centré sous le titre */
+/* ===== Titre — centré et positionné en haut ===== */
+.brand-title,
+.logo-container > h1{
+  position:absolute; left:50%; top:var(--brand-top);
+  transform:translateX(calc(-50% + var(--brand-shift-x)));
+  margin:0; white-space:nowrap; z-index:2; pointer-events:none;
+
+  font-family:var(--brand-font);
+  font-size:var(--brand-title-size);
+  font-weight:800; line-height:1;
+  letter-spacing:.5px; color:#000;
+  text-shadow:var(--text-shadow);
+}
+
+/* ===== Logo centré sous le titre ===== */
 .logo-container {
   position: absolute;
   left: 50%;
-  top: calc(var(--brand-top) + var(--brand-title-size) - 30px);
+  top: calc(var(--brand-top) + var(--brand-title-size) - 30px); /* ajuste ici pour espace */
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
@@ -85,23 +97,11 @@ header{
   height: auto;
 }
 
-/* ===== Titre — parfaitement centré, plus haut ===== */
-.brand-title,
-.logo-container > h1{
-  position:absolute; left:50%; top:var(--brand-top);
-  transform:translateX(calc(-50% + var(--brand-shift-x)));
-  margin:0; white-space:nowrap; z-index:2; pointer-events:none;
-
-  font-family:var(--brand-font);
-  font-size:var(--brand-title-size); font-weight:800; line-height:1;
-  letter-spacing:.5px; color:#000; text-shadow:var(--text-shadow);
-}
-
-/* ===== Navigation — juste SOUS le titre, centrée ===== */
+/* ===== Navigation — sous logo, centrée ===== */
 nav{
-  flex-basis:100%;                /* nouvelle ligne */
+  flex-basis:100%;
   display:flex; gap:25px; justify-content:center;
-  margin-top:0;                   /* l’espace est géré par padding-top du header */
+  margin-top:0;
 }
 nav a{
   color:var(--black); text-decoration:none;
