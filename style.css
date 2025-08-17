@@ -134,7 +134,7 @@ nav {
   display: flex;
   gap: 25px;
   justify-content: center;
-  margin-top: 10;
+  margin-top: 0;
 }
 
 nav a {
