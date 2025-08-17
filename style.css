@@ -213,7 +213,7 @@ html[lang="pt"] .shipping-note .price {
 
   /* Logo plus haut */
   .logo-container{
-    top: calc(var(--brand-top) + var(--brand-title-size) - 72px); /* ↑ ajuste ce -92px */
+    top: calc(var(--brand-top) + var(--brand-title-size) - 92px); /* ↑ ajuste ce -92px */
   }
 
   /* Laisse un peu d’espace sous le titre (menu) */
