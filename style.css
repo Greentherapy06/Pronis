@@ -201,6 +201,30 @@ html[lang="pt"] .shipping-note .price {
 /* =========================================================
    Responsive
    ========================================================= */
+/* ================= Desktop only (>=1024px) ================= */
+@media (min-width: 1024px){
+
+  /* Titre plus haut / finement centré */
+  .brand-title,
+  .logo-container > h1{
+    top: calc(var(--brand-top) + 22px);     /* ↑ baisse/augmente ce 22px */
+    transform: translateX(-50%);            /* garde le centrage parfait */
+  }
+
+  /* Logo plus haut */
+  .logo-container{
+    top: calc(var(--brand-top) + var(--brand-title-size) - 92px); /* ↑ ajuste ce -92px */
+  }
+
+  /* Laisse un peu d’espace sous le titre (menu) */
+  header{
+    padding-top: calc(var(--brand-top) + (var(--brand-title-size) * 0.95) + 28px);
+  }
+
+  /* Optionnel : équilibre menu + “Voir le panier” sur desktop */
+  nav{ margin-top: 4px; }
+  .header-panier{ margin-top: 14px; }
+}
 @media (max-width:480px){
   header{ padding-left:12px; padding-right:12px; }
   .logo{ width:56px; }
