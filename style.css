@@ -191,7 +191,7 @@ header, footer, .section, .product-grid, .avis-grid{
 /* Ajuster la taille uniquement pour la version portugaise */
 html[lang="pt"] .shipping-note,
 html[lang="pt"] .shipping-note .label {
-  font-size: 10px; /* taille adaptée pour match FR */
+  font-size: 12px; /* taille adaptée pour match FR */
 }
 
 html[lang="pt"] .shipping-note .price {
