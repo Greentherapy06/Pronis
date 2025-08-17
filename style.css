@@ -188,9 +188,14 @@ header, footer, .section, .product-grid, .avis-grid{
   text-transform: uppercase;
 }
 
-.shipping-note .price {
-  color: #d4af37;  /* doré pour le prix */
-  font-weight: 700;
+/* Ajuster la taille uniquement pour la version portugaise */
+html[lang="pt"] .shipping-note,
+html[lang="pt"] .shipping-note .label {
+  font-size: 15px; /* taille adaptée pour match FR */
+}
+
+html[lang="pt"] .shipping-note .price {
+  font-size: 18px; /* taille du prix, idem version FR */
 }
 
 /* =========================================================
