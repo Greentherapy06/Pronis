@@ -115,7 +115,7 @@ header {
 .logo-container {
   position: absolute;
   left: 50%;
-  top: calc(var(--brand-top) + var(--brand-title-size) - 70px);
+  top: calc(var(--brand-top) + var(--brand-title-size) - 92px);
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
@@ -382,7 +382,7 @@ html[lang='pt'] .shipping-note .price {
   /* Titre plus haut / finement centré */
   .brand-title,
   .logo-container > h1 {
-    top: calc(var(--brand-top) + 22px); /* ↑ baisse/augmente ce 22px */
+    top: calc(var(--brand-top) - 22px); /* ↑ baisse/augmente ce 22px */
     transform: translateX(-50%); /* garde le centrage parfait */
   }
 
