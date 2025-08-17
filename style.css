@@ -115,7 +115,7 @@ header {
 .logo-container {
   position: absolute;
   left: 50%;
-  top: calc(var(--brand-top) + var(--brand-title-size) - 122px);
+  top: calc(var(--brand-top) + var(--brand-title-size) - 92px);
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
