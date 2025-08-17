@@ -219,3 +219,20 @@ header, footer, .section, .product-grid, .avis-grid{
   nav a{ font-size:var(--nav-size-sm); white-space:nowrap; letter-spacing:.5px; }
   nav a::before{ display:none; }
 }
+/* Uniformiser la police d'écriture de la section livraison FR/PT */
+.shipping-note, 
+.shipping-note .label, 
+.shipping-note .price {
+  font-family: 'Playfair Display', serif !important;  /* même police que FR */
+  font-size: 18px;
+  color: #8c7a49;  /* couleur or chic */
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.shipping-note .price {
+  color: #d4af37;  /* doré pour le prix */
+  font-weight: 700;
+}
