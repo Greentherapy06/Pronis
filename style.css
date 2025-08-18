@@ -379,59 +379,78 @@ html[lang='pt'] .shipping-note .price {
 
 /* ================= Desktop only (>=1024px) ================= */
 @media (min-width: 1024px) {
-  /* Titre plus haut / finement centré */
-  .brand-title,
-  .logo-container > h1 {
-    top: calc(var(--brand-top) - 22px); /* ↑ baisse/augmente ce 22px */
-    transform: translateX(-50%); /* garde le centrage parfait */
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  /* Logo plus haut */
-  .logo-container {
-    top: calc(var(--brand-top) + var(--brand-title-size) + 92px); /* ↑ ajuste ce -92px */
-  }
-
-  /* Laisse un peu d’espace sous le titre (menu) */
   header {
-    padding-top: calc(var(--brand-top) + (var(--brand-title-size) * 0.95) + 28px);
+    max-width: 540px;
+    width: 100%;
+    margin: 32px auto 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+    padding: 30px 0 24px 0;
+    background: url('../images.webp') center/cover no-repeat;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  /* Optionnel : équilibre menu + “Voir le panier” sur desktop */
-  nav {
-    margin-top: 4px;
+  .logo-container {
+    position: static;
+    margin-bottom: 10px;
+    transform: none;
   }
+  .logo {
+    width: 72px !important;
+    height: 72px !important;
+  }
+
+  .brand-title {
+    position: static;
+    margin: 0 0 14px 0;
+    font-size: 34px !important;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 10px rgba(146,148,152,0.09);
+    font-weight: 700;
+    color: #222;
+    transform: none !important;
+    white-space: normal;
+    text-align: center;
+    pointer-events: auto;
+  }
+
+  nav {
+    flex-basis: auto;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    gap: 18px;
+    padding: 0;
+    font-size: 1.1em;
+  }
+  nav a {
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    padding: 4px 8px;
+  }
+
   .header-panier {
     margin-top: 14px;
-  }
-}
-
-/* ================= Mobile only (max-width: 480px) ================= */
-@media (max-width: 480px) {
-  header {
-    padding-left: 12px;
-    padding-right: 12px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
-  .logo {
-    width: 56px;
-  }
-
-  .brand-title,
-  .logo-container > h1 {
-    font-size: 22px;
-  }
-
-  nav {
-    gap: 12px;
-  }
-
-  nav a {
-    font-size: var(--nav-size-sm);
-    white-space: nowrap;
-    letter-spacing: 0.5px;
-  }
-
-  nav a::before {
-    display: none;
+  .section,
+  .main-content,
+  .avis-grid {
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
 }
