@@ -111,7 +111,7 @@ nav a:hover {
 }
 
 .product-card {
-  background: #fff;
+  background: #000;
   border-radius: var(--radius);
   box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
   padding: 15px;
