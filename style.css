@@ -20,17 +20,13 @@
   --gap: 20px;
   --header-pad-y: 15px;
   --header-pad-x: 25px;
-  --logo-w: 100px;
-  --brand-top: clamp(26px, 7vw, 64px);
-  --brand-shift-x: 0px;
+  --logo-w-mobile: 40px;
+  --logo-w-pc: 100px;
+  --brand-top-mobile: calc(12px + var(--logo-w-mobile));
+  --brand-top-pc: 70px;
   --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   --card-shadow-strong: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-html[lang="pt"] {
-  --brand-top: clamp(26px, 7vw, 64px);
-  --brand-shift-x: 0px;
 }
 
 /* =========================================================
@@ -67,14 +63,30 @@ header {
   position: relative;
   overflow: visible;
   padding: var(--header-pad-y) var(--header-pad-x);
-  padding-top: calc(var(--brand-top) + (var(--brand-title-size) * 0.95) + 26px);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Global logo and brand title */
+/* Logo Container */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* Logo */
+.logo {
+  height: auto;
+  width: var(--logo-w-mobile);
+  cursor: pointer;
+  transition: width 0.3s ease;
+}
+
+/* Brand Title */
 .brand-title,
 .logo-container > h1 {
   margin: 0;
@@ -85,34 +97,36 @@ header {
   font-weight: 800;
   line-height: 1;
   letter-spacing: 0.5px;
-  color: #000;
+  color: var(--black);
   text-shadow: var(--text-shadow);
+  font-size: 22px;
+  text-align: center;
 }
 
-.logo {
-  height: auto;
-  width: var(--logo-w);
-}
-
+/* Nav */
 nav {
   flex-basis: 100%;
   display: flex;
-  gap: 25px;
+  gap: 12px;
   justify-content: center;
-  margin-top: 0;
+  margin-top: 10px;
 }
 
 nav a {
   color: var(--black);
   text-decoration: none;
   font-weight: 700;
-  font-size: var(--nav-size);
-  letter-spacing: 1px;
+  font-size: var(--nav-size-sm);
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
   gap: 6px;
   transition: 0.3s;
+}
+
+nav a:hover {
+  color: #333;
 }
 
 nav a::before {
@@ -121,6 +135,7 @@ nav a::before {
   font-size: 14px;
 }
 
+/* Icons before nav links */
 nav a[href="#home"]::before {
   content: "\f015";
 }
@@ -137,10 +152,7 @@ nav a[href="/fr/"]::before {
   content: "\f024";
 }
 
-nav a:hover {
-  color: #333;
-}
-
+/* Panier button */
 .header-panier {
   flex-basis: 100%;
   display: flex;
@@ -217,8 +229,8 @@ h2 {
 }
 
 .product-card .cta-cart {
-  background: var(--black) !important;
-  color: var(--gold) !important;
+  background: var(--black);
+  color: var(--gold);
   border: 1px solid var(--black);
   font-weight: 700;
   padding: 8px 12px;
@@ -339,17 +351,16 @@ html[lang='pt'] .shipping-note .price {
   .logo-container {
     position: absolute;
     left: 50%;
-    top: calc(var(--brand-top) + var(--brand-title-size) - 44px);
+    top: var(--brand-top-mobile);
     transform: translateX(-50%);
     margin-bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 3;
   }
 
   .logo {
-    width: 40px !important;
+    width: var(--logo-w-mobile) !important;
   }
 
   .brand-title,
@@ -357,8 +368,8 @@ html[lang='pt'] .shipping-note .price {
     font-size: 22px !important;
     position: absolute;
     left: 50%;
-    top: var(--brand-top);
-    transform: translateX(calc(-50% + var(--brand-shift-x)));
+    top: calc(var(--brand-top-mobile) + var(--logo-w-mobile) + 12px);
+    transform: translateX(-50%);
     margin: 0;
     white-space: nowrap;
     z-index: 2;
@@ -381,7 +392,7 @@ html[lang='pt'] .shipping-note .price {
   }
 }
 
-/* Desktop styles - separation */
+/* Desktop styles */
 @media (min-width: 1024px) {
   body {
     display: flex;
@@ -412,8 +423,9 @@ html[lang='pt'] .shipping-note .price {
     align-items: center;
     z-index: auto;
   }
+
   .logo {
-    width: 100px !important;
+    width: var(--logo-w-pc) !important;
     height: auto !important;
   }
 
@@ -438,7 +450,7 @@ html[lang='pt'] .shipping-note .price {
     margin: 0;
     gap: 18px;
     padding: 0;
-    font-size: 18px;
+    font-size: var(--nav-size);
   }
   nav a {
     font-size: var(--nav-size);
