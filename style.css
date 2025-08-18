@@ -152,6 +152,19 @@ nav a:hover {
 }
 
 /* =========================================================
+   Suppression carré blanc Voir le panier sur la version portugaise
+   ========================================================= */
+html[lang="pt"] .panier-btn {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* =========================================================
    Styles Mobile
    ========================================================= */
 @media (max-width: 480px) {
@@ -226,4 +239,4 @@ nav a:hover {
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
   }
-}
+   }
