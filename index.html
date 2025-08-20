@@ -9,23 +9,23 @@
   <meta name="author" content="Green-Therapy">
   <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 
-  <!-- Connexions -->
+  <!-- Pré-conexões -->
   <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
-  <!-- Hero -->
+  <!-- Hero en priorité -->
   <link rel="preload" as="image" href="../images.webp" fetchpriority="high">
 
-  <!-- CSS principal -->
+  <!-- CSS principal (cache-bust) -->
   <link rel="stylesheet" href="../style.css?v=80" />
 
-  <!-- Snipcart CSS -->
+  <!-- Snipcart CSS (préchargé) -->
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
 
-  <!-- Snipcart settings -->
+  <!-- Snipcart -->
   <script>
     window.SnipcartSettings = {
       publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
@@ -37,16 +37,23 @@
 <body>
   <!-- HEADER -->
   <header>
+    <!-- Logo (seul dans le conteneur) -->
     <div class="logo-container">
       <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
     </div>
+
+    <!-- Nom du site (centré, même markup que la version FR) -->
     <h1 class="brand-title">Green-Therapy</h1>
+
+    <!-- Menu -->
     <nav>
       <a href="#home"> Início</a>
       <a href="#produits"> Produtos</a>
       <a href="#contact"> Contato</a>
       <a href="/fr/" hreflang="fr">🇨🇵 Francês</a>
     </nav>
+
+    <!-- Panier -->
     <div class="header-panier">
       <button class="snipcart-checkout panier-btn">Ver carrinho</button>
     </div>
@@ -60,7 +67,7 @@
         <span style="display:block;">CBD Premium</span>
       </span>
     </h2>
-    <p>Desde 2019, a Green-Therapy é especializada em produtos de CBD premium. Trabalhamos exclusivamente com produtores selecionados na Itália para oferecer flores, resinas, óleos e infusões de qualidade superior, respeitando a legislação europeia. Nosso objetivo é proporcionar uma experiência autêntica, segura e natural a cada cliente.</p>
+    </p> Desde 2019, a Green-Therapy é especializada em produtos de CBD premium. Trabalhamos exclusivamente com produtores selecionados na Itália para oferecer flores, resinas, óleos e infusões de qualidade superior, respeitando a legislação europeia. Nosso objetivo é proporcionar uma experiência autêntica, segura e natural a cada cliente.</p>
   </section>
 
   <!-- Produtos -->
@@ -195,7 +202,9 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('cali-dream-cbd','Flor CBD Cali Dream','Flor CBD premium da Itália','calidream-quantite')">🛒 Adicionar ao carrinho</button>
+        <button class="cta-cart" onclick="ajouterProduit('cali-dream-cbd','Flor CBD Cali Dream','Flor CBD premium da Itália','calidream-quantite')">
+          🛒 Adicionar ao carrinho
+        </button>
       </div>
 
       <!-- Produto 6 -->
@@ -218,70 +227,8 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD premium da Itália','gelato-quantite')">🛒 Adicionar ao carrinho</button>
-      </div>
-
-      <!-- NOVOS -->
-      <div class="product-card" data-id="ak47-cbd" data-stock="30">
-        <picture>
-          <source srcset="ak47-cbd.webp" type="image/webp" />
-          <img src="ak47-cbd.jpg" alt="Flor CBD AK-47 — Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌿 Flor CBD AK 47 🇮🇹</h3>
-        <p style="margin:.4rem 0 .2rem;">a partir de <strong>9,00 €</strong></p>
-        <p style="margin:.2rem 0; opacity:.75;">THC &lt; 0,3% — aromas amadeirados e picantes, secagem lenta, manicure cuidadosa.</p>
-        <label for="ak47-fr" style="display:block; font-size:.9rem; opacity:.85; margin:.4rem 0 .2rem;">Peso</label>
-        <select id="ak47-fr" class="weight">
-          <option value="2 g">2 g</option><option value="4 g">4 g</option><option value="6 g">6 g</option><option value="8 g">8 g</option><option value="10 g">10 g</option>
-        </select>
-        <button class="cta-cart"
-                data-id="ak47-cbd"
-                data-name="Flor CBD AK-47"
-                data-url="/pt/"
-                data-prices='{"2 g":9.00,"4 g":17.00,"6 g":25.00,"8 g":32.00,"10 g":40.00}'>
-          Adicionar ao carrinho
-        </button>
-      </div>
-
-      <div class="product-card" data-id="orange-cookies" data-stock="30">
-        <picture>
-          <source srcset="orange-cookies-cbd.webp" type="image/webp" />
-          <img src="orange-cookies-cbd.jpg" alt="Flor CBD Orange Cookies — Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌿 Flor CBD Orange Cookies 🍊</h3>
-        <p style="margin:.4rem 0 .2rem;">a partir de <strong>9,00 €</strong></p>
-        <p style="margin:.2rem 0; opacity:.75;">THC &lt; 0,3% — notas cítricas, laranja cristalizada e biscoito, perfil doce.</p>
-        <label for="oc-fr" style="display:block; font-size:.9rem; opacity:.85; margin:.4rem 0 .2rem;">Peso</label>
-        <select id="oc-fr" class="weight">
-          <option value="2 g">2 g</option><option value="4 g">4 g</option><option value="6 g">6 g</option><option value="8 g">8 g</option><option value="10 g">10 g</option>
-        </select>
-        <button class="cta-cart"
-                data-id="orange-cookies"
-                data-name="Flor CBD Orange Cookies"
-                data-url="/pt/"
-                data-prices='{"2 g":9.00,"4 g":17.00,"6 g":25.00,"8 g":32.00,"10 g":40.00}'>
-          Adicionar ao carrinho
-        </button>
-      </div>
-
-      <div class="product-card" data-id="gorilla-glue" data-stock="30">
-        <picture>
-          <source srcset="gorilla-glue-cbd.webp" type="image/webp" />
-          <img src="gorilla-glue-cbd.jpg" alt="Flor CBD Gorilla Glue — Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌿 Flor CBD Gorilla Glue 🦍</h3>
-        <p style="margin:.4rem 0 .2rem;">a partir de <strong>9,00 €</strong></p>
-        <p style="margin:.2rem 0; opacity:.75;">THC &lt; 0,3% — muito resinosa, notas terrosas e diesel, relaxamento profundo.</p>
-        <label for="gg-fr" style="display:block; font-size:.9rem; opacity:.85; margin:.4rem 0 .2rem;">Peso</label>
-        <select id="gg-fr" class="weight">
-          <option value="2 g">2 g</option><option value="4 g">4 g</option><option value="6 g">6 g</option><option value="8 g">8 g</option><option value="10 g">10 g</option>
-        </select>
-        <button class="cta-cart"
-                data-id="gorilla-glue"
-                data-name="Flor CBD Gorilla Glue"
-                data-url="/pt/"
-                data-prices='{"2 g":9.00,"4 g":17.00,"6 g":25.00,"8 g":32.00,"10 g":40.00}'>
-          Adicionar ao carrinho
+        <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD premium da Itália','gelato-quantite')">
+          🛒 Adicionar ao carrinho
         </button>
       </div>
     </div>
@@ -290,16 +237,34 @@
   <!-- Sobre nós -->
   <section id="about" class="section">
     <h2>ℹ️ Sobre nós</h2>
-    <p>Especialista em CBD desde 2019, a nossa missão é oferecer produtos de cânhamo da mais alta qualidade, sempre com total transparência e confiança. Selecionamos na Itália flores de CBD premium, óleos de CBD full spectrum, resinas e infusões naturais, garantindo pureza e eficácia em cada etapa do processo.</p>
+    <p>Especialista em CBD desde 2019, a nossa missão é oferecer produtos de cânhamo da mais alta qualidade, sempre com total transparência e confiança. Selecionamos na Itália flores de CBD premium, óleos de CBD full spectrum, resinas e infusões naturais, garantindo pureza e eficácia em cada etapa do processo.
+
+Acreditamos nos benefícios do CBD como aliado no bem-estar diário e trabalhamos para disponibilizar soluções naturais que ajudam a promover relaxamento, equilíbrio e qualidade de vida.
+
+Ao escolher nossos produtos de CBD, você opta por uma experiência autêntica, segura e sustentada por anos de experiência no setor. Descubra uma linha completa de flores de CBD, óleos full spectrum, infusões e resinas — tudo cuidadosamente produzido para proporcionar tranquilidade e harmonia de forma natural.
+
+Tom confiável e orientado ao cliente.</p>
   </section>
 
   <!-- Opiniões -->
   <section id="avis" class="section">
     <h2>⭐ Opiniões de Clientes</h2>
     <div class="avis-grid">
-      <div class="avis-card"><p class="avis-texte">“Entrega rápida e discreta, flores de qualidade excepcional. Recomendo 100%!”</p><div class="avis-stars">⭐⭐⭐⭐⭐</div><p class="avis-nom">– Julien M.</p></div>
-      <div class="avis-card"><p class="avis-texte">“Uma verdadeira descoberta! O óleo de CBD ajuda-me a dormir melhor. Atendimento excelente.”</p><div class="avis-stars">⭐⭐⭐⭐⭐</div><p class="avis-nom">– Sophie L.</p></div>
-      <div class="avis-card"><p class="avis-texte">“Excelente relação qualidade/preço. Sabor, aroma, relaxamento… tudo perfeito.”</p><div class="avis-stars">⭐⭐⭐⭐⭐</div><p class="avis-nom">– Karim B.</p></div>
+      <div class="avis-card">
+        <p class="avis-texte">“Entrega rápida e discreta, flores de qualidade excepcional. Recomendo 100%!”</p>
+        <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+        <p class="avis-nom">– Julien M.</p>
+      </div>
+      <div class="avis-card">
+        <p class="avis-texte">“Uma verdadeira descoberta! O óleo de CBD ajuda-me a dormir melhor. Atendimento excelente.”</p>
+        <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+        <p class="avis-nom">– Sophie L.</p>
+      </div>
+      <div class="avis-card">
+        <p class="avis-texte">“Excelente relação qualidade/preço. Sabor, aroma, relaxamento… tudo perfeito.”</p>
+        <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+        <p class="avis-nom">– Karim B.</p>
+      </div>
     </div>
   </section>
 
@@ -310,24 +275,13 @@
     <p><a href="mailto:greentherapy06@gmail.com">📧 greentherapy06@gmail.com</a></p>
   </section>
 
-  <footer style="background:#f9f9f9; padding:20px; text-align:center; font-size:14px; clear:both; margin-top:40px;">
-    <a href="./aviso-legal.html">Aviso legal</a> |
-    <a href="./politica-privacidade.html">Política de Privacidade</a> |
-    <a href="./cookies.html">Cookies</a> |
-    <a href="./cgv.html">CGV</a>
-  </footer>
-
-  <!-- Snipcart (hidden) — DOIT être dans le <body> -->
+  <!-- Snipcart (hidden) -->
   <div hidden id="snipcart"
     data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
     data-config-modal-style="side"
     data-currency="eur">
   </div>
 
-  <!-- Charge le script Snipcart -->
-  <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
-
-  <!-- JS site -->
   <script>
     const prixParProduit = {
       "amnesia-cbd":    {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
@@ -337,14 +291,13 @@
       "cali-dream-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "gelato-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00}
     };
-
     const LANG = (document.documentElement.lang || 'pt').toLowerCase();
     const TXT = LANG.startsWith('pt')
       ? { instock: 'Em stock: ', out: 'Esgotado' }
       : { instock: 'En stock : ', out: 'Rupture de stock' };
 
     function getStock(id) {
-      const card = document.querySelector(\`.product-card[data-id="\${id}"]\`);
+      const card = document.querySelector(`.product-card[data-id="${id}"]`);
       if (!card) return 0;
       const n = parseInt(card.getAttribute('data-stock'), 10);
       return isNaN(n) ? 0 : n;
@@ -376,33 +329,57 @@
     document.addEventListener('DOMContentLoaded', renderStocks);
 
     function ensureSnipcartReady(cb){
+      if (window.Snipcart && window.Snipcart.api) return cb();
+      if (typeof loadSnipcart === 'function') loadSnipcart();
       const start = Date.now();
-      (function waitFor(){
-        if (window.Snipcart && window.Snipcart.api) return cb();
-        if (Date.now() - start > 8000) return; // stop after 8s
-        requestAnimationFrame(waitFor);
-      })();
+      const t = setInterval(() => {
+        if (window.Snipcart && window.Snipcart.api) { clearInterval(t); cb(); }
+        if (Date.now() - start > 5000) { clearInterval(t); }
+      }, 100);
     }
 
-    // Version "ancienne" avec select id (Amnesia, etc.)
     function ajouterProduit(idBase, nomBase, description, selectId) {
       if (getStock(idBase) <= 0){ alert(TXT.out); return; }
       const quantite = document.getElementById(selectId).value;
-      const prix = (prixParProduit[idBase] && prixParProduit[idBase][quantite]) || 0;
-      const id = \`\${idBase}-\${quantite}g\`;
-      const nom = \`\${nomBase} \${quantite}g\`;
-
+      const prix = prixParProduit[idBase][quantite];
+      const id = `${idBase}-${quantite}g`;
+      const nom = `${nomBase} ${quantite}g`;
       ensureSnipcartReady(() => {
-        Snipcart.api.cart.items.add({
-          id, name: nom, price: prix, url: location.pathname, description
-        });
+        Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
       });
     }
+  </script>
 
-    // Version "nouvelles cartes" avec data-attributes (AK47 / Orange Cookies / Gorilla Glue)
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.product-card .cta-cart[data-prices]');
-      if (!btn) return;
+  <script>
+    let snipcartLoaded = false;
+    function loadSnipcart() {
+      if (snipcartLoaded) return;
+      snipcartLoaded = true;
+      const script = document.createElement("script");
+      script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    window.addEventListener("scroll", loadSnipcart, { once: true });
+    document.addEventListener("click", loadSnipcart, { once: true });
+  </script>
 
-      const card = btn.closest('.product-card');
-      if (getStock(
+  <!-- Lazy/decoding pour toutes les images -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('img').forEach(function (img, i) {
+        if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+        if (!img.hasAttribute('loading'))  img.setAttribute('loading', 'lazy');
+        if (i > 0 && !img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','low');
+      });
+    });
+  </script>
+
+  <footer style="text-align:center; padding:20px; font-size:14px;">
+    <a href="./aviso-legal.html">Aviso legal</a> |
+    <a href="./politica-privacidade.html">Política de Privacidade</a> |
+    <a href="./cookies.html">Cookies</a> |
+    <a href="./cgv.html">CGV</a>
+  </footer>
+</body>
+</html>
