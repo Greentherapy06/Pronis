@@ -25,35 +25,30 @@
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
 
-  <!-- Snipcart -->
+  <!-- Snipcart Settings (avant le script JS) -->
   <script>
     window.SnipcartSettings = {
       publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
       loadStrategy: "on-user-interaction"
     };
   </script>
+  <!-- On charge Snipcart JS de façon sûre -->
+  <script defer src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
 </head>
 
 <body>
   <!-- HEADER -->
   <header>
-    <!-- Logo (seul dans le conteneur) -->
     <div class="logo-container">
       <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
     </div>
-
-    <!-- Nom du site (centré, même markup que la version FR) -->
     <h1 class="brand-title">Green-Therapy</h1>
-
-    <!-- Menu -->
     <nav>
       <a href="#home"> Início</a>
       <a href="#produits"> Produtos</a>
       <a href="#contact"> Contato</a>
       <a href="/fr/" hreflang="fr">🇨🇵 Francês</a>
     </nav>
-
-    <!-- Panier -->
     <div class="header-panier">
       <button class="snipcart-checkout panier-btn">Ver carrinho</button>
     </div>
@@ -153,7 +148,7 @@
           <option value="8">8g – 33,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('cherry-cbd','Flor CBD Cherry','Flor CBD Cherry premium da Itália','cherry-quantite')">
+        <button class="cta-cart" onclick="ajouterProduto('cherry-cbd','Flor CBD Cherry','Flor CBD Cherry premium da Itália','cherry-quantite')">
           🛒 Adicionar ao carrinho
         </button>
       </div>
@@ -242,9 +237,8 @@
         </picture>
         <h3>🌿 Flor CBD AK-47 🇮🇹</h3>
         <p style="margin:.4rem 0 .2rem 0;">
-          <strong>Flor CBD AK-47</strong> com perfil <em>amadeirado e picante</em> (notas de pinho e pimenta).
-          Flores densas, manicure cuidadosa e <em>secagem lenta</em> para conservar os terpenos e o sabor autêntico.
-          Origem Itália, ideal para <em>relaxamento equilibrado</em> no fim do dia. <strong>THC &lt; 0,3%</strong>.
+          Perfil <em>amadeirado e picante</em>, flores densas e secagem lenta para preservar os terpenos.
+          Ideal para relaxamento equilibrado. <strong>THC &lt; 0,3%</strong>.
         </p>
         <p class="price">A partir de 9,00 €</p>
         <select id="ak47-quantite">
@@ -267,8 +261,7 @@
         </picture>
         <h3>🌿 Flor CBD Orange Cookies 🍊</h3>
         <p style="margin:.4rem 0 .2rem 0;">
-          <strong>Flor CBD Orange Cookies</strong> com notas de <em>cítricos</em>, <em>laranja cristalizada</em> e <em>biscoito</em>.
-          Cultivo cuidado na Itália, aroma guloso e textura resinosa — perfeita para um <em>momento de relax</em> durante o dia.
+          Notas de <em>cítricos</em>, <em>laranja cristalizada</em> e <em>biscoito</em>, aroma guloso.
           <strong>THC &lt; 0,3%</strong>.
         </p>
         <p class="price">A partir de 9,00 €</p>
@@ -292,9 +285,8 @@
         </picture>
         <h3>🌿 Flor CBD Gorilla Glue 🦍</h3>
         <p style="margin:.4rem 0 .2rem 0;">
-          <strong>Flor CBD Gorilla Glue</strong>, muito <em>resinosa</em>, com notas <em>terrosas e diesel</em>.
-          Secagem lenta e aparo manual para máxima intensidade aromática. Origem Itália,
-          ideal para <em>relaxamento profundo</em> à noite. <strong>THC &lt; 0,3%</strong>.
+          Muito <em>resinosa</em>, notas <em>terrosas e diesel</em>, ideal para relaxamento profundo.
+          <strong>THC &lt; 0,3%</strong>.
         </p>
         <p class="price">A partir de 9,00 €</p>
         <select id="gorilla-quantite">
@@ -310,7 +302,6 @@
       </div>
 
       <!-- ===== /AJOUTS ===== -->
-
     </div>
   </section>
 
@@ -362,15 +353,15 @@ Tom confiável e orientado ao cliente.</p>
     data-currency="eur">
   </div>
 
+  <!-- Panier + stocks + add-to-cart -->
   <script>
-    const prixParProduit = {
+    const prixParProduto = {
       "amnesia-cbd":    {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "resine-cbd":     {2: 7.50, 4: 14.00, 6: 20.00, 8: 26.00, 10: 32.00},
       "cherry-cbd":     {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00},
       "charas-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "cali-dream-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "gelato-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-      /* AJOUTS */
       "ak47-cbd":            {2: 9.00, 4: 17.00, 6: 25.00, 8: 32.00, 10: 40.00},
       "orange-cookies-cbd":  {2: 9.00, 4: 17.00, 6: 25.00, 8: 32.00, 10: 40.00},
       "gorilla-glue-cbd":    {2: 9.00, 4: 17.00, 6: 25.00, 8: 32.00, 10: 40.00}
@@ -414,5 +405,14 @@ Tom confiável e orientado ao cliente.</p>
 
     function ensureSnipcartReady(cb){
       if (window.Snipcart && window.Snipcart.api) return cb();
-      if (typeof loadSnipcart === 'function') loadSnipcart();
-  
+      const start = Date.now();
+      const t = setInterval(() => {
+        if (window.Snipcart && window.Snipcart.api) { clearInterval(t); cb(); }
+        if (Date.now() - start > 6000) { clearInterval(t); alert('Carrinho indisponível. Recarregue a página.'); }
+      }, 120);
+    }
+
+    function ajouterProduit(idBase, nomBase, description, selectId) {
+      if (getStock(idBase) <= 0){ alert(TXT.out); return; }
+      const q = document.getElementById(selectId).value;
+      const price = (
