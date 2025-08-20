@@ -19,7 +19,7 @@
   <link rel="preload" as="image" href="../images.webp" fetchpriority="high">
 
   <!-- CSS principal (cache-bust) -->
-  <link rel="stylesheet" href="../style.css?v=81" />
+  <link rel="stylesheet" href="../style.css?v=80" />
 
   <!-- Snipcart CSS (préchargé) -->
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
@@ -153,7 +153,7 @@
           <option value="8">8g – 33,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduto('cherry-cbd','Flor CBD Cherry','Flor CBD Cherry premium da Itália','cherry-quantite')">
+        <button class="cta-cart" onclick="ajouterProduit('cherry-cbd','Flor CBD Cherry','Flor CBD Cherry premium da Itália','cherry-quantite')">
           🛒 Adicionar ao carrinho
         </button>
       </div>
@@ -232,7 +232,7 @@
         </button>
       </div>
 
-      <!-- ================== NOVOS PRODUTOS (apenas adicionados) ================== -->
+      <!-- ===== AJOUTS : NOVOS PRODUTOS ===== -->
 
       <!-- AK-47 CBD -->
       <div class="product-card" data-id="ak47-cbd" data-stock="30">
@@ -241,14 +241,17 @@
           <img src="../ak47-cbd.jpg" alt="Flor CBD AK-47 - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌿 Flor CBD AK-47 🇮🇹</h3>
-        <p style="margin: .4rem 0 .2rem 0;">
+        <p style="margin:.4rem 0 .2rem 0;">
+          <strong>Flor CBD AK-47</strong> com perfil <em>amadeirado e picante</em> (notas de pinho e pimenta).
+          Flores densas, manicure cuidadosa e <em>secagem lenta</em> para conservar os terpenos e o sabor autêntico.
+          Origem Itália, ideal para <em>relaxamento equilibrado</em> no fim do dia. <strong>THC &lt; 0,3%</strong>.
         </p>
-        <p class="price">A partir de 8,90 €</p>
+        <p class="price">A partir de 9,00 €</p>
         <select id="ak47-quantite">
-          <option value="2" selected>2g – 8,90 €</option>
+          <option value="2" selected>2g – 9,00 €</option>
           <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 24,00 €</option>
-          <option value="8">8g – 30,00 €</option>
+          <option value="6">6g – 25,00 €</option>
+          <option value="8">8g – 32,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
         <button class="cta-cart" onclick="ajouterProduit('ak47-cbd','Flor CBD AK-47','Flor CBD premium da Itália','ak47-quantite')">
@@ -257,44 +260,56 @@
       </div>
 
       <!-- Orange Cookies CBD -->
-      <div class="product-card" data-id="orange-cookies" data-stock="30">
+      <div class="product-card" data-id="orange-cookies-cbd" data-stock="30">
         <picture>
           <source srcset="../orange-cookies-cbd.webp" type="image/webp" />
           <img src="../orange-cookies-cbd.jpg" alt="Flor CBD Orange Cookies - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
-        <h3>🍊 Flor CBD Orange Cookies 🇮🇹</h3>
-        <p class="price">A partir de 8,90 €</p>
+        <h3>🌿 Flor CBD Orange Cookies 🍊</h3>
+        <p style="margin:.4rem 0 .2rem 0;">
+          <strong>Flor CBD Orange Cookies</strong> com notas de <em>cítricos</em>, <em>laranja cristalizada</em> e <em>biscoito</em>.
+          Cultivo cuidado na Itália, aroma guloso e textura resinosa — perfeita para um <em>momento de relax</em> durante o dia.
+          <strong>THC &lt; 0,3%</strong>.
+        </p>
+        <p class="price">A partir de 9,00 €</p>
         <select id="orangecookies-quantite">
-          <option value="2" selected>2g – 8,90 €</option>
+          <option value="2" selected>2g – 9,00 €</option>
           <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 24,00 €</option>
-          <option value="8">8g – 30,00 €</option>
+          <option value="6">6g – 25,00 €</option>
+          <option value="8">8g – 32,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('orange-cookies','Flor CBD Orange Cookies','Flor CBD premium da Itália','orangecookies-quantite')">
+        <button class="cta-cart" onclick="ajouterProduit('orange-cookies-cbd','Flor CBD Orange Cookies','Flor CBD premium da Itália','orangecookies-quantite')">
           🛒 Adicionar ao carrinho
         </button>
       </div>
 
       <!-- Gorilla Glue CBD -->
-      <div class="product-card" data-id="gorilla-glue" data-stock="30">
+      <div class="product-card" data-id="gorilla-glue-cbd" data-stock="30">
         <picture>
           <source srcset="../gorilla-glue-cbd.webp" type="image/webp" />
           <img src="../gorilla-glue-cbd.jpg" alt="Flor CBD Gorilla Glue - Itália" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
-        <h3>🦍 Flor CBD Gorilla Glue 🇮🇹</h3>
-        <p class="price">A partir de 8,90 €</p>
-        <select id="gorillaglue-quantite">
-          <option value="2" selected>2g – 8,90 €</option>
+        <h3>🌿 Flor CBD Gorilla Glue 🦍</h3>
+        <p style="margin:.4rem 0 .2rem 0;">
+          <strong>Flor CBD Gorilla Glue</strong>, muito <em>resinosa</em>, com notas <em>terrosas e diesel</em>.
+          Secagem lenta e aparo manual para máxima intensidade aromática. Origem Itália,
+          ideal para <em>relaxamento profundo</em> à noite. <strong>THC &lt; 0,3%</strong>.
+        </p>
+        <p class="price">A partir de 9,00 €</p>
+        <select id="gorilla-quantite">
+          <option value="2" selected>2g – 9,00 €</option>
           <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 24,00 €</option>
-          <option value="8">8g – 30,00 €</option>
+          <option value="6">6g – 25,00 €</option>
+          <option value="8">8g – 32,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('gorilla-glue','Flor CBD Gorilla Glue','Flor CBD premium da Itália','gorillaglue-quantite')">
+        <button class="cta-cart" onclick="ajouterProduit('gorilla-glue-cbd','Flor CBD Gorilla Glue','Flor CBD premium da Itália','gorilla-quantite')">
           🛒 Adicionar ao carrinho
         </button>
       </div>
+
+      <!-- ===== /AJOUTS ===== -->
 
     </div>
   </section>
@@ -355,11 +370,10 @@ Tom confiável e orientado ao cliente.</p>
       "charas-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "cali-dream-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "gelato-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-
-      /* Novos */
-      "ak47-cbd":       {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-      "orange-cookies": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-      "gorilla-glue":   {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00}
+      /* AJOUTS */
+      "ak47-cbd":            {2: 9.00, 4: 17.00, 6: 25.00, 8: 32.00, 10: 40.00},
+      "orange-cookies-cbd":  {2: 9.00, 4: 17.00, 6: 25.00, 8: 32.00, 10: 40.00},
+      "gorilla-glue-cbd":    {2: 9.00, 4: 17.00, 6: 25.00, 8: 32.00, 10: 40.00}
     };
     const LANG = (document.documentElement.lang || 'pt').toLowerCase();
     const TXT = LANG.startsWith('pt')
@@ -401,34 +415,4 @@ Tom confiável e orientado ao cliente.</p>
     function ensureSnipcartReady(cb){
       if (window.Snipcart && window.Snipcart.api) return cb();
       if (typeof loadSnipcart === 'function') loadSnipcart();
-      const start = Date.now();
-      const t = setInterval(() => {
-        if (window.Snipcart && window.Snipcart.api) { clearInterval(t); cb(); }
-        if (Date.now() - start > 5000) { clearInterval(t); }
-      }, 100);
-    }
-
-    function ajouterProduit(idBase, nomBase, description, selectId) {
-      if (getStock(idBase) <= 0){ alert(TXT.out); return; }
-      const quantite = document.getElementById(selectId).value;
-      const prix = prixParProduit[idBase][quantite];
-      const id = `${idBase}-${quantite}g`;
-      const nom = `${nomBase} ${quantite}g`;
-      ensureSnipcartReady(() => {
-        Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
-      });
-    }
-  </script>
-
-  <script>
-    let snipcartLoaded = false;
-    function loadSnipcart() {
-      if (snipcartLoaded) return;
-      snipcartLoaded = true;
-      const script = document.createElement("script");
-      script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-    window.addEventListener("scroll", loadSnipcart, { once: true });
-    document
+  
