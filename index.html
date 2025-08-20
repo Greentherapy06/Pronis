@@ -18,401 +18,370 @@
   <!-- Hero en priorité -->
   <link rel="preload" as="image" href="../images.webp" fetchpriority="high">
 
-  <!-- CSS principal (cache-bust) -->
+  <!-- CSS principal -->
   <link rel="stylesheet" href="../style.css?v=80" />
 
   <!-- Snipcart CSS (préchargé) -->
-  <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
-  <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
+  <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';">
+  <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css"></noscript>
 
-  <!-- Snipcart Settings (avant le script JS) -->
+  <!-- Snipcart Settings + JS -->
   <script>
     window.SnipcartSettings = {
       publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
       loadStrategy: "on-user-interaction"
     };
   </script>
-  <!-- On charge Snipcart JS de façon sûre -->
   <script defer src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
 </head>
 
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="logo-container">
-      <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
-    </div>
-    <h1 class="brand-title">Green-Therapy</h1>
-    <nav>
-      <a href="#home"> Início</a>
-      <a href="#produits"> Produtos</a>
-      <a href="#contact"> Contato</a>
-      <a href="/fr/" hreflang="fr">🇨🇵 Francês</a>
-    </nav>
-    <div class="header-panier">
-      <button class="snipcart-checkout panier-btn">Ver carrinho</button>
-    </div>
-  </header>
+<header>
+  <div class="logo-container">
+    <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80">
+  </div>
+  <h1 class="brand-title">Green-Therapy</h1>
+  <nav>
+    <a href="#home">Início</a>
+    <a href="#produits">Produtos</a>
+    <a href="#contact">Contato</a>
+    <a href="/fr/" hreflang="fr">🇨🇵 Francês</a>
+  </nav>
+  <div class="header-panier">
+    <button class="snipcart-checkout panier-btn">Ver carrinho</button>
+  </div>
+</header>
 
-  <!-- Início -->
-  <section id="home" class="section">
-    <h2>
-      <span style="display:inline-block; text-align:center;">
-        <span style="display:block;">🌿 Green-Therapy 🌿</span>
-        <span style="display:block;">CBD Premium</span>
-      </span>
-    </h2>
-    </p> Desde 2019, a Green-Therapy é especializada em produtos de CBD premium. Trabalhamos exclusivamente com produtores selecionados na Itália para oferecer flores, resinas, óleos e infusões de qualidade superior, respeitando a legislação europeia. Nosso objetivo é proporcionar uma experiência autêntica, segura e natural a cada cliente.</p>
-  </section>
+<!-- Início -->
+<section id="home" class="section">
+  <h2>
+    <span style="display:inline-block; text-align:center;">
+      <span style="display:block;">🌿 Green-Therapy 🌿</span>
+      <span style="display:block;">CBD Premium</span>
+    </span>
+  </h2>
+  <p>Desde 2019, a Green-Therapy é especializada em produtos de CBD premium. Trabalhamos exclusivamente com produtores selecionados na Itália para oferecer flores, resinas, óleos e infusões de qualidade superior, respeitando a legislação europeia. Nosso objetivo é proporcionar uma experiência autêntica, segura e natural a cada cliente.</p>
+</section>
 
-  <!-- Produtos -->
-  <section id="produits" class="section">
-    <h2>🛍️ Nossos Produtos</h2>
+<!-- Produtos -->
+<section id="produits" class="section">
+  <h2>🛍️ Nossos Produtos</h2>
 
-    <div class="info-notes">
-      <p class="legal-note">Conforme a legislação da UE :</p>
-      <p class="legal-mid"><span class="nowrap"><strong>THC &lt; 0,3% 🇪🇺</strong></span></p>
-      <p class="legal-sub">sem efeitos psicoativos</p>
-      <div class="rule"></div>
-      <p class="shipping-note"><span class="label">Entrega em Portugal pelos CTT</span> — Taxa fixa: <span class="price">3,50&nbsp;€</span></p>
-    </div>
-
-    <div class="product-grid">
-      <!-- Produto 1 -->
-      <div class="product-card" data-id="amnesia-cbd" data-stock="10">
-        <picture>
-          <source srcset="../amnesia-cbd.webp" type="image/webp" />
-          <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌿 Flor CBD Swett Amnesia 🇮🇹</h3>
-        <p style="margin:.4rem 0 .2rem 0;">
-          Perfil aromático cítrico e terroso, colhida e aparada à mão na Itália.
-          Secagem lenta que preserva a <em>cor natural do cânhamo</em> e o sabor autêntico.
-          Perfeita para relaxar no fim do dia. <strong>THC &lt; 0,3%</strong>.
-        </p>
-        <p class="price">A partir de 8,90 €</p>
-        <select id="amnesia-quantite">
-          <option value="2" selected>2g – 8,90 €</option>
-          <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 24,00 €</option>
-          <option value="8">8g – 30,00 €</option>
-          <option value="10">10g – 40,00 €</option>
-        </select>
-        <button class="cta-cart" onclick="ajouterProduit('amnesia-cbd','Flor CBD Amnesia','Flor CBD premium da Itália','amnesia-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
-      </div>
-
-      <!-- Produto 2 -->
-      <div class="product-card" data-id="resine-cbd" data-stock="0">
-        <picture>
-          <source srcset="../resine-cbd.webp" type="image/webp" />
-          <img src="../resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌴 Resina CBD Hash 🇮🇹</h3>
-        <p style="margin:.4rem 0 .2rem 0;">
-          Textura cremosa e aromas de especiarias e pinho. Produção artesanal com
-          <em>prensagem a frio</em> para conservar os terpenos. Origem Itália,
-          sabor redondo e relaxante. <strong>THC &lt; 0,3%</strong>.
-        </p>
-        <p class="price">A partir de 7,50 €</p>
-        <select id="resine-quantite">
-          <option value="2" selected>2g – 7,50 €</option>
-          <option value="4">4g – 14,00 €</option>
-          <option value="6">6g – 20,00 €</option>
-          <option value="8">8g – 26,00 €</option>
-          <option value="10">10g – 32,00 €</option>
-        </select>
-        <button class="cta-cart" onclick="ajouterProduit('resine-cbd','Resina CBD Hash','Resina CBD premium da Itália','resine-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
-      </div>
-
-      <!-- Produto 3 -->
-      <div class="product-card" data-id="cherry-cbd" data-stock="0">
-        <picture>
-          <source srcset="../cherry-cbd.webp" type="image/webp" />
-          <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🍒 Flor CBD Cherry 🇮🇹</h3>
-        <p style="margin:.4rem 0 .2rem 0;">
-          Notas frutadas de cereja madura, flores densas e resinosas.
-          Cultivo controlado na Itália para um sabor doce e limpo, com final sedoso.
-          <strong>THC &lt; 0,3%</strong>.
-        </p>
-        <p class="price">A partir de 9,50 €</p>
-        <select id="cherry-quantite">
-          <option value="2" selected>2g – 9,50 €</option>
-          <option value="4">4g – 18,00 €</option>
-          <option value="6">6g – 26,00 €</option>
-          <option value="8">8g – 33,00 €</option>
-          <option value="10">10g – 40,00 €</option>
-        </select>
-        <button class="cta-cart" onclick="ajouterProduto('cherry-cbd','Flor CBD Cherry','Flor CBD Cherry premium da Itália','cherry-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
-      </div>
-
-      <!-- Produto 4 -->
-      <div class="product-card" data-id="charas-cbd" data-stock="0">
-        <picture>
-          <source srcset="../charas-cbd.webp" type="image/webp" />
-          <img src="../charas-cbd.webp" alt="Resina Charas CBD - Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🖤 Resina Charas CBD 🇮🇹</h3>
-        <p style="margin:.4rem 0 .2rem 0;">
-          Charas artesanal com toque tradicional: notas terrosas e especiadas, textura macia,
-          prensagem suave para preservar os terpenos. Origem Itália. <strong>THC &lt; 0,3%</strong>.
-        </p>
-        <p class="price">A partir de 8,90 €</p>
-        <select id="charas-quantite" aria-label="Escolher a quantidade para Resina Charas CBD">
-          <option value="2" selected>2g – 8,90 €</option>
-          <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 24,00 €</option>
-          <option value="8">8g – 30,00 €</option>
-          <option value="10">10g – 40,00 €</option>
-        </select>
-        <button class="cta-cart" onclick="ajouterProduit('charas-cbd','Resina Charas CBD','Resina Charas CBD artesanal da Itália','charas-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
-      </div>
-
-      <!-- Produto 5 -->
-      <div class="product-card" data-id="cali-dream-cbd" data-stock="0">
-        <picture>
-          <source srcset="../cali-dream-cbd.webp" type="image/webp" />
-          <img src="../cali-dream-cbd.webp" alt="Flor CBD Cali Dream - Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌿 Flor CBD Cali Dream 🇮🇹</h3>
-        <p style="margin:.4rem 0 .2rem 0;">
-          Perfil aromático elegante com toques <em>florais e frutados</em>, final suave e limpo.
-          Colheita e manicure à mão, secagem lenta para preservar os terpenos e a cor natural.
-          Origem Itália. <strong>THC &lt; 0,3%</strong>.
-        </p>
-        <p class="price">A partir de 8,90 €</p>
-        <select id="calidream-quantite" aria-label="Escolher a quantidade para Flor CBD Cali Dream">
-          <option value="2" selected>2g – 8,90 €</option>
-          <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 24,00 €</option>
-          <option value="8">8g – 30,00 €</option>
-          <option value="10">10g – 40,00 €</option>
-        </select>
-        <button class="cta-cart" onclick="ajouterProduit('cali-dream-cbd','Flor CBD Cali Dream','Flor CBD premium da Itália','calidream-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
-      </div>
-
-      <!-- Produto 6 -->
-      <div class="product-card" data-id="gelato-cbd" data-stock="0">
-        <picture>
-          <source srcset="../gelato-cbd.webp" type="image/webp" />
-          <img src="../gelato-cbd.webp" alt="Flor CBD Gelato - Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌿 Flor CBD Gelato 🇮🇹</h3>
-        <p style="margin:.4rem 0 .2rem 0;">
-          Perfil aromático cremoso com notas <em>doces e frutadas</em>, final suave e limpo.
-          Colheita e manicure à mão, secagem lenta que preserva os terpenos e a cor natural.
-          Origem Itália. <strong>THC &lt; 0,3%</strong>.
-        </p>
-        <p class="price">A partir de 8,90 €</p>
-        <select id="gelato-quantite" aria-label="Escolher a quantidade para Flor CBD Gelato">
-          <option value="2" selected>2g – 8,90 €</option>
-          <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 24,00 €</option>
-          <option value="8">8g – 30,00 €</option>
-          <option value="10">10g – 40,00 €</option>
-        </select>
-        <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD premium da Itália','gelato-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
-      </div>
-
-      <!-- ===== AJOUTS : NOVOS PRODUTOS ===== -->
-
-      <!-- AK-47 CBD -->
-      <div class="product-card" data-id="ak47-cbd" data-stock="30">
-        <picture>
-          <source srcset="../ak47-cbd.webp" type="image/webp" />
-          <img src="../ak47-cbd.jpg" alt="Flor CBD AK-47 - Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌿 Flor CBD AK-47 🇮🇹</h3>
-        <p style="margin:.4rem 0 .2rem 0;">
-          Perfil <em>amadeirado e picante</em>, flores densas e secagem lenta para preservar os terpenos.
-          Ideal para relaxamento equilibrado. <strong>THC &lt; 0,3%</strong>.
-        </p>
-        <p class="price">A partir de 9,00 €</p>
-        <select id="ak47-quantite">
-          <option value="2" selected>2g – 9,00 €</option>
-          <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 25,00 €</option>
-          <option value="8">8g – 32,00 €</option>
-          <option value="10">10g – 40,00 €</option>
-        </select>
-        <button class="cta-cart" onclick="ajouterProduit('ak47-cbd','Flor CBD AK-47','Flor CBD premium da Itália','ak47-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
-      </div>
-
-      <!-- Orange Cookies CBD -->
-      <div class="product-card" data-id="orange-cookies-cbd" data-stock="30">
-        <picture>
-          <source srcset="../orange-cookies-cbd.webp" type="image/webp" />
-          <img src="../orange-cookies-cbd.jpg" alt="Flor CBD Orange Cookies - Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌿 Flor CBD Orange Cookies 🍊</h3>
-        <p style="margin:.4rem 0 .2rem 0;">
-          Notas de <em>cítricos</em>, <em>laranja cristalizada</em> e <em>biscoito</em>, aroma guloso.
-          <strong>THC &lt; 0,3%</strong>.
-        </p>
-        <p class="price">A partir de 9,00 €</p>
-        <select id="orangecookies-quantite">
-          <option value="2" selected>2g – 9,00 €</option>
-          <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 25,00 €</option>
-          <option value="8">8g – 32,00 €</option>
-          <option value="10">10g – 40,00 €</option>
-        </select>
-        <button class="cta-cart" onclick="ajouterProduit('orange-cookies-cbd','Flor CBD Orange Cookies','Flor CBD premium da Itália','orangecookies-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
-      </div>
-
-      <!-- Gorilla Glue CBD -->
-      <div class="product-card" data-id="gorilla-glue-cbd" data-stock="30">
-        <picture>
-          <source srcset="../gorilla-glue-cbd.webp" type="image/webp" />
-          <img src="../gorilla-glue-cbd.jpg" alt="Flor CBD Gorilla Glue - Itália" class="product-img" loading="lazy" width="400" height="400" />
-        </picture>
-        <h3>🌿 Flor CBD Gorilla Glue 🦍</h3>
-        <p style="margin:.4rem 0 .2rem 0;">
-          Muito <em>resinosa</em>, notas <em>terrosas e diesel</em>, ideal para relaxamento profundo.
-          <strong>THC &lt; 0,3%</strong>.
-        </p>
-        <p class="price">A partir de 9,00 €</p>
-        <select id="gorilla-quantite">
-          <option value="2" selected>2g – 9,00 €</option>
-          <option value="4">4g – 17,00 €</option>
-          <option value="6">6g – 25,00 €</option>
-          <option value="8">8g – 32,00 €</option>
-          <option value="10">10g – 40,00 €</option>
-        </select>
-        <button class="cta-cart" onclick="ajouterProduit('gorilla-glue-cbd','Flor CBD Gorilla Glue','Flor CBD premium da Itália','gorilla-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
-      </div>
-
-      <!-- ===== /AJOUTS ===== -->
-    </div>
-  </section>
-
-  <!-- Sobre nós -->
-  <section id="about" class="section">
-    <h2>ℹ️ Sobre nós</h2>
-    <p>Especialista em CBD desde 2019, a nossa missão é oferecer produtos de cânhamo da mais alta qualidade, sempre com total transparência e confiança. Selecionamos na Itália flores de CBD premium, óleos de CBD full spectrum, resinas e infusões naturais, garantindo pureza e eficácia em cada etapa do processo.
-
-Acreditamos nos benefícios do CBD como aliado no bem-estar diário e trabalhamos para disponibilizar soluções naturais que ajudam a promover relaxamento, equilíbrio e qualidade de vida.
-
-Ao escolher nossos produtos de CBD, você opta por uma experiência autêntica, segura e sustentada por anos de experiência no setor. Descubra uma linha completa de flores de CBD, óleos full spectrum, infusões e resinas — tudo cuidadosamente produzido para proporcionar tranquilidade e harmonia de forma natural.
-
-Tom confiável e orientado ao cliente.</p>
-  </section>
-
-  <!-- Opiniões -->
-  <section id="avis" class="section">
-    <h2>⭐ Opiniões de Clientes</h2>
-    <div class="avis-grid">
-      <div class="avis-card">
-        <p class="avis-texte">“Entrega rápida e discreta, flores de qualidade excepcional. Recomendo 100%!”</p>
-        <div class="avis-stars">⭐⭐⭐⭐⭐</div>
-        <p class="avis-nom">– Julien M.</p>
-      </div>
-      <div class="avis-card">
-        <p class="avis-texte">“Uma verdadeira descoberta! O óleo de CBD ajuda-me a dormir melhor. Atendimento excelente.”</p>
-        <div class="avis-stars">⭐⭐⭐⭐⭐</div>
-        <p class="avis-nom">– Sophie L.</p>
-      </div>
-      <div class="avis-card">
-        <p class="avis-texte">“Excelente relação qualidade/preço. Sabor, aroma, relaxamento… tudo perfeito.”</p>
-        <div class="avis-stars">⭐⭐⭐⭐⭐</div>
-        <p class="avis-nom">– Karim B.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contato -->
-  <section id="contact" class="section">
-    <h2>✉️ Contato</h2>
-    <p>Entre em contato conosco para qualquer dúvida ou pedido especial.</p>
-    <p><a href="mailto:greentherapy06@gmail.com">📧 greentherapy06@gmail.com</a></p>
-  </section>
-
-  <!-- Snipcart (hidden) -->
-  <div hidden id="snipcart"
-    data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
-    data-config-modal-style="side"
-    data-currency="eur">
+  <div class="info-notes">
+    <p class="legal-note">Conforme a legislação da UE :</p>
+    <p class="legal-mid"><span class="nowrap"><strong>THC &lt; 0,3% 🇪🇺</strong></span></p>
+    <p class="legal-sub">sem efeitos psicoativos</p>
+    <div class="rule"></div>
+    <p class="shipping-note"><span class="label">Entrega em Portugal pelos CTT</span> — Taxa fixa: <span class="price">3,50&nbsp;€</span></p>
   </div>
 
-  <!-- Panier + stocks + add-to-cart -->
-  <script>
-    const prixParProduto = {
-      "amnesia-cbd":    {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-      "resine-cbd":     {2: 7.50, 4: 14.00, 6: 20.00, 8: 26.00, 10: 32.00},
-      "cherry-cbd":     {2: 9.50, 4: 18.00, 6: 26.00, 8: 33.00, 10: 40.00},
-      "charas-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-      "cali-dream-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-      "gelato-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
-      "ak47-cbd":            {2: 9.00, 4: 17.00, 6: 25.00, 8: 32.00, 10: 40.00},
-      "orange-cookies-cbd":  {2: 9.00, 4: 17.00, 6: 25.00, 8: 32.00, 10: 40.00},
-      "gorilla-glue-cbd":    {2: 9.00, 4: 17.00, 6: 25.00, 8: 32.00, 10: 40.00}
-    };
-    const LANG = (document.documentElement.lang || 'pt').toLowerCase();
-    const TXT = LANG.startsWith('pt')
-      ? { instock: 'Em stock: ', out: 'Esgotado' }
-      : { instock: 'En stock : ', out: 'Rupture de stock' };
+  <div class="product-grid">
+    <!-- Produto 1 -->
+    <div class="product-card" data-id="amnesia-cbd" data-stock="10">
+      <picture>
+        <source srcset="../amnesia-cbd.webp" type="image/webp">
+        <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400">
+      </picture>
+      <h3>🌿 Flor CBD Swett Amnesia 🇮🇹</h3>
+      <p style="margin:.4rem 0 .2rem 0;">Perfil aromático cítrico e terroso, colhida e aparada à mão na Itália. Secagem lenta que preserva a <em>cor natural do cânhamo</em> e o sabor autêntico. Perfeita para relaxar no fim do dia. <strong>THC &lt; 0,3%</strong>.</p>
+      <p class="price">A partir de 8,90 €</p>
+      <select id="amnesia-quantite">
+        <option value="2" selected>2g – 8,90 €</option>
+        <option value="4">4g – 17,00 €</option>
+        <option value="6">6g – 24,00 €</option>
+        <option value="8">8g – 30,00 €</option>
+        <option value="10">10g – 40,00 €</option>
+      </select>
+      <button class="cta-cart" onclick="ajouterProduit('amnesia-cbd','Flor CBD Amnesia','Flor CBD premium da Itália','amnesia-quantite')">🛒 Adicionar ao carrinho</button>
+    </div>
 
-    function getStock(id) {
-      const card = document.querySelector(`.product-card[data-id="${id}"]`);
-      if (!card) return 0;
-      const n = parseInt(card.getAttribute('data-stock'), 10);
-      return isNaN(n) ? 0 : n;
-    }
+    <!-- Produto 2 -->
+    <div class="product-card" data-id="resine-cbd" data-stock="0">
+      <picture>
+        <source srcset="../resine-cbd.webp" type="image/webp">
+        <img src="../resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" width="400" height="400">
+      </picture>
+      <h3>🌴 Resina CBD Hash 🇮🇹</h3>
+      <p style="margin:.4rem 0 .2rem 0;">Textura cremosa e aromas de especiarias e pinho. Produção artesanal com <em>prensagem a frio</em> para conservar os terpenos. Origem Itália, sabor redondo e relaxante. <strong>THC &lt; 0,3%</strong>.</p>
+      <p class="price">A partir de 7,50 €</p>
+      <select id="resine-quantite">
+        <option value="2" selected>2g – 7,50 €</option>
+        <option value="4">4g – 14,00 €</option>
+        <option value="6">6g – 20,00 €</option>
+        <option value="8">8g – 26,00 €</option>
+        <option value="10">10g – 32,00 €</option>
+      </select>
+      <button class="cta-cart" onclick="ajouterProduit('resine-cbd','Resina CBD Hash','Resina CBD premium da Itália','resine-quantite')">🛒 Adicionar ao carrinho</button>
+    </div>
 
-    function renderStocks(){
-      document.querySelectorAll('.product-card').forEach(card => {
-        const id = card.dataset.id; if (!id) return;
-        let label = card.querySelector('.stock-label');
-        if (!label){
-          label = document.createElement('div');
-          label.className = 'stock-label';
-          card.appendChild(label);
-        }
-        const btn = card.querySelector('.cta-cart');
-        const n = getStock(id);
+    <!-- Produto 3 -->
+    <div class="product-card" data-id="cherry-cbd" data-stock="0">
+      <picture>
+        <source srcset="../cherry-cbd.webp" type="image/webp">
+        <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" width="400" height="400">
+      </picture>
+      <h3>🍒 Flor CBD Cherry 🇮🇹</h3>
+      <p style="margin:.4rem 0 .2rem 0;">Notas frutadas de cereja madura, flores densas e resinosas. Cultivo controlado na Itália para um sabor doce e limpo, com final sedoso. <strong>THC &lt; 0,3%</strong>.</p>
+      <p class="price">A partir de 9,50 €</p>
+      <select id="cherry-quantite">
+        <option value="2" selected>2g – 9,50 €</option>
+        <option value="4">4g – 18,00 €</option>
+        <option value="6">6g – 26,00 €</option>
+        <option value="8">8g – 33,00 €</option>
+        <option value="10">10g – 40,00 €</option>
+      </select>
+      <button class="cta-cart" onclick="ajouterProduit('cherry-cbd','Flor CBD Cherry','Flor CBD Cherry premium da Itália','cherry-quantite')">🛒 Adicionar ao carrinho</button>
+    </div>
 
-        if (n <= 0){
-          label.textContent = TXT.out;
-          label.classList.remove('stock-in'); label.classList.add('stock-out');
-          if (btn){ btn.setAttribute('disabled','disabled'); btn.classList.add('btn-disabled'); btn.title = TXT.out; }
-        } else {
-          label.textContent = TXT.instock + n;
-          label.classList.remove('stock-out'); label.classList.add('stock-in');
-          if (btn){ btn.removeAttribute('disabled'); btn.classList.remove('btn-disabled'); btn.removeAttribute('title'); }
-        }
-      });
-    }
-    document.addEventListener('DOMContentLoaded', renderStocks);
+    <!-- Produto 4 -->
+    <div class="product-card" data-id="charas-cbd" data-stock="0">
+      <picture>
+        <source srcset="../charas-cbd.webp" type="image/webp">
+        <img src="../charas-cbd.webp" alt="Resina Charas CBD - Itália" class="product-img" loading="lazy" width="400" height="400">
+      </picture>
+      <h3>🖤 Resina Charas CBD 🇮🇹</h3>
+      <p style="margin:.4rem 0 .2rem 0;">Charas artesanal com toque tradicional: notas terrosas e especiadas, textura macia, prensagem suave para preservar os terpenos. Origem Itália. <strong>THC &lt; 0,3%</strong>.</p>
+      <p class="price">A partir de 8,90 €</p>
+      <select id="charas-quantite" aria-label="Escolher a quantidade para Resina Charas CBD">
+        <option value="2" selected>2g – 8,90 €</option>
+        <option value="4">4g – 17,00 €</option>
+        <option value="6">6g – 24,00 €</option>
+        <option value="8">8g – 30,00 €</option>
+        <option value="10">10g – 40,00 €</option>
+      </select>
+      <button class="cta-cart" onclick="ajouterProduit('charas-cbd','Resina Charas CBD','Resina Charas CBD artesanal da Itália','charas-quantite')">🛒 Adicionar ao carrinho</button>
+    </div>
 
-    function ensureSnipcartReady(cb){
-      if (window.Snipcart && window.Snipcart.api) return cb();
-      const start = Date.now();
-      const t = setInterval(() => {
-        if (window.Snipcart && window.Snipcart.api) { clearInterval(t); cb(); }
-        if (Date.now() - start > 6000) { clearInterval(t); alert('Carrinho indisponível. Recarregue a página.'); }
-      }, 120);
-    }
+    <!-- Produto 5 -->
+    <div class="product-card" data-id="cali-dream-cbd" data-stock="0">
+      <picture>
+        <source srcset="../cali-dream-cbd.webp" type="image/webp">
+        <img src="../cali-dream-cbd.webp" alt="Flor CBD Cali Dream - Itália" class="product-img" loading="lazy" width="400" height="400">
+      </picture>
+      <h3>🌿 Flor CBD Cali Dream 🇮🇹</h3>
+      <p style="margin:.4rem 0 .2rem 0;">Perfil aromático elegante com toques <em>florais e frutados</em>, final suave e limpo. Colheita e manicure à mão, secagem lenta para preservar os terpenos e a cor natural. Origem Itália. <strong>THC &lt; 0,3%</strong>.</p>
+      <p class="price">A partir de 8,90 €</p>
+      <select id="calidream-quantite" aria-label="Escolher a quantidade para Flor CBD Cali Dream">
+        <option value="2" selected>2g – 8,90 €</option>
+        <option value="4">4g – 17,00 €</option>
+        <option value="6">6g – 24,00 €</option>
+        <option value="8">8g – 30,00 €</option>
+        <option value="10">10g – 40,00 €</option>
+      </select>
+      <button class="cta-cart" onclick="ajouterProduit('cali-dream-cbd','Flor CBD Cali Dream','Flor CBD premium da Itália','calidream-quantite')">🛒 Adicionar ao carrinho</button>
+    </div>
 
-    function ajouterProduit(idBase, nomBase, description, selectId) {
-      if (getStock(idBase) <= 0){ alert(TXT.out); return; }
-      const q = document.getElementById(selectId).value;
-      const price = (
+    <!-- Produto 6 -->
+    <div class="product-card" data-id="gelato-cbd" data-stock="0">
+      <picture>
+        <source srcset="../gelato-cbd.webp" type="image/webp">
+        <img src="../gelato-cbd.webp" alt="Flor CBD Gelato - Itália" class="product-img" loading="lazy" width="400" height="400">
+      </picture>
+      <h3>🌿 Flor CBD Gelato 🇮🇹</h3>
+      <p style="margin:.4rem 0 .2rem 0;">Perfil aromático cremoso com notas <em>doces e frutadas</em>, final suave e limpo. Colheita e manicure à mão, secagem lenta que preserva os terpenos e a cor natural. Origem Itália. <strong>THC &lt; 0,3%</strong>.</p>
+      <p class="price">A partir de 8,90 €</p>
+      <select id="gelato-quantite" aria-label="Escolher a quantidade para Flor CBD Gelato">
+        <option value="2" selected>2g – 8,90 €</option>
+        <option value="4">4g – 17,00 €</option>
+        <option value="6">6g – 24,00 €</option>
+        <option value="8">8g – 30,00 €</option>
+        <option value="10">10g – 40,00 €</option>
+      </select>
+      <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD premium da Itália','gelato-quantite')">🛒 Adicionar ao carrinho</button>
+    </div>
+
+    <!-- ===== NOVOS PRODUTOS ===== -->
+
+    <!-- AK-47 CBD -->
+    <div class="product-card" data-id="ak47-cbd" data-stock="30">
+      <picture>
+        <source srcset="../ak47-cbd.webp" type="image/webp">
+        <img src="../ak47-cbd.jpg" alt="Flor CBD AK-47 — Itália" class="product-img" loading="lazy" width="400" height="400">
+      </picture>
+      <h3>🌿 Flor CBD AK-47 🇮🇹</h3>
+      <p style="margin:.4rem 0 .2rem 0;">Aromas <em>amadeirados e picantes</em>, flores compactas e resinosas. Secagem lenta que realça os terpenos. Sensação de relaxamento equilibrado e foco suave. <strong>THC &lt; 0,3%</strong>.</p>
+      <p class="price">A partir de 9,00 €</p>
+      <select id="ak47-quantite">
+        <option value="2" selected>2g – 9,00 €</option>
+        <option value="4">4g – 17,00 €</option>
+        <option value="6">6g – 25,00 €</option>
+        <option value="8">8g – 32,00 €</option>
+        <option value="10">10g – 40,00 €</option>
+      </select>
+      <button class="cta-cart" onclick="ajouterProduit('ak47-cbd','Flor CBD AK-47','Flor CBD premium da Itália','ak47-quantite')">🛒 Adicionar ao carrinho</button>
+    </div>
+
+    <!-- Orange Cookies CBD -->
+    <div class="product-card" data-id="orange-cookies-cbd" data-stock="30">
+      <picture>
+        <source srcset="../orange-cookies-cbd.webp" type="image/webp">
+        <img src="../orange-cookies-cbd.jpg" alt="Flor CBD Orange Cookies — Itália" class="product-img" loading="lazy" width="400" height="400">
+      </picture>
+      <h3>🌿 Flor CBD Orange Cookies 🍊</h3>
+      <p style="margin:.4rem 0 .2rem 0;">Notas <em>cítricas</em> com toque de <em>laranja cristalizada</em> e <em>biscoito</em>. Perfil doce e perfumado para um momento de conforto e boa disposição. <strong>THC &lt; 0,3%</strong>.</p>
+      <p class="price">A partir de 9,00 €</p>
+      <select id="orangecookies-quantite">
+        <option value="2" selected>2g – 9,00 €</option>
+        <option value="4">4g – 17,00 €</option>
+        <option value="6">6g – 25,00 €</option>
+        <option value="8">8g – 32,00 €</option>
+        <option value="10">10g – 40,00 €</option>
+      </select>
+      <button class="cta-cart" onclick="ajouterProduit('orange-cookies-cbd','Flor CBD Orange Cookies','Flor CBD premium da Itália','orangecookies-quantite')">🛒 Adicionar ao carrinho</button>
+    </div>
+
+    <!-- Gorilla Glue CBD -->
+    <div class="product-card" data-id="gorilla-glue-cbd" data-stock="30">
+      <picture>
+        <source srcset="../gorilla-glue-cbd.webp" type="image/webp">
+        <img src="../gorilla-glue-cbd.jpg" alt="Flor CBD Gorilla Glue — Itália" class="product-img" loading="lazy" width="400" height="400">
+      </picture>
+      <h3>🌿 Flor CBD Gorilla Glue 🦍</h3>
+      <p style="margin:.4rem 0 .2rem 0;">Extremamente <em>resinosa</em>, com nuances <em>terrosas e diesel</em>. Ideal para relaxamento profundo ao final do dia, mantendo um aroma intenso e característico. <strong>THC &lt; 0,3%</strong>.</p>
+      <p class="price">A partir de 9,00 €</p>
+      <select id="gorilla-quantite">
+        <option value="2" selected>2g – 9,00 €</option>
+        <option value="4">4g – 17,00 €</option>
+        <option value="6">6g – 25,00 €</option>
+        <option value="8">8g – 32,00 €</option>
+        <option value="10">10g – 40,00 €</option>
+      </select>
+      <button class="cta-cart" onclick="ajouterProduit('gorilla-glue-cbd','Flor CBD Gorilla Glue','Flor CBD premium da Itália','gorilla-quantite')">🛒 Adicionar ao carrinho</button>
+    </div>
+    <!-- ===== /NOVOS PRODUTOS ===== -->
+
+  </div>
+</section>
+
+<!-- Sobre nós -->
+<section id="about" class="section">
+  <h2>ℹ️ Sobre nós</h2>
+  <p>Especialista em CBD desde 2019, a nossa missão é oferecer produtos de cânhamo da mais alta qualidade, sempre com total transparência e confiança. Selecionamos na Itália flores de CBD premium, óleos de CBD full spectrum, resinas e infusões naturais, garantindo pureza e eficácia em cada etapa do processo. Acreditamos nos benefícios do CBD como aliado no bem-estar diário e trabalhamos para disponibilizar soluções naturais que promovem relaxamento, equilíbrio e qualidade de vida.</p>
+</section>
+
+<!-- Opiniões -->
+<section id="avis" class="section">
+  <h2>⭐ Opiniões de Clientes</h2>
+  <div class="avis-grid">
+    <div class="avis-card">
+      <p class="avis-texte">“Entrega rápida e discreta, flores de qualidade excepcional. Recomendo 100%!”</p>
+      <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+      <p class="avis-nom">– Julien M.</p>
+    </div>
+    <div class="avis-card">
+      <p class="avis-texte">“Uma verdadeira descoberta! O óleo de CBD ajuda-me a dormir melhor. Atendimento excelente.”</p>
+      <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+      <p class="avis-nom">– Sophie L.</p>
+    </div>
+    <div class="avis-card">
+      <p class="avis-texte">“Excelente relação qualidade/preço. Sabor, aroma, relaxamento… tudo perfeito.”</p>
+      <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+      <p class="avis-nom">– Karim B.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contato -->
+<section id="contact" class="section">
+  <h2>✉️ Contato</h2>
+  <p>Entre em contato conosco para qualquer dúvida ou pedido especial.</p>
+  <p><a href="mailto:greentherapy06@gmail.com">📧 greentherapy06@gmail.com</a></p>
+</section>
+
+<!-- Footer legal -->
+<footer style="text-align:center; padding:20px; font-size:14px;">
+  <a href="./aviso-legal.html">Aviso legal</a> |
+  <a href="./cookies.html">Cookies</a> |
+  <a href="./cgv.html">CGV</a> |
+  <a href="./politica-privacidade.html">Política de Privacidade</a>
+</footer>
+
+<!-- Snipcart (hidden) -->
+<div hidden id="snipcart"
+  data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
+  data-config-modal-style="side"
+  data-currency="eur">
+</div>
+
+<!-- JS panier -->
+<script>
+  const prixParProduit = {
+    "amnesia-cbd":    {2:8.90,4:17.00,6:24.00,8:30.00,10:40.00},
+    "resine-cbd":     {2:7.50,4:14.00,6:20.00,8:26.00,10:32.00},
+    "cherry-cbd":     {2:9.50,4:18.00,6:26.00,8:33.00,10:40.00},
+    "charas-cbd":     {2:8.90,4:17.00,6:24.00,8:30.00,10:40.00},
+    "cali-dream-cbd": {2:8.90,4:17.00,6:24.00,8:30.00,10:40.00},
+    "gelato-cbd":     {2:8.90,4:17.00,6:24.00,8:30.00,10:40.00},
+    "ak47-cbd":            {2:9.00,4:17.00,6:25.00,8:32.00,10:40.00},
+    "orange-cookies-cbd":  {2:9.00,4:17.00,6:25.00,8:32.00,10:40.00},
+    "gorilla-glue-cbd":    {2:9.00,4:17.00,6:25.00,8:32.00,10:40.00}
+  };
+
+  const LANG = (document.documentElement.lang || 'pt').toLowerCase();
+  const TXT = LANG.startsWith('pt')
+    ? { instock: 'Em stock: ', out: 'Esgotado' }
+    : { instock: 'En stock : ', out: 'Rupture de stock' };
+
+  function getStock(id){
+    const card = document.querySelector(`.product-card[data-id="${id}"]`);
+    if(!card) return 0;
+    const n = parseInt(card.getAttribute('data-stock'),10);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function renderStocks(){
+    document.querySelectorAll('.product-card').forEach(card=>{
+      const id = card.dataset.id; if(!id) return;
+      let label = card.querySelector('.stock-label');
+      if(!label){ label = document.createElement('div'); label.className='stock-label'; card.appendChild(label); }
+      const btn = card.querySelector('.cta-cart');
+      const n = getStock(id);
+      if(n<=0){
+        label.textContent = TXT.out;
+        label.classList.remove('stock-in'); label.classList.add('stock-out');
+        if(btn){ btn.setAttribute('disabled','disabled'); btn.classList.add('btn-disabled'); btn.title = TXT.out; }
+      }else{
+        label.textContent = TXT.instock + n;
+        label.classList.remove('stock-out'); label.classList.add('stock-in');
+        if(btn){ btn.removeAttribute('disabled'); btn.classList.remove('btn-disabled'); btn.removeAttribute('title'); }
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', renderStocks);
+
+  function ensureSnipcartReady(cb){
+    if(window.Snipcart && window.Snipcart.api) return cb();
+    const start = Date.now();
+    const t = setInterval(()=>{
+      if(window.Snipcart && window.Snipcart.api){ clearInterval(t); cb(); }
+      if(Date.now()-start>7000){ clearInterval(t); alert('Carrinho indisponível. Atualize a página.'); }
+    },120);
+  }
+
+  function ajouterProduit(idBase, nomBase, description, selectId){
+    if(getStock(idBase)<=0){ alert(TXT.out); return; }
+    const q = document.getElementById(selectId).value;
+    const price = (prixParProduit[idBase]||{})[q];
+    if(!price){ alert('Seleção inválida.'); return; }
+    const id = `${idBase}-${q}g`;
+    const name = `${nomBase} ${q}g`;
+    const url = window.location.pathname || '/';
+    ensureSnipcartReady(()=>{ Snipcart.api.cart.items.add({ id, name, price, url, description }); });
+  }
+</script>
+
+<!-- Lazy pour images -->
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('img').forEach(function(img,i){
+      if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
+      if(!img.hasAttribute('loading'))  img.setAttribute('loading','lazy');
+      if(i>0 && !img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','low');
+    });
+  });
+</script>
+
+<!-- Bandeau cookies -->
+<div id="cookie-banner" style="position:fixed;left:12px;right:12px;bottom:12px;background:#111;color:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 22px rgba(0,0,0,.18);display:none;z-index:9999;font-size:14px;">
+  Usamos cookies para melhorar a sua experiência. <a href="./politica-privacidade.html" style="color:#d4af37;text-decoration:underline;">Saiba mais</a>.
+  <button id="cookie-accept" style="margin-left:12px;background:#d4af37;border:0;color:#000;font-weight:700;padding:8px 12px;border-radius:8px;cursor:pointer;
