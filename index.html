@@ -25,7 +25,7 @@
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
   <noscript><link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" /></noscript>
 
-  <!-- Snipcart settings -->
+  <!-- Snipcart -->
   <script>
     window.SnipcartSettings = {
       publicApiKey: "MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3",
@@ -342,27 +342,23 @@ Tom confiável e orientado ao cliente.</p>
     <p>Entre em contato conosco para qualquer dúvida ou pedido especial.</p>
     <p><a href="mailto:greentherapy06@gmail.com">📧 greentherapy06@gmail.com</a></p>
   </section>
-
   <footer style="background:#f9f9f9; padding:20px; text-align:center; font-size:14px; clear:both; margin-top:40px;">
-    <a href="./aviso-legal.html">Aviso legal</a> |
-    <a href="./politica-privacidade.html">Política de Privacidade</a> |
-    <a href="./cookies.html">Cookies</a> |
-    <a href="./cgv.html">CGV</a>
-  </footer>
+  <a href="./aviso-legal.html">Aviso legal</a> |
+  <a href="./politica-privacidade.html">Política de Privacidade</a> |
+  <a href="./cookies.html">Cookies</a> |
+  <a href="./cgv.html">CGV</a>
+</footer>
+</body>
+</html>
 
-  <!-- Snipcart (hidden) - DOIT être DANS le <body> -->
+  <!-- Snipcart (hidden) -->
   <div hidden id="snipcart"
     data-api-key="MjUwNWU1NDctZmQwOC00YmEwLTlkMTItMWMxZmYyYWI5MzdhNjM4ODk3NzU4MjkzMjE0MDQ3"
     data-config-modal-style="side"
     data-currency="eur">
   </div>
 
-  <!-- Script Snipcart JS -->
-  <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
-
-  <!-- Tes scripts (stocks + add-to-cart) -->
   <script>
-    // Prix pour les produits "anciens" (boutons avec onclick)
     const prixParProduit = {
       "amnesia-cbd":    {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "resine-cbd":     {2: 7.50, 4: 14.00, 6: 20.00, 8: 26.00, 10: 32.00},
@@ -371,14 +367,13 @@ Tom confiável e orientado ao cliente.</p>
       "cali-dream-cbd": {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00},
       "gelato-cbd":     {2: 8.90, 4: 17.00, 6: 24.00, 8: 30.00, 10: 40.00}
     };
-
     const LANG = (document.documentElement.lang || 'pt').toLowerCase();
     const TXT = LANG.startsWith('pt')
       ? { instock: 'Em stock: ', out: 'Esgotado' }
       : { instock: 'En stock : ', out: 'Rupture de stock' };
 
     function getStock(id) {
-      const card = document.querySelector(\`.product-card[data-id="\${id}"]\`);
+      const card = document.querySelector(`.product-card[data-id="${id}"]`);
       if (!card) return 0;
       const n = parseInt(card.getAttribute('data-stock'), 10);
       return isNaN(n) ? 0 : n;
@@ -409,10 +404,15 @@ Tom confiável e orientado ao cliente.</p>
     }
     document.addEventListener('DOMContentLoaded', renderStocks);
 
-    // Helper "ready" pour Snipcart
-    function snipcartReady(cb){
-      if (window.Snipcart && window.Snipcart.api){ cb(); return; }
-      document.addEventListener('snipcart.ready', cb, { once:true });
+    function ensureSnipcartReady(cb){
+      if (window.Snipcart && window.Snipcart.api) return cb();
+      if (typeof loadSnipcart === 'function') loadSnipcart();
+      const start = Date.now();
+      const t = setInterval(() => {
+        if (window.Snipcart && window.Snipcart.api) { clearInterval(t); cb(); }
+        if (Date.now() - start > 5000) { clearInterval(t); }
+      }, 100);
     }
 
-    
+    function ajouterProduit(idBase, nomBase, description, selectId) {
+      if (getStock(
