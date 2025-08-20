@@ -45,6 +45,7 @@
       <a href="#home">Accueil</a>
       <a href="#produits">Produits</a>
       <a href="#contact">Contact</a>
+      <a href="/pt/" hreflang="pt">🇵🇹 Portugais</a>
       <a href="/fr/" hreflang="fr">🇨🇵 Français</a>
     </nav>
     <div class="header-panier">
@@ -76,6 +77,7 @@
     </div>
 
     <div class="product-grid">
+
       <!-- Produit 1 -->
       <div class="product-card" data-id="amnesia-cbd" data-stock="10">
         <picture>
@@ -96,7 +98,13 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('amnesia-cbd','Fleur CBD Amnesia','Fleur CBD premium d’Italie','amnesia-quantite')">
+        <button class="cta-cart snipcart-add-item"
+          data-item-id="amnesia-cbd"
+          data-item-name="Fleur CBD Amnesia"
+          data-item-price="8.90"
+          data-item-url="https://ton-site.com/produits#amnesia-cbd"
+          data-item-description="Fleur CBD premium d’Italie"
+          data-item-weight="2g">
           🛒 Ajouter au panier
         </button>
       </div>
@@ -121,7 +129,13 @@
           <option value="8">8g – 26,00 €</option>
           <option value="10">10g – 32,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('resine-cbd','Résine CBD Hash','Résine CBD premium d’Italie','resine-quantite')">
+        <button class="cta-cart snipcart-add-item"
+          data-item-id="resine-cbd"
+          data-item-name="Résine CBD Hash"
+          data-item-price="7.50"
+          data-item-url="https://ton-site.com/produits#resine-cbd"
+          data-item-description="Résine CBD premium d’Italie"
+          data-item-weight="2g">
           🛒 Ajouter au panier
         </button>
       </div>
@@ -146,7 +160,13 @@
           <option value="8">8g – 33,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('cherry-cbd','Fleur CBD Cherry','Fleur CBD Cherry premium d’Italie','cherry-quantite')">
+        <button class="cta-cart snipcart-add-item"
+          data-item-id="cherry-cbd"
+          data-item-name="Fleur CBD Cherry"
+          data-item-price="9.50"
+          data-item-url="https://ton-site.com/produits#cherry-cbd"
+          data-item-description="Fleur CBD Cherry premium d’Italie"
+          data-item-weight="2g">
           🛒 Ajouter au panier
         </button>
       </div>
@@ -170,7 +190,13 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('charas-cbd','Résine Charas CBD','Résine Charas CBD artisanale d’Italie','charas-quantite')">
+        <button class="cta-cart snipcart-add-item"
+          data-item-id="charas-cbd"
+          data-item-name="Résine Charas CBD"
+          data-item-price="8.90"
+          data-item-url="https://ton-site.com/produits#charas-cbd"
+          data-item-description="Résine Charas CBD artisanale d’Italie"
+          data-item-weight="2g">
           🛒 Ajouter au panier
         </button>
       </div>
@@ -195,7 +221,13 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('cali-dream-cbd','Fleur CBD Cali Dream','Fleur CBD premium d’Italie','calidream-quantite')">
+        <button class="cta-cart snipcart-add-item"
+          data-item-id="cali-dream-cbd"
+          data-item-name="Fleur CBD Cali Dream"
+          data-item-price="8.90"
+          data-item-url="https://ton-site.com/produits#calidream-cbd"
+          data-item-description="Fleur CBD premium d’Italie"
+          data-item-weight="2g">
           🛒 Ajouter au panier
         </button>
       </div>
@@ -220,7 +252,13 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Fleur CBD Gelato','Fleur CBD premium d’Italie','gelato-quantite')">
+        <button class="cta-cart snipcart-add-item"
+          data-item-id="gelato-cbd"
+          data-item-name="Fleur CBD Gelato"
+          data-item-price="8.90"
+          data-item-url="https://ton-site.com/produits#gelato-cbd"
+          data-item-description="Fleur CBD premium d’Italie"
+          data-item-weight="2g">
           🛒 Ajouter au panier
         </button>
       </div>
@@ -228,8 +266,8 @@
       <!-- Nouveau produit AK47 -->
       <div class="product-card" data-id="ak47-cbd" data-stock="30">
         <picture>
-          <source srcset="ak47-cbd.webp" type="image/webp" />
-          <img src="ak47-cbd.jpg" alt="Fleur CBD AK-47 — Italie" class="product-img" loading="lazy" width="400" height="400" />
+          <source srcset="images/ak47-cbd.webp" type="image/webp" />
+          <img src="images/ak47-cbd.jpg" alt="Fleur CBD AK-47 — Italie" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌿 Fleur CBD AK 47 🇮🇹</h3>
         <p style="margin:.4rem 0 .2rem;">à partir de <strong>9,00 €</strong></p>
@@ -242,18 +280,22 @@
           <option value="8 g">8 g</option>
           <option value="10 g">10 g</option>
         </select>
-        <button class="cta-cart"
-          data-id="ak47-cbd"
-          data-name="Fleur CBD AK-47"
-          data-url="/fr/"
-          data-prices='{"2 g":9.00,"4 g":17.00,"6 g":25.00,"8 g":32.00,"10 g":40.00}'>Ajouter au panier</button>
+        <button class="cta-cart snipcart-add-item"
+          data-item-id="ak47-cbd"
+          data-item-name="Fleur CBD AK-47"
+          data-item-price="9.00"
+          data-item-url="https://ton-site.com/produits#ak47-cbd"
+          data-item-description="Fleur CBD AK-47 premium d’Italie"
+          data-item-weight="2g">
+          🛒 Ajouter au panier
+        </button>
       </div>
 
       <!-- Nouveau produit Orange Cookies -->
       <div class="product-card" data-id="orange-cookies" data-stock="30">
         <picture>
-          <source srcset="orange-cookies-cbd.webp" type="image/webp" />
-          <img src="orange-cookies-cbd.jpg" alt="Fleur CBD Orange Cookies — Italie" class="product-img" loading="lazy" width="400" height="400" />
+          <source srcset="images/orange-cookies-cbd.webp" type="image/webp" />
+          <img src="images/orange-cookies-cbd.jpg" alt="Fleur CBD Orange Cookies — Italie" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌿 Fleur CBD Orange Cookies 🍊</h3>
         <p style="margin:.4rem 0 .2rem;">à partir de <strong>9,00 €</strong></p>
@@ -266,18 +308,22 @@
           <option value="8 g">8 g</option>
           <option value="10 g">10 g</option>
         </select>
-        <button class="cta-cart"
-          data-id="orange-cookies"
-          data-name="Fleur CBD Orange Cookies"
-          data-url="/fr/"
-          data-prices='{"2 g":9.00,"4 g":17.00,"6 g":25.00,"8 g":32.00,"10 g":40.00}'>Ajouter au panier</button>
+        <button class="cta-cart snipcart-add-item"
+          data-item-id="orange-cookies"
+          data-item-name="Fleur CBD Orange Cookies"
+          data-item-price="9.00"
+          data-item-url="https://ton-site.com/produits#orange-cookies"
+          data-item-description="Fleur CBD Orange Cookies premium d’Italie"
+          data-item-weight="2g">
+          🛒 Ajouter au panier
+        </button>
       </div>
 
       <!-- Nouveau produit Gorilla Glue -->
       <div class="product-card" data-id="gorilla-glue" data-stock="30">
         <picture>
-          <source srcset="gorilla-glue-cbd.webp" type="image/webp" />
-          <img src="gorilla-glue-cbd.jpg" alt="Fleur CBD Gorilla Glue — Italie" class="product-img" loading="lazy" width="400" height="400" />
+          <source srcset="images/gorilla-glue-cbd.webp" type="image/webp" />
+          <img src="images/gorilla-glue-cbd.jpg" alt="Fleur CBD Gorilla Glue — Italie" class="product-img" loading="lazy" width="400" height="400" />
         </picture>
         <h3>🌿 Fleur CBD Gorilla Glue 🦍</h3>
         <p style="margin:.4rem 0 .2rem;">à partir de <strong>9,00 €</strong></p>
@@ -290,12 +336,17 @@
           <option value="8 g">8 g</option>
           <option value="10 g">10 g</option>
         </select>
-        <button class="cta-cart"
-          data-id="gorilla-glue"
-          data-name="Fleur CBD Gorilla Glue"
-          data-url="/fr/"
-          data-prices='{"2 g":9.00,"4 g":17.00,"6 g":25.00,"8 g":32.00,"10 g":40.00}'>Ajouter au panier</button>
+        <button class="cta-cart snipcart-add-item"
+          data-item-id="gorilla-glue"
+          data-item-name="Fleur CBD Gorilla Glue"
+          data-item-price="9.00"
+          data-item-url="https://ton-site.com/produits#gorilla-glue"
+          data-item-description="Fleur CBD Gorilla Glue premium d’Italie"
+          data-item-weight="2g">
+          🛒 Ajouter au panier
+        </button>
       </div>
+
     </div>
   </section>
 
@@ -346,5 +397,4 @@
     <a href="./cgv.html">CGV</a>
   </footer>
 </body>
-            </html>
-            
+</html>
