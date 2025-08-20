@@ -37,23 +37,16 @@
 <body>
   <!-- HEADER -->
   <header>
-    <!-- Logo (seul dans le conteneur) -->
     <div class="logo-container">
       <img src="../logo-rond.png" alt="Logo Green Therapy - CBD Premium" class="logo" loading="lazy" width="80" height="80" />
     </div>
-
-    <!-- Nom du site (centré, même markup que la version FR) -->
     <h1 class="brand-title">Green-Therapy</h1>
-
-    <!-- Menu -->
     <nav>
       <a href="#home"> Início</a>
       <a href="#produits"> Produtos</a>
       <a href="#contact"> Contato</a>
       <a href="/fr/" hreflang="fr">🇨🇵 Francês</a>
     </nav>
-
-    <!-- Panier -->
     <div class="header-panier">
       <button class="snipcart-checkout panier-btn">Ver carrinho</button>
     </div>
@@ -67,7 +60,7 @@
         <span style="display:block;">CBD Premium</span>
       </span>
     </h2>
-    </p> Desde 2019, a Green-Therapy é especializada em produtos de CBD premium. Trabalhamos exclusivamente com produtores selecionados na Itália para oferecer flores, resinas, óleos e infusões de qualidade superior, respeitando a legislação europeia. Nosso objetivo é proporcionar uma experiência autêntica, segura e natural a cada cliente.</p>
+    <p>Desde 2019, a Green-Therapy é especializada em produtos de CBD premium. Trabalhamos exclusivamente com produtores selecionados na Itália para oferecer flores, resinas, óleos e infusões de qualidade superior, respeitando a legislação europeia. Nosso objetivo é proporcionar uma experiência autêntica, segura e natural a cada cliente.</p>
   </section>
 
   <!-- Produtos -->
@@ -202,9 +195,7 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('cali-dream-cbd','Flor CBD Cali Dream','Flor CBD premium da Itália','calidream-quantite')">
-          🛒 Adicionar ao carrinho
-        </button>
+        <button class="cta-cart" onclick="ajouterProduit('cali-dream-cbd','Flor CBD Cali Dream','Flor CBD premium da Itália','calidream-quantite')">🛒 Adicionar ao carrinho</button>
       </div>
 
       <!-- Produto 6 -->
@@ -227,10 +218,87 @@
           <option value="8">8g – 30,00 €</option>
           <option value="10">10g – 40,00 €</option>
         </select>
-        <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD premium da Itália','gelato-quantite')">
-          🛒 Adicionar ao carrinho
+        <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD premium da Itália','gelato-quantite')">🛒 Adicionar ao carrinho</button>
+      </div>
+
+      <!-- NOVO PRODUTO AK47 -->
+      <div class="product-card" data-id="ak47-cbd" data-stock="30">
+        <picture>
+          <source srcset="ak47-cbd.webp" type="image/webp" />
+          <img src="ak47-cbd.jpg" alt="Flor CBD AK-47 — Itália" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🌿 Flor CBD AK 47 🇮🇹</h3>
+        <p style="margin:.4rem 0 .2rem;">a partir de <strong>9,00 €</strong></p>
+        <p style="margin:.2rem 0; opacity:.75;">THC &lt; 0,3% — aromas amadeirados e picantes, secagem lenta, manicure cuidadosa.</p>
+        <label for="ak47-fr" style="display:block; font-size:.9rem; opacity:.85; margin:.4rem 0 .2rem;">Peso</label>
+        <select id="ak47-fr" class="weight">
+          <option value="2 g">2 g</option>
+          <option value="4 g">4 g</option>
+          <option value="6 g">6 g</option>
+          <option value="8 g">8 g</option>
+          <option value="10 g">10 g</option>
+        </select>
+        <button class="cta-cart"
+                data-id="ak47-cbd"
+                data-name="Flor CBD AK-47"
+                data-url="/pt/"
+                data-prices='{"2 g":9.00,"4 g":17.00,"6 g":25.00,"8 g":32.00,"10 g":40.00}'>
+          Adicionar ao carrinho
         </button>
       </div>
+
+      <!-- NOVO PRODUTO ORANGE COOKIES -->
+      <div class="product-card" data-id="orange-cookies" data-stock="30">
+        <picture>
+          <source srcset="orange-cookies-cbd.webp" type="image/webp" />
+          <img src="orange-cookies-cbd.jpg" alt="Flor CBD Orange Cookies — Itália" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🌿 Flor CBD Orange Cookies 🍊</h3>
+        <p style="margin:.4rem 0 .2rem;">a partir de <strong>9,00 €</strong></p>
+        <p style="margin:.2rem 0; opacity:.75;">THC &lt; 0,3% — notas cítricas, laranja cristalizada e biscoito, perfil doce.</p>
+        <label for="oc-fr" style="display:block; font-size:.9rem; opacity:.85; margin:.4rem 0 .2rem;">Peso</label>
+        <select id="oc-fr" class="weight">
+          <option value="2 g">2 g</option>
+          <option value="4 g">4 g</option>
+          <option value="6 g">6 g</option>
+          <option value="8 g">8 g</option>
+          <option value="10 g">10 g</option>
+        </select>
+        <button class="cta-cart"
+                data-id="orange-cookies"
+                data-name="Flor CBD Orange Cookies"
+                data-url="/pt/"
+                data-prices='{"2 g":9.00,"4 g":17.00,"6 g":25.00,"8 g":32.00,"10 g":40.00}'>
+          Adicionar ao carrinho
+        </button>
+      </div>
+
+      <!-- NOVO PRODUTO GORILLA GLUE -->
+      <div class="product-card" data-id="gorilla-glue" data-stock="30">
+        <picture>
+          <source srcset="gorilla-glue-cbd.webp" type="image/webp" />
+          <img src="gorilla-glue-cbd.jpg" alt="Flor CBD Gorilla Glue — Itália" class="product-img" loading="lazy" width="400" height="400" />
+        </picture>
+        <h3>🌿 Flor CBD Gorilla Glue 🦍</h3>
+        <p style="margin:.4rem 0 .2rem;">a partir de <strong>9,00 €</strong></p>
+        <p style="margin:.2rem 0; opacity:.75;">THC &lt; 0,3% — muito resinosa, notas terrosas e diesel, relaxamento profundo.</p>
+        <label for="gg-fr" style="display:block; font-size:.9rem; opacity:.85; margin:.4rem 0 .2rem;">Peso</label>
+        <select id="gg-fr" class="weight">
+          <option value="2 g">2 g</option>
+          <option value="4 g">4 g</option>
+          <option value="6 g">6 g</option>
+          <option value="8 g">8 g</option>
+          <option value="10 g">10 g</option>
+        </select>
+        <button class="cta-cart"
+                data-id="gorilla-glue"
+                data-name="Flor CBD Gorilla Glue"
+                data-url="/pt/"
+                data-prices='{"2 g":9.00,"4 g":17.00,"6 g":25.00,"8 g":32.00,"10 g":40.00}'>
+          Adicionar ao carrinho
+        </button>
+      </div>
+
     </div>
   </section>
 
@@ -345,41 +413,4 @@ Tom confiável e orientado ao cliente.</p>
       const id = `${idBase}-${quantite}g`;
       const nom = `${nomBase} ${quantite}g`;
       ensureSnipcartReady(() => {
-        Snipcart.api.cart.items.add({ id, name: nom, price: prix, url: '/', description });
-      });
-    }
-  </script>
-
-  <script>
-    let snipcartLoaded = false;
-    function loadSnipcart() {
-      if (snipcartLoaded) return;
-      snipcartLoaded = true;
-      const script = document.createElement("script");
-      script.src = "https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-    window.addEventListener("scroll", loadSnipcart, { once: true });
-    document.addEventListener("click", loadSnipcart, { once: true });
-  </script>
-
-  <!-- Lazy/decoding pour toutes les images -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('img').forEach(function (img, i) {
-        if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
-        if (!img.hasAttribute('loading'))  img.setAttribute('loading', 'lazy');
-        if (i > 0 && !img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','low');
-      });
-    });
-  </script>
-
-  <footer style="text-align:center; padding:20px; font-size:14px;">
-    <a href="./aviso-legal.html">Aviso legal</a> |
-    <a href="./politica-privacidade.html">Política de Privacidade</a> |
-    <a href="./cookies.html">Cookies</a> |
-    <a href="./cgv.html">CGV</a>
-  </footer>
-</body>
-            </html>
+        Snipcart.api.cart.items.add({ id, name: nom, p
