@@ -1,12 +1,22 @@
 export default async function handler(req, res) {
+  // Autoriser l’appel depuis ton site vitrine (GitHub Pages)
+  const ORIGIN = 'https://green-therapy.pt';
+  res.setHeader('Access-Control-Allow-Origin', ORIGIN);
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+
   try {
-    const { amount, currency = 'EUR', orderId = `GT-${Date.now()}` } = req.query;
+    const { amount, currency = 'EUR' } = req.query;
     if (!amount) return res.status(400).json({ error: 'amount required' });
+
+    const orderId = `GT-${Date.now()}`;
 
     const r = await fetch('https://api.nowpayments.io/v1/invoice', {
       method: 'POST',
       headers: {
-        'x-api-key': process.env.NOWPAY_API_KEY,
+        'x-api-key': process.env.NOWPAY_API_KEY || '',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -15,14 +25,15 @@ export default async function handler(req, res) {
         order_id: orderId,
         order_description: 'Commande Green-Therapy',
         is_fee_paid_by_user: true,
-        success_url: 'https://green-therapy-cbd.vercel.app/',
-        cancel_url: 'https://green-therapy-cbd.vercel.app/',
-        
+        success_url: 'https://green-therapy.pt/#/checkout',
+        cancel_url:  'https://green-therapy.pt/#/checkout',
       }),
     });
 
     const data = await r.json();
-    if (!r.ok || !data.invoice_url) return res.status(400).json(data);
+    if (!r.ok || !data.invoice_url) {
+      return res.status(r.status || 400).json(data);
+    }
     return res.status(200).json({ invoice_url: data.invoice_url });
   } catch (e) {
     return res.status(500).json({ error: 'server_error', detail: String(e) });
