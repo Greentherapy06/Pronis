@@ -1,4 +1,10 @@
 export default async function handler(req, res) {
+  // CORS pour autoriser green-therapy.pt
+  res.setHeader('Access-Control-Allow-Origin', 'https://green-therapy.pt');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(204).end();
+export default async function handler(req, res) {
   // Autoriser l’appel depuis ton site vitrine (GitHub Pages)
   const ORIGIN = 'https://green-therapy.pt';
   res.setHeader('Access-Control-Allow-Origin', ORIGIN);
