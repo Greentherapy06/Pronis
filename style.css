@@ -195,7 +195,7 @@ html[lang="pt"] .panier-btn {
 /* =========================================================
    Styles Desktop (PC)
    ========================================================= */
-@media (min-width: 1024px) {
+@media (min-width: 1080px) {
   body {
     background: var(--bg);
   }
