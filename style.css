@@ -16,7 +16,7 @@
   --header-padding-y: 20px;
   --header-padding-x: 20px;
 }
-
+<style>#pay-crypto{display:none!important}</style>
 /* =========================================================
    Base (tous supports)
    ========================================================= */
