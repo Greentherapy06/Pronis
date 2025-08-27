@@ -377,7 +377,7 @@
     btn.textContent = "Redirection…";
 
     try {
-      const r = await fetch(`/api/create-invoice?amount=${encodeURIComponent(amount)}&currency=EUR`);
+      const r = await fetch(`https://green-therapy-cbd.vercel.app/api/create-invoice?amount=${encodeURIComponent(amount)}&currency=EUR`);
       const d = await r.json();
       if (d.invoice_url) {
         location.href = d.invoice_url; // ouvre la facture NOWPayments (BTC/ETH au choix)
