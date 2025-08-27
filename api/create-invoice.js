@@ -1,11 +1,5 @@
 export default async function handler(req, res) {
-  // CORS pour autoriser green-therapy.pt
-  res.setHeader('Access-Control-Allow-Origin', 'https://green-therapy.pt');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  if (req.method === 'OPTIONS') return res.status(204).end();
-export default async function handler(req, res) {
-  // Autoriser l’appel depuis ton site vitrine (GitHub Pages)
+  // --- CORS : autoriser l'appel depuis ton site .pt ---
   const ORIGIN = 'https://green-therapy.pt';
   res.setHeader('Access-Control-Allow-Origin', ORIGIN);
   res.setHeader('Vary', 'Origin');
@@ -14,19 +8,22 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    const { amount, currency = 'EUR' } = req.query;
-    if (!amount) return res.status(400).json({ error: 'amount required' });
+    const amount = parseFloat(req.query.amount);
+    const currency = (req.query.currency || 'EUR').toUpperCase();
+    if (!(amount > 0)) {
+      return res.status(400).json({ error: 'amount required' });
+    }
 
     const orderId = `GT-${Date.now()}`;
 
     const r = await fetch('https://api.nowpayments.io/v1/invoice', {
       method: 'POST',
       headers: {
-        'x-api-key': process.env.NOWPAY_API_KEY || '',
+        'x-api-key': process.env.NOWPAY_API_KEY || '',   // <— même nom que sur Vercel
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        price_amount: parseFloat(amount),
+        price_amount: amount,
         price_currency: currency,
         order_id: orderId,
         order_description: 'Commande Green-Therapy',
