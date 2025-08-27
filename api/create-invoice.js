@@ -15,8 +15,9 @@ export default async function handler(req, res) {
         order_id: orderId,
         order_description: 'Commande Green-Therapy',
         is_fee_paid_by_user: true,
-        success_url: 'https://green-therapy-673xifnal-greentherapy06s-projects.vercel.app/',
-        cancel_url: 'https://green-therapy-673xifnal-greentherapy06s-projects.vercel.app/',
+        success_url: 'https://green-therapy-cbd.vercel.app/',
+        cancel_url: 'https://green-therapy-cbd.vercel.app/',
+        
       }),
     });
 
