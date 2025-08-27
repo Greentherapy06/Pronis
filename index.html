@@ -461,4 +461,13 @@
       // petit espace à gauche
       btn.style.marginLeft = '8px';
 
-      target.appendChi
+      target.appendChild(btn);
+    };
+
+    // Placer dès l’ouverture du panier
+    addBtn();
+
+    // Re-placer si le panier se met à jour (ajout/suppression d’article)
+    document.addEventListener('snipcart.updated', addBtn);
+  });
+</script>
