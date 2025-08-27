@@ -356,7 +356,7 @@
       if (total && !isNaN(total)) return Number(total).toFixed(2);
     } catch (e) {}
 
-    // 2) Fallback: un élément #total-eur ou [data-total-eur] (si tu en as un)
+    // 2) Fallback: un élément #total-eur ou [data-total-eur] (si tu en as um)
     const el = document.querySelector('#total-eur,[data-total-eur]');
     if (el) {
       const v = el.getAttribute('data-total-eur') || el.textContent;
@@ -369,7 +369,7 @@
   btn.addEventListener('click', async () => {
     const amount = getTotalEUR();
     if (!amount) {
-      alert("Total introuvable. Ajoute un article au panier puis réessaie.");
+      alert("Total introuvable. Ajoute um article au panier puis réessaie.");
       return;
     }
 
@@ -395,142 +395,22 @@
   });
 })();
 </script>
+
+<!-- === AJOUT MINIMAL : bouton crypto copié dans le panier Snipcart === -->
 <script>
 (function () {
-  const API = 'https://green-therapy-cbd.vercel.app';
+  const original = document.getElementById('pay-crypto');
+  if (!original) return;
 
-  function getTotalEUR() {
-    try {
-      const st = window.Snipcart?.store?.getState?.();
-      const total = st?.cart?.grandTotal || st?.cart?.total;
-      if (total && !isNaN(total)) return Number(total).toFixed(2);
-    } catch (e) {}
-    return null;
-  }
+  function placeButton() {
+    // zones possibles selon le thème Snipcart
+    const target =
+      document.querySelector('.snipcart-cart__footer .snipcart-cart__actions') ||
+      document.querySelector('.snipcart-cart__footer') ||
+      document.querySelector('.snipcart-cart__content');
 
-  async function payCrypto() {
-    const amount = getTotalEUR();
-    if (!amount) {
-      alert("Total introuvable. Ajoute un article au panier puis réessaie.");
-      return;
-    }
-    try {
-      const r = await fetch(`${API}/api/create-invoice?amount=${encodeURIComponent(amount)}&currency=EUR`, { mode: 'cors' });
-      const d = await r.json();
-      if (d.invoice_url) location.href = d.invoice_url;
-      else throw new Error(d.message || 'Erreur serveur');
-    } catch (err) {
-      alert("Paiement crypto indisponible : " + err.message);
-    }
-  }
-
-  function injectButton() {
-    // pied du panier Snipcart (vue panier)
-    const container = document.querySelector('.snipcart-cart__footer') || document.querySelector('.snipcart-cart__actions');
-    if (!container || document.getElementById('gt-crypto-in-cart')) return;
-
-    const btn = document.createElement('button');
-    btn.id = 'gt-crypto-in-cart';
-    btn.type = 'button';
-    btn.textContent = 'Payer en crypto (BTC / ETH)';
-    // style simple, plein largeur comme le bouton CB
-    btn.style.display = 'block';
-    btn.style.width = '100%';
-    btn.style.marginTop = '8px';
-    btn.style.padding = '12px 18px';
-    btn.style.borderRadius = '6px';
-    btn.style.cursor = 'pointer';
-    btn.className = 'snipcart-button-secondary'; // différent du bouton CB
-
-    btn.addEventListener('click', payCrypto);
-    container.appendChild(btn);
-  }
-
-  // Injecte au chargement ET à chaque changement de vue du modal
-  const obs = new MutationObserver(injectButton);
-  obs.observe(document.body, { childList: true, subtree: true });
-  injectButton();
-})();
-      </script>
-<!-- JS panier -->
-<script>
-  const prixParProduit = {
-    "amnesia-cbd":    {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-    "resine-cbd":     {2:12.00,4:24.00,6:36.00,8:48.00,10:55.00},
-    "cherry-cbd":     {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-    "charas-cbd":     {2:12.00,4:24.00,6:36.00,8:48.00,10:55.00},
-    "cali-dream-cbd": {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-    "gelato-cbd":     {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-    "ak47-cbd":            {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-    "orange-cookies-cbd":  {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-    "gorilla-glue-cbd":    {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00}
-  };
-
-  const LANG = (document.documentElement.lang || 'pt').toLowerCase();
-  const TXT = LANG.startsWith('pt')
-    ? { instock: 'Em stock: ', out: 'Esgotado' }
-    : { instock: 'En stock : ', out: 'Rupture de stock' };
-
-  function getStock(id){
-    const card = document.querySelector(`.product-card[data-id="${id}"]`);
-    if(!card) return 0;
-    const n = parseInt(card.getAttribute('data-stock'),10);
-    return isNaN(n) ? 0 : n;
-  }
-
-  function renderStocks(){
-    document.querySelectorAll('.product-card').forEach(card=>{
-      const id = card.dataset.id; if(!id) return;
-      let label = card.querySelector('.stock-label');
-      if(!label){ label = document.createElement('div'); label.className='stock-label'; card.appendChild(label); }
-      const btn = card.querySelector('.cta-cart');
-      const n = getStock(id);
-      if(n<=0){
-        label.textContent = TXT.out;
-        label.classList.remove('stock-in'); label.classList.add('stock-out');
-        if(btn){ btn.setAttribute('disabled','disabled'); btn.classList.add('btn-disabled'); btn.title = TXT.out; }
-      }else{
-        label.textContent = TXT.instock + n;
-        label.classList.remove('stock-out'); label.classList.add('stock-in');
-        if(btn){ btn.removeAttribute('disabled'); btn.classList.remove('btn-disabled'); btn.removeAttribute('title'); }
-      }
-    });
-  }
-  document.addEventListener('DOMContentLoaded', renderStocks);
-
-  function ensureSnipcartReady(cb){
-    if(window.Snipcart && window.Snipcart.api) return cb();
-    const start = Date.now();
-    const t = setInterval(()=>{
-      if(window.Snipcart && window.Snipcart.api){ clearInterval(t); cb(); }
-      if(Date.now()-start>7000){ clearInterval(t); alert('Carrinho indisponível. Atualize a página.'); }
-    },120);
-  }
-
-  function ajouterProduit(idBase, nomBase, description, selectId){
-    if(getStock(idBase)<=0){ alert(TXT.out); return; }
-    const q = document.getElementById(selectId).value;
-    const price = (prixParProduit[idBase]||{})[q];
-    if(!price){ alert('Seleção inválida.'); return; }
-    const id = `${idBase}-${q}g`;
-    const name = `${nomBase} ${q}g`;
-    const url = window.location.pathname || '/';
-    ensureSnipcartReady(()=>{ Snipcart.api.cart.items.add({ id, name, price, url, description }); });
-  }
-</script>
-
-<!-- Lazy pour images -->
-<script>
-  document.addEventListener('DOMContentLoaded', function(){
-    document.querySelectorAll('img').forEach(function(img,i){
-      if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
-      if(!img.hasAttribute('loading'))  img.setAttribute('loading','lazy');
-      if(i>0 && !img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','low');
-    });
-  });
-</script>
-
-<!-- Bandeau cookies -->
-<div id="cookie-banner" style="position:fixed;left:12px;right:12px;bottom:12px;background:#111;color:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 22px rgba(0,0,0,.18);display:none;z-index:9999;font-size:14px;">
-  Usamos cookies para melhorar a sua experiência. <a href="./politica-privacidade.html" style="color:#d4af37;text-decoration:underline;">Saiba mais</a>.
-  <button id="cookie-accept" style="margin-left:12px;background:#d4af37;border:0;color:#000;font-weight:700;padding:8px 12px;border-radius:8px;cursor:pointer;
+    if (target && !document.getElementById('pay-crypto-in-cart')) {
+      const b = original.cloneNode(true);
+      b.id = 'pay-crypto-in-cart';
+      b.removeAttribute('style');
+      b.className = 'snipcart-button snipcart-button-primary
