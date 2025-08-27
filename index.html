@@ -34,13 +34,13 @@
   </script>
   <script defer src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
   <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9V19J9PKQG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9V19J9PKQG');
-  </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9V19J9PKQG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9V19J9PKQG');
+</script>
 </head>
 
 <body>
@@ -261,23 +261,23 @@
 
   </div>
   <!-- === Déclarations Snipcart pour revalidation (cachées) === -->
-  <section id="snipcart-products" aria-hidden="true" style="display:none">
-    <!-- Amnesia 2g -->
-    <button class="snipcart-add-item"
-      data-item-id="amnesia-cbd-2g"
-      data-item-name="Flor CBD Amnesia 2g"
-      data-item-price="10.00"
-      data-item-url="/pt/">
-    </button>
-    <!-- Amnesia 4g -->
-    <button class="snipcart-add-item"
-      data-item-id="amnesia-cbd-4g"
-      data-item-name="Flor CBD Amnesia 4g"
-      data-item-price="20.00"
-      data-item-url="/pt/">
-    </button>
-    <!-- …répète 6g/8g/10g + fais pareil pour chaque variété … -->
-  </section>
+<section id="snipcart-products" aria-hidden="true" style="display:none">
+  <!-- Amnesia 2g -->
+  <button class="snipcart-add-item"
+    data-item-id="amnesia-cbd-2g"
+    data-item-name="Flor CBD Amnesia 2g"
+    data-item-price="10.00"
+    data-item-url="/pt/">
+  </button>
+  <!-- Amnesia 4g -->
+  <button class="snipcart-add-item"
+    data-item-id="amnesia-cbd-4g"
+    data-item-name="Flor CBD Amnesia 4g"
+    data-item-price="20.00"
+    data-item-url="/pt/">
+  </button>
+  <!-- …répète 6g/8g/10g + fais pareil pour chaque variété … -->
+</section>
 </section>
 
 <!-- Sobre nós -->
@@ -314,12 +314,12 @@
   <p>Entre em contato conosco para qualquer dúvida ou pedido especial.</p>
   <p><a href="mailto:greentherapy06@gmail.com">📧 greentherapy06@gmail.com</a></p>
   <div class="map-links" style="margin-top:10px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-    <a href="https://maps.app.goo.gl/Fo9NSd2xudiaiFLC9?g_st=ac" target="_blank" rel="noopener">
-      📍 Ver no Google Maps
-    </a>
-    <a href="https://www.google.com/maps/dir/?api=1&destination=Rua+de+Sao+Claudio+501,+4805-015+Barco,+Portugal" target="_blank" rel="noopener">
-      🧭 Obter direções
-    </a>
+  <a href="https://maps.app.goo.gl/Fo9NSd2xudiaiFLC9?g_st=ac" target="_blank" rel="noopener">
+    📍 Ver no Google Maps
+  </a>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=Rua+de+Sao+Claudio+501,+4805-015+Barco,+Portugal" target="_blank" rel="noopener">
+    🧭 Obter direções
+  </a>
   </div>
 </section>
 
@@ -337,15 +337,13 @@
   data-config-modal-style="side"
   data-currency="eur">
 </div>
-
-<!-- Bouton de paiement crypto (section du site) -->
+  <!-- Bouton de paiement crypto -->
 <div style="text-align:center;margin:20px 0">
   <button id="pay-crypto" type="button" style="padding:12px 18px;border-radius:6px;cursor:pointer">
     Payer en crypto (BTC / ETH)
   </button>
 </div>
 
-<!-- Logique du bouton crypto (utilisée par le bouton de la page ET celui du panier) -->
 <script>
 (function () {
   const btn = document.getElementById('pay-crypto');
@@ -358,7 +356,7 @@
       if (total && !isNaN(total)) return Number(total).toFixed(2);
     } catch (e) {}
 
-    // 2) Fallback: un élément #total-eur ou [data-total-eur]
+    // 2) Fallback: un élément #total-eur ou [data-total-eur] (si tu en as un)
     const el = document.querySelector('#total-eur,[data-total-eur]');
     if (el) {
       const v = el.getAttribute('data-total-eur') || el.textContent;
@@ -368,7 +366,7 @@
     return null;
   }
 
-  async function goCrypto() {
+  btn.addEventListener('click', async () => {
     const amount = getTotalEUR();
     if (!amount) {
       alert("Total introuvable. Ajoute un article au panier puis réessaie.");
@@ -376,38 +374,47 @@
     }
 
     btn.disabled = true;
-    const oldTxt = btn.textContent;
     btn.textContent = "Redirection…";
 
     try {
       const r = await fetch(
-        'https://green-therapy-cbd.vercel.app/api/create-invoice?amount=' + encodeURIComponent(amount) + '&currency=EUR',
-        { mode: 'cors' }
-      );
+  'https://green-therapy-cbd.vercel.app/api/create-invoice?amount=' + encodeURIComponent(amount) + '&currency=EUR',
+  { mode: 'cors' }
+);
       const d = await r.json();
       if (d.invoice_url) {
-        location.href = d.invoice_url; // ouvre la facture NOWPayments (BTC/ETH)
+        location.href = d.invoice_url; // ouvre la facture NOWPayments (BTC/ETH au choix)
       } else {
         throw new Error(d.message || "Erreur serveur");
       }
     } catch (err) {
       alert("Paiement crypto indisponible : " + err.message);
       btn.disabled = false;
-      btn.textContent = oldTxt;
+      btn.textContent = "Payer en crypto (BTC / ETH)";
     }
+  });
+})();
+</script>
+<script>
+(function () {
+  const API = 'https://green-therapy-cbd.vercel.app';
+
+  function getTotalEUR() {
+    try {
+      const st = window.Snipcart?.store?.getState?.();
+      const total = st?.cart?.grandTotal || st?.cart?.total;
+      if (total && !isNaN(total)) return Number(total).toFixed(2);
+    } catch (e) {}
+    return null;
   }
 
-  if (btn) btn.addEventListener('click', goCrypto);
-
-  // === AJOUT MINIMAL : bouton crypto dans le panier Snipcart ===
-  function mountCartButton() {
-    const container =
-      document.querySelector('.snipcart-cart__footer .snipcart-cart__actions') ||
-      document.querySelector('.snipcart-cart__footer') ||
-      document.querySelector('.snipcart-cart__content');
-
-    if (!container) return false;
-    if (document.getElementById('pay-crypto-in-cart')) return true;
-
-    const clone = btn.cloneNode(true);           // on clone pour garder le même libellé
-    clone.id = 
+  async function payCrypto() {
+    const amount = getTotalEUR();
+    if (!amount) {
+      alert("Total introuvable. Ajoute un article au panier puis réessaie.");
+      return;
+    }
+    try {
+      const r = await fetch(`${API}/api/create-invoice?amount=${encodeURIComponent(amount)}&currency=EUR`, { mode: 'cors' });
+      const d = await r.json();
+      if (d.invoice_url) l
