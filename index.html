@@ -337,6 +337,61 @@
   data-config-modal-style="side"
   data-currency="eur">
 </div>
+  <!-- Bouton de paiement crypto -->
+<div style="text-align:center;margin:20px 0">
+  <button id="pay-crypto" type="button" style="padding:12px 18px;border-radius:6px;cursor:pointer">
+    Payer en crypto (BTC / ETH)
+  </button>
+</div>
+
+<script>
+(function () {
+  const btn = document.getElementById('pay-crypto');
+
+  function getTotalEUR() {
+    // 1) Essaie via Snipcart
+    try {
+      const st = window.Snipcart?.store?.getState?.();
+      const total = st?.cart?.grandTotal || st?.cart?.total;
+      if (total && !isNaN(total)) return Number(total).toFixed(2);
+    } catch (e) {}
+
+    // 2) Fallback: un élément #total-eur ou [data-total-eur] (si tu en as un)
+    const el = document.querySelector('#total-eur,[data-total-eur]');
+    if (el) {
+      const v = el.getAttribute('data-total-eur') || el.textContent;
+      const n = parseFloat(String(v).replace(',', '.'));
+      if (!isNaN(n)) return n.toFixed(2);
+    }
+    return null;
+  }
+
+  btn.addEventListener('click', async () => {
+    const amount = getTotalEUR();
+    if (!amount) {
+      alert("Total introuvable. Ajoute un article au panier puis réessaie.");
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Redirection…";
+
+    try {
+      const r = await fetch(`/api/create-invoice?amount=${encodeURIComponent(amount)}&currency=EUR`);
+      const d = await r.json();
+      if (d.invoice_url) {
+        location.href = d.invoice_url; // ouvre la facture NOWPayments (BTC/ETH au choix)
+      } else {
+        throw new Error(d.message || "Erreur serveur");
+      }
+    } catch (err) {
+      alert("Paiement crypto indisponible : " + err.message);
+      btn.disabled = false;
+      btn.textContent = "Payer en crypto (BTC / ETH)";
+    }
+  });
+})();
+</script>
 
 <!-- JS panier -->
 <script>
