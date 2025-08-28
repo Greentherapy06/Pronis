@@ -579,6 +579,38 @@ document.addEventListener("snipcart.ready", ()=>{
     .observe(document.body,{subtree:true,childList:true});
 });
   </script>
+  ...
+  <!-- ton contenu, panier, produits etc -->
+
+  <!-- Script Crypto -->
+  <script>
+    async function payerEnCrypto() {
+      const total = getTotalEUR(); // ta fonction qui calcule le total
+      if (!total || Number(total) <= 0) {
+        alert("Panier vide.");
+        return;
+      }
+
+      try {
+        const resp = await fetch("https://green-therapy-cbd.vercel.app/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: Number(total) })
+        });
+
+        const { url } = await resp.json();
+        if (url) {
+          window.open(url, "_blank"); // ouvre la facture NOWPayments
+        } else {
+          alert("Impossible d’obtenir la facture crypto.");
+        }
+      } catch (err) {
+        alert("Erreur paiement crypto : " + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
 
 </body>
 </html>
