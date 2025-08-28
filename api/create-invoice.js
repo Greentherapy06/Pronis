@@ -1,24 +1,21 @@
-// /api/create-invoice.js
+// api/create-invoice.js
 export default async function handler(req, res) {
-  // CORS (autorise ton .pt et le www)
-  const ORIGINS = ['https://green-therapy.pt', 'https://www.green-therapy.pt'];
-  const origin = req.headers.origin;
-  if (ORIGINS.includes(origin)) res.setHeader('Access-Control-Allow-Origin', origin);
-  else res.setHeader('Access-Control-Allow-Origin', '*'); // pour tests
-
+  // CORS (autoriser ton site .pt et l'appel direct au .vercel.app)
+  const ORIGINS = ['https://green-therapy.pt', 'https://green-therapy-cbd.vercel.app'];
+  const origin = req.headers.origin || '';
+  res.setHeader('Access-Control-Allow-Origin', ORIGINS.includes(origin) ? origin : ORIGINS[0]);
   res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
+    // Accepte GET et POST
     const q = req.method === 'GET' ? req.query : (req.body || {});
-    const amount = parseFloat(q.amount);
+    const amount = parseFloat(String(q.amount ?? '').replace(',', '.'));
     const currency = String(q.currency || 'EUR').toUpperCase();
-
     if (!(amount > 0)) {
-      return res.status(400).json({ error: 'amount required' });
+      return res.status(400).json({ error: 'montant requis' });
     }
 
     const orderId = `GT-${Date.now()}`;
@@ -44,7 +41,6 @@ export default async function handler(req, res) {
     if (!r.ok || !data.invoice_url) {
       return res.status(r.status || 400).json(data);
     }
-
     return res.status(200).json({ invoice_url: data.invoice_url });
   } catch (e) {
     return res.status(500).json({ error: 'server_error', detail: String(e) });
