@@ -9,7 +9,7 @@
   <meta name="author" content="Green-Therapy">
   <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 
-  <!-- Pré-connections -->
+  <!-- Pré-conexões -->
   <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
   <link rel="preload" as="image" href="../images.webp" fetchpriority="high">
 
   <!-- CSS principal -->
-  <link rel="stylesheet" href="../style.css?v=91" />
+  <link rel="stylesheet" href="../style.css?v=92" />
 
   <!-- Snipcart CSS -->
   <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -45,7 +45,9 @@
   <!-- Optimisations mobile -->
   <style>
     img[loading="lazy"]{content-visibility:auto}
+    .product-img{max-width:100%;height:auto}
     .cta-cart{touch-action:manipulation}
+    .panier-btn{cursor:pointer}
   </style>
 </head>
 
@@ -76,6 +78,7 @@
   </h2>
   <p>Desde 2019, a Green-Therapy é especializada em produtos de CBD premium. Trabalhamos exclusivamente com produtores selecionados na Itália para oferecer flores, resinas, óleos e infusões de qualidade superior.</p>
 </section>
+
 <!-- Produtos -->
 <section id="produits" class="section">
   <h2>🛍️ Nossos Produtos</h2>
@@ -90,14 +93,14 @@
   </div>
 
   <div class="product-grid">
-    <!-- Produto 1 -->
+    <!-- Amnesia -->
     <div class="product-card" data-id="amnesia-cbd">
       <picture>
         <source srcset="../amnesia-cbd.webp" type="image/webp">
         <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400">
       </picture>
       <h3>🌿 Flor CBD Amnesia 🇮🇹</h3>
-      <p>Aromas cítricos e terrosos, colhida e aparada à mão na Itália. Secagem lenta que preserva a cor natural do cânhamo. <strong>THC &lt; 0,3%</strong>.</p>
+      <p>Aromas cítricos e terrosos. <strong>THC &lt; 0,3%</strong>.</p>
       <p class="price">A partir de 10,00 €</p>
       <select id="amnesia-quantite">
         <option value="2" selected>2g – 10,00 €</option>
@@ -109,14 +112,14 @@
       <button class="cta-cart" onclick="ajouterProduit('amnesia-cbd','Flor CBD Amnesia','Flor CBD premium da Itália','amnesia-quantite')">🛒 Adicionar ao carrinho</button>
     </div>
 
-    <!-- Produto 2 -->
+    <!-- Resina -->
     <div class="product-card" data-id="resine-cbd">
       <picture>
         <source srcset="../resine-cbd.webp" type="image/webp">
         <img src="../resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" width="400" height="400">
       </picture>
       <h3>🌴 Resina CBD Hash 🇮🇹</h3>
-      <p>Textura cremosa e aromas de especiarias e pinho. Produção artesanal com prensagem a frio. <strong>THC &lt; 0,3%</strong>.</p>
+      <p>Textura cremosa e aromas de especiarias e pinho. <strong>THC &lt; 0,3%</strong>.</p>
       <p class="price">A partir de 12,00 €</p>
       <select id="resine-quantite">
         <option value="2" selected>2g – 12,00 €</option>
@@ -128,14 +131,14 @@
       <button class="cta-cart" onclick="ajouterProduit('resine-cbd','Resina CBD Hash','Resina CBD premium da Itália','resine-quantite')">🛒 Adicionar ao carrinho</button>
     </div>
 
-    <!-- Produto 3 -->
+    <!-- Cherry -->
     <div class="product-card" data-id="cherry-cbd">
       <picture>
         <source srcset="../cherry-cbd.webp" type="image/webp">
         <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" width="400" height="400">
       </picture>
       <h3>🍒 Flor CBD Cherry 🇮🇹</h3>
-      <p>Notas frutadas de cereja madura, flores densas e resinosas. <strong>THC &lt; 0,3%</strong>.</p>
+      <p>Notas frutadas de cereja madura. <strong>THC &lt; 0,3%</strong>.</p>
       <p class="price">A partir de 10,00 €</p>
       <select id="cherry-quantite">
         <option value="2" selected>2g – 10,00 €</option>
@@ -147,14 +150,14 @@
       <button class="cta-cart" onclick="ajouterProduit('cherry-cbd','Flor CBD Cherry','Flor CBD premium da Itália','cherry-quantite')">🛒 Adicionar ao carrinho</button>
     </div>
 
-    <!-- Produto 4 -->
+    <!-- Charas -->
     <div class="product-card" data-id="charas-cbd">
       <picture>
         <source srcset="../charas-cbd.webp" type="image/webp">
         <img src="../charas-cbd.jpg" alt="Resina Charas CBD - Itália" class="product-img" loading="lazy" width="400" height="400">
       </picture>
       <h3>🖤 Resina Charas CBD 🇮🇹</h3>
-      <p>Charas artesanal, notas terrosas e especiadas. <strong>THC &lt; 0,3%</strong>.</p>
+      <p>Notas terrosas e especiadas. <strong>THC &lt; 0,3%</strong>.</p>
       <p class="price">A partir de 12,00 €</p>
       <select id="charas-quantite">
         <option value="2" selected>2g – 12,00 €</option>
@@ -165,14 +168,15 @@
       </select>
       <button class="cta-cart" onclick="ajouterProduit('charas-cbd','Resina Charas CBD','Resina Charas CBD artesanal da Itália','charas-quantite')">🛒 Adicionar ao carrinho</button>
     </div>
-    <!-- Produto 5 -->
+
+    <!-- Cali Dream -->
     <div class="product-card" data-id="cali-dream-cbd">
       <picture>
         <source srcset="../cali-dream-cbd.webp" type="image/webp">
         <img src="../cali-dream-cbd.jpg" alt="Flor CBD Cali Dream - Itália" class="product-img" loading="lazy" width="400" height="400">
       </picture>
       <h3>🌿 Flor CBD Cali Dream 🇮🇹</h3>
-      <p>Perfil aromático elegante, toques florais e frutados. <strong>THC &lt; 0,3%</strong>.</p>
+      <p>Perfil aromático elegante. <strong>THC &lt; 0,3%</strong>.</p>
       <p class="price">A partir de 10,00 €</p>
       <select id="calidream-quantite">
         <option value="2" selected>2g – 10,00 €</option>
@@ -184,14 +188,14 @@
       <button class="cta-cart" onclick="ajouterProduit('cali-dream-cbd','Flor CBD Cali Dream','Flor CBD premium da Itália','calidream-quantite')">🛒 Adicionar ao carrinho</button>
     </div>
 
-    <!-- Produto 6 -->
+    <!-- Gelato -->
     <div class="product-card" data-id="gelato-cbd">
       <picture>
         <source srcset="../gelato-cbd.webp" type="image/webp">
         <img src="../gelato-cbd.jpg" alt="Flor CBD Gelato - Itália" class="product-img" loading="lazy" width="400" height="400">
       </picture>
       <h3>🌿 Flor CBD Gelato 🇮🇹</h3>
-      <p>Perfil aromático cremoso, notas doces e frutadas. <strong>THC &lt; 0,3%</strong>.</p>
+      <p>Notas doces e frutadas. <strong>THC &lt; 0,3%</strong>.</p>
       <p class="price">A partir de 10,00 €</p>
       <select id="gelato-quantite">
         <option value="2" selected>2g – 10,00 €</option>
@@ -203,14 +207,14 @@
       <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD premium da Itália','gelato-quantite')">🛒 Adicionar ao carrinho</button>
     </div>
 
-    <!-- Produto 7 -->
+    <!-- AK-47 -->
     <div class="product-card" data-id="ak47-cbd">
       <picture>
         <source srcset="../ak47-cbd.webp" type="image/webp">
         <img src="../ak47-cbd.jpg" alt="Flor CBD AK-47 - Itália" class="product-img" loading="lazy" width="400" height="400">
       </picture>
       <h3>🌿 Flor CBD AK-47 🇮🇹</h3>
-      <p>Aromas amadeirados e picantes, flores compactas. <strong>THC &lt; 0,3%</strong>.</p>
+      <p>Aromas amadeirados e picantes. <strong>THC &lt; 0,3%</strong>.</p>
       <p class="price">A partir de 10,00 €</p>
       <select id="ak47-quantite">
         <option value="2" selected>2g – 10,00 €</option>
@@ -222,14 +226,14 @@
       <button class="cta-cart" onclick="ajouterProduit('ak47-cbd','Flor CBD AK-47','Flor CBD premium da Itália','ak47-quantite')">🛒 Adicionar ao carrinho</button>
     </div>
 
-    <!-- Produto 8 -->
+    <!-- Orange Cookies -->
     <div class="product-card" data-id="orange-cookies-cbd">
       <picture>
         <source srcset="../orange-cookies-cbd.webp" type="image/webp">
         <img src="../orange-cookies-cbd.jpg" alt="Flor CBD Orange Cookies - Itália" class="product-img" loading="lazy" width="400" height="400">
       </picture>
       <h3>🌿 Flor CBD Orange Cookies 🍊</h3>
-      <p>Notas cítricas, toque de laranja cristalizada e biscoito. <strong>THC &lt; 0,3%</strong>.</p>
+      <p>Notas cítricas e doces. <strong>THC &lt; 0,3%</strong>.</p>
       <p class="price">A partir de 10,00 €</p>
       <select id="orangecookies-quantite">
         <option value="2" selected>2g – 10,00 €</option>
@@ -241,14 +245,14 @@
       <button class="cta-cart" onclick="ajouterProduit('orange-cookies-cbd','Flor CBD Orange Cookies','Flor CBD premium da Itália','orangecookies-quantite')">🛒 Adicionar ao carrinho</button>
     </div>
 
-    <!-- Produto 9 -->
+    <!-- Gorilla Glue -->
     <div class="product-card" data-id="gorilla-glue-cbd">
       <picture>
         <source srcset="../gorilla-glue-cbd.webp" type="image/webp">
         <img src="../gorilla-glue-cbd.jpg" alt="Flor CBD Gorilla Glue - Itália" class="product-img" loading="lazy" width="400" height="400">
       </picture>
       <h3>🌿 Flor CBD Gorilla Glue 🦍</h3>
-      <p>Extremamente resinosa, nuances terrosas e diesel. <strong>THC &lt; 0,3%</strong>.</p>
+      <p>Nuances terrosas e diesel. <strong>THC &lt; 0,3%</strong>.</p>
       <p class="price">A partir de 10,00 €</p>
       <select id="gorilla-quantite">
         <option value="2" selected>2g – 10,00 €</option>
@@ -261,20 +265,115 @@
     </div>
   </div>
 </section>
-
 <!-- === Déclarations Snipcart (produits cachés) === -->
 <section id="snipcart-products" aria-hidden="true" style="display:none">
-  <!-- Exemple -->
-  <button class="snipcart-add-item" data-item-id="amnesia-cbd-2g" data-item-name="Flor CBD Amnesia 2g" data-item-price="10.00" data-item-url="https://green-therapy.pt/index.html?v=91"></button>
-  <button class="snipcart-add-item" data-item-id="amnesia-cbd-4g" data-item-name="Flor CBD Amnesia 4g" data-item-price="20.00" data-item-url="https://green-therapy.pt/index.html?v=91"></button>
-  <button class="snipcart-add-item" data-item-id="amnesia-cbd-6g" data-item-name="Flor CBD Amnesia 6g" data-item-price="30.00" data-item-url="https://green-therapy.pt/index.html?v=91"></button>
-  <button class="snipcart-add-item" data-item-id="amnesia-cbd-8g" data-item-name="Flor CBD Amnesia 8g" data-item-price="40.00" data-item-url="https://green-therapy.pt/index.html?v=91"></button>
-  <button class="snipcart-add-item" data-item-id="amnesia-cbd-10g" data-item-name="Flor CBD Amnesia 10g" data-item-price="45.00" data-item-url="https://green-therapy.pt/index.html?v=91"></button>
 
-  <!-- 👉 Fais pareil pour Resine, Cherry, Charas, Cali Dream, Gelato, AK47, Orange Cookies, Gorilla -->
-  <!-- Chaque ligne doit avoir data-item-url="https://green-therapy.pt/index.html?v=91" -->
+  <!-- Amnesia -->
+  <button class="snipcart-add-item" data-item-id="amnesia-cbd-2g"  data-item-name="Flor CBD Amnesia 2g"  data-item-price="10.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="amnesia-cbd-4g"  data-item-name="Flor CBD Amnesia 4g"  data-item-price="20.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="amnesia-cbd-6g"  data-item-name="Flor CBD Amnesia 6g"  data-item-price="30.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="amnesia-cbd-8g"  data-item-name="Flor CBD Amnesia 8g"  data-item-price="40.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="amnesia-cbd-10g" data-item-name="Flor CBD Amnesia 10g" data-item-price="45.00" data-item-url="https://green-therapy.pt/index.html"></button>
+
+  <!-- Resina -->
+  <button class="snipcart-add-item" data-item-id="resine-cbd-2g"  data-item-name="Resina CBD Hash 2g"  data-item-price="12.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="resine-cbd-4g"  data-item-name="Resina CBD Hash 4g"  data-item-price="24.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="resine-cbd-6g"  data-item-name="Resina CBD Hash 6g"  data-item-price="36.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="resine-cbd-8g"  data-item-name="Resina CBD Hash 8g"  data-item-price="48.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="resine-cbd-10g" data-item-name="Resina CBD Hash 10g" data-item-price="55.00" data-item-url="https://green-therapy.pt/index.html"></button>
+
+  <!-- Cherry -->
+  <button class="snipcart-add-item" data-item-id="cherry-cbd-2g"  data-item-name="Flor CBD Cherry 2g"  data-item-price="10.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="cherry-cbd-4g"  data-item-name="Flor CBD Cherry 4g"  data-item-price="20.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="cherry-cbd-6g"  data-item-name="Flor CBD Cherry 6g"  data-item-price="30.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="cherry-cbd-8g"  data-item-name="Flor CBD Cherry 8g"  data-item-price="40.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="cherry-cbd-10g" data-item-name="Flor CBD Cherry 10g" data-item-price="45.00" data-item-url="https://green-therapy.pt/index.html"></button>
+
+  <!-- Charas -->
+  <button class="snipcart-add-item" data-item-id="charas-cbd-2g"  data-item-name="Resina Charas CBD 2g"  data-item-price="12.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="charas-cbd-4g"  data-item-name="Resina Charas CBD 4g"  data-item-price="24.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="charas-cbd-6g"  data-item-name="Resina Charas CBD 6g"  data-item-price="36.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="charas-cbd-8g"  data-item-name="Resina Charas CBD 8g"  data-item-price="48.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="charas-cbd-10g" data-item-name="Resina Charas CBD 10g" data-item-price="55.00" data-item-url="https://green-therapy.pt/index.html"></button>
+
+  <!-- Cali Dream -->
+  <button class="snipcart-add-item" data-item-id="cali-dream-cbd-2g"  data-item-name="Flor CBD Cali Dream 2g"  data-item-price="10.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="cali-dream-cbd-4g"  data-item-name="Flor CBD Cali Dream 4g"  data-item-price="20.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="cali-dream-cbd-6g"  data-item-name="Flor CBD Cali Dream 6g"  data-item-price="30.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="cali-dream-cbd-8g"  data-item-name="Flor CBD Cali Dream 8g"  data-item-price="40.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="cali-dream-cbd-10g" data-item-name="Flor CBD Cali Dream 10g" data-item-price="45.00" data-item-url="https://green-therapy.pt/index.html"></button>
+
+  <!-- Gelato -->
+  <button class="snipcart-add-item" data-item-id="gelato-cbd-2g"  data-item-name="Flor CBD Gelato 2g"  data-item-price="10.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="gelato-cbd-4g"  data-item-name="Flor CBD Gelato 4g"  data-item-price="20.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="gelato-cbd-6g"  data-item-name="Flor CBD Gelato 6g"  data-item-price="30.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="gelato-cbd-8g"  data-item-name="Flor CBD Gelato 8g"  data-item-price="40.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="gelato-cbd-10g" data-item-name="Flor CBD Gelato 10g" data-item-price="45.00" data-item-url="https://green-therapy.pt/index.html"></button>
+
+  <!-- AK47 -->
+  <button class="snipcart-add-item" data-item-id="ak47-cbd-2g"  data-item-name="Flor CBD AK-47 2g"  data-item-price="10.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="ak47-cbd-4g"  data-item-name="Flor CBD AK-47 4g"  data-item-price="20.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="ak47-cbd-6g"  data-item-name="Flor CBD AK-47 6g"  data-item-price="30.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="ak47-cbd-8g"  data-item-name="Flor CBD AK-47 8g"  data-item-price="40.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="ak47-cbd-10g" data-item-name="Flor CBD AK-47 10g" data-item-price="45.00" data-item-url="https://green-therapy.pt/index.html"></button>
+
+  <!-- Orange Cookies -->
+  <button class="snipcart-add-item" data-item-id="orange-cookies-cbd-2g"  data-item-name="Flor CBD Orange Cookies 2g"  data-item-price="10.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="orange-cookies-cbd-4g"  data-item-name="Flor CBD Orange Cookies 4g"  data-item-price="20.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="orange-cookies-cbd-6g"  data-item-name="Flor CBD Orange Cookies 6g"  data-item-price="30.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="orange-cookies-cbd-8g"  data-item-name="Flor CBD Orange Cookies 8g"  data-item-price="40.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="orange-cookies-cbd-10g" data-item-name="Flor CBD Orange Cookies 10g" data-item-price="45.00" data-item-url="https://green-therapy.pt/index.html"></button>
+
+  <!-- Gorilla Glue -->
+  <button class="snipcart-add-item" data-item-id="gorilla-glue-cbd-2g"  data-item-name="Flor CBD Gorilla Glue 2g"  data-item-price="10.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="gorilla-glue-cbd-4g"  data-item-name="Flor CBD Gorilla Glue 4g"  data-item-price="20.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="gorilla-glue-cbd-6g"  data-item-name="Flor CBD Gorilla Glue 6g"  data-item-price="30.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="gorilla-glue-cbd-8g"  data-item-name="Flor CBD Gorilla Glue 8g"  data-item-price="40.00" data-item-url="https://green-therapy.pt/index.html"></button>
+  <button class="snipcart-add-item" data-item-id="gorilla-glue-cbd-10g" data-item-name="Flor CBD Gorilla Glue 10g" data-item-price="45.00" data-item-url="https://green-therapy.pt/index.html"></button>
 </section>
-<!-- Panier: JS produits -->
+
+<!-- Sobre nós -->
+<section id="about" class="section">
+  <h2>ℹ️ Sobre nós</h2>
+  <p>Especialista em CBD desde 2019, a nossa missão é oferecer produtos de cânhamo da mais alta qualidade, com total transparência e confiança.</p>
+</section>
+
+<!-- Opiniões -->
+<section id="avis" class="section">
+  <h2>⭐ Opiniões de Clientes</h2>
+  <div class="avis-grid">
+    <div class="avis-card"><p class="avis-texte">“Entrega rápida e discreta, flores de qualidade excepcional. Recomendo 100%!”</p><div class="avis-stars">⭐⭐⭐⭐⭐</div><p class="avis-nom">– Julien M.</p></div>
+    <div class="avis-card"><p class="avis-texte">“Uma verdadeira descoberta! O óleo de CBD ajuda-me a dormir melhor. Atendimento excelente.”</p><div class="avis-stars">⭐⭐⭐⭐⭐</div><p class="avis-nom">– Sophie L.</p></div>
+    <div class="avis-card"><p class="avis-texte">“Excelente relação qualidade/preço. Sabor, aroma, relaxamento… tudo perfeito.”</p><div class="avis-stars">⭐⭐⭐⭐⭐</div><p class="avis-nom">– Karim B.</p></div>
+  </div>
+</section>
+
+<!-- Contato -->
+<section id="contact" class="section">
+  <h2>✉️ Contato</h2>
+  <p>Entre em contato conosco para qualquer dúvida ou pedido especial.</p>
+  <p><a href="mailto:greentherapy06@gmail.com">📧 greentherapy06@gmail.com</a></p>
+  <div class="map-links" style="margin-top:10px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://maps.app.goo.gl/Fo9NSd2xudiaiFLC9?g_st=ac" target="_blank" rel="noopener">📍 Ver no Google Maps</a>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=Rua+de+Sao+Claudio+501,+4805-015+Barco,+Portugal" target="_blank" rel="noopener">🧭 Obter direções</a>
+  </div>
+</section>
+
+<!-- Footer legal -->
+<footer style="text-align:center; padding:20px; font-size:14px;">
+  <a href="./aviso-legal.html">Aviso legal</a> |
+  <a href="./cookies.html">Cookies</a> |
+  <a href="./cgv.html">CGV</a> |
+  <a href="./politica-privacidade.html">Política de Privacidade</a>
+</footer>
+<!-- Snipcart (hidden) -->
+<div hidden id="snipcart"
+  data-api-key="NTJhZjlkMTMtZmVmYy00MTZmLWFiYzUtZGU1ZDE1ZjZiODAwNjM4ODk3NzU4MjkzMjE0MDQ3"
+  data-config-modal-style="side"
+  data-config-currency="EUR">
+</div>
+
+<!-- Panier: JS produits (sélecteurs) -->
 <script>
 const prixParProduit = {
   "amnesia-cbd":       {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
@@ -288,42 +387,99 @@ const prixParProduit = {
   "gorilla-glue-cbd":  {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00}
 };
 
-function ensureSnipcartReady(callback){
-  if (window.Snipcart && window.Snipcart.api){
-    callback();
-  } else {
-    document.addEventListener('snipcart.ready', callback);
-  }
+function ensureSnipcartReady(cb){
+  if (window.Snipcart && window.Snipcart.api) cb();
+  else document.addEventListener('snipcart.ready', cb);
 }
 
 function ajouterProduit(idProduit, nom, desc, selectId){
   const sel = document.getElementById(selectId);
-  if (!sel) return alert("Choix introuvable");
+  if (!sel) return alert("Choix introuvable.");
 
   const g = parseInt(sel.value,10);
   const prix = prixParProduit[idProduit]?.[g];
-  if (!prix) return alert("Prix introuvable");
+  if (!prix) return alert("Prix introuvable.");
 
   const item = {
     id: `${idProduit}-${g}g`,
     name: `${nom} ${g}g`,
     price: Number(prix).toFixed(2),
-    url: "https://green-therapy.pt/index.html?v=91",
+    url: "https://green-therapy.pt/index.html",
     description: desc || ""
   };
 
   ensureSnipcartReady(()=>{
     Snipcart.api.cart.items.add(item)
-      .catch(()=>alert("Impossible d'ajouter au panier"));
+      .catch(()=> alert("Impossible d'ajouter ao carrinho. Tenta novamente."));
   });
 }
 </script>
 
-<footer>
-  <p>© 2025 Green-Therapy – CBD Premium</p>
-</footer>
+<!-- Paiement Crypto (NOWPayments) : bouton ajouté dans l'étape Paiement -->
+<script>
+const NOWP_API_KEY = "PX5H5DC-T4GMVX4-Q8F8VQR-M6S5X7C"; // fourni par toi
 
-<!-- Snipcart -->
-<div hidden id="snipcart" data-api-key="NTJhZjlkMTMtZmVmYy00MTZmLWFiYzUtZGU1ZDE1ZjZiODAwNjM4ODk3NzU4MjkzMjE0MDQ3" data-config-modal-style="side" data-config-currency="EUR"></div>
+async function nowpCreateInvoice(amountEUR){
+  const r = await fetch("https://api.nowpayments.io/v1/invoice",{
+    method:"POST",
+    headers:{ "Content-Type":"application/json","x-api-key":NOWP_API_KEY },
+    body: JSON.stringify({
+      price_amount: Number(amountEUR),
+      price_currency: "EUR",
+      order_id: "GT-"+Date.now(),
+      success_url: location.origin + "/?crypto=success",
+      cancel_url:  location.origin + "/?crypto=cancel"
+    })
+  });
+  if(!r.ok) throw new Error("NOWPayments "+r.status);
+  const j = await r.json();
+  return j.invoice_url || j.invoiceUrl || j.url;
+}
+
+function getTotalEUR(){
+  try {
+    const st = window.Snipcart?.store?.getState?.();
+    const t = st?.cart?.grandTotal ?? st?.cart?.total ?? 0;
+    return Number(t).toFixed(2);
+  } catch(e){ return "0.00"; }
+}
+
+function injectCryptoInPayment(){
+  const container =
+    document.querySelector(".snipcart-payment-methods") ||
+    document.querySelector('[class*="payment-methods"]') ||
+    document.querySelector(".snipcart-payment__methods");
+  if(!container) return;
+  if(document.getElementById("gt-crypto-method")) return;
+
+  const wrap = document.createElement("div");
+  wrap.id = "gt-crypto-method";
+  wrap.style.marginTop = "12px";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "snipcart-button-primary";
+  btn.textContent = "Payer en Crypto (NOWPayments)";
+  btn.onclick = async ()=>{
+    try{
+      const total = getTotalEUR();
+      if(Number(total)<=0){ alert("Carrinho vazio."); return; }
+      const url = await nowpCreateInvoice(total);
+      window.open(url, "_blank");
+    }catch(e){ alert("Paiement crypto indisponible."); }
+  };
+
+  wrap.appendChild(btn);
+  container.appendChild(wrap);
+}
+
+document.addEventListener("snipcart.ready", ()=>{
+  injectCryptoInPayment();
+  document.addEventListener("snipcart.routechanged", injectCryptoInPayment);
+  new MutationObserver(injectCryptoInPayment)
+    .observe(document.body,{subtree:true,childList:true});
+});
+</script>
+
 </body>
 </html>
