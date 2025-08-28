@@ -434,14 +434,20 @@ document.addEventListener('snipcart.ready', () => {
 async function payerEnCrypto(){
   try {
     const st = window.Snipcart?.store?.getState?.();
-    const total = Number(st?.cart?.grandTotal ?? st?.cart?.total ?? 0);
-    if (!total || total <= 0) { alert("Panier vide."); return; }
+    // -- Récupère le total de façon robuste
+const st = window.Snipcart?.store?.getState?.();
+let total = Number(st?.cart?.grandTotal ?? st?.cart?.total ?? 0);
 
-    const r = await fetch(
-      "https://green-therapy-cbd.vercel.app/api/create-invoice?amount=" +
-      encodeURIComponent(total.toFixed(2)) +
-      "&currency=EUR",
-      { method: "GET" }
+// si total est vide, on force via l'API (plus fiable)
+if (!total || isNaN(total) || total <= 0) {
+  const cart = await window.Snipcart.api.cart.get().catch(() => null);
+  total = Number(cart?.grandTotal ?? cart?.total ?? 0);
+}
+
+if (!total || isNaN(total) || total <= 0) {
+  alert("Panier vide ou total introuvable.");
+  return;
+}
     );
     const j = await r.json();
     if (!r.ok || !j.invoice_url) { alert("Paiement crypto indisponible."); return; }
