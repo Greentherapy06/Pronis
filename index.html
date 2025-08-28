@@ -437,11 +437,11 @@
       if (!total || Number(total) <= 0) { alert("Panier vide."); return; }
 
       // Appel en GET sur ton API Vercel /api/create-invoice
-      const r = await fetch(
-        "https://green-therapy-cbd.vercel.app/api/create-invoice?amount=" +
-        encodeURIComponent(total) + "&currency=EUR",
-        { method: "GET" }
-      );
+      const r = await fetch("https://green-therapy-cbd.vercel.app/api/create-invoice", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ amount: Number(total), currency: "EUR" }),
+});
       const j = await r.json();
       if (!r.ok || !j.invoice_url) { alert("Paiement crypto indisponible."); return; }
 
