@@ -1,48 +1,46 @@
-// api/checkout.js
+// /api/checkout.js
 export default async function handler(req, res) {
-  // CORS
-  res.setHeader("Access-Control-Allow-Origin", "https://green-therapy.pt");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  if (req.method === "OPTIONS") return res.status(204).end();
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Méthode non autorisée" });
-  }
+  // CORS: autoriser ton site .pt
+  const ORIGINS = ['https://green-therapy.pt', 'https://www.green-therapy.pt'];
+  const origin = req.headers.origin || '';
+  if (ORIGINS.includes(origin)) res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    const amount = Number(req.body?.amount);
-    if (!amount || isNaN(amount)) {
-      return res
-        .status(400)
-        .json({ error: "Montant introuvable. Retournez au paiement et réessayez." });
-    }
+    // Supporte GET (req.query) et POST (req.body)
+    const q = req.method === 'GET' ? req.query : (req.body || {});
+    const amount = parseFloat(q.amount);
+    const currency = String(q.currency || 'EUR').toUpperCase();
+    if (!(amount > 0)) return res.status(400).json({ error: 'amount required' });
 
-    const r = await fetch("https://api.nowpayments.io/v1/invoice", {
-      method: "POST",
+    const orderId = `GT-${Date.now()}`;
+
+    const r = await fetch('https://api.nowpayments.io/v1/invoice', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "x-api-key": process.env.NOWPAY_API_KEY,
+        'x-api-key': process.env.NOWPAY_API_KEY || '',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         price_amount: amount,
-        price_currency: "EUR",
-        pay_currency: "USDT",
-        order_id: "GT-" + Date.now(),
-        success_url: process.env.SITE_BASE_URL + "/?crypto=success",
-        cancel_url: process.env.SITE_BASE_URL + "/?crypto=cancel",
+        price_currency: currency,
+        order_id: orderId,
+        order_description: 'Commande Green-Therapy',
+        is_fee_paid_by_user: true,
+        success_url: 'https://green-therapy.pt/#/checkout',
+        cancel_url:  'https://green-therapy.pt/#/checkout',
       }),
     });
 
-    if (!r.ok) {
-      const t = await r.text();
-      return res.status(502).json({ error: "NOWPayments erreur", details: t });
+    const data = await r.json();
+    if (!r.ok || !data.invoice_url) {
+      return res.status(r.status || 400).json(data);
     }
-
-    const j = await r.json();
-    // on renvoie l'URL de facture à ouvrir côté client
-    return res.status(200).json({ url: j.invoice_url || j.url });
+    return res.status(200).json({ invoice_url: data.invoice_url });
   } catch (e) {
-    return res.status(500).json({ error: "Impossible de créer la facture crypto" });
+    return res.status(500).json({ error: 'server_error', detail: String(e) });
   }
 }
