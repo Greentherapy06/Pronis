@@ -372,155 +372,109 @@
   data-config-modal-style="side"
   data-config-currency="EUR">
 </div>
-
-<!-- Panier: JS produits (sélecteurs) -->
+<!-- Panier : JS produits (sélecteurs) -->
 <script>
-const prixParProduit = {
-  "amnesia-cbd":       {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-  "resine-cbd":        {2:12.00,4:24.00,6:36.00,8:48.00,10:55.00},
-  "cherry-cbd":        {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-  "charas-cbd":        {2:12.00,4:24.00,6:36.00,8:48.00,10:55.00},
-  "cali-dream-cbd":    {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-  "gelato-cbd":        {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-  "ak47-cbd":          {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-  "orange-cookies-cbd":{2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
-  "gorilla-glue-cbd":  {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00}
-};
-
-function ensureSnipcartReady(cb){
-  if (window.Snipcart && window.Snipcart.api) cb();
-  else document.addEventListener('snipcart.ready', cb);
-}
-
-function ajouterProduit(idProduit, nom, desc, selectId){
-  const sel = document.getElementById(selectId);
-  if (!sel) return alert("Choix introuvable.");
-
-  const g = parseInt(sel.value,10);
-  const prix = prixParProduit[idProduit]?.[g];
-  if (!prix) return alert("Prix introuvable.");
-
-  const item = {
-    id: `${idProduit}-${g}g`,
-    name: `${nom} ${g}g`,
-    price: Number(prix).toFixed(2),
-    url: "https://green-therapy.pt/index.html",
-    description: desc || ""
+  const prixParProduit = {
+    "amnesia-cbd":        {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
+    "resine-cbd":         {2:12.00,4:24.00,6:36.00,8:48.00,10:55.00},
+    "cherry-cbd":         {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
+    "charas-cbd":         {2:12.00,4:24.00,6:36.00,8:48.00,10:55.00},
+    "cali-dream-cbd":     {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
+    "gelato-cbd":         {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
+    "ak47-cbd":           {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
+    "orange-cookies-cbd": {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
+    "gorilla-glue-cbd":   {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00}
   };
 
-  ensureSnipcartReady(()=>{
-    Snipcart.api.cart.items.add(item)
-      .catch(()=> alert("Impossible d'ajouter ao carrinho. Tenta novamente."));
-  });
-}
-</script>
-  <script>
-<script>
-  async function payerEnCrypto() {
-    try {
-      const st = window?.Snipcart?.store?.getState?.();
-      const total = Number((st?.cart?.grandTotal ?? 0).toFixed(2));
-      if (!total || total <= 0) { alert("Panier vide."); return; }
-
-      const r = await fetch("https://green-therapy-cbd.vercel.app/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: total }),
-      });
-
-      const data = await r.json();
-      if (!r.ok || !data?.url) { alert("Crypto indisponible."); return; }
-      window.open(data.url, "_blank");
-    } catch (e) {
-      alert("Erreur paiement crypto.");
-    }
+  function ensureSnipcartReady(cb){
+    if (window.Snipcart && window.Snipcart.api) cb();
+    else document.addEventListener('snipcart.ready', cb);
   }
 
-  // insère le bouton dans la section Paiement de Snipcart
-  function injectCryptoButton() {
-    const zone =
-      document.querySelector(".snipcart-payment-methods") ||
-      document.querySelector('[class*="payment-methods"]') ||
-      document.querySelector(".snipcart__payment-methods");
+  function ajouterProduit(idProduit, nom, desc, selectId){
+    const sel = document.getElementById(selectId);
+    if (!sel) return alert("Choix introuvable.");
 
-    if (!zone || document.getElementById("gt-crypto-btn")) return;
+    const g = parseInt(sel.value, 10);
+    const prix = prixParProduit[idProduit]?.[g];
+    if (!prix) return alert("Prix introuvable.");
 
-    const btn = document.createElement("button");
-    btn.id = "gt-crypto-btn";
-    btn.className = "snipcart-button-primary";
-    btn.style.marginTop = "12px";
-    btn.textContent = "Payer en Crypto (NOWPayments)";
-    btn.onclick = payerEnCrypto;
-    zone.prepend(btn);
-  }
-
-  document.addEventListener("snipcart.ready", injectCryptoButton);
-  document.addEventListener("snipcart.routechanged", injectCryptoButton);
-  new MutationObserver(injectCryptoButton).observe(document.body, { subtree: true, childList: true });
-</script>
-
-  <script>
-/* Force la même URL produit pour tous les articles */
-document.addEventListener('snipcart.ready', () => {
-  try {
-    const addOrig = Snipcart.api.cart.items.add;
-    Snipcart.api.cart.items.add = function(item){
-      item = item || {};
-      item.url = "https://green-therapy.pt/index.html"; // URL unique
-      return addOrig.call(Snipcart.api.cart.items, item);
+    const item = {
+      id:   `${idProduit}-${g}g`,
+      name: `${nom} ${g}g`,
+      price: Number(prix).toFixed(2),
+      url:  "https://green-therapy.pt/index.html", // URL unique -> évite “Price changed”
+      description: desc || ""
     };
-  } catch(e) {}
-});
-  </script>
-  <script>
-  async function payerEnCrypto() {
+
+    ensureSnipcartReady(()=>{
+      Snipcart.api.cart.items.add(item)
+        .catch(()=> alert("Impossible d'ajouter au panier. Réessaie."));
+    });
+  }
+</script>
+
+<!-- Forcer la même URL produit pour tout ajout (ceinture + bretelles) -->
+<script>
+  document.addEventListener('snipcart.ready', () => {
+    try {
+      const addOrig = Snipcart.api.cart.items.add;
+      Snipcart.api.cart.items.add = function(item){
+        item = item || {};
+        item.url = "https://green-therapy.pt/index.html";
+        return addOrig.call(Snipcart.api.cart.items, item);
+      };
+    } catch(e) {}
+  });
+</script>
+
+<!-- Paiement crypto (NOWPayments via ton endpoint Vercel) -->
+<script>
+  async function payerEnCrypto(){
     try {
       const st = window.Snipcart?.store?.getState?.();
-      // Snipcart v3 retourne total/grandTotal en devise (pas en centimes)
       const total = Number(st?.cart?.grandTotal || st?.cart?.total || 0).toFixed(2);
+      if (!total || Number(total) <= 0) { alert("Panier vide."); return; }
 
-      if (!total || Number(total) <= 0) {
-        alert("Panier vide.");
-        return;
-      }
-
-      const r = await fetch("https://green-therapy-cbd.vercel.app/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: Number(total) }),
-      });
-
+      // Appel en GET sur ton API Vercel /api/create-invoice
+      const r = await fetch(
+        "https://green-therapy-cbd.vercel.app/api/create-invoice?amount=" +
+        encodeURIComponent(total) + "&currency=EUR",
+        { method: "GET" }
+      );
       const j = await r.json();
-      if (!r.ok || !j.invoice_url) {
-        alert("Paiement crypto indisponible.");
-        return;
-      }
-      window.open(j.invoice_url, "_blank");
+      if (!r.ok || !j.invoice_url) { alert("Paiement crypto indisponible."); return; }
+
+      // Redirection vers la facture NOWPayments
+      location.href = j.invoice_url;
     } catch (e) {
       alert("Erreur pendant le paiement crypto.");
     }
   }
+</script>
 
-  // Injecte le bouton dans l’étape Paiement de Snipcart
-  function injectCryptoButton() {
+<!-- Injection du bouton “Payer en Crypto” dans l’étape paiement Snipcart -->
+<script>
+  function injectCryptoButton(){
+    // Différents thèmes => plusieurs sélecteurs possibles
     const zone =
-      document.querySelector(".snipcart-payment-methods") ||
-      document.querySelector('[class*="payment-methods"]') ||
-      document.querySelector(".snipcart__payment-methods");
-    if (!zone || document.getElementById("gt-crypto-btn")) return;
+      document.querySelector('.snipcart-payment-methods') ||
+      document.querySelector('[class*="payment-methods"]');
+    if (!zone || document.getElementById('gt-crypto-btn')) return;
 
-    const btn = document.createElement("button");
-    btn.id = "gt-crypto-btn";
-    btn.className = "snipcart-button-primary";
-    btn.style.marginTop = "12px";
-    btn.textContent = "Payer en Crypto (NOWPayments)";
+    const btn = document.createElement('button');
+    btn.id = 'gt-crypto-btn';
+    btn.className = 'snipcart-button snipcart-button-primary';
+    btn.style.marginTop = '12px';
+    btn.textContent = 'Payer en Crypto (NOWPayments)';
     btn.onclick = payerEnCrypto;
     zone.prepend(btn);
   }
 
-  document.addEventListener("snipcart.ready", injectCryptoButton);
-  document.addEventListener("snipcart.routechanged", injectCryptoButton);
-  new MutationObserver(injectCryptoButton).observe(document.body, { subtree: true, childList: true });
-  </script>
+  document.addEventListener('snipcart.ready', injectCryptoButton);
+  document.addEventListener('snipcart.routechanged', injectCryptoButton);
+  new MutationObserver(injectCryptoButton).observe(document.body, { subtree:true, childList:true });
+</script>
+
 </body>
 </html>
