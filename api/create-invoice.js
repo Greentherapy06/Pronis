@@ -1,15 +1,22 @@
+// /api/create-invoice.js
 export default async function handler(req, res) {
-  // --- CORS : autoriser l'appel depuis ton site .pt ---
-  const ORIGIN = 'https://green-therapy.pt';
-  res.setHeader('Access-Control-Allow-Origin', ORIGIN);
+  // CORS (autorise ton .pt et le www)
+  const ORIGINS = ['https://green-therapy.pt', 'https://www.green-therapy.pt'];
+  const origin = req.headers.origin;
+  if (ORIGINS.includes(origin)) res.setHeader('Access-Control-Allow-Origin', origin);
+  else res.setHeader('Access-Control-Allow-Origin', '*'); // pour tests
+
   res.setHeader('Vary', 'Origin');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    const amount = parseFloat(req.query.amount);
-    const currency = (req.query.currency || 'EUR').toUpperCase();
+    const q = req.method === 'GET' ? req.query : (req.body || {});
+    const amount = parseFloat(q.amount);
+    const currency = String(q.currency || 'EUR').toUpperCase();
+
     if (!(amount > 0)) {
       return res.status(400).json({ error: 'amount required' });
     }
@@ -19,7 +26,7 @@ export default async function handler(req, res) {
     const r = await fetch('https://api.nowpayments.io/v1/invoice', {
       method: 'POST',
       headers: {
-        'x-api-key': process.env.NOWPAY_API_KEY || '',   // <— même nom que sur Vercel
+        'x-api-key': process.env.NOWPAY_API_KEY || '',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -37,6 +44,7 @@ export default async function handler(req, res) {
     if (!r.ok || !data.invoice_url) {
       return res.status(r.status || 400).json(data);
     }
+
     return res.status(200).json({ invoice_url: data.invoice_url });
   } catch (e) {
     return res.status(500).json({ error: 'server_error', detail: String(e) });
