@@ -414,11 +414,11 @@ function ajouterProduit(idProduit, nom, desc, selectId){
   });
 }
 </script>
+  <script>
+/* === NOWPayments – bouton Crypto dans l'étape Payment === */
+const NOWP_API_KEY = "PX5H5DC-T4GMVX4-Q8F8VQR-M6S5X7C";
 
-<!-- Paiement Crypto (NOWPayments) : bouton ajouté dans l'étape Paiement -->
-<script>
-const NOWP_API_KEY = "PX5H5DC-T4GMVX4-Q8F8VQR-M6S5X7C"; // fourni par toi
-
+/* 1) Crée une facture NOWPayments */
 async function nowpCreateInvoice(amountEUR){
   const r = await fetch("https://api.nowpayments.io/v1/invoice",{
     method:"POST",
@@ -436,50 +436,92 @@ async function nowpCreateInvoice(amountEUR){
   return j.invoice_url || j.invoiceUrl || j.url;
 }
 
-function getTotalEUR(){
-  try {
+/* 2) Total panier en EUR via Snipcart */
+function totalEUR(){
+  try{
     const st = window.Snipcart?.store?.getState?.();
-    const t = st?.cart?.grandTotal ?? st?.cart?.total ?? 0;
+    const t  = st?.cart?.grandTotal ?? st?.cart?.total ?? 0;
     return Number(t).toFixed(2);
-  } catch(e){ return "0.00"; }
+  }catch(e){ return "0.00"; }
 }
 
-function injectCryptoInPayment(){
-  const container =
-    document.querySelector(".snipcart-payment-methods") ||
-    document.querySelector('[class*="payment-methods"]') ||
-    document.querySelector(".snipcart-payment__methods");
-  if(!container) return;
+/* 3) Injection (forte) du bouton dans la page Payment */
+function onPaymentPage(){
+  return location.hash.includes("/checkout/payment");
+}
+
+function findPaymentContainer(){
+  const selectors = [
+    ".snipcart-payment-methods",
+    ".snipcart-payment__methods",
+    ".snipcart-payment__content",
+    ".snipcart-payment",
+    ".snipcart__content"
+  ];
+  for(const s of selectors){
+    const el = document.querySelector(s);
+    if(el) return el;
+  }
+  return null;
+}
+
+async function injectCryptoStrong(){
+  if(!onPaymentPage()) return;
   if(document.getElementById("gt-crypto-method")) return;
+
+  // on essaie pendant ~10s jusqu’à ce que le conteneur apparaisse
+  let tries = 0, container = null;
+  while(tries < 20 && !(container = findPaymentContainer())){
+    await new Promise(r=>setTimeout(r, 500));
+    tries++;
+  }
+  if(!container) return;
 
   const wrap = document.createElement("div");
   wrap.id = "gt-crypto-method";
-  wrap.style.marginTop = "12px";
+  wrap.style.marginTop = "14px";
 
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "snipcart-button-primary";
   btn.textContent = "Payer en Crypto (NOWPayments)";
+
   btn.onclick = async ()=>{
     try{
-      const total = getTotalEUR();
-      if(Number(total)<=0){ alert("Carrinho vazio."); return; }
-      const url = await nowpCreateInvoice(total);
+      const tot = totalEUR();
+      if(Number(tot) <= 0){ alert("Carrinho vazio."); return; }
+      const url = await nowpCreateInvoice(tot);
       window.open(url, "_blank");
     }catch(e){ alert("Paiement crypto indisponible."); }
   };
 
   wrap.appendChild(btn);
-  container.appendChild(wrap);
+
+  // on met le bouton en haut de la liste des méthodes
+  container.insertBefore(wrap, container.firstChild);
 }
 
-document.addEventListener("snipcart.ready", ()=>{
-  injectCryptoInPayment();
-  document.addEventListener("snipcart.routechanged", injectCryptoInPayment);
-  new MutationObserver(injectCryptoInPayment)
-    .observe(document.body,{subtree:true,childList:true});
-});
-</script>
+/* 4) Hooks Snipcart + MutationObserver + polling */
+function bootCrypto(){
+  injectCryptoStrong();
+  // réinjecter quand Snipcart change d’écran
+  document.addEventListener("snipcart.routechanged", ()=>setTimeout(injectCryptoStrong,150));
+  // observer les changements DOM
+  new MutationObserver(()=>setTimeout(injectCryptoStrong,150))
+    .observe(document.body,{childList:true,subtree:true});
+  // petit polling de secours
+  let n=0; const iv = setInterval(()=>{
+    injectCryptoStrong(); if(++n>30) clearInterval(iv);
+  }, 400);
+}
+
+if(document.readyState !== "loading") {
+  document.addEventListener("snipcart.ready", bootCrypto);
+} else {
+  document.addEventListener("DOMContentLoaded", ()=>document.addEventListener("snipcart.ready", bootCrypto));
+}
+  </script>
+
   <script>
 /* Force la même URL produit pour tous les articles */
 document.addEventListener('snipcart.ready', () => {
