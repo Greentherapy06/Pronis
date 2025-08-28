@@ -5,37 +5,35 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { amount } = req.body; // <-- on lit bien amount depuis le body
-
-    if (!amount || isNaN(amount)) {
-      return res.status(400).json({ error: "Montant introuvable" });
+    const { amount } = req.body;              // <- montant attendu
+    if (!amount || Number(amount) <= 0) {
+      return res.status(400).json({ error: "Montant manquant" });
     }
 
     const r = await fetch("https://api.nowpayments.io/v1/invoice", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": process.env.NOWPAY_API_KEY,
+        "x-api-key": process.env.NOWPAY_API_KEY,   // clé NowPayments dans Vercel
       },
       body: JSON.stringify({
-        price_amount: amount,
+        price_amount: Number(amount),
         price_currency: "EUR",
-        pay_currency: "USDT", // ou BTC/ETH
+        pay_currency: "USDT",
         order_id: "GT-" + Date.now(),
-        success_url: process.env.SITE_BASE_URL + "/?crypto=success",
-        cancel_url: process.env.SITE_BASE_URL + "/?crypto=cancel",
+        success_url: "https://green-therapy.pt/?crypto=success",
+        cancel_url: "https://green-therapy.pt/?crypto=cancel",
       }),
     });
 
-    const data = await r.json();
-
     if (!r.ok) {
-      throw new Error(data.message || "Erreur NowPayments");
+      const err = await r.text();
+      return res.status(502).json({ error: "NOWPayments: " + err });
     }
 
-    return res.status(200).json({ url: data.invoice_url });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Impossible de créer la facture crypto" });
+    const data = await r.json();
+    return res.status(200).json({ invoice_url: data.invoice_url || data.url });
+  } catch (e) {
+    return res.status(500).json({ error: "Impossible de créer la facture" });
   }
 }
