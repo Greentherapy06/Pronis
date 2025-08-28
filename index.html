@@ -536,81 +536,54 @@ document.addEventListener('snipcart.ready', () => {
 });
   </script>
   <script>
-const NOWP_API_KEY="PX5H5DC-T4GMVX4-Q8F8VQR-M6S5X7C";
+  async function payerEnCrypto() {
+    try {
+      const st = window.Snipcart?.store?.getState?.();
+      // Snipcart v3 retourne total/grandTotal en devise (pas en centimes)
+      const total = Number(st?.cart?.grandTotal || st?.cart?.total || 0).toFixed(2);
 
-async function nowpCreateInvoice(amountEUR){
-  const r=await fetch("https://api.nowpayments.io/v1/invoice",{
-    method:"POST",
-    headers:{ "Content-Type":"application/json","x-api-key":NOWP_API_KEY },
-    body:JSON.stringify({
-      price_amount:Number(amountEUR),
-      price_currency:"EUR",
-      order_id:"GT-"+Date.now(),
-      success_url:location.origin+"/?crypto=success",
-      cancel_url: location.origin+"/?crypto=cancel"
-    })
-  });
-  if(!r.ok) throw new Error("NOWPayments "+r.status);
-  const j=await r.json(); return j.invoice_url||j.invoiceUrl||j.url;
-}
-function totalEUR(){ try{
-  const st=window.Snipcart?.store?.getState?.();
-  const t=st?.cart?.grandTotal ?? st?.cart?.total ?? 0;
-  return Number(t).toFixed(2);}catch(e){return "0.00";}
-}
-function injectCrypto(){
-  const sel=[".snipcart-payment-methods",".snipcart-payment__methods",
-             '[class*=\"payment-methods\"]',".snipcart-payment__section--methods"];
-  const c=sel.map(s=>document.querySelector(s)).find(Boolean);
-  if(!c||document.getElementById("gt-crypto-method")) return;
-  const wrap=document.createElement("div"); wrap.id="gt-crypto-method"; wrap.style.marginTop="12px";
-  const btn=document.createElement("button"); btn.type="button"; btn.className="snipcart-button-primary";
-  btn.textContent="Payer en Crypto (NOWPayments)";
-  btn.onclick=async()=>{try{
-    const tot=totalEUR(); if(Number(tot)<=0){alert("Carrinho vazio.");return;}
-    const url=await nowpCreateInvoice(tot); window.open(url,"_blank");
-  }catch(e){alert("Paiement crypto indisponible.");}};
-  wrap.appendChild(btn); c.appendChild(wrap);
-}
-document.addEventListener("snipcart.ready", ()=>{
-  injectCrypto();
-  document.addEventListener("snipcart.routechanged", ()=>setTimeout(injectCrypto,150));
-  new MutationObserver(()=>setTimeout(injectCrypto,150))
-    .observe(document.body,{subtree:true,childList:true});
-});
-  </script>
-  ...
-  <!-- ton contenu, panier, produits etc -->
-
-  <!-- Script Crypto -->
-  <script>
-    async function payerEnCrypto() {
-      const total = getTotalEUR(); // ta fonction qui calcule le total
       if (!total || Number(total) <= 0) {
         alert("Panier vide.");
         return;
       }
 
-      try {
-        const resp = await fetch("https://green-therapy-cbd.vercel.app/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount: Number(total) })
-        });
+      const r = await fetch("https://green-therapy-cbd.vercel.app/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: Number(total) }),
+      });
 
-        const { url } = await resp.json();
-        if (url) {
-          window.open(url, "_blank"); // ouvre la facture NOWPayments
-        } else {
-          alert("Impossible d’obtenir la facture crypto.");
-        }
-      } catch (err) {
-        alert("Erreur paiement crypto : " + err.message);
+      const j = await r.json();
+      if (!r.ok || !j.invoice_url) {
+        alert("Paiement crypto indisponible.");
+        return;
       }
+      window.open(j.invoice_url, "_blank");
+    } catch (e) {
+      alert("Erreur pendant le paiement crypto.");
     }
-  </script>
-</body>
-</html>
+  }
 
+  // Injecte le bouton dans l’étape Paiement de Snipcart
+  function injectCryptoButton() {
+    const zone =
+      document.querySelector(".snipcart-payment-methods") ||
+      document.querySelector('[class*="payment-methods"]') ||
+      document.querySelector(".snipcart__payment-methods");
+    if (!zone || document.getElementById("gt-crypto-btn")) return;
+
+    const btn = document.createElement("button");
+    btn.id = "gt-crypto-btn";
+    btn.className = "snipcart-button-primary";
+    btn.style.marginTop = "12px";
+    btn.textContent = "Payer en Crypto (NOWPayments)";
+    btn.onclick = payerEnCrypto;
+    zone.prepend(btn);
+  }
+
+  document.addEventListener("snipcart.ready", injectCryptoButton);
+  document.addEventListener("snipcart.routechanged", injectCryptoButton);
+  new MutationObserver(injectCryptoButton).observe(document.body, { subtree: true, childList: true });
+  </script>
 </body>
 </html>
