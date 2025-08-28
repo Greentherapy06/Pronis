@@ -416,64 +416,63 @@
 
 <!-- Forcer la même URL produit pour tout ajout (ceinture + bretelles) -->
 <script>
-  document.addEventListener('snipcart.ready', () => {
-    try {
-      const addOrig = Snipcart.api.cart.items.add;
-      Snipcart.api.cart.items.add = function(item){
-        item = item || {};
-        item.url = "https://green-therapy.pt/index.html";
-        return addOrig.call(Snipcart.api.cart.items, item);
-      };
-    } catch(e) {}
-  });
+document.addEventListener('snipcart.ready', () => {
+  try {
+    const addOrig = Snipcart.api.cart.items.add;
+    Snipcart.api.cart.items.add = function(item){
+      item = item || {};
+      // DOIT être la même URL que dans tes <button class="snipcart-add-item"> cachés
+      item.url = "https://green-therapy.pt/index.html";
+      return addOrig.call(Snipcart.api.cart.items, item);
+    };
+  } catch (e) {}
+});
 </script>
 
-<!-- Paiement crypto (NOWPayments via ton endpoint Vercel) -->
+<!-- Paiement crypto (NOWPayments via ton endpoint Vercel en GET) -->
 <script>
-  async function payerEnCrypto(){
-    try {
-      const st = window.Snipcart?.store?.getState?.();
-      const total = Number(st?.cart?.grandTotal || st?.cart?.total || 0).toFixed(2);
-      if (!total || Number(total) <= 0) { alert("Panier vide."); return; }
+async function payerEnCrypto(){
+  try {
+    const st = window.Snipcart?.store?.getState?.();
+    const total = Number(st?.cart?.grandTotal ?? st?.cart?.total ?? 0);
+    if (!total || total <= 0) { alert("Panier vide."); return; }
 
-      // Appel en GET sur ton API Vercel /api/create-invoice
-      const r = await fetch("https://green-therapy-cbd.vercel.app/api/create-invoice", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ amount: Number(total), currency: "EUR" }),
-});
-      const j = await r.json();
-      if (!r.ok || !j.invoice_url) { alert("Paiement crypto indisponible."); return; }
+    const r = await fetch(
+      "https://green-therapy-cbd.vercel.app/api/create-invoice?amount=" +
+      encodeURIComponent(total.toFixed(2)) +
+      "&currency=EUR",
+      { method: "GET" }
+    );
+    const j = await r.json();
+    if (!r.ok || !j.invoice_url) { alert("Paiement crypto indisponible."); return; }
 
-      // Redirection vers la facture NOWPayments
-      location.href = j.invoice_url;
-    } catch (e) {
-      alert("Erreur pendant le paiement crypto.");
-    }
+    location.href = j.invoice_url; // redirection vers la facture NOWPayments
+  } catch (e) {
+    alert("Erreur pendant le paiement crypto.");
   }
+}
 </script>
 
 <!-- Injection du bouton “Payer en Crypto” dans l’étape paiement Snipcart -->
 <script>
-  function injectCryptoButton(){
-    // Différents thèmes => plusieurs sélecteurs possibles
-    const zone =
-      document.querySelector('.snipcart-payment-methods') ||
-      document.querySelector('[class*="payment-methods"]');
-    if (!zone || document.getElementById('gt-crypto-btn')) return;
+function injectCryptoButton(){
+  const zone =
+    document.querySelector('.snipcart-payment-methods') ||
+    document.querySelector('[class*="payment-methods"]') ||
+    document.querySelector('.snipcart__payment-methods');
+  if (!zone || document.getElementById('gt-crypto-btn')) return;
 
-    const btn = document.createElement('button');
-    btn.id = 'gt-crypto-btn';
-    btn.className = 'snipcart-button snipcart-button-primary';
-    btn.style.marginTop = '12px';
-    btn.textContent = 'Payer en Crypto (NOWPayments)';
-    btn.onclick = payerEnCrypto;
-    zone.prepend(btn);
-  }
-
-  document.addEventListener('snipcart.ready', injectCryptoButton);
-  document.addEventListener('snipcart.routechanged', injectCryptoButton);
-  new MutationObserver(injectCryptoButton).observe(document.body, { subtree:true, childList:true });
+  const btn = document.createElement('button');
+  btn.id = 'gt-crypto-btn';
+  btn.className = 'snipcart-button-primary';
+  btn.style.marginTop = '12px';
+  btn.textContent = 'Payer en Crypto (NOWPayments)';
+  btn.onclick = payerEnCrypto;
+  zone.prepend(btn);
+}
+document.addEventListener('snipcart.ready', injectCryptoButton);
+document.addEventListener('snipcart.routechanged', injectCryptoButton);
+new MutationObserver(injectCryptoButton).observe(document.body, { subtree: true, childList: true });
 </script>
 
 </body>
