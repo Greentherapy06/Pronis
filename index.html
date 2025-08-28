@@ -480,6 +480,63 @@ document.addEventListener("snipcart.ready", ()=>{
     .observe(document.body,{subtree:true,childList:true});
 });
 </script>
+  <script>
+/* Force la même URL produit pour tous les articles */
+document.addEventListener('snipcart.ready', () => {
+  try {
+    const addOrig = Snipcart.api.cart.items.add;
+    Snipcart.api.cart.items.add = function(item){
+      item = item || {};
+      item.url = "https://green-therapy.pt/index.html"; // URL unique
+      return addOrig.call(Snipcart.api.cart.items, item);
+    };
+  } catch(e) {}
+});
+  </script>
+  <script>
+const NOWP_API_KEY="PX5H5DC-T4GMVX4-Q8F8VQR-M6S5X7C";
+
+async function nowpCreateInvoice(amountEUR){
+  const r=await fetch("https://api.nowpayments.io/v1/invoice",{
+    method:"POST",
+    headers:{ "Content-Type":"application/json","x-api-key":NOWP_API_KEY },
+    body:JSON.stringify({
+      price_amount:Number(amountEUR),
+      price_currency:"EUR",
+      order_id:"GT-"+Date.now(),
+      success_url:location.origin+"/?crypto=success",
+      cancel_url: location.origin+"/?crypto=cancel"
+    })
+  });
+  if(!r.ok) throw new Error("NOWPayments "+r.status);
+  const j=await r.json(); return j.invoice_url||j.invoiceUrl||j.url;
+}
+function totalEUR(){ try{
+  const st=window.Snipcart?.store?.getState?.();
+  const t=st?.cart?.grandTotal ?? st?.cart?.total ?? 0;
+  return Number(t).toFixed(2);}catch(e){return "0.00";}
+}
+function injectCrypto(){
+  const sel=[".snipcart-payment-methods",".snipcart-payment__methods",
+             '[class*=\"payment-methods\"]',".snipcart-payment__section--methods"];
+  const c=sel.map(s=>document.querySelector(s)).find(Boolean);
+  if(!c||document.getElementById("gt-crypto-method")) return;
+  const wrap=document.createElement("div"); wrap.id="gt-crypto-method"; wrap.style.marginTop="12px";
+  const btn=document.createElement("button"); btn.type="button"; btn.className="snipcart-button-primary";
+  btn.textContent="Payer en Crypto (NOWPayments)";
+  btn.onclick=async()=>{try{
+    const tot=totalEUR(); if(Number(tot)<=0){alert("Carrinho vazio.");return;}
+    const url=await nowpCreateInvoice(tot); window.open(url,"_blank");
+  }catch(e){alert("Paiement crypto indisponible.");}};
+  wrap.appendChild(btn); c.appendChild(wrap);
+}
+document.addEventListener("snipcart.ready", ()=>{
+  injectCrypto();
+  document.addEventListener("snipcart.routechanged", ()=>setTimeout(injectCrypto,150));
+  new MutationObserver(()=>setTimeout(injectCrypto,150))
+    .observe(document.body,{subtree:true,childList:true});
+});
+  </script>
 
 </body>
 </html>
