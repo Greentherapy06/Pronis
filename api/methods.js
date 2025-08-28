@@ -1,12 +1,17 @@
-// /api/methods.js
+// api/methods.js
 export default function handler(req, res) {
+  // CORS
+  res.setHeader("Access-Control-Allow-Origin", "https://green-therapy.pt");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") return res.status(204).end();
+
+  const base = "https://green-therapy-cbd.vercel.app"; // ton domaine Vercel
   res.status(200).json([
     {
       id: "crypto",
       name: "Payer en Crypto (NOWPayments)",
-      // Snipcart fera un GET sur cette URL (dans un iframe)
-      checkoutUrl: "https://green-therapy-cbd.vercel.app/api/checkout"
-      // si ton domaine prod est autre, remplace par ton vrai domaine Vercel
-    }
+      checkoutUrl: `${base}/api/checkout`,
+    },
   ]);
 }
