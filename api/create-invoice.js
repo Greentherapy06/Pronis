@@ -18,8 +18,6 @@ export default async function handler(req, res) {
   try {
     // --- Récupération des paramètres ---
     const q = req.method === 'GET' ? req.query : (req.body || {});
-
-    // Correction : toujours forcer number
     const rawAmount = q.amount !== undefined ? q.amount : null;
     const amount = rawAmount ? parseFloat(String(rawAmount).replace(',', '.')) : 0;
     const currency = String(q.currency || 'EUR').toUpperCase();
@@ -34,7 +32,7 @@ export default async function handler(req, res) {
     const r = await fetch('https://api.nowpayments.io/v1/invoice', {
       method: 'POST',
       headers: {
-        'x-api-key': process.env.NOWPAY_API_KEY || '', // ta clé API stockée dans Vercel
+        'x-api-key': process.env.NOWPAY_API_KEY || '', // clé API stockée dans Vercel
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -43,8 +41,8 @@ export default async function handler(req, res) {
         order_id: orderId,
         order_description: 'Commande Green-Therapy',
         is_fee_paid_by_user: true,
-        success_url: 'https://green-therapy.pt/#/checkout',
-        cancel_url: 'https://green-therapy.pt/#/checkout',
+        success_url: 'https://green-therapy.pt/#/success', // ✅ corrigé
+        cancel_url:  'https://green-therapy.pt/#/cancel',  // ✅ corrigé
       }),
     });
 
