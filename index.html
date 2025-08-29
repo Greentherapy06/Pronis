@@ -416,6 +416,64 @@
     });
   }
 </script>
+  <!-- Bouton Crypto dans le header + redirection NowPayments -->
+<script>
+async function payerEnCrypto() {
+  try {
+    // Récupère le panier Snipcart
+    const cart = await window.Snipcart.api.cart.get();
+    const items = cart?.items || [];
+    let amount = Number(cart?.grandTotal || cart?.total || 0);
+
+    // Si pas de total → recalcule avec les articles
+    if ((!amount || isNaN(amount)) && items.length > 0) {
+      amount = items.reduce((sum, it) => {
+        const line = Number(it.totalPrice) || (Number(it.price) * (it.quantity || 1));
+        return sum + (isNaN(line) ? 0 : line);
+      }, 0);
+    }
+
+    // Si encore vide → stop
+    if (!amount || isNaN(amount)) {
+      alert("Erreur: panier vide ou montant introuvable.");
+      return;
+    }
+
+    // Appel backend Vercel → génère facture NowPayments
+    const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
+              + "?amount=" + encodeURIComponent(amount.toFixed(2))
+              + "&currency=EUR";
+
+    const r = await fetch(url, { method: "GET" });
+    const j = await r.json();
+
+    if (!r.ok || !j.invoice_url) {
+      alert("Paiement crypto indisponible.");
+      return;
+    }
+
+    // Redirection vers NowPayments
+    location.href = j.invoice_url;
+
+  } catch (err) {
+    alert("Erreur pendant le paiement crypto.");
+  }
+}
+
+// Ajoute le bouton Crypto dans le header à côté du panier
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".header-panier");
+  if (header && !document.getElementById("crypto-btn")) {
+    const btn = document.createElement("button");
+    btn.id = "crypto-btn";
+    btn.className = "snipcart-checkout panier-btn";
+    btn.style.marginLeft = "8px";
+    btn.innerHTML = 'Ver carrinho (₿ Crypto)';
+    btn.onclick = payerEnCrypto;
+    header.appendChild(btn);
+  }
+});
+</script>
   
 </body>
 </html>
