@@ -417,65 +417,6 @@
 <script>
 async function payerEnCrypto() {
   try {
-    // 1. Récupérer le panier Snipcart
-    const cart = await window.Snipcart.api.cart.get();
-    const items = cart?.items || [];
-    let amount = Number(cart?.grandTotal || cart?.total || 0);
-
-    // 2. Si pas de total → recalculer avec les articles
-    if ((!amount || isNaN(amount)) && items.length > 0) {
-      amount = items.reduce((sum, it) => {
-        const line = Number(it.totalPrice) || (Number(it.price) * (it.quantity || 1));
-        return sum + (isNaN(line) ? 0 : line);
-      }, 0);
-    }
-
-    // 3. Vérifie que le montant est valide
-    if (!amount || isNaN(amount)) {
-      alert("Erreur : panier vide ou montant introuvable.");
-      return;
-    }
-
-    // 4. Appel backend Vercel → crée facture NowPayments
-    const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
-              + "?amount=" + encodeURIComponent(amount.toFixed(2))
-              + "&currency=EUR";
-
-    const r = await fetch(url, { method: "GET" });
-    const j = await r.json();
-
-    if (!r.ok || !j.invoice_url) {
-      console.error(j);
-      alert("Paiement crypto indisponible.");
-      return;
-    }
-
-    // 5. Redirection vers NowPayments
-    window.location.href = j.invoice_url;
-
-  } catch (err) {
-    console.error(err);
-    alert("Erreur pendant le paiement crypto.");
-  }
-}
-
-// 6. Ajoute le bouton Crypto à côté du panier
-document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector(".header-panier"); 
-  if (header && !document.getElementById("crypto-btn")) {
-    const btn = document.createElement("button");
-    btn.id = "crypto-btn";
-    btn.className = "panier-btn"; // même style que "Voir le panier"
-    btn.style.marginLeft = "8px";
-    btn.innerHTML = 'Payer en Crypto ₿';
-    btn.onclick = payerEnCrypto;
-    header.appendChild(btn);
-  }
-});
-</script>
-  <script>
-async function payerEnCrypto() {
-  try {
     // 1. Récupérer le panier depuis Snipcart
     const cart = await window.Snipcart.api.cart.get();
     const items = cart.items || [];
