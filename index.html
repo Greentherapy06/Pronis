@@ -517,22 +517,6 @@ async function payerEnCrypto() {
 }
   </script>
   <script>
-async function payerEnCrypto() {
-  try {
-    const res = await fetch("https://green-therapy-cbd.vercel.app/api/create-invoice?amount=10&currency=EUR");
-    const data = await res.json();
-
-    if (data.invoice_url) {
-      window.location.href = data.invoice_url; // Redirection NowPayments
-    } else {
-      alert("Erreur: pas d'URL de paiement reçue.");
-      console.error(data);
-    }
-  } catch (err) {
-    alert("Erreur pendant le paiement crypto.");
-    console.error(err);
-  }
-}
 
 // --- Ajouter le bouton en haut à côté du panier ---
 document.addEventListener("DOMContentLoaded", () => {
