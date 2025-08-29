@@ -414,7 +414,63 @@
     });
   }
 </script>
-<script>async function payerEnCrypto(){try{const t=await window.Snipcart.api.cart.get(),e=t.items||[];let r=t.grandTotal||0;!r&&e.length>0&&(r=e.reduce(((t,e)=>{const n=Number(e.totalPrice)||Number(e.price)*e.quantity;return t+n}),0)),!r||isNaN(r)?alert("Erreur : panier vide ou montant introuvable."):(await fetch("https://green-therapy-cbd.vercel.app/api/create-invoice?amount="+encodeURIComponent(r.toFixed(2))+"&currency=EUR",{method:"GET"})).json().then((t=>{t.invoice_url?window.location.href=t.invoice_url:(console.error("Erreur serveur :",t),alert("Paiement crypto indisponible."))}))}catch(t){console.error(t),alert("Erreur pendant le paiement crypto.")}}document.addEventListener("DOMContentLoaded",()=>{const t=document.querySelector(".header-panier");if(t&&!document.getElementById("crypto-btn")){const e=document.createElement("button");e.id="crypto-btn",e.className="panier-btn",e.style.marginLeft="8px",e.innerHTML="Payer en Crypto ₿",e.onclick=payerEnCrypto,t.appendChild(e)}});</script>
-  
+<!-- Paiement Crypto -->
+<script>
+async function payerEnCrypto() {
+  try {
+    // 1. Récupère le panier depuis Snipcart
+    const cart = await window.Snipcart.api.cart.get();
+    const items = cart.items || [];
+
+    // 2. Calcule le montant total
+    let amount = cart.grandTotal || 0;
+    if (!amount && items.length > 0) {
+      amount = items.reduce((sum, it) => {
+        return sum + (Number(it.totalPrice) || (Number(it.price) * it.quantity));
+      }, 0);
+    }
+
+    if (!amount || isNaN(amount)) {
+      alert("Erreur : panier vide ou montant introuvable.");
+      return;
+    }
+
+    // 3. Appel backend Vercel pour créer la facture NowPayments
+    const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
+      + "?amount=" + encodeURIComponent(amount.toFixed(2))
+      + "&currency=EUR";
+
+    const res = await fetch(url, { method: "GET" });
+    const data = await res.json();
+
+    if (!res.ok || !data.invoice_url) {
+      console.error("Erreur serveur :", data);
+      alert("Paiement crypto indisponible.");
+      return;
+    }
+
+    // 4. Redirection vers la page de paiement NowPayments
+    window.location.href = data.invoice_url;
+
+  } catch (err) {
+    console.error(err);
+    alert("Erreur pendant le paiement crypto.");
+  }
+}
+
+// --- Ajouter le bouton en haut à côté du panier ---
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".header-panier");
+  if (header && !document.getElementById("crypto-btn")) {
+    const btn = document.createElement("button");
+    btn.id = "crypto-btn";
+    btn.className = "panier-btn";
+    btn.style.marginLeft = "8px";
+    btn.innerHTML = "Payer en Crypto ₿";
+    btn.onclick = payerEnCrypto;
+    header.appendChild(btn);
+  }
+});
+</script>
 </body>
 </html>
