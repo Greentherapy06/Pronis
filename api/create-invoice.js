@@ -1,10 +1,10 @@
 // api/create-invoice.js
 export default async function handler(req, res) {
   try {
-    // Autoriser ton site et ton domaine Vercel
+    // --- CORS ---
     const ORIGINS = [
-      'https://green-therapy.pt',
-      'https://green-therapy-cbd.vercel.app'
+      "https://green-therapy.pt",
+      "https://green-therapy-cbd.vercel.app"
     ];
     const origin = req.headers.origin || "";
     if (ORIGINS.includes(origin)) {
@@ -14,16 +14,18 @@ export default async function handler(req, res) {
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     if (req.method === "OPTIONS") return res.status(200).end();
 
-    // Récupération du montant
-    const q = req.method === "GET" ? req.query : req.body;
-    const amount = parseFloat(q.amount || 0);
+    // --- Récupération paramètres (toujours en query) ---
+    const q = req.query;
+    const amount = parseFloat(q.amount || "0");
+    const currency = (q.currency || "EUR").toUpperCase();
     if (!amount || amount <= 0) {
       return res.status(400).json({ error: "Montant invalide" });
     }
 
+    // --- Order ID ---
     const orderId = `GT-${Date.now()}`;
 
-    // Appel API NowPayments
+    // --- Appel NowPayments ---
     const r = await fetch("https://api.nowpayments.io/v1/invoice", {
       method: "POST",
       headers: {
@@ -32,7 +34,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         price_amount: amount,
-        price_currency: "EUR",
+        price_currency: currency,
         order_id: orderId,
         order_description: "Commande Green-Therapy",
         is_fee_paid_by_user: true,
@@ -49,10 +51,13 @@ export default async function handler(req, res) {
       });
     }
 
-    // OK → on retourne l’URL de paiement
+    // --- OK ---
     return res.status(200).json({ invoice_url: data.invoice_url });
 
   } catch (e) {
-    return res.status(500).json({ error: "server_error", detail: String(e) });
+    return res.status(500).json({
+      error: "server_error",
+      detail: String(e)
+    });
   }
 }
