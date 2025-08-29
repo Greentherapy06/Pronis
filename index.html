@@ -414,40 +414,64 @@
     });
   }
 </script>
-<button id="crypto-btn" class="panier-btn">Payer en Crypto ₿</button>
-
 <script>
 async function payerEnCrypto() {
   try {
-    // 1. Récupère le total du panier Snipcart
+    // 1. Récupérer le panier Snipcart
     const cart = await window.Snipcart.api.cart.get();
-    const amount = cart?.total || 0;
-    if (!amount) {
-      alert("Panier vide.");
+    const items = cart?.items || [];
+    let amount = Number(cart?.grandTotal || cart?.total || 0);
+
+    // 2. Si pas de total → recalculer avec les articles
+    if ((!amount || isNaN(amount)) && items.length > 0) {
+      amount = items.reduce((sum, it) => {
+        const line = Number(it.totalPrice) || (Number(it.price) * (it.quantity || 1));
+        return sum + (isNaN(line) ? 0 : line);
+      }, 0);
+    }
+
+    // 3. Vérifie que le montant est valide
+    if (!amount || isNaN(amount)) {
+      alert("Erreur : panier vide ou montant introuvable.");
       return;
     }
 
-    // 2. Appel backend pour créer la facture
-    const url = "https://green-therapy-cbd.vercel.app/api/create-invoice?amount=" + amount;
+    // 4. Appel backend Vercel → crée facture NowPayments
+    const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
+              + "?amount=" + encodeURIComponent(amount.toFixed(2))
+              + "&currency=EUR";
+
     const r = await fetch(url, { method: "GET" });
     const j = await r.json();
 
-    if (!j.invoice_url) {
-      alert("Crypto indisponible.");
+    if (!r.ok || !j.invoice_url) {
       console.error(j);
+      alert("Paiement crypto indisponible.");
       return;
     }
 
-    // 3. Redirection vers la page NowPayments
+    // 5. Redirection vers NowPayments
     window.location.href = j.invoice_url;
 
   } catch (err) {
     console.error(err);
-    alert("Erreur paiement crypto.");
+    alert("Erreur pendant le paiement crypto.");
   }
 }
 
-document.getElementById("crypto-btn").onclick = payerEnCrypto;
+// 6. Ajoute le bouton Crypto à côté du panier
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".header-panier"); 
+  if (header && !document.getElementById("crypto-btn")) {
+    const btn = document.createElement("button");
+    btn.id = "crypto-btn";
+    btn.className = "panier-btn"; // même style que "Voir le panier"
+    btn.style.marginLeft = "8px";
+    btn.innerHTML = 'Payer en Crypto ฿';
+    btn.onclick = payerEnCrypto;
+    header.appendChild(btn);
+  }
+});
 </script>
   
 </body>
