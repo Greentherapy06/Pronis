@@ -431,26 +431,31 @@ document.addEventListener('snipcart.ready', () => {
 <script>
 async function payerEnCrypto() {
   try {
-    <script>
-async function payerEnCrypto() {
-  try {
-    // Récupérer l'état du panier depuis Snipcart
-    const cart = await Snipcart.api.cart.get();
-    const total = Number(cart.itemsTotal ?? 0);
+    // Récupère le panier complet via Snipcart
+    const cart = await window.Snipcart.api.cart.get();
+    const items = cart?.items || [];
+    let amount = Number(cart?.grandTotal || cart?.total || 0);
 
-    if (!total || isNaN(total) || total <= 0) {
-      alert("Panier vide ou total introuvable.");
+    // Si pas de total → recalcule avec les articles
+    if ((!amount || isNaN(amount)) && items.length > 0) {
+      amount = items.reduce((sum, it) => {
+        const line = Number(it.totalPrice) || (Number(it.price) * (it.quantity || 1));
+        return sum + (isNaN(line) ? 0 : line);
+      }, 0);
+    }
+
+    // Si encore vide → stop
+    if (!amount || isNaN(amount)) {
+      alert("Erreur: total du panier introuvable.");
       return;
     }
 
-    // Appel à ton API Vercel pour créer la facture NOWPayments
-    const r = await fetch(
-      "https://green-therapy-cbd.vercel.app/api/create-invoice?amount=" +
-        encodeURIComponent(total.toFixed(2)) +
-        "&currency=EUR",
-      { method: "GET" }
-    );
+    // Appel de ton API Vercel
+    const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
+              + "?amount=" + encodeURIComponent(amount.toFixed(2))
+              + "&currency=EUR";
 
+    const r = await fetch(url, { method: "GET" });
     const j = await r.json();
 
     if (!r.ok || !j.invoice_url) {
@@ -458,11 +463,10 @@ async function payerEnCrypto() {
       return;
     }
 
-    // Redirection vers la facture NOWPayments
+    // Redirection vers NowPayments
     location.href = j.invoice_url;
 
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
     alert("Erreur pendant le paiement crypto.");
   }
 }
