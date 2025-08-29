@@ -425,7 +425,8 @@ async function payerEnCrypto() {
     let amount = cart.grandTotal || 0;
     if (!amount && items.length > 0) {
       amount = items.reduce((sum, it) => {
-        return sum + (Number(it.totalPrice) || (Number(it.price) * it.quantity));
+        const lineTotal = Number(it.totalPrice) || (Number(it.price) * it.quantity);
+        return sum + lineTotal;
       }, 0);
     }
 
@@ -470,7 +471,7 @@ document.addEventListener("DOMContentLoaded", () => {
     header.appendChild(btn);
   }
 });
-  </script>
+</script>
   
 </body>
 </html>
