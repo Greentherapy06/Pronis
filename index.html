@@ -414,7 +414,7 @@
     });
   }
 </script>
-<!-- Bouton Crypto dans le header + redirection NowPayments -->
+<!-- === Paiement Crypto avec NowPayments === -->
 <script>
 async function payerEnCrypto() {
   try {
@@ -437,7 +437,7 @@ async function payerEnCrypto() {
       return;
     }
 
-    // 4. Appel backend Vercel → génère facture NowPayments
+    // 4. Appel backend Vercel → crée facture NowPayments
     const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
               + "?amount=" + encodeURIComponent(amount.toFixed(2))
               + "&currency=EUR";
@@ -446,6 +446,7 @@ async function payerEnCrypto() {
     const j = await r.json();
 
     if (!r.ok || !j.invoice_url) {
+      console.error(j);
       alert("Paiement crypto indisponible.");
       return;
     }
@@ -459,13 +460,13 @@ async function payerEnCrypto() {
   }
 }
 
-// 6. Ajoute le bouton Crypto dans le header à côté du panier
+// 6. Ajoute le bouton Crypto à côté du panier
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".header-panier");
   if (header && !document.getElementById("crypto-btn")) {
     const btn = document.createElement("button");
     btn.id = "crypto-btn";
-    btn.className = "panier-btn";
+    btn.className = "panier-btn"; // pas de snipcart-checkout ici !
     btn.style.marginLeft = "8px";
     btn.innerHTML = 'Ver carrinho ₿'; // Texte avec symbole Bitcoin
     btn.onclick = payerEnCrypto;
