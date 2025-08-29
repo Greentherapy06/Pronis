@@ -414,16 +414,16 @@
     });
   }
 </script>
-  <!-- Bouton Crypto dans le header + redirection NowPayments -->
+<!-- Bouton Crypto dans le header + redirection NowPayments -->
 <script>
 async function payerEnCrypto() {
   try {
-    // Récupère le panier Snipcart
+    // 1. Récupère le panier Snipcart
     const cart = await window.Snipcart.api.cart.get();
     const items = cart?.items || [];
     let amount = Number(cart?.grandTotal || cart?.total || 0);
 
-    // Si pas de total → recalcule avec les articles
+    // 2. Si pas de total → recalcul avec les articles
     if ((!amount || isNaN(amount)) && items.length > 0) {
       amount = items.reduce((sum, it) => {
         const line = Number(it.totalPrice) || (Number(it.price) * (it.quantity || 1));
@@ -431,13 +431,13 @@ async function payerEnCrypto() {
       }, 0);
     }
 
-    // Si encore vide → stop
+    // 3. Vérifie que le montant est valide
     if (!amount || isNaN(amount)) {
-      alert("Erreur: panier vide ou montant introuvable.");
+      alert("Erreur : panier vide ou montant introuvable.");
       return;
     }
 
-    // Appel backend Vercel → génère facture NowPayments
+    // 4. Appel backend Vercel → génère facture NowPayments
     const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
               + "?amount=" + encodeURIComponent(amount.toFixed(2))
               + "&currency=EUR";
@@ -450,15 +450,16 @@ async function payerEnCrypto() {
       return;
     }
 
-    // Redirection vers NowPayments
-    location.href = j.invoice_url;
+    // 5. Redirection vers NowPayments
+    window.location.href = j.invoice_url;
 
   } catch (err) {
+    console.error(err);
     alert("Erreur pendant le paiement crypto.");
   }
 }
 
-// Ajoute le bouton Crypto dans le header à côté du panier
+// 6. Ajoute le bouton Crypto dans le header à côté du panier
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".header-panier");
   if (header && !document.getElementById("crypto-btn")) {
@@ -466,7 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.id = "crypto-btn";
     btn.className = "snipcart-checkout panier-btn";
     btn.style.marginLeft = "8px";
-    btn.innerHTML = 'Ver carrinho ₿';
+    btn.innerHTML = 'Ver carrinho ₿'; // Texte avec symbole Bitcoin
     btn.onclick = payerEnCrypto;
     header.appendChild(btn);
   }
