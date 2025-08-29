@@ -476,11 +476,11 @@ document.addEventListener("DOMContentLoaded", () => {
   <script>
 async function payerEnCrypto() {
   try {
-    // 1. Récupère le panier depuis Snipcart
+    // 1. Récupérer le panier depuis Snipcart
     const cart = await window.Snipcart.api.cart.get();
     const items = cart.items || [];
 
-    // 2. Calcule le montant total en €
+    // 2. Calculer le montant total en €
     let amount = cart.grandTotal || 0;
     if (!amount && items.length > 0) {
       amount = items.reduce((sum, it) => {
@@ -498,25 +498,23 @@ async function payerEnCrypto() {
       + "?amount=" + encodeURIComponent(amount.toFixed(2))
       + "&currency=EUR";
 
-    const r = await fetch(url, { method: "GET" });
-    const j = await r.json();
+    const res = await fetch(url, { method: "GET" });
+    const data = await res.json();
 
-    if (!r.ok || !j.invoice_url) {
-      console.error("Erreur serveur :", j);
+    if (!res.ok || !data.invoice_url) {
+      console.error("Erreur serveur :", data);
       alert("Paiement crypto indisponible.");
       return;
     }
 
-    // 4. Redirige le client vers la page de paiement NowPayments
-    window.location.href = j.invoice_url;
+    // 4. Redirection vers la page NowPayments
+    window.location.href = data.invoice_url;
 
   } catch (err) {
     console.error(err);
     alert("Erreur pendant le paiement crypto.");
   }
 }
-  </script>
-  <script>
 
 // --- Ajouter le bouton en haut à côté du panier ---
 document.addEventListener("DOMContentLoaded", () => {
@@ -531,7 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
     header.appendChild(btn);
   }
 });
-  </script>
+</script>
   
 </body>
 </html>
