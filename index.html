@@ -487,6 +487,94 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
  </script>
+  <script>
+async function payerEnCrypto() {
+  function afficherMessage(msg, type = "info") {
+    let div = document.getElementById("message-debug");
+    if (!div) {
+      div = document.createElement("div");
+      div.id = "message-debug";
+      div.style.position = "fixed";
+      div.style.bottom = "0";
+      div.style.left = "0";
+      div.style.right = "0";
+      div.style.backgroundColor = type === "error" ? "#f44336" : "#2196F3";
+      div.style.color = "#fff";
+      div.style.padding = "10px";
+      div.style.fontSize = "14px";
+      div.style.zIndex = "9999";
+      div.style.fontFamily = "sans-serif";
+      document.body.appendChild(div);
+    }
+    div.textContent = msg;
+  }
+
+  try {
+    afficherMessage("Début du processus de paiement...");
+
+    // Vérifie Snipcart
+    if (!window.Snipcart || !window.Snipcart.api || !window.Snipcart.api.cart) {
+      afficherMessage("Erreur : Panier Snipcart non accessible.", "error");
+      return;
+    }
+
+    const cart = await window.Snipcart.api.cart.get();
+    const items = cart?.items || [];
+    console.log("Panier :", cart);
+
+    let amount = Number(cart?.grandTotal || cart?.total || 0);
+    if ((!amount || isNaN(amount)) && items.length > 0) {
+      amount = items.reduce((sum, it) => {
+        const line = Number(it.totalPrice) || (Number(it.price) * (it.quantity || 1));
+        return sum + (isNaN(line) ? 0 : line);
+      }, 0);
+    }
+
+    afficherMessage("Montant à payer : " + amount.toFixed(2) + " EUR");
+
+    if (!amount || isNaN(amount)) {
+      afficherMessage("Erreur : panier vide ou montant invalide.", "error");
+      return;
+    }
+
+    const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
+      + "?amount=" + encodeURIComponent(amount.toFixed(2))
+      + "&currency=EUR";
+
+    afficherMessage("Appel à l'API create-invoice...");
+
+    const response = await fetch(url, { method: "GET" });
+    const data = await response.json();
+
+    if (!response.ok || !data.invoice_url) {
+      afficherMessage("Erreur serveur lors de la création de la facture.", "error");
+      console.error("Erreur serveur:", data);
+      return;
+    }
+
+    afficherMessage("Redirection vers la page de paiement...");
+
+    window.location.href = data.invoice_url;
+
+  } catch (error) {
+    console.error(error);
+    afficherMessage("Erreur pendant le paiement crypto. Veuillez réessayer.", "error");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".header-panier");
+  if (header && !document.getElementById("crypto-btn")) {
+    const btn = document.createElement("button");
+    btn.id = "crypto-btn";
+    btn.className = "panier-btn";
+    btn.style.marginLeft = "8px";
+    btn.innerText = "Payer en Crypto ₿";
+    btn.onclick = payerEnCrypto;
+    header.appendChild(btn);
+  }
+});
+  </script>
   
 </body>
 </html>
