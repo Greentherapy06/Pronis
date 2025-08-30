@@ -1,8 +1,25 @@
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    // Logique pour traiter le paiement crypto ici
-    res.status(200).json({ message: "Paiement reçu" });
-  } else {
-    res.status(405).json({ error: "Méthode non autorisée" });
+  try {
+    // Snipcart envoie des données en POST, on récupère le body
+    const body = req.body;
+
+    // Vérifiez que le publicToken est présent (indique une requête valide Snipcart)
+    if (!body || !body.publicToken) {
+      return res.status(400).json({ error: "publicToken manquant" });
+    }
+
+    // Ici, vous pourriez appeler l’API privée Snipcart pour valider le token
+    // (exemple fictif, à adapter avec votre clé API secrète et votre appel réseau)
+    // const validation = await fetch('https://app.snipcart.com/api/request/validate', { method: 'POST', ... });
+
+    // Si tout est ok, retournez la méthode de paiement et un message
+    return res.status(200).json({
+      paymentMethods: ["crypto"],
+      message: "Validation réussie, prêt pour paiement crypto"
+    });
+  } catch (error) {
+    // En cas d'erreur, on log et renvoie un message générique
+    console.error('Erreur dans la fonction paiement:', error);
+    res.status(500).json({ error: "Erreur serveur" });
   }
 }
