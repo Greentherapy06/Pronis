@@ -417,47 +417,35 @@
  <script>
 async function payerEnCrypto() {
   try {
-    // 1. Récupérer le panier depuis Snipcart
     const cart = await window.Snipcart.api.cart.get();
-    const items = cart.items || [];
-
-    // 2. Calculer le montant total
-    let amount = cart.grandTotal || 0;
-    if (!amount && items.length > 0) {
-      amount = items.reduce((sum, it) => {
-        return sum + (Number(it.totalPrice) || (Number(it.price) * it.quantity));
-      }, 0);
-    }
+    const amount = Number(cart?.grandTotal || 0);
 
     if (!amount || isNaN(amount)) {
       alert("Erreur : panier vide ou montant introuvable.");
       return;
     }
 
-    // 3. Appel backend Vercel pour créer la facture NowPayments
     const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
       + "?amount=" + encodeURIComponent(amount.toFixed(2))
       + "&currency=EUR";
 
-    const res = await fetch(url, { method: "GET" });
-    const data = await res.json();
+    const r = await fetch(url, { method: "GET" });
+    const j = await r.json();
 
-    if (!res.ok || !data.invoice_url) {
-      console.error("Erreur serveur :", data);
+    if (!r.ok || !j.invoice_url) {
+      console.error("Erreur serveur :", j);
       alert("Paiement crypto indisponible.");
       return;
     }
 
-    // 4. Redirection vers NowPayments
-    window.location.href = data.invoice_url;
-
+    window.location.href = j.invoice_url;
   } catch (err) {
     console.error(err);
     alert("Erreur pendant le paiement crypto.");
   }
 }
 
-// --- Ajouter le bouton en haut à côté du panier ---
+// bouton en haut du header
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".header-panier");
   if (header && !document.getElementById("crypto-btn")) {
@@ -465,7 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.id = "crypto-btn";
     btn.className = "panier-btn";
     btn.style.marginLeft = "8px";
-    btn.innerHTML = "Payer en Crypto ₿";
+    btn.innerHTML = "Ver carrinho ₿";
     btn.onclick = payerEnCrypto;
     header.appendChild(btn);
   }
