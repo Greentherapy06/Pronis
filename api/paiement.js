@@ -2,7 +2,8 @@ export default async function handler(req, res) {
   try {
     // Snipcart envoie des données en POST, on récupère le body
     const body = req.body;
-
+    console.log("Fonction paiement appelée");
+    
     // Vérifiez que le publicToken est présent (indique une requête valide Snipcart)
     if (!body || !body.publicToken) {
       return res.status(400).json({ error: "publicToken manquant" });
