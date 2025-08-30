@@ -415,43 +415,40 @@
   }
 </script>
  <script>
-async function payerEnCrypto(){
-  try{
-    const cart=await window.Snipcart.api.cart.get();
-    const items=cart.items||[];
-    let amount=cart.grandTotal||0;
-    if((!amount||isNaN(amount))&&items.length>0){
-      amount=items.reduce((s,it)=>s+(Number(it.totalPrice)||(Number(it.price)*it.quantity)),0);
+async function payerEnCrypto() {
+  try {
+    const cart = await window.Snipcart.api.cart.get();
+    const items = cart.items || [];
+    let amount = cart.grandTotal || 0;
+
+    if ((!amount || isNaN(amount)) && items.length > 0) {
+      amount = items.reduce((sum, it) => sum + (Number(it.totalPrice) || (Number(it.price) * it.quantity)), 0);
     }
-    if(!amount||isNaN(amount)){
+
+    if (!amount || isNaN(amount)) {
       alert("Erreur : panier vide ou montant introuvable.");
       return;
     }
-    const url="https://green-therapy-cbd.vercel.app/api/create-invoice?amount="+encodeURIComponent(amount.toFixed(2))+"&currency=EUR";
-    const r=await fetch(url,{method:"GET"});
-    const j=await r.json();
-    if(!r.ok||!j.invoice_url){
+
+    const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
+              + "?amount=" + encodeURIComponent(amount.toFixed(2))
+              + "&currency=EUR";
+
+    const r = await fetch(url, { method: "GET" });
+    const j = await r.json();
+
+    if (!r.ok || !j.invoice_url) {
       alert("Paiement crypto indisponible.");
+      console.error(j);
       return;
     }
-    window.location.href=j.invoice_url;
-  }catch(e){
-    console.error(e);
+
+    window.location.href = j.invoice_url;
+  } catch (err) {
+    console.error(err);
     alert("Erreur pendant le paiement crypto.");
   }
 }
-document.addEventListener("DOMContentLoaded",()=>{
-  const h=document.querySelector(".header-panier");
-  if(h&&!document.getElementById("crypto-btn")){
-    const b=document.createElement("button");
-    b.id="crypto-btn";
-    b.className="panier-btn";
-    b.style.marginLeft="8px";
-    b.innerHTML="Payer en Crypto ₿";
-    b.onclick=payerEnCrypto;
-    h.appendChild(b);
-  }
-});
  </script>
 </body>
 </html>
