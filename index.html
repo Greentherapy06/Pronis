@@ -488,41 +488,38 @@ document.addEventListener("DOMContentLoaded", () => {
 });
  </script>
   <script>
-async function payerEnCrypto() {
-  function afficherMessage(msg, type = "info") {
-    let div = document.getElementById("message-debug");
-    if (!div) {
-      div = document.createElement("div");
-      div.id = "message-debug";
-      div.style.position = "fixed";
-      div.style.bottom = "0";
-      div.style.left = "0";
-      div.style.right = "0";
-      div.style.backgroundColor = type === "error" ? "#f44336" : "#2196F3";
-      div.style.color = "#fff";
-      div.style.padding = "10px";
-      div.style.fontSize = "14px";
-      div.style.zIndex = "9999";
-      div.style.fontFamily = "sans-serif";
-      document.body.appendChild(div);
-    }
-    div.textContent = msg;
+function afficherMessage(msg, type = "info") {
+  let div = document.getElementById("message-debug");
+  if (!div) {
+    div = document.createElement("div");
+    div.id = "message-debug";
+    div.style.position = "fixed";
+    div.style.bottom = "0";
+    div.style.left = "0";
+    div.style.right = "0";
+    div.style.backgroundColor = type === "error" ? "#f44336" : "#2196F3";
+    div.style.color = "#fff";
+    div.style.padding = "10px";
+    div.style.fontSize = "14px";
+    div.style.zIndex = "9999";
+    div.style.fontFamily = "sans-serif";
+    document.body.appendChild(div);
   }
+  div.textContent = msg;
+}
 
+async function payerEnCrypto() {
   try {
-    afficherMessage("Début du processus de paiement...");
-
-    // Vérifie Snipcart
+    afficherMessage("Début du paiement crypto...");
     if (!window.Snipcart || !window.Snipcart.api || !window.Snipcart.api.cart) {
-      afficherMessage("Erreur : Panier Snipcart non accessible.", "error");
+      afficherMessage("Erreur : Snipcart non disponible.", "error");
       return;
     }
-
     const cart = await window.Snipcart.api.cart.get();
-    const items = cart?.items || [];
-    console.log("Panier :", cart);
-
+    afficherMessage("Panier récupéré.");
     let amount = Number(cart?.grandTotal || cart?.total || 0);
+    const items = cart?.items || [];
+
     if ((!amount || isNaN(amount)) && items.length > 0) {
       amount = items.reduce((sum, it) => {
         const line = Number(it.totalPrice) || (Number(it.price) * (it.quantity || 1));
@@ -530,25 +527,24 @@ async function payerEnCrypto() {
       }, 0);
     }
 
-    afficherMessage("Montant à payer : " + amount.toFixed(2) + " EUR");
-
     if (!amount || isNaN(amount)) {
-      afficherMessage("Erreur : panier vide ou montant invalide.", "error");
+      afficherMessage("Erreur : montant du panier introuvable.", "error");
       return;
     }
+
+    afficherMessage("Montant à payer : " + amount.toFixed(2) + " EUR");
 
     const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
       + "?amount=" + encodeURIComponent(amount.toFixed(2))
       + "&currency=EUR";
 
-    afficherMessage("Appel à l'API create-invoice...");
+    afficherMessage("Création de la facture...");
 
     const response = await fetch(url, { method: "GET" });
     const data = await response.json();
 
     if (!response.ok || !data.invoice_url) {
       afficherMessage("Erreur serveur lors de la création de la facture.", "error");
-      console.error("Erreur serveur:", data);
       return;
     }
 
@@ -556,24 +552,42 @@ async function payerEnCrypto() {
 
     window.location.href = data.invoice_url;
 
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     afficherMessage("Erreur pendant le paiement crypto. Veuillez réessayer.", "error");
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function ajouterBouton() {
   const header = document.querySelector(".header-panier");
-  if (header && !document.getElementById("crypto-btn")) {
-    const btn = document.createElement("button");
-    btn.id = "crypto-btn";
-    btn.className = "panier-btn";
-    btn.style.marginLeft = "8px";
-    btn.innerText = "Payer en Crypto ₿";
-    btn.onclick = payerEnCrypto;
-    header.appendChild(btn);
+  if (!header) {
+    afficherMessage("Erreur : élément '.header-panier' introuvable.", "error");
+    return;
   }
+  if (document.getElementById("crypto-btn")) return;
+
+  const btn = document.createElement("button");
+  btn.id = "crypto-btn";
+  btn.className = "panier-btn";
+  btn.style.marginLeft = "8px";
+  btn.innerText = "Payer en Crypto ₿";
+  btn.onclick = payerEnCrypto;
+  header.appendChild(btn);
+  afficherMessage("Bouton 'Payer en Crypto' ajouté.");
+}
+
+// Attendre que Snipcart soit prêt avant d’ajouter le bouton
+document.addEventListener("snipcart.ready", () => {
+  ajouterBouton();
 });
+
+// Au cas où snipcart.ready n’est pas émis, vérifier après 2 secondes
+setTimeout(() => {
+  if (!document.getElementById("crypto-btn")) {
+    ajouterBouton();
+  }
+}, 2000);
+
   </script>
   
 </body>
