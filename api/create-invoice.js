@@ -1,7 +1,6 @@
-// api/create-invoice.js
-
+// /api/create-invoice.js
 export default async function handler(req, res) {
-  // Autoriser uniquement ton domaine + vercel
+  // --- CORS ---
   const ORIGINS = [
     "https://green-therapy.pt",
     "https://green-therapy-cbd.vercel.app"
@@ -17,7 +16,7 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
 
   try {
-    // Récupération des paramètres amount & currency
+    // --- Récupération montant ---
     const q = req.method === "GET" ? req.query : (req.body || {});
     const rawAmount = q.amount !== undefined ? q.amount : null;
     const amount = rawAmount
@@ -31,12 +30,12 @@ export default async function handler(req, res) {
 
     const orderId = `GT-${Date.now()}`;
 
-    // Appel NowPayments
+    // --- Appel API NowPayments ---
     const r = await fetch("https://api.nowpayments.io/v1/invoice", {
       method: "POST",
       headers: {
         "x-api-key": process.env.NOWPAY_API_KEY || "",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         price_amount: amount,
@@ -45,8 +44,8 @@ export default async function handler(req, res) {
         order_description: "Commande Green-Therapy",
         is_fee_paid_by_user: true,
         success_url: "https://green-therapy.pt/#/checkout",
-        cancel_url: "https://green-therapy.pt/#/checkout"
-      })
+        cancel_url: "https://green-therapy.pt/#/checkout",
+      }),
     });
 
     const data = await r.json();
@@ -54,15 +53,17 @@ export default async function handler(req, res) {
     if (!r.ok || !data.invoice_url) {
       return res.status(r.status || 400).json({
         error: "nowpayments_error",
-        detail: data
+        detail: data,
       });
     }
 
+    // --- OK ---
     return res.status(200).json({ invoice_url: data.invoice_url });
+
   } catch (e) {
     return res.status(500).json({
       error: "server_error",
-      detail: String(e)
+      detail: String(e),
     });
   }
 }
