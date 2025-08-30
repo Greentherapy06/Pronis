@@ -414,12 +414,11 @@
     });
   }
 </script>
- <script>
+<script>
 async function payerEnCrypto() {
   try {
     console.log("Début du paiement crypto...");
 
-    // Vérifie que Snipcart est disponible
     if (!window.Snipcart || !window.Snipcart.api || !window.Snipcart.api.cart) {
       alert("Erreur : panier non accessible. Veuillez réessayer plus tard.");
       console.error("Snipcart non disponible");
@@ -462,8 +461,6 @@ async function payerEnCrypto() {
     }
 
     console.log("Réception de invoice_url :", j.invoice_url);
-
-    // Redirection vers la page NowPayments
     window.location.href = j.invoice_url;
 
   } catch (err) {
@@ -472,7 +469,6 @@ async function payerEnCrypto() {
   }
 }
 
-// Ajoute le bouton à côté du panier
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".header-panier");
   if (header && !document.getElementById("crypto-btn")) {
@@ -484,58 +480,6 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.onclick = payerEnCrypto;
     header.appendChild(btn);
     console.log("Bouton Payer en Crypto ajouté à la page.");
-  }
-});
- </script>
-<script>
-async function payerEnCrypto() {
-  try {
-    const cart = await window.Snipcart.api.cart.get();
-    const items = cart?.items || [];
-    let amount = Number(cart?.grandTotal || cart?.total || 0);
-
-    if ((!amount || isNaN(amount)) && items.length > 0) {
-      amount = items.reduce((sum, it) => {
-        const line = Number(it.totalPrice) || (Number(it.price) * (it.quantity || 1));
-        return sum + (isNaN(line) ? 0 : line);
-      }, 0);
-    }
-
-    if (!amount || isNaN(amount)) {
-      alert("Erreur : panier vide ou montant introuvable.");
-      return;
-    }
-
-    const url = "https://green-therapy-cbd.vercel.app/api/create-invoice"
-              + "?amount=" + encodeURIComponent(amount.toFixed(2))
-              + "&currency=EUR";
-
-    const r = await fetch(url, { method: "GET" });
-    const j = await r.json();
-
-    if (!r.ok || !j.invoice_url) {
-      console.error("Erreur backend :", j);
-      alert("Paiement crypto indisponible.");
-      return;
-    }
-
-    window.location.href = j.invoice_url;
-  } catch (err) {
-    console.error("Erreur:", err);
-    alert("Erreur pendant le paiement crypto.");
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector(".header-panier");
-  if (header && !document.getElementById("crypto-btn")) {
-    const btn = document.createElement("button");
-    btn.id = "crypto-btn";
-    btn.className = "panier-btn";
-    btn.style.marginLeft = "8px";
-    btn.innerHTML = "Payer en Crypto ₿";
-    btn.onclick = payerEnCrypto;
-    header.appendChild(btn);
   }
 });
 </script>
