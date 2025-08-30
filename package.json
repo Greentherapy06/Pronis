@@ -1,3 +1,12 @@
 {
-  "type": "module"
+  "name": "mon-projet-crypto",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    // vos dépendances ici
+  }
 }
