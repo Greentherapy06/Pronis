@@ -240,24 +240,27 @@ html[lang="pt"] .panier-btn {
     gap: 28px;
   }
    }
- /* Applique le même style au bouton crypto que le bouton panier */
+/* Style commun pour les deux boutons */
+button.snipcart-add-item,
 button[id^="crypto-"] {
   display: block;
   width: 100%;
-  max-width: 420px;
+  max-width: 280px;   /* petit rectangle */
   margin: .6rem auto 0;
-  padding: .9rem 1rem;
+  padding: .7rem 1rem;
   background: #000;        /* fond noir */
-  color: #d4af37;          /* écriture dorée */
+  color: #d4af37;          /* texte doré */
   border: none;
-  border-radius: 1rem;
+  border-radius: .6rem;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
+/* Effet au survol */
+button.snipcart-add-item:hover,
 button[id^="crypto-"]:hover {
   background: #222;        /* noir un peu plus clair */
   color: #ffd700;          /* doré plus lumineux */
