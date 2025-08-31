@@ -414,36 +414,17 @@
     });
   }
 </script>
+<button id="payCrypto">Payer en crypto</button>
 <script>
-async function payerEnCrypto(){
- try{
-   const cart=await window.Snipcart.api.cart.get();
-   const items=cart?.items||[];
-   let amount=Number(cart?.grandTotal||cart?.total||0);
-   if((!amount||isNaN(amount))&&items.length>0){
-     amount=items.reduce((s,it)=>{
-       const line=Number(it.totalPrice)||(Number(it.price)*(it.quantity||1));
-       return s+(isNaN(line)?0:line);
-     },0);
-   }
-   if(!amount||isNaN(amount)){alert("Erreur: panier vide.");return;}
-   const url="https://green-therapy-cbd.vercel.app/api/create-invoice"
-     +"?amount="+encodeURIComponent(amount.toFixed(2))
-     +"&currency=EUR";
-   const r=await fetch(url,{method:"GET"});
-   const j=await r.json();
-   if(!r.ok||!j.invoice_url){alert("Paiement crypto indisponible.");return;}
-   window.location.href=j.invoice_url;
- }catch(e){console.error(e);alert("Erreur paiement crypto.");}
-}
-document.addEventListener("DOMContentLoaded",()=>{
- const header=document.querySelector(".header-panier");
- if(header&&!document.getElementById("crypto-btn")){
-   const b=document.createElement("button");
-   b.id="crypto-btn";b.className="panier-btn";
-   b.style.marginLeft="8px";b.innerHTML="Payer en Crypto ₿";
-   b.onclick=payerEnCrypto;header.appendChild(b);
- }
+document.getElementById('payCrypto').addEventListener('click', async () => {
+  const resp = await fetch('/api/create-invoice', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ amount: 49.90, currency: 'EUR', orderId: 'GT-12345' })
+  });
+  const data = await resp.json();
+  if (data.invoice_url) window.location.href = data.invoice_url;
+  else alert('Erreur: ' + (data.error || 'imprévue'));
 });
 </script>
   
