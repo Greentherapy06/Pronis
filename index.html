@@ -428,20 +428,7 @@
   }
 </script>
 <script>
-document.getElementById('payCrypto').addEventListener('click', async () => {
-  const resp = await fetch('/api/create-invoice', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ amount: 49.90, currency: 'EUR', orderId: 'GT-12345' })
-  });
-  const data = await resp.json();
-  if (data.invoice_url) window.location.href = data.invoice_url;
-  else alert('Erreur: ' + (data.error || 'imprévue'));
-});
-</script>
-  <script>
 (async function () {
-  // Essaie de lire le prix depuis le bouton Snipcart
   const snipBtn = document.querySelector('[class*="snipcart-add-item"],[data-item-price]');
   const payBtn  = document.getElementById('payCrypto');
 
@@ -454,7 +441,7 @@ document.getElementById('payCrypto').addEventListener('click', async () => {
   payBtn?.addEventListener('click', async () => {
     const amount = getPrice();
     if (!amount || isNaN(amount)) {
-      alert("Impossible de lire le prix du produit. Vérifie data-item-price.");
+      alert("Impossible de lire le prix du produit (data-item-price manquant).");
       return;
     }
     try {
@@ -462,7 +449,7 @@ document.getElementById('payCrypto').addEventListener('click', async () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount,               // prix en EUR
+          amount,
           currency: 'EUR',
           orderId: `CRYPTO-${Date.now()}`,
           description: document.title || 'Paiement boutique'
@@ -474,14 +461,14 @@ document.getElementById('payCrypto').addEventListener('click', async () => {
         alert('Erreur création facture crypto. Regarde les logs Vercel.');
         return;
       }
-      window.location.href = data.invoice_url; // redirection paiement crypto
+      window.location.href = data.invoice_url;
     } catch (e) {
       console.error(e);
       alert('Erreur réseau lors de la création de la facture.');
     }
   });
 })();
-  </script>
+    </script>
   
 </body>
 </html>
