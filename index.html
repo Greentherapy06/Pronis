@@ -91,17 +91,16 @@
   </div>
 
   <div class="product-grid">
-    <!-- Amnesia -->
-    <div class="product-card" data-id="amnesia-cbd">
+  <!-- ============ AMNESIA ============ -->
+<div class="product-card" data-id="amnesia-cbd">
   <picture>
     <source srcset="./amnesia-cbd.webp" type="image/webp">
     <img src="./amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400">
   </picture>
   <h3>🌿 Flor CBD Amnesia 🇮🇹</h3>
   <p>Aromas cítricos e terrosos. <strong>THC &lt; 0,3%</strong>.</p>
-  <p class="price">A partir de 10,00 €</p>
+  <p class="price">À partir de 10,00 €</p>
 
-  <!-- Sélecteur quantité -->
   <select id="amnesia-quantite">
     <option value="2">2g – 10,00 €</option>
     <option value="4">4g – 20,00 €</option>
@@ -110,175 +109,240 @@
     <option value="10">10g – 45,00 €</option>
   </select>
 
-  <!-- Bouton panier Snipcart -->
-  <button class="snipcart-add-item panier-btn"
-    data-item-id="amnesia-cbd"
-    data-item-price="10.00"
-    data-item-url="/index.html"
-    data-item-description="Flor CBD Amnesia"
-    data-item-name="Flor CBD Amnesia">
+  <button class="cta-cart panier-btn"
+    onclick="ajouterProduit('amnesia-cbd','Flor CBD Amnesia','Flor CBD Amnesia','amnesia-quantite')">
     🛒 Adicionar ao carrinho
   </button>
 
-  <!-- Bouton crypto -->
-  <a id="crypto-amnesia" href="#" target="_blank" rel="noopener"
-     class="panier-btn" style="text-align:center;display:block;margin-top:.5rem">
-     ₿ Pagar em cripto
-  </a>
-    </div>
+  <button id="crypto-amnesia" class="panier-btn" style="margin-top:.5rem">
+    ₿ Pagar em cripto
+  </button>
+</div>
 
-    <!-- Resina -->
-    <div class="product-card" data-id="resine-cbd">
-      <picture>
-        <source srcset="../resine-cbd.webp" type="image/webp">
-        <img src="../resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" width="400" height="400">
-      </picture>
-      <h3>🌴 Resina CBD Hash 🇮🇹</h3>
-      <p>Textura cremosa e aromas de especiarias e pinho. <strong>THC &lt; 0,3%</strong>.</p>
-      <p class="price">A partir de 12,00 €</p>
-      <select id="resine-quantite">
-        <option value="2" selected>2g – 12,00 €</option>
-        <option value="4">4g – 24,00 €</option>
-        <option value="6">6g – 36,00 €</option>
-        <option value="8">8g – 48,00 €</option>
-        <option value="10">10g – 55,00 €</option>
-      </select>
-      <button class="cta-cart" onclick="ajouterProduit('resine-cbd','Resina CBD Hash','Resina CBD premium da Itália','resine-quantite')">🛒 Adicionar ao carrinho</button>
-    </div>
+<!-- ============ RESINA CBD HASH ============ -->
+<div class="product-card" data-id="resine-cbd">
+  <picture>
+    <source srcset="./resine-cbd.webp" type="image/webp">
+    <img src="./resine-cbd.jpg" alt="Resina CBD Hash - Itália" class="product-img" loading="lazy" width="400" height="400">
+  </picture>
+  <h3>🧱 Resina CBD Hash 🇮🇹</h3>
+  <p>Textura cremosa e notas de especiarias e pinho. <strong>THC &lt; 0,3%</strong>.</p>
+  <p class="price">À partir de 12,00 €</p>
 
-    <!-- Cherry -->
-    <div class="product-card" data-id="cherry-cbd">
-      <picture>
-        <source srcset="../cherry-cbd.webp" type="image/webp">
-        <img src="../cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" width="400" height="400">
-      </picture>
-      <h3>🍒 Flor CBD Cherry 🇮🇹</h3>
-      <p>Notas frutadas de cereja madura. <strong>THC &lt; 0,3%</strong>.</p>
-      <p class="price">A partir de 10,00 €</p>
-      <select id="cherry-quantite">
-        <option value="2" selected>2g – 10,00 €</option>
-        <option value="4">4g – 20,00 €</option>
-        <option value="6">6g – 30,00 €</option>
-        <option value="8">8g – 40,00 €</option>
-        <option value="10">10g – 45,00 €</option>
-      </select>
-      <button class="cta-cart" onclick="ajouterProduit('cherry-cbd','Flor CBD Cherry','Flor CBD premium da Itália','cherry-quantite')">🛒 Adicionar ao carrinho</button>
-    </div>
+  <select id="resine-quantite">
+    <option value="2">2g – 12,00 €</option>
+    <option value="4">4g – 24,00 €</option>
+    <option value="6">6g – 36,00 €</option>
+    <option value="8">8g – 48,00 €</option>
+    <option value="10">10g – 55,00 €</option>
+  </select>
 
-    <!-- Charas -->
-    <div class="product-card" data-id="charas-cbd">
-      <picture>
-        <source srcset="../charas-cbd.webp" type="image/webp">
-        <img src="../charas-cbd.jpg" alt="Resina Charas CBD - Itália" class="product-img" loading="lazy" width="400" height="400">
-      </picture>
-      <h3>🖤 Resina Charas CBD 🇮🇹</h3>
-      <p>Notas terrosas e especiadas. <strong>THC &lt; 0,3%</strong>.</p>
-      <p class="price">A partir de 12,00 €</p>
-      <select id="charas-quantite">
-        <option value="2" selected>2g – 12,00 €</option>
-        <option value="4">4g – 24,00 €</option>
-        <option value="6">6g – 36,00 €</option>
-        <option value="8">8g – 48,00 €</option>
-        <option value="10">10g – 55,00 €</option>
-      </select>
-      <button class="cta-cart" onclick="ajouterProduit('charas-cbd','Resina Charas CBD','Resina Charas CBD artesanal da Itália','charas-quantite')">🛒 Adicionar ao carrinho</button>
-    </div>
+  <button class="cta-cart panier-btn"
+    onclick="ajouterProduit('resine-cbd','Resina CBD Hash','Resina CBD Hash','resine-quantite')">
+    🛒 Adicionar ao carrinho
+  </button>
 
-    <!-- Cali Dream -->
-    <div class="product-card" data-id="cali-dream-cbd">
-      <picture>
-        <source srcset="../cali-dream-cbd.webp" type="image/webp">
-        <img src="../cali-dream-cbd.jpg" alt="Flor CBD Cali Dream - Itália" class="product-img" loading="lazy" width="400" height="400">
-      </picture>
-      <h3>🌿 Flor CBD Cali Dream 🇮🇹</h3>
-      <p>Perfil aromático elegante. <strong>THC &lt; 0,3%</strong>.</p>
-      <p class="price">A partir de 10,00 €</p>
-      <select id="calidream-quantite">
-        <option value="2" selected>2g – 10,00 €</option>
-        <option value="4">4g – 20,00 €</option>
-        <option value="6">6g – 30,00 €</option>
-        <option value="8">8g – 40,00 €</option>
-        <option value="10">10g – 45,00 €</option>
-      </select>
-      <button class="cta-cart" onclick="ajouterProduit('cali-dream-cbd','Flor CBD Cali Dream','Flor CBD premium da Itália','calidream-quantite')">🛒 Adicionar ao carrinho</button>
-    </div>
+  <button id="crypto-resine-hash" class="panier-btn" style="margin-top:.5rem">
+    ₿ Pagar em cripto
+  </button>
+</div>
 
-    <!-- Gelato -->
-    <div class="product-card" data-id="gelato-cbd">
-      <picture>
-        <source srcset="../gelato-cbd.webp" type="image/webp">
-        <img src="../gelato-cbd.jpg" alt="Flor CBD Gelato - Itália" class="product-img" loading="lazy" width="400" height="400">
-      </picture>
-      <h3>🌿 Flor CBD Gelato 🇮🇹</h3>
-      <p>Notas doces e frutadas. <strong>THC &lt; 0,3%</strong>.</p>
-      <p class="price">A partir de 10,00 €</p>
-      <select id="gelato-quantite">
-        <option value="2" selected>2g – 10,00 €</option>
-        <option value="4">4g – 20,00 €</option>
-        <option value="6">6g – 30,00 €</option>
-        <option value="8">8g – 40,00 €</option>
-        <option value="10">10g – 45,00 €</option>
-      </select>
-      <button class="cta-cart" onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD premium da Itália','gelato-quantite')">🛒 Adicionar ao carrinho</button>
-    </div>
+<!-- ============ CHERRY CBD ============ -->
+<div class="product-card" data-id="cherry-cbd">
+  <picture>
+    <source srcset="./cherry-cbd.webp" type="image/webp">
+    <img src="./cherry-cbd.jpg" alt="Flor CBD Cherry - Itália" class="product-img" loading="lazy" width="400" height="400">
+  </picture>
+  <h3>🍒 Flor CBD Cherry 🇮🇹</h3>
+  <p>Notas de cereja madura. <strong>THC &lt; 0,3%</strong>.</p>
+  <p class="price">À partir de 10,00 €</p>
 
-    <!-- AK-47 -->
-    <div class="product-card" data-id="ak47-cbd">
-      <picture>
-        <source srcset="../ak47-cbd.webp" type="image/webp">
-        <img src="../ak47-cbd.jpg" alt="Flor CBD AK-47 - Itália" class="product-img" loading="lazy" width="400" height="400">
-      </picture>
-      <h3>🌿 Flor CBD AK-47 🇮🇹</h3>
-      <p>Aromas amadeirados e picantes. <strong>THC &lt; 0,3%</strong>.</p>
-      <p class="price">A partir de 10,00 €</p>
-      <select id="ak47-quantite">
-        <option value="2" selected>2g – 10,00 €</option>
-        <option value="4">4g – 20,00 €</option>
-        <option value="6">6g – 30,00 €</option>
-        <option value="8">8g – 40,00 €</option>
-        <option value="10">10g – 45,00 €</option>
-      </select>
-      <button class="cta-cart" onclick="ajouterProduit('ak47-cbd','Flor CBD AK-47','Flor CBD premium da Itália','ak47-quantite')">🛒 Adicionar ao carrinho</button>
-    </div>
+  <select id="cherry-quantite">
+    <option value="2">2g – 10,00 €</option>
+    <option value="4">4g – 20,00 €</option>
+    <option value="6">6g – 30,00 €</option>
+    <option value="8">8g – 40,00 €</option>
+    <option value="10">10g – 45,00 €</option>
+  </select>
 
-    <!-- Orange Cookies -->
-    <div class="product-card" data-id="orange-cookies-cbd">
-      <picture>
-        <source srcset="../orange-cookies-cbd.webp" type="image/webp">
-        <img src="../orange-cookies-cbd.jpg" alt="Flor CBD Orange Cookies - Itália" class="product-img" loading="lazy" width="400" height="400">
-      </picture>
-      <h3>🌿 Flor CBD Orange Cookies 🍊</h3>
-      <p>Notas cítricas e doces. <strong>THC &lt; 0,3%</strong>.</p>
-      <p class="price">A partir de 10,00 €</p>
-      <select id="orangecookies-quantite">
-        <option value="2" selected>2g – 10,00 €</option>
-        <option value="4">4g – 20,00 €</option>
-        <option value="6">6g – 30,00 €</option>
-        <option value="8">8g – 40,00 €</option>
-        <option value="10">10g – 45,00 €</option>
-      </select>
-      <button class="cta-cart" onclick="ajouterProduit('orange-cookies-cbd','Flor CBD Orange Cookies','Flor CBD premium da Itália','orangecookies-quantite')">🛒 Adicionar ao carrinho</button>
-    </div>
+  <button class="cta-cart panier-btn"
+    onclick="ajouterProduit('cherry-cbd','Flor CBD Cherry','Flor CBD Cherry','cherry-quantite')">
+    🛒 Adicionar ao carrinho
+  </button>
 
-    <!-- Gorilla Glue -->
-    <div class="product-card" data-id="gorilla-glue-cbd">
-      <picture>
-        <source srcset="../gorilla-glue-cbd.webp" type="image/webp">
-        <img src="../gorilla-glue-cbd.jpg" alt="Flor CBD Gorilla Glue - Itália" class="product-img" loading="lazy" width="400" height="400">
-      </picture>
-      <h3>🌿 Flor CBD Gorilla Glue 🦍</h3>
-      <p>Nuances terrosas e diesel. <strong>THC &lt; 0,3%</strong>.</p>
-      <p class="price">A partir de 10,00 €</p>
-      <select id="gorilla-quantite">
-        <option value="2" selected>2g – 10,00 €</option>
-        <option value="4">4g – 20,00 €</option>
-        <option value="6">6g – 30,00 €</option>
-        <option value="8">8g – 40,00 €</option>
-        <option value="10">10g – 45,00 €</option>
-      </select>
-      <button class="cta-cart" onclick="ajouterProduit('gorilla-glue-cbd','Flor CBD Gorilla Glue','Flor CBD premium da Itália','gorilla-quantite')">🛒 Adicionar ao carrinho</button>
-    </div>
-  </div>
+  <button id="crypto-cherry" class="panier-btn" style="margin-top:.5rem">
+    ₿ Pagar em cripto
+  </button>
+</div>
+
+<!-- ============ RESINA CHARAS CBD ============ -->
+<div class="product-card" data-id="charas-cbd">
+  <picture>
+    <source srcset="./charas-cbd.webp" type="image/webp">
+    <img src="./charas-cbd.jpg" alt="Resina Charas CBD - Itália" class="product-img" loading="lazy" width="400" height="400">
+  </picture>
+  <h3>🧯 Resina Charas CBD 🇮🇹</h3>
+  <p>Notas terrosas e especiadas. <strong>THC &lt; 0,3%</strong>.</p>
+  <p class="price">À partir de 12,00 €</p>
+
+  <select id="charas-quantite">
+    <option value="2">2g – 12,00 €</option>
+    <option value="4">4g – 24,00 €</option>
+    <option value="6">6g – 36,00 €</option>
+    <option value="8">8g – 48,00 €</option>
+    <option value="10">10g – 55,00 €</option>
+  </select>
+
+  <button class="cta-cart panier-btn"
+    onclick="ajouterProduit('charas-cbd','Resina Charas CBD','Resina Charas CBD','charas-quantite')">
+    🛒 Adicionar ao carrinho
+  </button>
+
+  <button id="crypto-charas" class="panier-btn" style="margin-top:.5rem">
+    ₿ Pagar em cripto
+  </button>
+</div>
+
+<!-- ============ CALI DREAM ============ -->
+<div class="product-card" data-id="cali-dream-cbd">
+  <picture>
+    <source srcset="./cali-dream-cbd.webp" type="image/webp">
+    <img src="./cali-dream-cbd.jpg" alt="Flor CBD Cali Dream - Itália" class="product-img" loading="lazy" width="400" height="400">
+  </picture>
+  <h3>💤 Flor CBD Cali Dream 🇮🇹</h3>
+  <p>Perfil aromático elegante. <strong>THC &lt; 0,3%</strong>.</p>
+  <p class="price">À partir de 10,00 €</p>
+
+  <select id="calidream-quantite">
+    <option value="2">2g – 10,00 €</option>
+    <option value="4">4g – 20,00 €</option>
+    <option value="6">6g – 30,00 €</option>
+    <option value="8">8g – 40,00 €</option>
+    <option value="10">10g – 45,00 €</option>
+  </select>
+
+  <button class="cta-cart panier-btn"
+    onclick="ajouterProduit('cali-dream-cbd','Flor CBD Cali Dream','Flor CBD Cali Dream','calidream-quantite')">
+    🛒 Adicionar ao carrinho
+  </button>
+
+  <button id="crypto-cali-dream" class="panier-btn" style="margin-top:.5rem">
+    ₿ Pagar em cripto
+  </button>
+</div>
+
+<!-- ============ GELATO ============ -->
+<div class="product-card" data-id="gelato-cbd">
+  <picture>
+    <source srcset="./gelato-cbd.webp" type="image/webp">
+    <img src="./gelato-cbd.jpg" alt="Flor CBD Gelato - Itália" class="product-img" loading="lazy" width="400" height="400">
+  </picture>
+  <h3>🍨 Flor CBD Gelato 🇮🇹</h3>
+  <p>Notas doces e frutadas. <strong>THC &lt; 0,3%</strong>.</p>
+  <p class="price">À partir de 10,00 €</p>
+
+  <select id="gelato-quantite">
+    <option value="2">2g – 10,00 €</option>
+    <option value="4">4g – 20,00 €</option>
+    <option value="6">6g – 30,00 €</option>
+    <option value="8">8g – 40,00 €</option>
+    <option value="10">10g – 45,00 €</option>
+  </select>
+
+  <button class="cta-cart panier-btn"
+    onclick="ajouterProduit('gelato-cbd','Flor CBD Gelato','Flor CBD Gelato','gelato-quantite')">
+    🛒 Adicionar ao carrinho
+  </button>
+
+  <button id="crypto-gelato" class="panier-btn" style="margin-top:.5rem">
+    ₿ Pagar em cripto
+  </button>
+</div>
+
+<!-- ============ AK-47 CBD ============ -->
+<div class="product-card" data-id="ak47-cbd">
+  <picture>
+    <source srcset="./ak47-cbd.webp" type="image/webp">
+    <img src="./ak47-cbd.jpg" alt="Flor CBD AK-47 - Itália" class="product-img" loading="lazy" width="400" height="400">
+  </picture>
+  <h3>🔫 Flor CBD AK-47 🇮🇹</h3>
+  <p>Aromas amadeirados e picantes. <strong>THC &lt; 0,3%</strong>.</p>
+  <p class="price">À partir de 10,00 €</p>
+
+  <select id="ak47-quantite">
+    <option value="2">2g – 10,00 €</option>
+    <option value="4">4g – 20,00 €</option>
+    <option value="6">6g – 30,00 €</option>
+    <option value="8">8g – 40,00 €</option>
+    <option value="10">10g – 45,00 €</option>
+  </select>
+
+  <button class="cta-cart panier-btn"
+    onclick="ajouterProduit('ak47-cbd','Flor CBD AK-47','Flor CBD AK-47','ak47-quantite')">
+    🛒 Adicionar ao carrinho
+  </button>
+
+  <button id="crypto-ak47" class="panier-btn" style="margin-top:.5rem">
+    ₿ Pagar em cripto
+  </button>
+</div>
+
+<!-- ============ ORANGE COOKIES CBD ============ -->
+<div class="product-card" data-id="orange-cookies-cbd">
+  <picture>
+    <source srcset="./orange-cookies-cbd.webp" type="image/webp">
+    <img src="./orange-cookies-cbd.jpg" alt="Flor CBD Orange Cookies - Itália" class="product-img" loading="lazy" width="400" height="400">
+  </picture>
+  <h3>🍊 Flor CBD Orange Cookies 🇮🇹</h3>
+  <p>Notas cítricas e doces. <strong>THC &lt; 0,3%</strong>.</p>
+  <p class="price">À partir de 10,00 €</p>
+
+  <select id="orangecookies-quantite">
+    <option value="2">2g – 10,00 €</option>
+    <option value="4">4g – 20,00 €</option>
+    <option value="6">6g – 30,00 €</option>
+    <option value="8">8g – 40,00 €</option>
+    <option value="10">10g – 45,00 €</option>
+  </select>
+
+  <button class="cta-cart panier-btn"
+    onclick="ajouterProduit('orange-cookies-cbd','Flor CBD Orange Cookies','Flor CBD Orange Cookies','orangecookies-quantite')">
+    🛒 Adicionar ao carrinho
+  </button>
+
+  <button id="crypto-orange-cookies" class="panier-btn" style="margin-top:.5rem">
+    ₿ Pagar em cripto
+  </button>
+</div>
+
+<!-- ============ GORILLA GLUE ============ -->
+<div class="product-card" data-id="gorilla-glue-cbd">
+  <picture>
+    <source srcset="./gorilla-glue-cbd.webp" type="image/webp">
+    <img src="./gorilla-glue-cbd.jpg" alt="Flor CBD Gorilla Glue - Itália" class="product-img" loading="lazy" width="400" height="400">
+  </picture>
+  <h3>🦍 Flor CBD Gorilla Glue 🇮🇹</h3>
+  <p>Notas terrosas e diesel. <strong>THC &lt; 0,3%</strong>.</p>
+  <p class="price">À partir de 10,00 €</p>
+
+  <select id="gorilla-quantite">
+    <option value="2">2g – 10,00 €</option>
+    <option value="4">4g – 20,00 €</option>
+    <option value="6">6g – 30,00 €</option>
+    <option value="8">8g – 40,00 €</option>
+    <option value="10">10g – 45,00 €</option>
+  </select>
+
+  <button class="cta-cart panier-btn"
+    onclick="ajouterProduit('gorilla-glue-cbd','Flor CBD Gorilla Glue','Flor CBD Gorilla Glue','gorilla-quantite')">
+    🛒 Adicionar ao carrinho
+  </button>
+
+  <button id="crypto-gorilla-glue" class="panier-btn" style="margin-top:.5rem">
+    ₿ Pagar em cripto
+  </button>
+</div>  
+       
 </section>
 <!-- === Déclarations Snipcart (produits cachés) === -->
 <section id="snipcart-products" aria-hidden="true" style="display:none">
