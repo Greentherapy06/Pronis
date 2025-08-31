@@ -1,5 +1,6 @@
 // api/create-invoice.js
 export default async function handler(req, res) {
+  // --- CORS : autoriser ton domaine et vercel ---
   const ORIGINS = [
     "https://green-therapy.pt",
     "https://green-therapy-cbd.vercel.app"
@@ -15,9 +16,12 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
 
   try {
+    // --- Récupération montant ---
     const q = req.method === "GET" ? req.query : (req.body || {});
     const rawAmount = q.amount !== undefined ? q.amount : null;
-    const amount = rawAmount ? parseFloat(String(rawAmount).replace(",", ".")) : 0;
+    const amount = rawAmount
+      ? parseFloat(String(rawAmount).replace(",", "."))
+      : 0;
     const currency = String(q.currency || "EUR").toUpperCase();
 
     if (!amount || isNaN(amount) || amount <= 0) {
@@ -26,6 +30,7 @@ export default async function handler(req, res) {
 
     const orderId = `GT-${Date.now()}`;
 
+    // --- Appel NowPayments ---
     const r = await fetch("https://api.nowpayments.io/v1/invoice", {
       method: "POST",
       headers: {
@@ -44,6 +49,7 @@ export default async function handler(req, res) {
     });
 
     const data = await r.json();
+
     if (!r.ok || !data.invoice_url) {
       return res.status(r.status || 400).json({
         error: "nowpayments_error",
@@ -51,7 +57,9 @@ export default async function handler(req, res) {
       });
     }
 
+    // --- OK → retour URL facture ---
     return res.status(200).json({ invoice_url: data.invoice_url });
+
   } catch (e) {
     return res.status(500).json({
       error: "server_error",
