@@ -522,7 +522,28 @@ attachCrypto('gelato','gelato-quantite','crypto-gelato');
 attachCrypto('ak47','ak47-quantite','crypto-ak47');
 attachCrypto('orange','orangecookies-quantite','crypto-orange-cookies');
 attachCrypto('gorilla','gorilla-quantite','crypto-gorilla-glue');
-</script>  
+</script>
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".product-card").forEach(card => {
+    let stock = parseInt(card.dataset.stock || "0", 10);
+    if (stock <= 0) {
+      // grise et désactive les boutons
+      card.querySelectorAll("button").forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = "0.5";
+        btn.style.cursor = "not-allowed";
+      });
+      // ajoute un petit texte
+      let note = document.createElement("p");
+      note.textContent = "🚫 Rupture de stock";
+      note.style.color = "red";
+      note.style.fontWeight = "bold";
+      card.appendChild(note);
+    }
+  });
+});
+ </script> 
 </body>
 </html>
       
