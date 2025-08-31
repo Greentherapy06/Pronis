@@ -93,22 +93,38 @@
   <div class="product-grid">
     <!-- Amnesia -->
     <div class="product-card" data-id="amnesia-cbd">
-      <picture>
-        <source srcset="../amnesia-cbd.webp" type="image/webp">
-        <img src="../amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400">
-      </picture>
-      <h3>🌿 Flor CBD Amnesia 🇮🇹</h3>
-      <p>Aromas cítricos e terrosos. <strong>THC &lt; 0,3%</strong>.</p>
-      <p class="price">A partir de 10,00 €</p>
-      <select id="amnesia-quantite">
-        <option value="2" selected>2g – 10,00 €</option>
-        <option value="4">4g – 20,00 €</option>
-        <option value="6">6g – 30,00 €</option>
-        <option value="8">8g – 40,00 €</option>
-        <option value="10">10g – 45,00 €</option>
-      </select>
-      <button class="cta-cart" onclick="ajouterProduit('amnesia-cbd','Flor CBD Amnesia','Flor CBD premium da Itália','amnesia-quantite')">🛒 Adicionar ao carrinho</button>
-      <a id="crypto-amnesia" href="#" target="_blank" rel="noopener" style="display:inline-block;margin-left:.5rem;margin-top:.5rem;padding:.6rem 1rem;border:1px solid #222;background:#111;color:#fff;border-radius:.5rem;text-decoration:none">₿ Pagar em cripto</a>
+  <picture>
+    <source srcset="./amnesia-cbd.webp" type="image/webp">
+    <img src="./amnesia-cbd.jpg" alt="Flor CBD Amnesia - Itália" class="product-img" loading="lazy" width="400" height="400">
+  </picture>
+  <h3>🌿 Flor CBD Amnesia 🇮🇹</h3>
+  <p>Aromas cítricos e terrosos. <strong>THC &lt; 0,3%</strong>.</p>
+  <p class="price">A partir de 10,00 €</p>
+
+  <!-- Sélecteur quantité -->
+  <select id="amnesia-quantite">
+    <option value="2">2g – 10,00 €</option>
+    <option value="4">4g – 20,00 €</option>
+    <option value="6">6g – 30,00 €</option>
+    <option value="8">8g – 40,00 €</option>
+    <option value="10">10g – 45,00 €</option>
+  </select>
+
+  <!-- Bouton panier Snipcart -->
+  <button class="snipcart-add-item panier-btn"
+    data-item-id="amnesia-cbd"
+    data-item-price="10.00"
+    data-item-url="/index.html"
+    data-item-description="Flor CBD Amnesia"
+    data-item-name="Flor CBD Amnesia">
+    🛒 Adicionar ao carrinho
+  </button>
+
+  <!-- Bouton crypto -->
+  <a id="crypto-amnesia" href="#" target="_blank" rel="noopener"
+     class="panier-btn" style="text-align:center;display:block;margin-top:.5rem">
+     ₿ Pagar em cripto
+  </a>
     </div>
 
     <!-- Resina -->
