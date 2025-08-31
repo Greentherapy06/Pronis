@@ -65,24 +65,7 @@
   </nav>
   <div class="header-panier">
     <button class="snipcart-checkout panier-btn">Ver carrinho €</button>
-    <button id="payCrypto"
-        type="button"
-        class="btn btn-crypto"
-        data-currency="EUR">
-  💳 Pagar em cripto
-</button>
-
-<style>
-.btn-crypto {
-  margin-left: .5rem;
-  padding: .6rem 1rem;
-  border: 1px solid #222;
-  background: #111; color: #fff;
-  border-radius: .5rem; cursor: pointer;
-}
-.btn-crypto:hover { opacity: .9; }
-</style>
-
+    
 <!-- Início -->
 <section id="home" class="section">
   <h2>
@@ -429,56 +412,6 @@
     });
   }
 </script>
-
-<!-- ===== Script Crypto : bouton “Pagar em cripto” (NOWPayments) ===== -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // On lit le prix depuis le bouton Snipcart existant
-  const snipBtn = document.querySelector('[class*="snipcart-add-item"],[data-item-price]');
-  const payBtn  = document.getElementById('payCrypto');
-
-  function getPrice() {
-    if (!snipBtn) return null;
-    // Sécurise virgule -> point (29,90 -> 29.90)
-    const p = (snipBtn.getAttribute('data-item-price') || snipBtn.dataset.itemPrice || '').replace(',', '.');
-    return p ? Number(p) : null;
-  }
-
-  if (payBtn) {
-    payBtn.addEventListener('click', async () => {
-      const amount = getPrice();
-      if (!amount || isNaN(amount)) {
-        alert("Não foi possível ler o preço do produto (faltando data-item-price).");
-        return;
-      }
-      try {
-        const r = await fetch('/api/create-invoice', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            amount,
-            currency: 'EUR',
-            orderId: `CRYPTO-${Date.now()}`,
-            description: document.title || 'Pagamento loja'
-          })
-        });
-        const data = await r.json();
-        if (!r.ok || !data.invoice_url) {
-          console.error('Erro invoice:', data);
-          alert('Erro ao criar a fatura cripto. Verifica os logs do Vercel.');
-          return;
-        }
-        // Redirection vers la page de paiement crypto
-        window.location.href = data.invoice_url;
-      } catch (e) {
-        console.error(e);
-        alert('Erro de rede ao criar a fatura.');
-      }
-    });
-  }
-});
-</script>
-
 </body>
 </html>
       
