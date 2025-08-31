@@ -427,7 +427,6 @@
     });
   }
 </script>
-<button id="payCrypto">Payer en crypto</button>
 <script>
 document.getElementById('payCrypto').addEventListener('click', async () => {
   const resp = await fetch('/api/create-invoice', {
