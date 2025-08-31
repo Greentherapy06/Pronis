@@ -65,6 +65,23 @@
   </nav>
   <div class="header-panier">
     <button class="snipcart-checkout panier-btn">Ver carrinho €</button>
+    <!-- Bouton CRYPTO à côté du bouton EUR -->
+<button id="payCrypto"
+        class="btn btn-crypto"
+        data-currency="EUR">
+  Payer en crypto
+</button>
+
+<style>
+.btn-crypto {
+  margin-left: .5rem;
+  padding: .6rem 1rem;
+  border: 1px solid #222;
+  background: #111; color: #fff;
+  border-radius: .5rem; cursor: pointer;
+}
+.btn-crypto:hover{opacity:.9}
+</style>
     </button>
   </div>
 </header>
@@ -427,6 +444,49 @@ document.getElementById('payCrypto').addEventListener('click', async () => {
   else alert('Erreur: ' + (data.error || 'imprévue'));
 });
 </script>
+  <script>
+(async function () {
+  // Essaie de lire le prix depuis le bouton Snipcart
+  const snipBtn = document.querySelector('[class*="snipcart-add-item"],[data-item-price]');
+  const payBtn  = document.getElementById('payCrypto');
+
+  function getPrice() {
+    if (!snipBtn) return null;
+    const p = snipBtn.getAttribute('data-item-price') || snipBtn.dataset.itemPrice;
+    return p ? Number(p) : null;
+  }
+
+  payBtn?.addEventListener('click', async () => {
+    const amount = getPrice();
+    if (!amount || isNaN(amount)) {
+      alert("Impossible de lire le prix du produit. Vérifie data-item-price.");
+      return;
+    }
+    try {
+      const r = await fetch('/api/create-invoice', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount,               // prix en EUR
+          currency: 'EUR',
+          orderId: `CRYPTO-${Date.now()}`,
+          description: document.title || 'Paiement boutique'
+        })
+      });
+      const data = await r.json();
+      if (!r.ok || !data.invoice_url) {
+        console.error('Erreur invoice:', data);
+        alert('Erreur création facture crypto. Regarde les logs Vercel.');
+        return;
+      }
+      window.location.href = data.invoice_url; // redirection paiement crypto
+    } catch (e) {
+      console.error(e);
+      alert('Erreur réseau lors de la création de la facture.');
+    }
+  });
+})();
+  </script>
   
 </body>
 </html>
