@@ -240,28 +240,28 @@ html[lang="pt"] .panier-btn {
     gap: 28px;
   }
    }
-/* Style commun pour les deux boutons */
-button.snipcart-add-item,
-button[id^="crypto-"] {
-  display: block;
-  width: 100%;
-  max-width: 280px;   /* petit rectangle */
-  margin: .6rem auto 0;
-  padding: .7rem 1rem;
-  background: #000;        /* fond noir */
-  color: #d4af37;          /* texte doré */
-  border: none;
-  border-radius: .6rem;
-  font-weight: 700;
-  font-size: 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
+/* FORCE le look noir + doré sur les deux boutons d'une fiche produit */
+.product-card button.panier-btn,
+.product-card button[id^="crypto-"].panier-btn{
+  display:block !important;
+  width:100% !important;
+  max-width:360px !important;      /* baisse à 320px si tu veux plus petit */
+  margin:.6rem auto 0 !important;  /* centre horizontalement */
+  padding:.75rem 1rem !important;
+  background:#000 !important;      /* fond noir */
+  color:#d4af37 !important;        /* texte doré */
+  border:none !important;
+  border-radius:.9rem !important;
+  font-weight:700 !important;
+  font-size:1rem !important;
+  text-align:center !important;
+  cursor:pointer !important;
+  transition:all .2s !important;
+  appearance:none; -webkit-appearance:none; /* neutralise les styles par défaut */
+}
+.product-card button.panier-btn:hover,
+.product-card button[id^="crypto-"].panier-btn:hover{
+  background:#1d1d1d !important;
+  color:#ffd700 !important;
 }
 
-/* Effet au survol */
-button.snipcart-add-item:hover,
-button[id^="crypto-"]:hover {
-  background: #222;        /* noir un peu plus clair */
-  color: #ffd700;          /* doré plus lumineux */
-}
