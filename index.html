@@ -350,7 +350,7 @@
 <!-- Sobre nós -->
 <section id="about" class="section">
   <h2>ℹ️ Sobre nós</h2>
-  <p>Especialista em CBD desde 2019, a nossa missão é oferecer produtos de cânhamo da mais alta qualidade, com total transparência e confiança.</p>
+  <p>Especialista em CBD desde 2019, a nossa missão é oferecer produtos de cânhamo da mais alta qualidade, com total transparência econfiança.</p>
 </section>
 
 <!-- Opiniões -->
@@ -387,7 +387,7 @@
   data-config-modal-style="side"
   data-config-currency="EUR">
 </div>
-<!-- Panier : JS produits (sélecteurs) -->
+<!-- ===== Script Snipcart : gestion du panier (AJOUT AU PANIER) ===== -->
 <script>
   const prixParProduit = {
     "amnesia-cbd":        {2:10.00,4:20.00,6:30.00,8:40.00,10:45.00},
@@ -418,7 +418,8 @@
       id:   `${idProduit}-${g}g`,
       name: `${nom} ${g}g`,
       price: Number(prix).toFixed(2),
-      url:  "https://green-therapy.pt/index.html", // URL unique -> évite “Price changed”
+      // ⚠️ Harmonisé sur ton domaine Vercel pour éviter “Price changed”
+      url:  "https://green-therapy-cbd.vercel.app/index.html",
       description: desc || ""
     };
 
@@ -428,14 +429,17 @@
     });
   }
 </script>
+
+<!-- ===== Script Crypto : bouton “Pagar em cripto” (NOWPayments) ===== -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // On lit le prix depuis le bouton Snipcart existant
   const snipBtn = document.querySelector('[class*="snipcart-add-item"],[data-item-price]');
   const payBtn  = document.getElementById('payCrypto');
 
   function getPrice() {
     if (!snipBtn) return null;
-    // Remplace virgule par point au cas où (29,90 -> 29.90)
+    // Sécurise virgule -> point (29,90 -> 29.90)
     const p = (snipBtn.getAttribute('data-item-price') || snipBtn.dataset.itemPrice || '').replace(',', '.');
     return p ? Number(p) : null;
   }
@@ -464,6 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
           alert('Erro ao criar a fatura cripto. Verifica os logs do Vercel.');
           return;
         }
+        // Redirection vers la page de paiement crypto
         window.location.href = data.invoice_url;
       } catch (e) {
         console.error(e);
@@ -473,5 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+
 </body>
 </html>
+      
