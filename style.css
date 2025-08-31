@@ -245,7 +245,7 @@ html[lang="pt"] .panier-btn {
 .product-card button[id^="crypto-"].panier-btn{
   display:block !important;
   width:100% !important;
-  max-width:320px !important;      /* baisse à 320px si tu veux plus petit */
+  max-width:300px !important;      /* baisse à 320px si tu veux plus petit */
   margin:.6rem auto 0 !important;  /* centre horizontalement */
   padding:.75rem 1rem !important;
   background:#000 !important;      /* fond noir */
