@@ -429,47 +429,50 @@
   }
 </script>
 <script>
-(async function () {
+document.addEventListener('DOMContentLoaded', () => {
   const snipBtn = document.querySelector('[class*="snipcart-add-item"],[data-item-price]');
   const payBtn  = document.getElementById('payCrypto');
 
   function getPrice() {
     if (!snipBtn) return null;
-    const p = snipBtn.getAttribute('data-item-price') || snipBtn.dataset.itemPrice;
+    // Remplace virgule par point au cas où (29,90 -> 29.90)
+    const p = (snipBtn.getAttribute('data-item-price') || snipBtn.dataset.itemPrice || '').replace(',', '.');
     return p ? Number(p) : null;
   }
 
-  payBtn?.addEventListener('click', async () => {
-    const amount = getPrice();
-    if (!amount || isNaN(amount)) {
-      alert("Impossible de lire le prix du produit (data-item-price manquant).");
-      return;
-    }
-    try {
-      const r = await fetch('/api/create-invoice', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount,
-          currency: 'EUR',
-          orderId: `CRYPTO-${Date.now()}`,
-          description: document.title || 'Paiement boutique'
-        })
-      });
-      const data = await r.json();
-      if (!r.ok || !data.invoice_url) {
-        console.error('Erreur invoice:', data);
-        alert('Erreur création facture crypto. Regarde les logs Vercel.');
+  if (payBtn) {
+    payBtn.addEventListener('click', async () => {
+      const amount = getPrice();
+      if (!amount || isNaN(amount)) {
+        alert("Não foi possível ler o preço do produto (faltando data-item-price).");
         return;
       }
-      window.location.href = data.invoice_url;
-    } catch (e) {
-      console.error(e);
-      alert('Erreur réseau lors de la création de la facture.');
-    }
-  });
-})();
-    </script>
+      try {
+        const r = await fetch('/api/create-invoice', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount,
+            currency: 'EUR',
+            orderId: `CRYPTO-${Date.now()}`,
+            description: document.title || 'Pagamento loja'
+          })
+        });
+        const data = await r.json();
+        if (!r.ok || !data.invoice_url) {
+          console.error('Erro invoice:', data);
+          alert('Erro ao criar a fatura cripto. Verifica os logs do Vercel.');
+          return;
+        }
+        window.location.href = data.invoice_url;
+      } catch (e) {
+        console.error(e);
+        alert('Erro de rede ao criar a fatura.');
+      }
+    });
+  }
+});
+                          </script>
   
 </body>
 </html>
