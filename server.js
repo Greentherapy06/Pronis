@@ -6,31 +6,22 @@ app.use(express.json());
 
 // Endpoint appelé par Snipcart pour les paiements
 app.post("/payment", async (req, res) => {
+  console.log("Requête reçue sur /payment :", req.body);
+
   try {
     const { amount, currency } = req.body;
 
-    // Création de la commande sur Viva Wallet
-    const vivaResp = await axios.post(
-      "https://www.vivapayments.com/api/orders",
-      {
-        amount: amount * 100, // Viva Wallet prend le montant en centimes
-        currencyCode: currency || "EUR",
-        sourceCode: process.env.VIVA_SOURCE_CODE
-      },
-      {
-        auth: {
-          username: process.env.VIVA_MERCHANT_ID,
-          password: process.env.VIVA_API_KEY
-        }
-      }
-    );
+    // Test : on simule une commande Viva Wallet
+    const orderCode = "TEST-" + Date.now();
+
+    console.log("Order créé :", orderCode);
 
     res.json({
       success: true,
-      transactionId: vivaResp.data.orderCode
+      transactionId: orderCode
     });
   } catch (err) {
-    console.error(err.response?.data || err.message);
+    console.error("Erreur :", err);
     res.status(500).json({ success: false, error: "Erreur paiement Viva" });
   }
 });
