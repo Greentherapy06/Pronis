@@ -4,16 +4,16 @@ const app = express();
 
 app.use(express.json());
 
-// Endpoint appelé par Snipcart
+// Endpoint appelé par Snipcart pour les paiements
 app.post("/payment", async (req, res) => {
   try {
     const { amount, currency } = req.body;
 
-    // Appel à Viva Wallet
+    // Création de la commande sur Viva Wallet
     const vivaResp = await axios.post(
       "https://www.vivapayments.com/api/orders",
       {
-        amount: amount * 100, // Viva demande le montant en centimes
+        amount: amount * 100, // Viva Wallet prend le montant en centimes
         currencyCode: currency || "EUR",
         sourceCode: process.env.VIVA_SOURCE_CODE
       },
