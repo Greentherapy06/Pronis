@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Blog | Green Therapy</title>
+  <link rel="stylesheet" href="/style.css?v=parfaite">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo"><img src="/logo.png" alt="Logo"></div>
+    <h1 class="brand-title">Green Therapy</h1>
+    <nav class="nav-menu">
+      <a href="/">Accueil</a>
+      <a href="/shop.html">Boutique</a>
+      <a href="/blog/index.html">Blog</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="blog-index">
+    <h1>Notre Blog</h1>
+    <ul id="article-list" class="article-list">
+      <!-- Les articles apparaissent automatiquement ici -->
+    </ul>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Green Therapy. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    fetch('articles.json')
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('article-list');
+        data.forEach(a => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${a.link}">${a.title}</a> (${a.date})`;
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
