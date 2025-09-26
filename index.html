@@ -624,5 +624,37 @@
       "sameAs":["https://www.facebook.com/greentherapy","https://www.instagram.com/greentherapy"]
     }
     </script>
-  </body>
+    <script>
+  document.addEventListener('snipcart.ready', function() {
+    // Quand l'utilisateur clique sur "Passer au paiement"
+    Snipcart.events.on('cart.confirm', async (cart) => {
+      try {
+        // On envoie le montant total à ton serveur
+        const response = await fetch('/create-payment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            amount: Math.round(cart.total * 100), // montant en centimes
+            currency: '978' // 978 = EUR
+          })
+        });
+
+        const data = await response.json();
+
+        if (data && data.orderCode) {
+          // Redirige vers VivaWallet pour le paiement
+          window.location.href = `https://www.vivapayments.com/web/checkout?ref=${data.orderCode}`;
+        } else {
+          alert("Erreur: impossible de créer le paiement.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Erreur lors de la connexion à VivaWallet.");
+      }
+    });
+  });
+</script>
+</body>
 </html>
