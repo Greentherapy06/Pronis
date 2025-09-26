@@ -1,44 +1,55 @@
+// api/create-payment.js
 import fetch from "node-fetch";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ error: "Méthode non autorisée" });
   }
 
   try {
-    const { amount, productName } = req.body;
+    const { items, customer, currency } = req.body;
 
-    // 🔑 Ta clé API Viva Wallet
-    const API_KEY = "9uK3FAqsq7W6PrQreRUjXX4uV0tqwR";
-    const API_URL = "https://demo.vivapayments.com"; // change à production plus tard
+    // Calcul du montant total en centimes (VivaWallet travaille en cents)
+    const amount = items.reduce((total, item) => total + item.price * item.quantity, 0);
+    const amountInCents = Math.round(amount * 100);
 
-    // Création du paiement
-    const paymentRes = await fetch(`${API_URL}/api/orders`, {
+    // Clé API stockée dans Vercel (jamais côté front-end)
+    const VIVA_API_KEY = process.env.VIVA_API_KEY;
+
+    // Création de la commande chez VivaWallet
+    const vivaResponse = await fetch("https://demo.vivapayments.com/api/orders", { 
+      // Remplace demo par prod pour réel
       method: "POST",
       headers: {
+        "Authorization": `Bearer ${VIVA_API_KEY}`,
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${API_KEY}`
       },
       body: JSON.stringify({
-        amount: Math.round(amount * 100), // montant en cents
-        currencyCode: "EUR",
-        sourceCode: "Default",
-        description: productName,
-        allowRecurring: false
-      })
+        amount: amountInCents,
+        currency: currency || "EUR",
+        customer: {
+          email: customer.email,
+          fullName: customer.name
+        },
+        // URL de retour après paiement
+        redirectUrl: "https://ton-site.com/merci" 
+      }),
     });
 
-    const paymentData = await paymentRes.json();
+    const vivaData = await vivaResponse.json();
 
-    if (!paymentRes.ok) {
-      return res.status(paymentRes.status).json({ error: paymentData });
+    // Vérifie si VivaWallet a renvoyé l'URL de paiement
+    if (!vivaData.paymentUrl) {
+      return res.status(500).json({ error: "Impossible de créer le paiement VivaWallet" });
     }
 
-    // Retourne l’URL de paiement Viva Wallet
-    res.status(200).json({ paymentUrl: paymentData.PaymentUrl });
-
+    // Renvoie à Snipcart l'URL où rediriger le client
+    res.status(200).json({
+      redirectUrl: vivaData.paymentUrl,
+      status: "ok"
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
+    console.error("Erreur serveur:", error);
+    res.status(500).json({ error: "Erreur interne du serveur" });
   }
 }
