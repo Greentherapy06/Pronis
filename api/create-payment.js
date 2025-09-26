@@ -1,4 +1,3 @@
-// api/create-payment.js
 import fetch from "node-fetch";
 
 export default async function handler(req, res) {
@@ -7,49 +6,50 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { items, customer, currency } = req.body;
+    // Snipcart envoie les données de commande dans req.body
+    const { invoiceNumber, total, currency } = req.body;
 
-    // Calcul du montant total en centimes (VivaWallet travaille en cents)
-    const amount = items.reduce((total, item) => total + item.price * item.quantity, 0);
-    const amountInCents = Math.round(amount * 100);
+    // Montant en centimes
+    const amount = Math.round(parseFloat(total) * 100);
+    const orderId = invoiceNumber || `order-${Date.now()}`;
+    const currencyCode = currency || "EUR";
 
-    // Clé API stockée dans Vercel (jamais côté front-end)
-    const VIVA_API_KEY = process.env.VIVA_API_KEY;
-
-    // Création de la commande chez VivaWallet
-    const vivaResponse = await fetch("https://demo.vivapayments.com/api/orders", { 
-      // Remplace demo par prod pour réel
+    // Créer la commande chez Viva Wallet
+    const vivaResponse = await fetch("https://www.vivapayments.com/api/orders", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${VIVA_API_KEY}`,
+        "Authorization": `Basic ${Buffer.from(process.env.VIVA_API_KEY + ":").toString("base64")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        amount: amountInCents,
-        currency: currency || "EUR",
-        customer: {
-          email: customer.email,
-          fullName: customer.name
-        },
-        // URL de retour après paiement
-        redirectUrl: "https://ton-site.com/merci" 
+        Amount: amount,
+        CurrencyCode: currencyCode,
+        MerchantOrderId: orderId,
+        SourceCode: "Default", // vérifie dans ton compte Viva Wallet
       }),
     });
 
     const vivaData = await vivaResponse.json();
 
-    // Vérifie si VivaWallet a renvoyé l'URL de paiement
-    if (!vivaData.paymentUrl) {
-      return res.status(500).json({ error: "Impossible de créer le paiement VivaWallet" });
+    if (!vivaResponse.ok) {
+      console.error("Erreur Viva Wallet:", vivaData);
+      return res.status(500).json({ error: "Impossible de créer le paiement Viva Wallet" });
     }
 
-    // Renvoie à Snipcart l'URL où rediriger le client
-    res.status(200).json({
-      redirectUrl: vivaData.paymentUrl,
-      status: "ok"
-    });
-  } catch (error) {
-    console.error("Erreur serveur:", error);
-    res.status(500).json({ error: "Erreur interne du serveur" });
+    // URL pour que le client paye
+    const paymentUrl = vivaData?.TransactionId
+      ? `https://www.vivapayments.com/web/checkout/${vivaData.TransactionId}`
+      : null;
+
+    if (!paymentUrl) {
+      return res.status(500).json({ error: "Impossible de récupérer l'URL de paiement" });
+    }
+
+    // Retour à Snipcart
+    res.status(200).json({ url: paymentUrl });
+
+  } catch (err) {
+    console.error("Erreur serveur:", err);
+    res.status(500).json({ error: "Erreur serveur" });
   }
 }
