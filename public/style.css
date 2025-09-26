@@ -1,1 +1,263 @@
+/* =========================================================
+   Polices et variables globales
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
+:root {
+  --bg: #f5f5f5;
+  --text: #222;
+  --black: #000;
+  --gold: #d4af37;
+  --body-font: 'Poppins', sans-serif;
+  --brand-font: 'Playfair Display', serif;
+  --radius: 12px;
+  --gap: 20px;
+  --header-padding-y: 20px;
+  --header-padding-x: 20px;
+}
+
+#pay-crypto { 
+  display: none !important; 
+}
+
+/* =========================================================
+   Base (tous supports)
+   ========================================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+header {
+  background: url('images.webp') center/cover no-repeat;
+  padding: var(--header-padding-y) var(--header-padding-x);
+  text-align: center;
+  position: relative;
+}
+
+/* Logo et titre */
+.logo-container {
+  margin-bottom: 12px;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.brand-title {
+  font-family: var(--brand-font);
+  font-weight: 700;
+  font-size: 32px;
+  margin: 0 0 12px 0;
+  color: var(--black);
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--black);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: var(--gold);
+  color: var(--black);
+}
+
+/* Contenu principal */
+.section {
+  max-width: 540px;
+  margin: 20px auto;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.section h2 {
+  color: var(--gold);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px, 1fr));
+  gap: var(--gap);
+  padding: 0 15px 40px;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid #d4af37;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+  padding: 15px;
+  text-align: center;
+}
+
+.product-card h3 {
+  margin: 12px 0 8px;
+  font-size: 18px;
+}
+
+.price {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.product-card img {
+  border-radius: var(--radius);
+  max-width: 100%;
+  height: auto;
+}
+
+.product-card .cta-cart {
+  background-color: var(--black);
+  color: var(--gold);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  margin-top: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.product-card .cta-cart:hover {
+  opacity: 0.85;
+}
+
+/* Suppression carré blanc Voir le panier sur la version portugaise */
+html[lang="pt"] .panier-btn {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* Styles Mobile */
+@media (max-width: 480px) {
+  .logo {
+    width: 60px;
+  }
+
+  .brand-title {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  nav {
+    gap: 10px;
+  }
+
+  nav a {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px 30px;
+  }
+}
+
+/* Styles Desktop (PC) */
+@media (min-width: 1080px) {
+  body {
+    background: var(--bg);
+  }
+
+  header {
+    max-width: 600px;
+    margin: 50px auto 40px;
+    padding: 40px 30px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 0.1);
+  }
+
+  .logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+
+  .brand-title {
+    font-size: 64px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 35px;
+  }
+
+  .section {
+    max-width: 600px;
+    padding: 0 30px 50px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+}
+
+/* FORCE le look noir + doré sur les deux boutons d'une fiche produit */
+.product-card button.panier-btn,
+.product-card button[id^="crypto-"].panier-btn {
+  display: block !important;
+  width: 100% !important;
+  max-width: 300px !important;
+  margin: .6rem auto 0 !important;
+  padding: .75rem 1rem !important;
+  background: #000 !important;
+  color: #d4af37 !important;
+  border: none !important;
+  border-radius: .9rem !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: all .2s !important;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.product-card button.panier-btn:hover,
+.product-card button[id^="crypto-"].panier-btn:hover {
+  background: #1d1d1d !important;
+  color: #ffd700 !important;
+}
