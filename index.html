@@ -617,44 +617,12 @@
         "postalCode":"4805-015",
         "addressCountry":"PT"
       },
-      "telephone":"+351123456789",
+      "telephone":"+351965020889",
       "email":"contact@greentherapy.pt",
       "geo":{"@type":"GeoCoordinates","latitude":41.366,"longitude":-8.326},
       "openingHours":"Mo-Su 15:00-18:00",
       "sameAs":["https://www.facebook.com/greentherapy","https://www.instagram.com/greentherapy"]
     }
     </script>
-    <script>
-  document.addEventListener('snipcart.ready', function() {
-    // Quand l'utilisateur clique sur "Passer au paiement"
-    Snipcart.events.on('cart.confirm', async (cart) => {
-      try {
-        // On envoie le montant total à ton serveur
-        const response = await fetch('/create-payment', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            amount: Math.round(cart.total * 100), // montant en centimes
-            currency: '978' // 978 = EUR
-          })
-        });
-
-        const data = await response.json();
-
-        if (data && data.orderCode) {
-          // Redirige vers VivaWallet pour le paiement
-          window.location.href = `https://www.vivapayments.com/web/checkout?ref=${data.orderCode}`;
-        } else {
-          alert("Erreur: impossible de créer le paiement.");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Erreur lors de la connexion à VivaWallet.");
-      }
-    });
-  });
-</script>
 </body>
 </html>
