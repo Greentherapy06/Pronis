@@ -2,10 +2,10 @@
   "name": "green-therapy",
   "version": "1.0.0",
   "description": "Site Green Therapy avec paiement Viva Wallet",
-  "main": "index.js",
-  "type": "commonjs",
+  "main": "api/create-payment.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node api/create-payment.js"
   },
   "engines": {
     "node": "22.x"
