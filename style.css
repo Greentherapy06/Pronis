@@ -16,7 +16,7 @@
   --header-padding-y: 20px;
   --header-padding-x: 20px;
 }
-<style>#pay-crypto{display:none!important}</style>
+
 /* =========================================================
    Base (tous supports)
    ========================================================= */
@@ -112,7 +112,7 @@ nav a:hover {
 
 .product-card {
   background: #fff;
-  border: 1px solid #d4af37;   /* ✅ Bordure gris clair ajoutée */
+  border: 1px solid #d4af37;
   border-radius: var(--radius);
   box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
   padding: 15px;
@@ -153,16 +153,10 @@ nav a:hover {
 }
 
 /* =========================================================
-   Suppression carré blanc Voir le panier sur la version portugaise
+   Suppression du bouton crypto
    ========================================================= */
-html[lang="pt"] .panier-btn {
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  cursor: pointer;
-  color: inherit;
+#pay-crypto {
+  display: none !important;
 }
 
 /* =========================================================
@@ -240,28 +234,28 @@ html[lang="pt"] .panier-btn {
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
   }
-   }
-/* FORCE le look noir + doré sur les deux boutons d'une fiche produit */
-.product-card button.panier-btn,
-.product-card button[id^="crypto-"].panier-btn{
-  display:block !important;
-  width:100% !important;
-  max-width:300px !important;      /* baisse à 320px si tu veux plus petit */
-  margin:.6rem auto 0 !important;  /* centre horizontalement */
-  padding:.75rem 1rem !important;
-  background:#000 !important;      /* fond noir */
-  color:#d4af37 !important;        /* texte doré */
-  border:none !important;
-  border-radius:.9rem !important;
-  font-weight:700 !important;
-  font-size:1rem !important;
-  text-align:center !important;
-  cursor:pointer !important;
-  transition:all .2s !important;
-  appearance:none; -webkit-appearance:none; /* neutralise les styles par défaut */
 }
-.product-card button.panier-btn:hover,
-.product-card button[id^="crypto-"].panier-btn:hover{
-  background:#1d1d1d !important;
-  color:#ffd700 !important;
+
+/* FORCE le look noir + doré sur les boutons panier */
+.product-card button.panier-btn {
+  display: block !important;
+  width: 100% !important;
+  max-width: 300px !important;
+  margin: 0.6rem auto 0 !important;
+  padding: 0.75rem 1rem !important;
+  background: #000 !important;
+  color: #d4af37 !important;
+  border: none !important;
+  border-radius: 0.9rem !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  appearance: none; -webkit-appearance: none;
+}
+
+.product-card button.panier-btn:hover {
+  background: #1d1d1d !important;
+  color: #ffd700 !important;
 }
