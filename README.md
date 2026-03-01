@@ -1,3 +1,3 @@
-# Green-therapy-cbd
-Boutique en ligne de CBD à Guimarães
+# RJ Destock
+La reference en destockage
 redeploy
