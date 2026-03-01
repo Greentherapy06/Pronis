@@ -1,155 +1,1191 @@
 <!DOCTYPE html>
-<html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Pronis – Nutrição Premium</title>
-    <meta name="description" content="Especialista em nutrição esportiva premium: proteínas, BCAA, creatina e suplementos de alta qualidade.">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Pronis">
+<html lang="fr">
+<head>
+  <!-- BASE SEO -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RJ Destock – Déstockage Premium Noir & Or</title>
+  <meta name="description" content="RJ Destock, spécialiste du déstockage premium. Marques luxe, fin de séries et surplus de stock à prix cassés, livraison rapide, service professionnel pour particuliers et professionnels.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rj-destock.example.com/">
 
-    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
-    <link rel="icon" type="image/png" href="/favicon.png?v=2">
+  <!-- OPEN GRAPH / SOCIAL -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RJ Destock – Déstockage Premium Luxe">
+  <meta property="og:description" content="Déstockage haut de gamme noir & or : mode, accessoires, maison et high‑tech jusqu’à -80 %.">
+  <meta property="og:url" content="https://rj-destock.example.com/">
+  <meta property="og:site_name" content="RJ Destock">
 
-    <!-- Pré-conexões -->
-    <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- FAVICON (à adapter si tu as un vrai fichier) -->
+  <link rel="icon" href="/favicon.ico">
 
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="../style.css?v=99" />
+  <!-- TYPO + STYLE DE BASE -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Snipcart CSS -->
-    <link rel="preload" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-      <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css">
-    </noscript>
+  <style>
+    :root {
+      --bg-dark: #050509;
+      --bg-dark-alt: #0b0b11;
+      --gold: #d4af37;
+      --gold-soft: #f4e3a3;
+      --white: #ffffff;
+      --grey: #b8bcc7;
+      --danger: #ff4e4e;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 55px rgba(0,0,0,0.65);
+      --shadow-chip: 0 8px 24px rgba(0,0,0,0.55);
+      --transition-fast: 0.22s ease-out;
+      --max-width: 1180px;
+    }
 
-    <!-- Snipcart Settings + JS -->
-    <script>
-      window.SnipcartSettings = {
-        publicApiKey: "NTJhZjlkMTMtZmVmYy00MTZmLWFiYzUtZGU1ZDE1ZjZiODAwNjM4ODk3NzU4MjkzMjE0MDQ3"
-      };
-    </script>
-    <script defer src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9V19J9PKQG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-9V19J9PKQG');
-    </script>
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top, #151520 0, #050509 55%, #000000 100%);
+      color: var(--white);
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
-    <!-- Optimisations mobile -->
-    <style>
-      img[loading="lazy"]{content-visibility:auto}
-      .product-img{max-width:100%;height:auto}
-      .cta-cart{touch-action:manipulation}
-      .panier-btn{cursor:pointer}
-    </style>
-  </head>
+    body {
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  <body>
-    <header>
-      <div class="logo-container">
-        <img src="../logo-rond.png" alt="Logo Pronis – Nutrição Premium" class="logo" loading="lazy" width="80" height="80">
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* LAYOUT */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(90deg, rgba(5,5,9,0.95), rgba(5,5,9,0.85));
+      border-bottom: 1px solid rgba(212,175,55,0.18);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fff8d6 0, #f4e3a3 35%, #d4af37 70%, #7a5a15 100%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 8px 25px rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: #14120a;
+      letter-spacing: 1px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .brand-name {
+      font-size: 18px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 4px 0;
+      color: var(--grey);
+      transition: color var(--transition-fast);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #f4e3a3, #d4af37);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f4e3a3, #d4af37);
+      color: #14120a;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.7);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.85);
+    }
+
+    .burger {
+      display: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .burger span {
+      width: 16px;
+      height: 1.4px;
+      background: var(--gold-soft);
+      border-radius: 99px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 52px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,0.6);
+      background: radial-gradient(circle at 10% 0, rgba(244,227,163,0.3), rgba(5,5,9,0.9));
+      box-shadow: var(--shadow-chip);
+      margin-bottom: 14px;
+    }
+
+    .eyebrow-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fff8d6, #d4af37);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #14120a;
+    }
+
+    .eyebrow-text {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 10px;
+      color: var(--gold-soft);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 44px);
+      line-height: 1.15;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-title-emphasis {
+      background: linear-gradient(92deg, #f4e3a3, #d4af37, #fef6cf);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--grey);
+      max-width: 460px;
+      margin-bottom: 22px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(184,188,199,0.35);
+      font-size: 11px;
+      color: var(--grey);
+      backdrop-filter: blur(18px);
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(5,5,9,0.8));
+    }
+
+    .badge strong {
+      color: var(--gold-soft);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn-primary {
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f4e3a3, #d4af37);
+      color: #14120a;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      box-shadow: 0 16px 38px rgba(0,0,0,0.88);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    }
+
+    .btn-ghost {
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(184,188,199,0.55);
+      cursor: pointer;
+      background: transparent;
+      color: var(--grey);
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .btn-ghost span.icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(244,227,163,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--gold-soft);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(244,227,163,0.8);
+      color: var(--white);
+      background: rgba(5,5,9,0.8);
+    }
+
+    .hero-meta {
+      font-size: 11px;
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .hero-meta span {
+      color: var(--gold-soft);
+    }
+
+    /* HERO CARD DROITE */
+    .hero-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(212,175,55,0.28);
+      background: radial-gradient(circle at 0 0, rgba(244,227,163,0.25), rgba(5,5,9,0.96));
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .hero-card-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold-soft);
+    }
+
+    .hero-card-chip {
+      font-size: 11px;
+      color: #14120a;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #fef6cf;
+    }
+
+    .hero-card-main {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-card-price {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .hero-card-price span.old {
+      font-size: 13px;
+      text-decoration: line-through;
+      color: rgba(184,188,199,0.7);
+      font-weight: 400;
+    }
+
+    .hero-card-price span.pct {
+      font-size: 12px;
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .hero-card-label {
+      font-size: 11px;
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-top: 3px;
+    }
+
+    .hero-card-pill {
+      font-size: 11px;
+      color: var(--grey);
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(184,188,199,0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-card-pill span.bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+    }
+
+    .hero-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .hero-card-kpi {
+      font-size: 11px;
+      color: var(--grey);
+    }
+
+    .hero-card-kpi strong {
+      color: var(--gold-soft);
+    }
+
+    /* SECTION CATEGORIES */
+    .section {
+      padding: 18px 0 34px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-sub {
+      font-size: 12px;
+      color: var(--grey);
+      max-width: 360px;
+    }
+
+    .link-inline {
+      font-size: 11px;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .product-card {
+      border-radius: var(--radius-md);
+      background: linear-gradient(150deg, rgba(255,255,255,0.03), rgba(5,5,9,0.95));
+      border: 1px solid rgba(184,188,199,0.3);
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(212,175,55,0.55);
+      background: linear-gradient(150deg, rgba(244,227,163,0.08), rgba(5,5,9,0.96));
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      background: rgba(5,5,9,0.9);
+      border: 1px solid rgba(212,175,55,0.7);
+      color: var(--gold-soft);
+    }
+
+    .product-img {
+      height: 120px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 10% 0, rgba(244,227,163,0.2), rgba(5,5,9,0.95));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(184,188,199,0.8);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .product-title {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .product-meta {
+      font-size: 11px;
+      color: var(--grey);
+    }
+
+    .product-price-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .product-price {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .product-price span.old {
+      font-size: 11px;
+      text-decoration: line-through;
+      color: rgba(184,188,199,0.7);
+      margin-left: 4px;
+    }
+
+    .product-discount {
+      font-size: 11px;
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .product-cta {
+      margin-top: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold-soft);
+    }
+
+    /* SECTION PROMESSES */
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(184,188,199,0.4);
+      font-size: 11px;
+      color: var(--grey);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(5,5,9,0.9);
+    }
+
+    .pill-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--gold-soft);
+    }
+
+    /* SECTION GEO / FAQ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    .faq-item {
+      padding: 10px 0;
+      border-top: 1px solid rgba(184,188,199,0.18);
+    }
+
+    .faq-question {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .faq-answer {
+      font-size: 12px;
+      color: var(--grey);
+    }
+
+    .geo-block {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(184,188,199,0.35);
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(5,5,9,0.96));
+      padding: 12px 12px 10px;
+      font-size: 11px;
+      color: var(--grey);
+    }
+
+    .geo-block strong {
+      color: var(--gold-soft);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(184,188,199,0.22);
+      background: radial-gradient(circle at top, #14141e 0, #050509 55%);
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      padding: 18px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--grey);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 10px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom span {
+      opacity: 0.85;
+    }
+
+    /* MOBILE */
+    @media (max-width: 860px) {
+      nav {
+        display: none;
+      }
+      .burger {
+        display: flex;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-card {
+        order: -1;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding-top: 40px;
+      }
+      .header-inner {
+        padding-inline: 12px;
+      }
+      .wrapper {
+        padding-inline: 14px;
+      }
+      .product-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card-main {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <!-- SCHEMA.ORG OUTLET STORE -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "OutletStore",
+    "name": "RJ Destock",
+    "url": "https://rj-destock.example.com/",
+    "description": "Déstockage premium de marques luxe et haut de gamme : fin de séries, surplus de stock, lots pour particuliers et professionnels.",
+    "logo": "https://rj-destock.example.com/logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "FR"
+    },
+    "sameAs": [],
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday","Tuesday","Wednesday","Thursday","Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    }]
+  }
+  </script>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="wrapper header-inner">
+      <div class="brand">
+        <div class="brand-mark">RJ</div>
+        <div class="brand-text">
+          <div class="brand-name">RJ DESTOCK</div>
+          <div class="brand-tagline">Déstockage premium & luxe</div>
+        </div>
       </div>
 
-      <h1 class="brand-title">Pronis</h1>
-
-      <nav>
-        <a href="#home">Início</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#contact">Contato</a>
+      <nav aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="#destockage">Déstockage</a></li>
+          <li><a href="#categories">Catégories</a></li>
+          <li><a href="#pro">Pro & lots</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+          Devenir partenaire
+        </button>
       </nav>
 
-      <div class="header-panier">
-        <button type="button" class="snipcart-checkout panier-btn" aria-label="Ver carrinho">
-          Ver carrinho €
+      <button class="burger" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero wrapper" id="destockage">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">
+            <div class="eyebrow-dot">RJ</div>
+            <div class="eyebrow-text">Déstockage luxe – séries limitées</div>
+          </div>
+
+          <h1 class="hero-title">
+            <span>Déstockage</span>
+            <span class="hero-title-emphasis">premium noir & or</span>
+            <span>pour marques exigeantes</span>
+          </h1>
+
+          <p class="hero-sub">
+            RJ Destock accompagne les marques et les revendeurs qui veulent liquider leurs stocks
+            sans brader leur image : lots premium, contrôle qualité, sélection chic pour une clientèle exigeante.
+          </p>
+
+          <div class="hero-badges">
+            <div class="badge"><strong>–80 %</strong> sur fin de séries sélectionnées</div>
+            <div class="badge">Lots pour <strong>pros & marketplaces</strong></div>
+            <div class="badge">Image de marque <strong>préservée</strong></div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'});">
+              Voir les opportunités
+            </button>
+            <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+              <span class="icon">✦</span>
+              Proposer un stock
+            </button>
+          </div>
+
+          <p class="hero-meta">
+            Stock <span>sélectionné</span> • Process <span>transparent</span> • Délais <span>rapides</span>
+          </p>
+        </div>
+
+        <aside class="hero-card" aria-label="Mise en avant déstockage">
+          <div class="hero-card-header">
+            <div class="hero-card-title">Exemple de déstockage</div>
+            <div class="hero-card-chip">Lancement RJ Destock</div>
+          </div>
+
+          <div class="hero-card-main">
+            <div>
+              <div class="hero-card-price">
+                9,90 €
+                <span class="old">29,90 €</span>
+                <span class="pct">-67 %</span>
+              </div>
+              <div class="hero-card-label">Prix indicatif sur lot de produits premium</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="hero-card-pill">
+                <span class="bullet"></span> Fin de série contrôlée
+              </div>
+              <div class="hero-card-pill" style="margin-top:6px;">
+                <span class="bullet"></span> Conditionnement prêt à expédier
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card-footer">
+            <div class="hero-card-kpi">
+              Rotation stock <strong>accélérée</strong><br>
+              Image de marque <strong>maîtrisée</strong>
+            </div>
+            <button class="btn-ghost" style="margin-top:0;" onclick="document.getElementById('pro').scrollIntoView({behavior:'smooth'});">
+              <span class="icon">➜</span>
+              Solutions pro
+            </button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section wrapper" id="categories">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Univers RJ Destock</h2>
+          <p class="section-sub">
+            Une sélection noire, or et blanc pour présenter vos stocks comme une collection luxe :
+            mode, accessoires, maison, high‑tech, tout est pensé pour un rendu chic.
+          </p>
+        </div>
+        <a href="#contact" class="link-inline">Proposer un stock complet</a>
+      </div>
+
+      <div class="product-grid" aria-label="Catégories principales">
+        <article class="product-card">
+          <div class="product-tag">Mode & accessoires</div>
+          <div class="product-img">Prêt‑à‑porter</div>
+          <h3 class="product-title">Marques textile & accessoires</h3>
+          <p class="product-meta">Collections passées, capsules, séries pilotes, invendus premium.</p>
+          <div class="product-price-line">
+            <div class="product-price">
+              Dès 3,50 €<span class="old">11,90 €</span>
+            </div>
+            <div class="product-discount">-70 % indicatif</div>
+          </div>
+          <div class="product-cta">Découvrir les lots mode</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-tag">Beauté & bien‑être</div>
+          <div class="product-img">Cosmétiques</div>
+          <h3 class="product-title">Soins, beauté, parfums</h3>
+          <p class="product-meta">Surstocks, changement de packagings, fins de gammes sous contrôle qualité.</p>
+          <div class="product-price-line">
+            <div class="product-price">
+              Dès 1,90 €<span class="old">9,90 €</span>
+            </div>
+            <div class="product-discount">-60 % indicatif</div>
+          </div>
+          <div class="product-cta">Voir les opportunités beauté</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-tag">Maison & déco</div>
+          <div class="product-img">Home</div>
+          <h3 class="product-title">Art de la table & décoration</h3>
+          <p class="product-meta">Collections saisonnières, fin de séries, lots pour boutiques et e‑shops.</p>
+          <div class="product-price-line">
+            <div class="product-price">
+              Dès 2,90 €<span class="old">12,90 €</span>
+            </div>
+            <div class="product-discount">-65 % indicatif</div>
+          </div>
+          <div class="product-cta">Lotiser mon stock maison</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-tag">High‑tech & divers</div>
+          <div class="product-img">Tech</div>
+          <h3 class="product-title">High‑tech & univers divers</h3>
+          <p class="product-meta">Accessoires, gadgets, séries spéciales, stocks et retours contrôlés.</p>
+          <div class="product-price-line">
+            <div class="product-price">
+              Dès 4,90 €<span class="old">19,90 €</span>
+            </div>
+            <div class="product-discount">-75 % indicatif</div>
+          </div>
+          <div class="product-cta">Contacter RJ pour ce segment</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROMESSES / PRO -->
+    <section class="section wrapper" id="pro">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Pour les marques & revendeurs</h2>
+          <p class="section-sub">
+            RJ Destock structure le déstockage comme un levier stratégique : process clair, confidentialité, et
+            circuits de revente adaptés pour ne pas cannibaliser vos canaux habituels.
+          </p>
+        </div>
+        <a href="#contact" class="link-inline">Demander un rappel</a>
+      </div>
+
+      <div class="pill-row">
+        <div class="pill">
+          <div class="pill-icon">①</div>
+          Audit rapide de vos stocks, volumes, prix publics conseillés, contraintes marque.
+        </div>
+        <div class="pill">
+          <div class="pill-icon">②</div>
+          Proposition de scénario de déstockage : lots, remises, canaux, calendrier.
+        </div>
+        <div class="pill">
+          <div class="pill-icon">③</div>
+          Visibilité premium : présentation noire & or, communication claire sur l’origine du stock.
+        </div>
+        <div class="pill">
+          <div class="pill-icon">④</div>
+          Suivi des performances et rotation stock accélérée, avec reporting simplifié.
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ + GEO / GEO BLOCK -->
+    <section class="section wrapper" id="faq">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Questions fréquentes</h2>
+          <p class="section-sub">
+            Des réponses claires, en format court, pensées pour les moteurs de recherche classiques
+            et les moteurs IA afin de maximiser votre visibilité naturelle.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-grid">
+        <div>
+          <article class="faq-item">
+            <h3 class="faq-question">Qu’est‑ce que RJ Destock&nbsp;?</h3>
+            <p class="faq-answer">
+              RJ Destock est un service de déstockage premium qui aide les marques, e‑commerçants
+              et revendeurs à écouler leurs stocks sans abîmer leur image, en mettant en avant
+              les produits dans un univers chic noir & or.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-question">Quels types de stocks pouvez‑vous reprendre&nbsp;?</h3>
+            <p class="faq-answer">
+              Nous travaillons sur les fins de séries, collections passées, surstocks, produits
+              en changement de packaging et lots divers, dans des univers mode, beauté, maison,
+              high‑tech et plus selon les projets.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-question">Est‑ce adapté aux professionnels et aux marketplaces&nbsp;?</h3>
+            <p class="faq-answer">
+              Oui, RJ Destock s’adresse aussi bien aux marques qu’aux grossistes, e‑commerçants,
+              boutiques physiques ou vendeurs marketplace qui souhaitent acheter ou céder des lots
+              structurés à prix compétitifs.
+            </p>
+          </article>
+
+          <article class="faq-item">
+            <h3 class="faq-question">Comment démarrer un déstockage avec RJ Destock&nbsp;?</h3>
+            <p class="faq-answer">
+              Il suffit de nous envoyer une description rapide de votre stock (familles de produits,
+              quantités, prix publics conseillés, contraintes) via le formulaire de contact. Nous
+              revenons vers vous avec un scénario de déstockage adapté.
+            </p>
+          </article>
+        </div>
+
+        <aside class="geo-block">
+          <p><strong>Bloc d’information court pour moteurs IA :</strong></p>
+          <p>
+            RJ Destock est un site de déstockage premium en noir, or et blanc spécialisé dans les stocks
+            de marques et de revendeurs. Le site présente des lots de produits mode, beauté, maison et
+            high‑tech à prix cassés, sans nuire à l’image des marques. RJ Destock accompagne les marques,
+            e‑commerçants, grossistes et boutiques physiques pour structurer leur déstockage : audit des
+            stocks, création de lots, sélection des canaux de revente et suivi des performances. Le service
+            s’adresse aussi aux acheteurs professionnels qui recherchent des lots cohérents, prêts à être
+            revendus sur site marchand, marketplace ou boutique physique.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section wrapper" id="contact">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Contact RJ Destock</h2>
+          <p class="section-sub">
+            Décrivez en quelques lignes votre stock ou votre projet d’achat de lots. Nous revenons vers vous
+            rapidement avec une proposition claire et professionnelle.
+          </p>
+        </div>
+      </div>
+
+      <form class="pill-row" action="#" method="post">
+        <div class="pill" style="flex:1 1 260px;">
+          <div class="pill-icon">✉</div>
+          <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
+            <label for="email" style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--grey);">
+              Email professionnel
+            </label>
+            <input id="email" name="email" type="email" required
+                   style="background:transparent;border:none;border-bottom:1px solid rgba(184,188,199,0.6);padding:4px 0;font-size:12px;color:var(--white);outline:none;">
+          </div>
+        </div>
+
+        <div class="pill" style="flex:1 1 260px;">
+          <div class="pill-icon">🏷</div>
+          <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
+            <label for="type" style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--grey);">
+              Vous êtes
+            </label>
+            <select id="type" name="type"
+                    style="background:transparent;border:none;border-bottom:1px solid rgba(184,188,199,0.6);padding:4px 0;font-size:12px;color:var(--white);outline:none;">
+              <option value="marque" style="color:#000;">Marque</option>
+              <option value="grossiste" style="color:#000;">Grossiste</option>
+              <option value="ecom" style="color:#000;">E‑commerçant</option>
+              <option value="boutique" style="color:#000;">Boutique physique</option>
+              <option value="autre" style="color:#000;">Autre</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pill" style="flex-basis:100%; align-items:flex-start;">
+          <div class="pill-icon">✎</div>
+          <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
+            <label for="message" style="font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:var(--grey);">
+              Description rapide du stock / projet
+            </label>
+            <textarea id="message" name="message" rows="3" required
+                      style="width:100%;background:transparent;border:1px solid rgba(184,188,199,0.6);border-radius:10px;padding:8px;font-size:12px;color:var(--white);outline:none;"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" style="margin-top:6px;">
+          Envoyer ma demande
         </button>
-      </div>
-    </header>
-
-    <!-- Início -->
-    <section id="home" class="section">
-      <h2>
-        <span style="display:inline-block; text-align:center;">
-          <span style="display:block;">💪 Pronis 💪</span>
-          <span style="display:block;">Nutrição Premium</span>
-        </span>
-      </h2>
-      <p>Pronis é especializada em suplementos esportivos de alta qualidade: proteínas, BCAA, creatina e muito mais. Selecionamos os melhores produtos para performance e resultados reais.</p>
+      </form>
     </section>
+  </main>
 
-    <!-- Produtos -->
-    <section id="produtos" class="section">
-      <h2>🛍️ Nossos Produtos</h2>
-
-      <div class="product-grid">
-        <!-- Exemplo de produto -->
-        <div class="product-card" data-id="whey-protein" data-stock="10">
-          <picture>
-            <source srcset="./whey-protein.webp" type="image/webp">
-            <img src="./whey-protein.jpg" alt="Whey Protein Pronis" class="product-img" loading="lazy" width="400" height="400">
-          </picture>
-
-          <h3>💪 Whey Protein</h3>
-          <p>Proteína de alta qualidade para ganho muscular e recuperação rápida. Sabor delicioso e fácil de dissolver.</p>
-          <p class="price">À partir de 29,90 €</p>
-
-          <select id="whey-quantidade">
-            <option value="500">500g – 29,90 €</option>
-            <option value="1000">1kg – 49,90 €</option>
-            <option value="2000">2kg – 89,90 €</option>
-          </select>
-
-          <button type="button" class="panier-btn" onclick="ajouterProduit('whey-protein','Whey Protein','Whey Protein','whey-quantidade')" aria-label="Adicionar Whey Protein ao carrinho">
-            🛒 Adicionar ao carrinho
-          </button>
-        </div>
-
-        <!-- Outro produto -->
-        <div class="product-card" data-id="bcaa" data-stock="10">
-          <picture>
-            <source srcset="./bcaa.webp" type="image/webp">
-            <img src="./bcaa.jpg" alt="BCAA Pronis" class="product-img" loading="lazy" width="400" height="400">
-          </picture>
-
-          <h3>⚡ BCAA 2:1:1</h3>
-          <p>Suplemento essencial para recuperação e crescimento muscular. Com aminoácidos essenciais na proporção ideal.</p>
-          <p class="price">À partir de 19,90 €</p>
-
-          <select id="bcaa-quantidade">
-            <option value="300">300g – 19,90 €</option>
-            <option value="500">500g – 29,90 €</option>
-            <option value="1000">1kg – 49,90 €</option>
-          </select>
-
-          <button type="button" class="panier-btn" onclick="ajouterProduit('bcaa','BCAA 2:1:1','BCAA 2:1:1','bcaa-quantidade')" aria-label="Adicionar BCAA ao carrinho">
-            🛒 Adicionar ao carrinho
-          </button>
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrapper footer-inner">
+      <div class="footer-top">
+        <div>RJ Destock – Déstockage premium noir & or.</div>
+        <div class="footer-links">
+          <a href="#destockage">Accueil</a>
+          <a href="#categories">Univers</a>
+          <a href="#pro">Pro</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
         </div>
       </div>
-    </section>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> RJ Destock. Tous droits réservés.</span>
+        <span>SEO optimisé, structure prête pour référencement naturel & IA.</span>
+      </div>
+    </div>
+  </footer>
 
-    <!-- Snipcart (carrinho) -->
-    <div hidden id="snipcart" data-config-add-product-behavior="none"></div>
+</div>
 
-    <script>
-      // Função genérica para adicionar produtos ao carrinho
-      function ajouterProduit(id, nome, descricao, selectId){
-        const quantidade = document.getElementById(selectId).value;
-        const preco = document.querySelector(`#${selectId} option:checked`).text.split('–')[1].trim().replace('€','').trim();
-        Snipcart.api.items.add({
-          id: id,
-          name: nome,
-          price: parseFloat(preco),
-          quantity: parseInt(quantidade),
-          url: window.location.href
-        });
-      }
-    </script>
-  </body>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
 </html>
