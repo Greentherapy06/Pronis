@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://greentherapy06.github.io/Green-therapy-cbd/pt/sitemap.xml
