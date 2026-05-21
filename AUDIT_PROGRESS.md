@@ -1,11 +1,11 @@
 # 📋 AUDIT PROGRESS - Les Jardins Enchantés
 
 **Dernière mise à jour:** 21/05/2026
-**Statut:** En cours - Option A (manuel)
+**Statut:** ✅ Canonicals, robots.txt et sitemap terminés
 
 ---
 
-## ✅ DÉJÀ FAIT
+## ✅ COMPLETÉ
 
 ### Commits réalisés
 - `5707b4a` - Fix image Saturn Cockring sur index
@@ -13,99 +13,76 @@
   - - `cac6650` - Prix Le Flateur index (29.99 → 49.90) [ANNULÉ]
     - - `e7689eb` - Rollback Le Flateur fiche (49.90 → 29.99 €)
       - - `df30f65` - Rollback Le Flateur index (49.90 → 29.99 €)
-        - - `6eb89bc` - Canonical ajouté sur Magnum-Opus-vibro.html
-         
-          - ### Prix finaux confirmés
-          - - **Magnum Opus : 149,90 €**
-            - - **Le Flateur : 29,99 €**
-             
-              - ---
+        - - `6eb89bc` - Canonical Magnum-Opus-vibro
+          - - `62b9ade` - Création AUDIT_PROGRESS.md
+            - - `8473580` - Canonical cockring-vibrant-saturn-hueman
+              - - `fe0fde0` - Canonical le-flateur
+                - - `ffbb50d` - Canonical monster-pussy-strocker
+                  - - `(commit)` - Canonical anneau_vibrant_telecommande
+                    - - `(commit)` - Canonical pink-star
+                      - - `(commit)` - Canonical dual-vibe-sex-on-the-beach
+                        - - `(commit)` - Canonical Plug-Anal-Rosy-Gold
+                          - - `(commit)` - Canonical deguisement-infirmiere-sexy
+                            - - `(commit)` - Canonical orgie-pinacolada
+                              - - `(commit)` - Canonical Deguisement-Bunny
+                                - - `(commit)` - Canonical black-empire-my-duchess
+                                  - - `(commit)` - Canonical pink-star-choco-fraise
+                                    - - `(commit)` - Canonical Cockring-vibrant-Marry-Me-Wooomy
+                                      - - `(commit)` - Canonical red-dolls-energy-pleasure
+                                        - - `(commit)` - Canonical vibro-rechargeable-Indiana
+                                          - - `(commit)` - Canonical deguisement-etudiante
+                                            - - `(commit)` - Canonical hemp-intense-orgasm
+                                              - - `(commit)` - Canonical pink_star_sucette_cerise
+                                                - - `662e482` - Canonical deguisement-enseignante
+                                                  - - `c4ad35b` - robots.txt : corrige le domaine (jl-shop-06 → lesjardinsenchantes)
+                                                    - - `8fff419` - sitemap.xml : ajoute les 9 fiches manquantes
+                                                     
+                                                      - ### Prix finaux confirmés
+                                                      - - **Magnum Opus : 149,90 €**
+                                                        - - **Le Flateur : 29,99 €**
+                                                         
+                                                          - ### Balises canonical : 20/20 ✅
+                                                          - Toutes les fiches produit ont désormais leur `<link rel="canonical">`.
+                                                         
+                                                          - ### Sitemap.xml : complet ✅
+                                                          - 26 URLs total (home + 24 produits + cgv).
+                                                         
+                                                          - ### robots.txt : corrigé ✅
+                                                          - Pointe vers le bon domaine.
+                                                         
+                                                          - ---
 
-              ## 🔄 EN COURS - Ajout des balises canonical
+                                                          ## 📌 TÂCHES D'AUDIT RESTANTES
 
-              **Progression : 1/20 fiches produit**
+                                                          ### 1. Open Graph URL (og:url) - 24 fiches
+                                                          Ajouter sur chaque fiche dans le `<head>` :
+                                                          ```html
+                                                          <meta property="og:url" content="https://lesjardinsenchantes.vercel.app/NOMFICHIER.html">
+                                                          ```
 
-              ### Pattern à appliquer
-              Ajouter dans le `<head>` après `<meta name="description">` :
-              ```html
-              <link rel="canonical" href="https://lesjardinsenchantes.vercel.app/NOMFICHIER.html">
-              ```
+                                                          ### 2. Titres trop longs (>60 caractères) - 8 pages
+                                                          À raccourcir pour le SEO Google.
 
-              ### Workflow par fichier
-              1. Aller sur `https://github.com/JLShop06/Les-Jardins-Enchantes/edit/main/NOMFICHIER.html`
-              2. 2. Cliquer dans l'éditeur, trouver la ligne `<meta name="description"`
-                 3. 3. Fin de ligne → Entrée → taper le canonical
-                    4. 4. Onglet Preview pour vérifier (une seule ligne ajoutée)
-                       5. 5. Commit changes... → message : `SEO: ajoute canonical sur NOMFICHIER`
-                         
-                          6. ### ⚠️ NOTE TECHNIQUE
-                          7. - CodeMirror Find/Replace ne supporte PAS les retours à la ligne dans le champ Replace
-                             - - Toujours faire manuellement : End → Enter → type
-                              
-                               - ---
+                                                          ### 3. Meta descriptions trop longues (>160 caractères) - 16 pages
+                                                          À raccourcir pour le SEO Google.
 
-                               ## ⏳ FICHIERS RESTANTS - Canonicals (19)
+                                                          ### 4. Pages sans meta description
+                                                          - success.html
+                                                          - - cancel.html
+                                                            - - erreur.html
+                                                             
+                                                              - ### 5. Image orpheline
+                                                              - `orgie_gel_excitation_pina_colada_1.jpg` présente mais non référencée.
+                                                             
+                                                              - ### 6. vercel.json - stratégie de cache
+                                                              - Images en `immutable` 1 an. À reconsidérer.
+                                                             
+                                                              - ---
 
-                               - [ ] cockring-vibrant-saturn-hueman.html
-                               - [ ] - [ ] le-flateur.html
-                               - [ ] - [ ] monster-pussy-strocker.html
-                               - [ ] - [ ] anneau_vibrant_telecommande.html
-                               - [ ] - [ ] pink-star.html
-                               - [ ] - [ ] dual-vibe-sex-on-the-beach.html
-                               - [ ] - [ ] Plug-Anal-Rosy-Gold.html
-                               - [ ] - [ ] deguisement-infirmière-sexy.html
-                               - [ ] - [ ] orgie-pinacolada.html
-                               - [ ] - [ ] Déguisement-Bunny.html
-                               - [ ] - [ ] black-empire-my-duchess.html
-                               - [ ] - [ ] pink-star-choco-fraise.html
-                               - [ ] - [ ] Cockring-vibrant-Marry-Me-Wooomy.html
-                               - [ ] - [ ] red-dolls-energy-pleasure.html
-                               - [ ] - [ ] vibro-rechargeable-Indiana.html
-                               - [ ] - [ ] deguisement-etudiante.html
-                               - [ ] - [ ] hemp-intense-orgasm.html
-                               - [ ] - [ ] pink_star_sucette_cerise.html
-                               - [ ] - [ ] deguisement-enseignante.html
-                              
-                               - [ ] ---
-                              
-                               - [ ] ## 📌 AUTRES TÂCHES D'AUDIT À FAIRE APRÈS
-                              
-                               - [ ] ### 1. Open Graph URL (og:url) - 24 fiches
-                               - [ ] Ajouter sur chaque fiche dans le `<head>` :
-                               - [ ] ```html
-                               - [ ] <meta property="og:url" content="https://lesjardinsenchantes.vercel.app/NOMFICHIER.html">
-                               ```
+                                                              ## 🔑 RAPPELS
 
-                               ### 2. Sitemap.xml incomplet
-                               9 produits manquants dans `sitemap.xml`. À compléter avec toutes les URLs des fiches.
-
-                               ### 3. robots.txt - mauvais domaine
-                               Le fichier `robots.txt` référence encore `jl-shop-06.vercel.app`.
-                               Remplacer par : `https://lesjardinsenchantes.vercel.app/sitemap.xml`
-
-                               ### 4. Titres trop longs (>60 caractères) - 8 pages
-                               À raccourcir pour le SEO Google.
-
-                               ### 5. Meta descriptions trop longues (>160 caractères) - 16 pages
-                               À raccourcir pour le SEO Google.
-
-                               ### 6. Pages sans meta description
-                               - success.html
-                               - cancel.html
-                               - erreur.html
-
-                               ### 7. Image orpheline
-                               `orgie_gel_excitation_pina_colada_1.jpg` présente mais non référencée. Vérifier si à utiliser ou à supprimer.
-
-                               ### 8. vercel.json - stratégie de cache
-                               Actuellement les images sont en `immutable` 1 an. Problématique si une image doit être remplacée (besoin de renommer le fichier). À reconsidérer.
-
-                               ---
-
-                               ## 🔑 RAPPELS IMPORTANTS
-
-                               - **Repo :** JLShop06/Les-Jardins-Enchantes
-                               - **URL prod :** https://lesjardinsenchantes.vercel.app/
-                               - **NE PAS toucher aux `price_id` Stripe** (configurés côté Stripe Dashboard)
-                               - **⚠️ Loi française L112-1-1 :** le prix affiché doit être égal au prix Stripe encaissé
-                               
+                                                              - **Repo :** JLShop06/Les-Jardins-Enchantes
+                                                              - - **URL prod :** https://lesjardinsenchantes.vercel.app/
+                                                                - - **NE PAS toucher aux `price_id` Stripe**
+                                                                  - - **⚠️ L112-1-1 :** le prix affiché doit être = prix Stripe encaissé
+                                                                    - 
