@@ -1,7 +1,7 @@
 # 📋 AUDIT PROGRESS - Les Jardins Enchantés
 
 **Dernière mise à jour:** 21/05/2026  
-**Statut:** ✅ Canonicals + og:url + sitemap + robots.txt + titres SEO terminés
+**Statut:** ✅ Canonicals + og:url + sitemap + robots.txt + titres SEO + meta descriptions terminés
 
 ---
 
