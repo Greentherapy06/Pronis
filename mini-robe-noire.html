@@ -110,6 +110,32 @@
       font-weight:300;
     }
 
+    .size-selector{
+      margin-bottom:25px;
+    }
+
+    .size-dropdown{
+      width:100%;
+      max-width:220px;
+      padding:12px 14px;
+      border:1px solid rgba(0,0,0,0.12);
+      background:#fff;
+      font-size:14px;
+      border-radius:6px;
+      outline:none;
+      cursor:pointer;
+      transition:0.3s ease;
+    }
+
+    .size-dropdown:hover{
+      border-color:#C9A86A;
+    }
+
+    .size-dropdown:focus{
+      border-color:#C9A86A;
+      box-shadow:0 0 0 2px rgba(201,168,106,0.15);
+    }
+
     .add-to-cart{
       background:none;
       border:none;
@@ -160,6 +186,10 @@
       .product-details{
         text-align:center;
         max-width:600px;
+      }
+
+      .size-dropdown{
+        margin:auto;
       }
     }
 
@@ -220,11 +250,25 @@ Mini robe noire moulante ultra glamour avec dos nu plongeant, manches longues et
 
 <p class="product-price">49,95 €</p>
 
+<div class="size-selector">
+<label for="size" class="section-title">Taille</label>
+
+<select id="size" class="size-dropdown">
+<option value="S">S</option>
+<option value="M">M</option>
+<option value="L">L</option>
+<option value="XL">XL</option>
+</select>
+</div>
+
 <button
 class="add-to-cart"
 data-product-id="price_1TbJIHF9c1lWA0HyICYqgUFx"
 data-product-name="Mini Robe Noire Sexy Glamour"
-data-product-price="49.95">
+data-product-price="49.95"
+onclick="
+this.dataset.productName='Mini Robe Noire Sexy Glamour - Taille ' + document.getElementById('size').value;
+">
 AJOUTER AU PANIER
 </button>
 
@@ -259,6 +303,7 @@ Chez <strong>Les Jardins Enchantés</strong>, découvrez une sélection premium 
 <ul class="product-list">
 <li>Mini robe sexy femme</li>
 <li>Couleur : noir</li>
+<li>Tailles disponibles : S, M, L, XL</li>
 <li>Coupe moulante ajustée</li>
 <li>Style glamour et clubwear</li>
 <li>Dos nu extra plongeant</li>
