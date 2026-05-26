@@ -1,273 +1,176 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="logo.png">
-<link rel="manifest" href="site.webmanifest">
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#caa86a">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#caa86a">
+  <title>Mini robe noire sexy extensible femme | Les Jardins Enchantés</title>
 
-<title>Mini Robe Noire Sexy Glamour | Les Jardins Enchantés</title>
+  <meta name="description" content="Mini robe noire sexy extensible ultra glamour, dos nu plongeant, coupe moulante, manches longues et zip double sens. Livraison France.">
+  
+  <link rel="canonical" href="https://lesjardinsenchantes.vercel.app/Mini-robe-noire.html">
+  <meta property="og:url" content="https://lesjardinsenchantes.vercel.app/Mini-robe-noire.html">
 
-<meta name="description" content="Mini robe noire sexy glamour dos nu extensible avec manches longues et zip double sens. Robe moulante chic et sensuelle disponible chez Les Jardins Enchantés.">
+  <meta name="keywords" content="
+  les jardins enchantés,
+  mini robe noire,
+  robe sexy noire,
+  robe moulante femme,
+  robe sexy femme,
+  lingerie sexy,
+  clubwear femme,
+  tenue sexy femme,
+  robe dos nu sexy,
+  robe soirée sexy,
+  sexshop france,
+  boutique lingerie sexy france
+  ">
 
-<link rel="canonical" href="https://lesjardinsenchantes.vercel.app/Mini-robe-noire.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<meta property="og:url" content="https://lesjardinsenchantes.vercel.app/Mini-robe-noire.html">
+  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css"></noscript>
 
-<meta name="keywords" content="les jardins enchantés, mini robe noire sexy, robe sexy femme, robe moulante noire, robe glamour femme, robe dos nu sexy, mini robe clubwear, lingerie sexy femme, robe soirée sexy, robe noire glamour, robe sexy amazon, tenue sexy femme, robe extensible femme, robe club femme, cosplay glamour, sexshop france, lingerie glamour, robe sensuelle femme, boutique sexy france, sextoy france">
+  <script src="cart.js" defer></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    .product-page{
+      padding-top:160px;
+      padding-bottom:120px;
+      display:flex;
+      justify-content:center;
+      width:100%;
+    }
 
-<link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    .product-container{
+      max-width:1050px;
+      display:flex;
+      gap:80px;
+      align-items:flex-start;
+      padding:0 20px;
+    }
 
-<noscript>
-<link rel="stylesheet" href="style.css">
-</noscript>
+    .product-image-frame{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      align-items:center;
+    }
 
-<script src="cart.js" defer></script>
+    .product-image-frame img{
+      width:100%;
+      max-width:450px;
+      border-radius:12px;
+      object-fit:cover;
+      box-shadow:0 8px 40px rgba(0,0,0,0.12);
+      transition:0.4s ease;
+    }
 
-<style>
+    .product-image-frame img:hover{
+      transform:scale(1.03);
+    }
 
-.product-page{
-padding-top:160px;
-padding-bottom:120px;
-display:flex;
-justify-content:center;
-width:100%;
-}
+    .product-details{
+      flex:1;
+      max-width:450px;
+      text-align:left;
+    }
 
-.product-container{
-max-width:1050px;
-display:flex;
-gap:80px;
-align-items:flex-start;
-padding:0 20px;
-}
+    .product-title{
+      font-size:34px;
+      font-weight:300;
+      margin-bottom:10px;
+    }
 
-.product-image-frame{
-flex:1;
-display:flex;
-flex-direction:column;
-gap:20px;
-align-items:center;
-}
+    .product-subtitle{
+      font-size:15px;
+      color:#555;
+      margin-bottom:25px;
+      line-height:1.6;
+    }
 
-.product-image-frame img{
-width:100%;
-max-width:450px;
-border-radius:12px;
-object-fit:cover;
-box-shadow:0 8px 40px rgba(0,0,0,0.12);
-transition:0.4s ease;
-}
+    .product-price{
+      font-size:26px;
+      color:#C9A86A;
+      margin-bottom:25px;
+      font-weight:300;
+    }
 
-.product-image-frame img:hover{
-transform:scale(1.03);
-}
+    .add-to-cart{
+      background:none;
+      border:none;
+      font-size:12px;
+      letter-spacing:4px;
+      padding:12px 0;
+      cursor:pointer;
+      opacity:0.7;
+    }
 
-.product-details{
-flex:1;
-max-width:450px;
-text-align:left;
-}
+    .add-to-cart:hover{
+      opacity:1;
+    }
 
-.product-title{
-font-size:34px;
-font-weight:300;
-margin-bottom:10px;
-}
+    .separator{
+      margin:40px 0;
+      border:none;
+      border-top:1px solid rgba(0,0,0,0.05);
+    }
 
-.product-subtitle{
-font-size:15px;
-color:#555;
-margin-bottom:25px;
-line-height:1.6;
-}
+    .section-title{
+      font-size:18px;
+      margin-bottom:15px;
+      font-weight:300;
+    }
 
-.product-price{
-font-size:26px;
-color:#C9A86A;
-margin-bottom:28px;
-font-weight:300;
-}
+    .product-description{
+      font-size:15px;
+      color:#444;
+      margin-bottom:20px;
+      line-height:1.8;
+    }
 
-.size-selector{
-margin-bottom:32px;
-}
+    .product-list{
+      font-size:15px;
+      color:#333;
+      padding-left:18px;
+      line-height:1.9;
+    }
 
-.size-label{
-display:block;
-font-size:11px;
-letter-spacing:4px;
-text-transform:uppercase;
-color:#C9A86A;
-margin-bottom:14px;
-opacity:0.95;
-font-weight:400;
-}
+    @media(max-width:900px){
+      .product-container{
+        flex-direction:column;
+        text-align:center;
+        align-items:center;
+      }
 
-.size-dropdown{
-width:100%;
-max-width:240px;
-padding:14px 18px;
-background:rgba(255,255,255,0.98);
-border:1px solid rgba(201,168,106,0.28);
-border-radius:4px;
-font-size:13px;
-letter-spacing:2px;
-color:#1a1a1a;
-outline:none;
-cursor:pointer;
-transition:all 0.3s ease;
-box-shadow:0 8px 24px rgba(0,0,0,0.05);
-appearance:none;
--webkit-appearance:none;
--moz-appearance:none;
-}
+      .product-details{
+        text-align:center;
+        max-width:600px;
+      }
+    }
 
-.size-dropdown:hover{
-border-color:#C9A86A;
-box-shadow:0 10px 28px rgba(201,168,106,0.12);
-}
-
-.size-dropdown:focus{
-border-color:#C9A86A;
-box-shadow:0 0 0 2px rgba(201,168,106,0.15);
-}
-
-.add-to-cart{
-background:none;
-border:none;
-font-size:12px;
-letter-spacing:4px;
-padding:12px 0;
-cursor:pointer;
-opacity:0.7;
-transition:0.3s ease;
-}
-
-.add-to-cart:hover{
-opacity:1;
-}
-
-.separator{
-margin:40px 0;
-border:none;
-border-top:1px solid rgba(0,0,0,0.05);
-}
-
-.section-title{
-font-size:18px;
-margin-bottom:15px;
-font-weight:300;
-}
-
-.product-description{
-font-size:15px;
-color:#444;
-margin-bottom:20px;
-line-height:1.8;
-}
-
-.product-list{
-font-size:15px;
-color:#333;
-padding-left:18px;
-line-height:1.9;
-}
-
-@media(max-width:900px){
-
-.product-container{
-flex-direction:column;
-text-align:center;
-align-items:center;
-}
-
-.product-details{
-text-align:center;
-max-width:600px;
-}
-
-.size-selector{
-display:flex;
-flex-direction:column;
-align-items:center;
-}
-
-}
-
-.categories-nav{
-display:flex;
-align-items:center;
-gap:0;
-background:rgba(202,168,106,0.06);
-border:1px solid rgba(202,168,106,0.18);
-border-radius:2px;
-overflow:hidden;
-flex-shrink:0;
-flex-wrap:wrap;
-}
-
-.categories-nav a{
-display:inline-block;
-border:none;
-border-right:1px solid rgba(202,168,106,0.15);
-color:rgba(202,168,106,0.75);
-font-family:'Inter',sans-serif;
-font-size:9px;
-letter-spacing:2px;
-padding:8px 12px;
-cursor:pointer;
-transition:all .3s;
-text-transform:uppercase;
-text-decoration:none;
-white-space:nowrap;
-}
-
-.categories-nav a:last-child{
-border-right:none;
-}
-
-.categories-nav a:hover,
-.categories-nav a.active{
-color:#0c0a06;
-background:linear-gradient(135deg,#e6c98a 0%,#caa86a 50%,#b89050 100%);
-}
-
-@media(max-width:768px){
-
-.categories-nav a{
-font-size:8px;
-padding:6px 8px;
-letter-spacing:1px;
-}
-
-}
-
-</style>
+.categories-nav{display:flex;align-items:center;gap:0;background:rgba(202,168,106,0.06);border:1px solid rgba(202,168,106,0.18);border-radius:2px;overflow:hidden;flex-shrink:0;flex-wrap:wrap;}
+.categories-nav a{display:inline-block;border:none;border-right:1px solid rgba(202,168,106,0.15);color:rgba(202,168,106,0.75);font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;padding:8px 12px;cursor:pointer;transition:all .3s;text-transform:uppercase;text-decoration:none;white-space:nowrap;}
+.categories-nav a:last-child{border-right:none;}
+.categories-nav a:hover,.categories-nav a.active{color:#0c0a06;background:linear-gradient(135deg,#e6c98a 0%,#caa86a 50%,#b89050 100%);}
+@media(max-width:768px){.categories-nav a{font-size:8px;padding:6px 8px;letter-spacing:1px;}}
+  </style>
 </head>
 
 <body>
-
 <script src="compliance.js"></script>
 
 <header class="lux-header">
-
-<a href="index.html" class="header-logo-link">
-<img
-src="les-jardins-enchantes.webp"
-alt="Les Jardins Enchantés – Boutique Sextoys France"
-class="header-logo-img"
-width="158"
-height="80"
-fetchpriority="high">
-</a>
+  <a href="index.html" class="header-logo-link">
+    <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés – Boutique Sextoys France" class="header-logo-img" width="158" height="80" fetchpriority="high">
+  </a>
 
 <nav class="cat-nav" aria-label="Catégories">
 <a href="index.html" class="cat-nav__link">TOUS</a>
@@ -278,9 +181,8 @@ fetchpriority="high">
 </nav>
 
 <button class="lux-cart" onclick="showCart()">
-PANIER (<span id="cartCount">0</span>)
+    PANIER (<span id="cartCount">0</span>)
 </button>
-
 </header>
 
 <section class="product-page">
@@ -289,53 +191,33 @@ PANIER (<span id="cartCount">0</span>)
 
 <div class="product-image-frame">
 
-<img src="Mini robe noire.jpg" fetchpriority="high" alt="Mini robe noire sexy glamour">
+<img src="Mini robe noire.jpg" fetchpriority="high" alt="Mini robe noire sexy femme">
 
-<img src="Mini robe noire1.jpg" loading="lazy" alt="Mini robe noire moulante femme">
+<img src="Mini robe noire1.jpg" loading="lazy" alt="Robe noire moulante dos nu">
 
-<img src="Mini robe noire2.jpg" loading="lazy" alt="Robe noire sexy dos nu">
+<img src="Mini robe noire2.jpg" loading="lazy" alt="Robe sexy femme glamour">
 
-<img src="Mini robe noire3.jpg" loading="lazy" alt="Mini robe glamour femme">
+<img src="Mini robe noire3.jpg" loading="lazy" alt="Mini robe noire clubwear">
 
-<img src="Mini robe noire4.jpg" loading="lazy" alt="Robe sexy noire clubwear">
+<img src="Mini robe noire4.jpg" loading="lazy" alt="Robe sexy extensible élégante">
 
 </div>
 
 <div class="product-details">
 
-<h1 class="product-title">
-Mini Robe Noire Sexy Glamour
-</h1>
+<h1 class="product-title">Mini robe noire sexy extensible – J Lingerie</h1>
 
 <p class="product-subtitle">
-Mini robe noire moulante ultra glamour avec dos nu plongeant, manches longues et fermeture éclair double sens.
+Robe moulante ultra sexy avec dos nu plongeant, manches longues et coupe glamour.
 </p>
 
-<p class="product-price">
-49,95 €
-</p>
-
-<div class="size-selector">
-
-<label for="size" class="size-label">
-CHOISIR UNE TAILLE
-</label>
-
-<select id="size" class="size-dropdown">
-<option value="S">S</option>
-<option value="M">M</option>
-<option value="L">L</option>
-<option value="XL">XL</option>
-</select>
-
-</div>
+<p class="product-price">49,95 €</p>
 
 <button
 class="add-to-cart"
 data-product-id="price_1TbJIHF9c1lWA0HyICYqgUFx"
-data-product-name="Mini Robe Noire Sexy Glamour"
-data-product-price="49.95"
-onclick="this.dataset.productName='Mini Robe Noire Sexy Glamour - Taille ' + document.getElementById('size').value;">
+data-product-name="Mini robe noire sexy extensible"
+data-product-price="49.95">
 AJOUTER AU PANIER
 </button>
 
@@ -344,23 +226,19 @@ AJOUTER AU PANIER
 <h2 class="section-title">Description</h2>
 
 <p class="product-description">
-Craquez pour cette <strong>magnifique mini robe noire sexy</strong> au style ultra glamour et sensuel. Sa coupe moulante épouse parfaitement les formes du corps et sublime la silhouette avec élégance.
+Craquez pour cette <strong>mini robe noire sexy extensible</strong> au style ultra sensuel et glamour. Sa coupe moulante met parfaitement la silhouette en valeur tandis que son dos nu extra plongeant apporte une touche irrésistiblement sexy.
 </p>
 
 <p class="product-description">
-Son <strong>dos nu extra plongeant</strong> apporte une touche irrésistiblement provocante tandis que les manches longues élégantes renforcent son look chic et moderne.
+Grâce à sa matière douce et extensible, cette robe épouse les formes du corps tout en offrant un confort optimal. Le cordon de maintien permet un ajustement personnalisé pour un maintien parfait.
 </p>
 
 <p class="product-description">
-Grâce à sa matière douce, extensible et confortable, cette <strong>robe glamour femme</strong> offre une sensation agréable tout en mettant les courbes en valeur.
+Ses manches longues élégantes associées à la fermeture éclair double sens au dos créent un look chic, provocant et moderne. Idéale pour soirée, club, rendez-vous romantique ou cosplay glamour.
 </p>
 
 <p class="product-description">
-La fermeture éclair double sens au dos ajoute une finition sexy et sophistiquée idéale pour les soirées glamour, clubwear ou moments romantiques.
-</p>
-
-<p class="product-description">
-Chez <strong>Les Jardins Enchantés</strong>, découvrez une sélection premium de lingerie sexy femme, robes glamour et accessoires intimes haut de gamme.
+Chez <strong>Les Jardins Enchantés</strong>, découvrez des tenues sexy femme, lingerie glamour et accessoires intimes premium livrés en France.
 </p>
 
 <hr class="separator">
@@ -369,17 +247,15 @@ Chez <strong>Les Jardins Enchantés</strong>, découvrez une sélection premium 
 
 <ul class="product-list">
 <li>Mini robe sexy femme</li>
-<li>Couleur : noir</li>
-<li>Tailles disponibles : S, M, L, XL</li>
-<li>Coupe moulante ajustée</li>
-<li>Style glamour et clubwear</li>
+<li>Coupe moulante extensible</li>
 <li>Dos nu extra plongeant</li>
 <li>Manches longues élégantes</li>
-<li>Fermeture éclair zip double sens</li>
-<li>Matière douce et extensible</li>
-<li>Composition : 90% polyester, 10% élasthanne</li>
-<li>Tissu confortable et respirant</li>
-<li>Idéal pour soirées et moments romantiques</li>
+<li>Fermeture zip double sens</li>
+<li>Style : glamour / clubwear / lingerie sexy</li>
+<li>Matière : 90% polyester, 10% élasthanne</li>
+<li>Tissu doux et extensible</li>
+<li>Tailles : S / M / L / XL</li>
+<li>Idéal soirées, club, romantique</li>
 </ul>
 
 </div>
@@ -389,16 +265,13 @@ Chez <strong>Les Jardins Enchantés</strong>, découvrez une sélection premium 
 </section>
 
 <footer class="footer">
-
-© Les Jardins Enchantés – Boutique Luxe Intime
-<br>
+© Les Jardins Enchantés – Boutique Luxe Intime<br>
 
 <a href="cgv.html">CGV</a>
 <a href="confidentialite.html">Confidentialité</a>
 <a href="cookies.html">Cookies</a>
 <a href="mentions-legales.html">Mentions légales</a>
 <a href="index.html">Retour boutique</a>
-
 </footer>
 
 </body>
