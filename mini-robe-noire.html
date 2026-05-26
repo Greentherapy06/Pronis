@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="fr">
 <head>
 
@@ -38,7 +38,6 @@
   <script src="cart.js" defer></script>
 
   <style>
-
     .product-page{
       padding-top:160px;
       padding-bottom:120px;
@@ -152,7 +151,6 @@
       text-transform:uppercase;
     }
 
-    /* ===== LUXE SIZE UPGRADE ===== */
     .size-options{
       display:flex;
       gap:14px;
@@ -204,7 +202,6 @@
         justify-content:center;
       }
     }
-
   </style>
 
 </head>
@@ -258,20 +255,20 @@
     <p class="product-price">49,95 €</p>
 
     <div class="size-options">
-
       <input type="radio" name="size" id="s" value="S"><label for="s">S</label>
       <input type="radio" name="size" id="m" value="M"><label for="m">M</label>
       <input type="radio" name="size" id="l" value="L"><label for="l">L</label>
       <input type="radio" name="size" id="xl" value="XL"><label for="xl">XL</label>
-
     </div>
 
     <button
       class="add-to-cart"
-      data-product-id="price_1TbJIHF9c1lWA0HyICYqgUFx"
-      data-product-id="price_1TbL8hF9c1lWA0HyVa3mRc8V"
-      data-product-id="price_1TbLANF9c1lWA0Hyxtek6tJo"
-      data-product-id="price_1TbLCLF9c1lWA0HyGhqehFvC"
+      data-price-ids='{
+        "S":"price_1TbJIHF9c1lWA0HyICYqgUFx",
+        "M":"price_1TbL8hF9c1lWA0HyVa3mRc8V",
+        "L":"price_1TbLANF9c1lWA0Hyxtek6tJo",
+        "XL":"price_1TbLCLF9c1lWA0HyGhqehFvC"
+      }'
       data-product-name="Mini robe noire sexy extensible"
       data-product-price="49.95"
       onclick="addToCartWithSize()">
