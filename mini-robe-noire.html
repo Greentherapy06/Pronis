@@ -12,7 +12,7 @@
   <title>Mini robe noire sexy extensible dos nu | Les Jardins Enchantés</title>
 
   <meta name="description" content="Mini robe noire sexy extensible ultra glamour, dos nu plongeant, coupe moulante, manches longues et zip double sens.">
-  
+
   <link rel="canonical" href="https://lesjardinsenchantes.vercel.app/mini-robe-noire.html">
   <meta property="og:url" content="https://lesjardinsenchantes.vercel.app/mini-robe-noire.html">
 
@@ -38,6 +38,8 @@
   <script src="cart.js" defer></script>
 
   <style>
+
+    /* ===== STRUCTURE ===== */
     .product-page{
       padding-top:160px;
       padding-bottom:120px;
@@ -108,8 +110,8 @@
       letter-spacing:4px;
       padding:14px 0;
       cursor:pointer;
-      opacity:0.75;
-      transition:0.3s ease;
+      opacity:0.8;
+      transition:0.3s;
     }
 
     .add-to-cart:hover{
@@ -144,10 +146,17 @@
       line-height:1.9;
     }
 
-    /* ====== TAILLE LUXE ====== */
+    /* ===== NAV LUXE CLEAN ===== */
+    .cat-nav__link{
+      font-size:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
+    /* ===== SIZE LUXE PREMIUM ===== */
     .size-options{
       display:flex;
-      gap:10px;
+      gap:12px;
       flex-wrap:wrap;
       margin-bottom:25px;
     }
@@ -157,15 +166,15 @@
     }
 
     .size-options label{
-      padding:10px 16px;
-      border:1px solid rgba(0,0,0,0.12);
-      font-size:12px;
+      padding:11px 16px;
+      border:1px solid rgba(201,168,106,0.35);
+      font-size:11px;
       letter-spacing:2px;
       cursor:pointer;
-      transition:all .3s ease;
-      background:transparent;
+      transition:0.25s ease;
       color:#111;
       border-radius:2px;
+      background:transparent;
     }
 
     .size-options label:hover{
@@ -177,6 +186,7 @@
       background:linear-gradient(135deg,#e6c98a 0%,#caa86a 50%,#b89050 100%);
       color:#0c0a06;
       border-color:transparent;
+      box-shadow:0 6px 20px rgba(201,168,106,0.25);
     }
 
     @media(max-width:900px){
@@ -188,14 +198,15 @@
 
       .product-details{
         text-align:center;
-        max-width:600px;
       }
 
       .size-options{
         justify-content:center;
       }
     }
+
   </style>
+
 </head>
 
 <body>
@@ -203,21 +214,23 @@
 <script src="compliance.js"></script>
 
 <header class="lux-header">
+
   <a href="index.html" class="header-logo-link">
-    <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés" class="header-logo-img" width="158" height="80">
+    <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés" width="158" height="80">
   </a>
 
   <nav class="cat-nav">
-    <a href="index.html">TOUS</a>
-    <a href="index.html#sextoys">SEXTOYS</a>
-    <a href="index.html#gels-lubrifiants">GELS LUBRIFIANTS</a>
-    <a href="index.html#deguisements">DÉGUISEMENTS</a>
-    <a href="index.html#cockrings">COCKRINGS</a>
+    <a href="index.html" class="cat-nav__link">TOUS</a>
+    <a href="index.html#sextoys" class="cat-nav__link">SEXTOYS</a>
+    <a href="index.html#gels-lubrifiants" class="cat-nav__link">GELS</a>
+    <a href="index.html#deguisements" class="cat-nav__link">DÉGUISEMENTS</a>
+    <a href="index.html#cockrings" class="cat-nav__link">COCKRINGS</a>
   </nav>
 
   <button class="lux-cart" onclick="showCart()">
     PANIER (<span id="cartCount">0</span>)
   </button>
+
 </header>
 
 <section class="product-page">
@@ -229,8 +242,8 @@
     <img src="Mini robe noire.jpg" fetchpriority="high" alt="Mini robe noire sexy">
     <img src="Mini robe noire1.jpg" loading="lazy" alt="Robe noire moulante">
     <img src="Mini robe noire2.jpg" loading="lazy" alt="Robe dos nu sexy">
-    <img src="Mini robe noire3.jpg" loading="lazy" alt="Robe clubwear femme">
-    <img src="Mini robe noire4.jpg" loading="lazy" alt="Robe glamour élégante">
+    <img src="Mini robe noire3.jpg" loading="lazy" alt="Robe clubwear">
+    <img src="Mini robe noire4.jpg" loading="lazy" alt="Robe glamour femme">
 
   </div>
 
@@ -239,13 +252,14 @@
     <h1 class="product-title">Mini robe noire sexy extensible – J Lingerie</h1>
 
     <p class="product-subtitle">
-      Robe moulante ultra sensuelle avec dos nu plongeant et manches longues élégantes.
+      Robe moulante ultra glamour avec dos nu plongeant et manches longues élégantes.
     </p>
 
     <p class="product-price">49,95 €</p>
 
-    <!-- TAILLE LUXE -->
+    <!-- SIZE LUXE -->
     <div class="size-options">
+
       <input type="radio" name="size" id="s" value="S">
       <label for="s">S</label>
 
@@ -257,6 +271,7 @@
 
       <input type="radio" name="size" id="xl" value="XL">
       <label for="xl">XL</label>
+
     </div>
 
     <button
@@ -273,15 +288,15 @@
     <h2 class="section-title">Description</h2>
 
     <p class="product-description">
-      Craquez pour cette <strong>mini robe noire extensible</strong> au style ultra sensuel et glamour. Coupe moulante et dos nu plongeant.
+      Mini robe noire ultra sensuelle, coupe moulante et dos nu plongeant pour un look glamour.
     </p>
 
     <p class="product-description">
-      Matière douce et extensible pour un confort parfait tout en sublimant les formes.
+      Matière extensible confortable qui épouse parfaitement les formes.
     </p>
 
     <p class="product-description">
-      Idéale pour soirées, club, rendez-vous ou occasions sexy.
+      Idéale soirées, club, ou occasions sexy.
     </p>
 
     <hr class="separator">
@@ -289,12 +304,12 @@
     <h2 class="section-title">Caractéristiques</h2>
 
     <ul class="product-list">
-      <li>Mini robe sexy femme</li>
+      <li>Robe sexy femme</li>
       <li>Coupe moulante extensible</li>
       <li>Dos nu plongeant</li>
-      <li>Manches longues élégantes</li>
+      <li>Manches longues</li>
       <li>Zip double sens</li>
-      <li>Tailles S / M / L / XL</li>
+      <li>S / M / L / XL</li>
     </ul>
 
   </div>
