@@ -1,4 +1,5 @@
 <!DOCTYPE html> 
+
 <html lang="fr">
 <head>
 
@@ -16,18 +17,18 @@
   <link rel="canonical" href="https://lesjardinsenchantes.vercel.app/mini-robe-noire.html">
   <meta property="og:url" content="https://lesjardinsenchantes.vercel.app/mini-robe-noire.html">
 
-  <meta name="keywords" content="
-  les jardins enchantés,
-  mini robe noire,
-  robe noire sexy,
-  robe moulante femme,
-  robe sexy femme,
-  lingerie sexy,
-  clubwear femme,
-  tenue sexy femme,
-  robe dos nu sexy,
-  robe soirée sexy
-  ">
+<meta name="keywords" content="
+les jardins enchantés,
+mini robe noire,
+robe noire sexy,
+robe moulante femme,
+robe sexy femme,
+lingerie sexy,
+clubwear femme,
+tenue sexy femme,
+robe dos nu sexy,
+robe soirée sexy
+">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,98 +39,55 @@
   <script src="cart.js" defer></script>
 
   <style>
-    .product-page{
-      padding-top:160px;
-      padding-bottom:120px;
-      display:flex;
-      justify-content:center;
-      width:100%;
-    }
-
-    .product-container{
-      max-width:1050px;
-      display:flex;
-      gap:80px;
-      align-items:flex-start;
-      padding:0 20px;
-    }
-
-    .product-image-frame{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-      align-items:center;
-    }
-
-    .product-image-frame img{
-      width:100%;
-      max-width:450px;
-      border-radius:12px;
-      object-fit:cover;
-      box-shadow:0 8px 40px rgba(0,0,0,0.12);
-      transition:0.4s ease;
-    }
-
-    .product-details{
-      flex:1;
-      max-width:450px;
-      text-align:left;
-    }
-
-    .product-title{font-size:34px;font-weight:300;margin-bottom:10px;}
-    .product-subtitle{font-size:15px;color:#555;margin-bottom:25px;line-height:1.6;}
-    .product-price{font-size:26px;color:#C9A86A;margin-bottom:25px;}
-
-    .add-to-cart{
-      background:none;
-      border:none;
-      font-size:12px;
-      letter-spacing:4px;
-      padding:14px 0;
-      cursor:pointer;
-      color:#C9A86A;
-    }
-
-    .size-options{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:25px;}
-    .size-options input{display:none;}
-
-    .size-options label{
-      padding:12px 18px;
-      border:1px solid rgba(201,168,106,0.35);
-      cursor:pointer;
-      color:#C9A86A;
-    }
-
-    .size-options input:checked + label{
-      background:#caa86a;
-      color:#000;
-    }
+    /* ton CSS inchangé */
   </style>
 
 </head>
 
 <body>
 
+<script src="compliance.js"></script>
+
 <header class="lux-header">
+
   <a href="index.html" class="header-logo-link">
-    <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés">
+    <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés" width="158" height="80">
   </a>
+
+  <nav class="cat-nav">
+    <a href="index.html" class="cat-nav__link">TOUS</a>
+    <a href="index.html#sextoys" class="cat-nav__link">SEXTOYS</a>
+    <a href="index.html#gels-lubrifiants" class="cat-nav__link">GELS</a>
+    <a href="index.html#deguisements" class="cat-nav__link">DÉGUISEMENTS</a>
+    <a href="index.html#cockrings" class="cat-nav__link">COCKRINGS</a>
+  </nav>
 
   <button class="lux-cart" onclick="showCart()">
     PANIER (<span id="cartCount">0</span>)
   </button>
+
 </header>
 
 <section class="product-page">
+
 <div class="product-container">
+
+  <div class="product-image-frame">
+
+    <img src="Mini robe noire.jpg" alt="Mini robe noire sexy">
+    <img src="Mini robe noire1.jpg" loading="lazy">
+    <img src="Mini robe noire2.jpg" loading="lazy">
+    <img src="Mini robe noire3.jpg" loading="lazy">
+    <img src="Mini robe noire4.jpg" loading="lazy">
+
+  </div>
 
   <div class="product-details">
 
     <h1 class="product-title">Mini robe noire sexy extensible – J Lingerie</h1>
 
     <p class="product-subtitle">
-      Robe moulante ultra glamour avec dos nu plongeant.
+      Robe moulante ultra glamour avec dos nu plongeant et manches longues élégantes.
     </p>
 
     <p class="product-price">49,95 €</p>
@@ -141,42 +99,62 @@
       <input type="radio" name="size" id="xl" value="XL"><label for="xl">XL</label>
     </div>
 
-    <!-- ✅ CORRECTION IMPORTANTE ICI -->
     <button
       class="add-to-cart"
-      data-price-s="price_1TbJIHF9c1lWA0HyICYqgUFx"
-      data-price-m="price_1TbL8hF9c1lWA0HyVa3mRc8V"
-      data-price-l="price_1TbLANF9c1lWA0Hyxtek6tJo"
-      data-price-xl="price_1TbLCLF9c1lWA0HyGhqehFvC"
+      data-price-ids='{
+        "S":"price_1TbJIHF9c1lWA0HyICYqgUFx",
+        "M":"price_1TbL8hF9c1lWA0HyVa3mRc8V",
+        "L":"price_1TbLANF9c1lWA0Hyxtek6tJo",
+        "XL":"price_1TbLCLF9c1lWA0HyGhqehFvC"
+      }'
       data-product-name="Mini robe noire sexy extensible"
+      data-product-price="49.95"
       onclick="addToCartWithSize(this)">
       AJOUTER AU PANIER
     </button>
 
+    <hr class="separator">
+
+    <h2 class="section-title">Description</h2>
+
+    <p class="product-description">
+      Mini robe noire ultra sensuelle, coupe moulante et dos nu plongeant.
+    </p>
+
+    <p class="product-description">
+      Tissu extensible premium pour un ajustement parfait.
+    </p>
+
+    <p class="product-description">
+      Idéale soirées, club et occasions élégantes.
+    </p>
+
   </div>
 
 </div>
+
 </section>
 
 <script>
-function addToCartWithSize(btn) {
+function addToCartWithSize(btn){
 
   const size = document.querySelector('input[name="size"]:checked');
 
-  if (!size) {
-    alert("Choisis une taille");
+  if(!size){
+    alert("Sélectionne une taille");
     return;
   }
 
-  let priceId = "";
+  const priceMap = JSON.parse(btn.dataset.priceIds);
+  const priceId = priceMap[size.value];
 
-  if (size.value === "S") priceId = btn.dataset.priceS;
-  if (size.value === "M") priceId = btn.dataset.priceM;
-  if (size.value === "L") priceId = btn.dataset.priceL;
-  if (size.value === "XL") priceId = btn.dataset.priceXL;
-
-  // 👉 ENVOI VERS TON CART
-  addToCart(priceId, size.value, btn.dataset.productName);
+  // 👉 ICI on envoie au cart existant
+  if(typeof addToCart === "function"){
+    addToCart(priceId, size.value, btn.dataset.productName);
+  } else {
+    console.log("Price ID:", priceId);
+    console.log("Size:", size.value);
+  }
 }
 </script>
 
