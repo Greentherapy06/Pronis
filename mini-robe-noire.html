@@ -155,12 +155,6 @@
         max-width:600px;
       }
     }
-
-.categories-nav{display:flex;align-items:center;gap:0;background:rgba(202,168,106,0.06);border:1px solid rgba(202,168,106,0.18);border-radius:2px;overflow:hidden;flex-shrink:0;flex-wrap:wrap;}
-.categories-nav a{display:inline-block;border:none;border-right:1px solid rgba(202,168,106,0.15);color:rgba(202,168,106,0.75);font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2px;padding:8px 12px;cursor:pointer;transition:all .3s;text-transform:uppercase;text-decoration:none;white-space:nowrap;}
-.categories-nav a:last-child{border-right:none;}
-.categories-nav a:hover,.categories-nav a.active{color:#0c0a06;background:linear-gradient(135deg,#e6c98a 0%,#caa86a 50%,#b89050 100%);}
-@media(max-width:768px){.categories-nav a{font-size:8px;padding:6px 8px;letter-spacing:1px;}}
   </style>
 </head>
 
@@ -169,20 +163,20 @@
 
 <header class="lux-header">
   <a href="index.html" class="header-logo-link">
-    <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés – Boutique Sextoys France" class="header-logo-img" width="158" height="80" fetchpriority="high">
+    <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés – Boutique Sextoys France" class="header-logo-img" width="158" height="80">
   </a>
 
-<nav class="cat-nav" aria-label="Catégories">
-<a href="index.html" class="cat-nav__link">TOUS</a>
-<a href="index.html#sextoys" class="cat-nav__link">SEXTOYS</a>
-<a href="index.html#gels-lubrifiants" class="cat-nav__link">GELS LUBRIFIANTS</a>
-<a href="index.html#deguisements" class="cat-nav__link">DÉGUISEMENTS</a>
-<a href="index.html#cockrings" class="cat-nav__link">COCKRINGS</a>
-</nav>
+  <nav class="cat-nav" aria-label="Catégories">
+    <a href="index.html" class="cat-nav__link">TOUS</a>
+    <a href="index.html#sextoys" class="cat-nav__link">SEXTOYS</a>
+    <a href="index.html#gels-lubrifiants" class="cat-nav__link">GELS LUBRIFIANTS</a>
+    <a href="index.html#deguisements" class="cat-nav__link">DÉGUISEMENTS</a>
+    <a href="index.html#cockrings" class="cat-nav__link">COCKRINGS</a>
+  </nav>
 
-<button class="lux-cart" onclick="showCart()">
+  <button class="lux-cart" onclick="showCart()">
     PANIER (<span id="cartCount">0</span>)
-</button>
+  </button>
 </header>
 
 <section class="product-page">
@@ -192,13 +186,9 @@
 <div class="product-image-frame">
 
 <img src="Mini robe noire.jpg" fetchpriority="high" alt="Mini robe noire sexy femme">
-
 <img src="Mini robe noire1.jpg" loading="lazy" alt="Robe noire moulante sexy">
-
 <img src="Mini robe noire2.jpg" loading="lazy" alt="Mini robe noire dos nu">
-
 <img src="Mini robe noire3.jpg" loading="lazy" alt="Robe clubwear femme sexy">
-
 <img src="Mini robe noire4.jpg" loading="lazy" alt="Robe glamour élégante femme">
 
 </div>
@@ -213,11 +203,24 @@ Robe moulante ultra sensuelle avec dos nu plongeant et manches longues élégant
 
 <p class="product-price">49,95 €</p>
 
+<!-- TAILLE -->
+<div style="margin-bottom:20px;">
+  <label style="display:block; font-size:12px; letter-spacing:2px; margin-bottom:8px; opacity:0.7;">TAILLE</label>
+  <select id="productSize" style="width:100%; padding:10px; border:1px solid #ddd;">
+    <option value="">Choisir une taille</option>
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+</div>
+
 <button
 class="add-to-cart"
 data-product-id="price_1TbJIHF9c1lWA0HyICYqgUFx"
 data-product-name="Mini robe noire sexy extensible"
-data-product-price="49.95">
+data-product-price="49.95"
+onclick="addToCartWithSize()">
 AJOUTER AU PANIER
 </button>
 
@@ -230,15 +233,11 @@ Craquez pour cette <strong>mini robe noire extensible</strong> au style ultra se
 </p>
 
 <p class="product-description">
-Grâce à sa matière douce et extensible, cette robe épouse parfaitement les formes du corps tout en offrant un confort optimal. Le cordon de maintien permet un ajustement personnalisé.
+Grâce à sa matière douce et extensible, cette robe épouse les formes du corps tout en offrant un confort optimal. Le cordon de maintien permet un ajustement personnalisé.
 </p>
 
 <p class="product-description">
-Ses manches longues élégantes associées à la fermeture éclair double sens au dos créent un look chic, moderne et provocant. Idéale pour soirées, club, rendez-vous romantique ou cosplay glamour.
-</p>
-
-<p class="product-description">
-Chez <strong>Les Jardins Enchantés</strong>, découvrez une sélection premium de lingerie sexy, robes glamour et accessoires intimes.
+Ses manches longues élégantes associées à la fermeture éclair double sens au dos créent un look chic, provocant et moderne. Idéale pour soirées, club ou occasions spéciales.
 </p>
 
 <hr class="separator">
@@ -248,14 +247,11 @@ Chez <strong>Les Jardins Enchantés</strong>, découvrez une sélection premium 
 <ul class="product-list">
 <li>Mini robe sexy femme</li>
 <li>Coupe moulante extensible</li>
-<li>Dos nu extra plongeant</li>
+<li>Dos nu plongeant</li>
 <li>Manches longues élégantes</li>
-<li>Fermeture zip double sens</li>
-<li>Style glamour / clubwear / lingerie sexy</li>
+<li>Zip double sens</li>
 <li>Matière : 90% polyester, 10% élasthanne</li>
-<li>Tissu doux et extensible</li>
 <li>Tailles : S / M / L / XL</li>
-<li>Idéal soirées et occasions sexy</li>
 </ul>
 
 </div>
@@ -266,13 +262,30 @@ Chez <strong>Les Jardins Enchantés</strong>, découvrez une sélection premium 
 
 <footer class="footer">
 © Les Jardins Enchantés – Boutique Luxe Intime<br>
-
 <a href="cgv.html">CGV</a>
 <a href="confidentialite.html">Confidentialité</a>
 <a href="cookies.html">Cookies</a>
 <a href="mentions-legales.html">Mentions légales</a>
 <a href="index.html">Retour boutique</a>
 </footer>
+
+<script>
+function addToCartWithSize() {
+  const size = document.getElementById("productSize").value;
+  if (!size) {
+    alert("Veuillez choisir une taille");
+    return;
+  }
+
+  const button = document.querySelector(".add-to-cart");
+
+  addToCart(
+    button.dataset.productId,
+    button.dataset.productName + " - Taille " + size,
+    button.dataset.productPrice
+  );
+}
+</script>
 
 </body>
 </html>
