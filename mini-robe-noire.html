@@ -39,7 +39,6 @@
 
   <style>
 
-    /* ===== STRUCTURE ===== */
     .product-page{
       padding-top:160px;
       padding-bottom:120px;
@@ -110,8 +109,9 @@
       letter-spacing:4px;
       padding:14px 0;
       cursor:pointer;
-      opacity:0.8;
+      opacity:0.85;
       transition:0.3s;
+      color:#C9A86A;
     }
 
     .add-to-cart:hover{
@@ -146,17 +146,16 @@
       line-height:1.9;
     }
 
-    /* ===== NAV LUXE CLEAN ===== */
     .cat-nav__link{
       font-size:10px;
       letter-spacing:2px;
       text-transform:uppercase;
     }
 
-    /* ===== SIZE LUXE PREMIUM ===== */
+    /* ===== LUXE SIZE UPGRADE ===== */
     .size-options{
       display:flex;
-      gap:12px;
+      gap:14px;
       flex-wrap:wrap;
       margin-bottom:25px;
     }
@@ -166,20 +165,21 @@
     }
 
     .size-options label{
-      padding:11px 16px;
+      padding:12px 18px;
       border:1px solid rgba(201,168,106,0.35);
       font-size:11px;
       letter-spacing:2px;
       cursor:pointer;
       transition:0.25s ease;
-      color:#111;
+      color:#C9A86A;
       border-radius:2px;
       background:transparent;
+      text-transform:uppercase;
     }
 
     .size-options label:hover{
       border-color:#C9A86A;
-      color:#C9A86A;
+      background:rgba(201,168,106,0.08);
     }
 
     .size-options input:checked + label{
@@ -239,11 +239,11 @@
 
   <div class="product-image-frame">
 
-    <img src="Mini robe noire.jpg" fetchpriority="high" alt="Mini robe noire sexy">
-    <img src="Mini robe noire1.jpg" loading="lazy" alt="Robe noire moulante">
-    <img src="Mini robe noire2.jpg" loading="lazy" alt="Robe dos nu sexy">
-    <img src="Mini robe noire3.jpg" loading="lazy" alt="Robe clubwear">
-    <img src="Mini robe noire4.jpg" loading="lazy" alt="Robe glamour femme">
+    <img src="Mini robe noire.jpg" alt="Mini robe noire sexy">
+    <img src="Mini robe noire1.jpg" loading="lazy">
+    <img src="Mini robe noire2.jpg" loading="lazy">
+    <img src="Mini robe noire3.jpg" loading="lazy">
+    <img src="Mini robe noire4.jpg" loading="lazy">
 
   </div>
 
@@ -257,20 +257,12 @@
 
     <p class="product-price">49,95 €</p>
 
-    <!-- SIZE LUXE -->
     <div class="size-options">
 
-      <input type="radio" name="size" id="s" value="S">
-      <label for="s">S</label>
-
-      <input type="radio" name="size" id="m" value="M">
-      <label for="m">M</label>
-
-      <input type="radio" name="size" id="l" value="L">
-      <label for="l">L</label>
-
-      <input type="radio" name="size" id="xl" value="XL">
-      <label for="xl">XL</label>
+      <input type="radio" name="size" id="s" value="S"><label for="s">S</label>
+      <input type="radio" name="size" id="m" value="M"><label for="m">M</label>
+      <input type="radio" name="size" id="l" value="L"><label for="l">L</label>
+      <input type="radio" name="size" id="xl" value="XL"><label for="xl">XL</label>
 
     </div>
 
@@ -288,63 +280,22 @@
     <h2 class="section-title">Description</h2>
 
     <p class="product-description">
-      Mini robe noire ultra sensuelle, coupe moulante et dos nu plongeant pour un look glamour.
+      Mini robe noire ultra sensuelle, coupe moulante et dos nu plongeant.
     </p>
 
     <p class="product-description">
-      Matière extensible confortable qui épouse parfaitement les formes.
+      Tissu extensible premium pour un ajustement parfait.
     </p>
 
     <p class="product-description">
-      Idéale soirées, club, ou occasions sexy.
+      Idéale soirées, club et occasions élégantes.
     </p>
-
-    <hr class="separator">
-
-    <h2 class="section-title">Caractéristiques</h2>
-
-    <ul class="product-list">
-      <li>Robe sexy femme</li>
-      <li>Coupe moulante extensible</li>
-      <li>Dos nu plongeant</li>
-      <li>Manches longues</li>
-      <li>Zip double sens</li>
-      <li>S / M / L / XL</li>
-    </ul>
 
   </div>
 
 </div>
 
 </section>
-
-<footer class="footer">
-© Les Jardins Enchantés – Boutique Luxe Intime<br>
-<a href="cgv.html">CGV</a>
-<a href="confidentialite.html">Confidentialité</a>
-<a href="cookies.html">Cookies</a>
-<a href="mentions-legales.html">Mentions légales</a>
-<a href="index.html">Retour boutique</a>
-</footer>
-
-<script>
-function addToCartWithSize() {
-  const selected = document.querySelector('input[name="size"]:checked');
-
-  if (!selected) {
-    alert("Veuillez sélectionner une taille");
-    return;
-  }
-
-  const button = document.querySelector(".add-to-cart");
-
-  addToCart(
-    button.dataset.productId,
-    button.dataset.productName + " - Taille " + selected.value,
-    button.dataset.productPrice
-  );
-}
-</script>
 
 </body>
 </html>
