@@ -71,35 +71,15 @@
       transition:0.4s ease;
     }
 
-    .product-image-frame img:hover{
-      transform:scale(1.03);
-    }
-
     .product-details{
       flex:1;
       max-width:450px;
       text-align:left;
     }
 
-    .product-title{
-      font-size:34px;
-      font-weight:300;
-      margin-bottom:10px;
-    }
-
-    .product-subtitle{
-      font-size:15px;
-      color:#555;
-      margin-bottom:25px;
-      line-height:1.6;
-    }
-
-    .product-price{
-      font-size:26px;
-      color:#C9A86A;
-      margin-bottom:25px;
-      font-weight:300;
-    }
+    .product-title{font-size:34px;font-weight:300;margin-bottom:10px;}
+    .product-subtitle{font-size:15px;color:#555;margin-bottom:25px;line-height:1.6;}
+    .product-price{font-size:26px;color:#C9A86A;margin-bottom:25px;}
 
     .add-to-cart{
       background:none;
@@ -108,99 +88,22 @@
       letter-spacing:4px;
       padding:14px 0;
       cursor:pointer;
-      opacity:0.85;
-      transition:0.3s;
       color:#C9A86A;
     }
 
-    .add-to-cart:hover{
-      opacity:1;
-      letter-spacing:5px;
-    }
-
-    .separator{
-      margin:40px 0;
-      border:none;
-      border-top:1px solid rgba(0,0,0,0.05);
-    }
-
-    .section-title{
-      font-size:18px;
-      margin-bottom:15px;
-      font-weight:300;
-      letter-spacing:1px;
-    }
-
-    .product-description{
-      font-size:15px;
-      color:#444;
-      margin-bottom:20px;
-      line-height:1.8;
-    }
-
-    .product-list{
-      font-size:15px;
-      color:#333;
-      padding-left:18px;
-      line-height:1.9;
-    }
-
-    .cat-nav__link{
-      font-size:10px;
-      letter-spacing:2px;
-      text-transform:uppercase;
-    }
-
-    .size-options{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      margin-bottom:25px;
-    }
-
-    .size-options input{
-      display:none;
-    }
+    .size-options{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:25px;}
+    .size-options input{display:none;}
 
     .size-options label{
       padding:12px 18px;
       border:1px solid rgba(201,168,106,0.35);
-      font-size:11px;
-      letter-spacing:2px;
       cursor:pointer;
-      transition:0.25s ease;
       color:#C9A86A;
-      border-radius:2px;
-      background:transparent;
-      text-transform:uppercase;
-    }
-
-    .size-options label:hover{
-      border-color:#C9A86A;
-      background:rgba(201,168,106,0.08);
     }
 
     .size-options input:checked + label{
-      background:linear-gradient(135deg,#e6c98a 0%,#caa86a 50%,#b89050 100%);
-      color:#0c0a06;
-      border-color:transparent;
-      box-shadow:0 6px 20px rgba(201,168,106,0.25);
-    }
-
-    @media(max-width:900px){
-      .product-container{
-        flex-direction:column;
-        text-align:center;
-        align-items:center;
-      }
-
-      .product-details{
-        text-align:center;
-      }
-
-      .size-options{
-        justify-content:center;
-      }
+      background:#caa86a;
+      color:#000;
     }
   </style>
 
@@ -208,48 +111,25 @@
 
 <body>
 
-<script src="compliance.js"></script>
-
 <header class="lux-header">
-
   <a href="index.html" class="header-logo-link">
-    <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés" width="158" height="80">
+    <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés">
   </a>
-
-  <nav class="cat-nav">
-    <a href="index.html" class="cat-nav__link">TOUS</a>
-    <a href="index.html#sextoys" class="cat-nav__link">SEXTOYS</a>
-    <a href="index.html#gels-lubrifiants" class="cat-nav__link">GELS</a>
-    <a href="index.html#deguisements" class="cat-nav__link">DÉGUISEMENTS</a>
-    <a href="index.html#cockrings" class="cat-nav__link">COCKRINGS</a>
-  </nav>
 
   <button class="lux-cart" onclick="showCart()">
     PANIER (<span id="cartCount">0</span>)
   </button>
-
 </header>
 
 <section class="product-page">
-
 <div class="product-container">
-
-  <div class="product-image-frame">
-
-    <img src="Mini robe noire.jpg" alt="Mini robe noire sexy">
-    <img src="Mini robe noire1.jpg" loading="lazy">
-    <img src="Mini robe noire2.jpg" loading="lazy">
-    <img src="Mini robe noire3.jpg" loading="lazy">
-    <img src="Mini robe noire4.jpg" loading="lazy">
-
-  </div>
 
   <div class="product-details">
 
     <h1 class="product-title">Mini robe noire sexy extensible – J Lingerie</h1>
 
     <p class="product-subtitle">
-      Robe moulante ultra glamour avec dos nu plongeant et manches longues élégantes.
+      Robe moulante ultra glamour avec dos nu plongeant.
     </p>
 
     <p class="product-price">49,95 €</p>
@@ -261,41 +141,44 @@
       <input type="radio" name="size" id="xl" value="XL"><label for="xl">XL</label>
     </div>
 
+    <!-- ✅ CORRECTION IMPORTANTE ICI -->
     <button
       class="add-to-cart"
-      data-price-ids='{
-        "S":"price_1TbJIHF9c1lWA0HyICYqgUFx",
-        "M":"price_1TbL8hF9c1lWA0HyVa3mRc8V",
-        "L":"price_1TbLANF9c1lWA0Hyxtek6tJo",
-        "XL":"price_1TbLCLF9c1lWA0HyGhqehFvC"
-      }'
+      data-price-s="price_1TbJIHF9c1lWA0HyICYqgUFx"
+      data-price-m="price_1TbL8hF9c1lWA0HyVa3mRc8V"
+      data-price-l="price_1TbLANF9c1lWA0Hyxtek6tJo"
+      data-price-xl="price_1TbLCLF9c1lWA0HyGhqehFvC"
       data-product-name="Mini robe noire sexy extensible"
-      data-product-price="49.95"
-      onclick="addToCartWithSize()">
+      onclick="addToCartWithSize(this)">
       AJOUTER AU PANIER
     </button>
-
-    <hr class="separator">
-
-    <h2 class="section-title">Description</h2>
-
-    <p class="product-description">
-      Mini robe noire ultra sensuelle, coupe moulante et dos nu plongeant.
-    </p>
-
-    <p class="product-description">
-      Tissu extensible premium pour un ajustement parfait.
-    </p>
-
-    <p class="product-description">
-      Idéale soirées, club et occasions élégantes.
-    </p>
 
   </div>
 
 </div>
-
 </section>
+
+<script>
+function addToCartWithSize(btn) {
+
+  const size = document.querySelector('input[name="size"]:checked');
+
+  if (!size) {
+    alert("Choisis une taille");
+    return;
+  }
+
+  let priceId = "";
+
+  if (size.value === "S") priceId = btn.dataset.priceS;
+  if (size.value === "M") priceId = btn.dataset.priceM;
+  if (size.value === "L") priceId = btn.dataset.priceL;
+  if (size.value === "XL") priceId = btn.dataset.priceXL;
+
+  // 👉 ENVOI VERS TON CART
+  addToCart(priceId, size.value, btn.dataset.productName);
+}
+</script>
 
 </body>
 </html>
