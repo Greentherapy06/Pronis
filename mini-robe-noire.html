@@ -111,29 +111,61 @@
     }
 
     .size-selector{
-      margin-bottom:25px;
+      margin-bottom:30px;
+    }
+
+    .size-selector .section-title{
+      font-size:13px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      color:#C9A86A;
+      margin-bottom:12px;
+      opacity:0.9;
     }
 
     .size-dropdown{
       width:100%;
-      max-width:220px;
-      padding:12px 14px;
-      border:1px solid rgba(0,0,0,0.12);
-      background:#fff;
+      max-width:240px;
+      padding:14px 18px;
+      border:1px solid rgba(201,168,106,0.22);
+      background:
+      linear-gradient(
+        135deg,
+        rgba(255,255,255,0.03) 0%,
+        rgba(201,168,106,0.04) 100%
+      );
+      color:#f4e7c5;
       font-size:14px;
-      border-radius:6px;
+      letter-spacing:2px;
+      border-radius:2px;
       outline:none;
       cursor:pointer;
-      transition:0.3s ease;
+      transition:all 0.35s ease;
+      backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+      box-shadow:
+        0 4px 18px rgba(0,0,0,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.03);
     }
 
     .size-dropdown:hover{
       border-color:#C9A86A;
+      box-shadow:
+        0 8px 30px rgba(201,168,106,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      transform:translateY(-1px);
     }
 
     .size-dropdown:focus{
-      border-color:#C9A86A;
-      box-shadow:0 0 0 2px rgba(201,168,106,0.15);
+      border-color:#d8bb82;
+      box-shadow:
+        0 0 0 1px rgba(201,168,106,0.25),
+        0 10px 35px rgba(201,168,106,0.15);
+    }
+
+    .size-dropdown option{
+      background:#16120c;
+      color:#f4e7c5;
     }
 
     .add-to-cart{
@@ -188,6 +220,12 @@
         max-width:600px;
       }
 
+      .size-selector{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+      }
+
       .size-dropdown{
         margin:auto;
       }
@@ -202,10 +240,10 @@
 </head>
 
 <body>
-    <script src="compliance.js"></script>
+<script src="compliance.js"></script>
 
 <header class="lux-header">
-  <a href="index.html" class="header-logo-link">
+<a href="index.html" class="header-logo-link">
 <img src="les-jardins-enchantes.webp" alt="Les Jardins Enchantés – Boutique Sextoys France" class="header-logo-img" width="158" height="80" fetchpriority="high">
 </a>
 
@@ -218,7 +256,7 @@
 </nav>
 
 <button class="lux-cart" onclick="showCart()">
-    PANIER (<span id="cartCount">0</span>)
+PANIER (<span id="cartCount">0</span>)
 </button>
 </header>
 
@@ -251,7 +289,8 @@ Mini robe noire moulante ultra glamour avec dos nu plongeant, manches longues et
 <p class="product-price">49,95 €</p>
 
 <div class="size-selector">
-<label for="size" class="section-title">Taille</label>
+
+<label for="size" class="section-title">TAILLE</label>
 
 <select id="size" class="size-dropdown">
 <option value="S">S</option>
@@ -259,6 +298,7 @@ Mini robe noire moulante ultra glamour avec dos nu plongeant, manches longues et
 <option value="L">L</option>
 <option value="XL">XL</option>
 </select>
+
 </div>
 
 <button
