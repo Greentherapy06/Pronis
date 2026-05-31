@@ -874,3 +874,41 @@ button:hover {
         border: 1px solid var(--or) !important;
         background: rgba(202,168,106,0.06);
 }
+
+
+/* ── GAMME BIO – Lisibilite ingredients & badges ── */
+.product-page .ingredient-item {
+  background: rgba(76,175,80,0.12) !important;
+  border: 1px solid rgba(76,175,80,0.35) !important;
+  color: #e8f5e9 !important;
+}
+
+.product-page .ingredient-item strong {
+  color: #81c784 !important;
+}
+
+.product-page .sans-badge {
+  background: rgba(244,67,54,0.15) !important;
+  border: 1px solid rgba(244,67,54,0.4) !important;
+  color: #ef9a9a !important;
+}
+
+.product-page .product-description {
+  color: #d4c9b0 !important;
+}
+
+.product-page .product-list {
+  color: #d4c9b0 !important;
+}
+
+.product-page .section-title {
+  color: var(--or) !important;
+}
+
+.product-page .product-subtitle {
+  color: #c8bfa8 !important;
+}
+
+.product-page .cta-block p {
+  color: #d4c9b0 !important;
+}
