@@ -2,8 +2,77 @@
 // Vercel Serverless Function + Cron Job
 // Scrape les pages nouveautés des concurrents et retourne un JSON
 // Cron: déclenché toutes les 24h via vercel.json
+// Persistance via Vercel KV : détection nouveautés + variations de prix
 
 export const config = { maxDuration: 30 };
+
+// ─── KV (persistance, fallback silencieux si indisponible) ───────────────────
+
+let kv = null;
+async function getKV() {
+  if (kv !== null) return kv;
+  try {
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      const mod = await import('@vercel/kv');
+      kv = mod.kv;
+    } else {
+      kv = false; // pas configuré
+    }
+  } catch (e) {
+    kv = false;
+  }
+  return kv;
+}
+
+// Normalise un prix "24,49€" -> nombre 24.49 (ou null)
+function parsePrice(str) {
+  if (!str) return null;
+  const m = String(str).replace(/\s/g, '').match(/([\d]+[.,][\d]{1,2}|[\d]+)/);
+  if (!m) return null;
+  return parseFloat(m[1].replace(',', '.'));
+}
+
+// Compare le scrape courant au snapshot précédent : ajoute new/priceChange
+async function enrichWithHistory(results) {
+  const store = await getKV();
+  if (!store) return { results, historyEnabled: false };
+
+  let previous = {};
+  try {
+    previous = (await store.get('veille:last')) || {};
+  } catch (e) {
+    return { results, historyEnabled: false };
+  }
+
+  for (const [site, products] of Object.entries(results)) {
+    const prevList = previous[site] || [];
+    const prevByName = {};
+    for (const p of prevList) prevByName[p.name] = p;
+
+    for (const p of products) {
+      const prev = prevByName[p.name];
+      if (!prev) {
+        p.isNew = true;
+      } else {
+        const oldPrice = parsePrice(prev.price);
+        const newPrice = parsePrice(p.price);
+        if (oldPrice && newPrice && oldPrice !== newPrice) {
+          p.priceChange = newPrice > oldPrice ? 'up' : 'down';
+          p.oldPrice = prev.price;
+        }
+      }
+    }
+  }
+
+  // Sauvegarde le snapshot courant + historique daté
+  try {
+    await store.set('veille:last', results);
+    const day = new Date().toISOString().slice(0, 10);
+    await store.set('veille:history:' + day, results, { ex: 60 * 60 * 24 * 30 }); // garde 30j
+  } catch (e) { /* ignore */ }
+
+  return { results, historyEnabled: true };
+}
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -192,9 +261,13 @@ export default async function handler(req, res) {
     })
   );
 
+  // Persistance + détection nouveautés / variations de prix
+  const { historyEnabled } = await enrichWithHistory(results);
+
   return res.status(200).json({
     updatedAt: new Date().toISOString(),
     durationMs: Date.now() - startTime,
+    historyEnabled,
     results,
     errors
   });
