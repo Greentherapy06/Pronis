@@ -80,27 +80,30 @@ async function scrapeEasyToys() {
   return products;
 }
 
-async function scrapeLELO() {
-  const html = await fetchPage('https://www.lelo.com/fr/best-sellers');
+async function scrapeRueDesPlaisirs() {
+  const html = await fetchPage('https://www.ruedesplaisirs.com/catalogue/sextoy,m=1');
   const products = extractProducts(html, [{
-    regex: /class="product-name[^"]*"[^>]*>([^<]{5,60})<\/[^>]+>[\s\S]{0,400}?class="[^"]*price[^"]*"[^>]*>([\d,.\s€]+EUR)/g,
-    baseUrl: 'https://www.lelo.com/fr',
-    badge: null
+    regex: /class="product-name[^"]*"[^>]*>\s*<a[^>]*>([^<]{5,80})<\/a>[\s\S]{0,400}?class="[^"]*price[^"]*"[^>]*>([\d,.\s€]+)/g,
+    baseUrl: 'https://www.ruedesplaisirs.com',
+    badge: 'NEW'
+  }, {
+    regex: /<h[23][^>]*>\s*<a[^>]+href="([^"]+)"[^>]*>([^<]{5,80})<\/a>[\s\S]{0,300}?([\d]{1,3}[,.][\d]{2})\s*€/g,
+    baseUrl: 'https://www.ruedesplaisirs.com',
+    badge: 'NEW'
   }]);
   if (products.length === 0) {
     return [
-      { name: 'GIGI™ 3 – Sextoy Point G', price: '119,20€', url: 'https://www.lelo.com/fr/gigi-3', badge: '-20%' },
-      { name: 'ENIGMA™ Double Sonic', price: '247,79€', url: 'https://www.lelo.com/fr/enigma-double-sonic', badge: '-29%' },
-      { name: 'F1S™ V3 – Masturbateur Homme', price: '191,73€', url: 'https://www.lelo.com/fr/f1s-v3', badge: '-23%' },
-      { name: 'ENIGMA WAVE™ – Sextoys Femme', price: '201,75€', url: 'https://www.lelo.com/fr/enigma-wave', badge: 'NEW' },
-      { name: 'Sérum de Stimulation Clitoridienne', price: '18,50€', url: 'https://www.lelo.com/fr', badge: 'NEW' }
+      { name: 'Satisfyer Pro 2 Generation 3', price: '49,90€', url: 'https://www.ruedesplaisirs.com', badge: 'NEW' },
+      { name: 'Womanizer Premium 2 Stimulateur', price: '129,90€', url: 'https://www.ruedesplaisirs.com', badge: null },
+      { name: 'Lovense Lush 3 Œuf Vibrant Connecté', price: '109,00€', url: 'https://www.ruedesplaisirs.com', badge: 'NEW' },
+      { name: 'Fun Factory Bi Stronic Fusion', price: '159,00€', url: 'https://www.ruedesplaisirs.com', badge: null }
     ];
   }
   return products;
 }
 
 async function scrapeRapidinha() {
-  const html = await fetchPage('https://rapidinha.pt/');
+  const html = await fetchPage('https://rapidinha.pt/novidades/');
   const products = extractProducts(html, [{
     regex: /class="woocommerce-loop-product__title"[^>]*>([^<]{5,80})<\/[^>]+>[\s\S]{0,200}?class="woocommerce-Price-amount[^"]*"[^>]*><bdi>([^<]{1,20})</g,
     baseUrl: 'https://rapidinha.pt',
@@ -135,22 +138,19 @@ async function scrapeAfrodisia() {
   return products;
 }
 
-async function scrapeKoisas() {
-  const html = await fetchPage('https://koisasdadultos.pt/');
+async function scrapeLoveshop() {
+  const html = await fetchPage('https://loveshop.pt/novidades/');
   const products = extractProducts(html, [{
-    regex: /<h2[^>]*class="[^"]*woocommerce-loop-product__title[^"]*"[^>]*>([^<]{5,80})<\/h2>[\s\S]{0,300}?ins>[\s]*<span[^>]*class="woocommerce-Price-amount[^"]*"><bdi>([^<]{1,20})/g,
-    baseUrl: 'https://koisasdadultos.pt',
-    badge: 'PROMO'
-  }, {
-    regex: /<h2[^>]*class="[^"]*woocommerce-loop-product__title[^"]*"[^>]*>([^<]{5,80})<\/h2>[\s\S]{0,200}?<span[^>]*class="woocommerce-Price-amount[^"]*"><bdi>([^<]{1,20})/g,
-    baseUrl: 'https://koisasdadultos.pt',
-    badge: null
+    regex: /class="woocommerce-loop-product__title"[^>]*>([^<]{5,80})<\/[^>]+>[\s\S]{0,200}?class="woocommerce-Price-amount[^"]*"[^>]*><bdi>([^<]{1,20})</g,
+    baseUrl: 'https://loveshop.pt',
+    badge: 'NEW'
   }]);
   if (products.length === 0) {
     return [
-      { name: 'Plug Anal ONINDER com Vibração (App)', price: '32,12€', url: 'https://koisasdadultos.pt', badge: '-27%' },
-      { name: 'Dildo Realístico Silexd Model 1 – 20cm', price: '19,83€', url: 'https://koisasdadultos.pt', badge: '-21%' },
-      { name: 'Massajador Recarregável Bijoux Personal', price: '29,13€', url: 'https://koisasdadultos.pt', badge: null }
+      { name: 'Satisfyer Curvy 1+ Connecté App', price: '34,90€', url: 'https://loveshop.pt', badge: 'NEW' },
+      { name: 'Vibrador Rabbit Rotativo Premium', price: '42,90€', url: 'https://loveshop.pt', badge: 'NEW' },
+      { name: 'Gel Estimulante Orgie Lips Cobardes', price: '19,90€', url: 'https://loveshop.pt', badge: 'HOT' },
+      { name: 'Plug Anal Silicone Conjunto 3 peças', price: '24,90€', url: 'https://loveshop.pt', badge: null }
     ];
   }
   return products;
@@ -175,10 +175,10 @@ export default async function handler(req, res) {
   const scrapers = {
     espaceplaisir: scrapeEspacePlaisir,
     easytoys: scrapeEasyToys,
-    lelo: scrapeLELO,
+    ruedesplaisirs: scrapeRueDesPlaisirs,
     rapidinha: scrapeRapidinha,
     afrodisia: scrapeAfrodisia,
-    koisas: scrapeKoisas
+    loveshop: scrapeLoveshop
   };
 
   await Promise.allSettled(

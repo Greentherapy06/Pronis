@@ -378,11 +378,12 @@ body { background:#0c0a06; color:#e8d9b8; font-family:'Inter',sans-serif; min-he
 <script>
 // ============================================================
 // VEILLE CONCURRENTIELLE – Script de récupération dynamique
-// Proxy CORS : allorigins.win (gratuit, open-source)
+// Source : API serveur interne /api/veille/scraper (cron quotidien)
 // Mise à jour automatique toutes les 4h via localStorage cache
 // ============================================================
 
-const PROXY = 'https://api.allorigins.win/get?url=';
+// Endpoint serveur (cron quotidien 6h + scraping fiable côté serveur)
+const API_ENDPOINT = '/api/veille/scraper';
 const CACHE_TTL = 4 * 60 * 60 * 1000; // 4 heures en ms
 
 // Configuration des concurrents avec leurs sélecteurs CSS
@@ -569,41 +570,26 @@ function renderProducts(id, products, competitorUrl) {
 }
 
 // -------------------------------------------------------
-// Fetch un concurrent via proxy
+// Fetch TOUS les concurrents via notre API serveur (1 appel)
 // -------------------------------------------------------
-async function fetchCompetitor(competitor) {
-  const cached = getCached(competitor.id);
-  if (cached) {
-    renderProducts(competitor.id, cached, competitor.url);
-    return;
-  }
+async function fetchFromServer() {
+  const cached = getCached('all');
+  if (cached) return cached;
 
-  setLoading(competitor.id, 'Chargement');
+  const resp = await fetch(API_ENDPOINT, { signal: AbortSignal.timeout(20000) });
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  const json = await resp.json();
+  if (!json || !json.results) throw new Error('Réponse invalide');
 
-  try {
-    const proxyUrl = PROXY + encodeURIComponent(competitor.url);
-    const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(15000) });
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  setCache('all', json);
+  return json;
+}
 
-    const json = await resp.json();
-    const html = json.contents;
-    if (!html) throw new Error('Contenu vide');
-
-    const products = parseProducts(html, competitor);
-    if (products) {
-      setCache(competitor.id, products);
-      renderProducts(competitor.id, products, competitor.url);
-    } else {
-      setError(competitor.id, 'Structure non reconnue – voir site');
-      // Lien direct
-      const el = document.getElementById('feed-' + competitor.id);
-      if (el) el.innerHTML += ' <a href="' + competitor.url + '" target="_blank" style="color:#caa86a;font-size:10px;">Ouvrir →</a>';
-    }
-  } catch(err) {
-    setError(competitor.id, 'Erreur réseau · ' + err.message.substring(0, 30));
-    const el = document.getElementById('feed-' + competitor.id);
-    if (el) el.innerHTML += ' <a href="' + competitor.url + '" target="_blank" style="color:#caa86a;font-size:10px;margin-left:8px;">Ouvrir →</a>';
-  }
+// Mappe une entrée serveur {name, price, url, badge} vers le format de rendu
+function mapServerItems(items) {
+  if (!Array.isArray(items)) return null;
+  const mapped = items.map(p => ({ name: p.name, price: p.price, href: p.url }));
+  return mapped.length > 0 ? mapped : null;
 }
 
 // -------------------------------------------------------
@@ -614,14 +600,35 @@ async function fetchAllFlux() {
   if (btn) { btn.disabled = true; btn.textContent = '⟳ EN COURS...'; }
   setStatus('CHARGEMENT', 'flux-loading');
 
-  // Vider le cache pour forcer un refresh
+  // Forcer un refresh : vider le cache
   if (btn && !btn._firstRun) {
-    COMPETITORS.forEach(c => { try { localStorage.removeItem('veille_' + c.id); } catch(e){} });
+    try { localStorage.removeItem('veille_all'); } catch(e){}
   }
   btn && (btn._firstRun = false);
 
-  // Lancer tous les fetches en parallèle
-  await Promise.allSettled(COMPETITORS.map(c => fetchCompetitor(c)));
+  COMPETITORS.forEach(c => setLoading(c.id, 'Chargement'));
+
+  try {
+    const data = await fetchFromServer();
+    COMPETITORS.forEach(c => {
+      const items = mapServerItems(data.results[c.id]);
+      if (items) {
+        renderProducts(c.id, items, c.url);
+      } else {
+        setError(c.id, 'Aucun produit · voir site');
+        const el = document.getElementById('feed-' + c.id);
+        if (el) el.innerHTML += ' <a href="' + c.url + '" target="_blank" style="color:#caa86a;font-size:10px;">Ouvrir →</a>';
+      }
+    });
+    setStatus('À JOUR', 'flux-ok');
+  } catch(err) {
+    COMPETITORS.forEach(c => {
+      setError(c.id, 'Erreur · ' + err.message.substring(0, 24));
+      const el = document.getElementById('feed-' + c.id);
+      if (el) el.innerHTML += ' <a href="' + c.url + '" target="_blank" style="color:#caa86a;font-size:10px;margin-left:8px;">Ouvrir →</a>';
+    });
+    setStatus('ERREUR', 'flux-loading');
+  }
 
   // Mettre à jour l'heure
   const now = new Date();
@@ -640,21 +647,20 @@ async function fetchAllFlux() {
 // Auto-refresh toutes les 4h si la page reste ouverte
 // -------------------------------------------------------
 function scheduleAutoRefresh() {
-  // Vérifier si le cache est encore valide
-  const anyExpired = COMPETITORS.some(c => !getCached(c.id));
-  if (anyExpired) {
+  const cached = getCached('all');
+  if (!cached) {
     fetchAllFlux();
   } else {
-    // Tout est en cache, juste afficher
+    // Cache valide : afficher directement
     COMPETITORS.forEach(c => {
-      const cached = getCached(c.id);
-      if (cached) renderProducts(c.id, cached, c.url);
+      const items = mapServerItems(cached.results[c.id]);
+      if (items) renderProducts(c.id, items, c.url);
     });
     setStatus('CACHE', 'flux-ok');
   }
   // Relancer dans 4h
   setTimeout(() => {
-    COMPETITORS.forEach(c => { try { localStorage.removeItem('veille_' + c.id); } catch(e){} });
+    try { localStorage.removeItem('veille_all'); } catch(e){}
     fetchAllFlux();
   }, CACHE_TTL);
 }
