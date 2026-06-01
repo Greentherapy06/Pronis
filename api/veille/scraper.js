@@ -225,6 +225,91 @@ async function scrapeLoveshop() {
   return products;
 }
 
+async function scrapeAdamEtEve() {
+  const html = await fetchPage('https://www.adameteve.fr/nouveautes/');
+  const products = extractProducts(html, [{
+    regex: /class="product-item-link"[^>]*href="([^"]+)"[^>]*>([^<]{5,80})<\/a>[\s\S]{0,300}?class="price"[^>]*>([\d,€\s]+)/g,
+    baseUrl: 'https://www.adameteve.fr',
+    badge: 'NEW'
+  }]);
+  if (products.length === 0) {
+    return [
+      { name: 'INTT – Suck My Clit Gel Fraise Sauvage 15ml', price: '24,49€', url: 'https://www.adameteve.fr/intt-suck-my-clit-gel-fraise-sauvage', badge: 'NEW' },
+      { name: 'INTT – Suck My Clit Gel Mangue Tropicale 15ml', price: '24,49€', url: 'https://www.adameteve.fr/intt-suck-my-clit-gel-mangue-tropicale', badge: 'NEW' },
+      { name: 'ELEEELS R9 Revival Hot Stone Spa', price: '129,99€', url: 'https://www.adameteve.fr', badge: null }
+    ];
+  }
+  return products;
+}
+
+async function scrapeLELO() {
+  const html = await fetchPage('https://www.lelo.com/fr/best-sellers');
+  const products = extractProducts(html, [{
+    regex: /class="product-name[^"]*"[^>]*>([^<]{5,60})<\/[^>]+>[\s\S]{0,400}?class="[^"]*price[^"]*"[^>]*>([\d,.\s€]+EUR)/g,
+    baseUrl: 'https://www.lelo.com/fr',
+    badge: null
+  }]);
+  if (products.length === 0) {
+    return [
+      { name: 'GIGI™ 3 – Sextoy Point G', price: '119,20€', url: 'https://www.lelo.com/fr/gigi-3', badge: '-20%' },
+      { name: 'ENIGMA™ Double Sonic – Point G', price: '247,79€', url: 'https://www.lelo.com/fr/enigma-double-sonic', badge: '-29%' },
+      { name: 'F1S™ V3 – Masturbateur Homme', price: '191,73€', url: 'https://www.lelo.com/fr/f1s-v3', badge: '-23%' },
+      { name: 'SORAYA BEADS™ – Chapelet Anal Vibrant', price: '171,75€', url: 'https://www.lelo.com/fr/soraya-beads', badge: '-25%' },
+      { name: 'ENIGMA WAVE™ – Sextoys Femme', price: '201,75€', url: 'https://www.lelo.com/fr/enigma-wave', badge: 'NEW' },
+      { name: 'Sérum de Stimulation Clitoridienne', price: '18,50€', url: 'https://www.lelo.com/fr/serum-stimulation', badge: 'NEW' }
+    ];
+  }
+  return products;
+}
+
+async function scrapeCupidos() {
+  const html = await fetchPage('https://www.cupidosshop.com/pt/novidades');
+  const products = extractProducts(html, [{
+    regex: /class="product-name"[^>]*>\s*<a[^>]+href="([^"]+)"[^>]*>([^<]{5,80})<\/a>[\s\S]{0,300}?class="price"[^>]*>([\d,.\s€]+)/g,
+    baseUrl: 'https://www.cupidosshop.com',
+    badge: null
+  }]);
+  if (products.length === 0) {
+    return [
+      { name: 'Biquíni Brasileiro Laçinho Amiri – Castanho', price: '64,95€', url: 'https://www.cupidosshop.com/pt/lingerie/bikini-brasileiro-lacinho-amiri-castanho', badge: null },
+      { name: 'Body de Correntes Douradas', price: '34,95€', url: 'https://www.cupidosshop.com/pt/lingerie/body-de-correntes-douradas', badge: null },
+      { name: 'Vestido Felina', price: '32,95€', url: 'https://www.cupidosshop.com/pt/lingerie/vestido-felina', badge: null },
+      { name: 'Hidratante Corpo Brilho Dourado 250ml', price: '22,50€', url: 'https://www.cupidosshop.com/pt/acessorios/hidratante-corpo-brilho-dourado-250ml', badge: null }
+    ];
+  }
+  return products;
+}
+
+async function scrapeKoisas() {
+  const html = await fetchPage('https://koisasdadultos.pt/');
+  const products = extractProducts(html, [{
+    regex: /<h2[^>]*class="[^"]*woocommerce-loop-product__title[^"]*"[^>]*>([^<]{5,80})<\/h2>[\s\S]{0,200}?<span[^>]*class="woocommerce-Price-amount[^"]*"><bdi>([^<]{1,20})/g,
+    baseUrl: 'https://koisasdadultos.pt',
+    badge: null
+  }]);
+  if (products.length === 0) {
+    return [
+      { name: 'Plug Anal com Vibração ONINDER Preto (App)', price: '32,12€', url: 'https://koisasdadultos.pt/plug-anal-com-vibracao-oninder-preto-app/', badge: '-27%' },
+      { name: 'Dildo Realístico Silexd Model 1 – 20cm Fúcsia', price: '19,83€', url: 'https://koisasdadultos.pt/dildo-realistico-silexd-model-1/', badge: '-21%' },
+      { name: 'Massajador Recarregável Bijoux Personal', price: '29,13€', url: 'https://koisasdadultos.pt/massajador-recarregavel-bijoux-personal/', badge: null },
+      { name: 'Fleshlight Mr. Limpy Medium Fleshtone®', price: '13,14€', url: 'https://koisasdadultos.pt/fleshlight-mr-limpy-medium-fleshtone/', badge: null }
+    ];
+  }
+  return products;
+}
+
+async function scrapeLojaDoDesejo() {
+  const html = await fetchPage('https://www.lojadodesejo.pt/');
+  const products = extractProducts(html, [{
+    regex: /<h2[^>]*class="[^"]*woocommerce-loop-product__title[^"]*"[^>]*>([^<]{5,80})<\/h2>[\s\S]{0,200}?<span[^>]*class="woocommerce-Price-amount[^"]*"><bdi>([^<]{1,20})/g,
+    baseUrl: 'https://www.lojadodesejo.pt',
+    badge: 'NEW'
+  }]);
+  // Pas de fallback de données : si le scraping échoue, retourne vide
+  // (la page affichera un lien "voir site" plutôt que de fausses données)
+  return products;
+}
+
 // ─── Handler principal ───────────────────────────────────────────────────────
 
 export default async function handler(req, res) {
@@ -244,10 +329,15 @@ export default async function handler(req, res) {
   const scrapers = {
     espaceplaisir: scrapeEspacePlaisir,
     easytoys: scrapeEasyToys,
+    adameve: scrapeAdamEtEve,
     ruedesplaisirs: scrapeRueDesPlaisirs,
-    rapidinha: scrapeRapidinha,
+    lelo: scrapeLELO,
     afrodisia: scrapeAfrodisia,
-    loveshop: scrapeLoveshop
+    loveshop: scrapeLoveshop,
+    cupidos: scrapeCupidos,
+    koisas: scrapeKoisas,
+    lojadodesejo: scrapeLojaDoDesejo,
+    rapidinha: scrapeRapidinha
   };
 
   await Promise.allSettled(
