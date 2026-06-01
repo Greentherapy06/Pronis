@@ -937,3 +937,6 @@ button:hover {
 .cart-total-row{display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:2px;color:#caa86a;margin-bottom:24px}
 .cart-pay-btn{width:100%;background:none;border:1px solid #caa86a;color:#caa86a;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;padding:16px;cursor:pointer;transition:0.3s}
 .cart-clear-btn{width:100%;background:none;border:none;color:rgba(202,168,106,0.4);font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;padding:12px;cursor:pointer;margin-top:8px}
+
+/* Screen reader only - SEO text hidden visually */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
