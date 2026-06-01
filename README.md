@@ -43,7 +43,7 @@
 >           ├── mentions-legales            # Mentions légales
 >           ├── SECURITY.md                 # Politique de sécurité
 >           │
->           └── *.jpg                       # Visuels produits
+>           └── *.webp                       # Visuels produits
 >           ```
 >
 > ## Fonctionnement du panier

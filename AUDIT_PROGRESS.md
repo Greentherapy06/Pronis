@@ -7,7 +7,7 @@
 
 ## PR #1 : Nettoyage repo (MERGED)
 - Pages success.html, cancel.html, erreur.html : meta description déjà présentes
-- Image orpheline orgie_gel_excitation_pina_colada_1.jpg : supprimée
+- Image orpheline orgie_gel_excitation_pina_colada_1.webp : supprimée
 - vercel.json : stratégie cache immutable 1 an déjà en place
 - AUDIT_PROGRESS.md : mis à jour
 
