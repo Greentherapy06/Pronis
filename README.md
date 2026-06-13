@@ -2,7 +2,7 @@
 
 > Boutique en ligne premium dédiée à l'univers intime de luxe.
 >
-> [![Site](https://img.shields.io/badge/site-jl--shop--06.vercel.app-caa86a)](https://jl-shop-06.vercel.app)
+> [![Site](https://img.shields.io/badge/site-lesjardinsenchantes.vercel.app-caa86a)](https://lesjardinsenchantes.vercel.app)
 > [![Stripe](https://img.shields.io/badge/paiement-Stripe-635bff)](https://stripe.com)
 > [![Vercel](https://img.shields.io/badge/deploy-Vercel-000000)](https://vercel.com)
 >
@@ -12,7 +12,7 @@
 >
 > **Les Jardins Enchantés** (JL Shop 06) est une boutique en ligne proposant une sélection de produits intimes haut de gamme : gels lubrifiants aromatisés, vibromasseurs, masturbateurs et accessoires de luxe. L'univers visuel repose sur une charte sobre et élégante (noir profond et or `#caa86a`).
 >
-> Site en production : **https://jl-shop-06.vercel.app**
+> Site en production : **https://lesjardinsenchantes.vercel.app**
 >
 > ## Stack technique
 >
