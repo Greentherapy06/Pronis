@@ -916,6 +916,1906 @@ button:hover {
 /* ── SEO sections ── */
 .seo-intro{max-width:960px;margin:60px auto 0;padding:0 24px;text-align:center}
 .seo-intro__title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#caa86a;letter-spacing:2px;margin-bottom:20px}
+.seo-intro__text{font-family:'Inter',sans-serif;font-size:15px;color:#c5c5c5;line-height:1.8;margin-bottom:16px}
+.seo-bottom{max-width:1000px;margin:60px auto;padding:0 24px}
+.seo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
+.seo-col__title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#caa86a;letter-spacing:1px;margin-bottom:14px}
+.seo-col__text{font-family:'Inter',sans-serif;font-size:14px;color:#c5c5c5;line-height:1.8}
+.seo-why{margin-top:48px;padding:32px;background:rgba(202,168,106,0.07);border:1px solid rgba(202,168,106,0.2);border-radius:4px;text-align:center}
+.seo-why__title{font-family:'Cormorant Garamond',serif;font-size:24px;color:#caa86a;letter-spacing:2px;margin-bottom:16px}
+.seo-why__text{font-family:'Inter',sans-serif;font-size:14px;color:#c5c5c5;line-height:2;max-width:760px;margin:0 auto}
+.footer-nav{margin-top:8px}
+
+/* ── Cart modal ── */
+.cart-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;justify-content:flex-end;align-items:flex-start}
+.cart-panel{background:#111;border-left:1px solid rgba(202,168,106,0.3);width:420px;max-width:100vw;height:100vh;padding:48px 36px;display:flex;flex-direction:column;gap:24px;overflow-y:auto}
+.cart-header{display:flex;justify-content:space-between;align-items:center}
+.cart-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#caa86a;letter-spacing:3px}
+.cart-close{background:none;border:none;color:#caa86a;font-size:22px;cursor:pointer;line-height:1}
+.cart-items-list{padding:0;margin:0;flex:1}
+.cart-footer{border-top:1px solid rgba(202,168,106,0.2);padding-top:20px}
+.cart-total-row{display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:2px;color:#caa86a;margin-bottom:24px}
+.cart-pay-btn{width:100%;background:none;border:1px solid #caa86a;color:#caa86a;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;padding:16px;cursor:pointer;transition:0.3s}
+.cart-clear-btn{width:100%;background:none;border:none;color:rgba(202,168,106,0.4);font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;padding:12px;cursor:pointer;margin-top:8px}
+
+/* Screen reader only - SEO text hidden visually */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Gel lubrifiant bio images : ratio fixe 3:2 identique PC + mobile */
+article[data-category="gel-lubrifiant-bio"] img{
+    width:100%;
+    aspect-ratio:3/2;
+    max-height:none;
+    object-fit:cover;
+    object-position:center;
+}
+/* ================= ROOT ================= */
+
+:root {
+    --noir: #0c0a06;
+    --or: #caa86a;
+    --or-clair: #e6c98a;
+    --or-fonce: #8a6830;
+    --gris: #9c9c9c;
+    --blanc: #f5f5f5;
+    --fade-or: rgba(202,168,106,0.25);
+}
+
+/* ================= BASE ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fond doré-noir sur toute la page */
+body {
+    background:
+          radial-gradient(ellipse at 10% 0%, rgba(202,168,106,0.22) 0%, transparent 40%),
+          radial-gradient(ellipse at 90% 5%, rgba(202,168,106,0.15) 0%, transparent 38%),
+          radial-gradient(ellipse at 50% 15%, rgba(202,168,106,0.10) 0%, transparent 45%),
+          radial-gradient(ellipse at 15% 35%, rgba(202,168,106,0.12) 0%, transparent 42%),
+          radial-gradient(ellipse at 85% 45%, rgba(202,168,106,0.10) 0%, transparent 40%),
+          radial-gradient(ellipse at 30% 60%, rgba(202,168,106,0.08) 0%, transparent 40%),
+          radial-gradient(ellipse at 70% 75%, rgba(202,168,106,0.12) 0%, transparent 42%),
+          radial-gradient(ellipse at 20% 90%, rgba(202,168,106,0.10) 0%, transparent 38%),
+          radial-gradient(ellipse at 80% 100%, rgba(202,168,106,0.15) 0%, transparent 40%),
+          linear-gradient(180deg,
+                                #100d06 0%,
+                                #1a1408 8%,
+                                #16110a 18%,
+                                #1c1509 28%,
+                                #14100a 40%,
+                                #1a1408 52%,
+                                #16110a 65%,
+                                #1c1509 78%,
+                                #14100a 90%,
+                                #100d06 100%
+                              );
+    background-attachment: fixed;
+    color: var(--blanc);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ================= HEADER ================= */
+
+.lux-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    background: linear-gradient(180deg,
+                                    rgba(10,8,4,0.97) 0%,
+                                    rgba(14,11,5,0.92) 100%
+                                  );
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(202,168,106,0.25);
+    box-shadow: 0 2px 40px rgba(0,0,0,0.6), 0 1px 0 rgba(202,168,106,0.12);
+    transition: 0.4s ease;
+    gap: 16px;
+}
+
+.lux-header:hover {
+    background: linear-gradient(180deg,
+                                    rgba(10,8,4,0.99) 0%,
+                                    rgba(18,14,6,0.96) 100%
+                                  );
+}
+
+/* ======== LOGO IMAGE ======== */
+.header-logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-logo-img {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    filter: drop-shadow(0 2px 8px rgba(202,168,106,0.3));
+}
+
+.header-logo-img:hover {
+    opacity: 0.85;
+    transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+    .header-logo-img {
+        height: 60px;
+    }
+}
+
+
+/* ================= CATEGORY NAVIGATION ================= */
+
+.cat-nav {
+display: flex;
+align-items: center;
+flex-shrink: 0;
+flex-wrap: wrap;
+gap: 0;
+}
+
+.cat-nav__link {
+background: none;
+color: rgba(202,168,106,0.55);
+font-family: 'Inter', sans-serif;
+font-size: 9px;
+letter-spacing: 2px;
+font-weight: 400;
+padding: 7px 11px;
+text-decoration: none;
+border: 1px solid rgba(202,168,106,0.18);
+border-right: none;
+transition: all 0.3s ease;
+white-space: nowrap;
+text-transform: uppercase;
+}
+
+.cat-nav__link:last-child {
+border-right: 1px solid rgba(202,168,106,0.18);
+}
+
+.cat-nav__link:hover,
+.cat-nav__link--active {
+color: #0c0a06;
+background: linear-gradient(135deg, #e6c98a 0%, #caa86a 50%, #b89050 100%);
+}
+
+/* ================= CATEGORY SECTIONS ================= */
+
+.cat-section {
+grid-column: 1 / -1;
+padding: 48px 0 20px;
+}
+
+.cat-section__title {
+font-family: 'Cormorant Garamond', serif;
+font-size: 24px;
+font-weight: 300;
+color: var(--or);
+letter-spacing: 4px;
+text-transform: uppercase;
+border-bottom: 1px solid rgba(202,168,106,0.2);
+padding-bottom: 14px;
+display: inline-block;
+}
+
+/* ================= CART BUTTON ================= */
+
+.lux-cart {
+    background: none;
+    border: 1px solid rgba(202,168,106,0.5);
+    padding: 7px 16px;
+    color: var(--or);
+    letter-spacing: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.lux-cart:hover {
+    background: var(--or);
+    color: var(--noir);
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 200px 24px 140px;
+    overflow: hidden;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fond hero en continuité avec le body */
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+          radial-gradient(ellipse at 20% 30%, rgba(202,168,106,0.20) 0%, transparent 55%),
+          radial-gradient(ellipse at 80% 70%, rgba(202,168,106,0.14) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 100%, rgba(202,168,106,0.10) 0%, transparent 60%),
+          radial-gradient(ellipse at 50% 50%, rgba(202,168,106,0.06) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+/* Particules dorées flottantes */
+.hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+          radial-gradient(circle at 15% 25%, rgba(202,168,106,0.4) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 75% 60%, rgba(202,168,106,0.35) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 40% 80%, rgba(202,168,106,0.3) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 85% 15%, rgba(202,168,106,0.35) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 25% 65%, rgba(202,168,106,0.25) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 60% 35%, rgba(202,168,106,0.30) 0.5px, transparent 1.5px);
+    background-size: 280px 280px, 340px 340px, 220px 220px, 400px 400px, 300px 300px, 260px 260px;
+    opacity: 0.7;
+    animation: starsFloat 30s linear infinite;
+}
+
+@keyframes starsFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-40px); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    animation: fadeIn 1.4s ease both;
+}
+
+.hero-kicker {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--or);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeInUp 1.2s 0.2s ease forwards;
+}
+
+.hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 8vw, 92px);
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: var(--blanc);
+    margin-bottom: 28px;
+    line-height: 1.05;
+    opacity: 0;
+    animation: fadeInUp 1.2s 0.4s ease forwards;
+}
+
+.hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(135deg, #f0d98a 0%, #e6c98a 20%, #caa86a 45%, #a8884a 70%, #e6c98a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 0 auto 32px;
+    max-width: 320px;
+    color: var(--or);
+    font-size: 14px;
+    opacity: 0;
+    animation: fadeInUp 1.2s 0.6s ease forwards;
+}
+
+.hero-divider span {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--or), transparent);
+}
+
+.hero-baseline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(20px, 2.6vw, 26px);
+    color: #e8d9b8;
+    margin-bottom: 24px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    animation: fadeInUp 1.2s 0.8s ease forwards;
+}
+
+.hero-desc {
+    max-width: 720px;
+    margin: 0 auto 44px;
+    font-size: 15.5px;
+    line-height: 1.9;
+    color: #c5c5c5;
+    letter-spacing: 0.3px;
+    font-weight: 300;
+    font-family: 'Inter', sans-serif;
+    opacity: 0;
+    animation: fadeInUp 1.2s 1s ease forwards;
+}
+
+.hero-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeInUp 1.2s 1.2s ease forwards;
+}
+
+.hero-badges span {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--or);
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.hero-cta {
+    display: inline-block;
+    padding: 18px 56px;
+    border: 1px solid var(--or);
+    color: var(--or);
+    text-decoration: none;
+    letter-spacing: 5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 400;
+    background: transparent;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 1.2s 1.4s ease forwards;
+}
+
+.hero-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #f0d98a 0%, #caa86a 50%, #a8884a 100%);
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.hero-cta:hover {
+    color: var(--noir);
+    border-color: #e6c98a;
+    box-shadow: 0 12px 40px rgba(202,168,106,0.4);
+    transform: translateY(-2px);
+}
+
+.hero-cta:hover::before {
+    transform: translateY(0);
+}
+
+/* ================= PRODUITS ================= */
+
+.product-grid {
+    max-width: 1100px;
+    margin: 80px auto 140px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    padding: 0 20px;
+}
+
+article {
+    text-align: center;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+article:hover {
+    transform: translateY(-10px);
+}
+
+article a {
+    color: inherit;
+    text-decoration: none;
+}
+
+article img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+    border: 1px solid rgba(202,168,106,0.15);
+    transition: 0.4s ease;
+}
+
+article:hover img {
+    filter: brightness(1.12);
+    border-color: rgba(202,168,106,0.35);
+}
+
+article h3 {
+    margin-top: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: #e8d9b8;
+}
+
+article strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 16px;
+    color: var(--or);
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+}
+
+/* BUTTON AJOUT PANIER */
+button {
+    margin-top: 14px;
+    background: transparent;
+    border: 1px solid rgba(202,168,106,0.4);
+    color: var(--or);
+    letter-spacing: 4px;
+    padding: 8px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: var(--or);
+    color: var(--noir);
+}
+
+/* ================= PANIER MODAL ================= */
+
+#cart-modal {
+    background: rgba(10,8,4,0.97);
+    border: 1px solid var(--fade-or);
+    color: var(--blanc);
+}
+
+#cart-modal h2 {
+    color: var(--or);
+    letter-spacing: 2px;
+}
+
+#cart-modal button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    text-align: center;
+    padding: 80px 20px 60px;
+    color: var(--gris);
+    letter-spacing: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-top: 60px;
+    border-top: 1px solid rgba(202,168,106,0.15);
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.footer a {
+    color: var(--or);
+    margin: 0 12px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--or-clair);
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fadeIn {
+    from { opacity:0; transform: translateY(20px); }
+    to { opacity:1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= PAGES LEGALES ================= */
+
+.legal-page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 160px 24px 100px;
+    color: #d5d5d5;
+    line-height: 1.85;
+}
+
+.legal-page h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 5vw, 56px);
+    font-weight: 300;
+    color: var(--or);
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.legal-page .legal-subtitle {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--gris);
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    font-family: 'Inter', sans-serif;
+}
+
+.legal-page h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--or);
+    font-weight: 400;
+    margin-top: 50px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(202,168,106,0.2);
+    padding-bottom: 10px;
+}
+
+.legal-page h3 {
+    font-size: 15px;
+    color: #e8d9b8;
+    font-weight: 500;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+}
+
+.legal-page p,
+.legal-page li {
+    font-size: 14.5px;
+    color: #c5c5c5;
+    margin-bottom: 14px;
+    font-weight: 300;
+    font-family: 'Inter', sans-serif;
+}
+
+.legal-page ul {
+    padding-left: 22px;
+    margin-bottom: 20px;
+}
+
+.legal-page li {
+    margin-bottom: 8px;
+}
+
+.legal-page strong {
+    color: #e8d9b8;
+    font-weight: 500;
+}
+
+.legal-page a {
+    color: var(--or);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(202,168,106,0.3);
+    transition: 0.3s ease;
+}
+
+.legal-page a:hover {
+    color: #e6c98a;
+    border-bottom-color: var(--or);
+}
+
+.legal-placeholder {
+    display: inline-block;
+    background: rgba(255,100,100,0.12);
+    border: 1px dashed rgba(255,120,120,0.5);
+    color: #ff9a9a;
+    padding: 1px 8px;
+    border-radius: 3px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.legal-callout {
+    background: rgba(202,168,106,0.06);
+    border-left: 3px solid var(--or);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.legal-callout p {
+    margin: 0;
+    font-size: 14px;
+    color: #d5d5d5;
+}
+
+.legal-page .legal-meta {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gris);
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+    .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Header mobile compact */
+  .lux-header {
+        padding: 12px 16px;
+        flex-wrap: nowrap;
+        gap: 8px;
+        align-items: center;
+  }
+
+  /* Logo plus petit sur mobile */
+  .lux-header > a {
+        flex-shrink: 0;
+  }
+
+  .lux-header > a svg {
+        width: 38px !important;
+        height: 38px !important;
+  }
+
+  .lux-header > a div span:first-child {
+        font-size: 11px !important;
+        letter-spacing: 2px !important;
+  }
+
+  .lux-header > a div span:last-child {
+        font-size: 12px !important;
+        letter-spacing: 1px !important;
+  }
+
+  /* Category nav sur mobile : compact */
+  .cat-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cat-nav__link {
+    padding: 6px 8px;
+    font-size: 7.5px;
+    letter-spacing: 1px;
+  }
+
+  /* Panier compact */
+  .lux-cart {
+        padding: 6px 10px;
+        font-size: 9px;
+        letter-spacing: 1px;
+  }
+
+  /* Hero */
+  .hero {
+        padding: 110px 16px 80px;
+        min-height: auto;
+  }
+
+  .hero-kicker {
+        font-size: 9px;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+  }
+
+  .hero-divider {
+        margin-bottom: 20px;
+  }
+
+  .hero-desc {
+        font-size: 14px;
+        margin-bottom: 30px;
+  }
+
+  .hero-badges {
+        gap: 12px;
+        margin-bottom: 34px;
+  }
+
+  .hero-badges span {
+        font-size: 9px;
+        letter-spacing: 2px;
+  }
+
+  .hero-cta {
+        padding: 14px 32px;
+        letter-spacing: 3px;
+        font-size: 10px;
+  }
+
+  /* Grille produits */
+  .product-grid {
+        grid-template-columns: 1fr;
+        margin: 60px auto 100px;
+        gap: 40px;
+  }
+
+  .legal-page {
+        padding: 120px 20px 60px;
+  }
+
+  .legal-page h2 {
+        font-size: 22px;
+        margin-top: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+    .lux-header {
+          padding: 10px 12px;
+          gap: 6px;
+    }
+
+  .cat-nav__link {
+    padding: 5px 6px;
+    font-size: 7px;
+    letter-spacing: 0.5px;
+  }
+
+  .lux-cart {
+        padding: 5px 8px;
+        font-size: 8.5px;
+        letter-spacing: 0.5px;
+  }
+}
+
+
+/* ================= PRODUCT PAGES — FIX TEXT COLOR ON DARK BG ================= */
+/* Surcharge des couleurs sombres définies en inline sur les pages produits */
+
+.product-page {
+        color: var(--blanc);
+}
+
+.product-page .product-title {
+        color: var(--blanc) !important;
+        font-family: 'Cormorant Garamond', serif;
+}
+
+.product-page .product-subtitle {
+        color: #e8d9b8 !important;
+        font-family: 'Inter', sans-serif;
+}
+
+.product-page .product-price {
+        color: var(--or) !important;
+}
+
+.product-page .section-title {
+        color: var(--or) !important;
+        font-family: 'Cormorant Garamond', serif;
+        letter-spacing: 1px;
+}
+
+.product-page .product-description {
+        color: #d5d5d5 !important;
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+}
+
+.product-page .product-description strong {
+        color: #e8d9b8;
+        font-weight: 500;
+}
+
+.product-page .product-list {
+        color: #d5d5d5 !important;
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+}
+
+.product-page .product-list li {
+        color: #d5d5d5 !important;
+}
+
+.product-page .add-to-cart {
+        color: var(--or) !important;
+        border: 1px solid rgba(202,168,106,0.5) !important;
+        opacity: 1 !important;
+        background: transparent !important;
+        transition: 0.3s ease;
+}
+
+.product-page .add-to-cart:hover {
+        background: var(--or) !important;
+        color: var(--noir) !important;
+}
+
+.product-page .separator {
+        border-top: 1px solid rgba(202,168,106,0.2) !important;
+}
+
+
+/* ================= PRODUCT PAGES — CTA BLOCK (Orgie) ================= */
+/* Surcharge du bloc d'appel à l'action (encadré doré) sur fond sombre */
+
+.product-page .cta-block {
+        background: rgba(202,168,106,0.10) !important;
+        border-left: 3px solid var(--or) !important;
+        border-radius: 0 8px 8px 0;
+}
+
+.product-page .cta-block p {
+        color: #d5d5d5 !important;
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+}
+
+.product-page .cta-block p strong {
+        color: #e8d9b8 !important;
+        font-weight: 500;
+}
+
+.product-page .cta-block .cta-btn {
+        background: transparent !important;
+        color: var(--or) !important;
+        border: 1px solid var(--or) !important;
+        border-radius: 2px;
+        letter-spacing: 3px;
+        transition: 0.3s ease;
+}
+
+.product-page .cta-block .cta-btn:hover {
+        background: var(--or) !important;
+        color: var(--noir) !important;
+}
+
+.product-page .badge-naturel {
+        color: var(--or) !important;
+        border: 1px solid var(--or) !important;
+        background: rgba(202,168,106,0.06);
+}
+
+
+/* ── GAMME BIO – Lisibilite ingredients & badges ── */
+.product-page .ingredient-item {
+  background: rgba(76,175,80,0.12) !important;
+  border: 1px solid rgba(76,175,80,0.35) !important;
+  color: #e8f5e9 !important;
+}
+
+.product-page .ingredient-item strong {
+  color: #81c784 !important;
+}
+
+.product-page .sans-badge {
+  background: rgba(244,67,54,0.15) !important;
+  border: 1px solid rgba(244,67,54,0.4) !important;
+  color: #ef9a9a !important;
+}
+
+.product-page .product-description {
+  color: #d4c9b0 !important;
+}
+
+.product-page .product-list {
+  color: #d4c9b0 !important;
+}
+
+.product-page .section-title {
+  color: var(--or) !important;
+}
+
+.product-page .product-subtitle {
+  color: #c8bfa8 !important;
+}
+
+.product-page .cta-block p {
+  color: #d4c9b0 !important;
+}
+
+/* ── SEO sections ── */
+.seo-intro{max-width:960px;margin:60px auto 0;padding:0 24px;text-align:center}
+.seo-intro__title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#caa86a;letter-spacing:2px;margin-bottom:20px}
+.seo-intro__text{font-family:'Inter',sans-serif;font-size:15px;color:#c5c5c5;line-height:1.8;margin-bottom:16px}
+.seo-bottom{max-width:1000px;margin:60px auto;padding:0 24px}
+.seo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
+.seo-col__title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#caa86a;letter-spacing:1px;margin-bottom:14px}
+.seo-col__text{font-family:'Inter',sans-serif;font-size:14px;color:#c5c5c5;line-height:1.8}
+.seo-why{margin-top:48px;padding:32px;background:rgba(202,168,106,0.07);border:1px solid rgba(202,168,106,0.2);border-radius:4px;text-align:center}
+.seo-why__title{font-family:'Cormorant Garamond',serif;font-size:24px;color:#caa86a;letter-spacing:2px;margin-bottom:16px}
+.seo-why__text{font-family:'Inter',sans-serif;font-size:14px;color:#c5c5c5;line-height:2;max-width:760px;margin:0 auto}
+.footer-nav{margin-top:8px}
+
+/* ── Cart modal ── */
+.cart-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;justify-content:flex-end;align-items:flex-start}
+.cart-panel{background:#111;border-left:1px solid rgba(202,168,106,0.3);width:420px;max-width:100vw;height:100vh;padding:48px 36px;display:flex;flex-direction:column;gap:24px;overflow-y:auto}
+.cart-header{display:flex;justify-content:space-between;align-items:center}
+.cart-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#caa86a;letter-spacing:3px}
+.cart-close{background:none;border:none;color:#caa86a;font-size:22px;cursor:pointer;line-height:1}
+.cart-items-list{padding:0;margin:0;flex:1}
+.cart-footer{border-top:1px solid rgba(202,168,106,0.2);padding-top:20px}
+.cart-total-row{display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:2px;color:#caa86a;margin-bottom:24px}
+.cart-pay-btn{width:100%;background:none;border:1px solid #caa86a;color:#caa86a;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;padding:16px;cursor:pointer;transition:0.3s}
+.cart-clear-btn{width:100%;background:none;border:none;color:rgba(202,168,106,0.4);font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;padding:12px;cursor:pointer;margin-top:8px}
+
+/* Screen reader only - SEO text hidden visually */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Gel lubrifiant bio images : ratio fixe 3:2 identique PC + mobile */
+article[data-category="gel-lubrifiant-bio"] img{
+    width:100%;
+    aspect-ratio:3/2;
+    max-height:none;
+    object-fit:cover;
+    object-position:center;
+}
+/* ================= ROOT ================= */
+
+:root {
+    --noir: #0c0a06;
+    --or: #caa86a;
+    --or-clair: #e6c98a;
+    --or-fonce: #8a6830;
+    --gris: #9c9c9c;
+    --blanc: #f5f5f5;
+    --fade-or: rgba(202,168,106,0.25);
+}
+
+/* ================= BASE ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fond doré-noir sur toute la page */
+body {
+    background:
+          radial-gradient(ellipse at 10% 0%, rgba(202,168,106,0.22) 0%, transparent 40%),
+          radial-gradient(ellipse at 90% 5%, rgba(202,168,106,0.15) 0%, transparent 38%),
+          radial-gradient(ellipse at 50% 15%, rgba(202,168,106,0.10) 0%, transparent 45%),
+          radial-gradient(ellipse at 15% 35%, rgba(202,168,106,0.12) 0%, transparent 42%),
+          radial-gradient(ellipse at 85% 45%, rgba(202,168,106,0.10) 0%, transparent 40%),
+          radial-gradient(ellipse at 30% 60%, rgba(202,168,106,0.08) 0%, transparent 40%),
+          radial-gradient(ellipse at 70% 75%, rgba(202,168,106,0.12) 0%, transparent 42%),
+          radial-gradient(ellipse at 20% 90%, rgba(202,168,106,0.10) 0%, transparent 38%),
+          radial-gradient(ellipse at 80% 100%, rgba(202,168,106,0.15) 0%, transparent 40%),
+          linear-gradient(180deg,
+                                #100d06 0%,
+                                #1a1408 8%,
+                                #16110a 18%,
+                                #1c1509 28%,
+                                #14100a 40%,
+                                #1a1408 52%,
+                                #16110a 65%,
+                                #1c1509 78%,
+                                #14100a 90%,
+                                #100d06 100%
+                              );
+    background-attachment: fixed;
+    color: var(--blanc);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ================= HEADER ================= */
+
+.lux-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    background: linear-gradient(180deg,
+                                    rgba(10,8,4,0.97) 0%,
+                                    rgba(14,11,5,0.92) 100%
+                                  );
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(202,168,106,0.25);
+    box-shadow: 0 2px 40px rgba(0,0,0,0.6), 0 1px 0 rgba(202,168,106,0.12);
+    transition: 0.4s ease;
+    gap: 16px;
+}
+
+.lux-header:hover {
+    background: linear-gradient(180deg,
+                                    rgba(10,8,4,0.99) 0%,
+                                    rgba(18,14,6,0.96) 100%
+                                  );
+}
+
+/* ======== LOGO IMAGE ======== */
+.header-logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-logo-img {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    filter: drop-shadow(0 2px 8px rgba(202,168,106,0.3));
+}
+
+.header-logo-img:hover {
+    opacity: 0.85;
+    transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+    .header-logo-img {
+        height: 60px;
+    }
+}
+
+
+/* ================= CATEGORY NAVIGATION ================= */
+
+.cat-nav {
+display: flex;
+align-items: center;
+flex-shrink: 0;
+flex-wrap: wrap;
+gap: 0;
+}
+
+.cat-nav__link {
+background: none;
+color: rgba(202,168,106,0.55);
+font-family: 'Inter', sans-serif;
+font-size: 9px;
+letter-spacing: 2px;
+font-weight: 400;
+padding: 7px 11px;
+text-decoration: none;
+border: 1px solid rgba(202,168,106,0.18);
+border-right: none;
+transition: all 0.3s ease;
+white-space: nowrap;
+text-transform: uppercase;
+}
+
+.cat-nav__link:last-child {
+border-right: 1px solid rgba(202,168,106,0.18);
+}
+
+.cat-nav__link:hover,
+.cat-nav__link--active {
+color: #0c0a06;
+background: linear-gradient(135deg, #e6c98a 0%, #caa86a 50%, #b89050 100%);
+}
+
+/* ================= CATEGORY SECTIONS ================= */
+
+.cat-section {
+grid-column: 1 / -1;
+padding: 48px 0 20px;
+}
+
+.cat-section__title {
+font-family: 'Cormorant Garamond', serif;
+font-size: 24px;
+font-weight: 300;
+color: var(--or);
+letter-spacing: 4px;
+text-transform: uppercase;
+border-bottom: 1px solid rgba(202,168,106,0.2);
+padding-bottom: 14px;
+display: inline-block;
+}
+
+/* ================= CART BUTTON ================= */
+
+.lux-cart {
+    background: none;
+    border: 1px solid rgba(202,168,106,0.5);
+    padding: 7px 16px;
+    color: var(--or);
+    letter-spacing: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.lux-cart:hover {
+    background: var(--or);
+    color: var(--noir);
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 200px 24px 140px;
+    overflow: hidden;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fond hero en continuité avec le body */
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+          radial-gradient(ellipse at 20% 30%, rgba(202,168,106,0.20) 0%, transparent 55%),
+          radial-gradient(ellipse at 80% 70%, rgba(202,168,106,0.14) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 100%, rgba(202,168,106,0.10) 0%, transparent 60%),
+          radial-gradient(ellipse at 50% 50%, rgba(202,168,106,0.06) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+/* Particules dorées flottantes */
+.hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+          radial-gradient(circle at 15% 25%, rgba(202,168,106,0.4) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 75% 60%, rgba(202,168,106,0.35) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 40% 80%, rgba(202,168,106,0.3) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 85% 15%, rgba(202,168,106,0.35) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 25% 65%, rgba(202,168,106,0.25) 0.5px, transparent 1.5px),
+          radial-gradient(circle at 60% 35%, rgba(202,168,106,0.30) 0.5px, transparent 1.5px);
+    background-size: 280px 280px, 340px 340px, 220px 220px, 400px 400px, 300px 300px, 260px 260px;
+    opacity: 0.7;
+    animation: starsFloat 30s linear infinite;
+}
+
+@keyframes starsFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-40px); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    animation: fadeIn 1.4s ease both;
+}
+
+.hero-kicker {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--or);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeInUp 1.2s 0.2s ease forwards;
+}
+
+.hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 8vw, 92px);
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: var(--blanc);
+    margin-bottom: 28px;
+    line-height: 1.05;
+    opacity: 0;
+    animation: fadeInUp 1.2s 0.4s ease forwards;
+}
+
+.hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(135deg, #f0d98a 0%, #e6c98a 20%, #caa86a 45%, #a8884a 70%, #e6c98a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 0 auto 32px;
+    max-width: 320px;
+    color: var(--or);
+    font-size: 14px;
+    opacity: 0;
+    animation: fadeInUp 1.2s 0.6s ease forwards;
+}
+
+.hero-divider span {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--or), transparent);
+}
+
+.hero-baseline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(20px, 2.6vw, 26px);
+    color: #e8d9b8;
+    margin-bottom: 24px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    animation: fadeInUp 1.2s 0.8s ease forwards;
+}
+
+.hero-desc {
+    max-width: 720px;
+    margin: 0 auto 44px;
+    font-size: 15.5px;
+    line-height: 1.9;
+    color: #c5c5c5;
+    letter-spacing: 0.3px;
+    font-weight: 300;
+    font-family: 'Inter', sans-serif;
+    opacity: 0;
+    animation: fadeInUp 1.2s 1s ease forwards;
+}
+
+.hero-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeInUp 1.2s 1.2s ease forwards;
+}
+
+.hero-badges span {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--or);
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.hero-cta {
+    display: inline-block;
+    padding: 18px 56px;
+    border: 1px solid var(--or);
+    color: var(--or);
+    text-decoration: none;
+    letter-spacing: 5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 400;
+    background: transparent;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 1.2s 1.4s ease forwards;
+}
+
+.hero-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #f0d98a 0%, #caa86a 50%, #a8884a 100%);
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.hero-cta:hover {
+    color: var(--noir);
+    border-color: #e6c98a;
+    box-shadow: 0 12px 40px rgba(202,168,106,0.4);
+    transform: translateY(-2px);
+}
+
+.hero-cta:hover::before {
+    transform: translateY(0);
+}
+
+/* ================= PRODUITS ================= */
+
+.product-grid {
+    max-width: 1100px;
+    margin: 80px auto 140px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    padding: 0 20px;
+}
+
+article {
+    text-align: center;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+article:hover {
+    transform: translateY(-10px);
+}
+
+article a {
+    color: inherit;
+    text-decoration: none;
+}
+
+article img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+    border: 1px solid rgba(202,168,106,0.15);
+    transition: 0.4s ease;
+}
+
+article:hover img {
+    filter: brightness(1.12);
+    border-color: rgba(202,168,106,0.35);
+}
+
+article h3 {
+    margin-top: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: #e8d9b8;
+}
+
+article strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 16px;
+    color: var(--or);
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+}
+
+/* BUTTON AJOUT PANIER */
+button {
+    margin-top: 14px;
+    background: transparent;
+    border: 1px solid rgba(202,168,106,0.4);
+    color: var(--or);
+    letter-spacing: 4px;
+    padding: 8px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: var(--or);
+    color: var(--noir);
+}
+
+/* ================= PANIER MODAL ================= */
+
+#cart-modal {
+    background: rgba(10,8,4,0.97);
+    border: 1px solid var(--fade-or);
+    color: var(--blanc);
+}
+
+#cart-modal h2 {
+    color: var(--or);
+    letter-spacing: 2px;
+}
+
+#cart-modal button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    text-align: center;
+    padding: 80px 20px 60px;
+    color: var(--gris);
+    letter-spacing: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-top: 60px;
+    border-top: 1px solid rgba(202,168,106,0.15);
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.footer a {
+    color: var(--or);
+    margin: 0 12px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--or-clair);
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fadeIn {
+    from { opacity:0; transform: translateY(20px); }
+    to { opacity:1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= PAGES LEGALES ================= */
+
+.legal-page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 160px 24px 100px;
+    color: #d5d5d5;
+    line-height: 1.85;
+}
+
+.legal-page h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 5vw, 56px);
+    font-weight: 300;
+    color: var(--or);
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.legal-page .legal-subtitle {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--gris);
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    font-family: 'Inter', sans-serif;
+}
+
+.legal-page h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--or);
+    font-weight: 400;
+    margin-top: 50px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(202,168,106,0.2);
+    padding-bottom: 10px;
+}
+
+.legal-page h3 {
+    font-size: 15px;
+    color: #e8d9b8;
+    font-weight: 500;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+}
+
+.legal-page p,
+.legal-page li {
+    font-size: 14.5px;
+    color: #c5c5c5;
+    margin-bottom: 14px;
+    font-weight: 300;
+    font-family: 'Inter', sans-serif;
+}
+
+.legal-page ul {
+    padding-left: 22px;
+    margin-bottom: 20px;
+}
+
+.legal-page li {
+    margin-bottom: 8px;
+}
+
+.legal-page strong {
+    color: #e8d9b8;
+    font-weight: 500;
+}
+
+.legal-page a {
+    color: var(--or);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(202,168,106,0.3);
+    transition: 0.3s ease;
+}
+
+.legal-page a:hover {
+    color: #e6c98a;
+    border-bottom-color: var(--or);
+}
+
+.legal-placeholder {
+    display: inline-block;
+    background: rgba(255,100,100,0.12);
+    border: 1px dashed rgba(255,120,120,0.5);
+    color: #ff9a9a;
+    padding: 1px 8px;
+    border-radius: 3px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.legal-callout {
+    background: rgba(202,168,106,0.06);
+    border-left: 3px solid var(--or);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.legal-callout p {
+    margin: 0;
+    font-size: 14px;
+    color: #d5d5d5;
+}
+
+.legal-page .legal-meta {
+    text-align: center;
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gris);
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+    .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Header mobile compact */
+  .lux-header {
+        padding: 12px 16px;
+        flex-wrap: nowrap;
+        gap: 8px;
+        align-items: center;
+  }
+
+  /* Logo plus petit sur mobile */
+  .lux-header > a {
+        flex-shrink: 0;
+  }
+
+  .lux-header > a svg {
+        width: 38px !important;
+        height: 38px !important;
+  }
+
+  .lux-header > a div span:first-child {
+        font-size: 11px !important;
+        letter-spacing: 2px !important;
+  }
+
+  .lux-header > a div span:last-child {
+        font-size: 12px !important;
+        letter-spacing: 1px !important;
+  }
+
+  /* Category nav sur mobile : compact */
+  .cat-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cat-nav__link {
+    padding: 6px 8px;
+    font-size: 7.5px;
+    letter-spacing: 1px;
+  }
+
+  /* Panier compact */
+  .lux-cart {
+        padding: 6px 10px;
+        font-size: 9px;
+        letter-spacing: 1px;
+  }
+
+  /* Hero */
+  .hero {
+        padding: 110px 16px 80px;
+        min-height: auto;
+  }
+
+  .hero-kicker {
+        font-size: 9px;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+  }
+
+  .hero-divider {
+        margin-bottom: 20px;
+  }
+
+  .hero-desc {
+        font-size: 14px;
+        margin-bottom: 30px;
+  }
+
+  .hero-badges {
+        gap: 12px;
+        margin-bottom: 34px;
+  }
+
+  .hero-badges span {
+        font-size: 9px;
+        letter-spacing: 2px;
+  }
+
+  .hero-cta {
+        padding: 14px 32px;
+        letter-spacing: 3px;
+        font-size: 10px;
+  }
+
+  /* Grille produits */
+  .product-grid {
+        grid-template-columns: 1fr;
+        margin: 60px auto 100px;
+        gap: 40px;
+  }
+
+  .legal-page {
+        padding: 120px 20px 60px;
+  }
+
+  .legal-page h2 {
+        font-size: 22px;
+        margin-top: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+    .lux-header {
+          padding: 10px 12px;
+          gap: 6px;
+    }
+
+  .cat-nav__link {
+    padding: 5px 6px;
+    font-size: 7px;
+    letter-spacing: 0.5px;
+  }
+
+  .lux-cart {
+        padding: 5px 8px;
+        font-size: 8.5px;
+        letter-spacing: 0.5px;
+  }
+}
+
+
+/* ================= PRODUCT PAGES — FIX TEXT COLOR ON DARK BG ================= */
+/* Surcharge des couleurs sombres définies en inline sur les pages produits */
+
+.product-page {
+        color: var(--blanc);
+}
+
+.product-page .product-title {
+        color: var(--blanc) !important;
+        font-family: 'Cormorant Garamond', serif;
+}
+
+.product-page .product-subtitle {
+        color: #e8d9b8 !important;
+        font-family: 'Inter', sans-serif;
+}
+
+.product-page .product-price {
+        color: var(--or) !important;
+}
+
+.product-page .section-title {
+        color: var(--or) !important;
+        font-family: 'Cormorant Garamond', serif;
+        letter-spacing: 1px;
+}
+
+.product-page .product-description {
+        color: #d5d5d5 !important;
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+}
+
+.product-page .product-description strong {
+        color: #e8d9b8;
+        font-weight: 500;
+}
+
+.product-page .product-list {
+        color: #d5d5d5 !important;
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+}
+
+.product-page .product-list li {
+        color: #d5d5d5 !important;
+}
+
+.product-page .add-to-cart {
+        color: var(--or) !important;
+        border: 1px solid rgba(202,168,106,0.5) !important;
+        opacity: 1 !important;
+        background: transparent !important;
+        transition: 0.3s ease;
+}
+
+.product-page .add-to-cart:hover {
+        background: var(--or) !important;
+        color: var(--noir) !important;
+}
+
+.product-page .separator {
+        border-top: 1px solid rgba(202,168,106,0.2) !important;
+}
+
+
+/* ================= PRODUCT PAGES — CTA BLOCK (Orgie) ================= */
+/* Surcharge du bloc d'appel à l'action (encadré doré) sur fond sombre */
+
+.product-page .cta-block {
+        background: rgba(202,168,106,0.10) !important;
+        border-left: 3px solid var(--or) !important;
+        border-radius: 0 8px 8px 0;
+}
+
+.product-page .cta-block p {
+        color: #d5d5d5 !important;
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+}
+
+.product-page .cta-block p strong {
+        color: #e8d9b8 !important;
+        font-weight: 500;
+}
+
+.product-page .cta-block .cta-btn {
+        background: transparent !important;
+        color: var(--or) !important;
+        border: 1px solid var(--or) !important;
+        border-radius: 2px;
+        letter-spacing: 3px;
+        transition: 0.3s ease;
+}
+
+.product-page .cta-block .cta-btn:hover {
+        background: var(--or) !important;
+        color: var(--noir) !important;
+}
+
+.product-page .badge-naturel {
+        color: var(--or) !important;
+        border: 1px solid var(--or) !important;
+        background: rgba(202,168,106,0.06);
+}
+
+
+/* ── GAMME BIO – Lisibilite ingredients & badges ── */
+.product-page .ingredient-item {
+  background: rgba(76,175,80,0.12) !important;
+  border: 1px solid rgba(76,175,80,0.35) !important;
+  color: #e8f5e9 !important;
+}
+
+.product-page .ingredient-item strong {
+  color: #81c784 !important;
+}
+
+.product-page .sans-badge {
+  background: rgba(244,67,54,0.15) !important;
+  border: 1px solid rgba(244,67,54,0.4) !important;
+  color: #ef9a9a !important;
+}
+
+.product-page .product-description {
+  color: #d4c9b0 !important;
+}
+
+.product-page .product-list {
+  color: #d4c9b0 !important;
+}
+
+.product-page .section-title {
+  color: var(--or) !important;
+}
+
+.product-page .product-subtitle {
+  color: #c8bfa8 !important;
+}
+
+.product-page .cta-block p {
+  color: #d4c9b0 !important;
+}
+
+/* ── SEO sections ── */
+.seo-intro{max-width:960px;margin:60px auto 0;padding:0 24px;text-align:center}
+.seo-intro__title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#caa86a;letter-spacing:2px;margin-bottom:20px}
 .seo-intro__text{font-family:'Inter',sans-serif;font-size:15px;color:#c8bfa8;line-height:1.8;margin-bottom:16px}
 .seo-bottom{max-width:1000px;margin:60px auto;padding:0 24px}
 .seo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
