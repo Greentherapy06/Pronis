@@ -191,3 +191,30 @@
     start();
   }
 })();
+
+
+/* ============================================================
+ * RETRACTATION EN LIGNE (conformite loi du 19 juin 2026)
+ * Injecte le lien "Renoncer au contrat" dans le footer de TOUTES
+ * les pages. Le footer etant code en dur dans chaque page (pas de
+ * composant global), on ajoute le lien ici, dans le seul script
+ * deja charge partout. Idempotent + lisible (aucun dark pattern).
+ * ============================================================ */
+(function () {
+  'use strict';
+  function injectRetractationLink() {
+    var footer = document.querySelector('footer.footer') || document.querySelector('footer');
+    if (!footer) return;
+    if (footer.querySelector('a[href="retractation.html"], a[href="/retractation"]')) return;
+    var a = document.createElement('a');
+    a.href = 'retractation.html';
+    a.textContent = 'Renoncer au contrat';
+    footer.appendChild(document.createTextNode(' '));
+    footer.appendChild(a);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectRetractationLink);
+  } else {
+    injectRetractationLink();
+  }
+})();
