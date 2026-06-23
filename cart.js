@@ -1,3 +1,13 @@
+/* === Chargeur i18n automatique (ajouté pour la traduction multilingue) === */
+(function () {
+  if (!document.querySelector('script[src="/i18n.js"], script[src="i18n.js"]') && typeof TRANSLATIONS === 'undefined') {
+    var s = document.createElement('script');
+    s.src = '/i18n.js';
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+})();
+
 /* ============================================
 cart.js – Système panier unifié
 Les Jardins Enchantés
