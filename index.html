@@ -79,29 +79,29 @@ document.head.appendChild(s);
 <img src="favicon.webp" alt="Les Jardins Enchantés – Boutique Sextoys France" class="header-logo-img" width="105" height="105" fetchpriority="high">
 </a>
 <nav class="cat-nav" aria-label="Catégories">
-<a href="index.html" class="cat-nav__link cat-nav__link--active">TOUS</a>
-<a href="#gel-lubrifiant-bio" class="cat-nav__link">GELS LUBRIFIANTS BIO</a>
-<a href="#modes" class="cat-nav__link">MODES</a>
-<a href="#gels-lubrifiants" class="cat-nav__link">GELS LUBRIFIANTS</a>
-<a href="#sextoys" class="cat-nav__link">SEXTOYS</a>
-<a href="#deguisements" class="cat-nav__link">DÉGUISEMENTS</a>
-<a href="#cockrings" class="cat-nav__link">COCKRINGS</a>
+<a href="index.html" class="cat-nav__link cat-nav__link--active" data-i18n="menu_tous">TOUS</a>
+<a href="#gel-lubrifiant-bio" class="cat-nav__link" data-i18n="menu_gels_bio">GELS LUBRIFIANTS BIO</a>
+<a href="#modes" class="cat-nav__link" data-i18n="menu_modes">MODES</a>
+<a href="#gels-lubrifiants" class="cat-nav__link" data-i18n="menu_gels">GELS LUBRIFIANTS</a>
+<a href="#sextoys" class="cat-nav__link" data-i18n="menu_sextoys">SEXTOYS</a>
+<a href="#deguisements" class="cat-nav__link" data-i18n="menu_deguisements">DÉGUISEMENTS</a>
+<a href="#cockrings" class="cat-nav__link" data-i18n="menu_cockrings">COCKRINGS</a>
 </nav>
-<button class="lux-cart" onclick="showCart()">PANIER (<span id="cartCount">0</span>)</button>
+<button class="lux-cart" onclick="showCart()"><span data-i18n="panier">PANIER</span> (<span id="cartCount">0</span>)</button>
 </header>
 <section class="hero">
 <div class="hero-bg"></div>
 <div class="hero-content">
-<span class="hero-kicker">— Maison Française · Sextoys · Gel Lubrifiant Bio · Huile de Massage —</span>
+<span class="hero-kicker" data-i18n="hero_sous_titre">— Maison Française · Sextoys · Gel Lubrifiant Bio · Huile de Massage —</span>
 <h1 class="hero-title"><img src="favicon.webp" alt="Les Jardins Enchantés" class="hero-logo-img" width="200" height="200" fetchpriority="high"></h1>
 <div class="hero-divider"><span></span>✦<span></span></div>
 <p class="hero-baseline">Les Jardins Enchantés La boutique intime la plus raffinée de France &amp; d'Europe.</p>
 <p class="hero-desc">Découvrez notre sélection exclusive de <strong>sextoys</strong>, <strong>gels lubrifiants intimes bio</strong>, <strong>huiles de massage érotiques</strong> et <strong>stimulateurs clitoridiens</strong> silencieux. Des <strong>gels lubrifiants certifiés Bio Organic</strong> notés <strong>100/100 sur Yuka</strong>, des <strong>sextoys fabriqués en Europe</strong> aux matériaux certifiés, des <strong>cockrings vibrants</strong> et <strong>vibromasseurs</strong> rechargeables ultra-précis. Livraison gratuite en France et en Europe.</p>
 <div class="hero-badges">
-<span>✦ Livraison Gratuite en France &amp; Europe</span>
-<span>✦ Paiement 100% Sécurisé</span>
-<span>✦ Gel Lubrifiant Bio Yuka 100/100</span>
-<span>✦ Sextoys &amp; Huiles de Massage Premium</span>
+<span data-i18n="arg_livraison">✦ Livraison Gratuite en France &amp; Europe</span>
+<span data-i18n="arg_paiement">✦ Paiement 100% Sécurisé</span>
+<span data-i18n="arg_yuka">✦ Gel Lubrifiant Bio Yuka 100/100</span>
+<span data-i18n="arg_premium">✦ Sextoys &amp; Huiles de Massage Premium</span>
 </div>
 <a href="#collection" class="hero-cta">Découvrir Sextoys, Gels &amp; Huiles de Massage</a>
 </div>
@@ -377,5 +377,6 @@ document.head.appendChild(s);
 </div>
 </div>
 </div>
+<script src="/i18n.js" defer></script>
 </body>
 </html>
