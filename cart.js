@@ -1,9 +1,13 @@
 /* === Chargeur i18n automatique (ajouté pour la traduction multilingue) === */
 (function () {
-  if (!document.querySelector('script[src="/i18n.js"], script[src="i18n.js"]') && typeof TRANSLATIONS === 'undefined') {
+  function runI18n() {
+    try { if (typeof initI18n === 'function') initI18n(); } catch (e) {}
+  }
+  if (typeof TRANSLATIONS !== 'undefined') { runI18n(); return; }
+  if (!document.querySelector('script[src="/i18n.js"], script[src="i18n.js"]')) {
     var s = document.createElement('script');
     s.src = '/i18n.js';
-    s.defer = true;
+    s.onload = runI18n;
     document.head.appendChild(s);
   }
 })();
