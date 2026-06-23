@@ -136,9 +136,15 @@ function translateCart() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function initI18n() {
   applyTranslations();
   translateProduct();
   const obs = new MutationObserver(() => { translateCart(); translateProduct(); });
   obs.observe(document.body, { childList: true, subtree: true });
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initI18n);
+} else {
+  initI18n();
+}
