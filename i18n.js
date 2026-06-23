@@ -3,6 +3,7 @@
 const TRANSLATIONS = {
   fr: {
     banner_livraison: "✦ LIVRAISON GRATUITE EN FRANCE ET EN EUROPE ✦",
+    prod_add: "AJOUTER AU PANIER", prod_desc: "Description", prod_feat: "Caractéristiques",
     menu_tous: "TOUS", menu_gels_bio: "GELS LUBRIFIANTS BIO", menu_modes: "MODES",
     menu_gels: "GELS LUBRIFIANTS", menu_sextoys: "SEXTOYS",
     menu_deguisements: "DÉGUISEMENTS", menu_cockrings: "COCKRINGS", panier: "PANIER",
@@ -18,6 +19,7 @@ const TRANSLATIONS = {
   },
   pt: {
     banner_livraison: "✦ ENTREGA GRATUITA EM FRANÇA E NA EUROPA ✦",
+    prod_add: "ADICIONAR AO CARRINHO", prod_desc: "Descrição", prod_feat: "Características",
     menu_tous: "TODOS", menu_gels_bio: "GÉIS LUBRIFICANTES BIO", menu_modes: "MODA",
     menu_gels: "GÉIS LUBRIFICANTES", menu_sextoys: "BRINQUEDOS SEXUAIS",
     menu_deguisements: "FANTASIAS", menu_cockrings: "ANÉIS PENIANOS", panier: "CARRINHO",
@@ -33,6 +35,7 @@ const TRANSLATIONS = {
   },
   it: {
     banner_livraison: "✦ SPEDIZIONE GRATUITA IN FRANCIA E IN EUROPA ✦",
+    prod_add: "AGGIUNGI AL CARRELLO", prod_desc: "Descrizione", prod_feat: "Caratteristiche",
     menu_tous: "TUTTI", menu_gels_bio: "GEL LUBRIFICANTI BIO", menu_modes: "MODA",
     menu_gels: "GEL LUBRIFICANTI", menu_sextoys: "GIOCATTOLI EROTICI",
     menu_deguisements: "COSTUMI", menu_cockrings: "ANELLI FALLICI", panier: "CARRELLO",
@@ -48,6 +51,7 @@ const TRANSLATIONS = {
   },
   es: {
     banner_livraison: "✦ ENVÍO GRATUITO EN FRANCIA Y EN EUROPA ✦",
+    prod_add: "AÑADIR A LA CESTA", prod_desc: "Descripción", prod_feat: "Características",
     menu_tous: "TODOS", menu_gels_bio: "GELES LUBRICANTES BIO", menu_modes: "MODA",
     menu_gels: "GELES LUBRICANTES", menu_sextoys: "JUGUETES SEXUALES",
     menu_deguisements: "DISFRACES", menu_cockrings: "ANILLOS PENEANOS", panier: "CESTA",
@@ -63,6 +67,7 @@ const TRANSLATIONS = {
   },
   de: {
     banner_livraison: "✦ KOSTENLOSER VERSAND IN FRANKREICH UND EUROPA ✦",
+    prod_add: "IN DEN WARENKORB", prod_desc: "Beschreibung", prod_feat: "Merkmale",
     menu_tous: "ALLE", menu_gels_bio: "BIO-GLEITGELE", menu_modes: "MODE",
     menu_gels: "GLEITGELE", menu_sextoys: "SEXSPIELZEUG",
     menu_deguisements: "KOSTÜME", menu_cockrings: "PENISRINGE", panier: "WARENKORB",
@@ -94,6 +99,23 @@ function applyTranslations() {
   });
 }
 
+function translateProduct() {
+  const lang = getLang();
+  if (lang === "fr") return;
+  const dict = TRANSLATIONS[lang] || TRANSLATIONS.fr;
+  const fr = TRANSLATIONS.fr;
+  // bouton AJOUTER AU PANIER
+  document.querySelectorAll(".add-to-cart").forEach(b => {
+    if (b.textContent.trim() === fr.prod_add && dict.prod_add) b.textContent = dict.prod_add;
+  });
+  // titres de section Description / Caractéristiques
+  document.querySelectorAll(".section-title").forEach(h => {
+    const t = h.textContent.trim();
+    if (t === fr.prod_desc && dict.prod_desc) h.textContent = dict.prod_desc;
+    else if (t === fr.prod_feat && dict.prod_feat) h.textContent = dict.prod_feat;
+  });
+}
+
 function translateCart() {
   const lang = getLang();
   if (lang === "fr") return;
@@ -116,6 +138,7 @@ function translateCart() {
 
 document.addEventListener("DOMContentLoaded", () => {
   applyTranslations();
-  const obs = new MutationObserver(() => translateCart());
+  translateProduct();
+  const obs = new MutationObserver(() => { translateCart(); translateProduct(); });
   obs.observe(document.body, { childList: true, subtree: true });
 });
