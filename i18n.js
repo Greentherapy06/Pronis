@@ -318,3 +318,40 @@ if (document.readyState === "loading") {
 } else {
   initI18n();
 }
+
+
+/* === Selecteur de langue (additif, ne casse pas l'existant) === */
+(function(){
+  var SUPPORTED = ['fr','pt','es','it','de'];
+  var LABELS = { fr:'FR', pt:'PT', es:'ES', it:'IT', de:'DE' };
+  window.setLang = function(lang){
+    if (SUPPORTED.indexOf(lang) === -1) lang = 'fr';
+    try { localStorage.setItem('lang', lang); } catch(e){}
+    document.documentElement.lang = lang;
+    if (typeof initI18n === 'function') initI18n();
+    document.querySelectorAll('.lang-switch__btn').forEach(function(b){
+      b.classList.toggle('is-active', b.getAttribute('data-lang') === lang);
+    });
+  };
+  window.renderLangSwitcher = function(){
+    document.querySelectorAll('.lang-switch').forEach(function(box){
+      if (box.dataset.ready) return;
+      box.dataset.ready = '1';
+      var cur = (typeof getLang === 'function') ? getLang() : 'fr';
+      SUPPORTED.forEach(function(l){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'lang-switch__btn' + (l === cur ? ' is-active' : '');
+        b.setAttribute('data-lang', l);
+        b.textContent = LABELS[l];
+        b.addEventListener('click', function(){ window.setLang(l); });
+        box.appendChild(b);
+      });
+    });
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', window.renderLangSwitcher);
+  } else {
+    window.renderLangSwitcher();
+  }
+})();
