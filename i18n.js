@@ -104,7 +104,17 @@ const TRANSLATIONS = {
     loveconn_li11: "Résistance à l'eau IPX6",
     loveconn_li12: "Longueur totale : 14,5 cm",
     loveconn_li13: "Sans phtalates et hypoallergénique",
-    loveconn_li14: "Marque : Xocoon"
+    loveconn_li14: "Marque : Xocoon",
+    duchess_title: "Black Empire – My Duchess",
+    duchess_subtitle: "Vibromasseur Rabbit en silicone soft touch – 10 modes de vibrations – USB rechargeable – étanche.",
+    duchess_desc1: "Le Black Empire My Duchess est un vibromasseur rabbit haut de gamme conçu pour offrir des sensations intenses et précises. Sa texture en silicone soft touch garantit un confort optimal et une utilisation agréable.",
+    duchess_desc2: "Grâce à ses 10 modes de vibrations, il permet d'adapter l'intensité selon vos envies, du plus doux au plus puissant.",
+    duchess_li1: "Silicone soft touch premium",
+    duchess_li2: "10 modes de vibrations",
+    duchess_li3: "Rechargeable USB",
+    duchess_li4: "Étanche",
+    duchess_li5: "Dimensions : 19 x 3,3 cm",
+    duchess_li6: "Design élégant Black Empire"
   },
   pt: {
     banner_livraison: "✦ ENTREGA GRATUITA EM FRANÇA E NA EUROPA ✦",
@@ -209,7 +219,17 @@ const TRANSLATIONS = {
     loveconn_li11: "Resistência à água IPX6",
     loveconn_li12: "Comprimento total: 14,5 cm",
     loveconn_li13: "Sem ftalatos e hipoalergénico",
-    loveconn_li14: "Marca: Xocoon"
+    loveconn_li14: "Marca: Xocoon",
+    duchess_title: "Black Empire – My Duchess",
+    duchess_subtitle: "Vibrador Rabbit em silicone soft touch – 10 modos de vibração – recarregável por USB – à prova de água.",
+    duchess_desc1: "O Black Empire My Duchess é um vibrador rabbit de alta qualidade concebido para oferecer sensações intensas e precisas. A sua textura em silicone soft touch garante um conforto ideal e uma utilização agradável.",
+    duchess_desc2: "Graças aos seus 10 modos de vibração, permite adaptar a intensidade conforme os seus desejos, do mais suave ao mais potente.",
+    duchess_li1: "Silicone soft touch premium",
+    duchess_li2: "10 modos de vibração",
+    duchess_li3: "Recarregável por USB",
+    duchess_li4: "À prova de água",
+    duchess_li5: "Dimensões: 19 x 3,3 cm",
+    duchess_li6: "Design elegante Black Empire"
   },
   it: {
     banner_livraison: "✦ SPEDIZIONE GRATUITA IN FRANCIA E IN EUROPA ✦",
@@ -314,7 +334,17 @@ const TRANSLATIONS = {
     loveconn_li11: "Resistenza all'acqua IPX6",
     loveconn_li12: "Lunghezza totale: 14,5 cm",
     loveconn_li13: "Senza ftalati e ipoallergenico",
-    loveconn_li14: "Marca: Xocoon"
+    loveconn_li14: "Marca: Xocoon",
+    duchess_title: "Black Empire – My Duchess",
+    duchess_subtitle: "Vibratore Rabbit in silicone soft touch – 10 modalità di vibrazione – ricaricabile via USB – impermeabile.",
+    duchess_desc1: "Il Black Empire My Duchess è un vibratore rabbit di alta gamma progettato per offrire sensazioni intense e precise. La sua texture in silicone soft touch garantisce un comfort ottimale e un utilizzo piacevole.",
+    duchess_desc2: "Grazie alle sue 10 modalità di vibrazione, permette di adattare l'intensità in base ai tuoi desideri, dal più delicato al più potente.",
+    duchess_li1: "Silicone soft touch premium",
+    duchess_li2: "10 modalità di vibrazione",
+    duchess_li3: "Ricaricabile via USB",
+    duchess_li4: "Impermeabile",
+    duchess_li5: "Dimensioni: 19 x 3,3 cm",
+    duchess_li6: "Design elegante Black Empire"
   },
   es: {
     banner_livraison: "✦ ENVÍO GRATUITO EN FRANCIA Y EN EUROPA ✦",
@@ -419,7 +449,17 @@ const TRANSLATIONS = {
     loveconn_li11: "Resistencia al agua IPX6",
     loveconn_li12: "Longitud total: 14,5 cm",
     loveconn_li13: "Sin ftalatos e hipoalergénico",
-    loveconn_li14: "Marca: Xocoon"
+    loveconn_li14: "Marca: Xocoon",
+    duchess_title: "Black Empire – My Duchess",
+    duchess_subtitle: "Vibrador Rabbit de silicona soft touch – 10 modos de vibración – recargable por USB – resistente al agua.",
+    duchess_desc1: "El Black Empire My Duchess es un vibrador rabbit de alta gama diseñado para ofrecer sensaciones intensas y precisas. Su textura de silicona soft touch garantiza un confort óptimo y un uso agradable.",
+    duchess_desc2: "Gracias a sus 10 modos de vibración, permite adaptar la intensidad según tus deseos, del más suave al más potente.",
+    duchess_li1: "Silicona soft touch premium",
+    duchess_li2: "10 modos de vibración",
+    duchess_li3: "Recargable por USB",
+    duchess_li4: "Resistente al agua",
+    duchess_li5: "Dimensiones: 19 x 3,3 cm",
+    duchess_li6: "Diseño elegante Black Empire"
   },
   de: {
     banner_livraison: "✦ KOSTENLOSER VERSAND IN FRANKREICH UND EUROPA ✦",
@@ -524,7 +564,17 @@ const TRANSLATIONS = {
     loveconn_li11: "Wasserfest nach IPX6",
     loveconn_li12: "Gesamtlänge: 14,5 cm",
     loveconn_li13: "Phthalatfrei und hypoallergen",
-    loveconn_li14: "Marke: Xocoon"
+    loveconn_li14: "Marke: Xocoon",
+    duchess_title: "Black Empire – My Duchess",
+    duchess_subtitle: "Rabbit-Vibrator aus Soft-Touch-Silikon – 10 Vibrationsmodi – USB-aufladbar – wasserdicht.",
+    duchess_desc1: "Der Black Empire My Duchess ist ein hochwertiger Rabbit-Vibrator, der intensive und präzise Empfindungen bietet. Seine Soft-Touch-Silikon-Textur sorgt für optimalen Komfort und eine angenehme Anwendung.",
+    duchess_desc2: "Dank seiner 10 Vibrationsmodi lässt sich die Intensität ganz nach Wunsch anpassen, vom sanftesten bis zum kräftigsten.",
+    duchess_li1: "Soft-Touch-Silikon Premium",
+    duchess_li2: "10 Vibrationsmodi",
+    duchess_li3: "USB-aufladbar",
+    duchess_li4: "Wasserdicht",
+    duchess_li5: "Maße: 19 x 3,3 cm",
+    duchess_li6: "Elegantes Black-Empire-Design"
   }
 };
 
