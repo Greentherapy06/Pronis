@@ -117,41 +117,74 @@
 
 ## 🌍 Traduction multilingue (i18n) — État d'avancement
 
-Système de traduction maison (gratuit, sans dépendance) basé sur le fichier `i18n.js`. Détection automatique de la langue du navigateur (`navigator.language`). 5 langues : Français (défaut), Portugais, Italien, Espagnol, Allemand. Choix manuel via `localStorage.setItem('lang','pt')` (valeurs : `fr`, `pt`, `it`, `es`, `de`).
+Système de traduction maison (gratuit, sans dépendance) basé sur `i18n.js`. Détection auto via `navigator.language`. 5 langues : **Français (défaut), Portugais, Italien, Espagnol, Allemand**. Sélecteur visible dans le header (FR/PT/ES/IT/DE).
 
-### Fichiers concernés
-- `i18n.js` — dictionnaires de traduction + logique (clés `data-i18n` via `applyTranslations()` + traduction dynamique panier/produits via `translateCart()` / `translateProduct()` et un MutationObserver).
-- `cart.js` — chargeur en tête qui injecte `i18n.js` sur toutes les pages et appelle `initI18n()` via `s.onload`.
-- `vercel.json` — en-têtes Cache-Control.
+> ⚠️ **PIÈGE IMPORTANT — ordre des langues dans `i18n.js`** : l'objet `TRANSLATIONS` est dans l'ordre **`fr, pt, it, es, de`** (PAS fr/pt/es/it/de). Toute insertion de clés par langue doit respecter cet ordre, sinon les blocs ES et IT se retrouvent inversés. Vérifier à l'exécution : sur `TRANSLATIONS`, `.it.<clé>` doit être en italien et `.es.<clé>` en espagnol.
 
-### Méthode pour traduire une fiche produit
-1. Dans le **HTML de la fiche** : ajouter `data-i18n="<cle>"` sur le `<h1 class="product-title">`, le `<p class="product-subtitle">`, chaque `<p class="product-description">` et chaque `<li>`. **Retirer toutes les balises `<strong>`** (français inclus — décision validée).
-2. Dans `i18n.js` : ajouter les clés correspondantes dans les **5 blocs de langue** (fr, pt, it, es, de). Convention de préfixe par produit (ex. `marryme_`, `bunny_`).
-3. Commit des 2 fichiers, puis test en prod : `localStorage.setItem('lang','XX')` + **hard reload** (Ctrl+Shift+R) pour contourner le cache navigateur.
+### Architecture i18n
+- `i18n.js` : objet `TRANSLATIONS` (483 lignes), `getLang()`, `setLang(lang)`, `applyTranslations()` (gère uniquement `textContent`), `renderLangSwitcher()`.
+- Chaque élément traduisible porte un attribut `data-i18n="<clé>"`.
+- Footer : `footer_cgv`, `footer_confid`, `footer_cookies`, `footer_mentions`, `footer_livraison` (câblage href-based).
+- Panier : `cart_title`, `cart_total`, `cart_pay`, `cart_clear`, `cart_empty`, `cart_loading`.
 
-### ✅ Fait et déployé
-- Éléments communs : menu, bannière livraison, section héro, panier (TOTAL / PAYER / VIDER LE PANIER / vide / chargement), libellés produits (bouton AJOUTER AU PANIER, titres Description / Caractéristiques).
-- **Correctif cache (résolu le 2026-06-23)** : dans `vercel.json`, la règle générique `.css|.js` (max-age 86400) écrasait la règle spécifique `(i18n|cart).js` (max-age 0) car elle était placée APRÈS. Sur Vercel, la dernière règle qui matche l'emporte. **Solution : placer la règle générique AVANT la règle spécifique.** Vérifié OK : `i18n.js` et `cart.js` servis en `max-age=0, must-revalidate`.
-- **Produit 1 — Cockring Vibrant Marry Me (Wooomy)** : 100% traduit et testé en prod sur les 5 langues. Clés préfixe `marryme_` (titre, sous-titre, desc1-4, li1-12).
+### ✅ Fait et déployé (commité sur `main`)
+- **Étapes 1–3** : moteur i18n, sélecteur de langue dans le header + CSS, header unifié 7 items sur 36 pages.
+- **Étape 4** : `cart_title` + 5 `footer_*` (×5 langues) dans `i18n.js` ; `index.html` câblé (panier + footer + livraison) ; **footer câblé sur 34 pages**. Pages SANS footer ignorées : `mini-robe-noire.html`, `robe-longue-noire-argentee.html`. Testé live 5 langues. ✅
+- **Étape 5 (contenu fiches) — 3/33 faites** : `Cockring-vibrant-Marry-Me-Wooomy.html` (`marryme_*`), `Déguisement-Bunny.html` (`bunny_*`), `Magnum-Opus-vibro.html` (`magnum_*`, testé live 5 langues ✅).
 
-### 🔧 En cours — Produit 2 : Déguisement Bunny Girl (`Déguisement-Bunny.html`)
-- ✅ Clés `bunny_` ajoutées dans `i18n.js` (5 langues : titre, sous-titre, desc1-4, li1-10 — 80 clés au total). **Commité et déployé.**
-- ⬜ **RESTE À FAIRE (reprise) : éditer `Déguisement-Bunny.html`** pour ajouter les 16 `data-i18n="bunny_*"` (1 titre + 1 sous-titre + 4 desc + 10 li) et retirer les 3 `<strong>`. Puis commit + test 5 langues.
+### 🔁 Méthode reproductible pour traduire une fiche produit
+Contenu à câbler : `product-title` (h1), `product-subtitle` (p), les `product-description` (p, 3–4 en général), et les `<li>` de `product-list`. Procédure :
+1. Récupérer le HTML brut depuis `raw.githubusercontent.com/.../main/<fichier>`.
+2. Extraire le contenu FR (titre, sous-titre, descriptions, items).
+3. Traduire en PT, IT, ES, DE.
+4. Préfixe de clé unique (ex. `magnum_`). Clés : `_title`, `_subtitle`, `_desc1..N`, `_li1..M`.
+5. **i18n.js** : insérer le bloc dans CHAQUE objet langue, ordre `fr, pt, it, es, de`. Ancrage : après la dernière clé de la fiche précédente dans chaque bloc (ajouter la virgule). Valider : `<prefixe>_title` ×5, accolades 33/33 inchangées, `new Function(code)` OK, runtime it=italien/es=espagnol.
+6. **Page HTML** : ajouter `data-i18n` sur titre/sous-titre/desc/li ; **retirer les `<strong>`** des descriptions. Valider : nb de clés, tags équilibrés, changement pur-additif.
+7. Commit `i18n.js` PUIS la page HTML (propriétaire = « Commit changes »).
+8. Tester live avec cache-buster `?v=N` + `setLang(l)` sur les 5 langues.
 
-### ⏳ Reste à faire (par ordre de priorité)
-1. **Terminer le produit 2** (HTML Bunny, voir ci-dessus).
-2. **Produits 3 → ~31** : appliquer la même méthode. Liste des fiches restantes (préfixe de clé suggéré) :
-   - `Magnum-Opus-vibro.html`, `Plug-Anal-Rosy-Gold.html`, `anneau_vibrant_telecommande.html`, `black-empire-my-duchess.html`, `cockring-vibrant-saturn-hueman.html`, `deguisement-enseignante.html`, `deguisement-etudiante.html`, `deguisement-infirmière-sexy.html`, `dual-vibe-sex-on-the-beach.html`, `gel_cannabis_orgie.html`, `gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html`, `gel_lubrifiant_bio_neutre_divine_xtases.html`, `gel_lubrifiant_bio_neutre_framboise_divine_xtases.html`, `gel_lubrifiant_bio_neutre_monoi_divine_xtases.html`, `gel_lubrifiant_bio_neutre_vanille_divine_xtases.html`, `hemp-intense-orgasm.html`, `le-flateur.html`, `lubrifiant_eau_lube_tube_chocolat_orgie.html`, `lubrifiant_eau_lube_tube_fraise_orgie.html`, `lubrifiant_eau_tube_barbe_a_papa.html`, `mini-robe-noire.html`, `monster-pussy-strocker.html`, `orgie-pinacolada.html`, `pink-star-choco-fraise.html`, `pink-star.html`, `pink_star_sucette_cerise.html`, `red-dolls-energy-pleasure.html`, `robe-longue-noire-argentee.html`, `vibro-rechargeable-Indiana.html`
-   - (Non-produit, à ignorer : `google2ea8d2d7cec1a820.html`, `retractation.html`, `veille-concurrents.html`)
-3. **Petit reste commun** : libellé "Accès Réservé" du modal de vérification d'âge 18+ (non traduit, à ajouter une clé `data-i18n`).
-4. **Pages légales** : `cgv.html`, `confidentialite.html`, `cookies.html`, `mentions-legales.html`.
+### ⏳ Reste à faire — 30 fiches produit (contenu)
+> `mini-robe-noire.html` et `robe-longue-noire-argentee.html` n'ont pas de footer mais ont du contenu produit à traduire (inclus ci-dessous).
 
-### Comment tester
-`localStorage.setItem('lang','pt')` dans la console puis **Ctrl+Shift+R** (hard reload). `localStorage.removeItem('lang')` revient à la détection auto.
+  1. `Plug-Anal-Rosy-Gold.html`
+  2. `anneau_vibrant_telecommande.html`
+  3. `black-empire-my-duchess.html`
+  4. `cockring-vibrant-saturn-hueman.html`
+  5. `deguisement-enseignante.html`
+  6. `deguisement-etudiante.html`
+  7. `deguisement-infirmière-sexy.html`
+  8. `dual-vibe-sex-on-the-beach.html`
+  9. `gel_cannabis_orgie.html`
+  10. `gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html`
+  11. `gel_lubrifiant_bio_neutre_divine_xtases.html`
+  12. `gel_lubrifiant_bio_neutre_framboise_divine_xtases.html`
+  13. `gel_lubrifiant_bio_neutre_monoi_divine_xtases.html`
+  14. `gel_lubrifiant_bio_neutre_vanille_divine_xtases.html`
+  15. `hemp-intense-orgasm.html`
+  16. `le-flateur.html`
+  17. `lubrifiant_eau_lube_tube_chocolat_orgie.html`
+  18. `lubrifiant_eau_lube_tube_fraise_orgie.html`
+  19. `lubrifiant_eau_tube_barbe_a_papa.html`
+  20. `mini-robe-noire.html`
+  21. `monster-pussy-strocker.html`
+  22. `orgie-pinacolada.html`
+  23. `pink-star-choco-fraise.html`
+  24. `pink-star.html`
+  25. `pink_star_sucette_cerise.html`
+  26. `red-dolls-energy-pleasure.html`
+  27. `robe-longue-noire-argentee.html`
+  28. `sucette-cerise.html`
+  29. `vibro-rechargeable-Indiana.html`
+  30. `vibromasseur-rabbit-rose.html`
+
+### ⏳ Autres tâches restantes
+- **Modal 18+ « Accès Réservé »** (injectée par `compliance.js`) : à traduire.
+- **Contenu des pages légales** (`cgv`, `confidentialite`, `cookies`, `mentions-legales`, `retractation`) : seuls les liens footer sont traduits, le corps reste en FR.
+- **Optionnel** : étendre `applyTranslations()` à `title`/`placeholder`/`alt`.
 
 ### Règles de collaboration (rappel)
-- L'assistant prépare/édite le code dans l'éditeur GitHub ; **le propriétaire clique sur "Commit changes"** (commit direct sur `main`).
-- Compte propriétaire pour commiter : **JLShop06** (pas CashScanPro, qui n'a pas les droits d'écriture).
-- Vérification systématique de `i18n.js` avant commit (équilibre des accolades, comptage des clés) car il est chargé sur les 42 pages.
+- L'assistant édite dans l'éditeur GitHub ; **le propriétaire (JLShop06) clique « Commit changes »**.
+- Vérifier `i18n.js` avant chaque commit (accolades, comptage de clés, ordre des langues).
+- Français = langue par défaut. Réutiliser `i18n.js`, ne pas créer de nouveau système.
 
-_Dernière mise à jour : 2026-06-23._
+_Dernière mise à jour : 2026-06-25 — Étape 5 en cours (3/33 fiches). Reprendre par la 1ʳᵉ fiche de « Reste à faire »._
