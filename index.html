@@ -351,12 +351,12 @@ document.head.appendChild(s);
 </section>
 <footer class="footer">
 <p>© Les Jardins Enchantés – <span>Boutique Sextoys &amp; Gel Lubrifiant Intime France &amp; Europe</span></p>
-<p class="footer-shipping" style="text-align:center;color:#caa86a;font-size:13px;letter-spacing:1px;margin:0 0 10px;">Livraison gratuite en France et en Europe</p>
+<p class="footer-shipping" style="text-align:center;color:#caa86a;font-size:13px;letter-spacing:1px;margin:0 0 10px;" data-i18n="footer_livraison">Livraison gratuite en France et en Europe</p>
 <nav class="footer-nav">
-<a href="cgv.html">CGV</a>
-<a href="confidentialite">Confidentialité</a>
-<a href="cookies.html">Cookies</a>
-<a href="mentions-legales">Mentions légales</a>
+<a href="cgv.html" data-i18n="footer_cgv">CGV</a>
+<a href="confidentialite" data-i18n="footer_confid">Confidentialité</a>
+<a href="cookies.html" data-i18n="footer_cookies">Cookies</a>
+<a href="mentions-legales" data-i18n="footer_mentions">Mentions légales</a>
 </nav>
 </footer>
 
@@ -364,17 +364,17 @@ document.head.appendChild(s);
 <div id="cart-modal" class="cart-modal">
 <div class="cart-panel">
 <div class="cart-header">
-<span class="cart-title">VOTRE PANIER</span>
+<span class="cart-title" data-i18n="cart_title">VOTRE PANIER</span>
 <button onclick="closeCart()" class="cart-close">&times;</button>
 </div>
 <ul id="cart-items" class="cart-items-list"></ul>
 <div class="cart-footer">
 <div class="cart-total-row">
-<span>TOTAL</span>
+<span data-i18n="cart_total">TOTAL</span>
 <span><span id="cart-total">0.00</span> €</span>
 </div>
-<button id="checkout-btn" onclick="checkout()" class="cart-pay-btn">PAYER</button>
-<button onclick="clearCart();closeCart();" class="cart-clear-btn">VIDER LE PANIER</button>
+<button id="checkout-btn" onclick="checkout()" class="cart-pay-btn" data-i18n="cart_pay">PAYER</button>
+<button onclick="clearCart();closeCart();" class="cart-clear-btn" data-i18n="cart_clear">VIDER LE PANIER</button>
 </div>
 </div>
 </div>
