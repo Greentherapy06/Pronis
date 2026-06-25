@@ -1,190 +1,54 @@
-# Les Jardins Enchantés
+# Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
-> Boutique en ligne premium dédiée à l'univers intime de luxe.
->
-> [![Site](https://img.shields.io/badge/site-lesjardinsenchantes.vercel.app-caa86a)](https://lesjardinsenchantes.vercel.app)
-> [![Stripe](https://img.shields.io/badge/paiement-Stripe-635bff)](https://stripe.com)
-> [![Vercel](https://img.shields.io/badge/deploy-Vercel-000000)](https://vercel.com)
->
-> ---
->
-> ## Présentation
->
-> **Les Jardins Enchantés** (JL Shop 06) est une boutique en ligne proposant une sélection de produits intimes haut de gamme : gels lubrifiants aromatisés, vibromasseurs, masturbateurs et accessoires de luxe. L'univers visuel repose sur une charte sobre et élégante (noir profond et or `#caa86a`).
->
-> Site en production : **https://lesjardinsenchantes.vercel.app**
->
-> ## Stack technique
->
-> - **Frontend** : HTML5, CSS3, JavaScript vanilla
-> - - **Paiement** : Stripe Checkout (sessions hébergées)
->   - - **Backend serverless** : Node.js sur Vercel (`api/stripe/checkout.js`)
->     - - **Déploiement** : Vercel
->       - - **Stockage panier** : `localStorage` côté client
->        
->         - ## Structure du projet
->        
->         - ```
->           .
->           ├── index.html                  # Page d'accueil + grille produits
->           ├── style.css                   # Charte graphique globale
->           ├── cart.js                     # Système de panier unifié (localStorage + modal)
->           ├── api/stripe/checkout.js      # Endpoint serverless Stripe Checkout
->           ├── vercel.json                 # Configuration de déploiement Vercel
->           ├── package.json                # Dépendance stripe
->           │
->           ├── *.html                      # Pages produits (1 fichier par produit)
->           ├── success.html / cancel.html  # Retour Stripe
->           ├── erreur.html                 # Page d'erreur générique
->           │
->           ├── cgv.html                    # Conditions générales de vente
->           ├── confidentialite             # Politique de confidentialité (RGPD)
->           ├── cookies.html                # Politique cookies
->           ├── mentions-legales            # Mentions légales
->           ├── SECURITY.md                 # Politique de sécurité
->           │
->           └── *.webp                       # Visuels produits
->           ```
->
-> ## Fonctionnement du panier
->
-> Chaque bouton « AJOUTER » porte les attributs :
->
-> ```html
-> <button class=\"add-to-cart\"
->         data-product-id=\"price_xxx\"
->         data-product-name=\"Nom du produit\"
->         data-product-price=\"12.90\">
->   AJOUTER
-> </button>
-> ```
->
-> `cart.js` :
->
-> 1. Écoute tous les boutons `.add-to-cart[data-product-id]`
-> 2. 2. Stocke l'article (`id`, `name`, `price`, `priceId`) dans `localStorage`
->    3. 3. Met à jour le compteur du header et ouvre une modale stylée
->       4. 4. Le bouton **PAYER** envoie le panier à `/api/stripe/checkout`
->          5. 5. Stripe Checkout redirige vers `success.html` ou `cancel.html`
->            
->             6. ## Variables d'environnement
->            
->             7. À configurer sur Vercel :
->            
->             8. | Variable | Description |
-> |---|---|
-> | `STRIPE_SECRET_KEY` | Clé secrète Stripe (`sk_live_...` ou `sk_test_...`) |
->
-> ## Développement local
->
-> ```bash
-> # Installer les dépendances
-> npm install
->
-> # Lancer en local avec Vercel CLI
-> npx vercel dev
-> ```
->
-> Le site est ensuite accessible sur `http://localhost:3000`.
->
-> ## Déploiement
->
-> Tout push sur la branche `main` déclenche un déploiement Vercel automatique.
->
-> ```bash
-> git push origin main
-> ```
->
-> ## Sécurité
->
-> Le projet suit une politique de sécurité documentée — voir [SECURITY.md](./SECURITY.md). Toute vulnérabilité doit être signalée de manière responsable.
->
-> ## Mentions légales
->
-> - **Public visé** : exclusivement adulte (18+).
-> - - **CGV** : voir `cgv.html`
->   - - **RGPD** : voir `confidentialite`
->     - - **Mentions légales** : voir `mentions-legales`
->      
->       - ## Licence
->      
->       - © Les Jardins Enchantés – Tous droits réservés.
->       - Le code source est privé et propriétaire ; les visuels produits restent la propriété de leurs ayants droit respectifs.
->       -
+> FR = langue par défaut. Réutiliser i18n.js existant. NE PAS créer de nouveau système.
+> Ordre des langues dans i18n.js : **fr, pt, it, es, de** (ATTENTION : pas fr/pt/es/it/de — sinon inversion ES/IT).
+> Commits faits par le propriétaire (JLShop06) ; Claude prépare + colle, l'utilisateur clique "Commit changes".
 
+## ÉTAPES 1 à 4 — TERMINÉES & déployées
+- Étape 1 : moteur i18n vérifié, FR par défaut.
+- Étape 2 : sélecteur de langue visible dans le header (FR, PT, ES, IT, DE).
+- Étape 3 : header unifié sur 36 pages.
+- Étape 4 : footer multilingue sur 34 pages + panier.
 
----
+## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (8/33 committées)
 
-## 🌍 Traduction multilingue (i18n) — État d'avancement
+### Méthode par fiche
+1. Fetch HTML brut, extraire FR (title/subtitle/desc/li) + compter pour détecter duplication.
+2. Traduire en 5 langues (FR exact ; PT/IT/ES/DE fidèles). Choisir un préfixe de clé unique.
+3. Insérer les blocs dans i18n.js APRÈS les ancres = dernière clé de la fiche précédente, dans chaque bloc langue. Ordre des ancres = fr, pt, it, es, de.
+4. Valider (nb clés = N×5, accolades 33/33, ordre OK, IT/ES bien placés) → commit i18n.js.
+5. Câbler la page HTML (data-i18n sur title/subtitle/desc/li avec assignation cyclique (i%N)+1 ; SUPPRIMER les <strong>) → valider → commit HTML.
+6. Test live 5 langues sur Vercel.
 
-Système de traduction maison (gratuit, sans dépendance) basé sur `i18n.js`. Détection auto via `navigator.language`. 5 langues : **Français (défaut), Portugais, Italien, Espagnol, Allemand**. Sélecteur visible dans le header (FR/PT/ES/IT/DE).
+### Notes techniques importantes
+- raw.githubusercontent peut être en retard sur le commit → utiliser l'API GitHub : fetch('https://api.github.com/repos/JLShop06/Les-Jardins-Enchantes/contents/<file>?ref=main',{headers:{'Accept':'application/vnd.github.raw'}}) qui renvoie la version fraîche.
+- CSP GitHub bloque new Function() sur la page éditeur → validation structurelle par slice (pas d'eval).
+- Variables window perdues à chaque navigation → redéfinir __M après navigation.
+- Coller via ClipboardEvent sur .cm-content après clic [400,350].
+- Vercel : déploiement non instantané + cache edge parfois obstiné sur une page (HIT/age qui monte). Vérifier le fichier déployé avant test visuel.
 
-> ⚠️ **PIÈGE IMPORTANT — ordre des langues dans `i18n.js`** : l'objet `TRANSLATIONS` est dans l'ordre **`fr, pt, it, es, de`** (PAS fr/pt/es/it/de). Toute insertion de clés par langue doit respecter cet ordre, sinon les blocs ES et IT se retrouvent inversés. Vérifier à l'exécution : sur `TRANSLATIONS`, `.it.<clé>` doit être en italien et `.es.<clé>` en espagnol.
+### FICHES FAITES (committées i18n.js + HTML + testées sauf mention)
+1. Cockring-vibrant-Marry-Me-Wooomy — préfixe marryme_ — OK testé
+2. Déguisement-Bunny — bunny_ — OK testé
+3. Magnum-Opus-vibro — magnum_ — OK testé (avait eu bug inversion ES/IT corrigé)
+4. Plug-Anal-Rosy-Gold — rosygold_ — OK testé (3× blocs dupliqués, clés cycliques)
+5. anneau_vibrant_telecommande — loveconn_ — OK testé
+6. black-empire-my-duchess — duchess_ — OK testé
+7. cockring-vibrant-saturn-hueman — saturn_ — i18n.js + HTML COMMITTÉS ✅. Test visuel live NON confirmé (cache edge Vercel obstiné sur la page ; traductions vérifiées correctes dans i18n.js déployé). → À REVÉRIFIER visuellement plus tard.
+8. deguisement-enseignante — ens_ — i18n.js + HTML COMMITTÉS ✅. Test visuel live à faire.
 
-### Architecture i18n
-- `i18n.js` : objet `TRANSLATIONS` (483 lignes), `getLang()`, `setLang(lang)`, `applyTranslations()` (gère uniquement `textContent`), `renderLangSwitcher()`.
-- Chaque élément traduisible porte un attribut `data-i18n="<clé>"`.
-- Footer : `footer_cgv`, `footer_confid`, `footer_cookies`, `footer_mentions`, `footer_livraison` (câblage href-based).
-- Panier : `cart_title`, `cart_total`, `cart_pay`, `cart_clear`, `cart_empty`, `cart_loading`.
+### EN COURS — fiche 9 : deguisement-etudiante — préfixe etud_
+- i18n.js : 75 clés etud_ construites et COLLÉES dans l'éditeur, **EN ATTENTE DE COMMIT** (ancres ens_li9 lignes 151/300/449/598/747 ; 853→928 lignes ; validé ok:true, IT="Completo sexy con body scollato", ES="Conjunto sexy con body escotado").
+- **REPRISE** : si le collage etud_ est perdu, refaire l'insertion i18n.js (préfixe etud_, mêmes textes ci-dessous), commit, puis câbler deguisement-etudiante.html (1 title, 1 sub, 4 desc, 9 li, 2 <strong> à retirer), commit, test live.
 
-### ✅ Fait et déployé (commité sur `main`)
-- **Étapes 1–3** : moteur i18n, sélecteur de langue dans le header + CSS, header unifié 7 items sur 36 pages.
-- **Étape 4** : `cart_title` + 5 `footer_*` (×5 langues) dans `i18n.js` ; `index.html` câblé (panier + footer + livraison) ; **footer câblé sur 34 pages**. Pages SANS footer ignorées : `mini-robe-noire.html`, `robe-longue-noire-argentee.html`. Testé live 5 langues. ✅
-- **Étape 5 (contenu fiches) — 3/33 faites** : `Cockring-vibrant-Marry-Me-Wooomy.html` (`marryme_*`), `Déguisement-Bunny.html` (`bunny_*`), `Magnum-Opus-vibro.html` (`magnum_*`, testé live 5 langues ✅).
+### FICHES RESTANTES (ordre todo) — après etudiante
+deguisement-infirmière-sexy, dual-vibe-sex-on-the-beach, gel_cannabis_orgie, gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases, gel_lubrifiant_bio_neutre_divine_xtases, gel_lubrifiant_bio_neutre_framboise_divine_xtases, gel_lubrifiant_bio_neutre_monoi_divine_xtases, gel_lubrifiant_bio_neutre_vanille_divine_xtases, hemp-intense-orgasm, le-flateur, lubrifiant_eau_lube_tube_chocolat_orgie, lubrifiant_eau_lube_tube_fraise_orgie, lubrifiant_eau_tube_barbe_a_papa, mini-robe-noire (PAS de footer mais contenu à traduire), monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, red-dolls-energy-pleasure, robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
 
-### 🔁 Méthode reproductible pour traduire une fiche produit
-Contenu à câbler : `product-title` (h1), `product-subtitle` (p), les `product-description` (p, 3–4 en général), et les `<li>` de `product-list`. Procédure :
-1. Récupérer le HTML brut depuis `raw.githubusercontent.com/.../main/<fichier>`.
-2. Extraire le contenu FR (titre, sous-titre, descriptions, items).
-3. Traduire en PT, IT, ES, DE.
-4. Préfixe de clé unique (ex. `magnum_`). Clés : `_title`, `_subtitle`, `_desc1..N`, `_li1..M`.
-5. **i18n.js** : insérer le bloc dans CHAQUE objet langue, ordre `fr, pt, it, es, de`. Ancrage : après la dernière clé de la fiche précédente dans chaque bloc (ajouter la virgule). Valider : `<prefixe>_title` ×5, accolades 33/33 inchangées, `new Function(code)` OK, runtime it=italien/es=espagnol.
-6. **Page HTML** : ajouter `data-i18n` sur titre/sous-titre/desc/li ; **retirer les `<strong>`** des descriptions. Valider : nb de clés, tags équilibrés, changement pur-additif.
-7. Commit `i18n.js` PUIS la page HTML (propriétaire = « Commit changes »).
-8. Tester live avec cache-buster `?v=N` + `setLang(l)` sur les 5 langues.
+## AUTRES TÂCHES RESTANTES (après étape 5)
+- Modal 18+ "Accès Réservé" (compliance.js).
+- Contenu des pages légales : cgv, confidentialite, cookies (KK), mentions-legales, retractation.
+- Optionnel : étendre applyTranslations() à title/placeholder/alt.
 
-### ⏳ Reste à faire — 30 fiches produit (contenu)
-> `mini-robe-noire.html` et `robe-longue-noire-argentee.html` n'ont pas de footer mais ont du contenu produit à traduire (inclus ci-dessous).
-
-  1. `Plug-Anal-Rosy-Gold.html`
-  2. `anneau_vibrant_telecommande.html`
-  3. `black-empire-my-duchess.html`
-  4. `cockring-vibrant-saturn-hueman.html`
-  5. `deguisement-enseignante.html`
-  6. `deguisement-etudiante.html`
-  7. `deguisement-infirmière-sexy.html`
-  8. `dual-vibe-sex-on-the-beach.html`
-  9. `gel_cannabis_orgie.html`
-  10. `gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html`
-  11. `gel_lubrifiant_bio_neutre_divine_xtases.html`
-  12. `gel_lubrifiant_bio_neutre_framboise_divine_xtases.html`
-  13. `gel_lubrifiant_bio_neutre_monoi_divine_xtases.html`
-  14. `gel_lubrifiant_bio_neutre_vanille_divine_xtases.html`
-  15. `hemp-intense-orgasm.html`
-  16. `le-flateur.html`
-  17. `lubrifiant_eau_lube_tube_chocolat_orgie.html`
-  18. `lubrifiant_eau_lube_tube_fraise_orgie.html`
-  19. `lubrifiant_eau_tube_barbe_a_papa.html`
-  20. `mini-robe-noire.html`
-  21. `monster-pussy-strocker.html`
-  22. `orgie-pinacolada.html`
-  23. `pink-star-choco-fraise.html`
-  24. `pink-star.html`
-  25. `pink_star_sucette_cerise.html`
-  26. `red-dolls-energy-pleasure.html`
-  27. `robe-longue-noire-argentee.html`
-  28. `sucette-cerise.html`
-  29. `vibro-rechargeable-Indiana.html`
-  30. `vibromasseur-rabbit-rose.html`
-
-### ⏳ Autres tâches restantes
-- **Modal 18+ « Accès Réservé »** (injectée par `compliance.js`) : à traduire.
-- **Contenu des pages légales** (`cgv`, `confidentialite`, `cookies`, `mentions-legales`, `retractation`) : seuls les liens footer sont traduits, le corps reste en FR.
-- **Optionnel** : étendre `applyTranslations()` à `title`/`placeholder`/`alt`.
-
-### Règles de collaboration (rappel)
-- L'assistant édite dans l'éditeur GitHub ; **le propriétaire (JLShop06) clique « Commit changes »**.
-- Vérifier `i18n.js` avant chaque commit (accolades, comptage de clés, ordre des langues).
-- Français = langue par défaut. Réutiliser `i18n.js`, ne pas créer de nouveau système.
-
-_Dernière mise à jour : 2026-06-25 — Étape 5 en cours (3/33 fiches). Reprendre par la 1ʳᵉ fiche de « Reste à faire »._
+## À REVÉRIFIER VISUELLEMENT
+- saturn (fiche 7) : cache edge Vercel — retester quand propagé.
+- enseignante (fiche 8) : test live 5 langues.
