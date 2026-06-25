@@ -2,7 +2,7 @@
 
 > FR = langue par défaut. Réutiliser i18n.js existant. NE PAS créer de nouveau système.
 > Ordre des langues dans i18n.js : **fr, pt, it, es, de** (ATTENTION : pas fr/pt/es/it/de — sinon inversion ES/IT).
-> Commits faits par le propriétaire (JLShop06) ; Claude prépare + colle, l'utilisateur clique "Commit changes".
+> RÔLES : Claude fait TOUT (fetch, traduction, insertion, validation, collage dans l'éditeur, ouverture du dialogue de commit + message). L'utilisateur (JLShop06) clique uniquement sur "Commit changes".
 
 ## ÉTAPES 1 à 4 — TERMINÉES & déployées
 - Étape 1 : moteur i18n vérifié, FR par défaut.
@@ -10,7 +10,7 @@
 - Étape 3 : header unifié sur 36 pages.
 - Étape 4 : footer multilingue sur 34 pages + panier.
 
-## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (8/33 committées)
+## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (17/33 committées)
 
 ### Méthode par fiche
 1. Fetch HTML brut, extraire FR (title/subtitle/desc/li) + compter pour détecter duplication.
@@ -27,28 +27,39 @@
 - Coller via ClipboardEvent sur .cm-content après clic [400,350].
 - Vercel : déploiement non instantané + cache edge parfois obstiné sur une page (HIT/age qui monte). Vérifier le fichier déployé avant test visuel.
 
-### FICHES FAITES (committées i18n.js + HTML + testées sauf mention)
-1. Cockring-vibrant-Marry-Me-Wooomy — préfixe marryme_ — OK testé
-2. Déguisement-Bunny — bunny_ — OK testé
-3. Magnum-Opus-vibro — magnum_ — OK testé (avait eu bug inversion ES/IT corrigé)
-4. Plug-Anal-Rosy-Gold — rosygold_ — OK testé (3× blocs dupliqués, clés cycliques)
-5. anneau_vibrant_telecommande — loveconn_ — OK testé
-6. black-empire-my-duchess — duchess_ — OK testé
-7. cockring-vibrant-saturn-hueman — saturn_ — i18n.js + HTML COMMITTÉS ✅. Test visuel live NON confirmé (cache edge Vercel obstiné sur la page ; traductions vérifiées correctes dans i18n.js déployé). → À REVÉRIFIER visuellement plus tard.
-8. deguisement-enseignante — ens_ — i18n.js + HTML COMMITTÉS ✅. Test visuel live à faire.
+## FICHES FAITES (i18n.js + HTML committés)
 
-### EN COURS — fiche 9 : deguisement-etudiante — préfixe etud_
-- i18n.js : 75 clés etud_ construites et COLLÉES dans l'éditeur, **EN ATTENTE DE COMMIT** (ancres ens_li9 lignes 151/300/449/598/747 ; 853→928 lignes ; validé ok:true, IT="Completo sexy con body scollato", ES="Conjunto sexy con body escotado").
-- **REPRISE** : si le collage etud_ est perdu, refaire l'insertion i18n.js (préfixe etud_, mêmes textes ci-dessous), commit, puis câbler deguisement-etudiante.html (1 title, 1 sub, 4 desc, 9 li, 2 <strong> à retirer), commit, test live.
+1. Cockring-vibrant-Marry-Me-Wooomy — `marryme_` — OK testé
+2. Déguisement-Bunny — `bunny_` — OK testé
+3. Magnum-Opus-vibro — `magnum_` — OK testé
+4. Plug-Anal-Rosy-Gold — `rosygold_` — OK testé
+5. anneau_vibrant_telecommande — `loveconn_` — OK testé
+6. black-empire-my-duchess — `duchess_` — OK testé
+7. cockring-vibrant-saturn-hueman — `saturn_` — committé ✅, test visuel live À REVÉRIFIER (cache edge Vercel)
+8. deguisement-enseignante — `ens_` — committé ✅, test visuel live à faire
+9. deguisement-etudiante — `etud_` — committé ✅ (i18n.js + HTML)
+10. deguisement-infirmière-sexy — `infirmiere_` — committé ✅ (i18n.js + HTML)
+11. dual-vibe-sex-on-the-beach — `dualvibe_` — committé ✅ (i18n.js + HTML)
+12. gel_cannabis_orgie — `cannabis_` — committé ✅ (desc3 = INCI identique 5 langues)
+13. gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases — `caramel_` — committé ✅ (8 desc, 11 li)
+14. gel_lubrifiant_bio_neutre_divine_xtases — `neutre_` — committé ✅ (4 desc, 10 li)
+15. gel_lubrifiant_bio_neutre_framboise_divine_xtases — `framboise_` — committé ✅ (8 desc, 11 li)
+16. gel_lubrifiant_bio_neutre_monoi_divine_xtases — `monoi_` — committé ✅ (8 desc, 11 li)
+17. gel_lubrifiant_bio_neutre_vanille_divine_xtases — `vanille_` — committé ✅ (8 desc, 11 li)
 
-### FICHES RESTANTES (ordre todo) — après etudiante
-deguisement-infirmière-sexy, dual-vibe-sex-on-the-beach, gel_cannabis_orgie, gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases, gel_lubrifiant_bio_neutre_divine_xtases, gel_lubrifiant_bio_neutre_framboise_divine_xtases, gel_lubrifiant_bio_neutre_monoi_divine_xtases, gel_lubrifiant_bio_neutre_vanille_divine_xtases, hemp-intense-orgasm, le-flateur, lubrifiant_eau_lube_tube_chocolat_orgie, lubrifiant_eau_lube_tube_fraise_orgie, lubrifiant_eau_tube_barbe_a_papa, mini-robe-noire (PAS de footer mais contenu à traduire), monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, red-dolls-energy-pleasure, robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
+**Total committées : 17/33.** Gamme bio Divine Xtases (5 parfums) entièrement faite.
+Dernière ancre i18n.js = `vanille_li11` (×5, ordre fr/pt/it/es/de). i18n.js ≈ 183 750 chars, accolades 33/33.
 
-## AUTRES TÂCHES RESTANTES (après étape 5)
+## FICHES RESTANTES (ordre todo) — REPRENDRE À hemp-intense-orgasm
+
+hemp-intense-orgasm, le-flateur, lubrifiant_eau_lube_tube_chocolat_orgie, lubrifiant_eau_lube_tube_fraise_orgie, lubrifiant_eau_tube_barbe_a_papa, mini-robe-noire (PAS de footer mais contenu à traduire), monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, red-dolls-energy-pleasure, robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
+
+(16 fiches restantes)
+
+## AUTRES TÂCHES (après étape 5)
 - Modal 18+ "Accès Réservé" (compliance.js).
-- Contenu des pages légales : cgv, confidentialite, cookies (KK), mentions-legales, retractation.
+- Contenu pages légales : cgv, confidentialite, cookies, mentions-legales, retractation.
 - Optionnel : étendre applyTranslations() à title/placeholder/alt.
 
-## À REVÉRIFIER VISUELLEMENT
-- saturn (fiche 7) : cache edge Vercel — retester quand propagé.
-- enseignante (fiche 8) : test live 5 langues.
+## À REVÉRIFIER VISUELLEMENT (test live 5 langues sur Vercel)
+Fiches 7 (saturn) et 8 (enseignante), + vérif rapide des fiches 9→17 nouvellement faites.
