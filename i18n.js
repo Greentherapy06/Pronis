@@ -74,7 +74,17 @@ const TRANSLATIONS = {
     magnum_li10: "Sans phtalate et hypoallergénique",
     magnum_li11: "Dimensions : 31 cm dont 17 cm insérables",
     magnum_li12: "Diamètre : 3,5 cm",
-    magnum_li13: "Marque : Toy Joy"
+    magnum_li13: "Marque : Toy Joy",
+    rosygold_title: "Plug Anal Rosy Gold",
+    rosygold_subtitle: "Accessoire intime premium à finition Rosy Gold — élégant, raffiné & conçu pour un plaisir contrôlé.",
+    rosygold_desc1: "Le Plug Anal Rosy Gold est un accessoire intime premium conçu pour allier esthétique et confort. Sa finition dorée rosée lui donne un aspect élégant, parfait pour une expérience raffinée.",
+    rosygold_desc2: "Forme ergonomique, matière lisse et base sécurisée pour une utilisation agréable, même pour débutants.",
+    rosygold_li1: "Design Rosy Gold premium",
+    rosygold_li2: "Matière lisse & douce",
+    rosygold_li3: "Forme ergonomique",
+    rosygold_li4: "Base large sécurisée",
+    rosygold_li5: "Convient débutants & confirmés",
+    rosygold_li6: "Nettoyage facile"
   },
   pt: {
     banner_livraison: "✦ ENTREGA GRATUITA EM FRANÇA E NA EUROPA ✦",
@@ -149,7 +159,17 @@ const TRANSLATIONS = {
     magnum_li10: "Sem ftalatos e hipoalergénico",
     magnum_li11: "Dimensões: 31 cm, dos quais 17 cm inseríveis",
     magnum_li12: "Diâmetro: 3,5 cm",
-    magnum_li13: "Marca: Toy Joy"
+    magnum_li13: "Marca: Toy Joy",
+    rosygold_title: "Plug Anal Rosy Gold",
+    rosygold_subtitle: "Acessório íntimo premium com acabamento Rosy Gold — elegante, refinado e concebido para um prazer controlado.",
+    rosygold_desc1: "O Plug Anal Rosy Gold é um acessório íntimo premium concebido para aliar estética e conforto. O seu acabamento dourado rosado dá-lhe um aspeto elegante, perfeito para uma experiência refinada.",
+    rosygold_desc2: "Forma ergonómica, material liso e base segura para uma utilização agradável, mesmo para iniciantes.",
+    rosygold_li1: "Design Rosy Gold premium",
+    rosygold_li2: "Material liso e suave",
+    rosygold_li3: "Forma ergonómica",
+    rosygold_li4: "Base larga e segura",
+    rosygold_li5: "Adequado a iniciantes e experientes",
+    rosygold_li6: "Limpeza fácil"
   },
   it: {
     banner_livraison: "✦ SPEDIZIONE GRATUITA IN FRANCIA E IN EUROPA ✦",
@@ -224,7 +244,17 @@ const TRANSLATIONS = {
     magnum_li10: "Senza ftalati e ipoallergenico",
     magnum_li11: "Dimensioni: 31 cm di cui 17 cm inseribili",
     magnum_li12: "Diametro: 3,5 cm",
-    magnum_li13: "Marca: Toy Joy"
+    magnum_li13: "Marca: Toy Joy",
+    rosygold_title: "Plug Anal Rosy Gold",
+    rosygold_subtitle: "Accessorio intimo premium con finitura Rosy Gold — elegante, raffinato e pensato per un piacere controllato.",
+    rosygold_desc1: "Il Plug Anal Rosy Gold è un accessorio intimo premium pensato per unire estetica e comfort. La sua finitura dorata rosata gli conferisce un aspetto elegante, perfetto per un'esperienza raffinata.",
+    rosygold_desc2: "Forma ergonomica, materiale liscio e base sicura per un utilizzo piacevole, anche per principianti.",
+    rosygold_li1: "Design Rosy Gold premium",
+    rosygold_li2: "Materiale liscio e morbido",
+    rosygold_li3: "Forma ergonomica",
+    rosygold_li4: "Base larga e sicura",
+    rosygold_li5: "Adatto a principianti ed esperti",
+    rosygold_li6: "Pulizia facile"
   },
   es: {
     banner_livraison: "✦ ENVÍO GRATUITO EN FRANCIA Y EN EUROPA ✦",
@@ -299,7 +329,17 @@ const TRANSLATIONS = {
     magnum_li10: "Sin ftalatos e hipoalergénico",
     magnum_li11: "Dimensiones: 31 cm, de los cuales 17 cm insertables",
     magnum_li12: "Diámetro: 3,5 cm",
-    magnum_li13: "Marca: Toy Joy"
+    magnum_li13: "Marca: Toy Joy",
+    rosygold_title: "Plug Anal Rosy Gold",
+    rosygold_subtitle: "Accesorio íntimo premium con acabado Rosy Gold — elegante, refinado y diseñado para un placer controlado.",
+    rosygold_desc1: "El Plug Anal Rosy Gold es un accesorio íntimo premium diseñado para combinar estética y confort. Su acabado dorado rosado le da un aspecto elegante, perfecto para una experiencia refinada.",
+    rosygold_desc2: "Forma ergonómica, material liso y base segura para un uso agradable, incluso para principiantes.",
+    rosygold_li1: "Diseño Rosy Gold premium",
+    rosygold_li2: "Material liso y suave",
+    rosygold_li3: "Forma ergonómica",
+    rosygold_li4: "Base ancha y segura",
+    rosygold_li5: "Apto para principiantes y expertos",
+    rosygold_li6: "Limpieza fácil"
   },
   de: {
     banner_livraison: "✦ KOSTENLOSER VERSAND IN FRANKREICH UND EUROPA ✦",
@@ -374,7 +414,17 @@ const TRANSLATIONS = {
     magnum_li10: "Phthalatfrei und hypoallergen",
     magnum_li11: "Maße: 31 cm, davon 17 cm einführbar",
     magnum_li12: "Durchmesser: 3,5 cm",
-    magnum_li13: "Marke: Toy Joy"
+    magnum_li13: "Marke: Toy Joy",
+    rosygold_title: "Plug Anal Rosy Gold",
+    rosygold_subtitle: "Premium-Intimaccessoire mit Rosy-Gold-Finish — elegant, raffiniert und für kontrolliertes Vergnügen konzipiert.",
+    rosygold_desc1: "Der Plug Anal Rosy Gold ist ein Premium-Intimaccessoire, das Ästhetik und Komfort vereint. Sein rosé-goldenes Finish verleiht ihm ein elegantes Aussehen, perfekt für ein raffiniertes Erlebnis.",
+    rosygold_desc2: "Ergonomische Form, glattes Material und sichere Basis für eine angenehme Anwendung, auch für Anfänger.",
+    rosygold_li1: "Premium-Design in Rosy Gold",
+    rosygold_li2: "Glattes und weiches Material",
+    rosygold_li3: "Ergonomische Form",
+    rosygold_li4: "Breite, sichere Basis",
+    rosygold_li5: "Für Anfänger und Fortgeschrittene geeignet",
+    rosygold_li6: "Einfache Reinigung"
   }
 };
 
