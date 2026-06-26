@@ -10,7 +10,7 @@
 - Étape 3 : header unifié sur 36 pages.
 - Étape 4 : footer multilingue sur 34 pages + panier.
 
-## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (21/33 committées)
+## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (22/33 committées)
 
 ### Méthode par fiche
 1. Fetch HTML brut, extraire FR (title/subtitle/desc/li) + compter pour détecter duplication.
@@ -50,32 +50,32 @@
 19. le-flateur — `flateur_` — committé ✅ (i18n.js + HTML, 10 clés : title/subtitle/desc1/li1-7)
 20. lubrifiant_eau_lube_tube_chocolat_orgie — `choco_` — committé ✅ (i18n.js + HTML, 23 clés : title/subtitle/desc1-10/li1-11, desc8=INCI identique)
 21. lubrifiant_eau_lube_tube_fraise_orgie — `fraise_` — committé ✅ (i18n.js + HTML, 23 clés : title/subtitle/desc1-10/li1-11, desc8=INCI identique)
+22. lubrifiant_eau_tube_barbe_a_papa — `barbe_` — committé ✅ (i18n.js + HTML, 23 clés : title/subtitle/desc1-10/li1-11, desc8=INCI identique)
 
-**Total committées : 21/33.** Gamme bio Divine Xtases (5 parfums) entièrement faite + hemp-intense-orgasm + le-flateur + chocolat-orgie + fraise-orgie.
-Dernière ancre i18n.js = `fraise_li11` (×5, ordre fr/pt/it/es/de). i18n.js ≈ 224 386 chars, accolades 33/33.
+**Total committées : 22/33.** Gamme bio Divine Xtases (5 parfums) entièrement faite + hemp-intense-orgasm + le-flateur + choco/fraise/barbe Orgie + chocolat-orgie + fraise-orgie.
+Dernière ancre i18n.js = `barbe_li11` (×5, ordre fr/pt/it/es/de). i18n.js ≈ 241 195 chars, accolades 33/33.
 
-## FICHES RESTANTES (ordre todo) — REPRENDRE À lubrifiant_eau_tube_barbe_a_papa
+## FICHES RESTANTES (ordre todo) — REPRENDRE À mini-robe-noire
 
-lubrifiant_eau_tube_barbe_a_papa, mini-robe-noire (PAS de footer mais contenu à traduire), monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, red-dolls-energy-pleasure, robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
+mini-robe-noire (PAS de footer mais contenu à traduire), monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, red-dolls-energy-pleasure, robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
 
-(12 fiches restantes)
+(11 fiches restantes)
 
-## RÉCAP — POUR TERMINER LA TRADUCTION (au 21/33)
+## RÉCAP — POUR TERMINER LA TRADUCTION (au 22/33)
 
-### Étape 5 — 12 fiches produits restantes (ordre todo)
+### Étape 5 — 11 fiches produits restantes (ordre todo)
 Pour CHAQUE fiche, méthode = fetch HTML via API GitHub → extraire FR (title/subtitle/desc/li) + compter → traduire 5 langues (préfixe de clé unique) → insérer dans i18n.js APRÈS la dernière ancre (ordre fr/pt/it/es/de) → valider (clés = N×5, accolades 33/33, ordre OK) → commit i18n.js → câbler HTML (data-i18n, séquentiel pour desc/li multiples) → VÉRIFIER fin de fichier après paste (pas de doublon) → commit HTML.
-1. lubrifiant_eau_tube_barbe_a_papa (PROCHAINE)
-2. mini-robe-noire (PAS de footer mais contenu à traduire)
-3. monster-pussy-strocker
-4. orgie-pinacolada
-5. pink-star-choco-fraise
-6. pink-star
-7. pink_star_sucette_cerise
-8. red-dolls-energy-pleasure
-9. robe-longue-noire-argentee (PAS de footer mais contenu à traduire)
-10. sucette-cerise
-11. vibro-rechargeable-Indiana
-12. vibromasseur-rabbit-rose
+1. mini-robe-noire (PROCHAINE — PAS de footer mais contenu à traduire)
+2. monster-pussy-strocker
+3. orgie-pinacolada
+4. pink-star-choco-fraise
+5. pink-star
+6. pink_star_sucette_cerise
+7. red-dolls-energy-pleasure
+8. robe-longue-noire-argentee (PAS de footer mais contenu à traduire)
+9. sucette-cerise
+10. vibro-rechargeable-Indiana
+11. vibromasseur-rabbit-rose
 
 Astuce : les fiches "gel eau Orgie" (barbe_a_papa) sont quasi identiques à choco/fraise (juste le parfum change) → réutiliser les traductions en adaptant le parfum.
 
