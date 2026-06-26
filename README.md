@@ -10,7 +10,7 @@
 - Étape 3 : header unifié sur 36 pages.
 - Étape 4 : footer multilingue sur 34 pages + panier.
 
-## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (19/33 committées)
+## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (20/33 committées)
 
 ### Méthode par fiche
 1. Fetch HTML brut, extraire FR (title/subtitle/desc/li) + compter pour détecter duplication.
@@ -48,15 +48,16 @@
 17. gel_lubrifiant_bio_neutre_vanille_divine_xtases — `vanille_` — committé ✅ (8 desc, 11 li)
 18. hemp-intense-orgasm — `hemp_` — committé ✅ (i18n.js + HTML, 9 clés : title/subtitle/desc1/li1-6)
 19. le-flateur — `flateur_` — committé ✅ (i18n.js + HTML, 10 clés : title/subtitle/desc1/li1-7)
+20. lubrifiant_eau_lube_tube_chocolat_orgie — `choco_` — committé ✅ (i18n.js + HTML, 23 clés : title/subtitle/desc1-10/li1-11, desc8=INCI identique)
 
-**Total committées : 19/33.** Gamme bio Divine Xtases (5 parfums) entièrement faite + hemp-intense-orgasm + le-flateur.
-Dernière ancre i18n.js = `flateur_li7` (×5, ordre fr/pt/it/es/de). i18n.js ≈ 192 950 chars, accolades 33/33.
+**Total committées : 20/33.** Gamme bio Divine Xtases (5 parfums) entièrement faite + hemp-intense-orgasm + le-flateur + chocolat-orgie.
+Dernière ancre i18n.js = `choco_li11` (×5, ordre fr/pt/it/es/de). i18n.js ≈ 208 624 chars, accolades 33/33.
 
-## FICHES RESTANTES (ordre todo) — REPRENDRE À lubrifiant_eau_lube_tube_chocolat_orgie
+## FICHES RESTANTES (ordre todo) — REPRENDRE À lubrifiant_eau_lube_tube_fraise_orgie
 
-lubrifiant_eau_lube_tube_chocolat_orgie, lubrifiant_eau_lube_tube_fraise_orgie, lubrifiant_eau_tube_barbe_a_papa, mini-robe-noire (PAS de footer mais contenu à traduire), monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, red-dolls-energy-pleasure, robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
+lubrifiant_eau_lube_tube_fraise_orgie, lubrifiant_eau_tube_barbe_a_papa, mini-robe-noire (PAS de footer mais contenu à traduire), monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, red-dolls-energy-pleasure, robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
 
-(14 fiches restantes)
+(13 fiches restantes)
 
 ## AUTRES TÂCHES (après étape 5)
 - Modal 18+ "Accès Réservé" (compliance.js).
