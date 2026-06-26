@@ -10,7 +10,7 @@
 - Étape 3 : header unifié sur 36 pages.
 - Étape 4 : footer multilingue sur 34 pages + panier.
 
-## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (28/33 committées)
+## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (29/33 committées)
 
 ### Méthode par fiche
 1. Fetch HTML brut, extraire FR (title/subtitle/desc/li) + compter pour détecter duplication.
@@ -57,19 +57,20 @@
 26. pink-star-choco-fraise — `pscf_` — committé ✅ (i18n.js + HTML, 12 clés : title/subtitle/desc1/li1-9)
 27. pink-star — `pstar_` — committé ✅ (i18n.js + HTML, 12 clés : title/subtitle/desc1/li1-9, arôme Sangria)
 28. pink_star_sucette_cerise — `pscerise_` — committé ✅ (i18n.js + HTML, 12 clés : title/subtitle/desc1/li1-9, saveur Cerise)
+29. red-dolls-energy-pleasure — `reddolls_` — committé ✅ (i18n.js + HTML, 10 clés : title/subtitle/desc1/li1-7, marque Alive)
 
-**Total committées : 28/33.** Gamme bio Divine Xtases (5 parfums) entièrement faite + hemp-intense-orgasm + le-flateur + choco/fraise/barbe Orgie + chocolat-orgie + fraise-orgie.
-Dernière ancre i18n.js = `pscerise_li9` (×5, ordre fr/pt/it/es/de). i18n.js ≈ 270 520 chars, accolades 33/33.
+**Total committées : 29/33.** Gamme bio Divine Xtases (5 parfums) entièrement faite + hemp-intense-orgasm + le-flateur + choco/fraise/barbe Orgie + chocolat-orgie + fraise-orgie.
+Dernière ancre i18n.js = `reddolls_li7` (×5, ordre fr/pt/it/es/de). i18n.js ≈ 274 350 chars, accolades 33/33.
 
-## FICHES RESTANTES (ordre todo) — REPRENDRE À red-dolls-energy-pleasure
+## FICHES RESTANTES (ordre todo) — REPRENDRE À robe-longue-noire-argentee
 
-red-dolls-energy-pleasure, robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
+robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
 
-(5 fiches restantes)
+(4 fiches restantes)
 
-## RÉCAP — POUR TERMINER LA TRADUCTION (au 28/33)
+## RÉCAP — POUR TERMINER LA TRADUCTION (au 29/33)
 
-### Étape 5 — 5 fiches produits restantes (ordre todo)
+### Étape 5 — 4 fiches produits restantes (ordre todo)
 Pour CHAQUE fiche, méthode = fetch HTML via API GitHub → extraire FR (title/subtitle/desc/li) + compter → traduire 5 langues (préfixe de clé unique) → insérer dans i18n.js APRÈS la dernière ancre (ordre fr/pt/it/es/de) → valider (clés = N×5, accolades 33/33, ordre OK) → commit i18n.js → câbler HTML (data-i18n, séquentiel pour desc/li multiples) → VÉRIFIER fin de fichier après paste (pas de doublon) → commit HTML.
 1. pink_star_sucette_cerise (PROCHAINE)
 2. red-dolls-energy-pleasure
