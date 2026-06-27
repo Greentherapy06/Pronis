@@ -106,16 +106,17 @@
     overlay.innerHTML = ''
       + '<div class="lje-modal">'
       + '  <div class="lje-sub">Les Jardins Enchantés</div>'
-      + '  <h2 id="lje-age-title">Accès Réservé</h2>'
+      + '  <h2 id="lje-age-title" data-i18n="age_title">Accès Réservé</h2>'
       + '  <div class="lje-divider"></div>'
-      + '  <p>Ce site présente des produits réservés à un public adulte.<br>Vous devez avoir au moins <strong>18 ans</strong> pour y accéder.</p>'
+      + '  <p data-i18n="age_body">Ce site présente des produits réservés à un public adulte.<br>Vous devez avoir au moins <strong>18 ans</strong> pour y accéder.</p>'
       + '  <div class="lje-btn-row">'
-      + '    <button type="button" class="lje-btn lje-btn-primary" id="lje-age-yes">J\'ai 18 ans ou plus</button>'
-      + '    <button type="button" class="lje-btn" id="lje-age-no">Je suis mineur</button>'
+      + '    <button type="button" class="lje-btn lje-btn-primary" id="lje-age-yes" data-i18n="age_yes">J\'ai 18 ans ou plus</button>'
+      + '    <button type="button" class="lje-btn" id="lje-age-no" data-i18n="age_no">Je suis mineur</button>'
       + '  </div>'
-      + '  <div class="lje-legal">Conformément à l\'article 227-24 du Code pénal.</div>'
+      + '  <div class="lje-legal" data-i18n="age_legal">Conformément à l\'article 227-24 du Code pénal.</div>'
       + '</div>';
     document.body.appendChild(overlay);
+    try { if (typeof window.applyTranslations === "function") window.applyTranslations(); } catch (e) {}
 
     document.getElementById('lje-age-yes').addEventListener('click', function () {
       setStored(AGE_STORAGE_KEY, true, AGE_STORAGE_DAYS);
