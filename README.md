@@ -44,10 +44,10 @@ ENTRÉES FANTÔMES de l'ancienne todo (n'existent PAS comme fichiers) — à ign
 ==================================================
 RESTE À FAIRE
 ==================================================
-1) PAGES LÉGALES — traduire le contenu (5 langues) — EN COURS (2/5 fait) :
+1) PAGES LÉGALES — traduire le contenu (5 langues) — EN COURS (3/5 fait) :
     - cgv.html ✅ FAIT (70 éléments cgv_0..69, 2 commits Art.1-9 + Art.10-16 ; testé live FR/PT/DE OK)
    • confidentialite.html ✅ FAIT (53 éléments confid_0..52, RGPD ; i18n.js 265 clés + HTML câblé ; testé live FR/DE/IT OK)
-    - cookies.html ⬜ À FAIRE
+   • cookies.html ✅ FAIT (39 éléments cookies_0..38 ; i18n.js 195 clés + HTML câblé ; testé live FR/DE/ES OK)
     - mentions-legales.html ⬜ À FAIRE
     - retractation.html ⬜ À FAIRE
    Méthode : même process que les fiches (préfixes proposés : cgv_, confid_, cookies_, mentions_, retract_). Attention au volume → découper par page, valider accolades 33/33 à chaque commit. Vérifier les éléments à NE PAS traduire (dates, adresses, n° SIRET, raison sociale).
@@ -61,5 +61,5 @@ RESTE À FAIRE
 3) OPTIONNEL : étendre applyTranslations() à title/placeholder/alt (SEO + accessibilité).
 
 ==================================================
-PROCHAINE ACTION RECOMMANDÉE : pages légales restantes, continuer par cookies.html (puis mentions-legales.html, retractation.html)
+PROCHAINE ACTION RECOMMANDÉE : RESTE 2 PAGES LÉGALES → (1) mentions-legales.html préfixe mentions_  (2) retractation.html préfixe retract_. Process par page : extraire contenu via éditeur GitHub (payload.codeViewEditRoute.editInfo.content) → traduire FR/PT/IT/ES/DE (données fixes NON traduites : SIRET, adresse, email, TVA, articles de loi, dates, montants, noms propres ; HTML inline conservé) → insérer dans i18n.js après dernier ancrage page précédente (ORDRE fr/pt/it/es/de, accolades 36/36) → câbler data-i18n dans HTML (EXCLURE widget « VOTRE PANIER ») → tester live → MAJ README. État i18n.js : cgv 350 + confid 265 + cookies 195 clés.
 ==================================================
