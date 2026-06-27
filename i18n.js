@@ -497,6 +497,11 @@ const TRANSLATIONS = {
     indiana_li10: "Poids : 65 gr",
     indiana_li11: "Câble USB inclus",
     indiana_li12: "Marque : Litolu",
+    age_title: "Accès Réservé",
+    age_body: "Ce site présente des produits réservés à un public adulte.<br>Vous devez avoir au moins <strong>18 ans</strong> pour y accéder.",
+    age_yes: "J'ai 18 ans ou plus",
+    age_no: "Je suis mineur",
+    age_legal: "Conformément à l'article 227-24 du Code pénal.",
   },
   pt: {
     banner_livraison: "✦ ENTREGA GRATUITA EM FRANÇA E NA EUROPA ✦",
@@ -994,6 +999,11 @@ const TRANSLATIONS = {
     indiana_li10: "Peso: 65 g",
     indiana_li11: "Cabo USB incluído",
     indiana_li12: "Marca: Litolu",
+    age_title: "Acesso Reservado",
+    age_body: "Este site apresenta produtos reservados a um público adulto.<br>Deve ter pelo menos <strong>18 anos</strong> para aceder.",
+    age_yes: "Tenho 18 anos ou mais",
+    age_no: "Sou menor de idade",
+    age_legal: "Em conformidade com o artigo 227-24 do Código Penal.",
   },
   it: {
     banner_livraison: "✦ SPEDIZIONE GRATUITA IN FRANCIA E IN EUROPA ✦",
@@ -1491,6 +1501,11 @@ const TRANSLATIONS = {
     indiana_li10: "Peso: 65 g",
     indiana_li11: "Cavo USB incluso",
     indiana_li12: "Marchio: Litolu",
+    age_title: "Accesso Riservato",
+    age_body: "Questo sito presenta prodotti riservati a un pubblico adulto.<br>Devi avere almeno <strong>18 anni</strong> per accedervi.",
+    age_yes: "Ho 18 anni o più",
+    age_no: "Sono minorenne",
+    age_legal: "In conformità all'articolo 227-24 del Codice penale.",
   },
   es: {
     banner_livraison: "✦ ENVÍO GRATUITO EN FRANCIA Y EN EUROPA ✦",
@@ -1988,6 +2003,11 @@ const TRANSLATIONS = {
     indiana_li10: "Peso: 65 g",
     indiana_li11: "Cable USB incluido",
     indiana_li12: "Marca: Litolu",
+    age_title: "Acceso Reservado",
+    age_body: "Este sitio presenta productos reservados a un público adulto.<br>Debes tener al menos <strong>18 años</strong> para acceder.",
+    age_yes: "Tengo 18 años o más",
+    age_no: "Soy menor de edad",
+    age_legal: "De conformidad con el artículo 227-24 del Código Penal.",
   },
   de: {
     banner_livraison: "✦ KOSTENLOSER VERSAND IN FRANKREICH UND EUROPA ✦",
@@ -2485,6 +2505,11 @@ const TRANSLATIONS = {
     indiana_li10: "Gewicht: 65 g",
     indiana_li11: "USB-Kabel im Lieferumfang",
     indiana_li12: "Marke: Litolu",
+    age_title: "Zugang Beschränkt",
+    age_body: "Diese Website zeigt Produkte, die einem erwachsenen Publikum vorbehalten sind.<br>Sie müssen mindestens <strong>18 Jahre</strong> alt sein, um Zugang zu erhalten.",
+    age_yes: "Ich bin 18 oder älter",
+    age_no: "Ich bin minderjährig",
+    age_legal: "Gemäß Artikel 227-24 des Strafgesetzbuches.",
   }
 };
 
