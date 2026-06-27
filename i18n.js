@@ -2525,7 +2525,7 @@ function applyTranslations() {
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    if (dict[key]) el.textContent = dict[key];
+    if (dict[key]) { var __v = dict[key]; if (typeof __v === "string" && /<[a-z][\s\S]*>/i.test(__v)) { el.innerHTML = __v; } else { el.textContent = __v; } }
   });
 }
 
