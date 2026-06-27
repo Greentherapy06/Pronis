@@ -44,9 +44,9 @@ ENTRÉES FANTÔMES de l'ancienne todo (n'existent PAS comme fichiers) — à ign
 ==================================================
 RESTE À FAIRE
 ==================================================
-1) PAGES LÉGALES — traduire le contenu (5 langues) — EN COURS (1/5 fait) :
+1) PAGES LÉGALES — traduire le contenu (5 langues) — EN COURS (2/5 fait) :
     - cgv.html ✅ FAIT (70 éléments cgv_0..69, 2 commits Art.1-9 + Art.10-16 ; testé live FR/PT/DE OK)
-    - confidentialite.html ⬜ À FAIRE
+   • confidentialite.html ✅ FAIT (53 éléments confid_0..52, RGPD ; i18n.js 265 clés + HTML câblé ; testé live FR/DE/IT OK)
     - cookies.html ⬜ À FAIRE
     - mentions-legales.html ⬜ À FAIRE
     - retractation.html ⬜ À FAIRE
@@ -61,5 +61,5 @@ RESTE À FAIRE
 3) OPTIONNEL : étendre applyTranslations() à title/placeholder/alt (SEO + accessibilité).
 
 ==================================================
-PROCHAINE ACTION RECOMMANDÉE : pages légales restantes, commencer par confidentialite.html (même process que cgv.html : lire éléments → traduire 5 langues préfixe confid_ → insérer i18n.js → câbler data-i18n → tester).
+PROCHAINE ACTION RECOMMANDÉE : pages légales restantes, continuer par cookies.html (puis mentions-legales.html, retractation.html)
 ==================================================
