@@ -1,99 +1,65 @@
-# Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
+Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
-> FR = langue par défaut. Réutiliser i18n.js existant. NE PAS créer de nouveau système.
-> Ordre des langues dans i18n.js : **fr, pt, it, es, de** (ATTENTION : pas fr/pt/es/it/de — sinon inversion ES/IT).
-> RÔLES : Claude fait TOUT (fetch, traduction, insertion, validation, collage dans l'éditeur, ouverture du dialogue de commit + message). L'utilisateur (JLShop06) clique uniquement sur "Commit changes".
+FR = langue par défaut. Réutiliser i18n.js existant. NE PAS créer de nouveau système. Ordre des langues dans i18n.js : fr, pt, it, es, de (ATTENTION : pas fr/pt/es/it/de — sinon inversion ES/IT). RÔLES : Claude fait TOUT (fetch, traduction, insertion, validation, collage dans l'éditeur, ouverture du dialogue de commit + message). L'utilisateur (JLShop06) clique uniquement sur "Commit changes".
 
-## ÉTAPES 1 à 4 — TERMINÉES & déployées
-- Étape 1 : moteur i18n vérifié, FR par défaut.
-- Étape 2 : sélecteur de langue visible dans le header (FR, PT, ES, IT, DE).
-- Étape 3 : header unifié sur 36 pages.
-- Étape 4 : footer multilingue sur 34 pages + panier.
+==================================================
+ÉTAT GLOBAL (mis à jour)
+==================================================
+Étapes 1 à 4 : TERMINÉES & déployées (moteur i18n, sélecteur de langue header, header unifié 36 pages, footer multilingue 34 pages + panier).
+Étape 5 (traduction CONTENU des 33 fiches produits) : TERMINÉE — toutes les fiches produits réelles sont câblées (i18n.js + HTML).
+Modal 18+ "Accès Réservé" (compliance.js) : TERMINÉ & multilingue (5 langues).
 
-## ÉTAPE 5 — Traduction du CONTENU des fiches produits — EN COURS (29/33 committées)
+==================================================
+MÉTHODE PAR FICHE (rappel)
+==================================================
+Pour chaque fiche : fetch HTML (API GitHub ou raw) → extraire FR (title/subtitle/desc/li) + compter → traduire 5 langues (préfixe de clé unique) → insérer dans i18n.js APRÈS la dernière ancre, ordre fr/pt/it/es/de → valider (clés = N×5, accolades 33/33, ordre OK, IT/ES bien placés) → commit i18n.js → câbler HTML (data-i18n sur title/subtitle/desc/li, assignation séquentielle) → VÉRIFIER fin de fichier (pas de doublon) → commit HTML → test live.
 
-### Méthode par fiche
-1. Fetch HTML brut, extraire FR (title/subtitle/desc/li) + compter pour détecter duplication.
-2. Traduire en 5 langues (FR exact ; PT/IT/ES/DE fidèles). Choisir un préfixe de clé unique.
-3. Insérer les blocs dans i18n.js APRÈS les ancres = dernière clé de la fiche précédente, dans chaque bloc langue. Ordre des ancres = fr, pt, it, es, de.
-4. Valider (nb clés = N×5, accolades 33/33, ordre OK, IT/ES bien placés) → commit i18n.js.
-5. Câbler la page HTML (data-i18n sur title/subtitle/desc/li avec assignation cyclique (i%N)+1 ; SUPPRIMER les <strong>) → valider → commit HTML.
-6. Test live 5 langues sur Vercel.
+NOTES TECHNIQUES IMPORTANTES
+- Dernière ancre i18n.js = indiana_li12 (×5, ordre fr/pt/it/es/de). i18n.js ≈ 288 139 chars, accolades 33/33.
+- raw.githubusercontent peut être EN RETARD sur le dernier commit (cache CDN). L'API GitHub /contents est fiable MAIS rate-limitée (403 si trop de requêtes anonymes rapides).
+- ASTUCE FIABLE : sur la page éditeur GitHub (/edit/...), le contenu HEAD à jour est dispo dans un <script type="application/json"> embarqué → l'en extraire plutôt que via raw/API.
+- CSP GitHub bloque new Function() sur l'éditeur → validation structurelle par regex/slice (pas d'eval).
+- Variables window perdues à chaque navigation → tout régénérer après navigation.
+- Coller via ClipboardEvent sur .cm-content après Ctrl+A (clic [400,350] pour focus).
+- applyTranslations() utilise textContent (PAS innerHTML) → NE PAS mettre de HTML (<br>, <strong>) dans les valeurs i18n destinées à des éléments data-i18n, sinon les balises s'affichent en clair.
+- Vercel : déploiement non instantané + cache navigateur sur les <script src> (l'ancien JS peut s'exécuter au 1er chargement). Vérifier le fichier déployé (fetch cache:'reload') avant de conclure à un bug.
 
-### Notes techniques importantes
-- raw.githubusercontent peut être en retard sur le commit → utiliser l'API GitHub : fetch('https://api.github.com/repos/JLShop06/Les-Jardins-Enchantes/contents/<file>?ref=main',{headers:{'Accept':'application/vnd.github.raw'}}) qui renvoie la version fraîche.
-- CSP GitHub bloque new Function() sur la page éditeur → validation structurelle par slice (pas d'eval).
-- Variables window perdues à chaque navigation → redéfinir __M après navigation.
-- Coller via ClipboardEvent sur .cm-content après clic [400,350].
-- Vercel : déploiement non instantané + cache edge parfois obstiné sur une page (HIT/age qui monte). Vérifier le fichier déployé avant test visuel.
+==================================================
+FICHES PRODUITS — TOUTES FAITES (i18n.js + HTML committés)
+==================================================
+marryme_, bunny_, magnum_, rosygold_, loveconn_, duchess_, saturn_, ens_ (enseignante), etud_ (etudiante), infirmiere_, dualvibe_, cannabis_ (desc3=INCI identique 5 langues), caramel_, neutre_, framboise_, monoi_, vanille_, hemp_, flateur_, choco_, fraise_, barbe_, minirobe_, monster_, pina_, pscf_, pstar_, pscerise_, reddolls_, robelongue_, indiana_.
 
-## FICHES FAITES (i18n.js + HTML committés)
+Total : 32 préfixes de fiches câblés.
 
-1. Cockring-vibrant-Marry-Me-Wooomy — `marryme_` — OK testé
-2. Déguisement-Bunny — `bunny_` — OK testé
-3. Magnum-Opus-vibro — `magnum_` — OK testé
-4. Plug-Anal-Rosy-Gold — `rosygold_` — OK testé
-5. anneau_vibrant_telecommande — `loveconn_` — OK testé
-6. black-empire-my-duchess — `duchess_` — OK testé
-7. cockring-vibrant-saturn-hueman — `saturn_` — committé ✅, test visuel live À REVÉRIFIER (cache edge Vercel)
-8. deguisement-enseignante — `ens_` — committé ✅, test visuel live à faire
-9. deguisement-etudiante — `etud_` — committé ✅ (i18n.js + HTML)
-10. deguisement-infirmière-sexy — `infirmiere_` — committé ✅ (i18n.js + HTML)
-11. dual-vibe-sex-on-the-beach — `dualvibe_` — committé ✅ (i18n.js + HTML)
-12. gel_cannabis_orgie — `cannabis_` — committé ✅ (desc3 = INCI identique 5 langues)
-13. gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases — `caramel_` — committé ✅ (8 desc, 11 li)
-14. gel_lubrifiant_bio_neutre_divine_xtases — `neutre_` — committé ✅ (4 desc, 10 li)
-15. gel_lubrifiant_bio_neutre_framboise_divine_xtases — `framboise_` — committé ✅ (8 desc, 11 li)
-16. gel_lubrifiant_bio_neutre_monoi_divine_xtases — `monoi_` — committé ✅ (8 desc, 11 li)
-17. gel_lubrifiant_bio_neutre_vanille_divine_xtases — `vanille_` — committé ✅ (8 desc, 11 li)
-18. hemp-intense-orgasm — `hemp_` — committé ✅ (i18n.js + HTML, 9 clés : title/subtitle/desc1/li1-6)
-19. le-flateur — `flateur_` — committé ✅ (i18n.js + HTML, 10 clés : title/subtitle/desc1/li1-7)
-20. lubrifiant_eau_lube_tube_chocolat_orgie — `choco_` — committé ✅ (i18n.js + HTML, 23 clés : title/subtitle/desc1-10/li1-11, desc8=INCI identique)
-21. lubrifiant_eau_lube_tube_fraise_orgie — `fraise_` — committé ✅ (i18n.js + HTML, 23 clés : title/subtitle/desc1-10/li1-11, desc8=INCI identique)
-22. lubrifiant_eau_tube_barbe_a_papa — `barbe_` — committé ✅ (i18n.js + HTML, 23 clés : title/subtitle/desc1-10/li1-11, desc8=INCI identique)
-23. mini-robe-noire — `minirobe_` — committé ✅ (i18n.js + HTML, 11 clés : title/subtitle/desc1-3/li1-6, PAS de footer)
-24. monster-pussy-strocker — `monster_` — committé ✅ (i18n.js + HTML, 10 clés : title/subtitle/desc1/li1-7)
-25. orgie-pinacolada — `pina_` — committé ✅ (i18n.js + HTML, 9 clés : title/subtitle/desc1/li1-6)
-26. pink-star-choco-fraise — `pscf_` — committé ✅ (i18n.js + HTML, 12 clés : title/subtitle/desc1/li1-9)
-27. pink-star — `pstar_` — committé ✅ (i18n.js + HTML, 12 clés : title/subtitle/desc1/li1-9, arôme Sangria)
-28. pink_star_sucette_cerise — `pscerise_` — committé ✅ (i18n.js + HTML, 12 clés : title/subtitle/desc1/li1-9, saveur Cerise)
-29. red-dolls-energy-pleasure — `reddolls_` — committé ✅ (i18n.js + HTML, 10 clés : title/subtitle/desc1/li1-7, marque Alive)
+SESSION RÉCENTE (terminée) :
+- robe-longue-noire-argentee (robelongue_, 10 clés) → HTML câblé (i18n.js était déjà fait).
+- vibro-rechargeable-Indiana (indiana_, 18 clés ×5) → i18n.js + HTML.
+- gel_cannabis_orgie (cannabis_, 14 clés) → HTML câblé (i18n.js existait déjà ; le README précédent le marquait à tort "fait" alors que le HTML manquait).
+- Modal 18+ : age_title/age_body/age_yes/age_no/age_legal (×5) dans i18n.js + data-i18n sur les éléments du modal dans compliance.js + appel applyTranslations() après appendChild(overlay). age_body en TEXTE PLAT (compat textContent). Testé OK en pt (Acesso Reservado, etc.).
 
-**Total committées : 29/33.** Gamme bio Divine Xtases (5 parfums) entièrement faite + hemp-intense-orgasm + le-flateur + choco/fraise/barbe Orgie + chocolat-orgie + fraise-orgie.
-Dernière ancre i18n.js = `reddolls_li7` (×5, ordre fr/pt/it/es/de). i18n.js ≈ 274 350 chars, accolades 33/33.
+ENTRÉES FANTÔMES de l'ancienne todo (n'existent PAS comme fichiers) — à ignorer :
+- "sucette-cerise" = en réalité pink_star_sucette_cerise.html (déjà fait).
+- "vibromasseur-rabbit-rose" = aucun fichier correspondant dans le dépôt.
 
-## FICHES RESTANTES (ordre todo) — REPRENDRE À robe-longue-noire-argentee
+==================================================
+RESTE À FAIRE
+==================================================
+1) PAGES LÉGALES — traduire le contenu (5 langues) — NON FAIT, gros volume :
+   - cgv.html (~20 titres, ~44 paragraphes, ~15 li — le plus lourd)
+   - confidentialite.html
+   - cookies.html
+   - mentions-legales.html
+   - retractation.html
+   Méthode : même process que les fiches (préfixes proposés : cgv_, confid_, cookies_, mentions_, retract_). Attention au volume → découper par page, valider accolades 33/33 à chaque commit. Vérifier les éléments à NE PAS traduire (dates, adresses, n° SIRET, raison sociale).
 
-robe-longue-noire-argentee (PAS de footer mais contenu à traduire), sucette-cerise, vibro-rechargeable-Indiana, vibromasseur-rabbit-rose.
+2) VÉRIFICATION COMPLÈTE LIVE (non faite faute de temps + rate limit API) :
+   - Re-scanner les 32 fiches produits (title data-i18n + clés présentes dans i18n.js).
+   - Le scan automatique précédent a donné des FAUX POSITIFS "title not wired" à cause du rate limit 403 de l'API. Refaire via raw.githubusercontent ou le JSON embarqué de l'éditeur, pas l'API directe en rafale.
+   - Tester le modal 18+ en live dans les 5 langues APRÈS expiration du cache navigateur.
+   - Re-vérifier visuellement fiches saturn et enseignante (cache edge Vercel signalé précédemment).
 
-(4 fiches restantes)
+3) OPTIONNEL : étendre applyTranslations() à title/placeholder/alt (SEO + accessibilité).
 
-## RÉCAP — POUR TERMINER LA TRADUCTION (au 29/33)
-
-### Étape 5 — 4 fiches produits restantes (ordre todo)
-Pour CHAQUE fiche, méthode = fetch HTML via API GitHub → extraire FR (title/subtitle/desc/li) + compter → traduire 5 langues (préfixe de clé unique) → insérer dans i18n.js APRÈS la dernière ancre (ordre fr/pt/it/es/de) → valider (clés = N×5, accolades 33/33, ordre OK) → commit i18n.js → câbler HTML (data-i18n, séquentiel pour desc/li multiples) → VÉRIFIER fin de fichier après paste (pas de doublon) → commit HTML.
-1. pink_star_sucette_cerise (PROCHAINE)
-2. red-dolls-energy-pleasure
-3. robe-longue-noire-argentee (PAS de footer mais contenu à traduire)
-4. sucette-cerise
-5. vibro-rechargeable-Indiana
-6. vibromasseur-rabbit-rose
-
-Astuce : les fiches "gel eau Orgie" (barbe_a_papa) sont quasi identiques à choco/fraise (juste le parfum change) → réutiliser les traductions en adaptant le parfum.
-
-### Après l'étape 5 (autres tâches)
-- Modal 18+ "Accès Réservé" (compliance.js).
-- Traduire le contenu des pages légales : cgv, confidentialite, cookies, mentions-legales, retractation.
-- Optionnel : étendre applyTranslations() à title/placeholder/alt.
-
-### Test live final (Vercel, 5 langues)
-- À revérifier : fiches 7 (saturn) et 8 (enseignante), + vérif rapide des fiches 9→21.
-- Vercel : déploiement non instantané + cache edge parfois obstiné. Vérifier le fichier déployé avant test visuel.
-
-## AUTRES TÂCHES (après étape 5)
-- Modal 18+ "Accès Réservé" (compliance.js).
-- Contenu pages légales : cgv, confidentialite, cookies, mentions-legales, retractation.
-- Optionnel : étendre applyTranslations() à title/placeholder/alt.
-
-## À REVÉRIFIER VISUELLEMENT (test live 5 langues sur Vercel)
-Fiches 7 (saturn) et 8 (enseignante), + vérif rapide des fiches 9→21 nouvellement faites.
+==================================================
+PROCHAINE ACTION RECOMMANDÉE : pages légales, commencer par cgv.html.
+==================================================
