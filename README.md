@@ -79,9 +79,10 @@ OBJECTIF : audit intégral des traductions (accueil + fiches produits) dans les 
   - home_footer_seo
   - home_prod_1..31 (31 noms produits traduits, marques conservées)
   NOTE : home_announce NON créée — la barre d'annonce réutilise la clé EXISTANTE banner_livraison (déjà traduite ×5). De même cart_title (VOTRE PANIER) existe déjà.
+[OK] index.html : 52 attributs data-i18n câblés (committé sur main, vérifié via API GitHub : 52 home_ + .announce-bar=banner_livraison). Méthode : remplacement de chaîne sur HTML brut. Validé parse OK / 0 manquant / scripts 5=5 / meta 21=21 / diff +1377 chars. Mapping respecté (hero, 3 sections SEO, 6 cat, footer SEO span, 31 produits).
 
 --- RESTE À FAIRE (priorité) ---
-1) index.html — CÂBLER les data-i18n (PAS encore committé). 53 attributs à poser :
+1) index.html — [TERMINÉ ✅ committé] data-i18n posés. Référence du mapping (au cas où) :
    - .announce-bar -> banner_livraison (clé existante)
    - .hero-baseline -> home_hero_baseline ; .hero-desc -> home_hero_desc
    - .seo-intro__title -> home_seo_intro_title ; les 3 .seo-intro__text -> home_seo_intro_p1/p2/p3 (ordre DOM)
@@ -108,3 +109,27 @@ ASTUCES SESSION :
 - Variables window perdues à la navigation -> reconstruire (les 52 traductions __T ont été redéfinies sur la page éditeur avant de générer i18n.js).
 - raw.githubusercontent fetchable depuis github.com (CORS OK). new Function() bloqué par CSP sur l'éditeur -> validation structurelle (slice/regex).
 - Coller dans CodeMirror 6 : focus .cm-content -> Ctrl+A (clavier réel) -> dispatch ClipboardEvent('paste') avec DataTransfer text/plain. defaultPrevented:true = CM a intercepté. textContent non fiable (virtualisé) -> vérifier via scrollHeight / scroll + .cm-line.
+
+
+==================================================
+>>> REPRENDRE ICI (prochaine session) <<<
+
+ÉTAT : Page d'accueil = TRADUCTION TERMINÉE (i18n.js + index.html committés sur main). À tester en live dans les 5 langues une fois Vercel redéployé (cache edge possible -> fetch cache:'reload' / vérifier window.innerWidth pour le mobile).
+
+PROCHAINES ACTIONS (dans l'ordre) :
+
+A) TEST LIVE ACCUEIL (rapide) : ouvrir lesjardinsenchantes.vercel.app, changer de langue, vérifier que announce-bar, hero, sections SEO, titres catégories et noms produits se traduisent bien (notamment <strong> rendus correctement, pas en texte brut). Les noms de marque doivent rester intacts.
+
+B) COMPOSANTS PARTAGÉS (présents sur TOUTES les pages -> gros impact) :
+   B1) Bannière COOKIES (compliance.js) — encore 100% FR. Textes : "Nous utilisons des cookies de mesure d'audience (Google Analytics) pour améliorer votre expérience. Vous pouvez accepter ou refuser librement." + boutons "En savoir plus", "Tout refuser", "Tout accepter". compliance.js utilise DÉJÀ window.t + applyTranslations (modal 18+ fait). -> créer clés (×5) : cookie_text, cookie_more, cookie_refuse, cookie_accept ; remplacer les chaînes FR codées en dur par window.t('cle') ; appeler applyTranslations()/réappliquer après création de la bannière.
+   B2) "VOTRE PANIER" (titre panier, généré par cart.js) — clé cart_title EXISTE déjà (×5). -> faire utiliser window.t('cart_title') dans cart.js là où le titre est écrit.
+   B3) "Retour boutique" (footer <a href=index.html>) — non câblé sur ~31 fiches. -> clé footer_retour (×5) dans i18n.js + data-i18n sur le lien. Exceptions au footer différent : mini-robe-noire.html, robe-longue-noire-argentee.html.
+   B4) "© Les Jardins Enchantés – Boutique Luxe Intime" (texte nu footer ~31 fiches) — envisager footer_copyright (×5) en enveloppant la partie traduisible dans un <span data-i18n>. Garder "© Les Jardins Enchantés" (marque).
+
+C) BANNIÈRE HERO MOBILE (CSS — demande explicite "haut de gamme/luxe") :
+   Actuel : un seul @media (max-width:768px) qui ne touche QUE .hero-logo-img (220px). .hero = padding 200px 24px 140px + min-height 92vh (trop haut/vide sur mobile).
+   À faire : @media 768px et 480px -> réduire padding/min-height, calibrer .hero-baseline (clamp ~18-20px) et .hero-desc (~14px, line-height aéré), .hero-badges en colonne ou wrap centré avec gap réduit, .hero-cta pleine largeur (ou large) avec letter-spacing premium, marges régulières. Objectif : rythme vertical élégant, pas de vide, typo équilibrée. Le CSS est inline dans <style> de index.html (et/ou dans les fiches). Tester en VRAI mobile (window.innerWidth ; resize_window ne change pas toujours le rendu interne).
+
+D) RE-SCAN FICHES PRODUITS (vérif finale) : via raw/API (PAS l'API en rafale -> 403). Confirmer title data-i18n + clés présentes. Les fiches sont marquées faites mais re-vérifier saturn/enseignante (cache edge signalé).
+
+RAPPEL CLÉS HOME AJOUTÉES (déjà dans i18n.js, ordre fr/pt/it/es/de) : home_hero_baseline, home_hero_desc, home_seo_intro_title, home_seo_intro_p1..p3, home_seo_grid_t1..t3 + p1..p3, home_seo_why_title, home_seo_why_text, home_cat_1..6, home_footer_seo, home_prod_1..31. (home_announce N'EXISTE PAS : utiliser banner_livraison.)
