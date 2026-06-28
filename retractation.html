@@ -60,68 +60,68 @@ PANIER (<span id="cartCount">0</span>)
 </header>
 
 <section class="legal-page">
-<h1>Renoncer au contrat</h1>
-<p class="legal-subtitle">Rétractation en ligne — gratuite, sans compte</p>
+<h1 data-i18n="retract_title">Renoncer au contrat</h1>
+<p class="legal-subtitle" data-i18n="retract_subtitle">Rétractation en ligne — gratuite, sans compte</p>
 
 <div class="legal-callout">
-<p>Conformément aux articles L221-21 et D221-5 du Code de la consommation, vous pouvez renoncer à votre contrat directement en ligne, sans avoir à créer de compte ni à vous connecter, et sans aucun frais. La demande se fait en deux étapes : vous remplissez d'abord ce formulaire, puis vous confirmez votre rétractation à l'étape suivante.</p>
+<p data-i18n="retract_intro">Conformément aux articles L221-21 et D221-5 du Code de la consommation, vous pouvez renoncer à votre contrat directement en ligne, sans avoir à créer de compte ni à vous connecter, et sans aucun frais. La demande se fait en deux étapes : vous remplissez d'abord ce formulaire, puis vous confirmez votre rétractation à l'étape suivante.</p>
 </div>
 
 <!-- ETAPE 1 : formulaire -->
-<form class="retract-form" id="retractForm" autocomplete="on" novalidate>
+<form class="retract-form" id="retractForm" autocomplete="on" novalidate="">
 <div class="retract-field">
-<label for="rf-prenom">Prénom <span class="retract-required">*</span></label>
-<input type="text" id="rf-prenom" name="prenom" required>
+<label for="rf-prenom"><span data-i18n="retract_lbl_prenom">Prénom</span><span class="retract-required">*</span></label>
+<input type="text" id="rf-prenom" name="prenom" required="">
 </div>
 <div class="retract-field">
-<label for="rf-nom">Nom <span class="retract-required">*</span></label>
-<input type="text" id="rf-nom" name="nom" required>
+<label for="rf-nom"><span data-i18n="retract_lbl_nom">Nom</span><span class="retract-required">*</span></label>
+<input type="text" id="rf-nom" name="nom" required="">
 </div>
 <div class="retract-field">
-<label for="rf-email">Email <span class="retract-required">*</span></label>
-<input type="email" id="rf-email" name="email" required>
+<label for="rf-email"><span data-i18n="retract_lbl_email">Email</span><span class="retract-required">*</span></label>
+<input type="email" id="rf-email" name="email" required="">
 </div>
 <div class="retract-field">
-<label for="rf-commande">Numéro de commande <span class="retract-required">*</span></label>
-<input type="text" id="rf-commande" name="commande" required>
+<label for="rf-commande"><span data-i18n="retract_lbl_commande">Numéro de commande</span><span class="retract-required">*</span></label>
+<input type="text" id="rf-commande" name="commande" required="">
 </div>
 <div class="retract-field">
-<label for="rf-date">Date d'achat <span class="retract-required">*</span></label>
-<input type="date" id="rf-date" name="dateAchat" required>
+<label for="rf-date"><span data-i18n="retract_lbl_date">Date d'achat</span><span class="retract-required">*</span></label>
+<input type="date" id="rf-date" name="dateAchat" required="">
 </div>
 <div class="retract-field">
-<label for="rf-produit">Produit / nature du contrat <span class="retract-required">*</span></label>
-<input type="text" id="rf-produit" name="produit" required>
+<label for="rf-produit"><span data-i18n="retract_lbl_produit">Produit / nature du contrat</span><span class="retract-required">*</span></label>
+<input type="text" id="rf-produit" name="produit" required="">
 </div>
 <div class="retract-field">
-<label for="rf-message">Message (facultatif)</label>
+<label for="rf-message" data-i18n="retract_lbl_message">Message (facultatif)</label>
 <textarea id="rf-message" name="message"></textarea>
 </div>
 <p class="retract-error retract-hidden" id="rf-form-error"></p>
-<button type="submit" class="retract-btn" id="rf-continue">Renoncer au contrat ici</button>
+<button type="submit" class="retract-btn" id="rf-continue" data-i18n="retract_btn_continue">Renoncer au contrat ici</button>
 </form>
 
 <!-- ETAPE 2 : confirmation (le 2e clic materialise juridiquement la demande) -->
 <div class="retract-step2 retract-hidden" id="retractStep2">
-<h2 style="border:none;margin-top:0;">Confirmation de votre rétractation</h2>
-<p style="font-family:Inter,sans-serif;font-size:14px;color:#c5c5c5;">Vérifiez le récapitulatif ci-dessous. Votre rétractation ne sera juridiquement effective qu'après avoir cliqué sur « Confirmer la rétractation ».</p>
+<h2 style="border:none;margin-top:0;" data-i18n="retract_h_confirm">Confirmation de votre rétractation</h2>
+<p style="font-family:Inter,sans-serif;font-size:14px;color:#c5c5c5;" data-i18n="retract_confirm_txt">Vérifiez le récapitulatif ci-dessous. Votre rétractation ne sera juridiquement effective qu'après avoir cliqué sur « Confirmer la rétractation ».</p>
 <div class="retract-recap" id="retractRecap"></div>
 <p class="retract-error retract-hidden" id="rf-confirm-error"></p>
 <div style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;">
-<button type="button" class="retract-btn" id="rf-confirm">Confirmer la rétractation</button>
-<button type="button" class="retract-btn" id="rf-back" style="letter-spacing:2px;">Modifier</button>
+<button type="button" class="retract-btn" id="rf-confirm" data-i18n="retract_btn_confirm">Confirmer la rétractation</button>
+<button type="button" class="retract-btn" id="rf-back" style="letter-spacing:2px;" data-i18n="retract_btn_back">Modifier</button>
 </div>
 </div>
 
 <!-- ECRAN DE CONFIRMATION FINAL -->
 <div class="retract-result retract-hidden" id="retractResult">
-<h2 style="border:none;margin-top:0;">Demande enregistrée</h2>
-<p style="font-family:Inter,sans-serif;font-size:14px;color:#c5c5c5;">Votre demande de rétractation a bien été enregistrée. Un accusé de réception horodaté vous est envoyé par email.</p>
+<h2 style="border:none;margin-top:0;" data-i18n="retract_h_done">Demande enregistrée</h2>
+<p style="font-family:Inter,sans-serif;font-size:14px;color:#c5c5c5;" data-i18n="retract_done_txt">Votre demande de rétractation a bien été enregistrée. Un accusé de réception horodaté vous est envoyé par email.</p>
 <div class="retract-ref" id="retractRefOut"></div>
-<p style="font-family:Inter,sans-serif;font-size:13px;color:#9c9c9c;">Le professionnel dispose d'un délai de 14 jours pour procéder au remboursement éventuellement dû. Les exceptions légales (article L221-28 5° du Code de la consommation) sont précisées dans nos <a href="cgv.html">Conditions Générales de Vente</a>.</p>
+<p style="font-family:Inter,sans-serif;font-size:13px;color:#9c9c9c;"><span data-i18n="retract_done_p1a">Le professionnel dispose d'un délai de 14 jours pour procéder au remboursement éventuellement dû. Les exceptions légales (article L221-28 5° du Code de la consommation) sont précisées dans nos </span><a href="cgv.html" data-i18n="retract_link_cgv">Conditions Générales de Vente</a><span data-i18n="retract_done_p1b">.</span></p>
 </div>
 
-<p style="margin-top:40px;font-family:Inter,sans-serif;font-size:12px;color:#8a7560;">Vous pouvez également exercer votre droit de rétractation par écrit (formulaire-type papier) selon les modalités décrites dans nos <a href="cgv.html">Conditions Générales de Vente</a>. La présente fonction en ligne s'ajoute à ces modalités, elle ne les remplace pas.</p>
+<p style="margin-top:40px;font-family:Inter,sans-serif;font-size:12px;color:#8a7560;"><span data-i18n="retract_done_p2a">Vous pouvez également exercer votre droit de rétractation par écrit (formulaire-type papier) selon les modalités décrites dans nos </span><a href="cgv.html" data-i18n="retract_link_cgv">Conditions Générales de Vente</a><span data-i18n="retract_done_p2b">. La présente fonction en ligne s'ajoute à ces modalités, elle ne les remplace pas.</span></p>
 </section>
 
 <footer class="footer">
@@ -164,19 +164,19 @@ PANIER (<span id="cartCount">0</span>)
     };
     var emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email);
     if (!data.prenom || !data.nom || !emailOk || !data.commande || !data.dateAchat || !data.produit) {
-      formError.textContent = 'Merci de renseigner tous les champs obligatoires (email valide compris).';
+      formError.textContent = (window.t?window.t('retract_js_required'):'Merci de renseigner tous les champs obligatoires (email valide compris).');
       show(formError);
       return;
     }
     current = data;
     recap.innerHTML =
-      '<strong>Prénom :</strong> ' + esc(data.prenom) + '<br>' +
-      '<strong>Nom :</strong> ' + esc(data.nom) + '<br>' +
-      '<strong>Email :</strong> ' + esc(data.email) + '<br>' +
-      '<strong>N° de commande :</strong> ' + esc(data.commande) + '<br>' +
-      '<strong>Date d\'achat :</strong> ' + esc(data.dateAchat) + '<br>' +
-      '<strong>Produit / nature du contrat :</strong> ' + esc(data.produit) +
-      (data.message ? '<br><strong>Message :</strong> ' + esc(data.message) : '');
+      (window.t?window.t('retract_recap_prenom'):'<strong>Prénom :</strong> ') + esc(data.prenom) + '<br>' +
+      (window.t?window.t('retract_recap_nom'):'<strong>Nom :</strong> ') + esc(data.nom) + '<br>' +
+      (window.t?window.t('retract_recap_email'):'<strong>Email :</strong> ') + esc(data.email) + '<br>' +
+      (window.t?window.t('retract_recap_commande'):'<strong>N° de commande :</strong> ') + esc(data.commande) + '<br>' +
+      (window.t?window.t('retract_recap_date'):'<strong>Date d\'achat :</strong> ') + esc(data.dateAchat) + '<br>' +
+      (window.t?window.t('retract_recap_produit'):'<strong>Produit / nature du contrat :</strong> ') + esc(data.produit) +
+      (data.message ? (window.t?window.t('retract_recap_message'):'<br><strong>Message :</strong> ') + esc(data.message) : '');
     hide(form);
     show(step2);
     step2.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -193,7 +193,7 @@ PANIER (<span id="cartCount">0</span>)
     if (!current) return;
     hide(confirmError);
     confirmBtn.setAttribute('disabled', 'disabled');
-    confirmBtn.textContent = 'Envoi en cours…';
+    confirmBtn.textContent = (window.t?window.t('retract_js_sending'):'Envoi en cours…');
     var payload = {};
     for (var k in current) payload[k] = current[k];
     payload.confirm = true;
@@ -205,18 +205,18 @@ PANIER (<span id="cartCount">0</span>)
     .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
     .then(function (res) {
       if (!res.ok || !res.body.ok) {
-        throw new Error(res.body && res.body.error ? res.body.error : 'Erreur lors de l\'enregistrement.');
+        throw new Error(res.body && res.body.error ? res.body.error : (window.t?window.t('retract_js_err_save'):'Erreur lors de l\'enregistrement.'));
       }
-      document.getElementById('retractRefOut').textContent = 'Référence : ' + res.body.ref;
+      document.getElementById('retractRefOut').textContent = (window.t?window.t('retract_js_ref'):'Référence : ') + res.body.ref;
       hide(step2);
       show(result);
       result.scrollIntoView({ behavior: 'smooth', block: 'start' });
     })
     .catch(function (err) {
-      confirmError.textContent = err.message || 'Une erreur est survenue. Réessayez.';
+      confirmError.textContent = err.message || (window.t?window.t('retract_js_err_generic'):'Une erreur est survenue. Réessayez.');
       show(confirmError);
       confirmBtn.removeAttribute('disabled');
-      confirmBtn.textContent = 'Confirmer la rétractation';
+      confirmBtn.textContent = (window.t?window.t('retract_btn_confirm'):'Confirmer la rétractation');
     });
   });
 })();
