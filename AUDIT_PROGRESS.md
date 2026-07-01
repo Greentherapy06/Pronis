@@ -174,7 +174,7 @@ EXCEPTIONS a NE PAS traiter (footer different) : mini-robe-noire.html, robe-long
 
 
 ### A FAIRE APRES B3
-- **B4** : footer copyright "(c) Les Jardins Enchantes - Boutique Luxe Intime" sur ~31 fiches -> cle footer_copyright (x5), garder la marque
+- **B4 EN COURS (18/29 fiches committees au 01/07/2026)** : footer copyright -> cle footer_copyright (x5, fr/pt/it/es/de) COMMITTEE ; wiring <span data-i18n="footer_copyright">Boutique Luxe Intime</span> sur les 29 fiches produits (PAS les 6 pages legales, deja faites). Fiches faites 1-18 : Cockring-Marry-Me, Deguisement-Bunny, Magnum-Opus, Plug-Anal-Rosy-Gold(3occ), anneau_vibrant_telecommande, black-empire-my-duchess, cockring-saturn-hueman, deguisement-enseignante, deguisement-etudiante, deguisement-infirmiere-sexy, dual-vibe-sex-on-the-beach, gel_cannabis_orgie, gel_lubrifiant_bio_(caramel/neutre/framboise/monoi/vanille)[VARIANT footer "2025 ... -"], hemp-intense-orgasm. RESTE 19-29 : le-flateur, lubrifiant_eau_lube_tube_chocolat_orgie, lubrifiant_eau_lube_tube_fraise_orgie, lubrifiant_eau_tube_barbe_a_papa, monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, red-dolls-energy-pleasure, vibro-rechargeable-Indiana. PATTERN robuste : remplacer "Boutique Luxe Intime<br>" -> "<span data-i18n=\"footer_copyright\">Boutique Luxe Intime</span><br>".
 - **Point C** : CSS hero mobile (@media 768px et 480px, rendu premium) - <style> inline dans index.html
 - **Point D** : re-scan 32 fiches produits (title data-i18n + cles) via raw/JSON editeur (PAS l'API en rafale -> 403) ; re-verifier saturn/enseignante (cache edge Vercel)
 - **Optionnel** : etendre applyTranslations() a title/placeholder/alt (SEO/accessibilite)
