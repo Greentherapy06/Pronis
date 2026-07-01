@@ -236,7 +236,7 @@ modal.style.cssText = "display:none;position:fixed;inset:0;background:rgba(0,0,0
 modal.innerHTML = `
 <div style="background:#111;border-left:1px solid rgba(202,168,106,0.3);width:420px;max-width:100vw;height:100vh;padding:48px 36px;display:flex;flex-direction:column;gap:24px;overflow-y:auto;">
 <div style="display:flex;justify-content:space-between;align-items:center;">
-<span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#caa86a;letter-spacing:3px;">VOTRE PANIER</span>
+<span data-i18n="cart_title" style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#caa86a;letter-spacing:3px;">${(typeof window.t==='function')?window.t('cart_title'):'VOTRE PANIER'}</span>
 <button onclick="closeCart()" style="background:none;border:none;color:#caa86a;font-size:22px;cursor:pointer;line-height:1;">&times;</button>
 </div>
 <ul id="cart-items" style="padding:0;margin:0;flex:1;"></ul>
@@ -251,6 +251,7 @@ modal.innerHTML = `
 </div>
 `;
 document.body.appendChild(modal);
+    try { if (typeof window.applyTranslations === "function") window.applyTranslations(); } catch (e) {}
 
 // Fermeture en cliquant hors de la fenêtre du panier
 modal.addEventListener("click", (e) => {
