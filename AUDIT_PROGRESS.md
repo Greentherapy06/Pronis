@@ -1,7 +1,7 @@
 # AUDIT_PROGRESS - Les Jardins Enchantés
 
 **Dernière mise à jour :** 01/07/2026
-**Statut global :** Conformité légale OK - Audit Lighthouse OK - Google Merchant Center EN COURS (EAN ajoutés, resync lancée)
+**Statut global :** i18n fiches produits (titres+footer+labels UI) TERMINÉ 29/29 - Conformité légale OK - Audit Lighthouse OK - Google Merchant Center EN COURS (EAN ajoutés, resync lancée)
 
 ---
 
@@ -178,6 +178,8 @@ EXCEPTIONS a NE PAS traiter (footer different) : mini-robe-noire.html, robe-long
 - **Point C TERMINE (01/07/2026)** : CSS hero mobile committe dans index.html (bloc @media 768px enrichi : padding/min-height/titre/contenu ; nouveau @media 480px pour petits mobiles : logo 170px, titre clamp(32px,12vw,48px), padding resserre, degrade simplifie). Braces equilibrees 30/30. Rendu mobile verifie (previsualisation 412px) : hero equilibre et premium. Note : style.css possede deja un @media 768px hero complet qui l'emporte (charge apres) ; le @media 480px de style.css ne touche que header/nav/panier, donc le bloc inline gere seul le hero <=480px, sans conflit.
 - **Point D TERMINE (01/07/2026)** : re-scan des 29 fiches produits. Resultat : TOUT est deja instrumente. Chaque fiche a un <h1 data-i18n="*_title"> (22 a 47 attributs data-i18n/fiche). Les 29 cles _title sont definies exactement 5x dans i18n.js (fr/pt/it/es/de). Ordre des blocs de langue verifie = fr>pt>it>es>de (PAS d'inversion ES/IT). 8 titres identiques dans les 5 langues = noms de marque (Magnum Opus, Rosy Gold, Love Connection, My Duchess, Dual Vibe, Monster Pussy Strocker, Red Dolls, Indiana) -> normal (marques non traduites). Verif LIVE Vercel OK : saturn (fr/pt/it/es/de distincts, ES "Vibrador" vs IT "Vibrante") et enseignante (5 langues OK) ; footer_copyright B4 rendu OK (DE "Intime Luxus-Boutique"). Aucun recablage requis. Reliquat eventuel = cache edge Vercel (se purge cote deploiement, pas dans le repo).
 - **Optionnel** : etendre applyTranslations() a title/placeholder/alt (SEO/accessibilite)
+
+- **Point E TERMINE (01/07/2026)** : labels UI communs cables sur les 29 fiches produits vers cles i18n.js EXISTANTES (aucune nouvelle cle, aucune modif i18n.js). 3 labels par fiche standard : <h2 data-i18n="prod_desc">Description</h2>, <h2 data-i18n="prod_feat">Caracteristiques</h2>, bouton AJOUTER AU PANIER -> <span data-i18n="prod_add">. Transform regex robuste (garde anti-double-cablage) + nettoyage fences markdown. Variantes gerees : fiches standard d1/c1/a1 ; gels/lubes bio (gel_cannabis, gel_lubrifiant_bio_*, lubrifiant_eau_*) d0/c1/a2 (pas de titre Description, "Caracteristiques" sans accent, 2 boutons) ; Plug-Anal-Rosy-Gold d3/c3/a3 (3 docs concatenes). Les 29 fiches committees une par une (JLShop06 clique Commit).
 
 ### Notes techniques i18n
 - raw.githubusercontent peut etre en cache CDN ; API rate-limited (403) -> utiliser fetch cache:'reload'
