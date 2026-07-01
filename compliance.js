@@ -140,16 +140,18 @@
     bar.innerHTML = ''
       + '<div class="lje-cookie-inner">'
       + '  <div class="lje-cookie-text">'
+      + '    <span data-i18n="cookie_text">'
       + '    Nous utilisons des cookies de mesure d\'audience (Google Analytics) pour améliorer votre expérience. '
-      + '    Vous pouvez accepter ou refuser librement. '
-      + '    <a href="cookies.html">En savoir plus</a>'
+      + '    Vous pouvez accepter ou refuser librement.</span> '
+      + '    <a href="cookies.html" data-i18n="cookie_more">En savoir plus</a>'
       + '  </div>'
       + '  <div class="lje-cookie-btns">'
-      + '    <button type="button" class="lje-btn" id="lje-cookie-refuse">Tout refuser</button>'
-      + '    <button type="button" class="lje-btn lje-btn-primary" id="lje-cookie-accept">Tout accepter</button>'
+      + '    <button type="button" class="lje-btn" id="lje-cookie-refuse" data-i18n="cookie_refuse">Tout refuser</button>'
+      + '    <button type="button" class="lje-btn lje-btn-primary" id="lje-cookie-accept" data-i18n="cookie_accept">Tout accepter</button>'
       + '  </div>'
       + '</div>';
     document.body.appendChild(bar);
+    try { if (typeof window.applyTranslations === "function") window.applyTranslations(); } catch (e) {}
 
     document.getElementById('lje-cookie-accept').addEventListener('click', function () {
       setStored(COOKIE_STORAGE_KEY, 'accepted', COOKIE_STORAGE_DAYS);
