@@ -9,6 +9,14 @@ FR = langue par défaut. Réutiliser i18n.js existant. NE PAS créer de nouveau 
 Étape 5 (traduction CONTENU des 33 fiches produits) : TERMINÉE — toutes les fiches produits réelles sont câblées (i18n.js + HTML).
 Modal 18+ "Accès Réservé" (compliance.js) : TERMINÉ & multilingue (5 langues).
 
+=== MAJ i18n 01/07/2026 (session Claude) ===
+- Titres H1 des 29 fiches produits : data-i18n posés + clés ×5 (fr/pt/it/es/de) — VÉRIFIÉ.
+- Footer "Retour boutique" (footer_retour) + Footer "© ... Boutique Luxe Intime" (footer_copyright) : câblés ×29 — TERMINÉ.
+- Point E — Labels UI communs des fiches produits : "Description" (prod_desc), "Caractéristiques" (prod_feat), bouton "AJOUTER AU PANIER" (prod_add) câblés sur les 29 fiches vers clés i18n.js EXISTANTES (aucune nouvelle clé). Variantes : fiches standard d1/c1/a1 ; gels/lubes bio d0/c1/a2 (pas de titre "Description", "Caracteristiques" sans accent, 2 boutons) ; Plug-Anal-Rosy-Gold d3/c3/a3. — TERMINÉ 29/29.
+- CSS hero mobile (@media 768px + 480px dans index.html) — TERMINÉ.
+RESTE À FAIRE : bannière cookies (compliance.js, 3 boutons) ; titre panier "VOTRE PANIER" via window.t('cart_title') dans cart.js ; blocs ingrédients des gels bio (Cire d'abeille, Aloe Vera, Karité, badges CERTIFIÉ BIO / FABRIQUÉ EN FRANCE / Yuka, prix) — NON câblés ; pages légales : ~7 fragments résiduels chacune.
+============================================
+
 ==================================================
 MÉTHODE PAR FICHE (rappel)
 ==================================================
@@ -93,7 +101,9 @@ OBJECTIF : audit intégral des traductions (accueil + fiches produits) dans les 
    - <span> SEO du footer ("Boutique Sextoys & Gel Lubrifiant Intime France & Europe") -> home_footer_seo
    MÉTHODE FIABLE TESTÉE : insertion par remplacement de chaîne sur le HTML brut (PAS DOMParser re-serialize). applyTranslations() bascule en innerHTML SI la valeur contient une balise sinon textContent -> <strong> OK dans les valeurs. ATTENTION : "Boutique Sextoys" apparaît AUSSI dans og:title/twitter -> ne câbler QUE le <span> du footer (dernière occurrence, après "Les Jardins Enchantés –").
 
-2) COMPOSANTS PARTAGÉS (toutes les pages) — non fait :
+2) COMPOSANTS PARTAGÉS (toutes les pages) :
+   ✅ FAIT (01/07/2026) : labels UI "Description"/"Caractéristiques"/"AJOUTER AU PANIER" câblés ×29 (prod_desc/prod_feat/prod_add, clés existantes). footer_retour + footer_copyright câblés ×29.
+   RESTE non fait :
    - Bannière COOKIES (compliance.js) : texte + 3 boutons "En savoir plus / Tout refuser / Tout accepter" encore en FR. compliance.js utilise déjà window.t + applyTranslations (modal 18+). -> créer clés cookie_banner_text, cookie_more, cookie_refuse_all, cookie_accept_all (×5) + remplacer les chaînes FR codées en dur par window.t().
    - "Retour boutique" (footer <a href=index.html>) présent sur ~31 fiches, NON câblé. -> clé footer_retour (×5). Exceptions sans ce lien : mini-robe-noire.html, robe-longue-noire-argentee.html (footer différent).
    - "VOTRE PANIER" (titre panier généré par cart.js) : clé cart_title existe déjà -> faire utiliser window.t('cart_title') dans cart.js.
