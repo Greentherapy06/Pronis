@@ -163,15 +163,15 @@ Revenir dans Merchant Center dans 24-48h :
 - **Point B2** - Titre panier "VOTRE PANIER" : cart.js data-i18n="cart_title" : OK, teste live (FR/PT/IT/ES/DE)
 - **Point B3** - Cle i18n.js footer_retour : OK. FR "Retour boutique" / PT "Voltar a loja" / IT "Torna al negozio" / ES "Volver a la tienda" / DE "Zuruck zum Shop"
 
-### Point B3 en cours - ajout data-i18n="footer_retour" sur 29 fiches
+### Point B3 TERMINE (29/29) - data-i18n="footer_retour" sur toutes les fiches
 Remplacement (regex /g) : `<a href="index.html">Retour boutique</a>` -> ajout ` data-i18n="footer_retour"`
 EXCEPTIONS a NE PAS traiter (footer different) : mini-robe-noire.html, robe-longue-noire-argentee.html
 
-**Fiches COMMITTED (19/29) :**
-1-Cockring-vibrant-Marry-Me-Wooomy, 2-Deguisement-Bunny, 3-Magnum-Opus-vibro, 4-Plug-Anal-Rosy-Gold (3 occ), 5-anneau_vibrant_telecommande, 6-black-empire-my-duchess, 7-cockring-vibrant-saturn-hueman, 8-deguisement-enseignante, 9-deguisement-etudiante, 10-deguisement-infirmiere-sexy, 11-dual-vibe-sex-on-the-beach, 12-gel_cannabis_orgie, 13-gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases, 14-gel_lubrifiant_bio_neutre_divine_xtases, 15-gel_lubrifiant_bio_neutre_framboise_divine_xtases, 16-gel_lubrifiant_bio_neutre_monoi_divine_xtases, 17-gel_lubrifiant_bio_neutre_vanille_divine_xtases, 18-hemp-intense-orgasm, 19-le-flateur
+**Fiches COMMITTED (29/29 - TERMINE) :**
+1-Cockring-vibrant-Marry-Me-Wooomy, 2-Deguisement-Bunny, 3-Magnum-Opus-vibro, 4-Plug-Anal-Rosy-Gold (3 occ), 5-anneau_vibrant_telecommande, 6-black-empire-my-duchess, 7-cockring-vibrant-saturn-hueman, 8-deguisement-enseignante, 9-deguisement-etudiante, 10-deguisement-infirmiere-sexy, 11-dual-vibe-sex-on-the-beach, 12-gel_cannabis_orgie, 13-gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases, 14-gel_lubrifiant_bio_neutre_divine_xtases, 15-gel_lubrifiant_bio_neutre_framboise_divine_xtases, 16-gel_lubrifiant_bio_neutre_monoi_divine_xtases, 17-gel_lubrifiant_bio_neutre_vanille_divine_xtases, 18-hemp-intense-orgasm, 19-le-flateur, 20-lubrifiant_eau_lube_tube_chocolat_orgie, 21-lubrifiant_eau_lube_tube_fraise_orgie, 22-lubrifiant_eau_tube_barbe_a_papa, 23-monster-pussy-strocker, 24-orgie-pinacolada, 25-pink-star-choco-fraise, 26-pink-star, 27-pink_star_sucette_cerise, 28-red-dolls-energy-pleasure, 29-vibro-rechargeable-Indiana
 
-**Fiches RESTANTES (20-29) :**
-20-lubrifiant_eau_lube_tube_chocolat_orgie, 21-lubrifiant_eau_lube_tube_fraise_orgie, 22-lubrifiant_eau_tube_barbe_a_papa, 23-monster-pussy-strocker, 24-orgie-pinacolada, 25-pink-star-choco-fraise, 26-pink-star, 27-pink_star_sucette_cerise, 28-red-dolls-energy-pleasure, 29-vibro-rechargeable-Indiana
+**Toutes committees. Exceptions non traitees (footer different) : mini-robe-noire.html, robe-longue-noire-argentee.html.**
+
 
 ### A FAIRE APRES B3
 - **B4** : footer copyright "(c) Les Jardins Enchantes - Boutique Luxe Intime" sur ~31 fiches -> cle footer_copyright (x5), garder la marque
