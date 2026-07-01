@@ -147,3 +147,44 @@ Revenir dans Merchant Center dans 24-48h :
 - Merchant Center : https://merchants.google.com/mc/overview?a=147190726
 - PRODUCTS SOURCE 3 : https://merchants.google.com/mc/products/sources/detail?a=147190726&afmDataSourceId=10665531700
 - Branche par défaut : main
+
+
+---
+
+## PR i18n : Traduction multilingue (EN COURS) - MAJ 01/07/2026
+
+**Ordre langues (STRICT) :** fr / pt / it / es / de  (NE PAS mettre fr/pt/es/it/de sinon inversion ES/IT)
+**Marques NON traduites :** Divine Xtases, Wooomy, Orgie, Pink Star, Hueman, Litolu, Rosy Gold, Magnum Opus, My Duchess, Le Flateur, Monster Pussy Strocker, Red Dolls Energy, Marry Me, Saturn, Love Connection, Indiana, Black Empire, Hemp Intense Orgasm, Sex on the Beach, Pina Colada, Yuka, Bio Organic, Stripe, Google Analytics.
+**RÔLES :** Claude fait TOUT (fetch, traduction, insertion, validation, collage editeur, ouverture dialogue commit). JLShop06 clique uniquement "Commit changes".
+
+### Deja fait (COMMITTED)
+- **Point A** - Test live homepage 5 langues : OK (annonce, hero, SEO, 6 categories, 31 produits, marques intactes)
+- **Point B1** - Banniere cookies : cles i18n.js (cookie_text/more/refuse/accept) + compliance.js data-i18n : OK, teste live
+- **Point B2** - Titre panier "VOTRE PANIER" : cart.js data-i18n="cart_title" : OK, teste live (FR/PT/IT/ES/DE)
+- **Point B3** - Cle i18n.js footer_retour : OK. FR "Retour boutique" / PT "Voltar a loja" / IT "Torna al negozio" / ES "Volver a la tienda" / DE "Zuruck zum Shop"
+
+### Point B3 en cours - ajout data-i18n="footer_retour" sur 29 fiches
+Remplacement (regex /g) : `<a href="index.html">Retour boutique</a>` -> ajout ` data-i18n="footer_retour"`
+EXCEPTIONS a NE PAS traiter (footer different) : mini-robe-noire.html, robe-longue-noire-argentee.html
+
+**Fiches COMMITTED (17/29) :**
+1-Cockring-vibrant-Marry-Me-Wooomy, 2-Deguisement-Bunny, 3-Magnum-Opus-vibro, 4-Plug-Anal-Rosy-Gold (3 occ), 5-anneau_vibrant_telecommande, 6-black-empire-my-duchess, 7-cockring-vibrant-saturn-hueman, 8-deguisement-enseignante, 9-deguisement-etudiante, 10-deguisement-infirmiere-sexy, 11-dual-vibe-sex-on-the-beach, 12-gel_cannabis_orgie, 13-gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases, 14-gel_lubrifiant_bio_neutre_divine_xtases, 15-gel_lubrifiant_bio_neutre_framboise_divine_xtases, 16-gel_lubrifiant_bio_neutre_monoi_divine_xtases, 17-gel_lubrifiant_bio_neutre_vanille_divine_xtases
+
+**Fiches RESTANTES (18-29) :**
+18-hemp-intense-orgasm, 19-le-flateur, 20-lubrifiant_eau_lube_tube_chocolat_orgie, 21-lubrifiant_eau_lube_tube_fraise_orgie, 22-lubrifiant_eau_tube_barbe_a_papa, 23-monster-pussy-strocker, 24-orgie-pinacolada, 25-pink-star-choco-fraise, 26-pink-star, 27-pink_star_sucette_cerise, 28-red-dolls-energy-pleasure, 29-vibro-rechargeable-Indiana
+
+### A FAIRE APRES B3
+- **B4** : footer copyright "(c) Les Jardins Enchantes - Boutique Luxe Intime" sur ~31 fiches -> cle footer_copyright (x5), garder la marque
+- **Point C** : CSS hero mobile (@media 768px et 480px, rendu premium) - <style> inline dans index.html
+- **Point D** : re-scan 32 fiches produits (title data-i18n + cles) via raw/JSON editeur (PAS l'API en rafale -> 403) ; re-verifier saturn/enseignante (cache edge Vercel)
+- **Optionnel** : etendre applyTranslations() a title/placeholder/alt (SEO/accessibilite)
+
+### Notes techniques i18n
+- raw.githubusercontent peut etre en cache CDN ; API rate-limited (403) -> utiliser fetch cache:'reload'
+- CSP bloque new Function() dans l'editeur -> validation structurelle par regex/slice
+- variables window perdues a la navigation -> regenerer window.__pageNew apres chaque navigate
+- Collage : ClipboardEvent sur .cm-content apres Ctrl+A (clic [400,300] pour focus)
+- applyTranslations() utilise textContent sauf si la valeur contient une balise (alors innerHTML)
+- NE PAS enchainer trop vite l'ouverture du dialogue commit apres le collage (bug message tape dans l'editeur)
+- Laisser le message de commit par defaut (Copilot pollue si on tape)
+- A revisiter : Plug-Anal-Rosy-Gold.html a 3 footers dont 2 avec liens Confidentialite/Cookies/Mentions PAS cables ; cart.js ligne 245 <span>TOTAL</span> en dur
