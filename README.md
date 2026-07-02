@@ -143,3 +143,108 @@ C) BANNIÈRE HERO MOBILE (CSS — demande explicite "haut de gamme/luxe") :
 D) RE-SCAN FICHES PRODUITS (vérif finale) : via raw/API (PAS l'API en rafale -> 403). Confirmer title data-i18n + clés présentes. Les fiches sont marquées faites mais re-vérifier saturn/enseignante (cache edge signalé).
 
 RAPPEL CLÉS HOME AJOUTÉES (déjà dans i18n.js, ordre fr/pt/it/es/de) : home_hero_baseline, home_hero_desc, home_seo_intro_title, home_seo_intro_p1..p3, home_seo_grid_t1..t3 + p1..p3, home_seo_why_title, home_seo_why_text, home_cat_1..6, home_footer_seo, home_prod_1..31. (home_announce N'EXISTE PAS : utiliser banner_livraison.)
+
+
+========================================================================
+REPRISE — BUG BOUTON PANIER (data-i18n="panier") — MAJ 02/07/2026
+========================================================================
+
+CONTEXTE DU BUG :
+Le bouton PANIER du header ("PANIER (0)") n'etait traduit QUE sur l'accueil.
+Sur les autres pages il etait ecrit sans le span i18n :
+  <button class="lux-cart" onclick="showCart()">PANIER (<span id="cartCount">0</span>)</button>
+=> il fallait ajouter <span data-i18n="panier">PANIER</span> pour qu'il devienne
+   WARENKORB / CARRINHO / etc. selon la langue.
+
+CORRECTIF APPLIQUE (par page) :
+  Regex : PANIER(\s*)\(<span id="cartCount">
+  Remplacement : <span data-i18n="panier">PANIER</span>$1(<span id="cartCount">
+  (le flag /g gere les pages a plusieurs occurrences)
+
+WORKFLOW PAR PAGE (RÔLES : Claude fait tout SAUF le clic Commit) :
+  1. Aller sur github.com/JLShop06/Les-Jardins-Enchantes/edit/main/[FICHIER]
+  2. Extraire le HTML depuis le JSON de l'editeur (script[type=application/json],
+     chaine contenant 'lux-cart' + '<!DOCTYPE'), appliquer le remplacement,
+     stocker dans window.__new. Verifier occ_before / i18n_after / delta(=occ*32).
+  3. Coller : click [400,300], Ctrl+A, ClipboardEvent paste sur .cm-content
+     (DataTransfer text/plain = window.__new). Verifier defaultPrevented:true.
+  4. L'UTILISATEUR (JLShop06) clique "Commit changes...". Laisser le message par defaut.
+
+NOTES TECHNIQUES :
+  - CodeMirror virtualise => verif textContent apres collage NON FIABLE.
+    Se fier a i18n_after (avant collage) + defaultPrevented:true.
+  - Retours JS contenant des URL => filtre "[BLOCKED]". Renvoyer des compteurs/booleens.
+  - fetch avec {cache:'reload'} (CDN raw + rate-limit API 403).
+  - NE PAS toucher au CSS (style.css a des blocs dupliques, instruction utilisateur).
+
+------------------------------------------------------------------------
+AVANCEMENT — 20 pages COMMITTEES (bouton panier corrige) :
+------------------------------------------------------------------------
+ 1. hemp-intense-orgasm.html
+ 2. dual-vibe-sex-on-the-beach.html (2 occ)
+ 3. Plug-Anal-Rosy-Gold.html (3 occ)
+ 4. gel_lubrifiant_bio_neutre_divine_xtases.html
+ 5. gel_lubrifiant_bio_neutre_vanille_divine_xtases.html
+ 6. gel_lubrifiant_bio_neutre_framboise_divine_xtases.html
+ 7. gel_lubrifiant_bio_neutre_monoi_divine_xtases.html
+ 8. gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html
+ 9. gel_cannabis_orgie.html
+10. lubrifiant_eau_tube_barbe_a_papa.html
+11. lubrifiant_eau_lube_tube_chocolat_orgie.html
+12. lubrifiant_eau_lube_tube_fraise_orgie.html
+13. pink-star.html
+14. pink_star_sucette_cerise.html
+15. pink-star-choco-fraise.html
+16. orgie-pinacolada.html
+17. vibro-rechargeable-Indiana.html
+18. Magnum-Opus-vibro.html
+19. black-empire-my-duchess.html
+20. le-flateur.html
+
+------------------------------------------------------------------------
+RESTE A FAIRE — 15 pages (scan live du 02/07/2026, cache:reload) :
+------------------------------------------------------------------------
+Pages produits/autres (10) — bouton panier uniquement (1 occ chacune) :
+  - robe-longue-noire-argentee.html
+  - mini-robe-noire.html
+  - monster-pussy-strocker.html
+  - red-dolls-energy-pleasure.html
+  - Cockring-vibrant-Marry-Me-Wooomy.html
+  - cockring-vibrant-saturn-hueman.html
+  - anneau_vibrant_telecommande.html
+  - deguisement-etudiante.html
+  - deguisement-enseignante.html
+  (NB: deguisement-infirmiere-sexy n'apparait PLUS dans le scan live -> ignorer)
+
+Pages legales (5) — bouton panier (1 occ) :
+  - cgv.html            (AUSSI cart_title manquant sur <h2>VOTRE PANIER</h2>)
+  - cookies.html        (AUSSI cart_title manquant)
+  - confidentialite.html(AUSSI cart_title manquant)
+  - mentions-legales.html
+  - retractation.html
+
+  => Sur cgv/cookies/confidentialite : ajouter EN PLUS data-i18n="cart_title"
+     sur le <h2>VOTRE PANIER</h2> (la cle cart_title existe deja dans i18n.js).
+
+------------------------------------------------------------------------
+TACHE FINALE (apres les 15 pages) — lien "Renoncer au contrat" :
+------------------------------------------------------------------------
+Le lien injecte par compliance.js est en dur en francais. Il faut :
+  - creer une nouvelle cle i18n (ex: "renoncer_contrat") avec 5 traductions
+    fr/pt/it/es/de A FAIRE VALIDER PAR L'UTILISATEUR avant insertion,
+  - cabler dans compliance.js.
+FR = "Renoncer au contrat" ; PT/IT/ES/DE a proposer et faire valider.
+
+------------------------------------------------------------------------
+SCRIPT DE RE-SCAN (a lancer sur l'onglet du site live pour lister le reste) :
+------------------------------------------------------------------------
+  fetch chaque page avec {cache:'reload'}, tester /data-i18n="panier"/.
+  Les pages sans cette chaine restent a corriger.
+
+RAPPEL RÔLES : Claude fait TOUT sauf le clic final "Commit changes" (JLShop06).
+Ordre langues STRICT : fr / pt / it / es / de.
+Marques NON traduites : Divine Xtases, Wooomy, Orgie, Pink Star, Hueman, Litolu,
+Rosy Gold, Magnum Opus, My Duchess, Le Flateur, Monster Pussy Strocker,
+Red Dolls Energy, Marry Me, Saturn, Indiana, Black Empire, Hemp Intense Orgasm,
+Sex on the Beach, Pina Colada, Yuka, Bio Organic, Stripe, Google Analytics.
+========================================================================
