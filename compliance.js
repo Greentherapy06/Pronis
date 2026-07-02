@@ -211,7 +211,8 @@
     if (footer.querySelector('a[href="retractation.html"], a[href="/retractation"]')) return;
     var a = document.createElement('a');
     a.href = 'retractation.html';
-    a.textContent = 'Renoncer au contrat';
+    a.setAttribute('data-i18n', 'renoncer_contrat');
+    a.textContent = (typeof window.t === 'function' ? window.t('renoncer_contrat') : 'Renoncer au contrat');
     footer.appendChild(document.createTextNode(' '));
     footer.appendChild(a);
   }
