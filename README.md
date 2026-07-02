@@ -248,3 +248,31 @@ Rosy Gold, Magnum Opus, My Duchess, Le Flateur, Monster Pussy Strocker,
 Red Dolls Energy, Marry Me, Saturn, Indiana, Black Empire, Hemp Intense Orgasm,
 Sex on the Beach, Pina Colada, Yuka, Bio Organic, Stripe, Google Analytics.
 ========================================================================
+
+================================================== SESSION CLÔTURÉE — MAJ 02/07/2026 (fin de session Claude)
+
+BUG BOUTON PANIER (data-i18n="panier") : TERMINÉ 100%.
+Les 14 pages restantes ont été committées (span data-i18n="panier" sur le bouton du header) :
+robe-longue-noire-argentee, mini-robe-noire, monster-pussy-strocker, red-dolls-energy-pleasure,
+Cockring-vibrant-Marry-Me-Wooomy, cockring-vibrant-saturn-hueman, anneau_vibrant_telecommande,
+deguisement-etudiante, deguisement-enseignante, cgv, cookies, confidentialite, mentions-legales, retractation.
+Vérifié en live via raw GitHub (cache:reload) : panier=1 partout, plus aucun "PANIER (" brut (left=0).
+
+cart_title ("VOTRE PANIER") : câblé data-i18n="cart_title" sur les 4 pages légales ayant un titre statique :
+cgv, cookies, confidentialite ET mentions-legales (cette dernière ajoutée par cohérence, le titre y était présent
+et non câblé ; validé par JLShop06). retractation n'a pas de titre panier statique (généré côté JS).
+
+LIEN "Renoncer au contrat" (compliance.js) : TERMINÉ.
+- i18n.js : clé renoncer_contrat ajoutée ×5 (ordre fr/pt/it/es/de), insérée après home_prod_31 dans chaque bloc de langue.
+  Valeurs (validées par JLShop06) : fr="Renoncer au contrat", pt="Renunciar ao contrato",
+  it="Recedere dal contratto", es="Renunciar al contrato", de="Vom Vertrag zurücktreten".
+  Validé : 5 clés, accolades équilibrées.
+- compliance.js (ligne ~214, ancre 'a' du footer rétractation) : ancien 'a.textContent = "Renoncer au contrat"' remplacé par
+  a.setAttribute('data-i18n','renoncer_contrat') + a.textContent = window.t('renoncer_contrat') (fallback FR).
+  NB : applyTranslations() est appelé AVANT l'injection de ce footer -> le rendu initial passe donc par window.t(),
+  et data-i18n assure la retraduction lors d'un changement de langue ultérieur.
+
+VÉRIF : commits confirmés sur GitHub raw (i18n.js 5 valeurs OK ; compliance.js window.t + data-i18n OK, ancienne ligne supprimée).
+Simulation window.t par langue : les 5 traductions renvoyées correctement.
+RESTE (auto) : propagation cache edge Vercel non instantanée -> re-tester le lien live dans les 5 langues après expiration du cache.
+========================================================================
