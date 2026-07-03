@@ -4117,6 +4117,8 @@ if (document.readyState === "loading") {
     + '.dd--lang .dd__panel{min-width:120px}'
     + '.dd--lang .dd__item{justify-content:center;letter-spacing:2px}'
     + '.lux-mbrand{display:none}'
+    + '.lux-mmenus{display:none}'
+    + '@media(min-width:561px){.lux-header{background:linear-gradient(180deg,rgba(10,8,4,.85) 0%,rgba(10,8,4,.45) 60%,rgba(10,8,4,0) 100%)!important;border-bottom:1px solid rgba(202,168,106,.14)}.lux-header:hover{background:linear-gradient(180deg,rgba(10,8,4,.92) 0%,rgba(10,8,4,.6) 100%)!important}}'
     + '@media(max-width:768px){.lux-header{flex-wrap:wrap;gap:14px 10px}.nav-dd .dd__panel{right:auto;left:0}.dd--lang .dd__panel{right:0;left:auto}}'
     + '@media(max-width:560px){'
     + '.lux-header{display:grid!important;grid-template-columns:auto 1fr auto;grid-template-areas:"logo brand cart" "menus menus menus";align-items:center;gap:16px 12px;padding:16px 18px 18px;background:linear-gradient(180deg,#0d0a06 0%,#141009 100%);border-bottom:1px solid rgba(202,168,106,.22);box-shadow:0 1px 0 rgba(202,168,106,.10),0 14px 34px rgba(0,0,0,.45)}'
