@@ -276,3 +276,41 @@ VÉRIF : commits confirmés sur GitHub raw (i18n.js 5 valeurs OK ; compliance.js
 Simulation window.t par langue : les 5 traductions renvoyées correctement.
 RESTE (auto) : propagation cache edge Vercel non instantanée -> re-tester le lien live dans les 5 langues après expiration du cache.
 ========================================================================
+
+
+---
+
+## SUIVI PERFORMANCE & NAVIGATION AGENTIQUE (PageSpeed) — MAJ 2026-07-03
+
+Rapport PageSpeed (mobile) : https://pagespeed.web.dev/analysis/https-les-jardins-enchantes-com/rukr1digid?form_factor=mobile
+Scores de depart : Performances 78, Accessibilite 91, Bonnes pratiques 100, SEO 100, Navigation agentique 2/3.
+
+### RÔLES (identiques a l'i18n)
+Claude fait TOUT (fetch, calcul dimensions, collage dans l'editeur, verification debut/fin). L'utilisateur (JLShop06) clique UNIQUEMENT sur "Commit changes".
+
+### PLAN
+- A. llms.txt avec vrais liens Markdown — ✅ FAIT
+- B. Ajouter width/height sur les <img> (reduit le CLS 0.388) — EN COURS
+- C. Recompresser/redimensionner les ~13 images les plus lourdes (1.2–1.5 Mo) — A FAIRE
+- D. Corriger 69 animations CSS non compositees (utiliser transform/opacity) — A FAIRE
+
+### ETAPE B — width/height : fichiers FAITS (commit confirme via API)
+llms.txt, index.html, Plug-Anal-Rosy-Gold.html, le-flateur.html, mini-robe-noire.html, red-dolls-energy-pleasure.html, robe-longue-noire-argentee.html, Cockring-vibrant-Marry-Me-Wooomy.html, Déguisement-Bunny.html, Magnum-Opus-vibro.html, anneau_vibrant_telecommande.html, black-empire-my-duchess.html, cockring-vibrant-saturn-hueman.html, deguisement-enseignante.html, deguisement-etudiante.html, deguisement-infirmière-sexy.html
+
+### ETAPE B — fichiers RESTANTS (img sans width/height)
+dual-vibe-sex-on-the-beach.html (4), gel_cannabis_orgie.html (3), gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html (1), gel_lubrifiant_bio_neutre_divine_xtases.html (1), gel_lubrifiant_bio_neutre_framboise_divine_xtases.html (1), gel_lubrifiant_bio_neutre_monoi_divine_xtases.html (1), gel_lubrifiant_bio_neutre_vanille_divine_xtases.html (1), hemp-intense-orgasm.html (3), lubrifiant_eau_lube_tube_chocolat_orgie.html (3), lubrifiant_eau_lube_tube_fraise_orgie.html (3), lubrifiant_eau_tube_barbe_a_papa.html (3), monster-pussy-strocker.html (4), orgie-pinacolada.html (1), pink-star-choco-fraise.html (1), pink-star.html (1), pink_star_sucette_cerise.html (1), vibro-rechargeable-Indiana.html (a verifier)
+
+### PAGES SANS IMAGE (a ignorer)
+cancel, cgv, confidentialite, cookies, erreur, mentions-legales, retractation, success, veille-concurrents
+
+### METHODE PAR FICHIER (une a une, via editeur web GitHub)
+1. Aller sur https://github.com/JLShop06/Les-Jardins-Enchantes/edit/main/<FICHIER>
+2. En JS sur cette page : fetch du raw, extraire les <img>, fetch chaque image (createImageBitmap) pour width/height naturels, regex-remplacer les <img> sans width/height. Stocker dans window.__newFileHtml. (IMPORTANT: recalculer APRES avoir navigue, sinon la variable est "undefined").
+3. Clic dans l'editeur, Ctrl+A, Delete (vider completement AVANT de coller).
+4. Coller via ClipboardEvent('paste') sur .cm-content.
+5. Ctrl+Home puis Ctrl+End : verifier un seul <!DOCTYPE html> au debut et footer propre a la fin.
+6. Demander a l'utilisateur de cliquer "Commit changes".
+7. Verifier via API : https://api.github.com/repos/JLShop06/Les-Jardins-Enchantes/contents/<FICHIER> (base64 decode, compter width="X" height="Y"). NE PAS se fier a raw.githubusercontent (cache CDN en retard).
+
+### METHODE PLUS RAPIDE (github.dev / VS Code web) — a activer
+Ouvrir https://vscode.dev/github/JLShop06/Les-Jardins-Enchantes , autoriser "Visual Studio Code" (Continue en tant que JLShop06). Permet d'editer plusieurs fichiers puis 1 seul commit groupe. L'utilisateur valide la connexion.
