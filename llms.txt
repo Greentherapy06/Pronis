@@ -1,22 +1,57 @@
 # Les Jardins Enchantés
 
-> Boutique sextoys France premium — gel lubrifiant intime bio, huile de massage érotique, stimulateurs clitoridiens, vibromasseurs, cockrings vibrants.
+> Boutique en ligne de sextoys, gels lubrifiants intimes bio et accessoires premium, livraison discrète en France et en Europe.
 
-Certifiés Bio Organic, Yuka 100/100. Livraison discrète France et Europe.
+Boutique certifiée Bio Organic et Yuka 100/100 sur les produits bio. Paiement sécurisé via Stripe.
 
-## Produits
+## Vibromasseurs et stimulateurs
 
-- Gels lubrifiants intimes bio (Divine Xtases, Orgie, Pink Star)
-- Huiles de massage érotiques BIO
-- Stimulateurs clitoridiens silencieux rechargeables
-- Vibromasseurs premium
-- Cockrings vibrants rechargeables
-- Masturbateurs homme
-- Déguisements sexy
+- [Vibromasseur Indiana](https://les-jardins-enchantes.com/vibro-rechargeable-Indiana.html): vibromasseur rechargeable premium.
+- [Magnum Opus](https://les-jardins-enchantes.com/Magnum-Opus-vibro.html): vibromasseur haut de gamme.
+- [Monster Pussy Strocker](https://les-jardins-enchantes.com/monster-pussy-strocker.html): masturbateur homme.
+- [Red Dolls Energy](https://les-jardins-enchantes.com/red-dolls-energy-pleasure.html): masturbateur vaginal.
+- [Plug Anal Rosy Gold](https://les-jardins-enchantes.com/Plug-Anal-Rosy-Gold.html): plug anal.
+- [Anneau vibrant télécommandé](https://les-jardins-enchantes.com/anneau_vibrant_telecommande.html): cockring vibrant à télécommande.
+- [Cockring Marry Me (Wooomy)](https://les-jardins-enchantes.com/Cockring-vibrant-Marry-Me-Wooomy.html): cockring vibrant.
+- [Cockring Saturn (Hueman)](https://les-jardins-enchantes.com/cockring-vibrant-saturn-hueman.html): cockring vibrant.
+- [Dual Vibe Sex on the Beach](https://les-jardins-enchantes.com/dual-vibe-sex-on-the-beach.html): stimulateur duo.
+- [Black Empire My Duchess](https://les-jardins-enchantes.com/black-empire-my-duchess.html): stimulateur premium.
+- [Le Flateur](https://les-jardins-enchantes.com/le-flateur.html): stimulateur clitoridien silencieux rechargeable.
+- [Hemp Intense Orgasm](https://les-jardins-enchantes.com/hemp-intense-orgasm.html): stimulateur au chanvre.
+- [Pink Star](https://les-jardins-enchantes.com/pink-star.html): stimulateur clitoridien.
+- [Pink Star Choco Fraise](https://les-jardins-enchantes.com/pink-star-choco-fraise.html): variante gourmande.
+- [Pink Star Sucette Cerise](https://les-jardins-enchantes.com/pink_star_sucette_cerise.html): variante gourmande.
+- [Orgie Piña Colada](https://les-jardins-enchantes.com/orgie-pinacolada.html): stimulateur gourmand.
 
-## Informations
+## Gels lubrifiants bio
 
-- URL: https://lesjardinsenchantes.vercel.app/
-- Pays: France, Belgique, Suisse, Italie, Espagne, Allemagne, Pays-Bas, Portugal
-- Paiement: Stripe sécurisé
-- Livraison: discrète, emballage neutre
+- [Gel bio neutre](https://les-jardins-enchantes.com/gel_lubrifiant_bio_neutre_divine_xtases.html): gel lubrifiant bio neutre.
+- [Gel bio vanille](https://les-jardins-enchantes.com/gel_lubrifiant_bio_neutre_vanille_divine_xtases.html): gel lubrifiant bio vanille.
+- [Gel bio framboise](https://les-jardins-enchantes.com/gel_lubrifiant_bio_neutre_framboise_divine_xtases.html): gel lubrifiant bio framboise.
+- [Gel bio monoï](https://les-jardins-enchantes.com/gel_lubrifiant_bio_neutre_monoi_divine_xtases.html): gel lubrifiant bio monoï.
+- [Gel bio caramel beurre salé](https://les-jardins-enchantes.com/gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html): gel lubrifiant bio gourmand.
+- [Gel cannabis (Orgie)](https://les-jardins-enchantes.com/gel_cannabis_orgie.html): gel excitant parfumé.
+- [Lube tube barbe à papa](https://les-jardins-enchantes.com/lubrifiant_eau_tube_barbe_a_papa.html): lubrifiant à l'eau gourmand.
+- [Lube tube chocolat (Orgie)](https://les-jardins-enchantes.com/lubrifiant_eau_lube_tube_chocolat_orgie.html): lubrifiant à l'eau gourmand.
+- [Lube tube fraise (Orgie)](https://les-jardins-enchantes.com/lubrifiant_eau_lube_tube_fraise_orgie.html): lubrifiant à l'eau gourmand.
+
+## Déguisements
+
+- [Déguisement Bunny](https://les-jardins-enchantes.com/Déguisement-Bunny.html): déguisement sexy.
+- [Déguisement enseignante](https://les-jardins-enchantes.com/deguisement-enseignante.html): déguisement sexy.
+- [Déguisement étudiante](https://les-jardins-enchantes.com/deguisement-etudiante.html): déguisement sexy.
+- [Déguisement infirmière sexy](https://les-jardins-enchantes.com/deguisement-infirmière-sexy.html): déguisement sexy.
+- [Robe longue décolleté plongeant](https://les-jardins-enchantes.com/robe-longue-noire-argentee.html): robe de soirée noire et argentée.
+- [Mini robe noire](https://les-jardins-enchantes.com/mini-robe-noire.html): mini robe noire.
+
+## Informations pratiques
+
+- [CGV](https://les-jardins-enchantes.com/cgv.html): conditions générales de vente.
+- [Politique de confidentialité](https://les-jardins-enchantes.com/confidentialite.html): traitement des données personnelles (RGPD).
+- [Politique de cookies](https://les-jardins-enchantes.com/cookies.html): gestion des cookies et mesure d'audience.
+- [Mentions légales](https://les-jardins-enchantes.com/mentions-legales.html): informations légales de l'éditeur.
+- [Droit de rétractation](https://les-jardins-enchantes.com/retractation.html): formulaire et conditions de rétractation.
+
+## Optional
+
+- Paiement sécurisé via Stripe. Livraison discrète, emballage neutre. Zones desservies : France, Belgique, Suisse, Italie, Espagne, Allemagne, Pays-Bas, Portugal.
