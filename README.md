@@ -358,3 +358,30 @@ NE PAS se fier a raw.githubusercontent.com (cache CDN en retard de plusieurs min
 - Prochain fichier a traiter : dual-vibe-sex-on-the-beach.html (4 images).
 - Puis suivre la liste "fichiers RESTANTS" dans l'ordre.
 - ETAPE C (recompression ~13 images lourdes) et ETAPE D (69 animations CSS non compositees) : PAS COMMENCEES.
+
+
+==================================================
+SESSION PERFORMANCE — MAJ 2026-07-03 (fin de session)
+
+RÔLES : Claude fait tout (compression images via Canvas, calcul dimensions, verif) SAUF le remplacement/commit final des fichiers (JLShop06).
+
+ETAPE B (width/height images) : TERMINEE 100%. Les 4 derniers fichiers committes (par JLShop06) :
+- pink-star-choco-fraise.html (img 1024x1536)
+- pink-star.html (img 1024x1535)
+- pink_star_sucette_cerise.html (img 1023x1537)
+- vibro-rechargeable-Indiana.html (3 img : 1024x1536, 800x1200, 800x1200)
+Balayage complet API GitHub (cache:reload) sur les 17 fichiers "RESTANTS" : toutes les images ont width/height (allOk, 0 restant). CLS visé reglé.
+
+ETAPE C (compression images lourdes) : FAITE.
+- Logo favicon.webp : 1,90 Mo -> ~20 Ko. Redimensionne 1254x1254 -> 400x400, WebP q75 (via Squoosh). Remplace + committe par JLShop06.
+- 13 images produit lourdes (>1 Mo) recompressees WebP 800px de large, q75, via Canvas navigateur (createImageBitmap + canvas.toBlob('image/webp',0.75)). Total ~17 Mo -> ~690 Ko (-96%). Fichiers telecharges avec noms exacts, remplaces par lot + committes par JLShop06. Verif : aucun doublon "(1)" dans le depot, 13 noms presents, images en ligne = versions compressees.
+  Liste (avant -> apres Ko) : Robe longue argentee 1496->87 ; Mini robe noire 1484->66 ; lubrifiant fraise 1435->72 ; lubrifiant chocolat 1417->63 ; Magnum-Opus 1346->51 ; barbe a papa 1318->48 ; gel-cannabis 1295->52 ; red-dolls 1276->47 ; Cockring Marry-Me 1261->42 ; vibro-elegance 1234->56 ; le-flateur 1214->41 ; cockring-saturn 1199->36 ; plug rosy-gold 1173->29.
+
+METHODE COMPRESSION FIABLE (sans Squoosh, tout auto) : sur un onglet du domaine du site (CORS ok), fetch(url,{cache:'reload'}) -> createImageBitmap -> canvas 800px large (ratio conserve) -> canvas.toBlob('image/webp',0.75) -> download via a[download]=nom_exact. WebP encode nativement par le navigateur.
+
+RESULTATS PAGESPEED MOBILE (avant -> apres) : Score ~73-77 instable -> ~80-81 stable. CLS 0.388 -> 0.026 (vert). TBT 10ms -> 0ms. LCP 6,2s -> 4,3s (encore ameliorable). FCP/SI ~2,9s.
+NOTE : le score mobile PageSpeed fluctue de +/-15 pts d'un test a l'autre (serveurs Google). Toujours faire 3 tests et prendre la tendance.
+
+ETAPE D (69 animations CSS non compositees) : NON FAITE (choix JLShop06). Analyse : les @keyframes (starsFloat/fadeIn/fadeInUp) utilisent deja transform/opacity (OK). Seuls 7 "transition: all" restent non-composites. Impact quasi nul sur le score (TBT deja 0ms) + risque sur style.css (blocs dupliques, consigne "ne pas toucher"). Abandonnee sciemment.
+
+RESTE (optionnel) : baisser encore le LCP (element LCP = image haut de page ; pistes : preload de l'image LCP, verifier fetchpriority=high, eviter loading=lazy sur l'image above-the-fold). Recompression restante negligeable (images deja <270 Ko).
