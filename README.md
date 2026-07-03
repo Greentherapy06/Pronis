@@ -314,3 +314,47 @@ cancel, cgv, confidentialite, cookies, erreur, mentions-legales, retractation, s
 
 ### METHODE PLUS RAPIDE (github.dev / VS Code web) — a activer
 Ouvrir https://vscode.dev/github/JLShop06/Les-Jardins-Enchantes , autoriser "Visual Studio Code" (Continue en tant que JLShop06). Permet d'editer plusieurs fichiers puis 1 seul commit groupe. L'utilisateur valide la connexion.
+
+
+---
+
+## REPRISE AVEC VISUAL STUDIO CODE (github.dev) — INSTRUCTIONS DETAILLEES
+
+### Objectif
+Editer plusieurs fichiers HTML d'un coup et faire UN SEUL commit groupe, au lieu de la methode fichier-par-fichier (plus lente). Cela sert a finir l'ETAPE B (width/height) sur les 17 fichiers restants, puis a preparer C et D.
+
+### 1. Ouvrir l'editeur
+Aller sur : https://vscode.dev/github/JLShop06/Les-Jardins-Enchantes
+(ou appuyer sur "." (point) depuis la page GitHub du repo — cela ouvre github.dev.)
+
+### 2. Autoriser la connexion (fait par JLShop06, PAS par Claude)
+- Sur l'ecran "Authorize Visual Studio Code", cliquer "Continue" (connecte en tant que JLShop06).
+- Si un ecran GitHub OAuth apparait, cliquer "Authorize".
+- Attendre que l'arborescence des fichiers s'affiche a gauche (explorer).
+- NOTE : la 1ere tentative etait restee bloquee sur "Connexion a github.com...". Si ca rebloque : recharger l'onglet, ou revenir a la methode fichier-par-fichier (voir plus haut) qui marche a 100%.
+
+### 3. Workflow d'edition dans VS Code web
+Pour CHAQUE fichier restant (liste "ETAPE B — fichiers RESTANTS" plus haut) :
+- Ouvrir le fichier dans l'explorer.
+- Claude calcule les dimensions naturelles des images (fetch raw + createImageBitmap) et fournit le contenu corrige (img avec width="W" height="H").
+- Remplacer le contenu du fichier par la version corrigee (Ctrl+A, Delete, coller).
+- Ne PAS oublier : recalculer les dimensions APRES ouverture (variable JS sinon "undefined").
+
+### 4. Commit groupe (fait par JLShop06)
+- Cliquer sur l'icone "Source Control" (branche, colonne de gauche) ou Ctrl+Shift+G.
+- Verifier la liste des fichiers modifies (Changes).
+- Ecrire un message de commit (ex : "perf: ajout width/height images (CLS) — lot 2").
+- Cliquer "Commit & Push" (coche verte / bouton). => C'est JLShop06 qui valide le commit, jamais Claude.
+
+### 5. Verification (Claude)
+Apres push, verifier chaque fichier via l'API :
+https://api.github.com/repos/JLShop06/Les-Jardins-Enchantes/contents/<FICHIER>?ref=main
+avec header Accept: application/vnd.github.raw, puis compter les width="X" height="Y".
+NE PAS se fier a raw.githubusercontent.com (cache CDN en retard de plusieurs minutes).
+
+### ETAT AU MOMENT DE LA SAUVEGARDE
+- ETAPE A (llms.txt) : FAIT.
+- ETAPE B (width/height) : 16 fichiers FAITS. deguisement-infirmière-sexy.html : prepare et colle dans l'editeur GitHub mais COMMIT A CONFIRMER (verifier via API : doit avoir 4 paires width/height, ~277 lignes).
+- Prochain fichier a traiter : dual-vibe-sex-on-the-beach.html (4 images).
+- Puis suivre la liste "fichiers RESTANTS" dans l'ordre.
+- ETAPE C (recompression ~13 images lourdes) et ETAPE D (69 animations CSS non compositees) : PAS COMMENCEES.
