@@ -272,7 +272,7 @@ ensureCartModal();
 (function initPerfOptimizations() {
 // 1. Lazy loading for images below the fold on product pages
 function applyLazyLoading() {
-const imgs = document.querySelectorAll('img:not([loading])');
+const imgs = document.querySelectorAll('img:not([loading]):not([fetchpriority="high"])');
 imgs.forEach(function(img, i) {
 // Skip first image (hero/product main) - keep eager loading
 if (i === 0) {
