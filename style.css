@@ -416,6 +416,13 @@ article img {
     transition: 0.4s ease;
 }
 
+/* Gel lubrifiant bio : cadre au format 3:2, image intacte */
+article[data-category="gamme-bio"] img{
+    max-height: none;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+}
+
 article:hover img {
     filter: brightness(1.12);
     border-color: rgba(202,168,106,0.35);
@@ -1358,6 +1365,13 @@ article img {
     transition: 0.4s ease;
 }
 
+/* Gel lubrifiant bio : cadre au format 3:2, image intacte */
+article[data-category="gamme-bio"] img{
+    max-height: none;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+}
+
 article:hover img {
     filter: brightness(1.12);
     border-color: rgba(202,168,106,0.35);
@@ -2298,6 +2312,13 @@ article img {
     border-radius: 4px;
     border: 1px solid rgba(202,168,106,0.15);
     transition: 0.4s ease;
+}
+
+/* Gel lubrifiant bio : cadre au format 3:2, image intacte */
+article[data-category="gamme-bio"] img{
+    max-height: none;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
 }
 
 article:hover img {
