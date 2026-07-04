@@ -941,14 +941,6 @@ button:hover {
 /* Screen reader only - SEO text hidden visually */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* Gel lubrifiant bio images : ratio fixe 3:2 identique PC + mobile */
-article[data-category="gel-lubrifiant-bio"] img{
-    width:100%;
-    aspect-ratio:3/2;
-    max-height:none;
-    object-fit:cover;
-    object-position:center;
-}
 /* ================= ROOT ================= */
 
 :root {
@@ -1891,14 +1883,6 @@ button:hover {
 /* Screen reader only - SEO text hidden visually */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* Gel lubrifiant bio images : ratio fixe 3:2 identique PC + mobile */
-article[data-category="gel-lubrifiant-bio"] img{
-    width:100%;
-    aspect-ratio:3/2;
-    max-height:none;
-    object-fit:cover;
-    object-position:center;
-}
 /* ================= ROOT ================= */
 
 :root {
@@ -2841,14 +2825,6 @@ button:hover {
 /* Screen reader only - SEO text hidden visually */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* Gel lubrifiant bio images : ratio fixe 3:2 identique PC + mobile */
-article[data-category="gel-lubrifiant-bio"] img{
-    width:100%;
-    aspect-ratio:3/2;
-    max-height:none;
-    object-fit:cover;
-    object-position:center;
-}
 
 
 /* === Selecteur de langue === */
