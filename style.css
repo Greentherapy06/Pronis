@@ -420,6 +420,7 @@ article img {
 article[data-category="gamme-bio"] img{
     width: 100%;
     max-height: none;
+    height: auto;
     aspect-ratio: 3 / 2;
     object-fit: contain;
 }
@@ -1370,6 +1371,7 @@ article img {
 article[data-category="gamme-bio"] img{
     width: 100%;
     max-height: none;
+    height: auto;
     aspect-ratio: 3 / 2;
     object-fit: contain;
 }
@@ -2320,6 +2322,7 @@ article img {
 article[data-category="gamme-bio"] img{
     width: 100%;
     max-height: none;
+    height: auto;
     aspect-ratio: 3 / 2;
     object-fit: contain;
 }
