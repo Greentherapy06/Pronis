@@ -385,3 +385,49 @@ NOTE : le score mobile PageSpeed fluctue de +/-15 pts d'un test a l'autre (serve
 ETAPE D (69 animations CSS non compositees) : NON FAITE (choix JLShop06). Analyse : les @keyframes (starsFloat/fadeIn/fadeInUp) utilisent deja transform/opacity (OK). Seuls 7 "transition: all" restent non-composites. Impact quasi nul sur le score (TBT deja 0ms) + risque sur style.css (blocs dupliques, consigne "ne pas toucher"). Abandonnee sciemment.
 
 RESTE (optionnel) : baisser encore le LCP (element LCP = image haut de page ; pistes : preload de l'image LCP, verifier fetchpriority=high, eviter loading=lazy sur l'image above-the-fold). Recompression restante negligeable (images deja <270 Ko).
+
+
+============================================================
+JOURNAL DES CORRECTIONS - Session 2026-07-05 (Claude)
+============================================================
+
+Contexte : correction des fiches produit (32 fiches) et d'une fiche mal etiquetee.
+
+1) IMAGES NON ROGNEES (object-fit)
+   - Remplacement de "object-fit:cover" par "object-fit:contain" dans la
+     regle CSS ".product-image-frame img" sur toutes les fiches produit.
+   - Attention : certaines fiches avaient PLUSIEURS blocs
+     ".product-image-frame img" (ex: Plug-Anal-Rosy-Gold = 3 blocs,
+     dual-vibe = 2). Toutes les occurrences ont ete traitees, pas seulement
+     la premiere.
+   - Verifie : 32/32 fiches sans "object-fit:cover".
+
+2) SUPPRESSION DU CADRE BLANC AUTOUR DES PHOTOS
+   - Retrait de "background:#ffffff" et "padding:15px" dans la regle
+     ".product-image-frame img" sur les 32 fiches produit (22 en avaient
+     encore le cadre blanc; les autres etaient deja propres).
+   - Verifie : 32/32 fiches sans background blanc ni padding:15px.
+
+3) FICHE MAL ETIQUETEE : gel_lubrifiant_bio_neutre_divine_xtases.html
+   - Image principale cassee (404) : "gel lubriant bio miel coco.webp"
+     remplacee par "gel-lubrifiant-bio-coco.webp" (fichier existant, deja
+     utilise sur la page d'accueil).
+   - Ce produit est en realite un PARFUM COCO (et non "neutre").
+     Renommage du nom visible : "Gel Lubrifiant Glisse Bio Neutre Divine
+     Xtases" -> "... Bio Coco Divine Xtases" (titre, H1, meta, JSON-LD,
+     mots-cles, attribut name).
+   - Mentions de senteur adaptees : "sans odeur" -> "parfum coco gourmand";
+     "Sans odeur et neutre" -> "Parfum coco gourmand"; badge "Sans Parfum"
+     retire (produit desormais parfume).
+   - NON MODIFIE VOLONTAIREMENT : le nom de fichier / URL canonique
+     (gel_lubrifiant_bio_neutre_divine_xtases.html) et les cles i18n
+     data-i18n="neutre_*" (pour ne rien casser cote liens et traduction).
+
+METHODE / NOTES TECHNIQUES
+   - Toutes les modifs faites via l'editeur GitHub, commit direct sur "main".
+   - Verification fiable via la page "blob" GitHub (source fraiche). Le CDN
+     "raw.githubusercontent.com" ayant plusieurs minutes de cache, il a donne
+     des faux positifs; ne pas s'y fier pour verifier un commit recent.
+   - Fausse alerte levee : les fiches deguisement enseignante/etudiante
+     semblaient avoir des images 404 mais c'etait un probleme d'encodage
+     d'URL (apostrophes/espaces); les images s'affichent correctement.
