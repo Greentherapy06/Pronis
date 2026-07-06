@@ -431,3 +431,55 @@ METHODE / NOTES TECHNIQUES
    - Fausse alerte levee : les fiches deguisement enseignante/etudiante
      semblaient avoir des images 404 mais c'etait un probleme d'encodage
      d'URL (apostrophes/espaces); les images s'affichent correctement.
+
+
+==================================================
+SESSION SEO / GEO — MAJ 2026-07-06 (Claude)
+==================================================
+
+RÔLES : Claude fait TOUT (edition, collage editeur) SAUF le clic "Commit changes" (JLShop06).
+
+CONTEXTE : demande basee sur un rapport SEOptimizer ("Utilisez vos mots-cles principaux dans les balises HTML importantes", priorite moyenne) + audit GEO.
+
+--- FAIT (committe sur main) ---
+
+1) H1 SEO (index.html) : le H1 ne contenait QUE le logo (img), sans texte -> probleme SEO.
+   Ajout d'un <span class="hero-h1-text" data-i18n="home_h1_seo"> SOUS le logo (h1 en flex-column, centre, style dore Georgia 15px uppercase letter-spacing) avec le texte :
+   "Boutique Sextoys France : Gels Lubrifiants Bio, Huiles de Massage & Stimulateurs".
+   Rendu valide visuellement par JLShop06 (version "sous le logo", pas a cote).
+
+2) i18n.js : cle home_h1_seo ajoutee x5 (ordre fr/pt/it/es/de), inseree apres renoncer_contrat dans chaque bloc de langue. Accolades equilibrees. Traductions :
+   fr = Boutique Sextoys France : Gels Lubrifiants Bio, Huiles de Massage & Stimulateurs
+   pt = Loja de Sextoys Franca: Geis Lubrificantes Bio, Oleos de Massagem e Estimuladores
+   it = Negozio Sextoys Francia: Gel Lubrificanti Bio, Oli da Massaggio e Stimolatori
+   es = Tienda de Juguetes Sexuales Francia: Geles Lubricantes Bio, Aceites de Masaje y Estimuladores
+   de = Sextoy-Shop Frankreich: Bio-Gleitgele, Massageole & Stimulatoren
+
+3) GEO / SEO multilingue — support ?lang= dans l'URL (i18n.js) :
+   AVANT : langue geree UNIQUEMENT via localStorage + navigator.language -> toutes les langues sur la MEME URL -> versions PT/IT/ES/DE NON indexables par Google (bascule en JS que Googlebot n'execute pas).
+   PATCH getLang() : lit ?lang=xx en PRIORITE (si supporte -> le stocke en localStorage et le retourne), sinon fallback localStorage, sinon navigator, sinon fr. Logique testee 7/7 cas OK.
+   PATCH setLang() : met a jour l'URL sans recharger (history.replaceState). fr = URL propre (pas de param) ; autres langues = ?lang=xx.
+
+4) hreflang (index.html) : ajout de 6 <link rel="alternate"> apres le canonical :
+   fr -> https://les-jardins-enchantes.com/
+   pt/it/es/de -> https://les-jardins-enchantes.com/?lang=xx
+   x-default -> https://les-jardins-enchantes.com/
+   (rendus crawlables grace au patch getLang ci-dessus).
+
+5) UNIFORMISATION DES URLs vercel.app -> les-jardins-enchantes.com (incoherence de domaine).
+   Deux domaines vercel trouves dans le repo, tous deux remplaces par le .com :
+     - lesjardinsenchantes.vercel.app (le plus courant)
+     - les-jardins-enchantes-greentherapy06s-projects.vercel.app (URL technique, ex: lien dans cgv.html)
+   NOTE : llms.txt utilisait DEJA le .com partout (36x) -> rien a corriger.
+   FICHIERS FAITS (committes) : robots.txt (2), sitemap.xml (26), index.html (canonical + og:url + og:image + twitter:image + JSON-LD Store = 5).
+
+--- RESTE A FAIRE (URLs vercel -> .com) ---
+Environ 34 fichiers restants contiennent encore lesjardinsenchantes.vercel.app (surtout canonical + og:url, ~2 occ/page) :
+  les 32 fiches produit + pages legales (cgv, confidentialite, cookies, mentions-legales, retractation) + eventuels feed.xml / manifest / api.
+METHODE : editeur GitHub fichier par fichier (VS Code web / github.dev NE FONCTIONNE PAS -> reste bloque a la connexion, confirme par JLShop06). Remplacer les 2 domaines vercel -> les-jardins-enchantes.com. Verifier via API GitHub (pas raw : cache CDN).
+SCAN : API git/trees recursive + fetch raw {cache:'reload'} pour lister les fichiers contenant "vercel.app".
+
+--- PISTES GEO/SEO SUIVANTES (optionnel, non fait) ---
+  - JSON-LD Store : pas d'aggregateRating (avis clients) ni sameAs (reseaux sociaux) -> a ajouter si dispo (gros boost visibilite).
+  - Score PageSpeed "Navigation agentique" 2/3 -> viser 3/3.
+  - H2 "Boutique Sextoys, Gel Lubrifiant Bio..." fait desormais doublon avec le nouveau H1 -> reformuler pour varier les mots-cles (livraison discrete, Yuka 100/100...).
