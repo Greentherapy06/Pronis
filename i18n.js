@@ -4026,6 +4026,9 @@ window.t = function(key){
 
 
 function getLang() {
+  var params = new URLSearchParams(location.search);
+  var urlLang = (params.get("lang") || "").slice(0, 2).toLowerCase();
+  if (urlLang && TRANSLATIONS[urlLang]) { try { localStorage.setItem("lang", urlLang); } catch(e){} return urlLang; }
   const saved = localStorage.getItem("lang");
   const browser = (navigator.language || "fr").slice(0, 2).toLowerCase();
   return saved || (TRANSLATIONS[browser] ? browser : "fr");
@@ -4101,6 +4104,7 @@ if (document.readyState === "loading") {
   window.setLang = function(lang){
     if (SUPPORTED.indexOf(lang) === -1) lang = 'fr';
     try { localStorage.setItem('lang', lang); } catch(e){}
+    try { var __u = new URL(location.href); if (lang === 'fr') { __u.searchParams.delete('lang'); } else { __u.searchParams.set('lang', lang); } history.replaceState(null, '', __u); } catch(e){}
     document.documentElement.lang = lang;
     if (typeof initI18n === 'function') initI18n();
     document.querySelectorAll('.dd--lang .dd__item').forEach(function(b){
