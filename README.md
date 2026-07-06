@@ -585,3 +585,27 @@ RESTE (optionnel, prochaine session) :
 - Score PageSpeed "Navigation agentique" 2/3 -> viser 3/3.
 - Reformuler le H2 "Boutique Sextoys, Gel Lubrifiant Bio..." qui fait doublon avec le nouveau H1 (varier mots-cles : livraison discrete, Yuka...).
 - Verifier en live apres redeploiement Vercel : changement de langue ajoute bien ?lang=xx + traduit ; H1 s'affiche dans les 5 langues.
+
+
+---
+
+## CORRECTIF 2026-07-06 — Saveur Coco (page gel_lubrifiant_bio_neutre_divine_xtases)
+
+### Probleme
+La fiche gel_lubrifiant_bio_neutre_divine_xtases (produit Noix de Coco) affichait "Bio Neutre" et "sans odeur" au lieu de la saveur Coco.
+CAUSE : le H1 et la description ont data-i18n (neutre_title, neutre_subtitle, neutre_desc1) -> le texte affiche vient de i18n.js, PAS du HTML statique (qui, lui, contenait deja "Coco"). Corriger le HTML seul ne sert a rien : c'est i18n.js qui pilote l'affichage.
+
+### Fait (i18n.js, committe, 5 langues fr/pt/it/es/de)
+- neutre_title + neutre_desc1 : "Bio Neutre/Neutro/Neutral" -> "Bio Coco/Cocco/Kokos".
+- neutre_subtitle : "sans odeur / sem odor / inodore / sin olor / geruchlos" -> "delicat parfum noix de coco / delicado aroma de coco / delicato profumo di cocco / delicado aroma de coco / zarter Kokosduft".
+- La cle "neutre_" est EXCLUSIVE a la page Coco (les autres saveurs ont leur propre prefixe : framboise_, monoi_, vanille_).
+- VIGILANCE : "sans odeur" existe AUSSI dans framboise_subtitle et vanille_subtitle -> le remplacement a ete cible UNIQUEMENT sur neutre_subtitle (valeur complete). Framboise/Vanille laisses intacts (verifie).
+
+### A FAIRE — memes corrections a valider pour Framboise et Vanille
+Ces deux fiches ont la MEME incoherence (titre "Bio Neutre X" + subtitle "sans odeur", contradictoire avec une saveur) :
+- framboise_title (5 langues) : "Gel Lubrifiant Glisse Bio Neutre Framboise..." / "...Neutro Framboesa..." / "...Neutro Lampone..." / "...Neutro Frambuesa..." / "...Neutral Himbeere...". Le mot "Neutre/Neutro/Neutral" est a retirer ou remplacer.
+- framboise_subtitle (5 langues) : contient "sans odeur / sem odor / inodore / sin olor / geruchlos" -> a remplacer par une mention parfum framboise.
+- vanille_title (5 langues) : "...Bio Neutre Vanille..." / "...Neutro Baunilha..." / "...Neutro Vaniglia..." / "...Neutro Vainilla..." / "...Neutral Vanille...". Idem retirer "Neutre".
+- vanille_subtitle (5 langues) : "sans odeur..." -> mention parfum vanille.
+DECISION PRODUIT A VALIDER AVEC JLShop06 : garder "Neutre" ou le retirer du titre ? (pour Coco on a remplace Neutre -> Coco). Meme logique conseillee : framboise_title -> "Bio Framboise", vanille_title -> "Bio Vanille".
+METHODE : cibler la VALEUR COMPLETE de chaque cle (framboise_subtitle / vanille_subtitle) car "sans odeur" est partage entre plusieurs produits ; ne PAS faire de remplacement global.
