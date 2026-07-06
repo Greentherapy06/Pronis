@@ -114,7 +114,7 @@ function buildAccuseHtml(data) {
     data.message ? l('Message', data.message) : '',
     '</table>',
     '<p>Conformément au Code de la consommation, le professionnel dispose d\'un délai de <strong>14 jours</strong> pour procéder au remboursement éventuellement dû.</p>',
-    '<p>Nous attirons toutefois votre attention sur les <strong>exceptions légales au droit de rétractation</strong> (article L221-28 5° du Code de la consommation) applicables aux biens scellés ne pouvant être renvoyés pour des raisons d\'hygiène ou de protection de la santé une fois descellés. Le détail de ces exceptions figure dans nos <a href="https://lesjardinsenchantes.vercel.app/cgv">Conditions Générales de Vente</a>.</p>',
+    '<p>Nous attirons toutefois votre attention sur les <strong>exceptions légales au droit de rétractation</strong> (article L221-28 5° du Code de la consommation) applicables aux biens scellés ne pouvant être renvoyés pour des raisons d\'hygiène ou de protection de la santé une fois descellés. Le détail de ces exceptions figure dans nos <a href="https://les-jardins-enchantes.com/cgv">Conditions Générales de Vente</a>.</p>',
     '<p style="color:#8a7560;font-size:12px;margin-top:24px;">Cet email constitue un accusé de réception sur support durable. Conservez-le.</p>',
     '</div>'
   ].join('');
