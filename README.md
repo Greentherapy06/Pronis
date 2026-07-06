@@ -483,3 +483,78 @@ SCAN : API git/trees recursive + fetch raw {cache:'reload'} pour lister les fich
   - JSON-LD Store : pas d'aggregateRating (avis clients) ni sameAs (reseaux sociaux) -> a ajouter si dispo (gros boost visibilite).
   - Score PageSpeed "Navigation agentique" 2/3 -> viser 3/3.
   - H2 "Boutique Sextoys, Gel Lubrifiant Bio..." fait desormais doublon avec le nouveau H1 -> reformuler pour varier les mots-cles (livraison discrete, Yuka 100/100...).
+
+
+---
+
+## SESSION SEO/GEO 2026-07-06 — Suivi detaille
+
+### FAIT (tout committe)
+
+**1. H1 SEO (demande SEOptimizer : mots-cles dans balises HTML)**
+- Le H1 de index.html etait VIDE (juste le logo image, aucun texte).
+- Ajoute un span H1 texte riche en mots-cles SOUS le logo (style dore, Georgia, uppercase, discret) : "Boutique Sextoys France : Gels Lubrifiants Bio, Huiles de Massage & Stimulateurs" (option 3 validee visuellement, version "sous le logo").
+- Span avec data-i18n="home_h1_seo".
+
+**2. i18n home_h1_seo x5 (i18n.js)**
+- Cle home_h1_seo ajoutee dans les 5 langues, inseree apres renoncer_contrat, ordre fr/pt/it/es/de :
+  - FR : Boutique Sextoys France : Gels Lubrifiants Bio, Huiles de Massage & Stimulateurs
+  - PT : Loja de Sextoys Franca: Geis Lubrificantes Bio, Oleos de Massagem e Estimuladores
+  - IT : Negozio Sextoys Francia: Gel Lubrificanti Bio, Oli da Massaggio e Stimolatori
+  - ES : Tienda de Juguetes Sexuales Francia: Geles Lubricantes Bio, Aceites de Masaje y Estimuladores
+  - DE : Sextoy-Shop Frankreich: Bio-Gleitgele, Massageole & Stimulatoren
+
+**3. GEO / SEO multilingue — support ?lang= dans URL (i18n.js)**
+- Constat : langues gerees uniquement en localStorage/navigator -> versions PT/IT/ES/DE PAS indexables par Google (une seule URL).
+- getLang() lit desormais ?lang=xx en priorite (puis localStorage, puis navigateur). Teste 7/7 cas OK.
+- setLang() met a jour l'URL sans recharger (history.replaceState) : FR = URL propre sans param, autres langues = ?lang=xx.
+
+**4. hreflang (index.html)**
+- Ajout de 6 balises hreflang apres le canonical : fr, pt, it, es, de + x-default.
+- FR et x-default -> https://les-jardins-enchantes.com/ ; autres -> /?lang=xx (crawlables grace au patch getLang).
+
+**5. Uniformisation URLs vercel.app -> les-jardins-enchantes.com**
+- 3 variantes de domaine a remplacer (ordre : la plus longue d'abord) :
+  1. les-jardins-enchantes-greentherapy06s-projects.vercel.app
+  2. les-jardins-enchantes.vercel.app (avec tirets)
+  3. lesjardinsenchantes.vercel.app (sans tirets)
+- Methode : editeur GitHub fichier par fichier (VS Code web / github.dev ne fonctionne PAS). 1 commit par fichier (JLShop06 clique Commit).
+- llms.txt : deja en .com, RAS.
+- confidentialite.html : deja propre (0 vercel), non modifie.
+
+**Fichiers uniformises et committes (25) :**
+robots.txt, sitemap.xml, index.html, i18n.js, cgv.html, Cockring-vibrant-Marry-Me-Wooomy.html, Deguisement-Bunny.html, Magnum-Opus-vibro.html, anneau_vibrant_telecommande.html, api/retractation/submit.js, black-empire-my-duchess.html, cockring-vibrant-saturn-hueman.html, deguisement-enseignante.html, deguisement-etudiante.html, deguisement-infirmiere-sexy.html, dual-vibe-sex-on-the-beach.html, gel_cannabis_orgie.html, gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html, gel_lubrifiant_bio_neutre_divine_xtases.html, gel_lubrifiant_bio_neutre_framboise_divine_xtases.html, gel_lubrifiant_bio_neutre_monoi_divine_xtases.html, gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html, gel_lubrifiant_bio_neutre_vanille_divine_xtases.html, hemp-intense-orgasm.html, le-flateur.html
+
+### A FAIRE — PROCHAINE SESSION
+
+**A. Terminer uniformisation URLs vercel -> .com (13 fichiers restants, 2 occ. chacun, dans canonical + og:url) :**
+- Plug-Anal-Rosy-Gold.html
+- lubrifiant_eau_lube_tube_chocolat_orgie.html
+- lubrifiant_eau_lube_tube_fraise_orgie.html
+- lubrifiant_eau_tube_barbe_a_papa.html
+- mini-robe-noire.html
+- monster-pussy-strocker.html
+- orgie-pinacolada.html
+- pink-star-choco-fraise.html
+- pink-star.html
+- pink_star_sucette_cerise.html
+- red-dolls-energy-pleasure.html
+- robe-longue-noire-argentee.html
+- vibro-rechargeable-Indiana.html
+
+**B. BUG PRE-EXISTANT a corriger separement — dual-vibe-sex-on-the-beach.html :**
+- Le fichier contient DEUX documents HTML complets colles l'un apres l'autre (2 DOCTYPE, 2 <html>, 2 </html>, 4 <head>) — confirme via API GitHub.
+- Cette session : SEULES les URLs vercel ont ete corrigees, le doublon N'A PAS ete touche (decision validee avec JLShop06).
+- A traiter : supprimer le 2e document HTML en double (avec verification visuelle avant commit). Bug SEO (contenu duplique / page malformee).
+
+**C. Ameliorations SEO/GEO optionnelles notees precedemment :**
+- Enrichir JSON-LD Store : aggregateRating (si avis clients), sameAs (reseaux sociaux).
+- Score PageSpeed "Navigation agentique" 2/3 -> viser 3/3.
+- H2 "Boutique Sextoys, Gel Lubrifiant Bio..." fait doublon avec le nouveau H1 -> reformuler pour varier les mots-cles (livraison discrete, Yuka 100/100...).
+
+### NOTES METHODE (pour reprendre vite)
+- Ordre langues STRICT : fr / pt / it / es / de.
+- Verifier via editeur GitHub ou API GitHub (Accept: application/vnd.github.raw), PAS via raw.githubusercontent.com (cache CDN en retard).
+- CodeMirror est virtualise : la verification du DOM peut afficher des lignes du milieu, ce n'est pas fiable ; se fier a la validation du contenu avant collage + defaultPrevented=true, ou faire un screenshot.
+- Coller : clic dans l'editeur -> Ctrl+A -> Delete (vider) -> paste via ClipboardEvent. Valider AVANT collage : 0 vercel restant, 0 artefact (.com.com), DOCTYPE en tete.
+- En cas d'erreur GitHub "erreur lors de l'enregistrement" : re-cliquer Commit, ca repasse.
