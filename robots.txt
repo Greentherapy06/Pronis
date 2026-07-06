@@ -1,5 +1,5 @@
 # robots.txt — Les Jardins Enchantés
-# https://lesjardinsenchantes.vercel.app
+# https://les-jardins-enchantes.com
 
 User-agent: *
 Allow: /
@@ -11,4 +11,4 @@ Disallow: /erreur.html
 Disallow: /api/
 
 # Sitemap
-Sitemap: https://lesjardinsenchantes.vercel.app/sitemap.xml
+Sitemap: https://les-jardins-enchantes.com/sitemap.xml
