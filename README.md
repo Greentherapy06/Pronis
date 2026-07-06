@@ -558,3 +558,30 @@ robots.txt, sitemap.xml, index.html, i18n.js, cgv.html, Cockring-vibrant-Marry-M
 - CodeMirror est virtualise : la verification du DOM peut afficher des lignes du milieu, ce n'est pas fiable ; se fier a la validation du contenu avant collage + defaultPrevented=true, ou faire un screenshot.
 - Coller : clic dans l'editeur -> Ctrl+A -> Delete (vider) -> paste via ClipboardEvent. Valider AVANT collage : 0 vercel restant, 0 artefact (.com.com), DOCTYPE en tete.
 - En cas d'erreur GitHub "erreur lors de l'enregistrement" : re-cliquer Commit, ca repasse.
+
+
+---
+
+## MISE A JOUR 2026-07-06 (suite/fin de session) — TOUT TERMINE
+
+### Uniformisation URLs vercel -> .com : TERMINEE (100%)
+Les 13 fiches produit restantes ont ete traitees et committees :
+Plug-Anal-Rosy-Gold.html, lubrifiant_eau_lube_tube_chocolat_orgie.html, lubrifiant_eau_lube_tube_fraise_orgie.html, lubrifiant_eau_tube_barbe_a_papa.html, mini-robe-noire.html, monster-pussy-strocker.html, orgie-pinacolada.html, pink-star-choco-fraise.html, pink-star.html, pink_star_sucette_cerise.html, red-dolls-energy-pleasure.html, robe-longue-noire-argentee.html, vibro-rechargeable-Indiana.html.
+=> Plus AUCUNE reference vercel.app dans le repo (tous les canonical/og:url/JSON-LD/robots/sitemap/i18n pointent vers les-jardins-enchantes.com).
+
+### Bug doublon HTML : CORRIGE
+- dual-vibe-sex-on-the-beach.html : avait 2 documents HTML complets colles -> nettoye, garde 1 seul document (le plus complet, avec canonical .com). Committe.
+- Plug-Anal-Rosy-Gold.html : avait 3 documents HTML complets colles -> nettoye, garde 1 seul document (le 1er, le plus complet : 844 vs 764 chars de texte, CSS image enrichi max-height/object-fit). Committe.
+- Scan complet des 38 fichiers HTML du repo (via raw) : 0 fichier avec DOCTYPE multiple restant. Probleme entierement resolu.
+
+### Note technique
+- Le scan initial via API GitHub avait ete fausse par le rate limit (60 req/h) qui renvoyait "0 DOCTYPE" (reponse d'erreur JSON de 279 chars). Verifier via l'editeur GitHub ou raw.githubusercontent.com quand l'API est limitee.
+
+### ETAT GLOBAL SEO/GEO — recap
+FAIT : H1 SEO (texte mots-cles sous logo, 5 langues via home_h1_seo) ; support ?lang= dans URL (getLang/setLang) ; 6 hreflang (fr/pt/it/es/de + x-default) ; uniformisation URLs vercel->.com (100%) ; suppression doublons HTML (dual-vibe + Plug-Anal-Rosy-Gold).
+
+RESTE (optionnel, prochaine session) :
+- Enrichir JSON-LD Store : aggregateRating (si avis clients), sameAs (reseaux sociaux).
+- Score PageSpeed "Navigation agentique" 2/3 -> viser 3/3.
+- Reformuler le H2 "Boutique Sextoys, Gel Lubrifiant Bio..." qui fait doublon avec le nouveau H1 (varier mots-cles : livraison discrete, Yuka...).
+- Verifier en live apres redeploiement Vercel : changement de langue ajoute bien ?lang=xx + traduit ; H1 s'affiche dans les 5 langues.
