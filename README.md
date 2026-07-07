@@ -609,3 +609,64 @@ Ces deux fiches ont la MEME incoherence (titre "Bio Neutre X" + subtitle "sans o
 - vanille_subtitle (5 langues) : "sans odeur..." -> mention parfum vanille.
 DECISION PRODUIT A VALIDER AVEC JLShop06 : garder "Neutre" ou le retirer du titre ? (pour Coco on a remplace Neutre -> Coco). Meme logique conseillee : framboise_title -> "Bio Framboise", vanille_title -> "Bio Vanille".
 METHODE : cibler la VALEUR COMPLETE de chaque cle (framboise_subtitle / vanille_subtitle) car "sans odeur" est partage entre plusieurs produits ; ne PAS faire de remplacement global.
+
+==================================================
+SESSION SEO/GEO - MAJ 2026-07-07 (Claude)
+
+CONTEXTE : demande basee sur le rapport SEOptimizer. IMPORTANT : le "C+" vu par l'utilisateur n'etait PAS la note globale mais UNIQUEMENT la categorie GEO. Detail reel du rapport (genere le 7 juillet 10h30 UTC) :
+- Referencement sur page (On-Page SEO) : A+
+- GEO : C+
+- Links : F  <= plus gros point faible
+- Utilisabilite : A-
+- Performance : A+
+Conclusion : le travail precedent a bien porte (On-Page A+, Perf A+). Priorite du jour = corriger le "F" en Links.
+
+DIAGNOSTIC LINKS (fait via fetch + DOMParser sur le live) :
+- Accueil : 38 liens internes, 36 vers des fiches produit -> l'accueil est BIEN maille (mais liens sur images = texte d'ancre VIDE).
+- Fiches produit : chaque fiche ne pointe QUE vers l'accueil (index.html + ancres #) et les pages legales. AUCUNE fiche ne pointe vers une AUTRE fiche = schema "en etoile" qui plombe le score Links.
+- SOLUTION retenue : ajouter un bloc "Vous aimerez aussi" (section.related-products) en bas de chaque fiche, AVANT le <footer>, avec 4 liens internes ANCRES (texte = nom du produit) vers des produits de la meme categorie (completes par affinite si categorie trop petite). Style inline sobre dore/Georgia (bordure #caa86a, boutons arrondis).
+
+--- BLOCAGES DEPLOIEMENT (verifies, RAS) ---
+1. Webhook GitHub->Vercel : ACTIF. Projet Vercel "lesjardinsenchantes" (equipe greentherapy06s-projects) connecte a JLShop06/Les-Jardins-Enchantes depuis le 12 mai, events deployment + repository_dispatch ON. Preuve : commit auto-deploye statut "Pret". (La section "Deploy Hooks" est vide mais c'est normal : ce sont des URLs de declenchement manuel OPTIONNELLES, pas le webhook d'auto-deploiement.)
+2. Password Protection Vercel : OFF (Authentification Vercel OFF ; Protection par mot de passe indisponible = feature Pro 150$/mois, plan actuel = Hobby). Site public confirme : HTTP 200, pas de mur SSO.
+3. llms.txt : DEJA present a la racine (HTTP 200, structure OK : marque, description, categories ##, liens produits). RAS.
+
+--- FAIT (committe sur main) ---
+
+JSON-LD (schema.org) :
+- le-flateur.html : ajout JSON-LD Product + BreadcrumbList (dans le <head>, avant </head>). C'est la SEULE fiche avec JSON-LD ajoute cette session (voir "RESTE A FAIRE").
+- Etat JSON-LD global constate (scan des 32 URLs sitemap) : accueil = Store (deja present) ; 6 fiches gel bio = Product (deja present : caramel, neutre/coco, framboise, monoi, sans_parfum, vanille) ; le-flateur = Product+Breadcrumb (ajoute aujourd'hui) ; les 23 autres fiches = AUCUN JSON-LD ; AUCUNE page (sauf le-flateur) n'a de BreadcrumbList.
+
+Maillage interne - bloc "Vous aimerez aussi" (LOT TEST 6 fiches, 4 liens ancres chacune) :
+- le-flateur.html -> Magnum Opus, Indiana, My Duchess, Cockring Marry Me
+- pink-star.html -> Cannabis Orgie, Hemp Intense Orgasm, Sex On The Beach, Chocolat Orgie
+- Magnum-Opus-vibro.html -> Indiana, My Duchess, Le Flateur, Cockring Marry Me
+- monster-pussy-strocker.html -> Red Dolls Energy, Cannabis Orgie, Hemp, Sex On The Beach
+- cockring-vibrant-saturn-hueman.html -> Cockring Marry Me, Anneau Love Connection, Magnum Opus, Indiana
+- Deguisement-Bunny.html -> Enseignante, Etudiante, Infirmiere, My Duchess
+=> ~24 nouveaux liens internes contextuels crees.
+
+--- A FAIRE - PROCHAINE SESSION ---
+
+A. ATTENDRE / RELANCER LE SCAN SEOptimizer, puis VERIFIER la note "Links" (attendu : F -> C/B grace au maillage). Si l'effet est confirme, derouler le reste. Regarder le DETAIL de la section Links pour distinguer liens internes (on les corrige) vs backlinks externes (ne se corrigent PAS par le code : annuaires, partenaires, reseaux, temps).
+
+B. Bloc "Vous aimerez aussi" sur les 24 fiches RESTANTES (meme methode, meme style) :
+   Cockrings/vibros/etc : Cockring-vibrant-Marry-Me-Wooomy, anneau_vibrant_telecommande, vibro-rechargeable-Indiana, black-empire-my-duchess, red-dolls-energy-pleasure, Plug-Anal-Rosy-Gold.
+   Deguisements : deguisement-enseignante, deguisement-etudiante, deguisement-infirmiere-sexy.
+   Gels : gel_cannabis_orgie, hemp-intense-orgasm, dual-vibe-sex-on-the-beach, lubrifiant_eau_lube_tube_chocolat_orgie, lubrifiant_eau_lube_tube_fraise_orgie, lubrifiant_eau_tube_barbe_a_papa, orgie-pinacolada, pink-star-choco-fraise, pink_star_sucette_cerise.
+   Gels bio : gel_lubrifiant_bio_neutre_divine_xtases (Coco), _vanille_, _framboise_, _monoi_, _caramel_beurre_sale_, _sans_parfum_.
+   (Note : robe-longue-noire-argentee et mini-robe-noire ont un footer different et ne sont pas dans le sitemap -> a traiter a part si voulu.)
+
+C. JSON-LD Product + BreadcrumbList sur les 23 fiches qui n'en ont pas (donnees deja extraites : nom H1, description meta, prix, image .webp, marque, categorie, canonical). Ajouter aussi BreadcrumbList aux 6 fiches gel bio (qui ont Product mais pas Breadcrumb) et a l'accueil (qui a Store mais pas Breadcrumb). Tout en availability=InStock (a confirmer si rupture).
+
+D. GEO (remonter le C+) : enrichir le JSON-LD Store de l'accueil avec aggregateRating (si avis clients dispo) et sameAs (reseaux sociaux). Reformuler le H2 qui fait doublon avec le nouveau H1.
+
+METHODE FIABLE (validee cette session) :
+- Extraire le HTML PROPRE de l'editeur : parcourir l'objet JSON embarque PARSE (script[type=application/json]) et prendre la string qui contient <!DOCTYPE...</html>. NE PAS faire JSON.stringify(objet) + regex : ca reintroduit les echappements \n et \" (bug rencontre au 1er essai, HTML aplati -> il a fallu recharger l'editeur).
+- Inserer le bloc AVANT lastIndexOf('<footer'). Valider AVANT collage : related=1, footer=1, doctype=1, </html>=1, pas de \n litteral, fin = </footer></body></html>.
+- Coller : clic editeur -> Ctrl+A -> ClipboardEvent('paste') avec DataTransfer text/plain sur .cm-content ; verifier defaultPrevented=true ; Ctrl+End + screenshot pour controle visuel.
+- ROLES : Claude fait tout SAUF le clic "Commit changes" (JLShop06).
+- Verifier via API GitHub (Accept: application/vnd.github.raw, ?ref=main), PAS via raw.githubusercontent.com (cache CDN en retard).
+- NOTE OUTIL : le filtre de sortie JS masque les chaines contenant des URLs/cookies ("[BLOCKED]") -> ne renvoyer que des compteurs/booleens, jamais le HTML brut.
+
+RAPPEL PRIORITE SEO (dit a l'utilisateur) : un score SEOptimizer eleve ne fait pas vendre en soi ; regarder aussi Search Console (trafic reel, positions, conversions). Le "F" Links interne se corrige par le code (en cours) ; les backlinks externes demandent du temps/hors-code.
