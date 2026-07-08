@@ -138,6 +138,44 @@ total += Number(p.price);
 }
 
 cartTotal.textContent = total.toFixed(2);
+  // --- Récapitulatif panier (affichage) : sous-total, livraison, total ---
+  // NB : cartTotal correspond au sous-total des produits (en euros).
+  // La logique est un MIROIR du calcul serveur (checkout.js) :
+  //   livraison offerte dès 75 € de produits, sinon 6,90 €.
+  // La réduction de bienvenue -10 % est vérifiée et appliquée CÔTÉ SERVEUR
+  // (une seule fois par client) ; on l'indique ici à titre informatif.
+  try {
+    var _summaryEl = document.getElementById("cart-summary");
+    if (_summaryEl) {
+      var _subtotal = Number(cartTotal) || 0;
+      var FREE_SHIP = 75;
+      var SHIP_FEE = 6.90;
+      var _shipFree = _subtotal >= FREE_SHIP;
+      var _shipping = _shipFree ? 0 : SHIP_FEE;
+      var _total = _subtotal + _shipping;
+      var _shipLabel = _shipFree
+        ? '<span style="color:#2d7a30;">Offerts</span>'
+        : SHIP_FEE.toFixed(2).replace('.', ',') + ' €';
+      _summaryEl.innerHTML =
+        '<div style="display:flex;justify-content:space-between;">' +
+          '<span>Sous-total</span><span>' + _subtotal.toFixed(2).replace('.', ',') + ' €</span></div>' +
+        '<div style="display:flex;justify-content:space-between;">' +
+          '<span>Réduction bienvenue (1re commande)</span>' +
+          '<span style="color:#2d7a30;">-10 % appliqués si éligible</span></div>' +
+        '<div style="display:flex;justify-content:space-between;">' +
+          '<span>Livraison</span><span>' + _shipLabel + '</span></div>' +
+        (_shipFree ? '' :
+          '<div style="font-size:12px;opacity:.8;">Plus que ' +
+          (FREE_SHIP - _subtotal).toFixed(2).replace('.', ',') +
+          ' € pour la livraison offerte</div>') +
+        '<hr style="border:none;border-top:1px solid #caa86a;margin:8px 0;" />' +
+        '<div style="display:flex;justify-content:space-between;font-weight:bold;">' +
+          '<span>Total estimé</span><span>' + _total.toFixed(2).replace('.', ',') + ' €</span></div>' +
+        '<div style="font-size:11px;opacity:.7;margin-top:6px;">' +
+          'Le montant exact (avec réduction éventuelle) est confirmé au paiement sécurisé Stripe.</div>';
+    }
+  } catch (e) { /* affichage récap non bloquant */ }
+
 modal.style.display = "flex";
 document.body.style.overflow = "hidden";
 }
@@ -161,6 +199,17 @@ if (cartTotal) cartTotal.textContent = "0.00";
 
 // ── Checkout Stripe ───────────────────────────
 async function checkout() {
+  // --- Réduction de bienvenue : on récupère l'e-mail saisi dans le panier ---
+  // L'e-mail est requis : le serveur s'en sert pour vérifier si le client a déjà
+  // bénéficié de la remise de 10 % (vérification exclusivement côté serveur).
+  var emailField = document.getElementById("cart-email");
+  var email = emailField ? emailField.value.trim() : "";
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    showToast("Merci d'indiquer un e-mail valide pour finaliser la commande.");
+    if (emailField) emailField.focus();
+    return;
+  }
+
 const cart = getCart();
 if (cart.length === 0) {
 showToast("Votre panier est vide");
@@ -174,7 +223,7 @@ try {
 const res = await fetch("/api/stripe/checkout", {
 method: "POST",
 headers: { "Content-Type": "application/json" },
-body: JSON.stringify({ cart })
+body: JSON.stringify({ cart, email })
 });
 
 const data = await res.json();
@@ -245,6 +294,11 @@ modal.innerHTML = `
 <span>TOTAL</span>
 <span><span id="cart-total">0.00</span> &euro;</span>
 </div>
+<!-- Champ e-mail requis pour appliquer la réduction de bienvenue (vérifiée côté serveur) -->
+<input id="cart-email" type="email" required placeholder="Votre e-mail (pour votre commande)"
+ style="width:100%;padding:12px 14px;margin:10px 0;border:1px solid #caa86a;border-radius:8px;background:transparent;color:inherit;font-family:Georgia,serif;box-sizing:border-box;" />
+<!-- Récapitulatif détaillé (sous-total / réduction / livraison / total) -->
+<div id="cart-summary" style="margin:10px 0;font-size:14px;line-height:1.9;"></div>
 <button id="checkout-btn" onclick="checkout()" style="width:100%;background:none;border:1px solid #caa86a;color:#caa86a;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:4px;padding:16px;cursor:pointer;transition:0.3s;">PAYER</button>
 <button onclick="clearCart();closeCart();" style="width:100%;background:none;border:none;color:rgba(202,168,106,0.4);font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;padding:12px;cursor:pointer;margin-top:8px;">VIDER LE PANIER</button>
 </div>
