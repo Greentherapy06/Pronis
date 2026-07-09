@@ -1562,3 +1562,31 @@ ETAT : TÂCHE B terminee (sauf sous-cas "e-mail deja utilise" a valider manuelle
 PROCHAINES ÉTAPES (REPRENDRE ICI) :
   - TÂCHE C : verification config webhook Stripe -> a faire par JLShop06 (sensible, non touche par Claude).
   - Valider manuellement le sous-cas Stripe "e-mail deja utilise = pas de remise".
+
+
+==================================================
+SESSION 2026-07-09 (suite 3) — TÂCHE C : WEBHOOK STRIPE VÉRIFIÉ
+==================================================
+Verification faite par JLShop06 dans le dashboard Stripe (Workbench > Webhooks), constatee sur capture d'ecran.
+
+Destination d'evenement : "Reduction bienvenue - Les Jardins Enchantes" -> STATUT : Actif.
+  - URL d'endpoint : https://les-jardins-enchantes.com/api/stripe/webhook
+  - Description : Verrouille la reduction de bienvenue apres paiement.
+  - Version de l'API : 2024-06-20.
+  - Evenement ecoute : checkout.session.completed (1 evenement).
+  - Cle secrete de signature (whsec_...) : bien configuree cote Stripe (valeur NON reproduite ici, sensible).
+  - Performance : 0 evenement cette semaine (normal, aucun paiement reel finalise pendant les tests).
+
+ETAT : TÂCHE C terminee. Le webhook qui verrouille la remise de bienvenue apres paiement est actif et
+  correctement configure.
+
+==================================================
+RÉCAPITULATIF GLOBAL — TOUTES TÂCHES TERMINÉES
+==================================================
+  - TÂCHE A : banniere "Livraison offerte des 75 €" sur les 32 fiches produits -> TERMINEE (32/32).
+  - TÂCHE B : tests live (panier, e-mail/PAYER, recap livraison, bandeau 5 langues, parcours Stripe) -> TERMINEE.
+  - TÂCHE C : webhook Stripe checkout.session.completed actif -> TERMINEE.
+
+RESTE A VALIDER MANUELLEMENT (non bloquant, necessite un paiement reel) :
+  - Sous-cas Stripe "e-mail deja utilise = pas de remise de bienvenue" (a tester par JLShop06 avec un
+    e-mail ayant deja passe une commande complete).
