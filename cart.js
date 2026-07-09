@@ -148,7 +148,7 @@ cartTotal.textContent = total.toFixed(2);
   try {
     var _summaryEl = document.getElementById("cart-summary");
     if (_summaryEl) {
-      var _subtotal = Number(cartTotal) || 0;
+      var _subtotal = Number(total) || 0; // FIX: total = somme des prix produits (cartTotal est l'element DOM)
       var FREE_SHIP = 75;
       var SHIP_FEE = 6.90;
       var _shipFree = _subtotal >= FREE_SHIP;
@@ -541,7 +541,7 @@ cartTotal.textContent = total.toFixed(2);
   try {
     var _summaryEl = document.getElementById("cart-summary");
     if (_summaryEl) {
-      var _subtotal = Number(cartTotal) || 0;
+      var _subtotal = Number(total) || 0; // FIX: total = somme des prix produits (cartTotal est l'element DOM)
       var FREE_SHIP = 75;
       var SHIP_FEE = 6.90;
       var _shipFree = _subtotal >= FREE_SHIP;
