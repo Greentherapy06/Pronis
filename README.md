@@ -1420,10 +1420,57 @@ NB : le bandeau (.announce-bar) utilise data-i18n="banner_livraison" -> l'affich
 
 --- RESTE À FAIRE ---
 
-A) BANNIÈRE "LIVRAISON OFFERTE DÈS 75 €" SUR LES FICHES PRODUITS + PANIER (demande initiale, point 3) — NON FAIT
-Constat (scan live le-flateur / pink-star / Magnum-Opus) : les 32 fiches produits N'ONT PAS de bandeau d'annonce (.announce-bar / banner_livraison). Le message "Livraison offerte dès 75 € d'achat" n'apparaît donc QUE sur l'accueil.
-À faire : ajouter la bannière (idéalement le même bloc .announce-bar avec data-i18n="banner_livraison" que sur l'accueil) en haut des 32 fiches produits, + éventuellement dans le panier. Comme la clé banner_livraison est déjà traduite (5 langues), il suffit de câbler le bloc HTML sur chaque fiche. (Bonne nouvelle : les fiches n'ont AUCUNE mention "gratuite" à corriger, 0 hardcodée.)
-Rappel demande : NE PAS afficher le tarif 6,90 € dans la bannière/marketing ; le 6,90 € n'apparaît QUE dans le récap du panier quand < 75 €.
+A) BANNIÈRE "LIVRAISON OFFERTE DÈS 75 €" SUR LES FICHES PRODUITS — EN COURS (19/32 fait le 2026-07-09)
+Objectif : insérer le bloc .announce-bar (self-contained, 226 chars, style INLINE + data-i18n="banner_livraison", identique à l'accueil) juste AVANT <header> sur chacune des 32 fiches produits. Le +229 chars par fichier est normal (bloc 226 + retour ligne + indentation).
+Rappel : NE PAS afficher le tarif 6,90 € dans la bannière ; le 6,90 € n'apparaît QUE dans le récap panier quand < 75 €.
+
+MÉTHODE PAR FICHIER (à reprendre telle quelle) :
+  1. Naviguer sur /edit/main/[FICHIER] (URL-encoder les accents : é=%C3%A9, è=%C3%A8).
+  2. JS : fetch index.html via API (Accept: application/vnd.github.raw, cache:reload) pour régénérer le bloc .announce-bar ; extraire le HTML du fichier depuis le <script type="application/json"> de l'éditeur (parser l'objet, trouver la string contenant <!DOCTYPE et </html>) ; construire nw = f.slice(0,hIdx)+block+"\n  "+f.slice(hIdx) où hIdx=indexOf("<header") ; stocker dans window.__new.
+  3. VALIDER avant de coller : announce_after=1, banner_after=1, header_after=1, doctype_after=1, starts="<!DOCTYPE html>", ends="</html>", noLiteralNL=true, alreadyAnnounce=false.
+  4. Clic éditeur [600,350] → Ctrl+A+Delete x3 (triple clear obligatoire, sinon duplication DOCTYPE constatée sur red-dolls) → paste via ClipboardEvent sur .cm-content avec window.__new → vérifier defaultPrevented=true.
+  5. Ctrl+End (fin propre, un seul </html>, footer intact) + Ctrl+Home (un seul <!DOCTYPE ligne 1) via screenshots.
+  6. Dire "Prêt à committer" ; JLShop06 clique "Commit changes" et confirme ; passer au fichier suivant. RÔLE : Claude ne clique JAMAIS Commit.
+  NB : le filtre de sortie JS bloque les strings contenant des URLs → ne renvoyer QUE des compteurs/booleans.
+
+FAIT (19/32) — committés par JLShop06 :
+  1. le-flateur
+  2. pink-star
+  3. Magnum-Opus-vibro
+  4. monster-pussy-strocker
+  5. cockring-vibrant-saturn-hueman
+  6. Déguisement-Bunny
+  7. Cockring-vibrant-Marry-Me-Wooomy
+  8. anneau_vibrant_telecommande
+  9. vibro-rechargeable-Indiana
+  10. black-empire-my-duchess
+  11. red-dolls-energy-pleasure
+  12. Plug-Anal-Rosy-Gold
+  13. deguisement-enseignante
+  14. deguisement-etudiante
+  15. deguisement-infirmière-sexy
+  16. gel_cannabis_orgie
+  17. hemp-intense-orgasm
+  18. dual-vibe-sex-on-the-beach
+  19. lubrifiant_eau_lube_tube_chocolat_orgie
+
+RESTE (13/32) — à reprendre dans cet ordre :
+  20. lubrifiant_eau_lube_tube_fraise_orgie
+  21. lubrifiant_eau_tube_barbe_a_papa
+  22. orgie-pinacolada
+  23. pink-star-choco-fraise
+  24. pink_star_sucette_cerise
+  25. gel_lubrifiant_bio_neutre_divine_xtases
+  26. gel_lubrifiant_bio_neutre_vanille_divine_xtases
+  27. gel_lubrifiant_bio_neutre_framboise_divine_xtases
+  28. gel_lubrifiant_bio_neutre_monoi_divine_xtases
+  29. gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases
+  30. gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases
+  31. mini-robe-noire
+  32. robe-longue-noire-argentee
+  NB : mini-robe-noire et robe-longue-noire-argentee ont un footer différent et ne sont pas au sitemap, mais font partie des 32 fiches cibles — vérifier que le point d'insertion <header> existe bien avant de coller.
+
+À FAIRE APRÈS LES 32 : vérif finale via API GitHub (announce-bar=1 et banner_livraison présent sur chacune des 32 fiches), puis Tâches B et C ci-dessous.
 
 B) TESTS LIVE (après redéploiement Vercel — faire Ctrl+Shift+R pour vider le cache) :
   - Panier : ajouter au panier + ouvrir le panier fonctionnent (fix crash cart.js).
