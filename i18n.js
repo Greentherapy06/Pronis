@@ -3,6 +3,7 @@
 const TRANSLATIONS = {
   fr: {
     banner_livraison: "✦ LIVRAISON OFFERTE DÈS 75 € D'ACHAT ✦",
+    header_promo: "Les Jardins Enchantés vous offre -10% sur votre première commande",
     prod_add: "AJOUTER AU PANIER", prod_desc: "Description", prod_feat: "Caractéristiques",
     menu_tous: "TOUS", menu_gels_bio: "GELS LUBRIFIANTS BIO", menu_modes: "MODES",
     menu_gels: "GELS LUBRIFIANTS", menu_sextoys: "SEXTOYS",
@@ -805,6 +806,7 @@ const TRANSLATIONS = {
   },
   pt: {
     banner_livraison: "✦ ENTREGA GRÁTIS A PARTIR DE 75 € DE COMPRA ✦",
+    header_promo: "Les Jardins Enchantés oferece-lhe -10% na sua primeira encomenda",
     prod_add: "ADICIONAR AO CARRINHO", prod_desc: "Descrição", prod_feat: "Características",
     menu_tous: "TODOS", menu_gels_bio: "GÉIS LUBRIFICANTES BIO", menu_modes: "MODA",
     menu_gels: "GÉIS LUBRIFICANTES", menu_sextoys: "BRINQUEDOS SEXUAIS",
@@ -1607,6 +1609,7 @@ const TRANSLATIONS = {
   },
   it: {
     banner_livraison: "✦ SPEDIZIONE GRATUITA DA 75 € DI SPESA ✦",
+    header_promo: "Les Jardins Enchantés ti offre -10% sul tuo primo ordine",
     prod_add: "AGGIUNGI AL CARRELLO", prod_desc: "Descrizione", prod_feat: "Caratteristiche",
     menu_tous: "TUTTI", menu_gels_bio: "GEL LUBRIFICANTI BIO", menu_modes: "MODA",
     menu_gels: "GEL LUBRIFICANTI", menu_sextoys: "GIOCATTOLI EROTICI",
@@ -2409,6 +2412,7 @@ const TRANSLATIONS = {
   },
   es: {
     banner_livraison: "✦ ENVÍO GRATIS A PARTIR DE 75 € DE COMPRA ✦",
+    header_promo: "Les Jardins Enchantés te ofrece -10% en tu primer pedido",
     prod_add: "AÑADIR A LA CESTA", prod_desc: "Descripción", prod_feat: "Características",
     menu_tous: "TODOS", menu_gels_bio: "GELES LUBRICANTES BIO", menu_modes: "MODA",
     menu_gels: "GELES LUBRICANTES", menu_sextoys: "JUGUETES SEXUALES",
@@ -3211,6 +3215,7 @@ const TRANSLATIONS = {
   },
   de: {
     banner_livraison: "✦ KOSTENLOSER VERSAND AB 75 € EINKAUF ✦",
+    header_promo: "Les Jardins Enchantés schenkt Ihnen -10% auf Ihre erste Bestellung",
     prod_add: "IN DEN WARENKORB", prod_desc: "Beschreibung", prod_feat: "Merkmale",
     menu_tous: "ALLE", menu_gels_bio: "BIO-GLEITGELE", menu_modes: "MODE",
     menu_gels: "GLEITGELE", menu_sextoys: "SEXSPIELZEUG",
