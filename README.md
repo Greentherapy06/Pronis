@@ -1487,3 +1487,42 @@ C) VIGILANCE CONFIG STRIPE (à vérifier par JLShop06, non touché par Claude ca
 - Coller dans l'éditeur GitHub : TOUJOURS vider complètement avant (Ctrl+A + Delete, RÉPÉTER 2x et vérifier "Enter file contents here"), sinon le nouveau contenu s'ajoute APRÈS l'ancien (résidu constaté sur i18n.js et cart.js). Vérifier la fin du fichier (Ctrl+End) après collage.
 - Vérifier via API GitHub (Accept: application/vnd.github.raw), PAS raw.githubusercontent (cache CDN).
 - Remplacements ciblés par valeur COMPLÈTE (pas de remplacement global de "gratuit" seul) pour éviter les effets de bord.
+
+
+==================================================
+SESSION 2026-07-09 (suite) — TÂCHE A TERMINÉE 32/32
+==================================================
+Reprise de la Tâche A (bannière .announce-bar "Livraison offerte dès 75 €", data-i18n="banner_livraison", insérée juste avant <header> sur chaque fiche produit).
+
+Départ session : 19/32 fiches faites. Fin session : 32/32 fiches faites. TÂCHE A COMPLÈTE.
+
+Fiches traitées cette session (20 -> 32), toutes committées et vérifiées :
+  20. lubrifiant_eau_lube_tube_fraise_orgie.html
+  21. lubrifiant_eau_tube_barbe_a_papa.html
+  22. orgie-pinacolada.html
+  23. pink-star-choco-fraise.html
+  24. pink_star_sucette_cerise.html
+  25. gel_lubrifiant_bio_neutre_divine_xtases.html (variante Coco)
+  26. gel_lubrifiant_bio_neutre_vanille_divine_xtases.html
+  27. gel_lubrifiant_bio_neutre_framboise_divine_xtases.html
+  28. gel_lubrifiant_bio_neutre_monoi_divine_xtases.html
+  29. gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html
+  30. gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html
+  31. mini-robe-noire.html (footer différent - <header> bien présent, OK)
+  32. robe-longue-noire-argentee.html (footer différent - <header> bien présent, OK)
+
+VÉRIFICATION FINALE (via fetch raw.githubusercontent, cache no-store) : les 32 fiches ont
+announce-bar=1, banner_livraison=1, <!DOCTYPE=1, <header>=1. Aucune duplication de document.
+
+INCIDENTS / MÉTHODE :
+  - Fiches 21 et 22 : le 1er collage a créé un doublon (l'éditeur n'avait pas été vidé complètement).
+    Détecté via Ctrl+Home, corrigé en re-vidant l'éditeur (Ctrl+A + Delete répété jusqu'au placeholder
+    "Enter file contents here") avant de recoller. Confirme la note méthode existante.
+  - Procédure appliquée pour chaque fiche : régénérer le bloc depuis index.html, extraire le HTML de la
+    fiche, insérer le bloc avant <header>, valider les compteurs, vider complètement l'éditeur, coller,
+    vérifier début (Ctrl+Home) + fin (Ctrl+End), puis JLShop06 clique Commit.
+
+PROCHAINES ÉTAPES (REPRENDRE ICI) :
+  - TÂCHE B : tests live après redéploiement Vercel (voir section B ci-dessus) — Ctrl+Shift+R pour vider le cache,
+    vérifier panier, champ e-mail/PAYER, récap livraison >=75€ vs <75€, bandeau dans les 5 langues, parcours Stripe.
+  - TÂCHE C : vérification config webhook Stripe — à faire par JLShop06 (sensible, non touché par Claude).
