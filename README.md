@@ -1379,3 +1379,64 @@ METHODE FIABLE (validee cette session) :
 - NOTE OUTIL : le filtre de sortie JS masque les chaines contenant des URLs/cookies ("[BLOCKED]") -> ne renvoyer que des compteurs/booleens, jamais le HTML brut.
 
 RAPPEL PRIORITE SEO (dit a l'utilisateur) : un score SEOptimizer eleve ne fait pas vendre en soi ; regarder aussi Search Console (trafic reel, positions, conversions). Le "F" Links interne se corrige par le code (en cours) ; les backlinks externes demandent du temps/hors-code.
+
+
+==================================================
+SESSION STRIPE (SUITE) + BUGS PANIER + BANNIÈRE LIVRAISON — MAJ 2026-07-09 (Claude)
+==================================================
+
+RÔLES : Claude fait TOUT (édition, collage éditeur, vérifications API) SAUF le clic "Commit changes" (JLShop06).
+
+--- FAIT (committé sur main) ---
+
+1) CHAMP E-MAIL MANQUANT DANS LE PANIER (cart.js) — CORRIGÉ
+Problème : au clic "PAYER", message "veuillez rentrer une adresse valide" et AUCUN champ pour saisir l'e-mail.
+Cause : un #cart-modal codé EN DUR dans le HTML des pages (sans champ e-mail ni récap détaillé). ensureCartModal() voyait le modal déjà présent et faisait return -> ne créait jamais la version complète.
+Fix : nouvelle fonction injectCartExtras() dans cart.js. Si le modal existe déjà, elle injecte (avant le bouton PAYER) : un conteneur #cart-summary + le champ #cart-email (type email, requis). Appelée aussi au début de showCart(). Testé live : le champ e-mail s'affiche au-dessus de PAYER.
+
+2) BUG AFFICHAGE SOUS-TOTAL = 0,00 € (cart.js) — CORRIGÉ
+Problème : le récap affichait "Sous-total 0,00 €" et donc "Livraison 6,90 €" même avec un panier à 229 € (livraison qui aurait dû être offerte).
+Cause : le code faisait Number(cartTotal) où cartTotal est l'ÉLÉMENT DOM (pas sa valeur) -> NaN -> 0. Bug présent en DOUBLE (fichier dupliqué, voir point 3).
+Fix : remplacé par Number(total) (la variable qui contient la somme des prix). Testé : sous-total 229,85 € -> livraison "Offerts".
+NB IMPORTANT : ce bug n'affectait QUE l'affichage. Le montant réellement facturé est calculé côté serveur (checkout.js) avec les vrais prix Stripe -> jamais faux pour le client.
+
+3) FICHIER cart.js ENTIÈREMENT DUPLIQUÉ — CORRIGÉ (crash total)
+Problème : plus rien ne marchait (ni "ajouter au panier", ni ouverture du panier).
+Cause : cart.js contenait DEUX copies complètes du code (toutes les fonctions + variables écrites 2x) -> SyntaxError "Identifier 'CART_VERSION' has already been declared" (ligne 417) -> tout le fichier plantait.
+Fix : suppression de la copie en double. Fichier passé de 746 -> 408 lignes. Vérifié : CART_VERSION 1x, showCart 1x, addToCart 1x, injectCartExtras 1x, syntaxe OK (new Function), accolades 79/79. Les 2 correctifs ci-dessus (points 1 et 2) sont conservés dans la copie gardée.
+LEÇON : la duplication préexistait ; toujours vérifier les doublons top-level (const/function) avant de committer cart.js.
+
+4) BANNIÈRE + MESSAGES "LIVRAISON GRATUITE" -> "LIVRAISON OFFERTE DÈS 75 €" — FAIT
+Demande : retirer "livraison gratuite/offerte" SANS condition de tout le site, remplacer par "Livraison offerte dès 75 € d'achat".
+i18n.js (committé) : 30 remplacements (6 clés x 5 langues fr/pt/it/es/de). Clés modifiées :
+  - banner_livraison (bandeau d'annonce, 5 langues) -> ex FR "✦ LIVRAISON OFFERTE DÈS 75 € D'ACHAT ✦"
+  - footer_livraison (5 langues)
+  - arg_livraison (5 langues)
+  - home_seo_intro_p3, home_hero_desc, home_seo_why_text (mentions dans le texte SEO, 5 langues)
+  Traductions : PT "a partir de 75 €", IT "da 75 €", ES "a partir de 75 €", DE "ab 75 €".
+  Vérifié : 4238 lignes (inchangé), accolades 111/111, 5 bannières "DÈS/AB/DA 75", 0 mention non conditionnelle restante.
+index.html (committé) : 7 remplacements des textes STATIQUES (fallback + SEO) : bandeau .announce-bar, span arg_livraison, .seo-intro__text, .hero-desc, .seo-why__text, .footer-shipping ET le JSON-LD schema.org (description Store). Vérifié : 396 lignes, 7x "offerte dès 75", 0 gratuite.
+NB : le bandeau (.announce-bar) utilise data-i18n="banner_livraison" -> l'affichage dynamique dans les 5 langues vient de i18n.js ; le texte statique d'index.html sert de fallback/SEO.
+
+--- RESTE À FAIRE ---
+
+A) BANNIÈRE "LIVRAISON OFFERTE DÈS 75 €" SUR LES FICHES PRODUITS + PANIER (demande initiale, point 3) — NON FAIT
+Constat (scan live le-flateur / pink-star / Magnum-Opus) : les 32 fiches produits N'ONT PAS de bandeau d'annonce (.announce-bar / banner_livraison). Le message "Livraison offerte dès 75 € d'achat" n'apparaît donc QUE sur l'accueil.
+À faire : ajouter la bannière (idéalement le même bloc .announce-bar avec data-i18n="banner_livraison" que sur l'accueil) en haut des 32 fiches produits, + éventuellement dans le panier. Comme la clé banner_livraison est déjà traduite (5 langues), il suffit de câbler le bloc HTML sur chaque fiche. (Bonne nouvelle : les fiches n'ont AUCUNE mention "gratuite" à corriger, 0 hardcodée.)
+Rappel demande : NE PAS afficher le tarif 6,90 € dans la bannière/marketing ; le 6,90 € n'apparaît QUE dans le récap du panier quand < 75 €.
+
+B) TESTS LIVE (après redéploiement Vercel — faire Ctrl+Shift+R pour vider le cache) :
+  - Panier : ajouter au panier + ouvrir le panier fonctionnent (fix crash cart.js).
+  - Champ e-mail visible dans le panier, clic PAYER OK.
+  - Panier >= 75 € -> récap "Livraison : Offerts" ; < 75 € -> "6,90 €".
+  - Bandeau affiche "Livraison offerte dès 75 €" dans les 5 langues.
+  - Parcours Stripe complet : remise 10% 1re commande (e-mail neuf), pas de remise si e-mail déjà utilisé, montant facturé = montant attendu.
+
+C) VIGILANCE CONFIG STRIPE (à vérifier par JLShop06, non touché par Claude car sensible) :
+  - Variable d'env STRIPE_WEBHOOK_SECRET configurée sur Vercel.
+  - Endpoint webhook (checkout.session.completed) actif dans le dashboard Stripe (verrouille la remise après paiement).
+
+--- NOTES MÉTHODE ---
+- Coller dans l'éditeur GitHub : TOUJOURS vider complètement avant (Ctrl+A + Delete, RÉPÉTER 2x et vérifier "Enter file contents here"), sinon le nouveau contenu s'ajoute APRÈS l'ancien (résidu constaté sur i18n.js et cart.js). Vérifier la fin du fichier (Ctrl+End) après collage.
+- Vérifier via API GitHub (Accept: application/vnd.github.raw), PAS raw.githubusercontent (cache CDN).
+- Remplacements ciblés par valeur COMPLÈTE (pas de remplacement global de "gratuit" seul) pour éviter les effets de bord.
