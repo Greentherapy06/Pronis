@@ -1526,3 +1526,39 @@ PROCHAINES ÉTAPES (REPRENDRE ICI) :
   - TÂCHE B : tests live après redéploiement Vercel (voir section B ci-dessus) — Ctrl+Shift+R pour vider le cache,
     vérifier panier, champ e-mail/PAYER, récap livraison >=75€ vs <75€, bandeau dans les 5 langues, parcours Stripe.
   - TÂCHE C : vérification config webhook Stripe — à faire par JLShop06 (sensible, non touché par Claude).
+
+
+==================================================
+SESSION 2026-07-09 (suite 2) — TÂCHE B : TESTS LIVE TERMINÉS
+==================================================
+Tests réalisés sur le site en production https://les-jardins-enchantes.com (après redéploiement Vercel).
+
+TEST 1 - Panier : OK. Ajout au panier + ouverture du panneau panier fonctionnent, compteur mis à jour,
+  notification affichee. Aucun crash cart.js.
+
+TEST 2 - Champ e-mail + PAYER : OK. Champ "Votre e-mail (pour votre commande)" visible dans le panier,
+  bouton PAYER present et fonctionnel.
+
+TEST 3 - Recap livraison : OK.
+  - Panier 32,90 € (< 75 €) : Livraison 6,90 € + message "Plus que 42,10 € pour la livraison offerte".
+  - Panier 98,70 € (>= 75 €) : Livraison "Offerts". Bascule < / >= 75 € correcte.
+
+TEST 4 - Bandeau 5 langues : OK. Cle banner_livraison traduite dans TRANSLATIONS pour fr/pt/it/es/de :
+  fr=LIVRAISON OFFERTE, pt=ENTREGA GRÁTIS, it=SPEDIZIONE GRATUITA, es=ENVÍO GRATIS, de=KOSTENLOSER VERSAND.
+
+TEST 5 - Parcours Stripe : OK (redirection + montant verifies, SANS paiement reel).
+  - Clic PAYER -> redirection Stripe Checkout OK.
+  - Panier test : 3 x Orgie Piña Colada = 98,70 €.
+  - Remise "Bienvenue -10% (1re commande)" appliquee = -9,87 € (10% de 98,70, exact).
+  - Livraison Gratuite (>= 75 €).
+  - Montant total du cote Stripe = 88,83 € (98,70 - 9,87), = montant attendu. OK.
+  - E-mail utilise pour le test : e-mail neuf -> remise 1re commande bien appliquee.
+  - NON TESTE (necessite paiement reel, non effectue par Claude) : sous-cas "pas de remise si e-mail
+    deja utilise". A valider manuellement par JLShop06 avec un e-mail ayant deja passe une commande.
+  - Aucune donnee bancaire saisie, aucun paiement valide. Session Stripe quittee sans finaliser.
+
+ETAT : TÂCHE B terminee (sauf sous-cas "e-mail deja utilise" a valider manuellement).
+
+PROCHAINES ÉTAPES (REPRENDRE ICI) :
+  - TÂCHE C : verification config webhook Stripe -> a faire par JLShop06 (sensible, non touche par Claude).
+  - Valider manuellement le sous-cas Stripe "e-mail deja utilise = pas de remise".
