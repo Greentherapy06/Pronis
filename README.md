@@ -1631,3 +1631,70 @@ POINT "NEUTRE" FRAMBOISE / VANILLE -> RESOLU
 ==================================================
 Le mot "Neutre" a DEJA ETE RETIRE des fiches produits (framboise et vanille).
 Aucune action supplementaire requise sur ce point.
+
+
+==================================================
+SESSION MAILLAGE INTERNE — Bloc "Vous aimerez aussi" — MAJ 2026-07-10
+==================================================
+OBJECTIF (item 2 du plan Links) : ajouter une section <section class="related-products">
+AVANT le <footer> de CHAQUE fiche produit, avec 4 liens internes ANCRES (texte = nom du produit)
+vers des produits de MEME categorie (completes par affinite si categorie < 4).
+Style inline sobre dore/Georgia (bordure #caa86a, boutons arrondis 24px). Template IDENTIQUE
+a la fiche 1 (Cockring-vibrant-Marry-Me-Wooomy) deja committee.
+
+ROLES : Claude fait TOUT (extraction HTML editeur, construction section, collage CodeMirror).
+JLShop06 clique UNIQUEMENT sur "Commit changes". 1 commit par fiche.
+
+ETAT VERIFIE EN LIVE (raw github, cache:reload) : 23 fiches FAITES / 9 RESTANTES.
+
+--- 23 FICHES FAITES (bloc related-products present) ---
+Cockring-vibrant-Marry-Me-Wooomy, Magnum-Opus-vibro, cockring-vibrant-saturn-hueman,
+Deguisement-Bunny, le-flateur, monster-pussy-strocker, pink-star (= les 7 deja faites avant cette session),
+PLUS committees cette session : Plug-Anal-Rosy-Gold, anneau_vibrant_telecommande,
+black-empire-my-duchess, deguisement-enseignante, deguisement-etudiante,
+deguisement-infirmiere-sexy, dual-vibe-sex-on-the-beach, gel_cannabis_orgie,
+gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases, gel_lubrifiant_bio_neutre_divine_xtases (Coco),
+gel_lubrifiant_bio_neutre_framboise_divine_xtases, gel_lubrifiant_bio_neutre_monoi_divine_xtases,
+gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases, gel_lubrifiant_bio_neutre_vanille_divine_xtases,
+hemp-intense-orgasm, lubrifiant_eau_lube_tube_chocolat_orgie.
+(NB : chocolat_orgie tout juste committe -> peut apparaitre en retard sur le CDN raw, mais bien fait.)
+
+>>> REPRENDRE ICI <<< --- 9 FICHES RESTANTES (dans l'ordre) ---
+1. vibro-rechargeable-Indiana.html          (cat toy)          -> 4 liens : Cockring Marry Me, Magnum Opus, Cockring Saturn, Anneau Love Connection
+2. red-dolls-energy-pleasure.html           (cat masturbateur) -> Monster Pussy Strocker, Cockring Marry Me, Magnum Opus, Cockring Saturn
+3. lubrifiant_eau_lube_tube_fraise_orgie.html   (cat gelarome) -> Cannabis Orgie, Chocolat Orgie, Barbe a Papa Orgie, Pina Colada
+4. lubrifiant_eau_tube_barbe_a_papa.html    (cat gelarome)     -> Cannabis Orgie, Chocolat Orgie, Fraise Orgie, Pina Colada
+5. orgie-pinacolada.html                    (cat gelarome)     -> Cannabis Orgie, Chocolat Orgie, Fraise Orgie, Barbe a Papa Orgie
+6. pink-star-choco-fraise.html              (cat gelarome)     -> Cannabis Orgie, Chocolat Orgie, Fraise Orgie, Barbe a Papa Orgie
+7. pink_star_sucette_cerise.html            (cat gelarome)     -> Cannabis Orgie, Chocolat Orgie, Fraise Orgie, Barbe a Papa Orgie
+8. mini-robe-noire.html                     (cat lingerie)     -> Bunny, Enseignante, Etudiante, Infirmiere
+9. robe-longue-noire-argentee.html          (cat lingerie)     -> Bunny, Enseignante, Etudiante, Infirmiere
+
+--- CATEGORIES (pour reconstruire le mapping) ---
+toy(8) : Cockring-vibrant-Marry-Me-Wooomy, Magnum-Opus-vibro, cockring-vibrant-saturn-hueman,
+  anneau_vibrant_telecommande, black-empire-my-duchess, le-flateur, vibro-rechargeable-Indiana, Plug-Anal-Rosy-Gold
+masturbateur(2) : monster-pussy-strocker, red-dolls-energy-pleasure
+gelbio(6) : caramel, neutre_divine(Coco), framboise, monoi, sans_parfum, vanille (tous _divine_xtases)
+gelarome(8) : gel_cannabis_orgie, chocolat, fraise, barbe_a_papa, orgie-pinacolada, pink-star, pink-star-choco-fraise, pink_star_sucette_cerise
+excitant(2) : hemp-intense-orgasm, dual-vibe-sex-on-the-beach
+lingerie(6) : Deguisement-Bunny, deguisement-enseignante, deguisement-etudiante, deguisement-infirmiere-sexy, mini-robe-noire, robe-longue-noire-argentee
+Regle : 4 liens meme categorie (hors soi) ; si <4 completer par affinite
+(toy->masturbateur->excitant ; masturbateur->toy->excitant ; gelbio->gelarome->excitant ;
+ gelarome->gelbio->excitant ; excitant->gelarome->toy ; lingerie n'utilise que lingerie).
+
+--- METHODE PAR FICHE (rappel, marche a 100%) ---
+1. Aller sur /edit/main/[FICHIER].
+2. En JS : extraire le HTML HEAD depuis <script type="application/json"> de l'editeur
+   (deepFind : chaine contenant <!DOCTYPE, length>2000). Verifier related-products ABSENT.
+3. Construire la section (template ci-dessus) et l'inserer AVANT la 1ere occurrence de /<footer[\s>]/.
+   Verifier : 1 DOCTYPE, 1 footer, 1 seule section related-products, delta ~+1450 a +1560.
+4. Coller : clic dans l'editeur [600,350], Ctrl+A, ClipboardEvent('paste') sur .cm-content
+   (DataTransfer text/plain = nouveau HTML). Verifier defaultPrevented:true + screenshot Ctrl+End.
+5. JLShop06 clique "Commit changes".
+6. Verifier via raw {cache:'reload'} (le CDN peut retarder de quelques minutes).
+
+ITEMS RESTANTS DU PLAN LINKS/GEO (non commences, pour memoire) :
+- Item 1 : JSON-LD Store aggregateRating + sameAs -> NECESSITE donnees reelles de JLShop06
+  (note moyenne + nb avis clients ; URLs reseaux sociaux Instagram/Facebook/TikTok). Ne pas inventer.
+- Item 3 : JSON-LD Product + BreadcrumbList sur les 23 fiches sans JSON-LD
+  (seules le-flateur + 6 gels bio en ont). ~23 fiches, extraction donnees reelles par fiche.
