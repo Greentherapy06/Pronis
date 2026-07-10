@@ -1,4 +1,4 @@
-undefinedLes Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
+Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
 FR = langue par défaut. Réutiliser i18n.js existant. NE PAS créer de nouveau système. Ordre des langues dans i18n.js : fr, pt, it, es, de (ATTENTION : pas fr/pt/es/it/de — sinon inversion ES/IT). RÔLES : Claude fait TOUT (fetch, traduction, insertion, validation, collage dans l'éditeur, ouverture du dialogue de commit + message). L'utilisateur (JLShop06) clique uniquement sur "Commit changes".
 
@@ -1592,8 +1592,8 @@ RESTE A VALIDER MANUELLEMENT (non bloquant, necessite un paiement reel) :
     e-mail ayant deja passe une commande complete).
 
 
-==================================================
-TACHE D (EN COURS) : bandeau promo "-10% premiere commande" dans le header
+=============================================================
+TACHE D (TERMINEE) : bandeau promo "-10% premiere commande" dans le header
 ==================================================
 OBJECTIF : afficher "Les Jardins Enchantes vous offre -10% sur votre premiere commande"
 dans la zone centrale du header (entre CATEGORIES et LANGUE), sur la page d'accueil
@@ -1610,48 +1610,24 @@ FICHIERS SOCLE -> TERMINES (commites) :
   - style.css: regle .header-promo (couleur or #caa86a, flex:1, center, uppercase, cachee <1100px).
   - index.html (accueil) : div promo inseree. Rendu live verifie OK.
 
-FICHES PRODUITS -> 14/32 TERMINEES (commites) :
-  1 Cockring-vibrant-Marry-Me-Wooomy  2 Deguisement-Bunny  3 Magnum-Opus-vibro
-  4 Plug-Anal-Rosy-Gold  5 anneau_vibrant_telecommande  6 black-empire-my-duchess
-  7 cockring-vibrant-saturn-hueman  8 deguisement-enseignante  9 deguisement-etudiante
-  10 deguisement-infirmiere-sexy  11 dual-vibe-sex-on-the-beach  12 gel_cannabis_orgie
-  13 gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases
-  14 gel_lubrifiant_bio_neutre_divine_xtases
+FICHES PRODUITS -> 32/32 TERMINEES (commites).
+  Vague finale (fiches 15 a 32), toutes committees avec delta +123 :
+  15 gel_lubrifiant_bio_neutre_framboise_divine_xtases  16 monoi  17 sans_parfum
+  18 vanille  19 hemp-intense-orgasm  20 le-flateur  21 chocolat_orgie
+  22 fraise_orgie  23 barbe_a_papa  24 mini-robe-noire  25 monster-pussy-strocker
+  26 orgie-pinacolada  27 pink-star-choco-fraise  28 pink-star  29 pink_star_sucette_cerise
+  30 red-dolls-energy-pleasure  31 robe-longue-noire-argentee  32 vibro-rechargeable-Indiana
 
-RESTE A FAIRE -> 18 fiches (15 a 32) :
-  15 gel_lubrifiant_bio_neutre_framboise_divine_xtases.html
-  16 gel_lubrifiant_bio_neutre_monoi_divine_xtases.html
-  17 gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html
-  18 gel_lubrifiant_bio_neutre_vanille_divine_xtases.html
-  19 hemp-intense-orgasm.html
-  20 le-flateur.html
-  21 lubrifiant_eau_lube_tube_chocolat_orgie.html
-  22 lubrifiant_eau_lube_tube_fraise_orgie.html
-  23 lubrifiant_eau_tube_barbe_a_papa.html
-  24 mini-robe-noire.html
-  25 monster-pussy-strocker.html
-  26 orgie-pinacolada.html
-  27 pink-star-choco-fraise.html
-  28 pink-star.html
-  29 pink_star_sucette_cerise.html
-  30 red-dolls-energy-pleasure.html
-  31 robe-longue-noire-argentee.html
-  32 vibro-rechargeable-Indiana.html
+VERIFICATION FINALE (via API GitHub branche main, pas le CDN raw) :
+  33/33 fichiers cibles (32 fiches produits + index.html) conformes :
+  header-promo = 1, data-i18n="header_promo" = 1, <!DOCTYPE = 1 pour chacun.
+  Aucun bug de duplication (double DOCTYPE) constate.
 
-PROCEDURE PAR FICHE (rappel) :
-  a. Ouvrir https://github.com/JLShop06/Les-Jardins-Enchantes/edit/main/{FICHIER}
-  b. fetch raw (cache:no-store) -> inserer promoDiv avant '<div class="lang-switch"'
-     -> valider (delta +123, promoCount 1, doctype 1, headerCount 1, debut <!DOCTYPE html>)
-  c. Vider l'editeur (clic + Ctrl+A + Delete, verifier placeholder) AVANT de coller (bug doublon).
-  d. Coller via ClipboardEvent paste (defaultPrevented true).
-  e. Ctrl+Home + verifier ligne 1 = <!DOCTYPE html> unique + bon titre.
-  f. Dire "PRETE A COMMITTER" -> JLShop06 clique Commit -> "commit fait" -> fiche suivante.
+=> TACHE D COMPLETE. Bandeau promo present sur toute la boutique, i18n 5 langues (fr/pt/it/es/de).
+   Deploiement Vercel automatique depuis main.
 
-TRADUCTIONS header_promo :
-  FR: Les Jardins Enchantes vous offre -10% sur votre premiere commande
-  PT: Les Jardins Enchantes oferece-lhe -10% na sua primeira encomenda
-  IT: Les Jardins Enchantes ti offre -10% sul tuo primo ordine
-  ES: Les Jardins Enchantes te ofrece -10% en tu primer pedido
-  DE: Les Jardins Enchantes schenkt Ihnen -10% auf Ihre erste Bestellung
-
-PROCHAINE FOIS : reprendre a la fiche 15 (framboise), continuer jusqu'a 32.
+==================================================
+POINT "NEUTRE" FRAMBOISE / VANILLE -> RESOLU
+==================================================
+Le mot "Neutre" a DEJA ETE RETIRE des fiches produits (framboise et vanille).
+Aucune action supplementaire requise sur ce point.
