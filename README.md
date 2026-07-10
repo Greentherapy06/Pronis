@@ -1659,7 +1659,7 @@ gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases, gel_lubrifiant_bio_neutre_v
 hemp-intense-orgasm, lubrifiant_eau_lube_tube_chocolat_orgie.
 (NB : chocolat_orgie tout juste committe -> peut apparaitre en retard sur le CDN raw, mais bien fait.)
 
->>> REPRENDRE ICI <<< --- 9 FICHES RESTANTES (dans l'ordre) ---
+[TERMINE 2026-07-10 — les 9 fiches restantes sont FAITES, voir bloc de fin de session] --- 9 FICHES (etaient restantes, MAINTENANT FAITES) ---
 1. vibro-rechargeable-Indiana.html          (cat toy)          -> 4 liens : Cockring Marry Me, Magnum Opus, Cockring Saturn, Anneau Love Connection
 2. red-dolls-energy-pleasure.html           (cat masturbateur) -> Monster Pussy Strocker, Cockring Marry Me, Magnum Opus, Cockring Saturn
 3. lubrifiant_eau_lube_tube_fraise_orgie.html   (cat gelarome) -> Cannabis Orgie, Chocolat Orgie, Barbe a Papa Orgie, Pina Colada
@@ -1698,3 +1698,52 @@ ITEMS RESTANTS DU PLAN LINKS/GEO (non commences, pour memoire) :
   (note moyenne + nb avis clients ; URLs reseaux sociaux Instagram/Facebook/TikTok). Ne pas inventer.
 - Item 3 : JSON-LD Product + BreadcrumbList sur les 23 fiches sans JSON-LD
   (seules le-flateur + 6 gels bio en ont). ~23 fiches, extraction donnees reelles par fiche.
+
+
+==================================================
+SESSION MAILLAGE INTERNE (fin) — MAJ 2026-07-10 (Claude)
+
+TACHE "Vous aimerez aussi" (bloc related-products sur toutes les fiches produits) : TERMINEE 32/32.
+
+Les 9 dernieres fiches ont ete traitees et committees cette session (bloc related-products insere,
+4 liens internes ancres chacune, template identique aux precedentes, style inline dore/Georgia) :
+1. vibro-rechargeable-Indiana (toy)        -> Cockring Marry Me, Magnum Opus, Cockring Saturn, Anneau Love Connection
+2. red-dolls-energy-pleasure (masturbateur) -> Monster Pussy Strocker, Cockring Marry Me, Magnum Opus, Cockring Saturn
+3. lubrifiant_eau_lube_tube_fraise_orgie (gelarome) -> Cannabis, Chocolat, Barbe a Papa, Pina Colada
+4. lubrifiant_eau_tube_barbe_a_papa (gelarome)      -> Cannabis, Chocolat, Fraise, Pina Colada
+5. orgie-pinacolada (gelarome)             -> Cannabis, Chocolat, Fraise, Barbe a Papa
+6. pink-star-choco-fraise (gelarome)       -> Cannabis, Chocolat, Fraise, Barbe a Papa
+7. pink_star_sucette_cerise (gelarome)     -> Cannabis, Chocolat, Fraise, Barbe a Papa
+8. mini-robe-noire (lingerie)              -> Bunny, Enseignante, Etudiante, Infirmiere
+9. robe-longue-noire-argentee (lingerie)   -> Bunny, Enseignante, Etudiante, Infirmiere
+
+NOTE IMPORTANTE (lingerie) : mini-robe-noire ET robe-longue-noire-argentee n'ont PAS de <footer>
+(pas de cart.js/i18n, page plus simple). Le bloc a donc ete insere AVANT </body> (apres le dernier
+</section>), et non avant <footer>. Rendu propre verifie. Les hrefs lingerie utilisent les noms de
+fichiers EXACTS des pages live : Déguisement-Bunny.html (accent + D majuscule),
+deguisement-enseignante.html, deguisement-etudiante.html, deguisement-infirmière-sexy.html (accent).
+
+VERIFICATION FINALE (fetch raw, cache:no-store) sur les 9 : related-products=1, liens=4, DOCTYPE=1,
+aucune duplication. => TACHE MAILLAGE INTERNE COMPLETE (32/32 fiches).
+
+--------------------------------------------------
+>>> REPRENDRE ICI (prochaine session) <<<
+
+Il reste 2 items du plan Links/GEO (les DEUX necessitent une extraction de donnees ; item 1 necessite
+des donnees que SEUL JLShop06 peut fournir) :
+
+- ITEM 1 : JSON-LD Store (accueil) -> ajouter aggregateRating (note moyenne + nb d'avis clients REELS)
+  et sameAs (URLs reseaux sociaux : Instagram / Facebook / TikTok). BLOQUE : demander ces valeurs a
+  JLShop06 avant insertion. NE RIEN INVENTER (avis/note fictifs = risque conformite + trompeur).
+
+- ITEM 3 : JSON-LD Product + BreadcrumbList sur les 23 fiches qui n'ont PAS de JSON-LD
+  (seules le-flateur + les 6 gels bio en ont). Ajouter AUSSI BreadcrumbList aux 6 gels bio (Product OK,
+  Breadcrumb manquant) et a l'accueil (Store OK, Breadcrumb manquant). availability=InStock (a confirmer).
+  Donnees a extraire par fiche : nom H1, description meta, prix, image .webp, marque, categorie, canonical.
+  Faisable SANS donnees externes -> peut demarrer directement.
+
+RAPPEL METHODE (inchangee) : editeur GitHub fichier par fichier ; extraire le HTML depuis
+<script type="application/json"> de l'editeur ; inserer ; VIDER completement l'editeur (Ctrl+A+Delete
+x2, verifier placeholder "Enter file contents here") avant de coller ; ClipboardEvent paste sur
+.cm-content (verifier defaultPrevented:true) ; Ctrl+Home + Ctrl+End (screenshots) ; JLShop06 clique
+Commit. Verifier via API/raw (pas raw en cache). Ordre langues fr/pt/it/es/de. Marques NON traduites.
