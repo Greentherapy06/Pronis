@@ -1727,7 +1727,7 @@ VERIFICATION FINALE (fetch raw, cache:no-store) sur les 9 : related-products=1, 
 aucune duplication. => TACHE MAILLAGE INTERNE COMPLETE (32/32 fiches).
 
 --------------------------------------------------
->>> REPRENDRE ICI (prochaine session) <<<
+[EN COURS 2026-07-10 - voir bloc AVANCEMENT ITEM 3 en fin de fichier]
 
 Il reste 2 items du plan Links/GEO (les DEUX necessitent une extraction de donnees ; item 1 necessite
 des donnees que SEUL JLShop06 peut fournir) :
@@ -1747,3 +1747,66 @@ RAPPEL METHODE (inchangee) : editeur GitHub fichier par fichier ; extraire le HT
 x2, verifier placeholder "Enter file contents here") avant de coller ; ClipboardEvent paste sur
 .cm-content (verifier defaultPrevented:true) ; Ctrl+Home + Ctrl+End (screenshots) ; JLShop06 clique
 Commit. Verifier via API/raw (pas raw en cache). Ordre langues fr/pt/it/es/de. Marques NON traduites.
+
+==================================================
+AVANCEMENT ITEM 3 - JSON-LD Product + BreadcrumbList (session 2026-07-10)
+==================================================
+
+INVENTAIRE REEL (via API GitHub + raw no-store) : 30 fiches produit a toucher.
+  - le-flateur.html : Product + BreadcrumbList DEJA presents = MODELE DE REFERENCE (ne pas toucher).
+  - 6 gels bio Divine Xtases : Product present, BreadcrumbList MANQUANT -> ajouter Breadcrumb seul.
+  - 24 autres fiches : AUCUN JSON-LD -> ajouter Product + BreadcrumbList.
+
+MODELE (copie de le-flateur, valeurs tirees du contenu propre de chaque fiche, RIEN INVENTE) :
+  Product : name, description, image (URL absolue .webp du produit), sku (prefixe LJE-/DIVINE-),
+    brand.name, offers{url=canonical, priceCurrency EUR, price, priceValidUntil 2026-12-31,
+    availability InStock, seller.name "Les Jardins Enchantes"}, category.
+  BreadcrumbList : 3 niveaux -> Accueil (home) / Categorie (lien home, convention du site) /
+    Nom produit (lien canonical). Les 2 blocs places dans le <head>.
+
+FAIT (committe + verifie en live : 2 ld+json, 3 ListItem chacun) - 3/30 :
+  [x] gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html  (Breadcrumb ajoute)
+  [x] gel_lubrifiant_bio_neutre_divine_xtases.html               (Breadcrumb ajoute)
+  [x] gel_lubrifiant_bio_neutre_framboise_divine_xtases.html     (Breadcrumb ajoute)
+
+RESTE - GELS BIO (Breadcrumb seul) - 3 :
+  [ ] gel_lubrifiant_bio_neutre_monoi_divine_xtases.html
+  [ ] gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html
+  [ ] gel_lubrifiant_bio_neutre_vanille_divine_xtases.html
+
+RESTE - PRODUCT + BREADCRUMB - 24 :
+  [ ] Cockring-vibrant-Marry-Me-Wooomy.html
+  [ ] Deguisement-Bunny.html
+  [ ] Magnum-Opus-vibro.html
+  [ ] Plug-Anal-Rosy-Gold.html
+  [ ] anneau_vibrant_telecommande.html
+  [ ] black-empire-my-duchess.html
+  [ ] cockring-vibrant-saturn-hueman.html
+  [ ] deguisement-enseignante.html   (verifier nom exact fichier image : espace/apostrophe)
+  [ ] deguisement-etudiante.html     (idem image)
+  [ ] deguisement-infirmiere-sexy.html
+  [ ] dual-vibe-sex-on-the-beach.html   (2 prix : 28.90 / 32.90 -> choisir prix de vente courant)
+  [ ] gel_cannabis_orgie.html
+  [ ] hemp-intense-orgasm.html
+  [ ] lubrifiant_eau_lube_tube_chocolat_orgie.html
+  [ ] lubrifiant_eau_lube_tube_fraise_orgie.html
+  [ ] lubrifiant_eau_tube_barbe_a_papa.html
+  [ ] mini-robe-noire.html
+  [ ] monster-pussy-strocker.html
+  [ ] orgie-pinacolada.html          (2 prix : 12.90 / 32.90 -> choisir prix de vente courant)
+  [ ] pink-star-choco-fraise.html
+  [ ] pink_star_sucette_cerise.html
+  [ ] red-dolls-energy-pleasure.html
+  [ ] robe-longue-noire-argentee.html
+  [ ] vibro-rechargeable-Indiana.html
+
+>>> REPRENDRE ICI (prochaine session) <<<  -> prochaine fiche : gel_lubrifiant_bio_neutre_monoi_divine_xtases.html
+
+METHODE PAR FICHE (eprouvee) : ouvrir editeur GitHub ; extraire le HTML via
+payload.codeViewEditRoute.editInfo.content (plus fiable que deepFind) ; construire Breadcrumb
+(et Product si absent) a partir des donnees de la fiche ; inserer avant </head> (juste apres le
+Product existant pour les gels bio) ; VALIDER par compteurs uniquement (filtre bloque URLs) :
+ld+json=2, ListItem=3, DOCTYPE=1, </head>=1, delta positif, start/end OK ; vider entierement
+l'editeur (Ctrl+A/Delete x2, placeholder "Enter file contents here") ; coller via ClipboardEvent
+(defaultPrevented:true) ; Ctrl+Home + Ctrl+End (screenshots) ; JLShop06 clique Commit (jamais Claude).
+ITEM 1 reste BLOQUE : demander a JLShop06 note moyenne + nb avis + URLs reseaux sociaux. NE RIEN INVENTER.
