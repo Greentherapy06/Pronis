@@ -1,5 +1,64 @@
 Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
+==================================================
+>>> REPRENDRE ICI — SESSION JSON-LD (ITEM 3) — MAJ 2026-07-11 <<<
+==================================================
+OBJECTIF EN COURS : ajouter JSON-LD schema.org (Product + BreadcrumbList) dans le <head> de chaque fiche produit (avant </head>).
+RÔLES : Claude fait TOUT (fetch éditeur, extraction données RÉELLES, construction, vidage complet éditeur, collage, vérifs). SEUL JLShop06 clique "Commit changes". NE RIEN INVENTER.
+
+MÉTHODE PAR FICHE (rodée) :
+1. Ouvrir github.com/JLShop06/Les-Jardins-Enchantes/edit/main/[FICHIER] (encoder accents dans l'URL : é=%C3%A9, è=%C3%A8).
+2. JS : extraire le HTML via deepFind de la cle "content" (script[type=application/json], contient <!DOCTYPE). Extraire canonical, meta description, H1, prix (regex \d+[.,]\d{2}€), image produit (<img src="...webp"> hors favicon/logo/les-jardins-enchantes.webp).
+3. Construire Product (name, description, image ABSOLUE encodeURIComponent, sku LJE-XXX, brand{name}, offers{url=canonical, EUR, price, priceValidUntil 2026-12-31, availability InStock, seller Les Jardins Enchantés}, category) + BreadcrumbList (pos1 Accueil /, pos2 categorie /, pos3 name canonical). Insérer avant </head>.
+4. Valider par COMPTEURS : ldjson=2, product=1, breadcrumb=1, listitem=3, doctype=1, 1 seul </head>/</html>, startsOk, endsOk, delta>0, pas de \\n littéral.
+5. Vider l'éditeur COMPLÈTEMENT (Ctrl+A + Delete x3, confirmer placeholder "Enter file contents here" par screenshot) SINON doublon DOCTYPE.
+6. Coller via ClipboardEvent('paste') sur .cm-content (DataTransfer text/plain) -> vérifier defaultPrevented:true.
+7. Vérifier Ctrl+Home (1 seul DOCTYPE ligne 1) + Ctrl+End (related-products + footer uniques). Screenshots.
+8. Dire "prêt à committer" -> ATTENDRE que JLShop06 clique Commit et dise "commit fait".
+
+MODÈLE DE RÉFÉRENCE : le-flateur.html (a déjà Product + Breadcrumb — NE PAS TOUCHER).
+PIÈGE : certaines fiches ont un nom de fichier accentué (ex : deguisement-infirmiè­re-sexy.html avec è). Si "File not found", essayer la version accentuée URL-encodée. Le canonical se recopie TEL QUEL depuis la page (ne pas "corriger" l'accent).
+NE PAS vérifier via raw.githubusercontent.com (cache CDN décalé) -> vérifier via éditeur ou API GitHub (Accept: application/vnd.github.raw, ?ref=main).
+
+--- FAIT ET COMMITTÉ CETTE SESSION (ITEM 3) ---
+Gels bio (Breadcrumb seul ajouté, Product existait déjà) : monoi ✅, sans_parfum ✅, vanille ✅ (les 6 gels bio ont maintenant Product + Breadcrumb : + caramel/coco(neutre)/framboise faits avant).
+Product + BreadcrumbList (fiches sans aucun JSON-LD) :
+- Cockring-vibrant-Marry-Me-Wooomy.html ✅
+- Déguisement-Bunny.html ✅
+- Magnum-Opus-vibro.html ✅
+- Plug-Anal-Rosy-Gold.html ✅
+- anneau_vibrant_telecommande.html ✅
+- black-empire-my-duchess.html ✅
+- cockring-vibrant-saturn-hueman.html ✅ (Hueman, 59,99€, LJE-SATURN)
+- deguisement-enseignante.html ✅ (J Lingerie, 49,99€, LJE-ENSEIGNANTE)
+- deguisement-etudiante.html ✅ (J Lingerie, 39,90€, LJE-ETUDIANTE)
+- deguisement-infirmière-sexy.html ✅ (J Lingerie, 32,90€, LJE-INFIRMIERE — fichier ACCENTUÉ è)
+
+--- RESTE À FAIRE (ITEM 3) — Product + BreadcrumbList, dans l'ordre ---
+1. dual-vibe-sex-on-the-beach.html (2 prix 28,90/32,90 -> prix de vente courant)
+2. gel_cannabis_orgie.html
+3. hemp-intense-orgasm.html
+4. lubrifiant_eau_lube_tube_chocolat_orgie.html
+5. lubrifiant_eau_lube_tube_fraise_orgie.html
+6. lubrifiant_eau_tube_barbe_a_papa.html
+7. mini-robe-noire.html (footer différent : PAS de div.cart -> insérer avant </head> normalement, vérifier fin)
+8. monster-pussy-strocker.html
+9. orgie-pinacolada.html (2 prix 12,90/32,90)
+10. pink-star-choco-fraise.html
+11. pink_star_sucette_cerise.html
+12. red-dolls-energy-pleasure.html
+13. robe-longue-noire-argentee.html (footer différent : PAS de div.cart)
+14. vibro-rechargeable-Indiana.html
+
+--- APRÈS ITEM 3 : VÉRIF FINALE ---
+Contrôler chaque fiche via API GitHub : 2 ld+json, 1 Product, 1 BreadcrumbList, 3 ListItem. Confirmer 0 doublon DOCTYPE.
+
+--- BLOQUÉ — ITEM 1 (JSON-LD Store accueil) : DONNÉES REQUISES DE JLShop06 ---
+Enrichir le JSON-LD Store de l'accueil : aggregateRating (note moyenne + nb d'avis) et sameAs (URLs Instagram/Facebook/TikTok). NE RIEN INVENTER -> DEMANDER ces données à JLShop06. Ajouter aussi BreadcrumbList à l'accueil (le Store existe déjà).
+
+==================================================
+
+
 FR = langue par défaut. Réutiliser i18n.js existant. NE PAS créer de nouveau système. Ordre des langues dans i18n.js : fr, pt, it, es, de (ATTENTION : pas fr/pt/es/it/de — sinon inversion ES/IT). RÔLES : Claude fait TOUT (fetch, traduction, insertion, validation, collage dans l'éditeur, ouverture du dialogue de commit + message). L'utilisateur (JLShop06) clique uniquement sur "Commit changes".
 
 ==================================================
