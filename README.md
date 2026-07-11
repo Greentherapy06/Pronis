@@ -34,19 +34,22 @@ Product + BreadcrumbList (fiches sans aucun JSON-LD) :
 - deguisement-etudiante.html ✅ (J Lingerie, 39,90€, LJE-ETUDIANTE)
 - deguisement-infirmière-sexy.html ✅ (J Lingerie, 32,90€, LJE-INFIRMIERE — fichier ACCENTUÉ è)
 
+--- FAIT ET COMMITTÉ — SUITE SESSION 2026-07-11 (les 11 fiches de la liste RESTE ci-dessous, dans l'ordre) ---
+- dual-vibe-sex-on-the-beach.html ✅ (Orgie, 32,90€, LJE-DUALVIBE, Gels d'excitation)
+- gel_cannabis_orgie.html ✅ (Orgie, 12,90€, LJE-CANNABIS, Gels aromatisés)
+- hemp-intense-orgasm.html ✅ (Hemp Intense Orgasm, 30,90€, LJE-HEMP, Gels d'excitation)
+- lubrifiant_eau_lube_tube_chocolat_orgie.html ✅ (Orgie, 12,90€, LJE-CHOCOLAT, Gels aromatisés)
+- lubrifiant_eau_lube_tube_fraise_orgie.html ✅ (Orgie, 12,90€, LJE-FRAISE, Gels aromatisés)
+- lubrifiant_eau_tube_barbe_a_papa.html ✅ (Orgie, 12,90€, LJE-BARBEPAPA, Gels aromatisés)
+- mini-robe-noire.html ✅ (J Lingerie, 49,95€, LJE-MINIROBE, Lingerie — footer sans div.cart, OK)
+- monster-pussy-strocker.html ✅ (Alive, 19,99€, LJE-MONSTER, Masturbateurs)
+- orgie-pinacolada.html ✅ (Orgie, 32,90€ [prix courant, pas 12,90 de la meta], LJE-PINACOLADA, Gels aromatisés)
+- pink-star-choco-fraise.html ✅ (Pink Star, 14,95€, LJE-PINKSTARFC, Gels aromatisés)
+- pink_star_sucette_cerise.html ✅ (Pink Star, 14,95€, LJE-PINKSTARCE, Gels aromatisés)
+NOTE INCIDENT (orgie-pinacolada) : 1er collage a dupliqué le DOCTYPE (Ctrl+A n'avait pas capté le focus). Corrigé en rechargeant l'éditeur puis en cliquant DANS une ligne de code avant Ctrl+A. DÉSORMAIS : cliquer sur une ligne de code, Ctrl+A, VÉRIFIER le surlignage complet par screenshot AVANT de coller, puis contrôler la FIN du fichier (aucun 2e DOCTYPE).
+
 --- RESTE À FAIRE (ITEM 3) — Product + BreadcrumbList, dans l'ordre ---
-1. dual-vibe-sex-on-the-beach.html (2 prix 28,90/32,90 -> prix de vente courant)
-2. gel_cannabis_orgie.html
-3. hemp-intense-orgasm.html
-4. lubrifiant_eau_lube_tube_chocolat_orgie.html
-5. lubrifiant_eau_lube_tube_fraise_orgie.html
-6. lubrifiant_eau_tube_barbe_a_papa.html
-7. mini-robe-noire.html (footer différent : PAS de div.cart -> insérer avant </head> normalement, vérifier fin)
-8. monster-pussy-strocker.html
-9. orgie-pinacolada.html (2 prix 12,90/32,90)
-10. pink-star-choco-fraise.html
-11. pink_star_sucette_cerise.html
-12. red-dolls-energy-pleasure.html
+12. red-dolls-energy-pleasure.html   <<< REPRENDRE ICI
 13. robe-longue-noire-argentee.html (footer différent : PAS de div.cart)
 14. vibro-rechargeable-Indiana.html
 
