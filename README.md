@@ -26,10 +26,20 @@ Résultat : 31/32 fiches PARFAITES (ld=2, product=1, breadcrumb=1, listitem=3, d
 1 fiche oubliée détectée et corrigée : pink-star.html ("Pink Star Sangria 60ml", Pink Star, 14,95€, LJE-PINKSTARSANGRIA, Gels aromatisés) — elle n'était PAS dans la liste des 14 (à ne pas confondre avec pink-star-choco-fraise et pink_star_sucette_cerise). JSON-LD Product + BreadcrumbList ajouté et committé.
 => DÉSORMAIS : les 33 fiches produits ont toutes Product + BreadcrumbList. 0 doublon DOCTYPE.
 
+--- VÉRIF LIVE + TEST GOOGLE RICH RESULTS : FAIT (2026-07-11) ---
+Site en ligne testé (fetch cache:'reload' + outil Google search.google.com/test/rich-results) :
+- ACCUEIL : Store (Commerces et services à proximité) VALIDE, BreadcrumbList (Fils d'Ariane) VALIDE, Organisation VALIDE. sameAs (3 réseaux) + BreadcrumbList bien présents en live.
+- FICHES PRODUITS testées (red-dolls, pink-star) : "3 éléments valides détectés" -> Fiches de marchand (Product) VALIDE + Fils d'Ariane VALIDE. Seuls des avertissements NON critiques (champs recommandés optionnels : aggregateRating/shipping) -> n'empêchent PAS l'éligibilité aux extraits enrichis.
+
+--- CORRECTION MICRODATA ACCUEIL : FAIT (2026-07-11) ---
+PROBLÈME trouvé par le test Google sur l'accueil : "35 éléments dont certains non valides" -> 32 "Extraits de produits" NON valides (erreur critique : "Il faut indiquer offers, review, ou aggregateRating").
+CAUSE (pré-existante, PAS liée au JSON-LD de cette session) : les 32 cartes produits de l'accueil étaient balisées en MICRODATA <article itemscope itemtype="https://schema.org/Product"> avec itemprop name/image/PRICE mais SANS itemprop offers -> un prix sans offers est invalide pour Google.
+CORRECTIF appliqué (index.html, committé) : retrait des attributs microdata des 32 cartes (itemscope, itemtype Product, et itemprop name/image/price). Choix = option 2 (retirer le balisage Product partiel du listing plutôt que le compléter), car le vrai balisage Product complet vit déjà, valide, sur chaque fiche produit individuelle.
+PRÉSERVÉ (vérifié par compteurs) : les 32 <article> restent (affichage identique), data-category ×32 (filtres), data-i18n ×78 (traductions), et le JSON-LD Store+BreadcrumbList+sameAs de l'accueil INTACT (ldjson=2). Aucun impact visuel. delta ≈ -3136 chars.
+
 --- RESTE À FAIRE (léger / auto) ---
-1. VÉRIF LIVE après redéploiement Vercel (cache edge non instantané) : contrôler que les JSON-LD s'affichent bien sur le site en ligne (Rich Results Test de Google / fetch cache:'reload'), notamment l'accueil (sameAs + BreadcrumbList) et pink-star.html.
-2. (Optionnel) Test Google Rich Results / Search Console sur quelques fiches pour confirmer l'éligibilité aux extraits enrichis (Produit + Fil d'Ariane).
-3. (Optionnel, si un jour il y a de vrais avis clients) ajouter aggregateRating au Store de l'accueil ET/OU aux fiches produits.
+1. RE-TESTER l'accueil sur Google Rich Results APRÈS redéploiement Vercel (cache edge non instantané) pour confirmer que les 32 "Extraits de produits" invalides ont disparu et que la page ne montre plus que du valide (Store + Fils d'Ariane + Organisation).
+2. (Optionnel, si un jour il y a de vrais avis clients) ajouter aggregateRating au Store de l'accueil ET/OU aux fiches produits (ne JAMAIS inventer de faux avis).
 
 NOTES MÉTHODE (JSON-LD) — rappel pour toute future fiche :
 - Extraire le HTML via le <script type=application/json> de l'éditeur (deepFind clé "content", contient <!DOCTYPE). Ne PAS se fier à raw.githubusercontent pour VÉRIFIER un commit récent (cache CDN en retard).
