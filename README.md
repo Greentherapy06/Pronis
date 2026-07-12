@@ -1934,3 +1934,39 @@ VERIF (API GitHub, ?ref=main, Accept: application/vnd.github.raw) : home_seo_int
 
 --- ETAT GENERAL ---
 A ce stade, tous les points ouverts identifies sont soit TERMINES, soit en attente d'un evenement externe (avis clients reels pour aggregateRating). Aucune tache de code en attente cote SEO/GEO/i18n.
+
+==================================================
+SESSION GOOGLE MERCHANT CENTER — MAJ 2026-07-12 (Claude)
+
+RÔLES : Claude fait TOUT (config Merchant Center, generation feed.xml, collage editeur) SAUF le clic "Commit changes" GitHub (JLShop06).
+
+CONTEXTE : mise en place complete de Google Merchant Center pour diffuser les produits (compte "les jardins enchantes", ID 5818210174, feedLabel JARDINS_ENCHANTES).
+
+--- FAIT ---
+
+1. FLUX PRODUITS (feed.xml) : cree et en ligne.
+- Methode retenue = flux par fichier (option "lien du fichier" dans Merchant Center), URL : https://les-jardins-enchantes.com/feed.xml (mise a jour auto ~24h).
+- 32 produits extraits des fiches (JSON-LD des pages + images), feed RSS 2.0 namespace g: (id, title, description, link, image_link, availability, price, brand, mpn, identifier_exists=no, condition=new, adult=yes).
+- NB feedLabel Merchant Center = MAJUSCULES obligatoire (chiffres/tirets/underscores, max 20) -> JARDINS_ENCHANTES (le minuscule/tiret est refuse).
+- Ancien feed.xml existant (24 items + domaine github.io errone) REMPLACE par la version 32 items + domaine .com. (edit du fichier existant, PAS creation -> conflit "file already exists").
+
+2. LIVRAISON (Conditions de livraison) : 2/2 conditions configurees.
+- France : Colissimo, tarif fixe 6,90 € (virgule decimale obligatoire dans l'UI FR), delai 2-4 jours, fuseau Paris.
+- 5 autres pays (Allemagne, Belgique, Espagne, Italie, Portugal) : tarif fixe 8,90 €, delai d'acheminement 5-14 jours ouvres (total ~5-15 j), fuseau Paris. Regle le blocage "Informations de livraison manquantes pour 5 pays".
+
+3. RETOURS (Conditions de retour) : configurees (14 jours ; frais de retour A LA CHARGE DU CLIENT ; produits neufs/scelles uniquement ; PAS d'echanges ; remboursement sous 14 jours). URL politique = retractation.html. Conforme a l'exception d'hygiene (Art. L221-28 5° / Article 9 CGV) : retour refuse une fois l'emballage d'hygiene ouvert.
+
+4. CGV : retrait de la mention brouillon.
+- Supprime le paragraphe visible "[BROUILLON – A FAIRE VALIDER PAR UN AVOCAT]" (cgv_47) + le bloc de commentaire HTML "TODO (juridique)... avocat" (lignes ~115-122) dans cgv.html.
+- Contenu legal reel conserve intact (div.legal-callout, lien retractation.html, clause hygiene L221-28). Verifie en live : plus aucune mention BROUILLON/AVOCAT sur https://les-jardins-enchantes.com/cgv.
+
+--- ETAT / RESTE (externe, pas de code) ---
+- Config Merchant Center : 6/6 taches TERMINEES.
+- Produits : 32 importes. Au moment de la config, tous "Refuse / non visibles" car (a) EXAMEN INITIAL Google en cours (jusqu'a 3 jours ouvres) — attendre ; (b) blocage livraison 5 pays — REGLE ce jour.
+- POINT DE FOND : politique Google "contenu reserve aux adultes" pour une boutique erotique. Les sextoys risquent le refus ("produits destines a susciter une excitation") ; gels lubrifiants / huiles de massage ont plus de chances de passer. A confirmer apres l'examen initial.
+
+--- NOTES METHODE ---
+- feedLabel = MAJUSCULES uniquement. Valeurs monetaires UI FR = virgule (6,90 pas 6.90).
+- Variables window perdues a chaque navigation -> regenerer le contenu (feed / README) APRES navigation sur l'onglet cible.
+- Collage editeur GitHub : focus .cm-content -> Ctrl+A -> Delete -> ClipboardEvent('paste') DataTransfer text/plain. Verifier via l'onglet Preview (diff) avant que JLShop06 clique Commit.
+- Verifier le live via l'onglet du domaine (.com) directement (CORS bloque le fetch cross-origin depuis github.com).
