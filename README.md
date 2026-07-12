@@ -1899,3 +1899,38 @@ HREFLANG : fr, pt, it, es, de, x-default presents sur l'accueil. OK.
 
 --- NOTES METHODE (inchangees) ---
 Extraire le HTML via le <script type="application/json"> de l'editeur GitHub. Vider completement l'editeur (Ctrl+A + Delete) avant de coller. Coller via ClipboardEvent('paste') sur .cm-content (verifier defaultPrevented=true). Verifier debut (Ctrl+Home) + fin (Ctrl+End). Verifier via API GitHub (?ref=main), PAS via raw.githubusercontent (cache CDN en retard). JLShop06 clique "Commit changes".
+
+
+==================================================
+SESSION 2026-07-12 (suite) — REFORMULATION H2 ACCUEIL + CLOTURE DES POINTS OUVERTS
+==================================================
+
+ROLES : Claude fait TOUT (edition, collage editeur, verifications) SAUF le clic "Commit changes" (JLShop06).
+
+--- FAIT (committe sur main) ---
+
+REFORMULATION DU H2 D'ACCUEIL (doublon avec le H1) — TERMINE.
+CONSTAT : le 1er H2 de l'accueil (data-i18n="home_seo_intro_title") repetait quasi mot pour mot le H1 (home_h1_seo) : memes mots-cles "Boutique Sextoys / Gel Lubrifiant Bio / Huile de Massage / France". Les autres H2 (categories home_cat_1..6 + grille home_seo_grid_t1..t3 + home_seo_why_title) sont OK et n'ont pas ete touches.
+CORRECTIF : valeur de la cle home_seo_intro_title reformulee dans i18n.js, 5 langues (ordre fr/pt/it/es/de), pour varier les mots-cles (plaisir, bien-etre intime, livraison discrete) :
+  FR : Plaisir & Bien-Être Intime : Livraison Discrète en France & Europe
+  PT : Prazer & Bem-Estar Íntimo: Entrega Discreta em França e Europa
+  IT : Piacere & Benessere Intimo: Spedizione Discreta in Francia ed Europa
+  ES : Placer & Bienestar Íntimo: Envío Discreto en Francia y Europa
+  DE : Lust & Intimes Wohlbefinden: Diskreter Versand in Frankreich & Europa
+NB : le H2 est pilote par i18n.js (data-i18n) -> c'est la VALEUR de la cle qui a ete changee, pas le HTML. Esperluettes stockees en &amp; (coherent avec le fichier). L'ancienne valeur "Boutique Sextoys, Gel Lubrifiant Bio..." est entierement retiree.
+VERIF (API GitHub, ?ref=main, Accept: application/vnd.github.raw) : home_seo_intro_title = 5 occurrences ; 5 nouvelles valeurs presentes 1x chacune ; ancienne valeur = 0 ; accolades equilibrees (111/111). OK.
+
+--- CLOTURE DES POINTS OUVERTS (statut confirme par JLShop06) ---
+
+1) FICHE GOOGLE (Google Business Profile) : creee, revendiquee et geree. AVIS : JLShop06 n'en a pas encore -> on ATTEND que les clients en laissent avant d'ajouter quoi que ce soit. Verifie ce jour : aucun avis sur la fiche pour l'instant. RIEN A FAIRE cote code pour le moment.
+
+2) aggregateRating (JSON-LD Store accueil) : reste NON ajoute, volontairement, tant qu'il n'y a pas de VRAIS avis clients. NE RIEN INVENTER. A ajouter plus tard quand des avis reels existeront (note moyenne + nombre).
+
+3) H2 doublon accueil : REGLE ce jour (voir ci-dessus).
+
+4) PageSpeed "Navigation agentique" 2/3 -> 3/3 : DEJA REGLE (confirme par JLShop06). Plus d'action requise.
+
+5) Sous-cas Stripe "e-mail deja utilise = pas de remise de bienvenue" : DEJA TESTE (confirme par JLShop06). Plus d'action requise.
+
+--- ETAT GENERAL ---
+A ce stade, tous les points ouverts identifies sont soit TERMINES, soit en attente d'un evenement externe (avis clients reels pour aggregateRating). Aucune tache de code en attente cote SEO/GEO/i18n.
