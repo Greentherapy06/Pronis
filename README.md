@@ -1859,3 +1859,43 @@ ld+json=2, ListItem=3, DOCTYPE=1, </head>=1, delta positif, start/end OK ; vider
 l'editeur (Ctrl+A/Delete x2, placeholder "Enter file contents here") ; coller via ClipboardEvent
 (defaultPrevented:true) ; Ctrl+Home + Ctrl+End (screenshots) ; JLShop06 clique Commit (jamais Claude).
 ITEM 1 reste BLOQUE : demander a JLShop06 note moyenne + nb avis + URLs reseaux sociaux. NE RIEN INVENTER.
+
+
+==================================================
+SESSION 2026-07-12 (Claude) — COORDONNEES DE CONTACT (FOOTER) + ETAT DES LIEUX
+==================================================
+
+ROLES : Claude fait TOUT (edition, collage editeur, verifications) SAUF le clic "Commit changes" (JLShop06). NE RIEN INVENTER.
+
+--- FAIT (committe sur main) ---
+
+index.html — FOOTER : ajout/mise a jour des coordonnees de contact (commit initial "Update footer with contact info and address" + correction du jour).
+- Mention affichee : "Les Jardins Enchantes — Roquebrune-Cap-Martin, France".
+- Numero de telephone : affichage "+351 965 020 889" + lien cliquable tel:+351965020889.
+  NB : le footer affichait d'abord "06 27 61 59 98" / tel:+33627615998 ; corrige en +351 965 020 889 sur demande de JLShop06 (numero de contact officiel confirme, indicatif Portugal +351 assume).
+- Lien reseau social <link rel="me"> (dans le <head>) : aligne sur le bon compte -> instagram.com/gladiator_italia (remplace l'ancien instagram.com/lesjardinsenchantes, qui etait l'intrus). Coherent avec le JSON-LD sameAs de l'accueil (comptes gladiator_italia = comptes officiels confirmes par JLShop06).
+VERIF (API GitHub, ?ref=main, Accept: application/vnd.github.raw) : +351 965 020 889 = 1 ; ancien 06 27 61 59 98 = 0 ; tel:+351965020889 = 1 ; ancien tel:+33 = 0 ; gladiator_italia present ; lesjardinsenchantes = 0 ; 1 seul <!DOCTYPE. OK.
+
+--- ETAT DES LIEUX DU SITE LIVE (scan du 12/07, fetch cache:reload sur les-jardins-enchantes.com) ---
+
+SITEMAP : 32 URLs (accueil + 30 fiches produit + page /cgv). 2 fiches hors sitemap verifiees a part : mini-robe-noire, robe-longue-noire-argentee.
+
+JSON-LD (schema.org) : CONFORME.
+- Accueil : Store + BreadcrumbList + sameAs (3 reseaux : facebook Gladiator.Italia06, instagram gladiator_italia, tiktok gladiatoritalia). PAS d'aggregateRating (volontaire, pas de faux avis).
+- 32/32 fiches produit : Product + BreadcrumbList presents (les 30 du sitemap + mini-robe + robe-longue). /cgv : aucun JSON-LD (normal, page legale).
+- Aucun doublon DOCTYPE, aucune erreur de parsing JSON-LD sur l'ensemble scanne.
+
+MAILLAGE INTERNE : bloc "Vous aimerez aussi" (related-products) present sur les 32 fiches produit. OK.
+
+HREFLANG : fr, pt, it, es, de, x-default presents sur l'accueil. OK.
+
+--- RESTE A FAIRE / POINTS OUVERTS ---
+
+1) FICHE GOOGLE (Google Business Profile) : la fiche "Les Jardins Enchantes" (Roquebrune-Cap-Martin) est bien creee, revendiquee et geree (badge "Vous gerez cette fiche"). Efficacite de la fiche NON complete a 100% (Google suggere d'ajouter photos, reseaux, chat...). Le telephone affiche sur la fiche Google (+351 965 020 889) est desormais COHERENT avec le footer du site.
+
+2) ITEM 1 SEO/GEO (optionnel, toujours en attente) : aggregateRating sur le JSON-LD Store de l'accueil -> BLOQUE tant qu'il n'y a pas de VRAIS avis clients (note moyenne + nombre d'avis). NE RIEN INVENTER (risque conformite + penalite Google).
+
+3) DIVERS (rappels des sessions precedentes, non bloquants) : score PageSpeed "Navigation agentique" 2/3 -> viser 3/3 ; H2 accueil qui fait doublon avec le H1 -> a reformuler ; sous-cas Stripe "e-mail deja utilise = pas de remise" a valider manuellement avec un paiement reel.
+
+--- NOTES METHODE (inchangees) ---
+Extraire le HTML via le <script type="application/json"> de l'editeur GitHub. Vider completement l'editeur (Ctrl+A + Delete) avant de coller. Coller via ClipboardEvent('paste') sur .cm-content (verifier defaultPrevented=true). Verifier debut (Ctrl+Home) + fin (Ctrl+End). Verifier via API GitHub (?ref=main), PAS via raw.githubusercontent (cache CDN en retard). JLShop06 clique "Commit changes".
