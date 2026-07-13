@@ -1,6 +1,34 @@
 Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
 ==================================================
+SESSION SITEMAP + GOOGLE BUSINESS — TERMINÉE — MAJ 2026-07-13
+==================================================
+RÔLES : Claude fait TOUT (fetch éditeur, extraction, construction, collage) SAUF le clic « Commit changes » = JLShop06 seul.
+
+--- ITEM 1 : sitemap.xml corrigé (committé + vérifié via API + live 200) ---
+- Passé de 32 à 34 URLs.
+- Toutes les dates <lastmod> mises à jour au 2026-07-13.
+- 2 fiches produits AJOUTÉES : mini-robe-noire.html et robe-longue-noire-argentee.html.
+- Les 6 gels CONSERVÉS en .html (cohérence avec les balises canonical des fiches qui pointent en .html ; option "sans .html" abandonnée pour ne pas devoir aussi éditer tous les canonical).
+
+--- ITEM 2 : sitemap soumis dans Search Console ---
+- Propriété de type domaine (sc-domain:les-jardins-enchantes.com) -> soumission avec l'URL COMPLETE obligatoire (sitemap.xml seul = "Adresse de sitemap incorrecte").
+- Statut affiché juste après = « Impossible de récupérer le sitemap » : NORMAL/transitoire. Fichier live vérifié OK (200, application/xml, 34 URLs). Doit passer à « Réussite » sous 24-48h. Si rouge après 3-4 jours -> vérifier robots.txt / en-têtes HTTP (Googlebot).
+
+--- ITEM 3 : fiche Google Business vérifiée (RAS, tout bon) ---
+- Fiche bien gérée par le compte. Catégorie « Boutique érotique à Roquebrune-Cap-Martin » OK.
+- Adresse 49 Chem. du Vallonet, 06190 Roquebrune-Cap-Martin OK. Horaires « Ouvert 24h/24 » OK. Description présente OK.
+- Téléphone +351 965 020 889 (portugais) : CONSERVÉ volontairement (décision JLShop06).
+- Réseaux sociaux : NON liés à la fiche (comptes pro Facebook ~26k / Instagram ~28k mais nom différent de la boutique -> éviter la confusion client).
+- Avis : aucun pour l'instant (normal). Utiliser « Demander des avis » quand premiers clients.
+
+--- À SURVEILLER (prochains jours) ---
+- Search Console > Sitemaps : vérifier le passage au vert sous 24-48h.
+- Indexation des fiches produits (à contrôler plus tard).
+- Horaires jour férié 14 juillet (probablement rien à changer car 24h/24).
+
+
+==================================================
 SESSION JSON-LD (ITEM 3 + ITEM 1) — TERMINÉE — MAJ 2026-07-11
 ==================================================
 OBJECTIF (atteint) : JSON-LD schema.org (Product + BreadcrumbList) dans le <head> de CHAQUE fiche produit (avant </head>) + enrichissement du JSON-LD Store de l'accueil.
