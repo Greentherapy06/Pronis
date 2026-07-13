@@ -2865,3 +2865,21 @@ button:hover {
 .lang-switch__btn:hover{border-color:#caa86a;background:rgba(202,168,106,.12)}
 .lang-switch__btn.is-active{background:#caa86a;color:#111;border-color:#caa86a}
 @media(max-width:640px){.lang-switch{margin:6px 0;flex-wrap:wrap;justify-content:center}}
+
+/* ============================================================= */
+/* FIX MOBILE 2026-07-13 : espace sous le header (bandeau/kicker  */
+/* du hero ne doit jamais passer derriere le header fixe).        */
+/* Le header mobile passe en grille 2 lignes (<=560px), plus haut.*/
+/* ============================================================= */
+@media (max-width: 768px) {
+  .hero { padding-top: 172px; }
+}
+@media (max-width: 560px) {
+  .hero { padding-top: 178px; }
+}
+@media (max-width: 480px) {
+  .hero { padding-top: 178px; }
+}
+@media (max-width: 380px) {
+  .hero { padding-top: 186px; }
+}
