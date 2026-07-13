@@ -1998,3 +1998,33 @@ CONTEXTE : mise en place complete de Google Merchant Center pour diffuser les pr
 - Variables window perdues a chaque navigation -> regenerer le contenu (feed / README) APRES navigation sur l'onglet cible.
 - Collage editeur GitHub : focus .cm-content -> Ctrl+A -> Delete -> ClipboardEvent('paste') DataTransfer text/plain. Verifier via l'onglet Preview (diff) avant que JLShop06 clique Commit.
 - Verifier le live via l'onglet du domaine (.com) directement (CORS bloque le fetch cross-origin depuis github.com).
+
+
+==================================================
+SESSION ATTRIBUTS + POSTS + AUTOMATISATION — MAJ 2026-07-13
+==================================================
+ROLES : Claude fait TOUT sur la fiche Google Business (autorisation explicite du client). Sur GitHub : Claude prepare/colle, JLShop06 seul clique « Commit changes ».
+
+--- FAIT DANS CETTE SESSION ---
+1) Banniere mobile (style.css) : padding-top corrige par breakpoints (768=172px, 560=178px, 480=178px, 380=186px). Committe (Fix mobile header spacing for hero section, e900586), deploye Vercel, verifie LIVE (72090 car.). Client confirme : mobile PARFAIT.
+2) Fiche Google Business — ameliorations SEO/GEO (toutes EN ATTENTE validation Google ~10 min) :
+   - Categories : Boutique erotique (PRINCIPAL) + Boutique de lingerie + Magasin de cosmetiques.
+      - Paiements : Visa + Mastercard UNIQUEMENT (toutes autres cartes = Non).
+         - Date de creation : juin 2026.
+            - Attributs Clientele : Safe place pour les transgenres = OUI ; LGBTQ+ friendly = OUI.
+               - Telephone portugais +351 conserve (choix client). Adresse domicile conservee (categorie exige accueil public).
+                  - Attributs Accessibilite / Aide d'urgence / Gere par une femme : NON pertinents => ignores.
+                  3) Reseaux sociaux : ABANDONNES (comptes perso pro, nom different de la boutique).
+                  4) Automatisation : pas d'automatisation 100% autonome possible pour un debutant (API Google Business trop complexe). Mis en place = ROUTINE ASSISTEE hebdo. Rappel enregistre dans la MEMOIRE de Claude.ai (Zone « Les Jardins Enchantes »).
+
+                  --- CONSEIL STRATEGIE CONTENU ---
+                  Google Posts AVANT blog. Posts = effet local rapide, simple, sans code (expirent apres 7 j). Blog GitHub = SEO long terme mais technique/chronophage sur site HTML statique => plus tard (3-4 articles piliers).
+
+                  --- A FAIRE / A SURVEILLER ---
+                  - [ ] Publier le 1er Google Post (texte premium prepare par Claude ; visuel = logo ou photo produit ; bouton vers le site).
+                  - [ ] Routine : 1 Google Post / semaine (calendrier 4 posts du mois a suivre).
+                  - [ ] Search Console : sitemap doit passer au VERT sous 24-48h (soumis 2026-07-13).
+                  - [ ] Surveiller l'indexation des pages produits.
+                  - [ ] Horaires jours feries (ex : 14 juillet) si besoin.
+                  - [ ] Plus tard : quelques articles de blog piliers (gel lubrifiant bio, huiles de massage).
+                  
