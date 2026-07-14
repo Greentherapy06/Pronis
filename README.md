@@ -2028,3 +2028,50 @@ ROLES : Claude fait TOUT sur la fiche Google Business (autorisation explicite du
                   - [ ] Horaires jours feries (ex : 14 juillet) si besoin.
                   - [ ] Plus tard : quelques articles de blog piliers (gel lubrifiant bio, huiles de massage).
                   
+
+
+
+==================================================
+SESSION ANALYTICS + MERCHANT CENTER + SEARCH CONSOLE — TERMINEE — MAJ 2026-07-14
+==================================================
+ROLES : Claude fait TOUT sauf les clics de validation sensibles (commit, suppression, association) = JLShop06 seul.
+
+--- FAIT LE 2026-07-14 ---
+
+1) GOOGLE ANALYTICS - TAG CORRIGE
+- Ancien tag G-15REBJRSHP remplace par G-ZQXWL9PKEE dans compliance.js (ligne 21, var GA_ID). Commit + deploiement Vercel OK.
+- Verifie : compliance.js en production sert bien G-ZQXWL9PKEE. Visite remontee en Temps Reel (test en navigation privee).
+
+2) ANALYTICS - PROPRIETES
+- 2 proprietes existaient. Suppression de la propriete inutile 538041349 (en corbeille 35j, recuperable jusqu'a ~2026-08-18).
+- Propriete CONSERVEE : Les Jardins Enchantes = 476902259 (compte 344670846).
+
+3) ANALYTICS - FLUX DE DONNEES NETTOYE
+- IMPORTANT : l'ID G-ZQXWL9PKEE appartenait en fait a un VIEUX flux eBay "RosalieChic" (boutique fermee).
+- Flux renomme "Les Jardins Enchantes - Site Web" + URL corrigee vers https://les-jardins-enchantes.com.
+- ID de mesure INCHANGE (G-ZQXWL9PKEE) -> aucune modif du site necessaire. ID de flux : 10235487101.
+
+4) SEARCH CONSOLE - LIAISON ANALYTICS
+- Association creee : Analytics (flux Les Jardins Enchantes) <-> Search Console (les-jardins-enchantes.com, type Domaine).
+- Rappel : donnees de recherche visibles dans Analytics sous 24-48h.
+- Deja OK avant session : propriete domaine validee + sitemap.xml soumis (34 pages, statut OK).
+
+5) MERCHANT CENTER - DIAGNOSTIC
+- Flux produits = https://les-jardins-enchantes.com/feed.xml (source "PRODUCTS SOURCE 1", 32 produits, sync auto 24h).
+- Avertissement "Contenus reserves aux adultes" avant 21 juil 2026 : concerne UNIQUEMENT le PORTUGAL (fiches gratuites).
+- Le flux est deja correct : tous les produits ont <g:adult>yes</g:adult>. Le blocage PT est une regle pays Google, non contournable techniquement.
+- DECISION : laisse tel quel. FR + autres pays UE (Italie, Espagne, Allemagne, Belgique...) non affectes.
+- Note : le Portugal est un marche cible important -> a traiter avec le support Google Merchant ou via Google Ads payant (regles differentes des fiches gratuites).
+
+--- RESTE A FAIRE / A SURVEILLER ---
+
+- [ ] SUIVI CONVERSIONS E-COMMERCE (PRIORITAIRE) : le site n'envoie QUE des page_view a GA. AUCUN evenement add_to_cart / begin_checkout / purchase.
+      Verifie en direct : clic "Ajouter au panier" => aucune requete /collect vers GA.
+            -> A coder dans le site (gtag event). Le plus important = purchase (necessite de savoir comment une commande se conclut : page de confirmation ? paiement externe ?). A expliquer a Claude avant de coder.
+                  -> add_to_cart et begin_checkout codables cote front sans dependance.
+                  - [ ] BLOGS / ARTICLES SEO (recommande) : mettre en place des articles de blog = bon pour le referencement naturel (SEO long terme).
+                        Idee : articles piliers (ex : guide gel lubrifiant bio, conseils, etc.). Deja note plus haut dans le README comme "plus tard" -> a lancer.
+                        - [ ] Merchant Center : avertissement Portugal restera affiche jusqu'au 21 juil 2026 (choix assume).
+                        - [ ] Google Business Profile : fiche OK et geree, mais a COMPLETER (horaires, description, photos, services) pour max visibilite locale.
+                        - [ ] Verifier sous 24-48h que les rapports Search Console apparaissent bien dans Analytics.
+                        - [ ] Vider le cache navigateur perso (Ctrl+Shift+R) sinon l'ancien compliance.js en cache peut encore envoyer vers G-15REBJRSHP depuis TA machine (n'affecte pas les vrais visiteurs).
