@@ -18,7 +18,7 @@
   var AGE_STORAGE_DAYS = 30;
   var COOKIE_STORAGE_KEY = 'lje_cookie_consent';
   var COOKIE_STORAGE_DAYS = 180; // CNIL : 6 mois max
-  var GA_ID = 'G-15REBJRSHP';
+  var GA_ID = 'G-ZQXWL9PKEE';
   var REDIRECT_IF_MINOR = 'https://www.google.com';
 
   // ============================================================
