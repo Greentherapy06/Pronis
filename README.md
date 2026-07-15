@@ -2075,3 +2075,82 @@ ROLES : Claude fait TOUT sauf les clics de validation sensibles (commit, suppres
                         - [ ] Google Business Profile : fiche OK et geree, mais a COMPLETER (horaires, description, photos, services) pour max visibilite locale.
                         - [ ] Verifier sous 24-48h que les rapports Search Console apparaissent bien dans Analytics.
                         - [ ] Vider le cache navigateur perso (Ctrl+Shift+R) sinon l'ancien compliance.js en cache peut encore envoyer vers G-15REBJRSHP depuis TA machine (n'affecte pas les vrais visiteurs).
+
+
+==================================================
+SESSION SEO/GEO — MAJ 2026-07-15 (Claude)
+
+--- FAIT (committe sur main) ---
+1) index.html TITLE + META : ajout du mot-cle "intime".
+   - Title = "Les Jardins Enchantes - Sextoys & Gel Lubrifiant Intime Bio" (59 car, longueur optimale ; contient aussi la phrase "lubrifiant intime").
+   - Meta description = "Boutique sextoys France premium. Gel lubrifiant intime bio Yuka 100/100, huiles de massage, stimulateurs clitoridiens. Livraison discrete France & Europe." (154 car, optimal).
+   NB SEOptimer : mots-cles panier/ajouter + phrases "ajouter au panier" restent ROUGES => VOULU (bruit du bouton "AJOUTER AU PANIER", pas de vrais mots-cles SEO, ne PAS cibler).
+
+2) index.html JSON-LD FAQPage AJOUTE (nouveau bloc, insere avant </head>) : 6 questions/reponses.
+   Questions : Ou se met le gel lubrifiant ? / Quel est le role du gel lubrifiant ? / Comment choisir un bon lubrifiant intime bio ? / Quel type de gel facilite les rapports intimes ? / Vos gels lubrifiants sont-ils vraiment bio ? / La livraison est-elle discrete ?
+   Inspire du bloc "Autres questions" (People Also Ask) de Google sur "gel lubrifiant". But = booster le GEO (entites citables par les LLM).
+
+3) ADRESSE COMPLETE + NAP coherent :
+   - Footer visible : "Les Jardins Enchantes - 49 Chem. du Vallonet, 06190 Roquebrune-Cap-Martin, France".
+   - JSON-LD Store : ajout streetAddress "49 Chem. du Vallonet" (code postal/ville/pays existaient deja).
+   - Telephone JSON-LD ALIGNE sur le numero public +351965020889 (l'ancien +33627615998 a ete retire => NAP identique partout, important pour le SEO local).
+   VERIF GitHub raw OK : faqPresent, 6 questions, streetAddress present, ldCount=3, ancien tel absent.
+
+--- SCORES SEOptimer (audit 2026-07-15) ---
+Global B+. Referencement A+, GEO C+, Liens F, Convivialite A-, Performance A+.
+Ce qui bloque le passage a A = la categorie LIENS (F) : 0 backlink, force de domaine 0. Priorite ELEVEE. Travail HORS-SITE, lent (semaines/mois).
+GEO C+ : Schema identite OK, llms.txt OK ; seul rouge = "Contenu rendu 28%" (priorite FAIBLE, faux positif : le contenu texte est deja dans le HTML brut ; le 28% vient de la modal 18+/banniere cookies/panier injectes par JS. Chantier risque sur compliance.js pour gain nul => NE PAS faire en priorite).
+
+==================================================
+>>> A FAIRE PLUS TARD : STRATEGIE BACKLINKS (categorie F) — TOUT GRATUIT <<<
+(Note : Claude ne peut PAS creer de comptes ni s'inscrire/publier a la place de l'utilisateur. L'utilisateur cree les comptes ; Claude peut guider champ par champ et a deja redige les textes ci-dessous.)
+
+RAPPEL : un blog SUR son propre site = PAS un backlink (lien interne). Les backlinks = liens venant d'AUTRES sites vers le tien. Eviter les offres "5000 backlinks pas cher" = spam = penalite Google.
+
+ORDRE CONSEILLE :
+A) PLATEFORMES D'AVIS (le plus rentable) :
+   - Trustpilot (trustpilot.com) : compte entreprise GRATUIT -> profil public (lien) + avis clients (regle aussi le aggregateRating manquant en JSON-LD).
+   - Google Business Profile : deja fait, garder a jour.
+   - Pages Jaunes (pagesjaunes.fr) : inscription pro gratuite, bien vu par Google en France.
+B) ANNUAIRES GENERALISTES GRATUITS (inscription de base gratuite, NE PAS prendre l'option payante) :
+   - Yelp (yelp.fr), Cylex (cylex-france.fr), Hoodspot, Tuugo (tuugo.fr), Justacote.
+   => Coller le TEXTE DE PRESENTATION ci-dessous + infos NAP IDENTIQUES partout.
+C) RESEAUX : ajouter le lien du site dans les bios Facebook (Gladiator.Italia06) + Instagram (gladiator_italia) [souvent oublie]. Creer un Pinterest gratuit (efficace e-commerce).
+   NB : incoherence de marque "Gladiator Italia" vs "Les Jardins Enchantes" -> brouille le signal, a garder en tete.
+D) BLOGS bien-etre/bio/lifestyle (guest blogging / test produit gratuit) : chercher sur Google "blog bien-etre intime", "blog bio lifestyle", "blog sante feminine" -> page Contact/Partenariats -> envoyer le MAIL TYPE ci-dessous. Viser 5-10 blogs a la fois, TOUJOURS personnaliser.
+   Angle fort = gel bio, fabrique en France, Yuka 100/100.
+
+AMAZON : bon pour ventes/notoriete mais PAS de backlink (Amazon interdit les liens vers boutique externe sur les fiches). Utile juste pour la marque -> aligner le nom "Les Jardins Enchantes" partout.
+
+--- INFOS NAP (a mettre A L'IDENTIQUE partout) ---
+Nom : Les Jardins Enchantes
+Adresse : 49 Chem. du Vallonet, 06190 Roquebrune-Cap-Martin, France
+Tel : +351 965 020 889
+Site : les-jardins-enchantes.com
+
+--- TEXTE DE PRESENTATION (annuaires + plateformes d'avis) ---
+[COURT ~50 mots]
+Les Jardins Enchantes est une boutique francaise specialisee dans les gels lubrifiants bio, huiles de massage et accessoires de bien-etre intime. Nos gels sont fabriques en France et notes Yuka 100/100. Livraison discrete en France et en Europe. 49 Chem. du Vallonet, 06190 Roquebrune-Cap-Martin.
+
+[LONG ~120 mots]
+Les Jardins Enchantes est une boutique en ligne francaise dediee au bien-etre intime et a la sensualite. Nous proposons une selection de gels lubrifiants bio, huiles de massage, stimulateurs et accessoires choisis pour leur qualite et le respect du corps. Nos gels lubrifiants sont fabriques en France, a base d'ingredients d'origine naturelle, et affichent une note Yuka de 100/100, gage d'une composition saine. Nous attachons une grande importance a la discretion : chaque commande est expediee dans un colis neutre, sans mention du contenu. Livraison offerte des 75 EUR d'achat en France et en Europe. Basee a Roquebrune-Cap-Martin (06), la boutique privilegie le serieux, la confidentialite et des produits de confiance pour une intimite epanouie.
+
+--- MAIL TYPE (blogs bien-etre) ---
+Objet : Test produit - gels lubrifiants bio francais notes Yuka 100/100
+
+Bonjour [Prenom / nom du blog],
+
+Je suis [ton prenom], de la boutique francaise Les Jardins Enchantes, specialisee dans le bien-etre intime bio.
+
+Je suis votre blog avec interet, notamment vos articles sur [sujet precis d'un article - A PERSONNALISER]. Le ton bienveillant et l'approche naturelle que vous defendez correspondent tout a fait a nos valeurs.
+
+Nous proposons une gamme de gels lubrifiants bio fabriques en France, notes Yuka 100/100, a la composition courte et naturelle. J'aimerais vous en faire decouvrir quelques-uns gratuitement, sans engagement, si vous souhaitez les tester et, eventuellement, partager votre avis aupres de votre communaute.
+
+Si l'idee vous interesse, je vous envoie avec plaisir une selection. Et bien sur, je reste ouvert a toute autre forme de collaboration qui vous conviendrait.
+
+Merci pour votre temps et votre travail,
+[Ton prenom]
+Les Jardins Enchantes - les-jardins-enchantes.com
+
+CONSEILS MAIL : personnaliser la ligne "je suis votre blog" (citer un vrai article) sinon = spam. Ne pas envoyer 200 mails d'un coup, viser 5-10 blogs cibles a la fois.
+==================================================
