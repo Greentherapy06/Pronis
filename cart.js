@@ -77,7 +77,7 @@ return;
 const priceId = sizeInput.dataset.priceId || button.dataset.productId;
 const size = sizeInput.value;
 const baseName = button.dataset.productName || "Produit";
-const name = baseName + " – Taille " + size;
+const colorInput = document.querySelector('input[name="color"]:checked'); const name = baseName + (colorInput ? " (" + colorInput.value + ")" : "") + " - Taille " + size;
 const price = button.dataset.productPrice;
 
 addToCart(priceId, name, price, priceId);
