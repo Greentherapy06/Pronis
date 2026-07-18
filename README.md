@@ -2181,7 +2181,7 @@ MÉTHODE PAR FICHE (rappel fiable) :
   - Ctrl+End -> screenshot : fin propre </html>, aucun DOCTYPE dupliqué en trop.
   - JLShop06 clique « Commit changes ». Puis vérifier via API GitHub (Accept: application/vnd.github.raw, cache:'reload') : doctype=1, htmlClose=1, hasShip=true, hasReturn=true.
 
---- FAIT (committé + vérifié via API GitHub) — 12/33 fiches ---
+--- FAIT (committé + collé, "Commit changes" par JLShop06) — 20/33 fiches ---
   1. red-dolls-energy-pleasure.html
   2. Cockring-vibrant-Marry-Me-Wooomy.html
   3. Déguisement-Bunny.html
@@ -2194,8 +2194,6 @@ MÉTHODE PAR FICHE (rappel fiable) :
   10. deguisement-etudiante.html
   11. deguisement-infirmière-sexy.html
   12. dual-vibe-sex-on-the-beach.html (vérifié : 1 seul DOCTYPE, l'ancien doublon HTML n'est plus présent)
-
---- RESTE À FAIRE — 21/33 fiches (même payload, même méthode) ---
   13. gel_cannabis_orgie.html
   14. gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html
   15. gel_lubrifiant_bio_neutre_divine_xtases.html
@@ -2204,6 +2202,8 @@ MÉTHODE PAR FICHE (rappel fiable) :
   18. gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html
   19. gel_lubrifiant_bio_neutre_vanille_divine_xtases.html
   20. hemp-intense-orgasm.html
+
+--- RESTE À FAIRE — 13/33 fiches (même payload, même méthode) ---
   21. le-flateur.html
   22. lubrifiant_eau_lube_tube_chocolat_orgie.html
   23. lubrifiant_eau_lube_tube_fraise_orgie.html
