@@ -2221,4 +2221,13 @@ MÉTHODE PAR FICHE (rappel fiable) :
 NOTE : incohérence pré-existante repérée sur dual-vibe-sex-on-the-beach.html — la meta description affiche « 28,90 € » alors que le prix JSON-LD est 32,90 €. NON corrigé (hors périmètre offers). À signaler/traiter éventuellement plus tard.
 
 À FAIRE APRÈS LES 33 FICHES : re-tester dans Google Rich Results / Search Console (après redéploiement Vercel, cache edge) pour confirmer que « Fiches de marchand » ne remonte plus d'avertissement shipping/return. Le problème « Extraits de produits » restera (aggregateRating volontairement absent — normal).
+
+--- MAJ 2026-07-18 : TÂCHE shippingDetails + hasMerchantReturnPolicy = TERMINÉE (33/33) ---
+Les 33 fiches produits contiennent désormais, dans le bloc "offers" du JSON-LD Product :
+  - "shippingDetails" : Colissimo, taux 6,90 EUR, destination FR, handlingTime 0-1 j, transitTime 1-2 j.
+  - "hasMerchantReturnPolicy" : FR, fenetre 14 jours (MerchantReturnFiniteReturnWindow), retour par courrier (ReturnByMail), frais de retour a la charge du client (ReturnShippingFees).
+Prix JAMAIS modifie, aucune donnee inventee. Deux formats geres : COMPACT (minifie) et INDENTED (multi-lignes) selon la fiche.
+13 fiches traitees et committees cette session (fin du lot) : le-flateur, lubrifiant_eau_lube_tube_chocolat_orgie, lubrifiant_eau_lube_tube_fraise_orgie, lubrifiant_eau_tube_barbe_a_papa, mini-robe-noire, monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, robe-longue-noire-argentee, tanga-taille-haute-dentelle-bleue, vibro-rechargeable-Indiana.
+RESTE : re-test Google Rich Results / Search Console APRES redeploiement Vercel + purge cache edge. Avertissement "Extraits de produits" (aggregateRating) restera VOLONTAIREMENT (pas de faux avis).
+Incoherence dual-vibe-sex-on-the-beach.html (meta 28,90 EUR vs JSON-LD 32,90 EUR) : toujours EN ATTENTE de decision JLShop06.
 ==================================================
