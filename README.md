@@ -2154,3 +2154,71 @@ Les Jardins Enchantes - les-jardins-enchantes.com
 
 CONSEILS MAIL : personnaliser la ligne "je suis votre blog" (citer un vrai article) sinon = spam. Ne pas envoyer 200 mails d'un coup, viser 5-10 blogs cibles a la fois.
 ==================================================
+
+==================================================
+SESSION SEARCH CONSOLE — shippingDetails + hasMerchantReturnPolicy (Fiches de marchand) — EN COURS — MAJ 2026-07-18
+
+RÔLES : Claude fait TOUT (fetch éditeur, extraction, construction, collage) SAUF le clic « Commit changes » = JLShop06 seul.
+
+CONTEXTE : Search Console signalait 3 problèmes de données structurées.
+  1) « Extraits de produits » (aggregateRating + review) -> NE PAS CORRIGER (exigerait de faux avis clients ; aggregateRating OMIS volontairement, risque pénalité Google). Non traité, décision confirmée.
+  2) « Fiches de marchand » -> CORRIGÉ : ajout de shippingDetails + hasMerchantReturnPolicy dans le bloc "offers" du JSON-LD Product de CHAQUE fiche produit.
+  3) « Indexation » (redirect/canonical) -> considéré normal/intentionnel, non traité.
+
+DONNÉES RÉELLES (confirmées par JLShop06) :
+  - Livraison : Colissimo, délai 24/48h. Frais = 6,90 € sous 75 € d'achat, OFFERTE dès 75 €.
+  - Retour : fenêtre 14 jours. Droit de rétractation EXCLU une fois l'emballage descellé. Retour par courrier, frais retour à la charge du client.
+
+PAYLOAD JSON-LD inséré (juste après l'accolade fermante de l'objet "seller", dans "offers"), delta ≈ +1092 chars/fiche :
+  shippingDetails { OfferShippingDetails, shippingRate 6.90 EUR, shippingDestination FR, deliveryTime : handlingTime 0-1 DAY + transitTime 1-2 DAY }
+  hasMerchantReturnPolicy { MerchantReturnPolicy, applicableCountry FR, MerchantReturnFiniteReturnWindow, merchantReturnDays 14, ReturnByMail, ReturnShippingFees }
+
+MÉTHODE PAR FICHE (rappel fiable) :
+  - Naviguer sur /edit/main/[FICHIER]. Redéfinir deepFind + __transformOffers (variables window perdues à chaque navigation).
+  - Extraire HTML depuis le <script type=application/json> de l'éditeur (deepFind clé contenant "<!DOCTYPE"), stocker window.__origHtml, transformer -> window.__newHtml.
+  - Valider AVANT collage : Product parse, shipOk, returnOk, prix préservé, doctype=1, htmlClose=1, expectedLines.
+  - Cliquer SUR une ligne de code -> Ctrl+A (touches individuelles, pas batché) -> SCREENSHOT pour vérifier le surlignage bleu -> coller via ClipboardEvent('paste') sur .cm-content (defaultPrevented=true).
+  - Ctrl+End -> screenshot : fin propre </html>, aucun DOCTYPE dupliqué en trop.
+  - JLShop06 clique « Commit changes ». Puis vérifier via API GitHub (Accept: application/vnd.github.raw, cache:'reload') : doctype=1, htmlClose=1, hasShip=true, hasReturn=true.
+
+--- FAIT (committé + vérifié via API GitHub) — 12/33 fiches ---
+  1. red-dolls-energy-pleasure.html
+  2. Cockring-vibrant-Marry-Me-Wooomy.html
+  3. Déguisement-Bunny.html
+  4. Magnum-Opus-vibro.html
+  5. Plug-Anal-Rosy-Gold.html
+  6. anneau_vibrant_telecommande.html
+  7. black-empire-my-duchess.html
+  8. cockring-vibrant-saturn-hueman.html
+  9. deguisement-enseignante.html
+  10. deguisement-etudiante.html
+  11. deguisement-infirmière-sexy.html
+  12. dual-vibe-sex-on-the-beach.html (vérifié : 1 seul DOCTYPE, l'ancien doublon HTML n'est plus présent)
+
+--- RESTE À FAIRE — 21/33 fiches (même payload, même méthode) ---
+  13. gel_cannabis_orgie.html
+  14. gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html
+  15. gel_lubrifiant_bio_neutre_divine_xtases.html
+  16. gel_lubrifiant_bio_neutre_framboise_divine_xtases.html
+  17. gel_lubrifiant_bio_neutre_monoi_divine_xtases.html
+  18. gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html
+  19. gel_lubrifiant_bio_neutre_vanille_divine_xtases.html
+  20. hemp-intense-orgasm.html
+  21. le-flateur.html
+  22. lubrifiant_eau_lube_tube_chocolat_orgie.html
+  23. lubrifiant_eau_lube_tube_fraise_orgie.html
+  24. lubrifiant_eau_tube_barbe_a_papa.html
+  25. mini-robe-noire.html
+  26. monster-pussy-strocker.html
+  27. orgie-pinacolada.html
+  28. pink-star-choco-fraise.html
+  29. pink-star.html
+  30. pink_star_sucette_cerise.html
+  31. robe-longue-noire-argentee.html
+  32. tanga-taille-haute-dentelle-bleue.html
+  33. vibro-rechargeable-Indiana.html
+
+NOTE : incohérence pré-existante repérée sur dual-vibe-sex-on-the-beach.html — la meta description affiche « 28,90 € » alors que le prix JSON-LD est 32,90 €. NON corrigé (hors périmètre offers). À signaler/traiter éventuellement plus tard.
+
+À FAIRE APRÈS LES 33 FICHES : re-tester dans Google Rich Results / Search Console (après redéploiement Vercel, cache edge) pour confirmer que « Fiches de marchand » ne remonte plus d'avertissement shipping/return. Le problème « Extraits de produits » restera (aggregateRating volontairement absent — normal).
+==================================================
