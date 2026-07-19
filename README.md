@@ -2280,6 +2280,54 @@ Note technique cle : cart.js TESTE l'existence de #cart-modal avant de le creer 
 CSP GitHub bloque fetch externe sur l'editeur -> reconstruire le modal en litteral (deja documente). new Function() bloque -> validation par regex/slice.
 ATTENTION FILTRE OUTIL JS : le caractere "=" dans les attributs + query strings declenchent "[BLOCKED]" -> pour AFFICHER/transferer du HTML, remplacer temporairement [?=&] et "cookie", ou travailler en compteurs/booleens.
 
+--- AVANCEMENT ETAPE 1 (cart-modal statique) - MAJ en cours ---
+
+FAIT (commit par JLShop06) - 20 fichiers avec cart-modal statique :
+  [OK] pink-star.html (test initial : ratio 49% -> 58.1%, pas de doublon, panier OK)
+  [OK] Cockring-vibrant-Marry-Me-Wooomy.html
+  [OK] Deguisement-Bunny.html
+  [OK] Magnum-Opus-vibro.html
+  [OK] Plug-Anal-Rosy-Gold.html
+  [OK] anneau_vibrant_telecommande.html
+  [OK] black-empire-my-duchess.html
+  [OK] cockring-vibrant-saturn-hueman.html
+  [OK] coffret-bien-etre-intime-bio.html
+  [OK] deguisement-enseignante.html
+  [OK] deguisement-etudiante.html
+  [OK] deguisement-infirmiere-sexy.html
+  [OK] dual-vibe-sex-on-the-beach.html
+  [OK] gel_cannabis_orgie.html
+  [OK] gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html
+  [OK] gel_lubrifiant_bio_neutre_divine_xtases.html
+  [OK] gel_lubrifiant_bio_neutre_framboise_divine_xtases.html
+  [OK] gel_lubrifiant_bio_neutre_monoi_divine_xtases.html
+  [OK] gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html
+  [OK] gel_lubrifiant_bio_neutre_vanille_divine_xtases.html
+
+DEJA OK avant cette campagne (avaient deja le modal) : cgv, confidentialite, cookies, index, mentions-legales.
+EXCLUS (pas de panier) : cancel, erreur, google2ea8d2d7cec1a820, success, veille-concurrents, retractation(*).
+  (*) retractation : a verifier, charge cart.js -> a traiter comme les fiches.
+
+RESTE A FAIRE - 15 fiches (memes etapes : modal statique avant </body>, 1 commit/fichier) :
+  [ ] hemp-intense-orgasm.html
+  [ ] le-flateur.html
+  [ ] lubrifiant_eau_lube_tube_chocolat_orgie.html
+  [ ] lubrifiant_eau_lube_tube_fraise_orgie.html
+  [ ] lubrifiant_eau_tube_barbe_a_papa.html
+  [ ] mini-robe-noire.html
+  [ ] monster-pussy-strocker.html
+  [ ] orgie-pinacolada.html
+  [ ] pink-star-choco-fraise.html
+  [ ] pink_star_sucette_cerise.html
+  [ ] red-dolls-energy-pleasure.html
+  [ ] retractation.html
+  [ ] robe-longue-noire-argentee.html
+  [ ] tanga-taille-haute-dentelle-bleue.html
+  [ ] vibro-rechargeable-Indiana.html
+
+APRES ETAPE 1 : verif API groupee (cart-modal=1, doctype=1, pas de doublon sur chaque),
+  re-mesurer le ratio live, re-lancer l audit GEO pour confirmer le passage a B+/A+.
+
 --- RESTE A FAIRE POUR VISER A+ (dans l'ordre de priorite) ---
 
 ETAPE 1 — cart-modal statique sur TOUTES les fiches (gain ~ +9 pts/fiche) :
