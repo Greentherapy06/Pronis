@@ -2282,7 +2282,7 @@ ATTENTION FILTRE OUTIL JS : le caractere "=" dans les attributs + query strings 
 
 --- AVANCEMENT ETAPE 1 (cart-modal statique) - MAJ en cours ---
 
-FAIT (commit par JLShop06) - 20 fichiers avec cart-modal statique :
+FAIT (commit par JLShop06) - 25 fichiers avec cart-modal statique :
   [OK] pink-star.html (test initial : ratio 49% -> 58.1%, pas de doublon, panier OK)
   [OK] Cockring-vibrant-Marry-Me-Wooomy.html
   [OK] Deguisement-Bunny.html
@@ -2303,24 +2303,23 @@ FAIT (commit par JLShop06) - 20 fichiers avec cart-modal statique :
   [OK] gel_lubrifiant_bio_neutre_monoi_divine_xtases.html
   [OK] gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html
   [OK] gel_lubrifiant_bio_neutre_vanille_divine_xtases.html
+  [OK] hemp-intense-orgasm.html
+  [OK] le-flateur.html
+  [OK] lubrifiant_eau_lube_tube_chocolat_orgie.html
+  [OK] lubrifiant_eau_lube_tube_fraise_orgie.html
+  [OK] lubrifiant_eau_tube_barbe_a_papa.html
 
 DEJA OK avant cette campagne (avaient deja le modal) : cgv, confidentialite, cookies, index, mentions-legales.
-EXCLUS (pas de panier) : cancel, erreur, google2ea8d2d7cec1a820, success, veille-concurrents, retractation(*).
-  (*) retractation : a verifier, charge cart.js -> a traiter comme les fiches.
+EXCLUS (pas de panier) : cancel, erreur, google2ea8d2d7cec1a820, success, veille-concurrents.
 
-RESTE A FAIRE - 15 fiches (memes etapes : modal statique avant </body>, 1 commit/fichier) :
-  [ ] hemp-intense-orgasm.html
-  [ ] le-flateur.html
-  [ ] lubrifiant_eau_lube_tube_chocolat_orgie.html
-  [ ] lubrifiant_eau_lube_tube_fraise_orgie.html
-  [ ] lubrifiant_eau_tube_barbe_a_papa.html
+RESTE A FAIRE - 10 fiches (memes etapes : modal statique avant </body>, 1 commit/fichier) :
   [ ] mini-robe-noire.html
   [ ] monster-pussy-strocker.html
   [ ] orgie-pinacolada.html
   [ ] pink-star-choco-fraise.html
   [ ] pink_star_sucette_cerise.html
   [ ] red-dolls-energy-pleasure.html
-  [ ] retractation.html
+  [ ] retractation.html (verifier : charge cart.js -> a traiter comme fiche)
   [ ] robe-longue-noire-argentee.html
   [ ] tanga-taille-haute-dentelle-bleue.html
   [ ] vibro-rechargeable-Indiana.html
