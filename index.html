@@ -127,6 +127,20 @@ document.head.appendChild(s);
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Où se met le gel lubrifiant ?","acceptedAnswer":{"@type":"Answer","text":"Le gel lubrifiant s'applique sur les zones intimes externes et sur les accessoires pour faciliter le glissement et améliorer le confort. Quelques gouttes suffisent, à renouveler si besoin. Les gels à base d'eau sont compatibles avec les préservatifs et la plupart des sextoys, contrairement aux gels à base de silicone qui peuvent endommager les jouets en silicone."}},{"@type":"Question","name":"Quel est le rôle du gel lubrifiant ?","acceptedAnswer":{"@type":"Answer","text":"Le rôle d'un gel lubrifiant est de réduire les frictions et d'apporter une sensation de glissement plus naturelle et confortable. Il aide à limiter les inconforts liés à la sécheresse et rend les moments intimes plus agréables."}},{"@type":"Question","name":"Comment choisir un bon lubrifiant intime bio ?","acceptedAnswer":{"@type":"Answer","text":"Pour choisir un bon lubrifiant intime bio, privilégiez une composition courte et naturelle, une base à l'eau compatible avec les préservatifs, et une certification bio. Chez Les Jardins Enchantés, nos gels lubrifiants bio sont fabriqués en France et affichent une note Yuka de 100/100, gage d'une composition saine."}},{"@type":"Question","name":"Quel type de gel facilite les rapports intimes ?","acceptedAnswer":{"@type":"Answer","text":"Les gels lubrifiants à base d'eau sont les plus polyvalents pour faciliter les rapports intimes : ils offrent une sensation naturelle, sont doux pour la peau et compatibles avec les préservatifs comme avec la plupart des accessoires intimes."}},{"@type":"Question","name":"Vos gels lubrifiants sont-ils vraiment bio ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Nos gels lubrifiants sont bio, fabriqués en France et notés Yuka 100/100. Leur composition privilégie des ingrédients d'origine naturelle, sans additifs superflus, pour respecter les zones intimes."}},{"@type":"Question","name":"La livraison est-elle discrète ?","acceptedAnswer":{"@type":"Answer","text":"Oui, toutes nos commandes sont expédiées dans un colis neutre et discret, sans aucune mention du contenu ni du nom de la boutique à l'extérieur. Votre vie privée est préservée."}}]}</script>
 </head>
 <body>
+  <!-- AGE GATE STATIQUE : present dans le HTML brut (conformite art. 227-24 + ratio brut/rendu). Masque par defaut, revele par compliance.js si le flag d'age est absent. -->
+  <div class="lje-overlay" id="lje-age-overlay" role="dialog" aria-modal="true" aria-labelledby="lje-age-title" hidden>
+    <div class="lje-modal">
+      <div class="lje-sub">Les Jardins Enchantes</div>
+      <h2 id="lje-age-title" data-i18n="age_title">Acces Reserve</h2>
+      <div class="lje-divider"></div>
+      <p data-i18n="age_body">Ce site presente des produits reserves a un public adulte.<br>Vous devez avoir au moins <strong>18 ans</strong> pour y acceder.</p>
+      <div class="lje-btn-row">
+        <button type="button" class="lje-btn lje-btn-primary" id="lje-age-yes" data-i18n="age_yes">J'ai 18 ans ou plus</button>
+        <button type="button" class="lje-btn" id="lje-age-no" data-i18n="age_no">Je suis mineur</button>
+      </div>
+      <div class="lje-legal" data-i18n="age_legal">Conformement a l'article 227-24 du Code penal.</div>
+    </div>
+  </div>
 <script src="compliance.js"></script>
 <div class="announce-bar" style="background:#caa86a;color:#1a1a1a;text-align:center;font-size:13px;letter-spacing:1px;padding:8px 12px;font-weight:600;" data-i18n="banner_livraison">✦ LIVRAISON OFFERTE DÈS 75 € D'ACHAT ✦</div>
 <header class="lux-header">
