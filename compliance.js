@@ -97,36 +97,33 @@
   // AGE GATE
   // ============================================================
   function showAgeGate(onAccept) {
+    var overlay = document.getElementById('lje-age-overlay');
+    // Fallback : si le markup statique est absent (page non encore migree),
+    // on ne bloque pas a tort et on continue proprement.
+    if (!overlay) { if (typeof onAccept === 'function') onAccept(); return; }
+
     document.body.style.overflow = 'hidden';
-    var overlay = document.createElement('div');
-    overlay.className = 'lje-overlay';
-    overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-labelledby', 'lje-age-title');
-    overlay.innerHTML = ''
-      + '<div class="lje-modal">'
-      + '  <div class="lje-sub">Les Jardins Enchantés</div>'
-      + '  <h2 id="lje-age-title" data-i18n="age_title">Accès Réservé</h2>'
-      + '  <div class="lje-divider"></div>'
-      + '  <p data-i18n="age_body">Ce site présente des produits réservés à un public adulte.<br>Vous devez avoir au moins <strong>18 ans</strong> pour y accéder.</p>'
-      + '  <div class="lje-btn-row">'
-      + '    <button type="button" class="lje-btn lje-btn-primary" id="lje-age-yes" data-i18n="age_yes">J\'ai 18 ans ou plus</button>'
-      + '    <button type="button" class="lje-btn" id="lje-age-no" data-i18n="age_no">Je suis mineur</button>'
-      + '  </div>'
-      + '  <div class="lje-legal" data-i18n="age_legal">Conformément à l\'article 227-24 du Code pénal.</div>'
-      + '</div>';
-    document.body.appendChild(overlay);
+    overlay.hidden = false; // revele l'age-gate deja present dans le HTML brut
     try { if (typeof window.applyTranslations === "function") window.applyTranslations(); } catch (e) {}
 
-    document.getElementById('lje-age-yes').addEventListener('click', function () {
-      setStored(AGE_STORAGE_KEY, true, AGE_STORAGE_DAYS);
-      document.body.style.overflow = '';
-      overlay.remove();
-      if (typeof onAccept === 'function') onAccept();
-    });
-    document.getElementById('lje-age-no').addEventListener('click', function () {
-      window.location.replace(REDIRECT_IF_MINOR);
-    });
+    var yes = document.getElementById('lje-age-yes');
+    var no = document.getElementById('lje-age-no');
+
+    if (yes && !yes.__ljeBound) {
+      yes.__ljeBound = true;
+      yes.addEventListener('click', function () {
+        setStored(AGE_STORAGE_KEY, true, AGE_STORAGE_DAYS);
+        document.body.style.overflow = '';
+        overlay.hidden = true;
+        if (typeof onAccept === 'function') onAccept();
+      });
+    }
+    if (no && !no.__ljeBound) {
+      no.__ljeBound = true;
+      no.addEventListener('click', function () {
+        window.location.replace(REDIRECT_IF_MINOR);
+      });
+    }
   }
 
   // ============================================================
