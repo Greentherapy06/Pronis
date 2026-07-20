@@ -2388,3 +2388,28 @@ Bloc <div id="cart-modal" style="display:none;..."> ... contenant :
 - Ne toucher a AUCUNE fiche produit tant que le rapport GEO detaille n'a pas ete lu.
 - C'est JLShop06 qui commit (ou qui donne accord explicite pour que Claude commit a sa place).
 - Objectif vise : GEO A+ (non garanti a l'avance — depend des recommandations reelles de l'outil).
+
+### DIAGNOSTIC (analyse du code faite le 2026-07-20 par Claude — a confirmer avec le rapport SEOptimer detaille)
+
+> Rappel : diagnostic base sur le code, PAS sur le barème exact de SEOptimer. A recouper avec les 13 recommandations du rapport. Le A+ n'est PAS garanti.
+
+DEJA BON (ne pas casser) :
+- llms.txt present et bien structure.
+- Accueil : JSON-LD Store + BreadcrumbList + FAQPage.
+- Fiches produits : JSON-LD Product + Offer valides.
+- Chaque page : 1 h1 unique + meta description presente.
+
+4 FAIBLESSES GEO IDENTIFIEES (par ordre d'impact estime) :
+1. CONTENU FICHES TROP COURT (impact le + fort). Texte visible tres maigre : ~940 a ~1640 caracteres par fiche (ex. mini-robe-noire ~940). Les moteurs generatifs citent des pages riches et explicatives. -> Enrichir chaque fiche : description detaillee, usage, matiere, entretien, conseils, benefices.
+2. AUCUN AVIS STRUCTURE (AggregateRating / Review) sur les fiches. Product + Offer presents mais zero note/avis. Signal de credibilite tres valorise par les IA. -> Ajouter AggregateRating + Review reels en Schema.org.
+3. PAS DE FAQ STRUCTUREE SUR LES FICHES. L'accueil a un FAQPage mais aucune fiche produit n'en a. Le format Q/R est le + directement repris par les IA generatives. -> Ajouter un bloc FAQPage par fiche (3-5 questions/reponses reelles).
+4. CONTENU CITABLE DE L'ACCUEIL LIMITE. ~7300 caracteres de texte visible dont bcp de noms produits + menu. Peu de texte editorial. -> Ajouter du contenu explicatif citable (guide, "pourquoi bio", etc.).
+
+ORDRE DE TRAVAIL CONSEILLE : commencer par 1 fiche pilote (enrichir texte + FAQ + avis), re-mesurer sur SEOptimer, et ne propager que si le score GEO bouge.
+
+### CONTRAINTE IMPORTANTE : SEULEMENT 2 TESTS SEOptimer / JOUR
+
+- Ne PAS faire "1 modif = 1 test" (ça brulerait les 2 tests sur une seule fiche).
+- METHODE ADAPTEE : grouper PLUSIEURS corrections d'un coup sur la fiche pilote (enrichir texte + FAQ + avis structures) PUIS faire 1 SEUL test pour mesurer l'effet cumule. Garder le 2e test du jour en reserve.
+- Toujours noter la note AVANT (capture) avant de consommer un test, pour comparer.
+- Preparer tous les changements a l'avance (colles, prets a committer) AVANT de lancer un test, pour ne pas gaspiller.
