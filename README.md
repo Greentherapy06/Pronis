@@ -2362,3 +2362,29 @@ Bloc <div id="cart-modal" style="display:none;..."> ... contenant :
   Depart : 49% (fiches) -> pink-star apres ETAPE test : 58,1%.
   Objectif ETAPE 1+2 : ~68-70%. Objectif A+ : >75-80% sur toutes les pages.
 ==================================================
+
+
+---
+
+## PLAN GEO — A FAIRE DEMAIN (objectif : sortir de C+ en GEO)
+
+> Note : le score "GEO" de SEOptimer = Generative Engine Optimization (optimisation pour les IA generatives : ChatGPT, Perplexity, reponses IA de Google), PAS la geolocalisation.
+
+### Contexte
+- La modif de l'age-gate (passage du JS au HTML brut dans index.html + compliance.js) a ete committee, mais elle N'A PAS change la note SEOptimer (resultat identique constate). Ne pas re-tenter cette piste.
+- Un age-gate en overlay reste vu en premier par l'outil, qu'il soit genere en JS ou ecrit en dur.
+
+### Etapes
+1. MESURER LA VRAIE NOTE DE DEPART (avant toute modif). Relancer SEOptimer sur les-jardins-enchantes.com des que le forfait est de nouveau dispo. Noter le score exact par categorie (surtout GEO et Liens) + capture datee = reference "AVANT".
+2. OUVRIR LE DETAIL DES RECOMMANDATIONS GEO dans le rapport SEOptimer. Lire exactement ce que l'outil reproche (les 13 recommandations). SEULE source fiable de quoi corriger.
+3. CORRIGER LES POINTS GEO listes, un par un. Leviers GEO habituels a verifier :
+   - Donnees structurees Schema.org completes et propres (deja : Store + BreadcrumbList ; a enrichir : Product + Offer + avis sur les fiches produits).
+   - Contenu texte clair et "citable" (FAQ structuree, questions/reponses).
+   - Titres et meta coherents.
+   - Fichier llms.txt bien rempli (existe deja dans le repo — a verifier).
+4. RE-MESURER APRES CHAQUE CHANGEMENT significatif. Une modif -> un nouveau test SEOptimer -> comparer au "AVANT". Garder seulement ce qui fait bouger le chiffre. Sinon annuler.
+
+### Regles de travail
+- Ne toucher a AUCUNE fiche produit tant que le rapport GEO detaille n'a pas ete lu.
+- C'est JLShop06 qui commit (ou qui donne accord explicite pour que Claude commit a sa place).
+- Objectif vise : GEO A+ (non garanti a l'avance — depend des recommandations reelles de l'outil).
