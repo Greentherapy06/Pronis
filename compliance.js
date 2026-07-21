@@ -67,6 +67,7 @@
     if (document.getElementById('lje-compliance-styles')) return;
     var css = ''
       + '.lje-overlay{position:fixed;inset:0;background:rgba(15,10,5,0.95);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:"Cormorant Garamond",Georgia,serif;animation:lje-fade-in 0.4s ease}'
+      + '.lje-overlay[hidden]{display:none!important}'
       + '@keyframes lje-fade-in{from{opacity:0}to{opacity:1}}'
       + '.lje-modal{background:#1a1208;border:1px solid #a8884d;color:#e8d9b0;max-width:480px;width:100%;padding:48px 32px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.5)}'
       + '.lje-modal h2{font-size:28px;font-weight:300;letter-spacing:3px;margin:0 0 8px;color:#d4af6a;text-transform:uppercase}'
