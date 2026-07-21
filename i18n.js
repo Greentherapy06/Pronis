@@ -4220,7 +4220,8 @@ if (document.readyState === "loading") {
     try {
       var probe = document.createElement('div');
       probe.className = 'nav-dd';
-      probe.style.cssText = 'position:static;visibility:hidden;pointer-events:none';
+      probe.style.visibility = 'hidden';
+      probe.style.pointerEvents = 'none';
       document.body.appendChild(probe);
       var pos = getComputedStyle(probe).position;
       document.body.removeChild(probe);
