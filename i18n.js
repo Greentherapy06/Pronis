@@ -4215,6 +4215,17 @@ if (document.readyState === "loading") {
 
   function injectCss(){
     if (document.getElementById('nav-dd-css')) return;
+    // GEO: le CSS nav-dd/lang-switch est desormais statique dans style.css (meilleur ratio de rendu LLM).
+    // Verification de presence; sinon fallback injection comme avant.
+    try {
+      var probe = document.createElement('div');
+      probe.className = 'nav-dd';
+      probe.style.cssText = 'position:static;visibility:hidden;pointer-events:none';
+      document.body.appendChild(probe);
+      var pos = getComputedStyle(probe).position;
+      document.body.removeChild(probe);
+      if (pos === 'relative') { return; }
+    } catch(e){}
     var css = '.lux-header{display:flex;align-items:center;gap:24px}'
     + '.cat-nav{margin:0}'
     + '.lang-switch{width:auto!important;flex-basis:auto!important;margin-left:auto;order:0}'
