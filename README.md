@@ -2413,3 +2413,40 @@ ORDRE DE TRAVAIL CONSEILLE : commencer par 1 fiche pilote (enrichir texte + FAQ 
 - METHODE ADAPTEE : grouper PLUSIEURS corrections d'un coup sur la fiche pilote (enrichir texte + FAQ + avis structures) PUIS faire 1 SEUL test pour mesurer l'effet cumule. Garder le 2e test du jour en reserve.
 - Toujours noter la note AVANT (capture) avant de consommer un test, pour comparer.
 - Preparer tous les changements a l'avance (colles, prets a committer) AVANT de lancer un test, pour ne pas gaspiller.
+
+
+==================================================
+SESSION GEO A+ + FIX PORTAIL D'AGE — MAJ 2026-07-21 (Claude)
+
+RÔLES : Claude fait TOUT (fetch editeur, diagnostic, construction, collage) SAUF le clic « Commit changes » (JLShop06 seul).
+
+--- ITEM 1 : RATIO DE RENDU / GEO — VRAIE CAUSE ENFIN CORRIGEE ---
+
+Cause racine du ratio de rendu faible : un bloc CSS (~5 Ko, nav-dd / lang-switch) etait injecte dynamiquement par injectCss() dans i18n.js sur CHAQUE page (jamais traite avant). Ce <style> runtime alourdissait le DOM rendu (mauvais ratio pour les LLM / GEO).
+
+Correctif en 2 commits (ordre important : style.css AVANT i18n.js pour eviter tout instant sans style sur le header/selecteur de langue) :
+1. style.css : bloc nav-dd/lang-switch ajoute EN STATIQUE a la fin du fichier (~5099 chars, ajout pur, meme CSS qu'avant). Verifie parse OK, .nav-dd{position:relative} actif.
+2. i18n.js (commit 60b34b9) : injectCss() detecte desormais le CSS statique (probe visibility:hidden qui lit getComputedStyle().position SANS position inline — la 1ere version posait position:static en inline, ce qui ecrasait toujours la regle et faussait la detection) et SAUTE l'injection. CSS conserve en FALLBACK si style.css absent.
+
+VERIFIE EN LIVE (chargement frais non-cache) : injectedPresent=false (le <style> n'est plus injecte), nav-dd position=relative (style statique applique), nav rendue correctement.
+PIEGE RENCONTRE : cache edge Vercel en retard -> mes 1ers tests montraient encore l'ancien i18n.js (injection presente). Une fois le CDN a jour, le skip fonctionne. TOUJOURS verifier fetch cache:'reload' + attendre la propagation avant de conclure.
+
+RESULTAT SEOptimer : GEO = A+ (objectif depasse : cible C+ visee). Autres scores : Referencement A+, Performance A+, Convivialite A-, Liens F, global B+.
+HONNETETE : le levier "ratio de rendu" est traite proprement, mais le barème SEOptimer reste inconnu. Le point bas restant = Liens (F), sujet a part (profil de liens interne/externe, backlinks), sans rapport avec le rendu/CSS.
+
+--- ITEM 2 : BUG BLOQUANT — PORTAIL D'AGE "ACCES RESERVE" (site inaccessible) ---
+
+SYMPTOME : clic sur « J'ai 18 ans ou plus » sans effet -> impossible d'entrer sur le site.
+
+DIAGNOSTIC (cause racine confirmee en live) : ce n'etait PAS lie au fix GEO (compliance.js est independant, ne mentionne ni nav-dd ni injectCss).
+- L'overlay du portail est en HTML statique avec l'attribut [hidden] : <div class="lje-overlay" id="lje-age-overlay" ... hidden>.
+- La regle .lje-overlay{...display:flex} injectee par injectStyles() (compliance.js) ECRASE le display:none implicite de [hidden] (regle explicite > attribut hidden). L'overlay reste donc visible en permanence.
+- Quand l'age est deja valide (localStorage lje_age_verified=true / age_ok=1), start() saute volontairement showAgeGate() -> le bouton n'est JAMAIS binde (__ljeBound absent) -> clic sans effet + overlay jamais masque.
+
+CORRECTIF (compliance.js, injectStyles) : ajout d'UNE ligne CSS dans la chaine css :
+  + '.lje-overlay[hidden]{display:none!important}'
+Inseree juste apres la regle .lje-overlay. Ajout pur (delta +55 chars, accolades/parentheses equilibrees).
+TESTE EN LIVE (avant commit) : etat hidden -> display:none (site accessible) ; showAgeGate retire hidden -> display:flex (portail s'affiche normalement pour un nouveau visiteur). Aucun impact sur style.css / i18n.js / bloc nav-dd -> A+ GEO preserve.
+
+ETAT : modification collee dans l'editeur GitHub (compliance.js). COMMIT A CONFIRMER par JLShop06.
+RESTE (auto) : apres redeploiement Vercel, re-verifier live que le site est accessible. Pour tester le cas "nouveau visiteur" : vider lje_age_verified puis cliquer « J'ai 18 ans ou plus » (ce clic = JLShop06, Claude ne valide pas un portail d'age).
