@@ -1,5 +1,33 @@
 Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
+## SESSION BACKLINKS — TRUSTPILOT (22 juillet)
+
+Objectif du jour : travailler les LIENS (note F sur SEOptimer = manque de backlinks externes ; le maillage interne est deja fait).
+Plateforme choisie (la plus simple + rentable) : Trustpilot.
+
+ETAT :
+- Compte Trustpilot Business cree par JLShop06 (email de connexion : jlshop06190@gmail.com).
+- Verification du domaine : balise meta posee dans le <head> de index.html, commitee et LIVE sur le site.
+  ID balise : trustpilot-one-time-domain-verification-id = e101ab76-c3bb-4702-b633-a05c4e7c1368
+  Verifie live : fetch renvoie 200, balise presente 1 fois, bon ID.
+
+BLOCAGE (non resolu, cote Trustpilot) :
+- Impossible de finaliser la verification : leur interface plante a chaque clic avec "Une erreur technique est survenue".
+- Cause identifiee dans la console Trustpilot : bug React de leur cote -> NotFoundError: Failed to execute insertBefore on Node (chunks 961/902).
+- Confirme aussi en manuel par JLShop06 : chaque bouton declenche l erreur. Ce n est PAS un souci de notre site ni anti-bot.
+- Note : pas d email @les-jardins-enchantes.com dispo (seulement Gmail), donc methode "email du domaine" indisponible.
+
+A REPRENDRE PLUS TARD (quand l interface Trustpilot refonctionnera) :
+- Retenter la verification balise meta (le tag est deja live, rien a refaire cote site) ; OU
+- Methode DNS (ajouter un TXT dans Vercel) ; OU
+- Methode fichier (deposer un fichier de verif a la racine via GitHub).
+- Ensuite : completer le profil (logo, description longue/courte, categorie) pour maximiser le backlink.
+
+PROCHAINES PLATEFORMES BACKLINKS (ordre README) : Pages Jaunes, puis annuaires gratuits (Yelp, Cylex, Hoodspot, Tuugo, Justacote), bios sociales, Pinterest, blogs.
+
+---
+
+
 ==================================================
 SESSION SITEMAP + GOOGLE BUSINESS — TERMINÉE — MAJ 2026-07-13
 ==================================================
