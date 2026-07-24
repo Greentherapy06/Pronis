@@ -1,5 +1,38 @@
 Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
+## SESSION BLOG SEO — 24/07/2026
+
+RÔLES : Claude fait TOUT (fetch gabarit, rédaction, construction fichier, collage éditeur) SAUF le clic "Commit changes" (JLShop06).
+
+### FAIT (tout committé sur main)
+
+- 3 ARTICLES DE BLOG créés (~1000 mots chacun : intro + 4 paragraphes + conclusion + FAQ ; JSON-LD Article + FAQPage + BreadcrumbList sur chaque) :
+  1. blog-gel-lubrifiant-bio.html — mot-clé principal "gel lubrifiant bio"
+  2. blog-lubrifiant-eau-vs-bio.html — mot-clé "lubrifiant base eau ou bio / eau vs bio"
+  3. blog-choisir-premier-sextoy.html — mot-clé "choisir premier sextoy / sextoy débutant"
+- MÉTHODE : chaque article réutilise le gabarit du site (head icônes/manifest/viewport + CSS site + header + footer + cart modal verbatim), avec un bloc CSS ".blog-*" ajouté (défini dans blog-gel-lubrifiant-bio.html, réutilisé par les autres). Construction en JS (fetch du gabarit -> remplacement head SEO + injection contenu article) puis collage ClipboardEvent sur .cm-content. Validé : 1 seul DOCTYPE, 1 h1, 3 ld+json, se termine par </html>.
+- INFOS PRODUIT RÉELLES (relues sur les fiches, NE PAS réinventer) :
+  * Gels bio Divine Xtases (coco, vanille, framboise, monoï, caramel beurre salé, neutre/sans parfum) = 19,90 € / 100 ml pompe. Formule CORPS GRAS : cire d'abeille, huile de graines de tournesol, beurre de karité, aloe vera, tocophérol (vit. E). Certifié Bio Organic, fabriqué en France, Yuka 100/100. **NON compatibles préservatifs** (corps gras fragilisent le latex). Compatibles majorité des sextoys.
+  * Lubrifiants base EAU : Pink Star (compatible préservatifs indiqué), Orgie chocolat/fraise/barbe à papa/piña colada (base eau, compatibles sextoys). => avec préservatif : base eau uniquement.
+  * Sextoys cités : Indiana (Litolu, vibro USB silicone IPX7), Love Connection (Xocoon, anneau vibrant couple télécommandé), Magnum Opus (Toy Joy), Red Dolls Energy Pleasure (masturbateur).
+- PAGE PILIER blog.html créée : liste les 3 articles en cartes (tag/titre/desc/lien) + JSON-LD Blog + ItemList (3 items) + BreadcrumbList.
+- MENU : lien "BLOG" (data-i18n="menu_blog") ajouté dans index.html (nav .cat-nav) -> pointe vers blog.html. Présent uniquement sur index.html.
+- SITEMAP : les 4 pages ajoutées à sitemap.xml (38 URLs total, priority 0.7, changefreq monthly/weekly, lastmod 2026-07-24).
+- MAILLAGE INTERNE CROISÉ : les 3 articles se lient mutuellement (dans conclusions) + CTA vers la boutique (#gel-lubrifiant-bio / #sextoys). blog.html <-> articles <-> boutique.
+
+### RESTE À FAIRE
+
+- i18n : créer la clé menu_blog dans i18n.js (×5 fr/pt/it/es/de) — actuellement "BLOG" s'affiche à l'identique dans toutes les langues (acceptable mais non traduit).
+- i18n : traduire le CONTENU des 4 pages blog (article×3 + blog.html) dans les 5 langues si souhaité — actuellement FR uniquement (pas de data-i18n sur le contenu blog).
+- hreflang : les pages blog n'ont pas de balises hreflang (contrairement à index.html).
+- og:image : les 3 articles + blog.html utilisent tous l'image du gel coco par défaut -> créer une image dédiée par article serait mieux pour le partage social.
+- Search Console : resoumettre / laisser Google recrawler le sitemap (les 4 URLs blog doivent être indexées).
+- Prochains articles suggérés (élargir les mots-clés) : "cockring : à quoi ça sert" (-> #cockrings), "gel lubrifiant aromatisé : plaisir et précautions" (-> gels aromatisés Pink Star/Orgie).
+- Quand un nouvel article est ajouté : penser à (1) l'ajouter à blog.html (carte + ItemList JSON-LD), (2) l'ajouter au sitemap.xml, (3) créer les liens croisés depuis les articles existants.
+
+==================================================
+
+
 ## SESSION BACKLINKS — TRUSTPILOT (22 juillet)
 
 Objectif du jour : travailler les LIENS (note F sur SEOptimer = manque de backlinks externes ; le maillage interne est deja fait).
