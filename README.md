@@ -4,6 +4,15 @@ Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
 [MAJ 24/07/2026 – session i18n/hreflang blog] hreflang ajouté aux 3 articles (blog.html l'avait déjà) → les 4 pages blog ont 6 hreflang. menu_blog confirmé présent ×5 dans i18n.js. RESTE optionnel : traduction du CONTENU rédactionnel des articles + og:image dédiée par article + recrawl sitemap Search Console.
 
+[MAJ 24/07/2026 – session NOUVEL ARTICLE aromatisé] 4e ARTICLE DE BLOG créé et committé sur main : blog-gel-lubrifiant-aromatise.html — mot-clé principal "gel lubrifiant aromatisé" (~914 mots ; intro + 5 H2 + bloc précaution + CTA + FAQ 4 questions ; JSON-LD Article + FAQPage + BreadcrumbList ; 6 hreflang fr/pt/it/es/de + x-default ; canonical propre). Construit sur le gabarit blog-gel-lubrifiant-bio.html (head icônes/manifest/CSS .blog-* + header + footer + cart modal verbatim). Vérifié LIVE via API : len 20824, doctype=1, h1=1, ld+json=3, hreflang=6, canonical=1, endsOk. INFOS PRODUIT RÉELLES utilisées (relues sur les fiches, NON inventées) : Pink Star (Sangria/Fraise-Chocolat/Cerise) 14,95€/60ml base eau comestible sans paraben compatible préservatifs + sextoys ; Orgie (Chocolat/Fraise/Barbe à papa) 12,90€/tube 100ml base eau embrassable/sexe oral compatible sextoys ; Orgie Piña Colada 50ml sans paraben. Contraste rappelé correctement : gels bio Divine Xtases = corps gras => PAS compatibles préservatifs (base eau uniquement avec préservatif). CTA pointe vers #gels-aromatises (ancre à vérifier/créer sur l'accueil). Les 3 liens croisés vers les articles existants sont présents DANS ce nouvel article.
+
+>>> RESTE À FAIRE POUR CE 4e ARTICLE (workflow "nouvel article" NON terminé — 3 étapes restantes) :
+  1. blog.html : ajouter la CARTE (tag/titre/desc/lien) du 4e article + l'ajouter au JSON-LD ItemList (passer de 3 à 4 items). PAS ENCORE FAIT.
+  2. sitemap.xml : ajouter l'URL https://les-jardins-enchantes.com/blog-gel-lubrifiant-aromatise.html (priority 0.7, changefreq monthly, lastmod 2026-07-24) — passera de 38 à 39 URLs. PAS ENCORE FAIT.
+  3. LIENS CROISÉS ENTRANTS : ajouter dans les 3 articles existants (blog-gel-lubrifiant-bio, blog-lubrifiant-eau-vs-bio, blog-choisir-premier-sextoy) un lien vers le nouvel article aromatisé (dans leur conclusion). PAS ENCORE FAIT (les liens SORTANTS depuis le nouvel article sont déjà en place).
+  OPTIONNEL : vérifier/créer l'ancre #gels-aromatises sur index.html (sinon le CTA retombe en haut de page) ; og:image dédiée.
+
+
 RÔLES : Claude fait TOUT (fetch gabarit, rédaction, construction fichier, collage éditeur) SAUF le clic "Commit changes" (JLShop06).
 
 ### FAIT (tout committé sur main)
@@ -29,7 +38,7 @@ RÔLES : Claude fait TOUT (fetch gabarit, rédaction, construction fichier, coll
 - hreflang : ✅ FAIT (24/07/2026) — les 4 pages blog (blog.html + 3 articles) ont chacune 6 balises hreflang (fr/pt/it/es/de + x-default) insérées après le canonical, sur le modèle d'index.html. Crawlables grâce au patch getLang() qui lit ?lang=xx. Vérifié LIVE via API GitHub (hreflang=6, canonical=1, doctype=1 sur les 4).
 - og:image : les 3 articles + blog.html utilisent tous l'image du gel coco par défaut -> créer une image dédiée par article serait mieux pour le partage social.
 - Search Console : resoumettre / laisser Google recrawler le sitemap (les 4 URLs blog doivent être indexées).
-- Prochains articles suggérés (élargir les mots-clés) : "cockring : à quoi ça sert" (-> #cockrings), "gel lubrifiant aromatisé : plaisir et précautions" (-> gels aromatisés Pink Star/Orgie).
+- Prochains articles suggérés (élargir les mots-clés) : "cockring : à quoi ça sert" (-> #cockrings). [FAIT le 24/07 : "gel lubrifiant aromatisé" = blog-gel-lubrifiant-aromatise.html, mais workflow nouvel article à finir : blog.html + sitemap + liens croisés entrants — voir note en tête.]
 - Quand un nouvel article est ajouté : penser à (1) l'ajouter à blog.html (carte + ItemList JSON-LD), (2) l'ajouter au sitemap.xml, (3) créer les liens croisés depuis les articles existants.
 
 ==================================================
