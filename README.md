@@ -2,6 +2,8 @@ Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
 ## SESSION BLOG SEO — 24/07/2026
 
+[MAJ 24/07/2026 – session i18n/hreflang blog] hreflang ajouté aux 3 articles (blog.html l'avait déjà) → les 4 pages blog ont 6 hreflang. menu_blog confirmé présent ×5 dans i18n.js. RESTE optionnel : traduction du CONTENU rédactionnel des articles + og:image dédiée par article + recrawl sitemap Search Console.
+
 RÔLES : Claude fait TOUT (fetch gabarit, rédaction, construction fichier, collage éditeur) SAUF le clic "Commit changes" (JLShop06).
 
 ### FAIT (tout committé sur main)
@@ -22,9 +24,9 @@ RÔLES : Claude fait TOUT (fetch gabarit, rédaction, construction fichier, coll
 
 ### RESTE À FAIRE
 
-- i18n : créer la clé menu_blog dans i18n.js (×5 fr/pt/it/es/de) — actuellement "BLOG" s'affiche à l'identique dans toutes les langues (acceptable mais non traduit).
+- i18n : clé menu_blog dans i18n.js (×5 fr/pt/it/es/de) — ✅ FAIT (valeur "Blog" identique dans les 5 langues, volontaire : mot international ; câblée sur le lien BLOG du menu).
 - i18n : traduire le CONTENU des 4 pages blog (article×3 + blog.html) dans les 5 langues si souhaité — actuellement FR uniquement (pas de data-i18n sur le contenu blog).
-- hreflang : les pages blog n'ont pas de balises hreflang (contrairement à index.html).
+- hreflang : ✅ FAIT (24/07/2026) — les 4 pages blog (blog.html + 3 articles) ont chacune 6 balises hreflang (fr/pt/it/es/de + x-default) insérées après le canonical, sur le modèle d'index.html. Crawlables grâce au patch getLang() qui lit ?lang=xx. Vérifié LIVE via API GitHub (hreflang=6, canonical=1, doctype=1 sur les 4).
 - og:image : les 3 articles + blog.html utilisent tous l'image du gel coco par défaut -> créer une image dédiée par article serait mieux pour le partage social.
 - Search Console : resoumettre / laisser Google recrawler le sitemap (les 4 URLs blog doivent être indexées).
 - Prochains articles suggérés (élargir les mots-clés) : "cockring : à quoi ça sert" (-> #cockrings), "gel lubrifiant aromatisé : plaisir et précautions" (-> gels aromatisés Pink Star/Orgie).
