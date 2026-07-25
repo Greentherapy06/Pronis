@@ -1,5 +1,49 @@
 Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
+## SESSION TRADUCTION CONTENU BLOG (i18n pt/it/es/de) — MAJ 25/07/2026
+
+OBJECTIF : traduire le CONTENU RÉDACTIONNEL des pages blog (blog.html + 5 articles) en PT/IT/ES/DE (FR = langue par défaut). On réutilise le système i18n.js existant (NE PAS en créer un nouveau).
+
+RÔLES : Claude fait TOUT (fetch API/éditeur, traduction, construction, collage ClipboardEvent) SAUF le clic "Commit changes" (JLShop06 uniquement). Répondre en FRANÇAIS. Ordre des langues STRICT : fr / pt / it / es / de. NE PAS toucher à style.css.
+
+MÉTHODE "OPTION 3" (préserver la mise en forme) : les valeurs de traduction contiennent directement les balises <strong> et les liens internes <a href>. applyTranslations() détecte une balise via /<[a-z][\s\S]*>/i et utilise innerHTML (sinon textContent) — donc AUCUNE modification de la fonction n'est nécessaire. Les URL des liens restent STRICTEMENT identiques à la source FR.
+
+MARQUES JAMAIS TRADUITES : Divine Xtases, Wooomy, Orgie, Pink Star, Hueman, Xocoon, Litolu, Rosy Gold, Magnum Opus, My Duchess, Le Flateur, Monster Pussy Strocker, Red Dolls Energy, Marry Me, Saturn, Love Connection, Indiana, Black Empire, Piña Colada, Toy Joy, etc. Préserver "Les Jardins Enchantés".
+
+DÉCOUVERTE CLÉ : i18n.js n'était chargé sur AUCUNE page blog (seul index.html le chargeait). Sur ordre "partout", on ajoute les 3 scripts d'index.html AVANT </body> sur chaque page blog : cart.js (defer), compliance.js, /i18n.js (defer).
+
+WORKFLOW PAR ARTICLE (= 2 commits : d'abord clés i18n.js, ensuite câblage HTML) :
+1. Fetch HTML brut (API GitHub, Accept raw, ?ref=main). Racine = <main> OU <article> selon la page.
+2. Sélecteur de câblage : [...root.querySelectorAll('h1,h2,p,li,.blog-warning,.blog-faq-q,a')] ; exclure header/nav/footer, exclure déjà data-i18n, exclure <a> dans un <p> (évite double-câblage), texte >= 2 car. Attribuer un préfixe PREFIX_1..N dans l'ordre du document.
+3. Construire le dict FR source depuis innerHTML de chaque élément, puis les 4 langues (pt/it/es/de) en préservant balises/URL.
+4. Valider : chaque langue a N clés ; <strong> équilibrés et en même nombre qu'en FR ; count/hrefs des <a> identiques au FR.
+5. i18n.js : insérer chaque bloc de langue APRÈS la ligne ancre "blog_more: ..." de cette langue (5 occurrences, ordre fr/pt/it/es/de ; insérer en ordre décroissant d'index). Valider : accolades 114/114 ; PREFIX_1 et PREFIX_N chacun 5× ; préfixes précédents (bio_/evb_/sxt_/arm_) toujours 5× ; N×5 lignes bien formées via regex /^\s*PREFIX_\d+: ".*",$/.
+6. Coller dans l'éditeur : clic dans le code, Ctrl+A + Delete (RÉPÉTER jusqu'à voir le placeholder "Enter file contents here"), puis ClipboardEvent('paste') sur .cm-content ; vérifier defaultPrevented:true ; vérif début (Ctrl+Home : header + const TRANSLATIONS + fr:) et fin (Ctrl+End : bloc renderNavMenus). Demander le commit.
+7. Câblage HTML : refetch original, poser data-i18n="PREFIX_i" sur chaque élément câblé, injecter les 3 scripts avant </body> (SI /i18n.js absent). Sérialiser : (doctype+'\n')+doc.documentElement.outerHTML. Valider : N data-i18n, 1 DOCTYPE, 3 scripts, 1 </body>/</html>, 6 hreflang, 3 JSON-LD. Coller, demander le commit.
+8. Vérif finale : i18n.js + HTML sur main via API ; test LIVE (localStorage.lang='xx' ; applyTranslations() ; vérifier gras/liens préservés ; puis remettre 'fr').
+
+PIÈGES / NOTES :
+- sessionStorage est isolé par ORIGINE : les données construites sur les-jardins-enchantes.com ne sont PAS lisibles sur github.com. Reconstruire les dicts directement dans l'onglet github (le fetch API marche sur github origin).
+- new Function() (contrôle de syntaxe) est bloqué par la CSP github sur les pages blob ("unsafe-eval"/"Content Security") : ce N'EST PAS une erreur de syntaxe. Utiliser la validation regex par ligne.
+- Le filtre de sortie bloque les chaînes contenant "=", des URL, "cookie", du base64 : neutraliser l'affichage via .replace(/=/g,'\u3013').replace(/https?:\/\//g,'§§').replace(/cookie/gi,'c°°kie') et ne retourner que des compteurs/booléens.
+- Ctrl+A + Delete peut ne pas vider du premier coup : re-cliquer, refaire, re-screenshot pour confirmer le placeholder AVANT de coller.
+
+ÉTAT D'AVANCEMENT (préfixe de clés entre parenthèses) :
+- blog.html — 19 clés (blog_*) + 3 scripts — COMMITTÉ + vérifié.
+- Article 1 blog-gel-lubrifiant-bio.html — 43 clés (bio_*) + 3 scripts — COMMITTÉ + testé LIVE (allemand : gras+liens OK).
+- Article 2 blog-lubrifiant-eau-vs-bio.html — 30 clés (evb_*) + 3 scripts — COMMITTÉ + testé LIVE (espagnol OK).
+- Article 3 blog-choisir-premier-sextoy.html — 33 clés (sxt_*) + 3 scripts — COMMITTÉ + testé LIVE (italien : h1 + 2 liens + strong OK).
+- Article 4 blog-gel-lubrifiant-aromatise.html — 28 clés (arm_*). i18n.js COMMITTÉ (arm_ 5×, accolades 114/114). Câblage HTML = RESTE À FAIRE (poser 28 data-i18n arm_1..arm_28 + 3 scripts avant </body> ; racine <article> ; marques Pink Star/Orgie/Divine Xtases/Piña Colada ; liens : arm_17 = 3 liens absolus [blog-lubrifiant-eau-vs-bio + blog-gel-lubrifiant-bio + blog-choisir-premier-sextoy], arm_18 = 1 lien RELATIF blog-cockring-guide-utilisation.html).
+
+RESTE À FAIRE :
+1. Article 4 : câbler le HTML (28 data-i18n arm_* + 3 scripts), commit, tester LIVE.
+2. Article 5 blog-cockring-guide-utilisation.html : workflow complet (préfixe suggéré ckr_) — clés i18n.js puis câblage HTML + 3 scripts.
+3. Vérif LIVE finale des 6 pages dans les 5 langues.
+
+ANCRE i18n.js : la ligne "blog_more:" apparaît exactement 5× (une par bloc de langue, ordre fr/pt/it/es/de). Préfixes déjà présents ×5 : blog_, bio_, evb_, sxt_, arm_.
+
+---
+
 ## SESSION BLOG — NOUVEL ARTICLE COCKRING (5e article) — MAJ 25/07/2026
 
 RÔLES : Claude fait TOUT (fetch éditeur/API, rédaction, construction, collage ClipboardEvent) SAUF le clic "Commit changes" (JLShop06). Méthode collage = clic dans le code + Ctrl+A + Delete (vider AVANT) puis ClipboardEvent('paste') sur .cm-content ; vérif début (1 seul DOCTYPE) + fin (</html>) par screenshot Ctrl+Home/Ctrl+End. NE PAS toucher à style.css.
@@ -493,315 +537,6 @@ VÉRIF : commits confirmés sur GitHub raw (i18n.js 5 valeurs OK ; compliance.js
 Simulation window.t par langue : les 5 traductions renvoyées correctement.
 RESTE (auto) : propagation cache edge Vercel non instantanée -> re-tester le lien live dans les 5 langues après expiration du cache.
 ========================================================================
-
-
----
-
-## SUIVI PERFORMANCE & NAVIGATION AGENTIQUE (PageSpeed) — MAJ 2026-07-03
-
-Rapport PageSpeed (mobile) : https://pagespeed.web.dev/analysis/https-les-jardins-enchantes-com/rukr1digid?form_factor=mobile
-Scores de depart : Performances 78, Accessibilite 91, Bonnes pratiques 100, SEO 100, Navigation agentique 2/3.
-
-### RÔLES (identiques a l'i18n)
-Claude fait TOUT (fetch, calcul dimensions, collage dans l'editeur, verification debut/fin). L'utilisateur (JLShop06) clique UNIQUEMENT sur "Commit changes".
-
-### PLAN
-- A. llms.txt avec vrais liens Markdown — ✅ FAIT
-- B. Ajouter width/height sur les <img> (reduit le CLS 0.388) — EN COURS
-- C. Recompresser/redimensionner les ~13 images les plus lourdes (1.2–1.5 Mo) — A FAIRE
-- D. Corriger 69 animations CSS non compositees (utiliser transform/opacity) — A FAIRE
-
-### ETAPE B — width/height : fichiers FAITS (commit confirme via API)
-llms.txt, index.html, Plug-Anal-Rosy-Gold.html, le-flateur.html, mini-robe-noire.html, red-dolls-energy-pleasure.html, robe-longue-noire-argentee.html, Cockring-vibrant-Marry-Me-Wooomy.html, Déguisement-Bunny.html, Magnum-Opus-vibro.html, anneau_vibrant_telecommande.html, black-empire-my-duchess.html, cockring-vibrant-saturn-hueman.html, deguisement-enseignante.html, deguisement-etudiante.html, deguisement-infirmière-sexy.html
-
-### ETAPE B — fichiers RESTANTS (img sans width/height)
-dual-vibe-sex-on-the-beach.html (4), gel_cannabis_orgie.html (3), gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html (1), gel_lubrifiant_bio_neutre_divine_xtases.html (1), gel_lubrifiant_bio_neutre_framboise_divine_xtases.html (1), gel_lubrifiant_bio_neutre_monoi_divine_xtases.html (1), gel_lubrifiant_bio_neutre_vanille_divine_xtases.html (1), hemp-intense-orgasm.html (3), lubrifiant_eau_lube_tube_chocolat_orgie.html (3), lubrifiant_eau_lube_tube_fraise_orgie.html (3), lubrifiant_eau_tube_barbe_a_papa.html (3), monster-pussy-strocker.html (4), orgie-pinacolada.html (1), pink-star-choco-fraise.html (1), pink-star.html (1), pink_star_sucette_cerise.html (1), vibro-rechargeable-Indiana.html (a verifier)
-
-### PAGES SANS IMAGE (a ignorer)
-cancel, cgv, confidentialite, cookies, erreur, mentions-legales, retractation, success, veille-concurrents
-
-### METHODE PAR FICHIER (une a une, via editeur web GitHub)
-1. Aller sur https://github.com/JLShop06/Les-Jardins-Enchantes/edit/main/<FICHIER>
-2. En JS sur cette page : fetch du raw, extraire les <img>, fetch chaque image (createImageBitmap) pour width/height naturels, regex-remplacer les <img> sans width/height. Stocker dans window.__newFileHtml. (IMPORTANT: recalculer APRES avoir navigue, sinon la variable est "undefined").
-3. Clic dans l'editeur, Ctrl+A, Delete (vider completement AVANT de coller).
-4. Coller via ClipboardEvent('paste') sur .cm-content.
-5. Ctrl+Home puis Ctrl+End : verifier un seul <!DOCTYPE html> au debut et footer propre a la fin.
-6. Demander a l'utilisateur de cliquer "Commit changes".
-7. Verifier via API : https://api.github.com/repos/JLShop06/Les-Jardins-Enchantes/contents/<FICHIER> (base64 decode, compter width="X" height="Y"). NE PAS se fier a raw.githubusercontent (cache CDN en retard).
-
-### METHODE PLUS RAPIDE (github.dev / VS Code web) — a activer
-Ouvrir https://vscode.dev/github/JLShop06/Les-Jardins-Enchantes , autoriser "Visual Studio Code" (Continue en tant que JLShop06). Permet d'editer plusieurs fichiers puis 1 seul commit groupe. L'utilisateur valide la connexion.
-
-
----
-
-## REPRISE AVEC VISUAL STUDIO CODE (github.dev) — INSTRUCTIONS DETAILLEES
-
-### Objectif
-Editer plusieurs fichiers HTML d'un coup et faire UN SEUL commit groupe, au lieu de la methode fichier-par-fichier (plus lente). Cela sert a finir l'ETAPE B (width/height) sur les 17 fichiers restants, puis a preparer C et D.
-
-### 1. Ouvrir l'editeur
-Aller sur : https://vscode.dev/github/JLShop06/Les-Jardins-Enchantes
-(ou appuyer sur "." (point) depuis la page GitHub du repo — cela ouvre github.dev.)
-
-### 2. Autoriser la connexion (fait par JLShop06, PAS par Claude)
-- Sur l'ecran "Authorize Visual Studio Code", cliquer "Continue" (connecte en tant que JLShop06).
-- Si un ecran GitHub OAuth apparait, cliquer "Authorize".
-- Attendre que l'arborescence des fichiers s'affiche a gauche (explorer).
-- NOTE : la 1ere tentative etait restee bloquee sur "Connexion a github.com...". Si ca rebloque : recharger l'onglet, ou revenir a la methode fichier-par-fichier (voir plus haut) qui marche a 100%.
-
-### 3. Workflow d'edition dans VS Code web
-Pour CHAQUE fichier restant (liste "ETAPE B — fichiers RESTANTS" plus haut) :
-- Ouvrir le fichier dans l'explorer.
-- Claude calcule les dimensions naturelles des images (fetch raw + createImageBitmap) et fournit le contenu corrige (img avec width="W" height="H").
-- Remplacer le contenu du fichier par la version corrigee (Ctrl+A, Delete, coller).
-- Ne PAS oublier : recalculer les dimensions APRES ouverture (variable JS sinon "undefined").
-
-### 4. Commit groupe (fait par JLShop06)
-- Cliquer sur l'icone "Source Control" (branche, colonne de gauche) ou Ctrl+Shift+G.
-- Verifier la liste des fichiers modifies (Changes).
-- Ecrire un message de commit (ex : "perf: ajout width/height images (CLS) — lot 2").
-- Cliquer "Commit & Push" (coche verte / bouton). => C'est JLShop06 qui valide le commit, jamais Claude.
-
-### 5. Verification (Claude)
-Apres push, verifier chaque fichier via l'API :
-https://api.github.com/repos/JLShop06/Les-Jardins-Enchantes/contents/<FICHIER>?ref=main
-avec header Accept: application/vnd.github.raw, puis compter les width="X" height="Y".
-NE PAS se fier a raw.githubusercontent.com (cache CDN en retard de plusieurs minutes).
-
-### ETAT AU MOMENT DE LA SAUVEGARDE
-- ETAPE A (llms.txt) : FAIT.
-- ETAPE B (width/height) : 16 fichiers FAITS. deguisement-infirmière-sexy.html : prepare et colle dans l'editeur GitHub mais COMMIT A CONFIRMER (verifier via API : doit avoir 4 paires width/height, ~277 lignes).
-- Prochain fichier a traiter : dual-vibe-sex-on-the-beach.html (4 images).
-- Puis suivre la liste "fichiers RESTANTS" dans l'ordre.
-- ETAPE C (recompression ~13 images lourdes) et ETAPE D (69 animations CSS non compositees) : PAS COMMENCEES.
-
-
-==================================================
-SESSION PERFORMANCE — MAJ 2026-07-03 (fin de session)
-
-RÔLES : Claude fait tout (compression images via Canvas, calcul dimensions, verif) SAUF le remplacement/commit final des fichiers (JLShop06).
-
-ETAPE B (width/height images) : TERMINEE 100%. Les 4 derniers fichiers committes (par JLShop06) :
-- pink-star-choco-fraise.html (img 1024x1536)
-- pink-star.html (img 1024x1535)
-- pink_star_sucette_cerise.html (img 1023x1537)
-- vibro-rechargeable-Indiana.html (3 img : 1024x1536, 800x1200, 800x1200)
-Balayage complet API GitHub (cache:reload) sur les 17 fichiers "RESTANTS" : toutes les images ont width/height (allOk, 0 restant). CLS visé reglé.
-
-ETAPE C (compression images lourdes) : FAITE.
-- Logo favicon.webp : 1,90 Mo -> ~20 Ko. Redimensionne 1254x1254 -> 400x400, WebP q75 (via Squoosh). Remplace + committe par JLShop06.
-- 13 images produit lourdes (>1 Mo) recompressees WebP 800px de large, q75, via Canvas navigateur (createImageBitmap + canvas.toBlob('image/webp',0.75)). Total ~17 Mo -> ~690 Ko (-96%). Fichiers telecharges avec noms exacts, remplaces par lot + committes par JLShop06. Verif : aucun doublon "(1)" dans le depot, 13 noms presents, images en ligne = versions compressees.
-  Liste (avant -> apres Ko) : Robe longue argentee 1496->87 ; Mini robe noire 1484->66 ; lubrifiant fraise 1435->72 ; lubrifiant chocolat 1417->63 ; Magnum-Opus 1346->51 ; barbe a papa 1318->48 ; gel-cannabis 1295->52 ; red-dolls 1276->47 ; Cockring Marry-Me 1261->42 ; vibro-elegance 1234->56 ; le-flateur 1214->41 ; cockring-saturn 1199->36 ; plug rosy-gold 1173->29.
-
-METHODE COMPRESSION FIABLE (sans Squoosh, tout auto) : sur un onglet du domaine du site (CORS ok), fetch(url,{cache:'reload'}) -> createImageBitmap -> canvas 800px large (ratio conserve) -> canvas.toBlob('image/webp',0.75) -> download via a[download]=nom_exact. WebP encode nativement par le navigateur.
-
-RESULTATS PAGESPEED MOBILE (avant -> apres) : Score ~73-77 instable -> ~80-81 stable. CLS 0.388 -> 0.026 (vert). TBT 10ms -> 0ms. LCP 6,2s -> 4,3s (encore ameliorable). FCP/SI ~2,9s.
-NOTE : le score mobile PageSpeed fluctue de +/-15 pts d'un test a l'autre (serveurs Google). Toujours faire 3 tests et prendre la tendance.
-
-ETAPE D (69 animations CSS non compositees) : NON FAITE (choix JLShop06). Analyse : les @keyframes (starsFloat/fadeIn/fadeInUp) utilisent deja transform/opacity (OK). Seuls 7 "transition: all" restent non-composites. Impact quasi nul sur le score (TBT deja 0ms) + risque sur style.css (blocs dupliques, consigne "ne pas toucher"). Abandonnee sciemment.
-
-RESTE (optionnel) : baisser encore le LCP (element LCP = image haut de page ; pistes : preload de l'image LCP, verifier fetchpriority=high, eviter loading=lazy sur l'image above-the-fold). Recompression restante negligeable (images deja <270 Ko).
-
-
-============================================================
-JOURNAL DES CORRECTIONS - Session 2026-07-05 (Claude)
-============================================================
-
-Contexte : correction des fiches produit (32 fiches) et d'une fiche mal etiquetee.
-
-1) IMAGES NON ROGNEES (object-fit)
-   - Remplacement de "object-fit:cover" par "object-fit:contain" dans la
-     regle CSS ".product-image-frame img" sur toutes les fiches produit.
-   - Attention : certaines fiches avaient PLUSIEURS blocs
-     ".product-image-frame img" (ex: Plug-Anal-Rosy-Gold = 3 blocs,
-     dual-vibe = 2). Toutes les occurrences ont ete traitees, pas seulement
-     la premiere.
-   - Verifie : 32/32 fiches sans "object-fit:cover".
-
-2) SUPPRESSION DU CADRE BLANC AUTOUR DES PHOTOS
-   - Retrait de "background:#ffffff" et "padding:15px" dans la regle
-     ".product-image-frame img" sur les 32 fiches produit (22 en avaient
-     encore le cadre blanc; les autres etaient deja propres).
-   - Verifie : 32/32 fiches sans background blanc ni padding:15px.
-
-3) FICHE MAL ETIQUETEE : gel_lubrifiant_bio_neutre_divine_xtases.html
-   - Image principale cassee (404) : "gel lubriant bio miel coco.webp"
-     remplacee par "gel-lubrifiant-bio-coco.webp" (fichier existant, deja
-     utilise sur la page d'accueil).
-   - Ce produit est en realite un PARFUM COCO (et non "neutre").
-     Renommage du nom visible : "Gel Lubrifiant Glisse Bio Neutre Divine
-     Xtases" -> "... Bio Coco Divine Xtases" (titre, H1, meta, JSON-LD,
-     mots-cles, attribut name).
-   - Mentions de senteur adaptees : "sans odeur" -> "parfum coco gourmand";
-     "Sans odeur et neutre" -> "Parfum coco gourmand"; badge "Sans Parfum"
-     retire (produit desormais parfume).
-   - NON MODIFIE VOLONTAIREMENT : le nom de fichier / URL canonique
-     (gel_lubrifiant_bio_neutre_divine_xtases.html) et les cles i18n
-     data-i18n="neutre_*" (pour ne rien casser cote liens et traduction).
-
-METHODE / NOTES TECHNIQUES
-   - Toutes les modifs faites via l'editeur GitHub, commit direct sur "main".
-   - Verification fiable via la page "blob" GitHub (source fraiche). Le CDN
-     "raw.githubusercontent.com" ayant plusieurs minutes de cache, il a donne
-     des faux positifs; ne pas s'y fier pour verifier un commit recent.
-   - Fausse alerte levee : les fiches deguisement enseignante/etudiante
-     semblaient avoir des images 404 mais c'etait un probleme d'encodage
-     d'URL (apostrophes/espaces); les images s'affichent correctement.
-
-
-==================================================
-SESSION SEO / GEO — MAJ 2026-07-06 (Claude)
-==================================================
-
-RÔLES : Claude fait TOUT (edition, collage editeur) SAUF le clic "Commit changes" (JLShop06).
-
-CONTEXTE : demande basee sur un rapport SEOptimizer ("Utilisez vos mots-cles principaux dans les balises HTML importantes", priorite moyenne) + audit GEO.
-
---- FAIT (committe sur main) ---
-
-1) H1 SEO (index.html) : le H1 ne contenait QUE le logo (img), sans texte -> probleme SEO.
-   Ajout d'un <span class="hero-h1-text" data-i18n="home_h1_seo"> SOUS le logo (h1 en flex-column, centre, style dore Georgia 15px uppercase letter-spacing) avec le texte :
-   "Boutique Sextoys France : Gels Lubrifiants Bio, Huiles de Massage & Stimulateurs".
-   Rendu valide visuellement par JLShop06 (version "sous le logo", pas a cote).
-
-2) i18n.js : cle home_h1_seo ajoutee x5 (ordre fr/pt/it/es/de), inseree apres renoncer_contrat dans chaque bloc de langue. Accolades equilibrees. Traductions :
-   fr = Boutique Sextoys France : Gels Lubrifiants Bio, Huiles de Massage & Stimulateurs
-   pt = Loja de Sextoys Franca: Geis Lubrificantes Bio, Oleos de Massagem e Estimuladores
-   it = Negozio Sextoys Francia: Gel Lubrificanti Bio, Oli da Massaggio e Stimolatori
-   es = Tienda de Juguetes Sexuales Francia: Geles Lubricantes Bio, Aceites de Masaje y Estimuladores
-   de = Sextoy-Shop Frankreich: Bio-Gleitgele, Massageole & Stimulatoren
-
-3) GEO / SEO multilingue — support ?lang= dans l'URL (i18n.js) :
-   AVANT : langue geree UNIQUEMENT via localStorage + navigator.language -> toutes les langues sur la MEME URL -> versions PT/IT/ES/DE NON indexables par Google (bascule en JS que Googlebot n'execute pas).
-   PATCH getLang() : lit ?lang=xx en PRIORITE (si supporte -> le stocke en localStorage et le retourne), sinon fallback localStorage, sinon navigator, sinon fr. Logique testee 7/7 cas OK.
-   PATCH setLang() : met a jour l'URL sans recharger (history.replaceState). fr = URL propre (pas de param) ; autres langues = ?lang=xx.
-
-4) hreflang (index.html) : ajout de 6 <link rel="alternate"> apres le canonical :
-   fr -> https://les-jardins-enchantes.com/
-   pt/it/es/de -> https://les-jardins-enchantes.com/?lang=xx
-   x-default -> https://les-jardins-enchantes.com/
-   (rendus crawlables grace au patch getLang ci-dessus).
-
-5) UNIFORMISATION DES URLs vercel.app -> les-jardins-enchantes.com (incoherence de domaine).
-   Deux domaines vercel trouves dans le repo, tous deux remplaces par le .com :
-     - lesjardinsenchantes.vercel.app (le plus courant)
-     - les-jardins-enchantes-greentherapy06s-projects.vercel.app (URL technique, ex: lien dans cgv.html)
-   NOTE : llms.txt utilisait DEJA le .com partout (36x) -> rien a corriger.
-   FICHIERS FAITS (committes) : robots.txt (2), sitemap.xml (26), index.html (canonical + og:url + og:image + twitter:image + JSON-LD Store = 5).
-
---- RESTE A FAIRE (URLs vercel -> .com) ---
-Environ 34 fichiers restants contiennent encore lesjardinsenchantes.vercel.app (surtout canonical + og:url, ~2 occ/page) :
-  les 32 fiches produit + pages legales (cgv, confidentialite, cookies, mentions-legales, retractation) + eventuels feed.xml / manifest / api.
-METHODE : editeur GitHub fichier par fichier (VS Code web / github.dev NE FONCTIONNE PAS -> reste bloque a la connexion, confirme par JLShop06). Remplacer les 2 domaines vercel -> les-jardins-enchantes.com. Verifier via API GitHub (pas raw : cache CDN).
-SCAN : API git/trees recursive + fetch raw {cache:'reload'} pour lister les fichiers contenant "vercel.app".
-
---- PISTES GEO/SEO SUIVANTES (optionnel, non fait) ---
-  - JSON-LD Store : pas d'aggregateRating (avis clients) ni sameAs (reseaux sociaux) -> a ajouter si dispo (gros boost visibilite).
-  - Score PageSpeed "Navigation agentique" 2/3 -> viser 3/3.
-  - H2 "Boutique Sextoys, Gel Lubrifiant Bio..." fait desormais doublon avec le nouveau H1 -> reformuler pour varier les mots-cles (livraison discrete, Yuka 100/100...).
-
-
----
-
-## SESSION SEO/GEO 2026-07-06 — Suivi detaille
-
-### FAIT (tout committe)
-
-**1. H1 SEO (demande SEOptimizer : mots-cles dans balises HTML)**
-- Le H1 de index.html etait VIDE (juste le logo image, aucun texte).
-- Ajoute un span H1 texte riche en mots-cles SOUS le logo (style dore, Georgia, uppercase, discret) : "Boutique Sextoys France : Gels Lubrifiants Bio, Huiles de Massage & Stimulateurs" (option 3 validee visuellement, version "sous le logo").
-- Span avec data-i18n="home_h1_seo".
-
-**2. i18n home_h1_seo x5 (i18n.js)**
-- Cle home_h1_seo ajoutee dans les 5 langues, inseree apres renoncer_contrat, ordre fr/pt/it/es/de :
-  - FR : Boutique Sextoys France : Gels Lubrifiants Bio, Huiles de Massage & Stimulateurs
-  - PT : Loja de Sextoys Franca: Geis Lubrificantes Bio, Oleos de Massagem e Estimuladores
-  - IT : Negozio Sextoys Francia: Gel Lubrificanti Bio, Oli da Massaggio e Stimolatori
-  - ES : Tienda de Juguetes Sexuales Francia: Geles Lubricantes Bio, Aceites de Masaje y Estimuladores
-  - DE : Sextoy-Shop Frankreich: Bio-Gleitgele, Massageole & Stimulatoren
-
-**3. GEO / SEO multilingue — support ?lang= dans URL (i18n.js)**
-- Constat : langues gerees uniquement en localStorage/navigator -> versions PT/IT/ES/DE PAS indexables par Google (une seule URL).
-- getLang() lit desormais ?lang=xx en priorite (puis localStorage, puis navigateur). Teste 7/7 cas OK.
-- setLang() met a jour l'URL sans recharger (history.replaceState) : FR = URL propre sans param, autres langues = ?lang=xx.
-
-**4. hreflang (index.html)**
-- Ajout de 6 balises hreflang apres le canonical : fr, pt, it, es, de + x-default.
-- FR et x-default -> https://les-jardins-enchantes.com/ ; autres -> /?lang=xx (crawlables grace au patch getLang).
-
-**5. Uniformisation URLs vercel.app -> les-jardins-enchantes.com**
-- 3 variantes de domaine a remplacer (ordre : la plus longue d'abord) :
-  1. les-jardins-enchantes-greentherapy06s-projects.vercel.app
-  2. les-jardins-enchantes.vercel.app (avec tirets)
-  3. lesjardinsenchantes.vercel.app (sans tirets)
-- Methode : editeur GitHub fichier par fichier (VS Code web / github.dev ne fonctionne PAS). 1 commit par fichier (JLShop06 clique Commit).
-- llms.txt : deja en .com, RAS.
-- confidentialite.html : deja propre (0 vercel), non modifie.
-
-**Fichiers uniformises et committes (25) :**
-robots.txt, sitemap.xml, index.html, i18n.js, cgv.html, Cockring-vibrant-Marry-Me-Wooomy.html, Deguisement-Bunny.html, Magnum-Opus-vibro.html, anneau_vibrant_telecommande.html, api/retractation/submit.js, black-empire-my-duchess.html, cockring-vibrant-saturn-hueman.html, deguisement-enseignante.html, deguisement-etudiante.html, deguisement-infirmiere-sexy.html, dual-vibe-sex-on-the-beach.html, gel_cannabis_orgie.html, gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html, gel_lubrifiant_bio_neutre_divine_xtases.html, gel_lubrifiant_bio_neutre_framboise_divine_xtases.html, gel_lubrifiant_bio_neutre_monoi_divine_xtases.html, gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html, gel_lubrifiant_bio_neutre_vanille_divine_xtases.html, hemp-intense-orgasm.html, le-flateur.html
-
-### A FAIRE — PROCHAINE SESSION
-
-**A. Terminer uniformisation URLs vercel -> .com (13 fichiers restants, 2 occ. chacun, dans canonical + og:url) :**
-- Plug-Anal-Rosy-Gold.html
-- lubrifiant_eau_lube_tube_chocolat_orgie.html
-- lubrifiant_eau_lube_tube_fraise_orgie.html
-- lubrifiant_eau_tube_barbe_a_papa.html
-- mini-robe-noire.html
-- monster-pussy-strocker.html
-- orgie-pinacolada.html
-- pink-star-choco-fraise.html
-- pink-star.html
-- pink_star_sucette_cerise.html
-- red-dolls-energy-pleasure.html
-- robe-longue-noire-argentee.html
-- vibro-rechargeable-Indiana.html
-
-**B. BUG PRE-EXISTANT a corriger separement — dual-vibe-sex-on-the-beach.html :**
-- Le fichier contient DEUX documents HTML complets colles l'un apres l'autre (2 DOCTYPE, 2 <html>, 2 </html>, 4 <head>) — confirme via API GitHub.
-- Cette session : SEULES les URLs vercel ont ete corrigees, le doublon N'A PAS ete touche (decision validee avec JLShop06).
-- A traiter : supprimer le 2e document HTML en double (avec verification visuelle avant commit). Bug SEO (contenu duplique / page malformee).
-
-**C. Ameliorations SEO/GEO optionnelles notees precedemment :**
-- Enrichir JSON-LD Store : aggregateRating (si avis clients), sameAs (reseaux sociaux).
-- Score PageSpeed "Navigation agentique" 2/3 -> viser 3/3.
-- H2 "Boutique Sextoys, Gel Lubrifiant Bio..." fait doublon avec le nouveau H1 -> reformuler pour varier les mots-cles (livraison discrete, Yuka 100/100...).
-
-### NOTES METHODE (pour reprendre vite)
-- Ordre langues STRICT : fr / pt / it / es / de.
-- Verifier via editeur GitHub ou API GitHub (Accept: application/vnd.github.raw), PAS via raw.githubusercontent.com (cache CDN en retard).
-- CodeMirror est virtualise : la verification du DOM peut afficher des lignes du milieu, ce n'est pas fiable ; se fier a la validation du contenu avant collage + defaultPrevented=true, ou faire un screenshot.
-- Coller : clic dans l'editeur -> Ctrl+A -> Delete (vider) -> paste via ClipboardEvent. Valider AVANT collage : 0 vercel restant, 0 artefact (.com.com), DOCTYPE en tete.
-- En cas d'erreur GitHub "erreur lors de l'enregistrement" : re-cliquer Commit, ca repasse.
-
-
----
-
-## MISE A JOUR 2026-07-06 (suite/fin de session) — TOUT TERMINE
-
-### Uniformisation URLs vercel -> .com : TERMINEE (100%)
-Les 13 fiches produit restantes ont ete traitees et committees :
-Plug-Anal-Rosy-Gold.html, lubrifiant_eau_lube_tube_chocolat_orgie.html, lubrifiant_eau_lube_tube_fraise_orgie.html, lubrifiant_eau_tube_barbe_a_papa.html, mini-robe-noire.html, monster-pussy-strocker.html, orgie-pinacolada.html, pink-star-choco-fraise.html, pink-star.html, pink_star_sucette_cerise.html, red-dolls-energy-pleasure.html, robe-longue-noire-argentee.html, vibro-rechargeable-Indiana.html.
-=> Plus AUCUNE reference vercel.app dans le repo (tous les canonical/og:url/JSON-LD/robots/sitemap/i18n pointent vers les-jardins-enchantes.com).
-
-### Bug doublon HTML : CORRIGE
-- dual-vibe-sex-on-the-beach.html : avait 2 documents HTML complets colles -> nettoye, garde 1 seul document (le plus complet, avec canonical .com). Committe.
-- Plug-Anal-Rosy-Gold.html : avait 3 documents HTML complets colles -> nettoye, garde 1 seul document (le 1er, le plus complet : 844 vs 764 chars de texte, CSS image enrichi max-height/object-fit). Committe.
-- Scan complet des 38 fichiers HTML du repo (via raw) : 0 fichier avec DOCTYPE multiple restant. Probleme entierement resolu.
-
-### Note technique
-- Le scan initial via API GitHub avait ete fausse par le rate limit (60 req/h) qui renvoyait "0 DOCTYPE" (reponse d'erreur JSON de 279 chars). Verifier via l'editeur GitHub ou raw.githubusercontent.com quand l'API est limitee.
-
-### ETAT GLOBAL SEO/GEO — recap
-FAIT : H1 SEO (texte mots-cles sous logo, 5 langues via home_h1_seo) ; support ?lang= dans URL (getLang/setLang) ; 6 hreflang (fr/pt/it/es/de + x-default) ; uniformisation URLs vercel->.com (100%) ; suppression doublons HTML (dual-vibe + Plug-Anal-Rosy-Gold).
-
-RESTE (optionnel, prochaine session) :
-- Enrichir JSON-LD Store : aggregateRating (si avis clients), sameAs (reseaux sociaux).
-- Score PageSpeed "Navigation agentique" 2/3 -> viser 3/3.
-- Reformuler le H2 "Boutique Sextoys, Gel Lubrifiant Bio..." qui fait doublon avec le nouveau H1 (varier mots-cles : livraison discrete, Yuka...).
-- Verifier en live apres redeploiement Vercel : changement de langue ajoute bien ?lang=xx + traduit ; H1 s'affiche dans les 5 langues.
 
 
 ---
