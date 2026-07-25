@@ -1,5 +1,48 @@
 Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
+## SESSION BLOG — HABILLAGE + FINITION 4e ARTICLE — MAJ 25/07/2026
+
+RÔLES : Claude fait TOUT (fetch éditeur, extraction, construction, collage) SAUF le clic "Commit changes" (JLShop06). Méthode collage = Ctrl+A + Delete (vider AVANT) puis ClipboardEvent('paste') sur .cm-content ; TOUJOURS vérifier début (1 seul DOCTYPE) + fin (</html>) par screenshot Ctrl+Home/Ctrl+End. NE PAS toucher à style.css (blocs dupliqués, consigne).
+
+--- FAIT (tout committé sur main + vérifié LIVE via API GitHub) ---
+
+1) FINITION DU 4e ARTICLE (blog-gel-lubrifiant-aromatise.html) — les 3 étapes du workflow "nouvel article" qui restaient sont TERMINÉES :
+   - blog.html : CARTE du 4e article ajoutée (tag Guide + titre "Gel lubrifiant aromatisé : plaisir gourmand et conseils d'usage" + desc Pink Star/Orgie + lien) => 4 cartes. JSON-LD ItemList passé de 3 à 4 items (position 4 ajoutée). Vérifié : cards=4, ListItem=6 (4 blog + 2 breadcrumb).
+   - sitemap.xml : URL blog-gel-lubrifiant-aromatise.html ajoutée (lastmod 2026-07-24, monthly, priority 0.7). Passé de 38 à 39 URLs. Vérifié LIVE : 39 <url>.
+   - LIENS CROISÉS ENTRANTS : un <p> avec lien vers le nouvel article ajouté dans la CONCLUSION des 3 anciens articles (blog-gel-lubrifiant-bio, blog-lubrifiant-eau-vs-bio, blog-choisir-premier-sextoy). 1 occurrence chacun, vérifié LIVE.
+
+2) CTA DU 4e ARTICLE RÉPARÉ : le CTA pointait vers #gels-aromatises = ANCRE INEXISTANTE sur index.html (vérifié : les seules ancres réelles sont gel-lubrifiant-bio, modes, gels-lubrifiants, sextoys, deguisements, cockrings, collection). Corrigé => le CTA pointe désormais vers #gels-lubrifiants (ancre valide, option 2 choisie par JLShop06). Plus aucune occurrence de #gels-aromatises.
+
+3) SITEMAP RESOUMIS à Google Search Console (propriété sc-domain:les-jardins-enchantes.com, compte /u/1). Date "URL envoyées" passée à 25 juil. 2026. Recrawl asynchrone Google : le compteur affichera 39 URLs (au lieu de 34) sous 24-48h. ATTENTION : ne PAS confondre avec l'autre compte GSC qui ne gère que green-therapy.pt.
+
+4) *** GROS FIX VISUEL *** LES 5 PAGES BLOG N'AVAIENT AUCUN CSS DU SITE (fond blanc + header/footer cassés = pas du tout "haut de gamme"). CAUSE : blog.html + les 4 articles n'importaient NI style.css, NI les polices Google, NI :root, NI la règle body à fond sombre. Le CSS .blog-* (texte crème #e8e2d6 / doré #caa86a) était prévu pour fond SOMBRE => illisible sur blanc.
+   CORRECTIF (5 fichiers committés) : injection, dans le <head> juste AVANT le 1er <style>, des mêmes ressources que index.html : <link style.css> + preconnect/fonts Google + un <style> avec :root (variables --or/--blanc...) + la règle body{background: radial-gradient dorés + linear-gradient sombre #100d06..., background-attachment:fixed, color:var(--blanc), font Cormorant Garamond}. Copié VERBATIM depuis index.html. Fichiers : blog.html, blog-gel-lubrifiant-bio.html, blog-lubrifiant-eau-vs-bio.html, blog-choisir-premier-sextoy.html, blog-gel-lubrifiant-aromatise.html. Vérifié LIVE sur les 5 : styleCss=1, fonts=1, root=1, body(radial-gradient)=1, doctype=1, endsOk. Rendu validé par JLShop06.
+
+--- RESTE À FAIRE (blog) ---
+
+A) NOUVEAUX ARTICLES À CRÉER (élargir les mots-clés — JLShop06 pense qu'il en manque). Pistes déjà notées + suggestions :
+   - "cockring : à quoi ça sert / comment l'utiliser" (-> CTA #cockrings)
+   - "huile de massage sensuelle : bien la choisir" (-> gamme massage)
+   - "lingerie & déguisements : guide pour se lancer" (-> #deguisements)
+   - "bien-être intime : hygiène et entretien des sextoys" (-> #sextoys)
+   - "gel lubrifiant bio vs aromatisé : quand choisir lequel" (relie 2 articles existants)
+   RAPPEL WORKFLOW COMPLET pour CHAQUE nouvel article (ne rien oublier) :
+     (0) construire l'article sur le gabarit blog-gel-lubrifiant-bio.html (head icônes/manifest + BLOC CSS SITE style.css/fonts/:root/body SOMBRE + CSS .blog-* + header + footer + cart modal verbatim) ; ~900-1000 mots ; intro + 4-5 H2 + FAQ ; JSON-LD Article + FAQPage + BreadcrumbList ; 6 hreflang fr/pt/it/es/de + x-default ; canonical propre ; CTA vers une ANCRE QUI EXISTE (voir liste ancres réelles ci-dessus).
+     (1) blog.html : ajouter la CARTE + incrémenter le JSON-LD ItemList (position N).
+     (2) sitemap.xml : ajouter l'URL (priority 0.7, monthly, lastmod du jour) + incrémenter le total.
+     (3) LIENS CROISÉS : lien entrant depuis les articles existants (conclusion) + liens sortants depuis le nouveau.
+     (4) INFOS PRODUIT RÉELLES uniquement (relire les fiches, NE RIEN INVENTER). Marques NON traduites.
+     (5) resoumettre sitemap dans Search Console.
+
+B) i18n du CONTENU BLOG : les 5 pages blog sont en FR uniquement (pas de data-i18n sur le contenu rédactionnel). Traduire pt/it/es/de si souhaité (le menu "BLOG" et hreflang sont déjà faits).
+
+C) og:image DÉDIÉE par article (les 4 articles + blog.html utilisent tous l'image gel coco par défaut) — mieux pour le partage social.
+
+D) VÉRIF RENDU MOBILE des pages blog (le fond sombre est OK desktop ; contrôler .blog-card / .blog-article en viewport mobile réel).
+
+==================================================
+
+
 ## SESSION BLOG SEO — 24/07/2026
 
 [MAJ 24/07/2026 – session i18n/hreflang blog] hreflang ajouté aux 3 articles (blog.html l'avait déjà) → les 4 pages blog ont 6 hreflang. menu_blog confirmé présent ×5 dans i18n.js. RESTE optionnel : traduction du CONTENU rédactionnel des articles + og:image dédiée par article + recrawl sitemap Search Console.
