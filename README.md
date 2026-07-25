@@ -1,5 +1,30 @@
 Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
+## SESSION BLOG — NOUVEL ARTICLE COCKRING (5e article) — MAJ 25/07/2026
+
+RÔLES : Claude fait TOUT (fetch éditeur/API, rédaction, construction, collage ClipboardEvent) SAUF le clic "Commit changes" (JLShop06). Méthode collage = clic dans le code + Ctrl+A + Delete (vider AVANT) puis ClipboardEvent('paste') sur .cm-content ; vérif début (1 seul DOCTYPE) + fin (</html>) par screenshot Ctrl+Home/Ctrl+End. NE PAS toucher à style.css.
+
+--- FAIT (tout committé sur main + vérifié LIVE via API GitHub) ---
+
+5e ARTICLE DE BLOG créé : blog-cockring-guide-utilisation.html — mot-clé principal "cockring" (~902 mots ; intro + 4 H2 [à quoi ça sert / cockring simple vs vibrant / comment le mettre et l'utiliser / notre sélection] + bloc précaution + CTA + FAQ 5 questions). Construit sur le gabarit blog-gel-lubrifiant-bio.html (head icônes/manifest + BLOC CSS SITE style.css/fonts/:root/body SOMBRE + CSS .blog-* + header + footer + cart modal verbatim). JSON-LD Article + FAQPage + BreadcrumbList. 6 hreflang fr/pt/it/es/de + x-default. canonical propre. Vérifié LIVE via API : len 21849, doctype=1, h1=1, ld+json=3, hreflang=6, canonical=1, endsOk. CTA pointe vers index.html#cockrings (ANCRE VALIDE, vérifiée). INFOS PRODUIT RÉELLES relues sur les fiches (NON inventées) : Cockring Marry Me/Wooomy 52,90€ (silicone+ABS, 1 moteur, 10 modes, diamètre extensible 3cm, IPX7, USB) ; Cockring Saturn/Hueman 59,99€ (silicone médical+ABS, 3 vitesses + 7 modes, 100% étanche, sans phtalates, USB) ; Anneau Love Connection/Xocoon 64,90€ (forme en C, 2 moteurs, 5 modes vibration + 5 pulsés, télécommande incluse). Marques NON traduites. Précaution sécurité rappelée (port 20-30 min max, jamais pendant le sommeil, taille adaptée).
+
+WORKFLOW "nouvel article" COMPLET (les 5 étapes TERMINÉES) :
+1. Article créé (ci-dessus). Liens SORTANTS déjà en place vers blog-choisir-premier-sextoy + blog-lubrifiant-eau-vs-bio.
+2. blog.html : CARTE du 5e article ajoutée (tag Guide + titre + desc Wooomy/Hueman/Xocoon + lien) => 5 cartes. JSON-LD ItemList passé de 4 à 5 items (position 5). Vérifié LIVE : cards=5, positions 1-5.
+3. sitemap.xml : URL blog-cockring-guide-utilisation.html ajoutée (lastmod 2026-07-25, monthly, priority 0.7). Passé de 39 à 40 URLs. Vérifié LIVE : urls=40, XML valide.
+4. LIENS CROISÉS ENTRANTS : un <p> avec lien vers le nouvel article ajouté AVANT le CTA/conclusion des 4 articles existants (blog-gel-lubrifiant-bio, blog-lubrifiant-eau-vs-bio, blog-choisir-premier-sextoy, blog-gel-lubrifiant-aromatise). 1 occurrence chacun, vérifié LIVE (cockLinks=1, doctype=1, endsOk).
+5. SITEMAP RESOUMIS à Google Search Console (propriété sc-domain:les-jardins-enchantes.com, URL COMPLETE https://les-jardins-enchantes.com/sitemap.xml). Recrawl asynchrone : le compteur "Pages découvertes" passera de 39 à 40 sous 24-48h. ATTENTION : ne PAS confondre avec l'autre compte GSC (green-therapy.pt).
+
+--- RESTE À FAIRE (blog) — pistes prochains articles + finitions ---
+
+A) NOUVEAUX ARTICLES restants (élargir mots-clés) : "huile de massage sensuelle : bien la choisir" (-> gamme massage) ; "lingerie & déguisements : guide pour se lancer" (-> #deguisements) ; "bien-être intime : hygiène et entretien des sextoys" (-> #sextoys) ; "gel lubrifiant bio vs aromatisé : quand choisir lequel" (relie 2 articles existants). [FAIT le 25/07 : "cockring" = blog-cockring-guide-utilisation.html.] Rappel workflow "nouvel article" = les 5 étapes ci-dessus.
+B) i18n du CONTENU BLOG : les 6 pages blog sont en FR uniquement (menu BLOG + hreflang déjà faits). Traduire pt/it/es/de si souhaité.
+C) og:image DÉDIÉE par article (les 5 articles + blog.html utilisent tous l'image gel coco par défaut) — mieux pour le partage social. Le nouvel article cockring utilise aussi l'image coco par défaut.
+D) VÉRIF RENDU MOBILE des pages blog (fond sombre OK desktop ; contrôler .blog-card / .blog-article en viewport mobile réel).
+
+==================================================
+
+
 ## SESSION BLOG — HABILLAGE + FINITION 4e ARTICLE — MAJ 25/07/2026
 
 RÔLES : Claude fait TOUT (fetch éditeur, extraction, construction, collage) SAUF le clic "Commit changes" (JLShop06). Méthode collage = Ctrl+A + Delete (vider AVANT) puis ClipboardEvent('paste') sur .cm-content ; TOUJOURS vérifier début (1 seul DOCTYPE) + fin (</html>) par screenshot Ctrl+Home/Ctrl+End. NE PAS toucher à style.css (blocs dupliqués, consigne).
