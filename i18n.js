@@ -3,7 +3,7 @@
 const TRANSLATIONS = {
   fr: {
     banner_livraison: "✦ LIVRAISON OFFERTE DÈS 75 € D'ACHAT ✦",
-    header_promo: "Les Jardins Enchantés vohus offre -10% sur votre première commande",
+    header_promo: "Les Jardins Enchantés vous offre -10% sur votre première commande",
     prod_add: "AJOUTER AU PANIER", prod_desc: "Description", prod_feat: "Caractéristiques",
     menu_tous: "TOUS", menu_gels_bio: "GELS LUBRIFIANTS BIO", menu_modes: "MODES",
     menu_gels: "GELS LUBRIFIANTS", menu_sextoys: "SEXTOYS",
