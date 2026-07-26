@@ -2,6 +2,20 @@ Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
 ## SESSION TRADUCTION CONTENU BLOG (i18n pt/it/es/de) — MAJ 25/07/2026
 
+## MAJ 26/07/2026 — FINALISATION BLOG (i18n + UI)
+
+ÉTAT : volet blog terminé sur les 6 pages (blog.html + 5 articles), multilingue fr/pt/it/es/de.
+
+FAIT :
+- Article 4 (blog-gel-lubrifiant-aromatise) : 28 clés arm_1..arm_28 câblées + 3 scripts injectés (cart.js defer, compliance.js, /i18n.js defer). Testé LIVE (pt/it/es/de).
+- Article 5 (blog-cockring-guide-utilisation) : 38 clés ckr_1..ckr_38 créées en FR+PT+IT+ES+DE (152 traductions), insérées dans i18n.js après les 5 ancres blog_more (accolades 114/114). Câblage HTML 38 data-i18n + 3 scripts. 2 commits. Testé LIVE 5 langues (H1 traduit, 19 strong, 2 liens préservés, CTA traduit, marques préservées).
+- Vérif i18n des 6 pages : bio_=43, evb_=30, sxt_=33, arm_=28, blog_ (h1/c1..c5/more), ckr_=38. Toutes testées LIVE.
+- Faute corrigée : "vohus offre" -> "vous offre" dans i18n.js (header_promo, 1 occurrence). Commit + vérif LIVE.
+- Correction chevauchement bannière/titre (header fixe ~117px, z-index 2000) : .blog-article (5 articles) padding-top 60px -> 150px ; blog.html .blog-list 60px -> 150px puis -> 200px pour plus d'air (rendu haut de gamme). 1 commit par fichier (7 commits).
+
+RESTE (optionnel) : uniformiser les 6 pages articles à padding-top 200px comme blog.html si on veut le même espacement partout.
+
+
 OBJECTIF : traduire le CONTENU RÉDACTIONNEL des pages blog (blog.html + 5 articles) en PT/IT/ES/DE (FR = langue par défaut). On réutilise le système i18n.js existant (NE PAS en créer un nouveau).
 
 RÔLES : Claude fait TOUT (fetch API/éditeur, traduction, construction, collage ClipboardEvent) SAUF le clic "Commit changes" (JLShop06 uniquement). Répondre en FRANÇAIS. Ordre des langues STRICT : fr / pt / it / es / de. NE PAS toucher à style.css.
