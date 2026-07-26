@@ -1,3 +1,50 @@
+# 🔍 AUDIT COMPLET DU SITE — 26/07/2026 (par Claude)
+
+> Audit réalisé en direct sur le site (les-jardins-enchantes.com) + code du dépôt.
+> Améliorations classées **du travail le plus LOURD au plus LÉGER**.
+> ⚠️ Ceci est une liste d'audit : rien n'a été modifié sur le site.
+
+## 🟥 TRÈS LOURD (gros chantier, fort impact)
+
+**1. i18n.js = 658 Ko chargé sur CHAQUE page.** Le fichier de traductions pèse 658 Ko décodés et est rechargé intégralement à chaque page — de loin le plus gros poids du site, pénalise le chargement (surtout mobile/4G). Piste : découper par section (commun/fiches/légal/blog) et ne charger que le nécessaire ; OU générer des pages déjà traduites (1 URL par langue) ; OU minifier + defer + cache long.
+
+**2. Duplication massive du code entre les ~50 fichiers HTML.** Header, footer, modal panier, CSS site et CSS .blog-* sont copiés verbatim dans chaque fichier. Toute correction doit être répétée 30-50 fois (source d'incohérences). Piste : composants/partials (build statique 11ty/Astro ou includes) ; OU externaliser header/footer/panier dans un JS partagé.
+
+**3. Images non optimisées (plusieurs > 200 Ko, une à 1,5 Mo).** gel-lubrifiant-bio-coco.webp fait 1,5 Mo ; plusieurs images produits/tangas dépassent 200-240 Ko. Piste : recompresser (< 150 Ko), servir en plusieurs tailles (srcset), dimensionner au besoin réel.
+
+## 🟧 LOURD
+
+**4. hreflang absent sur TOUTES les fiches produits.** L'accueil et le blog ont 6 hreflang, mais les fiches produits en ont 0 (vérifié en live sur 5 fiches). Le site est multilingue mais Google ne connaît pas les versions FR/PT/IT/ES/DE des fiches → SEO international bridé sur le catalogue. Piste : ajouter le bloc hreflang (fr/pt/it/es/de + x-default) après le canonical de chaque fiche.
+
+**5. Incohérence de chargement d'i18n.js entre fiches produits.** Les fiches ont 30-46 attributs data-i18n mais le HTML brut de plusieurs fiches ne charge PAS i18n.js (parfois injecté dynamiquement, parfois absent). La traduction du contenu produit peut donc ne pas s'appliquer selon la fiche/URL. Piste : uniformiser (i18n.js en dur partout OU injecté partout) et tester le changement de langue sur chaque fiche en live.
+
+## 🟨 MOYEN
+
+**6. README de suivi = 200 Ko.** Ce journal fait ~200 000 caractères, difficile à maintenir. Piste : archiver les anciennes sessions dans /docs/journal-archive.md et garder un README court (état actuel + prochaines actions).
+
+**7. Accessibilité : liens-images sans intitulé.** ~35 liens de l'accueil n'ont ni texte ni aria-label (liens autour des images produits). L'alt de l'image aide, mais un aria-label sur le lien est préférable pour les lecteurs d'écran. Piste : ajouter aria-label sur les liens produits + un lien "aller au contenu" (skip link).
+
+**8. Pas de fil d'Ariane visible sur les fiches produits.** Le BreadcrumbList JSON-LD existe (bon pour Google) mais aucun fil d'Ariane visible pour l'utilisateur. Piste : afficher un breadcrumb (Accueil › Catégorie › Produit).
+
+## 🟩 LÉGER (finitions)
+
+**9. Ordre des titres : un H2 avant le H1.** Sur l'accueil, la barre d'annonce est un H2 placé avant le H1. Idéalement le H1 vient en premier dans le document.
+
+**10. Pas de capture d'emails / newsletter.** Aucun formulaire newsletter (accueil ni blog) → opportunité manquée de fidélisation/retargeting first-party.
+
+**11. Backlinks externes toujours faibles.** Chantier Trustpilot bloqué (bug côté Trustpilot). Reprendre : Trustpilot, Pages Jaunes, annuaires, Pinterest (cf. journal).
+
+## ✅ POINTS DÉJÀ SOLIDES (à conserver)
+
+- Sécurité checkout Stripe : prix lus côté serveur (pas depuis le client), entrées validées, clés en variables d'env (process.env), pas de clé en dur, pas de CORS wildcard.
+- SEO de base OK : canonical, og/twitter, JSON-LD (Store/Product/Breadcrumb/Article/FAQ), sitemap (40 URLs), robots.txt avec Sitemap, page 404 fonctionnelle, aucun contenu HTTP non sécurisé.
+- Accueil sans débordement horizontal en mobile (390 px).
+- Modal 18+ et bannière cookies (refus possible) présents.
+
+---
+
+# 📓 JOURNAL DE BORD (historique complet, inchangé)
+
 Les Jardins Enchantés — Suivi i18n (FR/PT/IT/ES/DE)
 
 ## SESSION TRADUCTION CONTENU BLOG (i18n pt/it/es/de) — MAJ 25/07/2026
