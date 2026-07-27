@@ -33,41 +33,36 @@ Fiche produit : ~289 Ko de traductions (common+product) au lieu de 658 Ko. Page 
 
 ---
 
-## 🚧 SESSION 27/07/2026 — CHANTIER n°2 "Code dupliqué (~50 HTML)" (Claude) — EN COURS
+## ✅ SESSION 27/07/2026 — CHANTIER n°2 "Code dupliqué (~50 HTML)" (Claude) — FICHES PRODUIT TERMINÉES
 
-Attaque du point n°2 de l'audit (header/footer/modal panier copiés dans chaque page). RÔLES : Claude fait TOUT (analyse, génération, collage éditeur) SAUF le clic "Commit changes" (JLShop06). Site JAMAIS cassé.
+Point n°2 de l'audit (header/footer/modal panier copiés dans chaque page). RÔLES : Claude fait TOUT (analyse, génération, collage éditeur) SAUF le clic "Commit changes" (JLShop06). Site JAMAIS cassé (chaque étape réversible).
 
-### STRATÉGIE CHOISIE (option 1 = prudente, validée par JLShop06)
-Ni build tool (11ty/Astro : trop risqué sur site statique en prod), ni externalisation JS du header/footer (recul SEO car liens injectés en JS). On fait D'ABORD la **NORMALISATION** : figer UNE version de référence propre de chaque bloc et la propager sur toutes les pages, sans changer l'architecture (blocs restent dans le HTML = zéro risque SEO). Étape 2 optionnelle plus tard : externaliser UNIQUEMENT le modal panier en JS partagé (aucun impact SEO).
-
-### ANALYSE FAITE (34 fiches produits scannées)
-Le code n'était PAS identique verbatim : micro-différences accumulées (indentation, accents). Variantes trouvées : **header = 10 variantes**, **footer = 7 variantes** (dont 3 pages SANS footer), **modal panier = 2 variantes**. MAIS contenu RÉEL identique partout (mêmes 8 liens header, mêmes 5 liens footer, mêmes clés data-i18n). SEULES vraies différences de contenu : (a) header variante bunny/infirmière = bouton PANIER SANS span data-i18n → non traduit (BUG, corrigé par la normalisation) ; (b) footer variante gels bio = copyright "2025 -" au lieu de "© –".
+### STRATÉGIE CHOISIE (option 1 — prudente, validée par JLShop06)
+NORMALISATION : figer UNE version de référence propre de chaque bloc et la propager, sans changer l'architecture (blocs restent dans le HTML → zéro risque SEO). Étape 2 optionnelle plus tard : externaliser UNIQUEMENT le modal panier en JS partagé.
 
 ### VERSION DE RÉFÉRENCE CANONIQUE (source = gel_cannabis_orgie.html)
-- header hash **2f6d5b9b** (accents ok + span data-i18n="panier" présent, indentation propre)
-- footer hash **cd070b73** (© + accents ok, 6 clés data-i18n footer_*)
-- modal panier hash **7e59b8a6** (accents corrects "réduction/vérifiée/Récapitulatif")
+- header : accents ok + span data-i18n="panier" présent (bouton PANIER traduit), indentation propre
+- footer : © + accents ok, clés data-i18n="footer_*"
+- modal panier : accents corrects (réduction/vérifiée/Récapitulatif), commentaire "<!-- Cart modal statique"
+- ⚠️ Les hash notés à l'origine (2f6d5b9b / cd070b73 / 7e59b8a6) ne correspondaient plus à la source vivante → validation faite STRUCTURELLEMENT (voir méthode).
 
-### MÉTHODE PAR PAGE (workflow, = 1 commit/page)
-1. Ouvrir /edit/main/<fichier> sur github (onglet 1714124770).
-2. Dans l'onglet github (fetch raw marche sur origine github ; window perdu à chaque navigation → tout régénérer) : fetch RAW de la page + fetch RAW de gel_cannabis_orgie.html (source canonique) ; extraire header/footer/cart canoniques.
-3. Sur le RAW de la page cible (manipulation de CHAÎNE, PAS DOM serialize → préserve tout le reste byte-à-byte) : remplacer le header (regex <header...</header>), le footer (<footer...</footer>), le cart (scan balancé de <div id="cart-modal"> jusqu'au </div> équilibré) par les blocs canoniques. Stocker sur window.__newX.
-4. Valider : doctype=1, header=1, footer=1, cart=1, les 3 hash canoniques, panierI18n=true, endsOk, startsOk.
-5. Coller : clic éditeur [600,300], Ctrl+A, Delete, screenshot placeholder, puis ClipboardEvent('paste') sur .cm-content (defaultPrevented=true). Vérif Ctrl+Home/Ctrl+End.
-6. Demander le commit à JLShop06. Attendre "commit fait". Enchainer.
+### MÉTHODE PAR PAGE (workflow, 1 commit/page)
+1. Ouvrir `/edit/main/<fichier>`. 2. En JS : fetch RAW du canon + de la cible, extraire header (`<header…</header>`), footer (`<footer…</footer>`), modal (du commentaire "Cart modal statique" — ou du `<div id="cart-modal"` si pas de commentaire — jusqu'au premier `<script`/`</body>`). 3. Remplacer les blocs de la cible par ceux du canon (ordre décroissant). 4. Validation STRUCTURELLE : doctype=1, header=1, footer=1 (0 si page sans footer), cart=1, panier présent, début `<!DOCTYPE html>`, fin `</html>`, octets avant header identiques. 5. Vider l'éditeur (vérifier placeholder), coller via ClipboardEvent. 6. Vérifier Ctrl+Home (titre) + Ctrl+End (modal + `</body>` unique). 7. JLShop06 commit.
+- ⚠️ Cas SANS footer (ne PAS ajouter de footer) : mini-robe-noire, robe-longue-noire-argentee, tanga-taille-haute-dentelle-bleue.
+- ⚠️ Cas SANS commentaire "Cart modal statique" dans la cible : détecter le modal via `<div id="cart-modal"`.
 
-### FAIT (committé sur main)
-- **hemp-intense-orgasm.html** = PAGE PILOTE. Normalisée + committée + VÉRIFIÉE LIVE : rendu ok (header/fiche/footer), traduction ok (testé PT : bouton "CARRINHO", footer "Loja de Luxo Íntimo", menu "TODOS"). delta +7 chars, reste du fichier intact.
+### ✅ FAIT — TOUTES LES FICHES PRODUIT NORMALISÉES (committé sur main)
+Scan final du dépôt : **0 fiche produit** avec header/footer/modal non-conforme. Les 32 fiches produit sont alignées sur le canon + le canon gel_cannabis_orgie lui-même (source, non modifié).
 
-### RESTE À FAIRE — REPRENDRE ICI EXACTEMENT
-Normaliser les **33 fiches produits restantes** (même workflow ci-dessus), 1 commit chacune. Liste des 33 (hemp = DÉJÀ FAIT, à NE PAS refaire) :
-Cockring-vibrant-Marry-Me-Wooomy.html, Déguisement-Bunny.html, Magnum-Opus-vibro.html, Plug-Anal-Rosy-Gold.html, anneau_vibrant_telecommande.html, black-empire-my-duchess.html, cockring-vibrant-saturn-hueman.html, coffret-bien-etre-intime-bio.html, deguisement-enseignante.html, deguisement-etudiante.html, deguisement-infirmière-sexy.html, dual-vibe-sex-on-the-beach.html, gel_cannabis_orgie.html (= source canonique, DÉJÀ conforme / peut être sautée), gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html, gel_lubrifiant_bio_neutre_divine_xtases.html, gel_lubrifiant_bio_neutre_framboise_divine_xtases.html, gel_lubrifiant_bio_neutre_monoi_divine_xtases.html, gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html, gel_lubrifiant_bio_neutre_vanille_divine_xtases.html, le-flateur.html, lubrifiant_eau_lube_tube_chocolat_orgie.html, lubrifiant_eau_lube_tube_fraise_orgie.html, lubrifiant_eau_tube_barbe_a_papa.html, mini-robe-noire.html, monster-pussy-strocker.html, orgie-pinacolada.html, pink-star-choco-fraise.html, pink-star.html, pink_star_sucette_cerise.html, red-dolls-energy-pleasure.html, robe-longue-noire-argentee.html, tanga-taille-haute-dentelle-bleue.html, vibro-rechargeable-Indiana.html.
+Fiches traitées (session) : Cockring-vibrant-Marry-Me-Wooomy, Déguisement-Bunny, Magnum-Opus-vibro, Plug-Anal-Rosy-Gold, anneau_vibrant_telecommande, black-empire-my-duchess, cockring-vibrant-saturn-hueman, coffret-bien-etre-intime-bio, deguisement-enseignante, deguisement-etudiante, deguisement-infirmière-sexy, dual-vibe-sex-on-the-beach, gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases, gel_lubrifiant_bio_neutre_divine_xtases, gel_lubrifiant_bio_neutre_framboise_divine_xtases, gel_lubrifiant_bio_neutre_monoi_divine_xtases, gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases, gel_lubrifiant_bio_neutre_vanille_divine_xtases, le-flateur, lubrifiant_eau_lube_tube_chocolat_orgie, lubrifiant_eau_lube_tube_fraise_orgie, lubrifiant_eau_tube_barbe_a_papa, mini-robe-noire (sans footer), monster-pussy-strocker, orgie-pinacolada, pink-star-choco-fraise, pink-star, pink_star_sucette_cerise, red-dolls-energy-pleasure, robe-longue-noire-argentee (sans footer), tanga-taille-haute-dentelle-bleue (sans footer), vibro-rechargeable-Indiana. + pilote initial hemp-intense-orgasm.
 
-NOTE : **mini-robe-noire.html, robe-longue-noire-argentee.html, tanga-taille-haute-dentelle-bleue.html** n'ont PAS de <footer> → normaliser SEULEMENT header + cart, NE PAS ajouter de footer.
-NOTE : les pages BLOG (blog*.html), légales (cgv/confidentialite/cookies/mentions-legales/retractation) et index.html n'ont PAS été scannées dans ce lot — à traiter après les 33 fiches (vérifier leurs variantes avant).
-APRÈS les 33 : vérif live groupée (échantillon multi-langues) puis (optionnel étape 2) sortir le modal panier dans un JS partagé.
-
----
+### 🔻 RESTE À FAIRE (Chantier n°2) — ARRÊTÉ ICI à la demande de JLShop06
+Le scan complet du dépôt (51 fichiers .html) a révélé **17 pages NON-fiches** dont le header/footer diffère encore du canon. NON traitées (décision : on s'arrête après les fiches produit). À reprendre plus tard SI on veut un site 100% homogène :
+- **Blog (6)** : blog.html, blog-choisir-premier-sextoy, blog-cockring-guide-utilisation, blog-gel-lubrifiant-aromatise, blog-gel-lubrifiant-bio, blog-lubrifiant-eau-vs-bio.
+- **Pages légales (5)** : cgv, confidentialite, cookies, mentions-legales, retractation.
+- **Accueil + utilitaires (6)** : index.html, cancel, erreur, success, veille-concurrents, google2ea8d2…html (fichier de vérification Google — NE PAS toucher).
+- ⚠️ AVANT de normaliser ces pages : VÉRIFIER si leur header/footer DOIT vraiment être identique au canon des fiches, ou si la différence est volontaire (mise en page blog/accueil différente). Ne pas casser une structure voulue.
+- Étape 2 OPTIONNELLE (jamais commencée) : externaliser le modal panier dans un JS partagé (0 impact SEO).
 
 ## 🟥 TRÈS LOURD (gros chantier, fort impact)
 
