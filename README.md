@@ -4,6 +4,35 @@
 > Améliorations classées **du travail le plus LOURD au plus LÉGER**.
 > ⚠️ Ceci est une liste d'audit : rien n'a été modifié sur le site.
 
+## ✅ SESSION 27/07/2026 — CHANTIER n°1 "i18n.js 658 Ko" (Claude)
+
+> Attaque du point n°1 de l'audit (i18n.js chargé entier sur chaque page). RÔLES : Claude fait TOUT (analyse, génération, collage éditeur) SAUF le clic "Commit changes" (JLShop06). Site JAMAIS cassé (chaque étape réversible + fallback).
+
+### FAIT (tout committé sur main)
+
+**A) Cache réparé (vercel.json).** DÉCOUVERTE : le serveur compresse déjà i18n.js en Brotli (658 Ko → ~60-90 Ko réseau), donc minifier ne servait à rien (gain 4,9 % seulement, abandonné). LE VRAI PROBLÈME : une règle explicite dans vercel.json forçait `/(i18n|cart)\.js` en `max-age=0, must-revalidate` → le navigateur revalidait i18n.js à CHAQUE page. CORRECTIF : règle supprimée → i18n.js/cart.js retombent sur la règle générale `.js` = `max-age=86400, stale-while-revalidate=604800`. Autres règles (webp/css-js/html/api), cleanUrls, crons : intacts.
+
+**B) i18n.js DÉCOUPÉ par section (5 nouveaux fichiers).** Le fichier = 1 objet `TRANSLATIONS` de 1022 clés × 5 langues (fr/pt/it/es/de) + ~13 Ko de code. Découpé par préfixe de clé en 5 fichiers, chacun s'auto-fusionne dans `window.TRANSLATIONS` puis appelle applyTranslations() :
+- `i18n-common.js` — 44 clés (menu/footer/cart/panier/header/banner/age/hero/arg/prod/cta/renoncer + **cookie** = bandeau). Chargé sur TOUTES les pages.
+- `i18n-home.js` — 56 clés (home_).
+- `i18n-legal.js` — 239 clés (cgv/confid/cookies/mentions/retract).
+- `i18n-blog.js` — 191 clés (blog/bio/evb/sxt/arm/ckr).
+- `i18n-product.js` — 492 clés (fiches produits).
+INTÉGRITÉ PROUVÉE : reconstruction des 5 fichiers = 0 clé perdue / 0 valeur modifiée / 0 clé en trop (1022×5). Testé LIVE : common+product = 536 clés, traduction OK PT/IT/DE, bandeau cookies traduit ("Aceitar tudo").
+PIÈGE CORRIGÉ : clés `cookie_*` (bandeau, partout via compliance.js) d'abord classées "product" → auraient été absentes sur légal/blog. Déplacées dans **common**. Audit des 51 pages après correction = 0 clé orpheline.
+
+**C) Loader intelligent dans cart.js.** cart.js = chargeur universel. Ancien bloc loader (480 car., injectait /i18n.js entier) REMPLACÉ par un loader qui : (1) détecte le type de page via le nom de fichier (index→home ; cgv/confidentialite/cookies/mentions-legales/retractation→legal ; blog*→blog ; sinon→product) ; (2) charge `i18n-common.js` + `i18n-<section>.js` ; (3) **FALLBACK** : si un fichier de section échoue (onerror), recharge /i18n.js complet. Code panier après le loader = INCHANGÉ au bit près. i18n.js complet CONSERVÉ (filet de sécurité).
+
+### GAIN
+Fiche produit : ~289 Ko de traductions (common+product) au lieu de 658 Ko. Page légale ~135 Ko. Blog ~185 Ko. Accueil ~44 Ko (common+home). (Avant Brotli.)
+
+### RESTE À FAIRE / À SURVEILLER (chantier n°1)
+- **Transition cache** : à cause du commit A (`.js` en cache 24h), les visiteurs déjà venus exécutent encore l'ANCIEN cart.js en cache → chargent /i18n.js entier tant que le cache n'expire pas. Grâce à stale-while-revalidate ils basculent tout seuls ; tout NOUVEAU visiteur reçoit direct les sections. AUCUNE casse (les 2 chemins traduisent). Vérifier en navigation privée qu'une fiche charge i18n-common.js + i18n-product.js.
+- **Vérif LIVE post-cache** d'une page de chaque type (accueil/produit/légal/blog) dans les 5 langues une fois l'ancien cart.js expiré.
+- **Optionnel** : quand i18n.js est modifié à l'avenir, RÉGÉNÉRER les 5 fichiers de section (générés depuis i18n.js — ne pas éditer à la main). Envisager un script de build. À terme, si stable, on POURRAIT supprimer i18n.js complet (mais le garder tant que le fallback sert).
+
+---
+
 ## 🟥 TRÈS LOURD (gros chantier, fort impact)
 
 **1. i18n.js = 658 Ko chargé sur CHAQUE page.** Le fichier de traductions pèse 658 Ko décodés et est rechargé intégralement à chaque page — de loin le plus gros poids du site, pénalise le chargement (surtout mobile/4G). Piste : découper par section (commun/fiches/légal/blog) et ne charger que le nécessaire ; OU générer des pages déjà traduites (1 URL par langue) ; OU minifier + defer + cache long.
