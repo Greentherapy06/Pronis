@@ -1,15 +1,35 @@
-/* === Chargeur i18n automatique (ajouté pour la traduction multilingue) === */
+/* >>> Chargeur i18n par section (optimise: commun + section de la page, fallback i18n.js complet) >>> */
 (function () {
   function runI18n() {
     try { if (typeof initI18n === 'function') initI18n(); } catch (e) {}
+    try { if (typeof window.applyTranslations === 'function') window.applyTranslations(); } catch (e) {}
   }
   if (typeof TRANSLATIONS !== 'undefined') { runI18n(); return; }
-  if (!document.querySelector('script[src="/i18n.js"], script[src="i18n.js"]')) {
+  if (document.querySelector('script[src="/i18n.js"], script[src="i18n.js"]')) { return; }
+  function pageSection() {
+    var file = ((location.pathname || '').toLowerCase().split('/').pop()) || 'index.html';
+    if (file === '' || file === 'index.html' || file === 'index') return 'home';
+    if (/^(cgv|confidentialite|cookies|mentions-legales|retractation)/.test(file)) return 'legal';
+    if (/^blog/.test(file)) return 'blog';
+    return 'product';
+  }
+  var sections = ['i18n-common.js', 'i18n-' + pageSection() + '.js'];
+  var fellBack = false;
+  function loadFull() {
+    if (fellBack) return; fellBack = true;
     var s = document.createElement('script');
-    s.src = '/i18n.js';
-    s.onload = runI18n;
+    s.src = '/i18n.js'; s.onload = runI18n;
     document.head.appendChild(s);
   }
+  function loadSeq(i) {
+    if (i >= sections.length) { runI18n(); return; }
+    var s = document.createElement('script');
+    s.src = '/' + sections[i];
+    s.onload = function () { loadSeq(i + 1); };
+    s.onerror = loadFull;
+    document.head.appendChild(s);
+  }
+  loadSeq(0);
 })();
 
 /* ============================================
