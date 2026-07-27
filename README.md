@@ -33,6 +33,42 @@ Fiche produit : ~289 Ko de traductions (common+product) au lieu de 658 Ko. Page 
 
 ---
 
+## 🚧 SESSION 27/07/2026 — CHANTIER n°2 "Code dupliqué (~50 HTML)" (Claude) — EN COURS
+
+Attaque du point n°2 de l'audit (header/footer/modal panier copiés dans chaque page). RÔLES : Claude fait TOUT (analyse, génération, collage éditeur) SAUF le clic "Commit changes" (JLShop06). Site JAMAIS cassé.
+
+### STRATÉGIE CHOISIE (option 1 = prudente, validée par JLShop06)
+Ni build tool (11ty/Astro : trop risqué sur site statique en prod), ni externalisation JS du header/footer (recul SEO car liens injectés en JS). On fait D'ABORD la **NORMALISATION** : figer UNE version de référence propre de chaque bloc et la propager sur toutes les pages, sans changer l'architecture (blocs restent dans le HTML = zéro risque SEO). Étape 2 optionnelle plus tard : externaliser UNIQUEMENT le modal panier en JS partagé (aucun impact SEO).
+
+### ANALYSE FAITE (34 fiches produits scannées)
+Le code n'était PAS identique verbatim : micro-différences accumulées (indentation, accents). Variantes trouvées : **header = 10 variantes**, **footer = 7 variantes** (dont 3 pages SANS footer), **modal panier = 2 variantes**. MAIS contenu RÉEL identique partout (mêmes 8 liens header, mêmes 5 liens footer, mêmes clés data-i18n). SEULES vraies différences de contenu : (a) header variante bunny/infirmière = bouton PANIER SANS span data-i18n → non traduit (BUG, corrigé par la normalisation) ; (b) footer variante gels bio = copyright "2025 -" au lieu de "© –".
+
+### VERSION DE RÉFÉRENCE CANONIQUE (source = gel_cannabis_orgie.html)
+- header hash **2f6d5b9b** (accents ok + span data-i18n="panier" présent, indentation propre)
+- footer hash **cd070b73** (© + accents ok, 6 clés data-i18n footer_*)
+- modal panier hash **7e59b8a6** (accents corrects "réduction/vérifiée/Récapitulatif")
+
+### MÉTHODE PAR PAGE (workflow, = 1 commit/page)
+1. Ouvrir /edit/main/<fichier> sur github (onglet 1714124770).
+2. Dans l'onglet github (fetch raw marche sur origine github ; window perdu à chaque navigation → tout régénérer) : fetch RAW de la page + fetch RAW de gel_cannabis_orgie.html (source canonique) ; extraire header/footer/cart canoniques.
+3. Sur le RAW de la page cible (manipulation de CHAÎNE, PAS DOM serialize → préserve tout le reste byte-à-byte) : remplacer le header (regex <header...</header>), le footer (<footer...</footer>), le cart (scan balancé de <div id="cart-modal"> jusqu'au </div> équilibré) par les blocs canoniques. Stocker sur window.__newX.
+4. Valider : doctype=1, header=1, footer=1, cart=1, les 3 hash canoniques, panierI18n=true, endsOk, startsOk.
+5. Coller : clic éditeur [600,300], Ctrl+A, Delete, screenshot placeholder, puis ClipboardEvent('paste') sur .cm-content (defaultPrevented=true). Vérif Ctrl+Home/Ctrl+End.
+6. Demander le commit à JLShop06. Attendre "commit fait". Enchainer.
+
+### FAIT (committé sur main)
+- **hemp-intense-orgasm.html** = PAGE PILOTE. Normalisée + committée + VÉRIFIÉE LIVE : rendu ok (header/fiche/footer), traduction ok (testé PT : bouton "CARRINHO", footer "Loja de Luxo Íntimo", menu "TODOS"). delta +7 chars, reste du fichier intact.
+
+### RESTE À FAIRE — REPRENDRE ICI EXACTEMENT
+Normaliser les **33 fiches produits restantes** (même workflow ci-dessus), 1 commit chacune. Liste des 33 (hemp = DÉJÀ FAIT, à NE PAS refaire) :
+Cockring-vibrant-Marry-Me-Wooomy.html, Déguisement-Bunny.html, Magnum-Opus-vibro.html, Plug-Anal-Rosy-Gold.html, anneau_vibrant_telecommande.html, black-empire-my-duchess.html, cockring-vibrant-saturn-hueman.html, coffret-bien-etre-intime-bio.html, deguisement-enseignante.html, deguisement-etudiante.html, deguisement-infirmière-sexy.html, dual-vibe-sex-on-the-beach.html, gel_cannabis_orgie.html (= source canonique, DÉJÀ conforme / peut être sautée), gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html, gel_lubrifiant_bio_neutre_divine_xtases.html, gel_lubrifiant_bio_neutre_framboise_divine_xtases.html, gel_lubrifiant_bio_neutre_monoi_divine_xtases.html, gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html, gel_lubrifiant_bio_neutre_vanille_divine_xtases.html, le-flateur.html, lubrifiant_eau_lube_tube_chocolat_orgie.html, lubrifiant_eau_lube_tube_fraise_orgie.html, lubrifiant_eau_tube_barbe_a_papa.html, mini-robe-noire.html, monster-pussy-strocker.html, orgie-pinacolada.html, pink-star-choco-fraise.html, pink-star.html, pink_star_sucette_cerise.html, red-dolls-energy-pleasure.html, robe-longue-noire-argentee.html, tanga-taille-haute-dentelle-bleue.html, vibro-rechargeable-Indiana.html.
+
+NOTE : **mini-robe-noire.html, robe-longue-noire-argentee.html, tanga-taille-haute-dentelle-bleue.html** n'ont PAS de <footer> → normaliser SEULEMENT header + cart, NE PAS ajouter de footer.
+NOTE : les pages BLOG (blog*.html), légales (cgv/confidentialite/cookies/mentions-legales/retractation) et index.html n'ont PAS été scannées dans ce lot — à traiter après les 33 fiches (vérifier leurs variantes avant).
+APRÈS les 33 : vérif live groupée (échantillon multi-langues) puis (optionnel étape 2) sortir le modal panier dans un JS partagé.
+
+---
+
 ## 🟥 TRÈS LOURD (gros chantier, fort impact)
 
 **1. i18n.js = 658 Ko chargé sur CHAQUE page.** Le fichier de traductions pèse 658 Ko décodés et est rechargé intégralement à chaque page — de loin le plus gros poids du site, pénalise le chargement (surtout mobile/4G). Piste : découper par section (commun/fiches/légal/blog) et ne charger que le nécessaire ; OU générer des pages déjà traduites (1 URL par langue) ; OU minifier + defer + cache long.
