@@ -1,3 +1,86 @@
+# 🛡️ PLAN CONFIANCE & CONVERSION — 06/08/2026 (par Claude)
+
+> Audit réalisé en tant que **client inconnu et méfiant** sur le site LIVE, puis vérification dans le dépôt.
+> ⚠️ RIEN N EST MODIFIÉ (ni site ni code) : ceci est un PLAN. Règle du dépôt inchangée : Claude prépare, **JLShop06 clique "Commit changes"**.
+
+## 🟥 P0 — Bloquants de confiance (avant tout le reste)
+
+**P0-1. Coordonnées contradictoires selon les pages — LE PLUS GRAVE.**
+Constaté en live : /mentions-legales affiche "10 Avenue du Maréchal Foch" + lesjardinsenchantes06@gmail.com, tandis que /cgv et /confidentialite affichent "49 chemin du Vallonet" + jlshop06190@gmail.com. Un visiteur qui compare deux pages conclut "site pas fiable".
+CAUSE TROUVÉE : le HTML est BON partout (cgv.html, confidentialite.html, mentions-legales.html contiennent Foch + le bon e-mail). C est le legacy i18n.js (662 Ko) qui ÉCRASE le texte à l affichage : il contient 10 fois "49 chemin du Vallonet", 60 fois "jlshop06190", 0 fois "Foch", 0 fois "lesjardinsenchantes06". i18n-legal.js est à jour, mais i18n.js est encore (a) codé en dur dans index.html et blog.html, (b) utilisé en FALLBACK par le loader de cart.js.
+ACTIONS : régénérer i18n.js depuis les 5 fichiers de section (ou corriger les clés fautives) ; retirer le script i18n.js en dur de index.html et blog.html ; revérifier /cgv, /confidentialite et /mentions-legales en navigation privée dans les 5 langues.
+
+**P0-2. Deux adresses Gmail à la place d un e-mail pro.**
+lesjardinsenchantes06@gmail.com et jlshop06190@gmail.com coexistent. ACTION : créer contact@les-jardins-enchantes.com, le mettre partout (HTML + i18n + Stripe), et n en garder qu un seul.
+
+**P0-3. Aucune page Contact.** /contact renvoie 404. Pas de téléphone, pas de formulaire, pas de délai de réponse visible (les CGV annoncent 5 jours ouvrés).
+ACTION : créer contact.html (e-mail, formulaire, horaires, délai de réponse), la lier dans le header ET le footer, l ajouter au sitemap.
+
+**P0-4. Frais de port invisibles alors que le montant existe dans le code.**
+api/stripe/checkout.js définit SHIPPING_FEE_CENTS = 690 (6,90 €) et FREE_SHIPPING_THRESHOLD_CENTS = 7500. Le client ne découvre donc les 6,90 € que sur Stripe, après avoir cliqué PAYER. /livraison et /faq renvoient 404.
+ACTION : afficher "Livraison 6,90 € — offerte dès 75 €" dans le panier, sur les fiches produit et dans le bandeau ; créer une page Livraison & Retours (délais 3-7 j FR / 5-14 j UE, Colissimo, colis neutre) + une FAQ.
+
+**P0-5. La remise -10 % n est pas tenue dans le panier.**
+Le panier affiche "-10 % appliqués si éligible" et un "Total estimé" identique au sous-total : le client croit à une fausse promesse. Côté serveur c est propre (éligibilité vérifiée sur le Customer Stripe, coupon usage unique), mais le front ne peut pas le savoir.
+ACTION : reformuler clairement ("remise appliquée automatiquement à l étape de paiement si c est votre 1re commande, sinon prix affiché") ou afficher le montant exact après saisie de l e-mail. Ne PAS exposer un endpoint qui dirait si un e-mail a déjà commandé (énumération d e-mails).
+
+**P0-6. Pas de vraie page 404.** /404.html renvoie l erreur brute Vercel ("NOT_FOUND" + identifiant + lien vers la doc Vercel). erreur.html existe mais c est une page d erreur de PAIEMENT, pas un 404.
+ACTION : créer 404.html (Vercel le sert automatiquement) avec header/footer, message rassurant et liens vers les catégories.
+
+**P0-7. Contradiction sur la zone de livraison.** Les CGV disent "France métropolitaine et Union Européenne" mais checkout.js autorise aussi GB, CH et NO (hors UE), avec le même 6,90 €.
+ACTION : soit retirer GB/CH/NO des allowed_countries, soit mettre les CGV à jour et prévoir les frais/douane.
+
+**P0-8. Page interne accessible publiquement.** /veille-concurrents.html (27 Ko de veille concurrentielle) est en ligne, sans noindex et sans Disallow dans robots.txt.
+ACTION : ajouter noindex + Disallow (ou sortir la page de la production).
+
+**P0-9. Fichiers fantômes d un autre commerce.** Les fichiers "mentions-legales" et "confidentialite" (SANS extension) contiennent encore l identité "RJ Destock" avec une adresse au Portugal. Ils ne sont pas servis aujourd hui (les .html gagnent avec cleanUrls) mais c est une bombe à retardement juridique.
+ACTION (à faire par JLShop06) : supprimer ces 2 fichiers du dépôt après vérification.
+
+## 🟧 P1 — Réassurance et passage à l acte
+
+**P1-10. Zéro avis client sur tout le site.** Aucune note, aucun témoignage, aucun widget. ACTION : relancer le chantier avis (Trustpilot bloqué : tester Avis Vérifiés / Google Business), afficher les avis sur les fiches et l accueil, et ajouter le JSON-LD AggregateRating seulement quand les avis sont réels.
+
+**P1-11. Panier pauvre.** cart.js n a ni gestion de quantité ni suppression par ligne (seulement "Vider le panier"), aucun logo de paiement, aucun rappel du colis neutre, aucune mention CGV avant paiement.
+ACTION : quantité +/-, suppression par ligne, logos Visa/Mastercard/Stripe, phrase "colis neutre et discret", mention "en cliquant sur PAYER vous acceptez les CGV" avec lien.
+
+**P1-12. Fiches produit incomplètes.** Ni contenance/taille sur les cartes, ni stock, ni délai, ni garantie, ni politique de retour hygiène, ni guide des tailles pour le textile.
+ACTION : bloc standard sous le prix (contenance, dispo, délai, garantie légale, retour hygiène expliqué avec bienveillance) + guide des tailles pour robes/tangas/déguisements.
+
+**P1-13. Incohérences catalogue qui font douter.** "Magnum Opus" est appelé "Stimulateur Clitoridien Va-et-Vient" sur l accueil et "Toy Joy — Magnum Opus" sur sa fiche. "Dual Vibe Sex on the Beach" est un GEL de 15 ml à 32,90 € mais son texte alternatif dit "Stimulateur Clitoridien Vibromasseur", et un gel Orgie de 50 ml est à 12,90 € : sans contenance affichée, les prix paraissent arbitraires.
+ACTION : un seul nom par produit (carte = fiche = title = alt), contenance et format sur chaque carte, alt corrigés.
+
+**P1-14. Superlatifs non prouvés.** "la boutique intime la plus raffinée de France & d Europe", "la référence française", "le meilleur stimulateur", "le plus silencieux du marché français".
+ACTION : étayer (test, source, avis) ou remplacer par des faits vérifiables (Yuka 100/100 avec lien, fabriqué en France, sans phtalates).
+
+**P1-15. Un seul moyen de paiement.** checkout.js utilise payment_method_types ["card"].
+ACTION : passer à automatic_payment_methods pour activer Apple Pay / Google Pay / Link et réduire l abandon mobile.
+
+## 🟨 P2 — UX, lisibilité, technique
+
+**P2-16. Premier écran sans produit** : logo + deux longs paragraphes saturés de mots-clés en gras, texte pâle sur photo claire (contraste insuffisant). ACTION : remonter 3-4 produits et 4 pictos de réassurance au-dessus de la ligne de flottaison, déplacer le texte SEO plus bas.
+
+**P2-17. Contrastes** : options PT/ES/DE/IT du sélecteur de langue quasi invisibles, footer très pâle. ACTION : viser AA (4,5:1).
+
+**P2-18. Traduction incomplète** : "CATÉGORIES", "LANGUE", le bouton du hero, "Vous aimerez aussi" et les textes incrustés dans les images restent en français dans les 4 autres langues. ACTION : câbler ces libellés en i18n, prévoir des visuels neutres ou localisés.
+
+**P2-19. Navigation** : pas de recherche, pas de vraies pages catégories (le menu pointe vers des ancres de l accueil), pas de tri/filtres, pas de fil d Ariane visible. ACTION : au minimum une page par catégorie + un champ de recherche.
+
+**P2-20. hreflang absent** sur les fiches produit ET les pages légales (0 partout, 6 sur accueil/blog). ACTION : bloc hreflang fr/pt/it/es/de + x-default après le canonical de chaque page.
+
+**P2-21. En-têtes de sécurité** : vercel.json ne pose que X-Content-Type-Options. ACTION : ajouter Referrer-Policy, X-Frame-Options (ou frame-ancestors), Permissions-Policy, HSTS, puis CSP en Report-Only avant de la faire respecter.
+
+**P2-22. README de 200 Ko** difficile à maintenir. ACTION : archiver le journal dans docs/journal-archive.md et garder en tête de README l état actuel + les prochaines actions.
+
+## ⏱️ Ordre d exécution proposé
+
+Jour 1 (crédibilité, rapide) : P0-1, P0-2, P0-9, P0-8, P0-6.
+Jour 2-3 (transparence) : P0-3, P0-4, P0-5, P0-7.
+Semaine 2 (réassurance) : P1-11, P1-12, P1-13, P1-10.
+Ensuite : P1-14, P1-15, puis les P2 dans l ordre.
+
+Indicateur de contrôle : sur chaque page, un client doit trouver en moins de 10 secondes qui vend, comment le joindre, combien coûte la livraison et comment renvoyer.
+
+---
 # 🔍 AUDIT COMPLET DU SITE — 26/07/2026 (par Claude)
 
 > Audit réalisé en direct sur le site (les-jardins-enchantes.com) + code du dépôt.
