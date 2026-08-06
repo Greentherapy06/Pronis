@@ -1,0 +1,107 @@
+/* ============================================================
+   THEME CLAIR — Les Jardins Enchantes
+   Fond photo "Suite romantique baignee de lumiere doree" + habillage lumineux
+   Applique a toutes les pages via cart.js
+   ============================================================ */
+
+/* ---------- FOND GENERAL ---------- */
+html{background-color:#f8f1e6}
+body{
+  background-color:#f8f1e6!important;
+  background-image:linear-gradient(180deg,rgba(255,251,244,.52) 0%,rgba(255,248,238,.42) 30%,rgba(255,247,235,.52) 65%,rgba(255,251,245,.66) 100%),url("/Suite%20romantique%20baign%C3%A9e%20de%20lumi%C3%A8re%20dor%C3%A9e.webp")!important;
+  background-repeat:no-repeat,no-repeat!important;
+  background-size:cover,cover!important;
+  background-position:center center,center top!important;
+  background-attachment:fixed,fixed!important;
+  color:#4a3428!important;
+}
+
+/* ---------- HEADER / NAV / PANIER ---------- */
+.lux-header{background:rgba(255,250,243,.82)!important;border-bottom:1px solid rgba(180,136,67,.35)!important;box-shadow:0 2px 24px rgba(120,80,40,.12)!important}
+.cat-nav__link,.categories-nav a{color:#8a6830!important;border-color:rgba(180,136,67,.35)!important}
+.cat-nav__link:hover,.cat-nav__link--active,.categories-nav a:hover,.categories-nav a.active{color:#fffaf0!important;background:linear-gradient(135deg,#c9a24a 0%,#a97c2f 100%)!important}
+.categories-nav{background:rgba(255,250,243,.55)!important}
+.lux-cart{color:#7b1e2b!important;border-color:rgba(180,136,67,.45)!important;background:rgba(255,255,255,.6)!important}
+.lux-cart:hover{background:linear-gradient(135deg,#c9a24a 0%,#a97c2f 100%)!important;color:#fffaf0!important}
+.lang-switch button,.lang-switch a{color:#8a6830!important;border-color:rgba(180,136,67,.4)!important}
+
+/* ---------- ACCUEIL ---------- */
+.hero{background-image:none!important;background-color:transparent!important}
+.hero-bg{background:radial-gradient(ellipse at 50% 40%,rgba(255,246,228,.35) 0%,transparent 65%)!important}
+.hero-bg::after{opacity:.25}
+.hero-kicker{color:#805a20!important}
+.hero-h1-text{color:#8a5a1f!important}
+.hero-title,.hero-title em,.hero-baseline{color:#7b1e2b!important}
+.hero-desc{color:#5a4436!important}
+.hero-badges span{color:#6b503a!important;border-color:rgba(180,136,67,.4)!important}
+.hero-divider{color:#b48843!important}
+.hero-divider span{background:linear-gradient(90deg,transparent,#b48843)!important}
+.hero-cta{background:linear-gradient(135deg,#7b1e2b 0%,#5e1622 100%)!important;color:#f8e7c8!important;border-color:#7b1e2b!important;text-shadow:none!important}
+.cat-section__title,.seo-intro__title{color:#7b1e2b!important}
+.seo-intro__text,.seo-bottom,.seo-bottom p,.seo-bottom li,.seo-bottom h2{color:#4f3b2c!important}
+.seo-intro strong,.seo-bottom strong{color:#7b1e2b!important}
+.product-grid article{background:rgba(255,252,246,.86)!important;border:1px solid rgba(180,136,67,.35)!important;box-shadow:0 8px 30px rgba(120,80,40,.12)!important}
+.product-grid article:hover{box-shadow:0 14px 40px rgba(120,80,40,.20)!important;border-color:rgba(180,136,67,.6)!important}
+.product-grid article h3{color:#4a3428!important}
+.product-grid article strong{color:#7b1e2b!important}
+.product-grid article button{background:rgba(255,255,255,.75)!important;color:#8a6830!important;border:1px solid rgba(180,136,67,.55)!important}
+.product-grid article button:hover{background:linear-gradient(135deg,#c9a24a 0%,#a97c2f 100%)!important;color:#fffaf0!important}
+
+/* ---------- FICHES PRODUIT ---------- */
+.product-page{color:#4a3428!important}
+.product-page .product-container{background:rgba(255,252,246,.80)!important;border:1px solid rgba(180,136,67,.30)!important;border-radius:14px;box-shadow:0 8px 30px rgba(120,80,40,.10)!important}
+.product-page .product-title{color:#7b1e2b!important}
+.product-page .product-subtitle{color:#6b503a!important}
+.product-page .product-price{color:#7b1e2b!important}
+.product-page .section-title{color:#805a20!important}
+.product-page .product-description,.product-page .product-list,.product-page .product-list li,.product-page .cta-block p{color:#4f3b2c!important}
+.product-page .product-description strong,.product-page .cta-block p strong{color:#7b1e2b!important}
+.product-page .separator{border-top:1px solid rgba(180,136,67,.35)!important}
+.product-page .add-to-cart{color:#7b1e2b!important;border:1px solid rgba(123,30,43,.45)!important;background:rgba(255,255,255,.75)!important}
+.product-page .add-to-cart:hover{background:linear-gradient(135deg,#7b1e2b 0%,#5e1622 100%)!important;color:#f8e7c8!important}
+.product-page .cta-block{background:rgba(255,252,246,.80)!important;border-left:3px solid #b48843!important}
+.product-page .cta-block .cta-btn{color:#7b1e2b!important;border-color:rgba(123,30,43,.45)!important}
+.product-page .cta-block .cta-btn:hover{background:linear-gradient(135deg,#7b1e2b 0%,#5e1622 100%)!important;color:#f8e7c8!important}
+.product-page .badge-naturel{color:#805a20!important;border:1px solid #b48843!important;background:rgba(255,255,255,.6)!important}
+.product-page .ingredient-item{background:rgba(76,175,80,.10)!important;border:1px solid rgba(56,142,60,.35)!important;color:#2e5b31!important}
+.product-page .ingredient-item strong{color:#2e7d32!important}
+.product-page .sans-badge{background:rgba(198,40,40,.08)!important;border:1px solid rgba(198,40,40,.35)!important;color:#a02725!important}
+.related-products h2,.related-products h3{color:#7b1e2b!important}
+.related-products article{background:rgba(255,252,246,.86)!important;border:1px solid rgba(180,136,67,.35)!important}
+
+/* ---------- BLOG ---------- */
+.blog-article,.blog-list{color:#4a3428!important}
+.blog-article{background:rgba(255,252,246,.78)!important;border:1px solid rgba(180,136,67,.28)!important;border-radius:14px}
+.blog-article h1,.blog-list h1{color:#7b1e2b!important}
+.blog-article h2{color:#7b1e2b!important;border-bottom:1px solid rgba(180,136,67,.35)!important}
+.blog-article h3,.blog-faq-q{color:#805a20!important}
+.blog-article p,.blog-article li{color:#4f3b2c!important}
+.blog-article strong{color:#7b1e2b!important}
+.blog-article a,.blog-back,.blog-card__tag,.blog-card__more{color:#8a6830!important}
+.blog-meta,.blog-list__intro,.blog-card__desc{color:#6b503a!important}
+.blog-warning{background:rgba(198,40,40,.09)!important;border-left:4px solid #a83c2f!important}
+.blog-warning strong{color:#8f2b1f!important}
+.blog-cta{background:linear-gradient(135deg,#7b1e2b 0%,#5e1622 100%)!important;color:#f8e7c8!important}
+.blog-card{background:rgba(255,252,246,.86)!important;border:1px solid rgba(180,136,67,.35)!important}
+.blog-card:hover{border-color:rgba(180,136,67,.65)!important}
+.blog-card__title{color:#4a3428!important}
+
+/* ---------- PAGES LEGALES ---------- */
+.legal-page{color:#4a3428!important;background:rgba(255,252,246,.78)!important;border-radius:14px}
+.legal-page h1,.legal-page h2{color:#7b1e2b!important}
+.legal-page h2{border-bottom:1px solid rgba(180,136,67,.35)!important}
+.legal-page h3,.legal-page strong{color:#805a20!important}
+.legal-page .legal-subtitle{color:#6b503a!important}
+.legal-page p,.legal-page li{color:#4f3b2c!important}
+.legal-page a{color:#8a6830!important;border-bottom:1px solid rgba(180,136,67,.4)!important}
+.legal-page a:hover{color:#7b1e2b!important;border-bottom-color:#7b1e2b!important}
+.legal-page .legal-meta{color:#6b503a!important;border-top:1px solid rgba(180,136,67,.25)!important}
+.legal-callout{background:rgba(255,250,240,.85)!important;border-left:3px solid #b48843!important}
+.legal-callout p{color:#4f3b2c!important}
+
+/* ---------- FOOTER ---------- */
+.footer{background:rgba(255,250,243,.85)!important;border-top:1px solid rgba(180,136,67,.35)!important;color:#5a4436!important}
+.footer a{color:#8a6830!important}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:900px){body{background-attachment:scroll,scroll!important}}
