@@ -1,3 +1,16 @@
+/* >>> Theme clair global : charge theme-clair.css sur toutes les pages >>> */
+(function () {
+  try {
+    if (document.querySelector('link[data-lje-theme]')) return;
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = '/theme-clair.css';
+    l.setAttribute('data-lje-theme', '1');
+    (document.head || document.documentElement).appendChild(l);
+  } catch (e) {}
+})();
+/* <<< fin theme clair <<< */
+
 /* >>> Chargeur i18n par section (optimise: commun + section de la page, fallback i18n.js complet) >>> */
 (function () {
   function runI18n() {
