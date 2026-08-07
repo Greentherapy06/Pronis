@@ -81,6 +81,56 @@ Ensuite : P1-14, P1-15, puis les P2 dans l ordre.
 Indicateur de contrôle : sur chaque page, un client doit trouver en moins de 10 secondes qui vend, comment le joindre, combien coûte la livraison et comment renvoyer.
 
 ---
+# ✅ SESSION 07/08/2026 (nuit) — CHANTIER n°5 "P0-3 terminé + navigation + GSC" (Claude)
+
+> Règle inchangée : Claude prépare, **JLShop06 clique "Commit changes"**.
+
+## ✅ FAIT — P0-3 : pages Livraison et FAQ (P0-3 CLOS)
+- `livraison.html` créé (9 738 o, 135 lignes) : zone France métropolitaine + UE, délais 3-7 j / 5-14 j ouvrés, frais 6,90 € offerts dès 75 €, La Poste/Colissimo (Mondial Relay sur demande), emballage discret et neutre, rétractation 14 j + exclusion hygiène L.221-28 6°, garantie légale. **Toutes les infos viennent des CGV et de cart.js, rien d inventé.**
+- `faq.html` créé (16 189 o, 126 lignes) : 14 questions en 5 rubriques + JSON-LD FAQPage généré depuis les mêmes textes (0 écart vérifié). Les 5 questions produits sont reprises du JSON-LD de index.html.
+- Les 2 pages sont bâties sur le squelette de contact.html (header / footer / modal panier / classe .legal-page) : aucun CSS nouveau.
+- Vérifié en LIVE : titres, sections, header, panier, footer, et 0 débordement horizontal en 390 px.
+
+## ✅ FAIT — Navigation vers Contact / Livraison / FAQ
+- `i18n-core.js` **+70 lignes** : bloc qui injecte LIVRAISON et FAQ dans le menu Catégories et dans le footer de TOUTES les pages, 5 langues, idempotent, inséré AVANT le lien Contact. Testé en direct sur le site avant commit.
+- `index.html` **+4 lignes** : les mêmes liens en dur dans le menu et le footer de l accueil (pour le crawl Google).
+- `sitemap.xml` **+2 lignes** : 41 → 43 URLs.
+- Vérifié en LIVE sur l accueil ET sur cgv.html : ordre LIVRAISON / FAQ / CONTACT, 0 doublon, 5 langues OK (ENTREGA, SPEDIZIONE, ENVÍO, VERSAND, LIVRAISON).
+
+## 🐛 BUG TROUVÉ ET CORRIGÉ — collision de clés i18n
+- La clé `footer_livraison` **existait déjà** et vaut "Livraison offerte dès 75 € d achat". Le lien du footer affichait donc cette phrase promo à la place de "Livraison".
+- Corrigé : clés renommées en `menu_page_livraison`, `footer_page_livraison`, `menu_page_faq`, `footer_page_faq` (i18n-core.js + index.html).
+- **LEÇON : toujours vérifier qu une clé i18n est libre AVANT de l utiliser** (chercher dans i18n-common.js et i18n-product.js).
+
+## ✅ FAIT — Google Search Console
+- Sitemap re-soumis le 07/08/2026 : message "Sitemap envoyé".
+- **PIÈGE :** sur une propriété de type *domaine*, saisir `sitemap.xml` seul est REFUSÉ ("Adresse de sitemap incorrecte"). Il faut l URL complète `https://les-jardins-enchantes.com/sitemap.xml`.
+- État affiché : "Opération effectuée", 41 pages découvertes (passera à 43 à la prochaine lecture de Google).
+
+## 🔻 RESTE À FAIRE — mis à jour le 07/08/2026 (nuit)
+
+### 🚫 UNIQUEMENT JLShop06
+- **P0-9 — SUPPRIMER les 2 fichiers fantômes** `mentions-legales` (391 o) et `confidentialite` (2 795 o), **SANS extension**, à la racine. Ils contiennent l identité "RJ Destock", Rue Professeur Manuel José Pereira n° 601, 4805-128 Caldas das Taipas, Portugal.
+  - **VÉRIFIÉ le 07/08/2026 : la suppression est SANS RISQUE.** En live, `/mentions-legales` et `/confidentialite` servent déjà les versions `.html` de Les Jardins Enchantés (8 918 o et 10 822 o, 0 occurrence de "RJ Destock").
+  - Chemin : ouvrir le fichier sur GitHub → bouton « ... » en haut à droite → Delete file → Commit changes. Suppression de fichier **interdite à Claude**.
+- **P0-2 — e-mail pro : ABANDONNÉ pour l instant.** JLShop06 n a que `lesjardinsenchantes06@gmail.com`. Tout le site (contact, faq, livraison, CGV, mentions légales) utilise cette seule adresse, c est donc cohérent. À revoir si un jour un domaine mail est acheté. **P0-2 n est plus bloquant.**
+
+### ▶️ PROCHAINE ÉTAPE (Claude peut faire, dans cet ordre)
+1. `livraison.html` : supprimer les 15 lignes de script mort du formulaire de contact (diff préparé le 07/08, -15 / +0).
+2. **P0-4** : frais de port 6,90 € / offerts dès 75 € affichés AVANT le paiement (cart.js l.182-205 le fait déjà dans le récap panier : vérifier tout le parcours).
+3. **P0-5** : la remise de bienvenue -10 % annoncée dans la bannière ne s applique pas au panier.
+4. **P0-7** : contradiction zone de livraison (CGV = France + UE ; ailleurs GB / CH / NO).
+5. `cart.js` pageSection() : 404, contact, livraison, faq, erreur, success, cancel chargent inutilement i18n-product.js (492 clés).
+6. Ensuite P1-11, P1-12, P1-13, P1-10, P1-14, P1-15, puis les P2 dans l ordre.
+
+## 🧰 Leçons techniques de cette session
+- Champ « Name your file... » de GitHub : la frappe clavier part dans la recherche latérale. Utiliser le setter natif React `Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set` + événements `input` et `change`.
+- Réutiliser `contact.html` comme squelette embarque son `<script>` de formulaire : le retirer (c est ce qui a été oublié dans livraison.html).
+- Vérifier un fichier long : impossible via le DOM (CodeMirror virtualise). Utiliser l onglet **Preview** (`.react-file-line`, le textContent finit par `\n`) ou l API après commit.
+- **README : l éditeur est en « Soft wrap »**, donc `Down` se déplace par ligne VISUELLE. Passer le sélecteur sur **« No wrap »** avant toute navigation clavier.
+- Les `.js` sont mis en cache 24 h : **Ctrl+Maj+R obligatoire** pour vérifier une modif JS en LIVE.
+
+---
 # ✅ SESSION 07/08/2026 (soir) — CHANTIER n°4 "P0-8 / P0-6 / P0-3" (Claude)
 
 > Suite directe du PLAN CONFIANCE & CONVERSION ci-dessus. RÔLES INCHANGÉS : Claude prépare tout (analyse, génération, collage dans l éditeur), **JLShop06 clique "Commit changes"**.
