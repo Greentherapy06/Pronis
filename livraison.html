@@ -115,20 +115,5 @@
 </div>
 </div>
 </div>
-<script>
-(function(){
-  var f = document.getElementById("contact-form");
-  if (!f) return;
-  f.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var sujet = document.getElementById("cf-sujet").value;
-    var cmd = document.getElementById("cf-commande").value.trim();
-    var msg = document.getElementById("cf-message").value.trim();
-    var corps = (cmd ? "Numero de commande : " + cmd + "\n\n" : "") + msg;
-    var lien = "mailto:lesjardinsenchantes06@gmail.com?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(corps);
-    window.location.href = lien;
-  });
-})();
-</script>
 </body>
 </html>
