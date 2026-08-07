@@ -158,8 +158,9 @@ module.exports = async (req, res) => {
       billing_address_collection: "required",
       shipping_address_collection: {
         allowed_countries: [
-          "FR", "BE", "CH", "LU", "MC", "DE", "ES", "IT", "PT", "NL",
-          "AT", "GB", "IE", "DK", "SE", "NO", "FI",
+          // France + Monaco + Union européenne uniquement (cf. CGV art. 8).
+          "FR", "MC", "BE", "LU", "DE", "ES", "IT", "PT", "NL",
+          "AT", "IE", "DK", "SE", "FI",
         ],
       },
       phone_number_collection: { enabled: true },
