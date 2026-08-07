@@ -81,6 +81,51 @@ Ensuite : P1-14, P1-15, puis les P2 dans l ordre.
 Indicateur de contrôle : sur chaque page, un client doit trouver en moins de 10 secondes qui vend, comment le joindre, combien coûte la livraison et comment renvoyer.
 
 ---
+# ✅ SESSION 07/08/2026 (nuit 3) — CHANTIER n°7 "P0-9 clos + décision P0-7 : UE + Monaco" (Claude)
+
+> Règle inchangée : Claude prépare, JLShop06 clique "Commit changes".
+
+## ✅ FAIT — P0-9 : les 2 fichiers fantômes "RJ Destock" sont SUPPRIMÉS (P0-9 CLOS)
+`mentions-legales` (391 o) et `confidentialite` (2 795 o), sans extension, supprimés par JLShop06 (2 commits).
+Contrôle après coup : plus AUCUN fichier fantôme dans l arbre Git. En ligne, `/mentions-legales` (8 918 o) et `/confidentialite` (10 822 o) affichent bien les pages Les Jardins Enchantés, 0 mention "RJ Destock".
+
+## 🧭 DÉCISION JLShop06 — P0-7 : Option A, variante "Union européenne + Monaco"
+Décision textuelle de JLShop06 : "pour les zones de livraison on garde UE et Monaco".
+Monaco est conservé car La Poste le traite comme la France : pas de douane, pas de surcoût, mêmes délais.
+Suisse, Royaume-Uni et Norvège sont abandonnés : hors douane européenne et aucune clause CGV ne les couvrait.
+
+## ✅ FAIT — P0-7 étape 1 sur 9 : `api/stripe/checkout.js` (commité)
+`allowed_countries` l.161-163 :
+- RETIRÉS : "CH" (Suisse), "GB" (Royaume-Uni), "NO" (Norvège).
+- CONSERVÉS, 14 destinations : "FR", "MC", "BE", "LU", "DE", "ES", "IT", "PT", "NL", "AT", "IE", "DK", "SE", "FI".
+- Ligne de commentaire ajoutée renvoyant à l article 8 des CGV.
+Diff Preview contrôlé avant commit : 3 ajouts / 2 suppressions, rien d autre touché.
+
+## 🔻 RESTE À FAIRE — mis à jour le 07/08/2026 (nuit 3)
+
+### ▶️ P0-7, étapes 2 à 9 — REPRENDRE ICI À LA PROCHAINE SESSION
+2. `livraison.html` : remplacer "France métropolitaine et dans l ensemble de l Union européenne" par une formule incluant Monaco. Vérifier aussi le paragraphe des délais.
+3. `cgv.html` article 8 : même ajout de Monaco.
+4 à 8. Retirer "Suisse" de la phrase "Et en Europe : Belgique, Suisse, Italie, Espagne, Allemagne, Pays-Bas, Portugal" dans les 6 pages produit Divine Xtases :
+   - `gel_lubrifiant_bio_neutre_monoi_divine_xtases.html` (clé `monoi_desc8`)
+   - `gel_lubrifiant_bio_neutre_divine_xtases.html` (clé `neutre_desc4`)
+   - `gel_lubrifiant_bio_neutre_framboise_divine_xtases.html` (clé `framboise_desc8`)
+   - `gel_lubrifiant_bio_neutre_vanille_divine_xtases.html` (clé `vanille_desc8`)
+   - `gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html` (clé `caramel_desc8`)
+   - `gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html` (paragraphe SANS clé i18n)
+   Remplacement proposé : "Et en Europe : Belgique, Luxembourg, Italie, Espagne, Allemagne, Pays-Bas, Portugal." (et ajouter Monaco côté France).
+9. `i18n-product.js` : 20 occurrences de Suisse / Svizzera / Suíça / Schweiz / Switzerland à retirer (5 clés x 4 langues pt/it/es/de). AUCUNE occurrence dans i18n-home.js, i18n-common.js, i18n-legal.js, i18n-core.js.
+
+### ▶️ ENSUITE (ordre conseillé)
+1. `cart.js` — patch de `pageSection()` : les pages 404 / contact / livraison / faq / erreur / success / cancel chargent inutilement `i18n-product.js` (282 ko, 492 clés). Gros gain de vitesse.
+2. P1-11, P1-12, P1-13, P1-10, P1-14, P1-15.
+3. P2-16 à P2-22.
+
+### ✅ DÉJÀ CLOS
+P0-3 (pages Contact / Livraison / FAQ), P0-4 (frais de port visibles avant paiement), P0-5 (remise -10 % appliquée côté serveur), P0-6 (vraie page 404), P0-8 (veille-concurrents masquée de Google), P0-9 (fichiers fantômes). P0-2 (e-mail pro) : ABANDONNÉ, non bloquant.
+
+> Fin de session du 07/08/2026. Reprendre exactement à "P0-7, étape 2 : livraison.html".
+
 # ✅ SESSION 07/08/2026 (nuit 2) — CHANTIER n°6 "P0-4 et P0-5 vérifiés + diagnostic P0-7" (Claude)
 
 > Règle inchangée : Claude prépare, JLShop06 clique "Commit changes".
