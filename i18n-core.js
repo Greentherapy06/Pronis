@@ -303,3 +303,73 @@ if (document.readyState === "loading") {
   }
 })();
 /* <<< fin lien CONTACT <<< */
+
+/* >>> Liens LIVRAISON et FAQ ajoutes au menu Categories et au footer, sur toutes les pages (P0-3) >>> */
+(function () {
+  var PAGES = [
+    { file: 'livraison.html', key: 'livraison', labels: {
+      fr: { menu: 'LIVRAISON', footer: 'Livraison' },
+      pt: { menu: 'ENTREGA', footer: 'Entrega' },
+      es: { menu: 'ENVÍO', footer: 'Envío' },
+      it: { menu: 'SPEDIZIONE', footer: 'Spedizione' },
+      de: { menu: 'VERSAND', footer: 'Versand' }
+    } },
+    { file: 'faq.html', key: 'faq', labels: {
+      fr: { menu: 'FAQ', footer: 'FAQ' },
+      pt: { menu: 'FAQ', footer: 'FAQ' },
+      es: { menu: 'FAQ', footer: 'FAQ' },
+      it: { menu: 'FAQ', footer: 'FAQ' },
+      de: { menu: 'FAQ', footer: 'FAQ' }
+    } }
+  ];
+
+  try {
+    window.TRANSLATIONS = window.TRANSLATIONS || {};
+    PAGES.forEach(function (p) {
+      for (var l in p.labels) {
+        if (!window.TRANSLATIONS[l]) window.TRANSLATIONS[l] = {};
+        window.TRANSLATIONS[l]['menu_' + p.key] = p.labels[l].menu;
+        window.TRANSLATIONS[l]['footer_' + p.key] = p.labels[l].footer;
+      }
+    });
+  } catch (e) {}
+
+  function curLang() {
+    try { return (typeof window.getLang === 'function') ? window.getLang() : 'fr'; } catch (e) { return 'fr'; }
+  }
+
+  function addPageLinks() {
+    var lang = curLang();
+    PAGES.forEach(function (p) {
+      var L = p.labels[lang] || p.labels.fr;
+      document.querySelectorAll('.dd--cat .dd__panel').forEach(function (panel) {
+        if (panel.querySelector('a[href$="' + p.file + '"]')) return;
+        var a = document.createElement('a');
+        a.className = 'dd__item';
+        a.href = p.file;
+        a.setAttribute('data-i18n', 'menu_' + p.key);
+        a.textContent = L.menu;
+        var ref = panel.querySelector('a[href$="contact.html"]');
+        if (ref) { panel.insertBefore(a, ref); } else { panel.appendChild(a); }
+      });
+      document.querySelectorAll('footer').forEach(function (f) {
+        if (f.querySelector('a[href$="' + p.file + '"]')) return;
+        var a = document.createElement('a');
+        a.href = p.file;
+        a.setAttribute('data-i18n', 'footer_' + p.key);
+        a.textContent = L.footer;
+        var ref = f.querySelector('a[href$="contact.html"]');
+        if (ref) { f.insertBefore(a, ref); f.insertBefore(document.createTextNode(' '), ref); }
+        else { f.appendChild(document.createTextNode(' ')); f.appendChild(a); }
+      });
+    });
+    try { if (typeof window.applyTranslations === 'function') window.applyTranslations(); } catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(addPageLinks, 0); });
+  } else {
+    setTimeout(addPageLinks, 0);
+  }
+})();
+/* <<< fin liens LIVRAISON et FAQ <<< */
