@@ -1,7 +1,7 @@
 # 🛡️ PLAN CONFIANCE & CONVERSION — 06/08/2026 (par Claude)
 
 > Audit réalisé en tant que **client inconnu et méfiant** sur le site LIVE, puis vérification dans le dépôt.
-> ⚠️ RIEN N EST MODIFIÉ (ni site ni code) : ceci est un PLAN. Règle du dépôt inchangée : Claude prépare, **JLShop06 clique "Commit changes"**.
+> ⚠️ RIEN N EST MODIFIÉ (ni site ni code) : ceci est un PLAN. Règle du dépôt inchangée : Claude prépare, **JLShop06 clique "Commit changes"**. — **MISE À JOUR 07/08/2026 : ce plan est désormais EN COURS D EXÉCUTION. Voir la section SESSION 07/08/2026 — CHANTIER n°3 plus bas.**
 
 ## 🟥 P0 — Bloquants de confiance (avant tout le reste)
 
@@ -79,6 +79,99 @@ Semaine 2 (réassurance) : P1-11, P1-12, P1-13, P1-10.
 Ensuite : P1-14, P1-15, puis les P2 dans l ordre.
 
 Indicateur de contrôle : sur chaque page, un client doit trouver en moins de 10 secondes qui vend, comment le joindre, combien coûte la livraison et comment renvoyer.
+
+---
+# ✅ SESSION 07/08/2026 — CHANTIER n°3 "i18n allégé pour de vrai" (Claude)
+
+> Suite du PLAN CONFIANCE & CONVERSION ci-dessus. RÔLES INCHANGÉS : Claude prépare tout (analyse, génération, collage éditeur), **JLShop06 clique "Commit changes"**.
+> Tout ce qui suit est **committé sur main ET vérifié en LIVE**.
+
+## ✅ FAIT — P0-1 : coordonnées contradictoires (RÉSOLU)
+
+Cause confirmée : le HTML des pages légales était BON, c est le legacy i18n.js (662 Ko) qui écrasait le texte à l affichage.
+Correction dans i18n.js : 6 clés × 5 langues (30 lignes) remplacées par les valeurs à jour de i18n-legal.js — clés `cgv_6`, `cgv_44`, `cgv_61`, `confid_5`, `confid_46`, `cookies_37`.
+Diff contrôlé : exactement 30 suppressions / 30 ajouts. Commit : "fix(i18n): adresse Foch + e-mail correct dans les 6 cles legales".
+
+Vérification LIVE, dans les 5 langues (fr/pt/it/es/de) :
+
+| Page | "Foch" | "Vallonet" | ancien mail | nouveau mail |
+|---|---|---|---|---|
+| /cgv | 1 | 0 | 0 | 3 |
+| /confidentialite | 1 | 0 | 0 | 2 |
+| /mentions-legales | 1 | 0 | 0 | 1 |
+
+→ **Plus aucune contradiction d adresse ni d e-mail sur le site.**
+
+## 🐞 BUG MAJEUR TROUVÉ ET CORRIGÉ — le chantier n°1 ne servait à RIEN
+
+Découverte en live : un **second chargeur i18n, ancien et oublié, était resté à la FIN de cart.js** ("Chargeur i18n automatique", 481 octets). Il forçait le chargement de /i18n.js ENTIER sur toute page sans balise en dur.
+Conséquence : les fiches produit chargeaient i18n.js (662 Ko) **EN PLUS** des fichiers de section (common + product) → ~950 Ko au lieu de 662 Ko. Le README affirmait ce bloc "REMPLACÉ" : c était FAUX.
+
+Corrections appliquées (option A "chemin propre", choisie par JLShop06) :
+
+1. **Création de `i18n-core.js`** — 14 853 octets, 252 lignes : le MOTEUR i18n extrait de i18n.js, SANS les traductions. Contient window.t, getLang, applyTranslations, translateProduct, translateCart, initI18n, renderNavMenus, renderLangSwitcher, setLang, le CSS injecté et les menus déroulants (makeDD, closeAll).
+   **Astuce clé à ne pas casser : AUCUNE déclaration locale de TRANSLATIONS dans i18n-core.js**, pour que les références se résolvent dynamiquement vers window.TRANSLATIONS, rempli ensuite par les fichiers de section. Accolades 111/111, syntaxe validée.
+   Testé avant commit dans une iframe sandbox sur l origine live : 536 clés, i18n.js NON chargé, sélecteur + menus construits, bascule des 5 langues OK.
+   Commit : "feat(i18n): i18n-core.js — moteur i18n partage extrait de i18n.js".
+
+2. **cart.js nettoyé** — suppression du vieux chargeur en double (13 lignes) + `i18n-core.js` ajouté en PREMIER dans le tableau des sections. 17 448 → 16 983 octets. Diff : 1 ajout / 14 suppressions.
+   Commit : "perf(i18n): loader charge i18n-core.js + suppression du vieux loader en double".
+
+3. **Retrait de la balise `i18n.js` en dur** dans les 7 fichiers HTML qui l avaient encore. ⚠️ Le plan annonçait 2 fichiers ; le scan des 51 HTML du dépôt en a trouvé **7**. Un commit par fichier :
+
+| # | Fichier | Avant | Après | État |
+|---|---|---|---|---|
+| 1 | index.html | 51 052 | 51 010 | ✅ committé |
+| 2 | blog.html | 18 636 | 18 597 | ✅ committé |
+| 3 | blog-gel-lubrifiant-bio.html | 24 082 | 24 043 | ✅ committé |
+| 4 | blog-lubrifiant-eau-vs-bio.html | 22 982 | 22 943 | ✅ committé |
+| 5 | blog-choisir-premier-sextoy.html | 22 545 | 22 504 | ✅ committé |
+| 6 | blog-gel-lubrifiant-aromatise.html | 23 110 | 23 068 | ✅ committé |
+| 7 | blog-cockring-guide-utilisation.html | 22 722 | 22 680 | ✅ committé |
+
+→ **7/7. Plus AUCUNE page du site ne charge i18n.js (662 Ko).**
+
+### GAIN RÉEL (mesuré en live, requêtes réseau)
+- Fiche produit : core + common + product → **536 clés** (au lieu de 1022), i18n.js ABSENT.
+- Page légale : core + common + i18n-legal.js → 283 clés.
+- Accueil : core + common + home → 100 clés.
+- Blog : core + common + blog → 235 clés.
+- Économie : **~660 Ko de JS en moins par page**. Toutes les requêtes en 200.
+
+### CONTRÔLE ZÉRO-RÉGRESSION (méthode à réutiliser)
+Avant de retirer i18n.js d une page : comparer TOUTES les clés `data-i18n` de la page aux clés réellement disponibles dans core + sections chargées.
+- Accueil : 96 `data-i18n`, 88 uniques, 100 clés dispo → 1 seule manquante (`skip_content`), qui **n existait pas non plus** dans i18n.js → zéro régression.
+- Les 6 pages blog : 0 clé manquante.
+Après chaque déploiement, vérifié en live : menus construits, sélecteur de langue OK, panier (addToCart/showCart) OK, bascule des 5 langues OK, capture d écran identique à avant.
+
+### ⚠️ LEÇONS ET PIÈGES (à ne pas réapprendre)
+- **raw.githubusercontent.com sert des copies PÉRIMÉES.** Pour vérifier qu un commit est passé, utiliser l API GitHub (endpoint commits, sha main). Une fausse alerte "le commit n est pas passé" a été causée par ce cache.
+- **Ctrl+A puis Delete dans l éditeur GitHub échoue parfois silencieusement** → le collage s AJOUTE et le fichier DOUBLE. C est arrivé une fois (blog-lubrifiant-eau-vs-bio.html), détecté au diff, **rien n a été committé**, corrigé immédiatement. Obligatoire depuis : répéter Ctrl+A + Delete DEUX fois, puis **garde-fou** qui vérifie que l éditeur contient exactement le texte du placeholder vide, sinon on lève une erreur AVANT de coller.
+- Le bouton **Preview** est à la coordonnée (391, 120) page non défilée ; à (391, 169) le clic échoue et on reste en Edit.
+- Toujours contrôler le diff Preview AVANT de demander le commit. Ici : 1 suppression attendue par fichier ; 1 suppression + 1 ajout quand les 3 balises script partagent la même ligne (cas de blog-choisir-premier-sextoy.html).
+- Sur les pages GitHub, `new Function()` est bloqué par la CSP → valider la syntaxe JS depuis un onglet du site live.
+
+## 🔻 RESTE À FAIRE — PLAN CONFIANCE & CONVERSION
+
+### 🚫 UNIQUEMENT JLShop06 (Claude n a pas le droit de le faire)
+- **P0-2 — créer l e-mail pro** contact (arobase) les-jardins-enchantes.com : création de compte, interdite à Claude. Une fois créé, Claude remplacera les 2 adresses Gmail partout (HTML + fichiers i18n).
+- **P0-9 — SUPPRIMER les 2 fichiers fantômes** `mentions-legales` et `confidentialite` (SANS extension) à la racine du dépôt : ils affichent l identité "RJ Destock" et une adresse au Portugal. Suppression de fichier, interdite à Claude. **C est le plus gros risque de confiance restant.**
+
+### PROCHAINE ÉTAPE IMMÉDIATE (Claude peut faire, dans cet ordre)
+1. **P0-8** — /veille-concurrents.html est accessible publiquement : ajouter noindex + Disallow. Constat : robots.txt ne mentionne pas "veille" (0 occurrence).
+2. **P0-6** — créer une vraie page 404.html (aujourd hui : page 404 GitHub par défaut).
+3. **P0-3** — créer contact.html ; livraison.html et faq.html sont AUSSI en 404.
+4. **P0-4** — afficher les frais de port avant le panier (SHIPPING_FEE_CENTS 690 ; FREE_SHIPPING_THRESHOLD_CENTS 7500).
+5. **P0-5** — faire honorer la remise -10% dans le panier.
+6. **P0-7** — trancher la zone de livraison : les CGV disent France + UE, mais checkout.js accepte GB, CH et NO.
+7. Puis P1-11, P1-12, P1-13, P1-10, ensuite P1-14, P1-15, puis les P2 dans l ordre.
+
+### ÉTAT DES P1 / P2 : AUCUN COMMENCÉ
+P1-10 (0 avis client), P1-11 (panier pauvre), P1-12 (fiches produit incomplètes), P1-13 (incohérences catalogue), P1-14 (superlatifs non prouvés), P1-15 (un seul moyen de paiement).
+P2-16 à P2-22 : rien fait. Noter que **P2-22 (README trop gros) EMPIRE** : ce fichier grossit à chaque session, il faudra le découper.
+
+### CHANTIER n°2 (normalisation HTML) : TOUJOURS EN PAUSE
+32 fiches produit normalisées. Restent 17 pages non-produit non normalisées, plus 3 fiches SANS footer : mini-robe-noire, robe-longue-noire-argentee, tanga-taille-haute-dentelle-bleue.
 
 ---
 # 🔍 AUDIT COMPLET DU SITE — 26/07/2026 (par Claude)
