@@ -307,14 +307,14 @@ if (document.readyState === "loading") {
 /* >>> Liens LIVRAISON et FAQ ajoutes au menu Categories et au footer, sur toutes les pages (P0-3) >>> */
 (function () {
   var PAGES = [
-    { file: 'livraison.html', key: 'livraison', labels: {
+    { file: 'livraison.html', key: 'page_livraison', labels: {
       fr: { menu: 'LIVRAISON', footer: 'Livraison' },
       pt: { menu: 'ENTREGA', footer: 'Entrega' },
       es: { menu: 'ENVÍO', footer: 'Envío' },
       it: { menu: 'SPEDIZIONE', footer: 'Spedizione' },
       de: { menu: 'VERSAND', footer: 'Versand' }
     } },
-    { file: 'faq.html', key: 'faq', labels: {
+    { file: 'faq.html', key: 'page_faq', labels: {
       fr: { menu: 'FAQ', footer: 'FAQ' },
       pt: { menu: 'FAQ', footer: 'FAQ' },
       es: { menu: 'FAQ', footer: 'FAQ' },
