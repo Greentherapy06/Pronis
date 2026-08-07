@@ -10,5 +10,9 @@ Disallow: /cancel.html
 Disallow: /erreur.html
 Disallow: /api/
 
+# Page interne (veille concurrentielle) : ne pas indexer
+Disallow: /veille-concurrents.html
+Disallow: /veille-concurrents
+
 # Sitemap
 Sitemap: https://les-jardins-enchantes.com/sitemap.xml
