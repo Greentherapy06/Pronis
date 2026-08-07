@@ -120,10 +120,9 @@ DEUX OPTIONS PROPOSÉES À JLShop06 :
 ## 🔻 RESTE À FAIRE — mis à jour le 07/08/2026 (nuit 2)
 
 ### 🚫 UNIQUEMENT JLShop06 (Claude n a pas le droit)
-1. **P0-9 — supprimer les 2 fichiers fantômes "RJ Destock" : TOUJOURS EN ATTENTE au 07/08/2026 nuit 2.**
-   `mentions-legales` (391 o) et `confidentialite` (2 795 o), SANS extension, à la racine du dépôt.
-   Vérifié sans risque : en ligne, `/mentions-legales` et `/confidentialite` servent déjà les bonnes versions `.html` (0 mention "RJ Destock").
-   Marche à suivre, 3 clics par fichier : ouvrir le fichier sur GitHub -> bouton "..." en haut à droite -> "Delete file" -> "Commit changes".
+1. **P0-9 — fichiers fantômes "RJ Destock" : ✅ FAIT le 07/08/2026 (nuit 2) par JLShop06. P0-9 CLOS.**
+   `mentions-legales` (391 o) et `confidentialite` (2 795 o), SANS extension, ont été supprimés du dépôt (2 commits).
+   Contrôle après suppression : plus AUCUN fichier fantôme dans l arbre Git ; en ligne `/mentions-legales` (8 918 o, titre "Mentions Légales – Les Jardins Enchantés") et `/confidentialite` (10 822 o, titre "Politique de Confidentialité – Les Jardins Enchantés") s affichent normalement, 0 mention "RJ Destock".
 2. **P0-7 — choisir Option A ou Option B** (voir le diagnostic ci-dessus).
 3. P0-2 (e-mail pro) : ABANDONNÉ, non bloquant. Seul lesjardinsenchantes06@gmail.com existe et tout le site l utilise de façon cohérente.
 
