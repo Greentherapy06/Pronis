@@ -81,6 +81,64 @@ Ensuite : P1-14, P1-15, puis les P2 dans l ordre.
 Indicateur de contrôle : sur chaque page, un client doit trouver en moins de 10 secondes qui vend, comment le joindre, combien coûte la livraison et comment renvoyer.
 
 ---
+# ✅ SESSION 07/08/2026 (soir) — CHANTIER n°4 "P0-8 / P0-6 / P0-3" (Claude)
+
+> Suite directe du PLAN CONFIANCE & CONVERSION ci-dessus. RÔLES INCHANGÉS : Claude prépare tout (analyse, génération, collage dans l éditeur), **JLShop06 clique "Commit changes"**.
+> Cette section REMPLACE la liste "RESTE À FAIRE" du chantier n°3 (plus bas).
+> Tout ce qui suit est **committé sur main, vérifié octet par octet via l API GitHub ET vérifié en LIVE**.
+
+## ✅ FAIT — P0-8 : page interne rendue invisible pour Google (RÉSOLU)
+
+- `veille-concurrents.html` : ajout ligne 6 de `<meta name="robots" content="noindex, nofollow, noarchive">`. Commit : "fix(seo): noindex sur la page interne veille-concurrents".
+- `robots.txt` : ajout d un commentaire + `Disallow: /veille-concurrents.html` + `Disallow: /veille-concurrents`. Commit : "fix(seo): interdire veille-concurrents dans robots.txt".
+- Vérification LIVE : `/robots.txt` contient bien les 2 lignes Disallow ; la page reste atteignable si on tape l URL exacte (normal, ce n est pas un mot de passe) mais elle ne peut plus être indexée ni archivée.
+
+## ✅ FAIT — P0-6 : vraie page 404 (RÉSOLU)
+
+- Création de `404.html` (97 lignes, 6331 octets), construite à partir du fichier canon `gel_cannabis_orgie.html` : même en-tête, 4 menus déroulants, même pied de page (6 liens), même modale panier.
+- Vérification LIVE : `/page-qui-nexiste-pas-test` renvoie bien le code HTTP **404** avec la page personnalisée (avant : erreur brute Vercel "NOT_FOUND"). Aucun débordement horizontal testé à 390 px de large.
+
+## 🟡 EN COURS — P0-3 : page Contact créée (livraison + FAQ restent à faire)
+
+4 commits :
+
+1. `contact.html` (151 lignes, 9820 octets) : adresse 10 Avenue du Maréchal Foch, 06190 Roquebrune-Cap-Martin ; SIRET 848 732 137 00015 ; e-mail lesjardinsenchantes06@gmail.com ; délai de réponse 5 jours ouvrés maximum (source : CGV) ; délais de livraison 3-7 j France / 5-14 j UE ; emballage discret et neutre. **Aucune information inventée** : pas de numéro de téléphone ni d horaires, car ils n existent nulle part dans le dépôt.
+2. `i18n-core.js` : +53 lignes ajoutées à la fin. Elles insèrent automatiquement le lien "Contact" dans le menu Catégories ET dans le pied de page de **toutes** les pages du site, dans les 5 langues (fr/pt/it/es/de), sans jamais créer de doublon (code idempotent). Testé en live avant le commit.
+3. `index.html` : +2 lignes (lien CONTACT en dur dans `.cat-nav` après BLOG, et lien Contact dans le pied de page après Mentions légales) pour que le lien existe même si le JavaScript ne se charge pas.
+4. `sitemap.xml` : +1 entrée `contact.html` (le sitemap passe de 40 à 41 URL).
+
+⚠️ Pour clore P0-3 il manque encore **livraison.html** et **faq.html** : ces 2 URL sont toujours en 404.
+
+## 🔻 RESTE À FAIRE — mis à jour le 07/08/2026 au soir
+
+### 🚫 UNIQUEMENT JLShop06 (Claude n a pas le droit de le faire)
+- **P0-2 — créer l e-mail pro** contact (arobase) les-jardins-enchantes.com : création de compte, interdite à Claude. Une fois créé, Claude remplacera les 2 adresses Gmail partout (HTML + fichiers i18n + contact.html).
+- **P0-9 — SUPPRIMER les 2 fichiers fantômes** `mentions-legales` et `confidentialite` (SANS extension) à la racine : ils affichent l identité "RJ Destock" et une adresse au Portugal. Suppression de fichier, interdite à Claude. **C est le plus gros risque de confiance restant.**
+- Re-soumettre `sitemap.xml` dans Google Search Console maintenant que contact.html y figure.
+
+### ▶️ PROCHAINE ÉTAPE IMMÉDIATE (Claude peut faire, dans cet ordre)
+1. **P0-3 (fin)** — créer `livraison.html` puis `faq.html` sur le même gabarit que contact.html, puis les rattacher (i18n-core.js + index.html + sitemap.xml).
+2. **Nettoyage** — corriger `pageSection()` dans `cart.js` : les pages 404, contact, livraison, faq, success et cancel chargent aujourd hui `i18n-product.js` (492 clés) alors qu elles n en ont aucun besoin.
+3. **P0-4** — afficher les frais de port avant le panier (SHIPPING_FEE_CENTS 690 soit 6,90 EUR ; FREE_SHIPPING_THRESHOLD_CENTS 7500 soit livraison offerte dès 75 EUR).
+4. **P0-5** — faire honorer la remise -10 % dans le panier.
+5. **P0-7** — trancher la zone de livraison : les CGV disent France + UE, mais checkout.js accepte GB, CH et NO.
+6. Puis P1-11, P1-12, P1-13, P1-10, ensuite P1-14, P1-15, puis les P2 dans l ordre.
+
+### ÉTAT DES P1 / P2 : toujours AUCUN commencé
+P1-10 (0 avis client), P1-11 (panier pauvre), P1-12 (fiches produit incomplètes), P1-13 (incohérences catalogue), P1-14 (superlatifs non prouvés), P1-15 (un seul moyen de paiement). P2-16 à P2-22 : rien fait. **P2-22 (README trop gros) continue d empirer** : ce fichier dépasse maintenant 2600 lignes, il faudra le découper.
+
+## 🧰 Leçons techniques de cette session (à relire avant la prochaine)
+
+- Toujours lire les fichiers via `api.github.com` (l API renvoie la version à jour) ; `raw.githubusercontent.com` renvoie souvent une version périmée.
+- Dans l éditeur GitHub, si **Soft wrap** est activé, la touche Bas se déplace ligne À L ÉCRAN et non ligne de fichier : passer le menu en **No wrap** avant de compter les lignes.
+- L éditeur ne garde qu une partie des lignes dans la page (virtualisation) : pour un gros fichier, la vérification fiable se fait via l API GitHub APRÈS le commit, pas dans l éditeur.
+- Home puis Backspace supprime une unité d indentation ; en répéter plusieurs colle deux lignes ensemble (erreur commise puis corrigée sur veille-concurrents.html).
+- Le bouton **Preview** change de place : le localiser à chaque fois, ne pas réutiliser d anciennes coordonnées.
+- Les fichiers `.js` sont mis en cache 24 h : faire **Ctrl+Shift+R** pour vérifier un changement JavaScript en live.
+- Rappel : **1 fichier = 1 commit**, et bien vérifier que TOUS les fichiers préparés ont été committés (2 fois cette session, un seul des deux l avait été).
+
+---
+
 # ✅ SESSION 07/08/2026 — CHANTIER n°3 "i18n allégé pour de vrai" (Claude)
 
 > Suite du PLAN CONFIANCE & CONVERSION ci-dessus. RÔLES INCHANGÉS : Claude prépare tout (analyse, génération, collage éditeur), **JLShop06 clique "Commit changes"**.
