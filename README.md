@@ -81,6 +81,64 @@ Ensuite : P1-14, P1-15, puis les P2 dans l ordre.
 Indicateur de contrôle : sur chaque page, un client doit trouver en moins de 10 secondes qui vend, comment le joindre, combien coûte la livraison et comment renvoyer.
 
 ---
+# ✅ SESSION 07/08/2026 (nuit 2) — CHANTIER n°6 "P0-4 et P0-5 vérifiés + diagnostic P0-7" (Claude)
+
+> Règle inchangée : Claude prépare, JLShop06 clique "Commit changes".
+
+## ✅ FAIT — commits de fin du chantier n°5 vérifiés
+- `livraison.html` : 135 -> 120 lignes (9 280 o), script mort du formulaire de contact retiré. Page vérifiée EN LIGNE (titre, h1, 8 sections OK).
+- `README.md` : 2 683 -> 2 733 lignes, chapitre n°5 bien présent.
+
+## ✅ FAIT — P0-4 : frais de port visibles avant paiement (P0-4 CLOS, aucune correction nécessaire)
+Vérification RÉELLE, en ajoutant des produits au panier sur le site en ligne :
+- panier à 29,90 € -> "Livraison 6,90 €" + "Plus que 45,10 € pour la livraison offerte" + "Total estimé 36,80 €"
+- panier à 89,90 € -> "Livraison Offerts" + "Total estimé 89,90 €"
+Couverture : sur les 43 URL du sitemap, 41 contiennent le bloc `cart-summary` écrit en dur dans le HTML ; les 2 autres (`/` et `/cgv`) l obtiennent au chargement car `cart.js` (fonction `injectCartExtras`, l.322-327) crée `cart-summary` et `cart-email` s ils manquent. -> RIEN À CORRIGER.
+
+## ✅ FAIT — P0-5 : remise de bienvenue -10 % (P0-5 CLOS, aucune correction nécessaire)
+`api/stripe/checkout.js` l.107-116 : la remise est bien appliquée CÔTÉ SERVEUR via un coupon Stripe créé à la volée (percent_off 10, duration "once").
+Anti-abus l.87-105 : recherche du Customer Stripe par e-mail ; si metadata.welcome_discount_used vaut "true" la remise est refusée ; en cas d erreur de lecture elle est refusée aussi (fail-safe).
+Le panier affiche "appliqués si éligible", ce qui est honnête et conforme. -> RIEN À CORRIGER.
+
+## 🔎 DIAGNOSTIC — P0-7 : contradiction sur les zones de livraison (EN ATTENTE DE DÉCISION JLShop06)
+Ce que disent les textes officiels du site :
+- CGV article 8 + `livraison.html` : "France métropolitaine et l ensemble de l Union européenne", 3-7 j ouvrés FR / 5-14 j ouvrés UE.
+
+Ce que dit le code réellement :
+- `api/stripe/checkout.js` l.159-163, `allowed_countries` : FR, BE, **CH**, LU, **MC**, DE, ES, IT, PT, NL, AT, **GB**, IE, DK, SE, **NO**.
+- CH (Suisse), MC (Monaco), GB (Royaume-Uni), NO (Norvège) sont HORS Union européenne -> douane, TVA à l import, délais plus longs, et AUCUNE clause CGV ne les couvre. Risque de litige.
+
+Ce que disent les pages produit :
+- 6 pages "Divine Xtases" annoncent "Et en Europe : Belgique, Suisse, Italie, Espagne, Allemagne, Pays-Bas, Portugal".
+- Clés i18n concernées : `monoi_desc8`, `neutre_desc4`, `framboise_desc8`, `vanille_desc8`, `caramel_desc8` (+ 1 paragraphe SANS clé i18n dans `gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html`).
+- `i18n-product.js` contient 20 occurrences de Suisse / Svizzera / Suíça / Schweiz / Switzerland (5 clés x 4 langues pt/it/es/de). AUCUNE dans i18n-home.js, i18n-common.js, i18n-legal.js, i18n-core.js.
+
+DEUX OPTIONS PROPOSÉES À JLShop06 :
+- **Option A (recommandée)** : se limiter à France + UE. Retirer CH, MC, GB, NO de `allowed_countries` (1 commit), retirer "Suisse" des 6 pages produit (6 commits) et des 20 lignes de `i18n-product.js` (1 commit). Zéro douane, tout devient cohérent.
+- **Option B** : assumer l international. Garder ces pays mais ajouter une clause "Livraisons hors Union européenne" (douane, TVA à l import, délais) dans les CGV ET dans `livraison.html`, et corriger la phrase "l ensemble de l Union européenne".
+
+## 🔻 RESTE À FAIRE — mis à jour le 07/08/2026 (nuit 2)
+
+### 🚫 UNIQUEMENT JLShop06 (Claude n a pas le droit)
+1. **P0-9 — supprimer les 2 fichiers fantômes "RJ Destock" : TOUJOURS EN ATTENTE au 07/08/2026 nuit 2.**
+   `mentions-legales` (391 o) et `confidentialite` (2 795 o), SANS extension, à la racine du dépôt.
+   Vérifié sans risque : en ligne, `/mentions-legales` et `/confidentialite` servent déjà les bonnes versions `.html` (0 mention "RJ Destock").
+   Marche à suivre, 3 clics par fichier : ouvrir le fichier sur GitHub -> bouton "..." en haut à droite -> "Delete file" -> "Commit changes".
+2. **P0-7 — choisir Option A ou Option B** (voir le diagnostic ci-dessus).
+3. P0-2 (e-mail pro) : ABANDONNÉ, non bloquant. Seul lesjardinsenchantes06@gmail.com existe et tout le site l utilise de façon cohérente.
+
+### ▶️ PROCHAINE ÉTAPE (Claude peut faire, dans cet ordre)
+1. P0-7 : appliquer l option choisie par JLShop06.
+2. `cart.js` — patch de `pageSection()` : les pages 404 / contact / livraison / faq / erreur / success / cancel chargent inutilement `i18n-product.js` (282 ko, 492 clés). Gros gain de vitesse.
+3. P1-11, P1-12, P1-13, P1-10, P1-14, P1-15.
+4. P2-16 à P2-22.
+
+## 🧰 Leçons techniques de cette session
+- Ne jamais conclure qu une fonctionnalité est cassée en lisant seulement le HTML : `cart.js` injecte `cart-summary` et `cart-email` à l exécution. Toujours TESTER EN LIGNE.
+- Signature réelle : `addToCart(id, name, price, priceId)` — 4 arguments, l identifiant en premier. Puis `showCart()` pour ouvrir le panier.
+- La source de vérité des pays livrables n est PAS les CGV mais `allowed_countries` dans `api/stripe/checkout.js`.
+- L API de recherche de code GitHub (/search/code) renvoie vide sans authentification : passer par git/trees?recursive=1 puis lire les fichiers un par un.
+
 # ✅ SESSION 07/08/2026 (nuit) — CHANTIER n°5 "P0-3 terminé + navigation + GSC" (Claude)
 
 > Règle inchangée : Claude prépare, **JLShop06 clique "Commit changes"**.
