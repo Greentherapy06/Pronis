@@ -26,7 +26,7 @@
     if (/^blog/.test(file)) return 'blog';
     return 'product';
   }
-  var sections = ['i18n-common.js', 'i18n-' + pageSection() + '.js'];
+  var sections = ['i18n-core.js', 'i18n-common.js', 'i18n-' + pageSection() + '.js'];
   var fellBack = false;
   function loadFull() {
     if (fellBack) return; fellBack = true;
@@ -424,17 +424,4 @@ document.addEventListener('DOMContentLoaded', applyLazyLoading);
 } else {
 applyLazyLoading();
 }
-})();
-/* === Chargeur i18n automatique (ajouté pour la traduction multilingue) === */
-(function () {
-  function runI18n() {
-    try { if (typeof initI18n === 'function') initI18n(); } catch (e) {}
-  }
-  if (typeof TRANSLATIONS !== 'undefined') { runI18n(); return; }
-  if (!document.querySelector('script[src="/i18n.js"], script[src="i18n.js"]')) {
-    var s = document.createElement('script');
-    s.src = '/i18n.js';
-    s.onload = runI18n;
-    document.head.appendChild(s);
-  }
 })();
