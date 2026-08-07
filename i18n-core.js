@@ -250,3 +250,56 @@ if (document.readyState === "loading") {
 })();
 
 })();
+
+/* >>> Lien CONTACT ajoute au menu Categories et au footer, sur toutes les pages (P0-3) >>> */
+(function () {
+  var LABELS = {
+    fr: { menu: 'CONTACT', footer: 'Contact' },
+    pt: { menu: 'CONTACTO', footer: 'Contacto' },
+    es: { menu: 'CONTACTO', footer: 'Contacto' },
+    it: { menu: 'CONTATTI', footer: 'Contatti' },
+    de: { menu: 'KONTAKT', footer: 'Kontakt' }
+  };
+  try {
+    window.TRANSLATIONS = window.TRANSLATIONS || {};
+    for (var l in LABELS) {
+      if (!window.TRANSLATIONS[l]) window.TRANSLATIONS[l] = {};
+      window.TRANSLATIONS[l].menu_contact = LABELS[l].menu;
+      window.TRANSLATIONS[l].footer_contact = LABELS[l].footer;
+    }
+  } catch (e) {}
+
+  function curLang() {
+    try { return (typeof window.getLang === 'function') ? window.getLang() : 'fr'; } catch (e) { return 'fr'; }
+  }
+
+  function addContactLinks() {
+    var L = LABELS[curLang()] || LABELS.fr;
+    document.querySelectorAll('.dd--cat .dd__panel').forEach(function (panel) {
+      if (panel.querySelector('a[href$="contact.html"]')) return;
+      var a = document.createElement('a');
+      a.className = 'dd__item';
+      a.href = 'contact.html';
+      a.setAttribute('data-i18n', 'menu_contact');
+      a.textContent = L.menu;
+      panel.appendChild(a);
+    });
+    document.querySelectorAll('footer').forEach(function (f) {
+      if (f.querySelector('a[href$="contact.html"]')) return;
+      var a = document.createElement('a');
+      a.href = 'contact.html';
+      a.setAttribute('data-i18n', 'footer_contact');
+      a.textContent = L.footer;
+      f.appendChild(document.createTextNode(' '));
+      f.appendChild(a);
+    });
+    try { if (typeof window.applyTranslations === 'function') window.applyTranslations(); } catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(addContactLinks, 0); });
+  } else {
+    setTimeout(addContactLinks, 0);
+  }
+})();
+/* <<< fin lien CONTACT <<< */
