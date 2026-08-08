@@ -214,6 +214,48 @@ Règle inchangée : Claude prépare, JLShop06 clique "Commit changes". **Un seul
 ### 🔎 INVENTAIRE DES CONTENANCES (préparation de l'étape 2)
 La contenance figure dans le texte descriptif de la plupart des fiches (100 ml, 60 ml, 50 ml, 15 ml, 31 cm...), mais jamais comme information produit structurée. **4 fiches n'en portent aucune** : `gel_cannabis_orgie`, `Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`.
 
+## ✅ SESSION 08/08/2026 (jour) — CHANTIER n°12 « P1-12 étape 2 : contenance et dimensions en dur sur 23 fiches » (Claude)
+
+Règle inchangée : Claude prépare, JLShop06 clique Commit changes. 24 commits : 1 règle CSS + 23 fiches produit. Aucun JS touché.
+
+### ✅ FAIT — une ligne `<p class="product-format">` insérée juste sous `<p class="product-price">`
+- **Pourquoi en dur dans le HTML** et non injecté par `cart.js` comme le bloc `#product-info` du chantier n°11 : la contenance a une valeur SEO, elle doit être dans la source servie à Google.
+- **Une seule règle CSS**, ajoutée en fin de `style.css` (77 387 → 77 471 o) : `.product-format{font-size:14px;letter-spacing:.5px;color:#555;margin:-10px 0 22px;}`. Nom de classe libre (0 occurrence avant). Les 23 fiches chargent `style.css`, donc 1 commit CSS au lieu de 23.
+- **Ancre unique vérifiée avant écriture** : sur les 23 fiches, `<p class="product-price">` existe exactement 1 fois et est enfant DIRECT de `.product-details`.
+
+### ✅ LES 23 VALEURS (toutes reprises mot pour mot de la fiche technique déjà présente dans la page)
+- **100 ml** : les 6 Divine Xtases + les 3 tubes Orgie (chocolat, fraise, barbe à papa).
+- **60 ml** : pink-star, pink-star-choco-fraise, pink_star_sucette_cerise. **50 ml** : orgie-pinacolada. **15 ml** : hemp-intense-orgasm, dual-vibe-sex-on-the-beach (flacon airless).
+- **coffret-bien-etre-intime-bio** : produit composite, donc formule dédiée « Coffret : huile de massage 100 ml + gel lubrifiant 100 ml + 10 préservatifs ».
+- **Dimensions (7 toys)** : Magnum Opus 31 cm dont 17 insérables et Ø 3,5 cm — black-empire 19 x 3,3 cm — monster-pussy-strocker 16 x 6 cm — Indiana 14,8 x 2,5 cm — anneau télécommandé longueur totale 14,5 cm — Marry Me hauteur 9,3 cm et Ø intérieur extensible 3 cm — Saturn 8,5 × 2,2 cm, Ø intérieur 4,7 cm, 150 g.
+- ⚠️ Le `×` et le `x` sont repris **tels quels** de chaque source, sans uniformisation. Aucune mensuration inventée, aucun stock, aucune matière ajoutée.
+- **24e fiche, le même jour** : `gel_cannabis_orgie` → « Contenance : 50 ml ». Cette valeur n existait NULLE PART dans le dépôt, elle a été communiquée par JLShop06. Commit séparé, 16 573 → 16 622 o.
+
+### 🆕 MÉTHODE — 3 découvertes à réutiliser
+- **Modifier le document CodeMirror par l API JS (`view.dispatch`) n active PAS le bouton Commit** : React ne voit pas la transaction. Il faut une vraie frappe clavier ensuite. Astuce : taper `x` puis Retour arrière (net zéro, le compteur d octets le prouve). Le doc est lisible via `document.querySelector('.cm-content').cmTile.view.state.doc.toString()`.
+- **Preuve plus forte que le Diff Preview** : comparer `doc === original.replace(ancre, ancre + insertion)`. Les 23 fiches ressortent `identique: true`, donc une seule insertion et rien d autre touché. Le Preview reste utile mais il est seulement visuel.
+- **L API GitHub non authentifiée est limitée à 60 requêtes par heure** : épuisée en lisant les 34 fiches. Contournement : lire le contenu dans l éditeur lui-même, puis vérifier sur le SITE EN LIGNE (fetch same-origin), ce qui ne coûte aucune requête API.
+
+### ✅ VÉRIFIÉ EN LIGNE (fetch same-origin, cache reload)
+- Les 23 fiches renvoient 200 et contiennent **exactement 1** `class="product-format"`, avec la bonne valeur.
+- 18 pages témoins (accueil, contact, faq, livraison, cgv, blog, 404, les 4 fiches sans contenance, les 7 textiles) : **0 occurrence**. Aucun effet de bord.
+- `/style.css` servi en 77 471 o, règle `.product-format` présente.
+- Rendu contrôlé sur `/cockring-vibrant-saturn-hueman` (la ligne la plus longue) : 14 px, gris #555, placée entre le prix et AJOUTER AU PANIER, **0 débordement** ; testé aussi en colonne 330 px, la ligne passe sur 2 lignes sans rien casser.
+
+## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (jour, après le chantier n°12)
+
+### ▶️ REPRENDRE ICI
+- **P1-12 étape 2, reliquat** : 3 fiches n ont AUCUNE contenance ni dimension dans le dépôt. Rien d inventable ; JLShop06 vérifie les chiffres fournisseur le 09/08/2026 :
+  - `Plug-Anal-Rosy-Gold` → longueur totale, longueur insérable, diamètre max, matière exacte (la fiche dit seulement « matière lisse et douce »).
+  - `le-flateur` → hauteur × largeur en cm.
+  - `red-dolls-energy-pleasure` → hauteur × diamètre de la canette et profondeur insérable.
+- **P1-12 reliquat BLOQUÉ côté JLShop06** : sélecteur de taille S / M / L sur `deguisement-infirmière-sexy` (attend 3 Price ID Stripe) et guide des tailles (attend les mensurations fournisseur).
+- Ensuite : P1-13, P1-10, P1-14, P1-15, puis P2-16 à P2-22.
+
+### ⚠️ POINTS OUVERTS (ceux du 08/08 nuit restent valables, + 2 nouveaux)
+- **NOUVEAU** : les libellés Contenance / Dimensions / Coffret sont en français en dur dans les 5 langues, exactement comme le bloc `#product-info` et les libellés du panier. Le chantier i18n commun grossit : panier + `#product-info` + `.product-format`, à traiter en une fois via `i18n-common.js` (vérifier d abord que les clés sont libres, cf. le bug `footer_livraison`).
+- **NOUVEAU** : rien n a été ajouté au JSON-LD. La contenance n est PAS dans le balisage Product, elle n existe que pour l œil humain et le texte de la page. Chantier à part si on veut l exposer en données structurées.
+
 ## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (nuit, après le chantier n°11)
 
 ### ▶️ REPRENDRE ICI
