@@ -140,11 +140,31 @@ Ils annonçaient la même zone de livraison sans figurer dans la liste P0-7. San
 ## 🧭 ARBITRAGE JLShop06 — 08/08/2026
 "Principato di Monaco" est CONSERVÉ en italien, décision explicite de JLShop06. En italien "Monaco" seul désigne Munich. À réutiliser tel quel dans toute traduction italienne future.
 
-## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (fin de session)
+## ✅ SESSION 08/08/2026 (soir) — CHANTIER n°9 "cart.js : les pages de service ne chargent plus i18n-product.js" (Claude)
+
+Règle inchangée : Claude prépare, JLShop06 clique "Commit changes".
+
+### ✅ FAIT — patch de `pageSection()` dans `cart.js` (1 commit, 2 lignes)
+- **l.27** : `return 'product';` devient `return /^(404|contact|livraison|faq|erreur|success|cancel)(\.html)?$/.test(file) ? null : 'product';`. Le `(\.html)?$` couvre les deux formes, car `cleanUrls` sert `/contact` aussi bien que `/contact.html` ; l'ancrage évite les faux positifs (`faq-truc.html` reste bien `product`).
+- **l.29** : la section n'est ajoutée que si elle existe — `var sec = pageSection(); var sections = ['i18n-core.js', 'i18n-common.js']; if (sec) sections.push('i18n-' + sec + '.js');`
+- ⚠️ PIÈGE ÉVITÉ : renvoyer une chaîne VIDE au lieu de `null` aurait fait demander `/i18n-.js` → 404 → le `onerror` du loader aurait rechargé `i18n.js` ENTIER (662 ko). Exactement l'inverse du but.
+- Delta contrôlé : 16 983 devient 17 105 octets, soit +122, exactement la somme calculée AVANT le remplacement (+83 sur l.27, +39 sur l.29). Diff Preview : 1 seul hunk `@@ -24,9 +24,9 @@`, 2 ajouts / 2 suppressions. Méthode Ctrl+F, Match Case coché, Regexp décoché, les 2 chaînes cherchées vérifiées uniques avant.
+
+### ✅ CONTRÔLE ZÉRO-RÉGRESSION (fait AVANT de toucher au fichier)
+- Les 7 pages n'utilisent que 16 clés (`menu_*`, `header_promo`, `panier`, `footer_*`, `cart_title`), toutes présentes dans `i18n-common.js` (44 clés). `erreur.html`, `success.html` et `cancel.html` n'ont AUCUN attribut `data-i18n`.
+- Les libellés LIVRAISON / FAQ / CONTACT injectés dans le menu et le footer sont écrits en dur dans `i18n-core.js` : `menu_page_livraison`, `footer_page_faq`, `menu_contact`... n'existent NI dans common NI dans product. Le patch ne pouvait donc pas casser la navigation.
+
+### ✅ VÉRIFIÉ EN LIGNE (après commit + Ctrl+Maj+R)
+- `/faq` et `/contact` : `i18n-core.js` + `i18n-common.js` seuls, `i18n-product.js` ABSENT des requêtes réseau, 50 clés au lieu de 542, **0 clé manquante**.
+- `/contact` dans les 5 langues : PANIER / CARRINHO / CARRELLO / CESTA / WARENKORB, menu complet jusqu'à LIVRAISON / FAQ / CONTACT, 0 clé manquante par langue.
+- Fiche produit témoin `gel_cannabis_orgie.html` : core + common + product, 542 clés. Aucune régression.
+- **Gain réel : environ 278 ko et 492 clés en moins sur 7 pages.**
+
+## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (soir, après le chantier n°9)
 
 ### ▶️ REPRENDRE ICI
-1. `cart.js` — patch de `pageSection()` : les pages 404 / contact / livraison / faq / erreur / success / cancel chargent inutilement `i18n-product.js` (278 ko, 492 clés). Gros gain de vitesse.
-2. P1-11, P1-12, P1-13, P1-10, P1-14, P1-15.
+1. **P1-11 — panier pauvre** : dans `cart.js`, ajouter la quantité +/- et la suppression par ligne (aujourd'hui seul "Vider le panier" existe), les logos Visa / Mastercard / Stripe, la phrase "colis neutre et discret" et la mention "en cliquant sur PAYER vous acceptez les CGV" avec le lien.
+2. P1-12, P1-13, P1-10, P1-14, P1-15.
 3. P2-16 à P2-22.
 
 ### ⚠️ POINTS OUVERTS (non bloquants)
@@ -163,7 +183,7 @@ Ils annonçaient la même zone de livraison sans figurer dans la liste P0-7. San
 7. **Toujours vérifier si le texte porte une clé i18n avant de croire le travail terminé.** Corriger le HTML seul ne sert à rien si un fichier i18n l'écrase au chargement, y compris en français.
 8. **Chercher les doublons JSON-LD** : faq.html dupliquait la phrase dans un bloc FAQPage lu par Google.
 
-> Fin de session du 08/08/2026. P0-7 CLOS. Reprendre au patch de `pageSection()` dans `cart.js`.
+> Fin de session du 08/08/2026 (soir). P0-7 CLOS, patch `pageSection()` CLOS et vérifié en ligne. Reprendre à P1-11 (panier : quantité, suppression par ligne, logos de paiement, mention CGV).
 
 ---
 
