@@ -54,4 +54,4 @@ Boutique certifiée Bio Organic et Yuka 100/100 sur les produits bio. Paiement s
 
 ## Optional
 
-- Paiement sécurisé via Stripe. Livraison discrète, emballage neutre. Zones desservies : France, Belgique, Suisse, Italie, Espagne, Allemagne, Pays-Bas, Portugal.
+- Paiement sécurisé via Stripe. Livraison discrète, emballage neutre. Zones desservies : France, Monaco, Belgique, Luxembourg, Italie, Espagne, Allemagne, Pays-Bas, Portugal.
