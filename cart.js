@@ -24,9 +24,9 @@
     if (file === '' || file === 'index.html' || file === 'index') return 'home';
     if (/^(cgv|confidentialite|cookies|mentions-legales|retractation)/.test(file)) return 'legal';
     if (/^blog/.test(file)) return 'blog';
-    return 'product';
+    return /^(404|contact|livraison|faq|erreur|success|cancel)(\.html)?$/.test(file) ? null : 'product';
   }
-  var sections = ['i18n-core.js', 'i18n-common.js', 'i18n-' + pageSection() + '.js'];
+  var sec = pageSection(); var sections = ['i18n-core.js', 'i18n-common.js']; if (sec) sections.push('i18n-' + sec + '.js');
   var fellBack = false;
   function loadFull() {
     if (fellBack) return; fellBack = true;
