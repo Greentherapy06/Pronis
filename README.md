@@ -121,41 +121,49 @@ l.175, clé `neutre_desc4`. Diff Preview : 1 ligne, 1 ajout / 1 suppression. 19 
 "Et en Europe : Belgique, Luxembourg, Monaco, Italie, Espagne, Allemagne, Pays-Bas, Portugal."
 Le plan d'hier proposait d'ajouter Monaco "côté France", mais la partie France est une liste de VILLES (Paris, Lyon, Marseille...) : y insérer un pays serait incohérent. Monaco est donc placé dans la liste Europe.
 
-## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026
+## ✅ FAIT — P0-7 étapes 6 à 9 : les 3 dernières pages produit + i18n-product.js
+- étape 6 `gel_lubrifiant_bio_neutre_vanille_divine_xtases.html` l.160, clé `vanille_desc8` : 21 183 devient 21 195 octets (+12). Diff Preview 1 ajout / 1 suppression.
+- étape 7 `gel_lubrifiant_bio_neutre_framboise_divine_xtases.html` l.183, clé `framboise_desc8` : 21 418 devient 21 430 (+12).
+- étape 8 `gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html` l.183, clé `caramel_desc8` : 22 019 devient 22 031 (+12).
+- étape 8bis `gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html` l.161 : paragraphe SANS clé i18n confirmé, donc le HTML fait foi. 21 234 devient 21 246 (+12).
+- étape 9 `i18n-product.js` : les 25 occurrences corrigées en 5 Replace All, un par langue. Preview en échec (278 ko monoligne), vérification au delta : 278 411 devient 278 776, soit +365, exactement 5 x (12+13+25+13+10) calculé à l'avance. Compteurs finaux : Suisse 0, Suíça 0, Svizzera 0, Suiza 0, Schweiz 0.
 
-### ▶️ P0-7, étapes 6 à 9 — REPRENDRE ICI
-6. `gel_lubrifiant_bio_neutre_vanille_divine_xtases.html` (l.160, clé `vanille_desc8`).
-7. `gel_lubrifiant_bio_neutre_framboise_divine_xtases.html` (l.183, clé `framboise_desc8`).
-8. `gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html` (l.183, clé `caramel_desc8`).
-8bis. `gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html` (l.161, paragraphe SANS clé i18n).
-9. `i18n-product.js` : **25 occurrences et non 20** comme annoncé hier. Le plan d'hier avait oublié le FRANÇAIS (5 occurrences) et listait "Switzerland" qui n'existe pas dans le fichier ; l'espagnol utilise "Suiza". Comptage réel sur 278 410 caractères : Suisse 5, Suíça 5, Svizzera 5, Suiza 5, Schweiz 5. Les 5 clés partagent la MÊME phrase dans chaque langue, donc 5 Replace All globaux suffisent :
-   - fr : "Et en Europe : Belgique, Suisse, Italie, Espagne, Allemagne, Pays-Bas, Portugal."
-   - pt : "E na Europa: Bélgica, Suíça, Itália, Espanha, Alemanha, Países Baixos, Portugal."
-   - it : "E in Europa: Belgio, Svizzera, Italia, Spagna, Germania, Paesi Bassi, Portogallo."
-   - es : "Y en Europa: Bélgica, Suiza, Italia, España, Alemania, Países Bajos, Portugal."
-   - de : "Und in Europa: Belgien, Schweiz, Italien, Spanien, Deutschland, Niederlande, Portugal."
-   C'est CE fichier qui change ce que le client voit réellement : les pages produit sont traduites au chargement.
+**P0-7 EST CLOS.** Les 9 étapes sont faites et commitées.
+⚠️ `i18n-product.js` est un .js mis en cache 24 h : un Ctrl+Shift+R est nécessaire pour constater le changement en ligne.
 
-### ⚠️ FICHIERS HORS LISTE À ARBITRER (JLShop06)
-Découverts par recherche de code, ils annoncent aussi la zone de livraison mais n'étaient pas dans le plan P0-7 :
-- `faq.html` lignes 64 et 95, dont le JSON-LD FAQPage lu par Google.
-- `contact.html` ligne 91.
-- `llms.txt` ligne 57.
-Tant qu'ils ne sont pas traités, le site continue d'annoncer la Suisse à Google et aux IA.
+## ✅ FAIT — 3 fichiers hors plan, découverts en cours de route
+Ils annonçaient la même zone de livraison sans figurer dans la liste P0-7. Sans eux, le site aurait continué d'annoncer la Suisse à Google et aux IA.
+- `faq.html` : 2 remplacements x 2 occurrences. Le texte est DUPLIQUÉ entre le paragraphe visible l.64 et le bloc JSON-LD FAQPage l.95 lu par Google. Les deux sont corrigés. 16 189 devient 16 231 (+42). Vérifié AVANT d'agir : ce paragraphe n'a pas de clé i18n et i18n-legal.js ne contient aucune clé faq_.
+- `contact.html` l.91 : 9 820 devient 9 831 (+11). Pas de clé i18n non plus.
+- `llms.txt` l.57 : "Zones desservies : France, Monaco, Belgique, Luxembourg, Italie, Espagne, Allemagne, Pays-Bas, Portugal." 4 780 devient 4 792 (+12). Monaco est placé après la France car c'est ici une liste de PAYS, pas de villes.
 
-### ❓ QUESTIONS EN ATTENTE
-- Italien : "Principato di Monaco" a été retenu plutôt que "Monaco" seul, car en italien "Monaco" désigne Munich. À confirmer ou à simplifier.
-- `i18n.js` (legacy, fallback) porte encore l'ancienne formulation : à aligner ou à laisser tel quel ?
+## 🧭 ARBITRAGE JLShop06 — 08/08/2026
+"Principato di Monaco" est CONSERVÉ en italien, décision explicite de JLShop06. En italien "Monaco" seul désigne Munich. À réutiliser tel quel dans toute traduction italienne future.
+
+## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (fin de session)
+
+### ▶️ REPRENDRE ICI
+1. `cart.js` — patch de `pageSection()` : les pages 404 / contact / livraison / faq / erreur / success / cancel chargent inutilement `i18n-product.js` (278 ko, 492 clés). Gros gain de vitesse.
+2. P1-11, P1-12, P1-13, P1-10, P1-14, P1-15.
+3. P2-16 à P2-22.
+
+### ⚠️ POINTS OUVERTS (non bloquants)
+- **Écart entre le discours et la technique** : le site annonce 8 ou 9 destinations, alors que `allowed_countries` en autorise 14. L'Autriche, l'Irlande, le Danemark, la Suède et la Finlande peuvent payer et être livrées sans jamais être citées nulle part. Ce n'est pas un mensonge, contrairement à la Suisse, mais c'est un manque à gagner. À ouvrir comme sujet à part.
+- **Graphie incohérente** : `cgv.html` et `contact.html` écrivent "Union Européenne" avec un E majuscule, `livraison.html` et `faq.html` écrivent "Union européenne". Piège concret rencontré : une recherche Match Case en minuscule ne trouve RIEN dans les CGV.
+- `i18n.js` (legacy, fallback) porte encore l'ancienne formulation des CGV. À aligner ou à laisser tel quel.
+- `i18n-legal.js` et `i18n-product.js` portent en tête "Généré automatiquement depuis i18n.js. Ne pas éditer à la main." Ils ont été édités à la main faute de générateur accessible. Si le générateur est un jour relancé, il ÉCRASERA ces corrections.
 
 ## 🛠️ MÉTHODE — à réutiliser, gros gain de fiabilité
-1. **Ctrl+F dans l'éditeur GitHub ouvre un panneau Find & Replace** (Next, Previous, All, Match Case, Regexp, By Word, Replace, Replace All). C'est LA méthode sûre : elle évite le bug connu "Ctrl+A puis Delete échoue en silence, le fichier double".
-2. Toujours cocher **Match Case** et vérifier que la chaîne cherchée est **unique** AVANT de cliquer Replace All.
-3. Si le clic dans l'éditeur ne prend pas le focus, recliquer plus bas puis Ctrl+F.
-4. Le bouton **Preview se clique par référence** (outil find) ; les clics par coordonnées échouent.
-5. Sur les gros fichiers où le Preview plante, lire le document complet via `document.querySelector('.cm-content').cmTile.view.state.doc.toString()` et contrôler le **delta d'octets** : il doit égaler exactement la somme des insertions.
+1. **Ctrl+F dans l'éditeur GitHub ouvre un panneau Find & Replace** (Next, Previous, All, Match Case, Regexp, By Word, Replace, Replace All). C'est LA méthode sûre : elle évite le bug connu "Ctrl+A puis Delete échoue en silence, le fichier double". Il faut parfois cliquer dans l'éditeur puis appuyer deux fois : le premier Ctrl+F est souvent avalé.
+2. Toujours cocher **Match Case** et vérifier que la chaîne cherchée est **unique** (ou de compte connu) AVANT de cliquer Replace All.
+3. Le bouton **Preview se clique par référence** (outil find) ; les clics par coordonnées échouent.
+4. Sur les gros fichiers où le Preview plante, lire le document complet via `document.querySelector('.cm-content').cmTile.view.state.doc.toString()` et contrôler le **delta d'octets** : il doit égaler exactement la somme des insertions calculée à l'avance. C'est une preuve plus forte qu'un diff visuel.
+5. **Calculer le delta attendu AVANT de remplacer**, sinon la vérification ne vaut rien.
 6. La **recherche de code GitHub n'indexe PAS les fichiers générés monolignes** (i18n-legal.js, i18n-product.js). Ne jamais conclure "absent" sur la base d'une recherche de code : ouvrir le fichier et compter.
+7. **Toujours vérifier si le texte porte une clé i18n avant de croire le travail terminé.** Corriger le HTML seul ne sert à rien si un fichier i18n l'écrase au chargement, y compris en français.
+8. **Chercher les doublons JSON-LD** : faq.html dupliquait la phrase dans un bloc FAQPage lu par Google.
 
-> Fin de session du 08/08/2026. Reprendre exactement à "P0-7, étape 6 : gel_lubrifiant_bio_neutre_vanille_divine_xtases.html".
+> Fin de session du 08/08/2026. P0-7 CLOS. Reprendre au patch de `pageSection()` dans `cart.js`.
 
 ---
 
