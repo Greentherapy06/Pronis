@@ -145,6 +145,89 @@ clearTimeout(toast._timeout);
 toast._timeout = setTimeout(() => { toast.style.opacity = "0"; }, 2500);
 }
 
+// ── Regroupement des articles identiques (quantité) ──
+// Le panier reste stocké comme une LISTE : 1 entrée = 1 exemplaire.
+// Aucune migration du localStorage, aucun changement du payload envoyé à
+// /api/stripe/checkout (le serveur compte chaque entrée pour 1).
+function groupCart(cart) {
+  const groups = [];
+  const byKey = {};
+  (cart || []).forEach((p) => {
+    const key = p.priceId || p.id || p.name;
+    if (!byKey[key]) { byKey[key] = { key: key, item: p, qty: 0 }; groups.push(byKey[key]); }
+    byKey[key].qty += 1;
+  });
+  return groups;
+}
+
+// ── Quantité +/- et suppression par ligne ─────
+function cartLineAdd(key) {
+  const cart = getCart();
+  const found = cart.find((p) => (p.priceId || p.id || p.name) === key);
+  if (!found) return;
+  cart.push({ id: found.id, name: found.name, price: found.price, priceId: found.priceId });
+  saveCart(cart); updateCartCount(); showCart();
+}
+
+function cartLineRemoveOne(key) {
+  const cart = getCart();
+  const i = cart.findIndex((p) => (p.priceId || p.id || p.name) === key);
+  if (i === -1) return;
+  cart.splice(i, 1);
+  saveCart(cart); updateCartCount(); showCart();
+}
+
+function cartLineDelete(key) {
+  saveCart(getCart().filter((p) => (p.priceId || p.id || p.name) !== key));
+  updateCartCount(); showCart();
+}
+
+// ── Rendu des lignes du panier (nom, quantité, prix unitaire, sous-total) ──
+// Renvoie le sous-total produits, calculé sur les quantités réelles.
+function renderCartLines(cartItems, cart) {
+  let total = 0;
+  const mkBtn = (txt, label, fn) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = txt; b.setAttribute("aria-label", label); b.title = label;
+    b.style.cssText = "background:none;border:1px solid rgba(202,168,106,0.5);color:#caa86a;width:26px;height:26px;line-height:1;font-size:14px;cursor:pointer;border-radius:4px;flex:none;";
+    b.addEventListener("click", fn);
+    return b;
+  };
+  groupCart(cart).forEach((g) => {
+    const p = g.item;
+    const li = document.createElement("li");
+    li.style.cssText = "list-style:none;padding:12px 0;border-bottom:1px solid rgba(202,168,106,0.15);";
+    const row1 = document.createElement("div");
+    row1.style.cssText = "display:flex;justify-content:space-between;align-items:flex-start;gap:8px;";
+    const nm = document.createElement("span");
+    nm.style.cssText = "font-size:13px;letter-spacing:1px;line-height:1.4;";
+    nm.textContent = p.name;
+    row1.appendChild(nm);
+    row1.appendChild(mkBtn("\u00d7", "Supprimer " + p.name + " du panier", () => cartLineDelete(g.key)));
+    const row2 = document.createElement("div");
+    row2.style.cssText = "display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;";
+    const qty = document.createElement("div");
+    qty.style.cssText = "display:flex;align-items:center;gap:8px;";
+    const nb = document.createElement("span");
+    nb.style.cssText = "font-size:13px;min-width:18px;text-align:center;";
+    nb.textContent = g.qty;
+    qty.appendChild(mkBtn("\u2212", "Retirer un exemplaire de " + p.name, () => cartLineRemoveOne(g.key)));
+    qty.appendChild(nb);
+    qty.appendChild(mkBtn("+", "Ajouter un exemplaire de " + p.name, () => cartLineAdd(g.key)));
+    const unit = document.createElement("span");
+    unit.style.cssText = "font-size:11px;opacity:.7;flex:1;text-align:center;";
+    unit.textContent = Number(p.price).toFixed(2).replace(".", ",") + " € / u";
+    const sum = document.createElement("span");
+    sum.style.cssText = "color:#caa86a;font-size:13px;text-align:right;";
+    sum.textContent = (Number(p.price) * g.qty).toFixed(2).replace(".", ",") + " €";
+    row2.appendChild(qty); row2.appendChild(unit); row2.appendChild(sum);
+    li.appendChild(row1); li.appendChild(row2);
+    cartItems.appendChild(li);
+    total += Number(p.price) * g.qty;
+  });
+  return total;
+}
+
 // ── Affichage du panier (modal) ───────────────
 function showCart() {
   injectCartExtras(); // garantit la présence du récap + champ e-mail avant le rendu
@@ -161,14 +244,7 @@ let total = 0;
 if (cart.length === 0) {
 cartItems.innerHTML = "<li style='list-style:none;color:#9c9c9c;letter-spacing:2px;font-size:12px;'>Votre panier est vide</li>";
 } else {
-cart.forEach((p, i) => {
-const li = document.createElement("li");
-li.style.cssText = "display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(202,168,106,0.15);list-style:none;";
-li.innerHTML = `<span style="font-size:13px;letter-spacing:1px;">${p.name}</span>
-<span style="color:#caa86a;font-size:13px;">${Number(p.price).toFixed(2)} €</span>`;
-cartItems.appendChild(li);
-total += Number(p.price);
-});
+total = renderCartLines(cartItems, cart);
 }
 
 cartTotal.textContent = total.toFixed(2);
@@ -342,6 +418,24 @@ function injectCartExtras() {
     wrap.appendChild(label);
     wrap.appendChild(input);
     checkoutBtn.parentNode.insertBefore(wrap, checkoutBtn);
+  }
+
+  // 3) Réassurance : moyens de paiement, colis neutre, acceptation des CGV
+  if (!document.getElementById('cart-trust')) {
+    var badge = 'border:1px solid rgba(202,168,106,.45);border-radius:4px;padding:2px 7px;letter-spacing:1px;';
+    var trust = document.createElement('div');
+    trust.id = 'cart-trust';
+    trust.style.cssText = 'font-family:Georgia,serif;font-size:11px;line-height:1.7;color:#caa86a;opacity:.9;margin:12px 0 4px;';
+    trust.innerHTML =
+      '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">' +
+        '<span style="' + badge + '">VISA</span>' +
+        '<span style="' + badge + '">MASTERCARD</span>' +
+        '<span style="' + badge + '">Paiement sécurisé Stripe</span>' +
+      '</div>' +
+      '<div>Colis neutre et discret : aucune mention du contenu ni de la boutique sur l\'emballage.</div>' +
+      '<div style="margin-top:4px;">En cliquant sur PAYER, vous acceptez nos ' +
+        '<a href="/cgv" style="color:#caa86a;text-decoration:underline;">conditions générales de vente</a>.</div>';
+    checkoutBtn.parentNode.insertBefore(trust, checkoutBtn);
   }
 
   // Retraduit les nouveaux éléments si le moteur i18n est présent
