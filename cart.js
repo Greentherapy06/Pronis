@@ -519,3 +519,41 @@ document.addEventListener('DOMContentLoaded', applyLazyLoading);
 applyLazyLoading();
 }
 })();
+
+// ── Bloc d'informations d'achat sur les fiches produit ──
+// Ajoute, sous le bouton d'ajout au panier, les informations déjà publiées sur
+// /livraison, /faq et /cgv (délais, frais, discrétion, garanties, rétractation).
+// Cible uniquement le bouton principal d'une fiche produit
+// (.product-details > .add-to-cart), jamais les cartes de la page d'accueil
+// ni le bouton de rappel en bas de fiche (.cta-block).
+// Aucune donnée inventée : stock réel, tailles et contenances ne sont pas affichés ici.
+(function initProductInfo() {
+function buildProductInfo() {
+if (document.getElementById('product-info')) return;
+var btn = document.querySelector('.product-details > .add-to-cart[data-product-id]');
+if (!btn || !btn.parentNode) return;
+var rows = [
+['Disponibilité', 'Vendu dans la limite des stocks disponibles.'],
+['Livraison', 'France métropolitaine et Monaco : 3 à 7 jours ouvrés. Union européenne : 5 à 14 jours ouvrés. Frais 6,90 €, offerts dès 75 € d\'achat.'],
+['Discrétion', 'Colis neutre et discret, sans aucune mention du contenu ni du nom de la boutique.'],
+['Paiement', 'Paiement sécurisé Stripe — VISA et Mastercard.'],
+['Garantie', 'Garantie légale de conformité et garantie des vices cachés.'],
+['Retour', 'Rétractation sous 14 jours ; les biens scellés descellés après livraison ne sont pas repris (art. L.221-28 6° du Code de la consommation).']
+];
+var box = document.createElement('div');
+box.id = 'product-info';
+box.style.cssText = 'font-family:Georgia,serif;font-size:13px;line-height:1.7;opacity:.92;margin:22px auto 0;padding:16px 18px;border:1px solid rgba(202,168,106,0.35);border-radius:6px;text-align:left;max-width:520px;';
+box.innerHTML = rows.map(function (r) {
+return '<div style="margin:0 0 8px;"><strong style="color:#caa86a;letter-spacing:1px;">' + r[0] + '</strong> — ' + r[1] + '</div>';
+}).join('') +
+'<div style="margin-top:10px;font-size:12px;opacity:.85;">' +
+'<a href="/livraison" style="color:#caa86a;">Livraison et retours</a> · ' +
+'<a href="/cgv" style="color:#caa86a;">Conditions générales de vente</a></div>';
+btn.parentNode.insertBefore(box, btn.nextSibling);
+}
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', buildProductInfo);
+} else {
+buildProductInfo();
+}
+})();
