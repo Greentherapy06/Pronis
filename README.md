@@ -81,6 +81,84 @@ Ensuite : P1-14, P1-15, puis les P2 dans l ordre.
 Indicateur de contrôle : sur chaque page, un client doit trouver en moins de 10 secondes qui vend, comment le joindre, combien coûte la livraison et comment renvoyer.
 
 ---
+# ✅ SESSION 08/08/2026 — CHANTIER n°8 "P0-7 étapes 2 à 5 : Monaco ajouté, Suisse retirée" (Claude)
+
+> Règle inchangée : Claude prépare, JLShop06 clique "Commit changes".
+
+## ✅ FAIT — P0-7 étape 2 sur 9 : `livraison.html` (commit `b2ee0bf`)
+3 remplacements ciblés, Match Case activé. Diff Preview contrôlé : 3 ajouts / 3 suppressions, rien d'autre touché.
+- l.11 meta description : "France métropolitaine et Union européenne" devient "France métropolitaine, Monaco et Union européenne".
+- l.53 zone : "<strong>France métropolitaine</strong> et dans" devient "<strong>France métropolitaine</strong>, à <strong>Monaco</strong> et dans".
+- l.57 délais : "<strong>France métropolitaine :</strong>" devient "<strong>France métropolitaine et Monaco :</strong>". Monaco reste dans la tranche 3-7 j ouvrés, pas 5-14.
+Lignes 60 à 119 relues : aucune autre mention géographique.
+
+## ✅ FAIT — P0-7 étape 3 sur 9 : `cgv.html` article 8 (commit `76f34c1`)
+2 remplacements. Diff Preview : 1 hunk, lignes 92-93, 2 ajouts / 2 suppressions.
+- l.92 (clé `cgv_30`) : "France métropolitaine et Union Européenne" devient "France métropolitaine, Monaco et Union Européenne".
+- l.93 (clé `cgv_31`) : "ouvrés pour la France métropolitaine" devient "... et Monaco".
+⚠️ Attention : cgv.html utilise l'orthographe "Union **E**uropéenne" avec un E majuscule. Une recherche Match Case en minuscule ne trouve rien.
+⚠️ Piège identifié : cgv.html porte des clés i18n, donc éditer le HTML seul NE SUFFIT PAS (même piège que P0-1). D'où l'étape 3bis.
+
+## ✅ FAIT — P0-7 étape 3bis (hors plan initial) : `i18n-legal.js` (commit `2e0cefa`)
+Fichier généré, 9 lignes / 127 ko. `cgv_30` et `cgv_31` y existent bien dans les 5 langues.
+10 remplacements appliqués (2 clés x fr/pt/it/es/de) :
+- fr : "France métropolitaine, Monaco et Union Européenne" / "... jours ouvrés pour la France métropolitaine et Monaco".
+- pt : "França metropolitana, Mónaco e União Europeia" / "... dias úteis para a França metropolitana e o Mónaco".
+- it : "Francia metropolitana, Principato di Monaco e Unione Europea" / "... giorni lavorativi per la Francia metropolitana e il Principato di Monaco".
+- es : "Francia metropolitana, Mónaco y Unión Europea" / "... días hábiles para la Francia metropolitana y Mónaco".
+- de : "französisches Mutterland, Monaco und Europäische Union" / "... Werktage für das französische Mutterland und Monaco".
+⚠️ Le Preview GitHub ÉCHOUE sur ce fichier ("There has been an error generating the preview") car tout tient sur une ligne de 127 ko. Vérification faite autrement : 127 582 devient 127 703 octets, soit +121 caractères, exactement les 10 insertions attendues. Compteurs finaux : "Monaco" 6 fois, "Mónaco" 4 fois.
+⚠️ En-tête du fichier : "Généré automatiquement depuis i18n.js. Ne pas éditer à la main." L'édition manuelle a été faite faute de générateur accessible.
+⚠️ Le message de commit enregistré est le libellé par défaut de GitHub ("Update print statement from 'Hello' to 'Goodbye'"), sans rapport avec le contenu. Contenu vérifié correct sur main.
+
+## ✅ FAIT — P0-7 étape 4 sur 9 : `gel_lubrifiant_bio_neutre_monoi_divine_xtases.html` (commit `e67f611`)
+l.160, clé `monoi_desc8`. Diff Preview : 1 ligne, 1 ajout / 1 suppression. 21 438 devient 21 450 octets (+12).
+
+## ✅ FAIT — P0-7 étape 5 sur 9 : `gel_lubrifiant_bio_neutre_divine_xtases.html` (commit "Modify delivery locations in product description")
+l.175, clé `neutre_desc4`. Diff Preview : 1 ligne, 1 ajout / 1 suppression. 19 168 devient 19 180 octets (+12).
+
+## 📝 Formule retenue pour les 6 pages produit (écart assumé vs le plan d'hier)
+"Et en Europe : Belgique, Luxembourg, Monaco, Italie, Espagne, Allemagne, Pays-Bas, Portugal."
+Le plan d'hier proposait d'ajouter Monaco "côté France", mais la partie France est une liste de VILLES (Paris, Lyon, Marseille...) : y insérer un pays serait incohérent. Monaco est donc placé dans la liste Europe.
+
+## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026
+
+### ▶️ P0-7, étapes 6 à 9 — REPRENDRE ICI
+6. `gel_lubrifiant_bio_neutre_vanille_divine_xtases.html` (l.160, clé `vanille_desc8`).
+7. `gel_lubrifiant_bio_neutre_framboise_divine_xtases.html` (l.183, clé `framboise_desc8`).
+8. `gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html` (l.183, clé `caramel_desc8`).
+8bis. `gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html` (l.161, paragraphe SANS clé i18n).
+9. `i18n-product.js` : **25 occurrences et non 20** comme annoncé hier. Le plan d'hier avait oublié le FRANÇAIS (5 occurrences) et listait "Switzerland" qui n'existe pas dans le fichier ; l'espagnol utilise "Suiza". Comptage réel sur 278 410 caractères : Suisse 5, Suíça 5, Svizzera 5, Suiza 5, Schweiz 5. Les 5 clés partagent la MÊME phrase dans chaque langue, donc 5 Replace All globaux suffisent :
+   - fr : "Et en Europe : Belgique, Suisse, Italie, Espagne, Allemagne, Pays-Bas, Portugal."
+   - pt : "E na Europa: Bélgica, Suíça, Itália, Espanha, Alemanha, Países Baixos, Portugal."
+   - it : "E in Europa: Belgio, Svizzera, Italia, Spagna, Germania, Paesi Bassi, Portogallo."
+   - es : "Y en Europa: Bélgica, Suiza, Italia, España, Alemania, Países Bajos, Portugal."
+   - de : "Und in Europa: Belgien, Schweiz, Italien, Spanien, Deutschland, Niederlande, Portugal."
+   C'est CE fichier qui change ce que le client voit réellement : les pages produit sont traduites au chargement.
+
+### ⚠️ FICHIERS HORS LISTE À ARBITRER (JLShop06)
+Découverts par recherche de code, ils annoncent aussi la zone de livraison mais n'étaient pas dans le plan P0-7 :
+- `faq.html` lignes 64 et 95, dont le JSON-LD FAQPage lu par Google.
+- `contact.html` ligne 91.
+- `llms.txt` ligne 57.
+Tant qu'ils ne sont pas traités, le site continue d'annoncer la Suisse à Google et aux IA.
+
+### ❓ QUESTIONS EN ATTENTE
+- Italien : "Principato di Monaco" a été retenu plutôt que "Monaco" seul, car en italien "Monaco" désigne Munich. À confirmer ou à simplifier.
+- `i18n.js` (legacy, fallback) porte encore l'ancienne formulation : à aligner ou à laisser tel quel ?
+
+## 🛠️ MÉTHODE — à réutiliser, gros gain de fiabilité
+1. **Ctrl+F dans l'éditeur GitHub ouvre un panneau Find & Replace** (Next, Previous, All, Match Case, Regexp, By Word, Replace, Replace All). C'est LA méthode sûre : elle évite le bug connu "Ctrl+A puis Delete échoue en silence, le fichier double".
+2. Toujours cocher **Match Case** et vérifier que la chaîne cherchée est **unique** AVANT de cliquer Replace All.
+3. Si le clic dans l'éditeur ne prend pas le focus, recliquer plus bas puis Ctrl+F.
+4. Le bouton **Preview se clique par référence** (outil find) ; les clics par coordonnées échouent.
+5. Sur les gros fichiers où le Preview plante, lire le document complet via `document.querySelector('.cm-content').cmTile.view.state.doc.toString()` et contrôler le **delta d'octets** : il doit égaler exactement la somme des insertions.
+6. La **recherche de code GitHub n'indexe PAS les fichiers générés monolignes** (i18n-legal.js, i18n-product.js). Ne jamais conclure "absent" sur la base d'une recherche de code : ouvrir le fichier et compter.
+
+> Fin de session du 08/08/2026. Reprendre exactement à "P0-7, étape 6 : gel_lubrifiant_bio_neutre_vanille_divine_xtases.html".
+
+---
+
 # ✅ SESSION 07/08/2026 (nuit 3) — CHANTIER n°7 "P0-9 clos + décision P0-7 : UE + Monaco" (Claude)
 
 > Règle inchangée : Claude prépare, JLShop06 clique "Commit changes".
