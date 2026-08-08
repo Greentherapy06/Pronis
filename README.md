@@ -160,11 +160,34 @@ Règle inchangée : Claude prépare, JLShop06 clique "Commit changes".
 - Fiche produit témoin `gel_cannabis_orgie.html` : core + common + product, 542 clés. Aucune régression.
 - **Gain réel : environ 278 ko et 492 clés en moins sur 7 pages.**
 
-## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (soir, après le chantier n°9)
+## ✅ SESSION 08/08/2026 (nuit) — CHANTIER n°10 "P1-11 : panier vivant (quantité, suppression, réassurance)" (Claude)
+
+Règle inchangée : Claude prépare, JLShop06 clique "Commit changes". **Un seul fichier touché : `cart.js`** — les 41 pages qui portent la modale panier en dur héritent automatiquement, aucun HTML modifié.
+
+### ✅ FAIT — P1-11 (1 commit, 3 hunks, `cart.js` 17 105 → 21 654 octets, 428 → 522 lignes)
+- **Quantité +/- et suppression par ligne.** Les articles identiques sont regroupés à l'AFFICHAGE par `groupCart()` (clé = `priceId`, sinon `id`, sinon `name`). Chaque ligne montre : nom, bouton `×`, boutons `−` / quantité / `+`, prix unitaire, sous-total de ligne.
+- **Décision structurante : le stockage NE CHANGE PAS.** Le panier reste une liste où 1 entrée = 1 exemplaire. Donc : aucune migration de `localStorage`, `CART_VERSION` inchangé, et surtout **payload envoyé à `/api/stripe/checkout` identique au bit près**. Lecture préalable de `api/stripe/checkout.js` : le serveur fait `quantity = Number.isInteger(item.quantity) && item.quantity > 0 ? item.quantity : 1` et récupère le prix officiel dans Stripe. Le chemin de paiement n'a pas été touché.
+- **Nouvelles fonctions** : `groupCart(cart)`, `cartLineAdd(key)`, `cartLineRemoveOne(key)`, `cartLineDelete(key)`, `renderCartLines(cartItems, cart)` (qui renvoie le sous-total produits). Le bloc de rendu de `showCart()` se réduit à `total = renderCartLines(cartItems, cart);`.
+- **Boutons construits en DOM, pas en `innerHTML`** : les noms de produits contiennent des apostrophes et des tirets, un `onclick` en chaîne aurait cassé. Chaque bouton porte un `aria-label` et un `title` explicites.
+- **Bloc réassurance `#cart-trust`**, injecté par `injectCartExtras()` juste au-dessus du bouton PAYER : badges VISA / MASTERCARD / "Paiement sécurisé Stripe", puis "Colis neutre et discret : aucune mention du contenu ni de la boutique sur l'emballage", puis "En cliquant sur PAYER, vous acceptez nos conditions générales de vente" avec lien vers `/cgv`.
+- ⚠️ **Rien d'inventé sur les moyens de paiement** : `payment_method_types` vaut `["card"]`, donc ni Apple Pay, ni Google Pay, ni CB, ni Amex ne sont annoncés. Ce sera P1-15.
+
+### ✅ PREUVES AVANT COMMIT
+- Delta d'octets calculé AVANT écriture : 17 105 + 4 549 = 21 654. Résultat obtenu : 21 654 pile.
+- Diff Preview : exactement 3 hunks — `@@ -145,6 +145,89 @@`, `@@ -161,14 +244,7 @@`, `@@ -344,6 +420,24 @@`. Rien d'autre touché.
+- 🆕 **Nouvelle méthode de validation** : l'analyseur JavaScript (Lezer) de l'éditeur GitHub est interrogeable depuis la console — on parcourt l'arbre et on compte les nœuds `isError`. Résultat : **0 erreur sur les 21 654 octets**. C'est une vraie validation de syntaxe du fichier ENTIER, contrairement au comptage d'accolades.
+- Code testé EN LIGNE (injecté dans la page avant d'écrire dans le dépôt) : 3 articles / 75,70 € → `+` = 4 articles / 88,60 € → deux `−` = 2 / 62,80 € → `×` = 1 / 12,90 € → panier vide. Clé inconnue : aucun plantage. Panneau réduit à 330 px : 0 débordement.
+
+### ✅ VÉRIFIÉ EN LIGNE APRÈS COMMIT (Ctrl+Maj+R obligatoire, .js en cache 24 h)
+- Fiche produit `gel_cannabis_orgie` : 2 clics sur AJOUTER AU PANIER = 1 seule ligne, quantité 2, 12,90 € / u, 25,80 €, livraison 6,90 €, total estimé 32,70 €. Clic réel sur `+` : quantité 3, 38,70 €, badge à 3, la modale reste ouverte.
+- Clic réel sur `×` : panier vide, "Votre panier est vide", total 0.00, badge 0.
+- Page à modale statique (`/contact`) : même rendu, 2 exemplaires à 40 € regroupés en 1 ligne, total 80,00 €, livraison "Offerts" (seuil 75 € respecté), bloc réassurance présent, lien CGV vers `/cgv`.
+
+## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (nuit, après le chantier n°10)
 
 ### ▶️ REPRENDRE ICI
-1. **P1-11 — panier pauvre** : dans `cart.js`, ajouter la quantité +/- et la suppression par ligne (aujourd'hui seul "Vider le panier" existe), les logos Visa / Mastercard / Stripe, la phrase "colis neutre et discret" et la mention "en cliquant sur PAYER vous acceptez les CGV" avec le lien.
-2. P1-12, P1-13, P1-10, P1-14, P1-15.
+1. **P1-12 — fiches produit incomplètes** : bloc standard sous le prix (contenance, disponibilité, délai, garantie légale, retour hygiène expliqué), + guide des tailles pour le textile.
+2. P1-13, P1-10, P1-14, P1-15.
 3. P2-16 à P2-22.
 
 ### ⚠️ POINTS OUVERTS (non bloquants)
@@ -172,6 +195,8 @@ Règle inchangée : Claude prépare, JLShop06 clique "Commit changes".
 - **Graphie incohérente** : `cgv.html` et `contact.html` écrivent "Union Européenne" avec un E majuscule, `livraison.html` et `faq.html` écrivent "Union européenne". Piège concret rencontré : une recherche Match Case en minuscule ne trouve RIEN dans les CGV.
 - `i18n.js` (legacy, fallback) porte encore l'ancienne formulation des CGV. À aligner ou à laisser tel quel.
 - `i18n-legal.js` et `i18n-product.js` portent en tête "Généré automatiquement depuis i18n.js. Ne pas éditer à la main." Ils ont été édités à la main faute de générateur accessible. Si le générateur est un jour relancé, il ÉCRASERA ces corrections.
+- **Libellés du panier non traduits** : le panier affiche "Sous-total", "Livraison", "Colis neutre et discret", "conditions générales de vente"... en français en dur, dans les 5 langues. C'était déjà le cas avant le chantier n°10, qui n'a fait qu'ajouter des libellés au même endroit. À traiter en une fois via `i18n-common.js` (vérifier d'abord que les clés sont libres — cf. le bug `footer_livraison`).
+- **Regroupement des quantités côté `checkout()` NON fait** : deux exemplaires partent aujourd'hui en 2 lignes Stripe identiques au lieu d'une ligne `quantity: 2`. Le serveur sait déjà gérer `quantity`. Volontairement laissé pour un commit séparé : ne pas mélanger affichage et paiement.
 
 ## 🛠️ MÉTHODE — à réutiliser, gros gain de fiabilité
 1. **Ctrl+F dans l'éditeur GitHub ouvre un panneau Find & Replace** (Next, Previous, All, Match Case, Regexp, By Word, Replace, Replace All). C'est LA méthode sûre : elle évite le bug connu "Ctrl+A puis Delete échoue en silence, le fichier double". Il faut parfois cliquer dans l'éditeur puis appuyer deux fois : le premier Ctrl+F est souvent avalé.
@@ -183,7 +208,7 @@ Règle inchangée : Claude prépare, JLShop06 clique "Commit changes".
 7. **Toujours vérifier si le texte porte une clé i18n avant de croire le travail terminé.** Corriger le HTML seul ne sert à rien si un fichier i18n l'écrase au chargement, y compris en français.
 8. **Chercher les doublons JSON-LD** : faq.html dupliquait la phrase dans un bloc FAQPage lu par Google.
 
-> Fin de session du 08/08/2026 (soir). P0-7 CLOS, patch `pageSection()` CLOS et vérifié en ligne. Reprendre à P1-11 (panier : quantité, suppression par ligne, logos de paiement, mention CGV).
+> Fin de session du 08/08/2026 (nuit). P0-7, patch `pageSection()` et P1-11 sont CLOS et vérifiés en ligne. Reprendre à P1-12 (fiches produit : contenance, stock, délai, garantie, retour hygiène, guide des tailles).
 
 ---
 
