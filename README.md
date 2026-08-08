@@ -183,12 +183,44 @@ Règle inchangée : Claude prépare, JLShop06 clique "Commit changes". **Un seul
 - Clic réel sur `×` : panier vide, "Votre panier est vide", total 0.00, badge 0.
 - Page à modale statique (`/contact`) : même rendu, 2 exemplaires à 40 € regroupés en 1 ligne, total 80,00 €, livraison "Offerts" (seuil 75 € respecté), bloc réassurance présent, lien CGV vers `/cgv`.
 
-## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (nuit, après le chantier n°10)
+## ✅ SESSION 08/08/2026 (nuit, suite) — CHANTIER n°11 "P1-12 étape 1 : bloc d'informations d'achat sur les 33 fiches produit" (Claude)
+
+Règle inchangée : Claude prépare, JLShop06 clique "Commit changes". **Un seul fichier touché : `cart.js`** — les 33 fiches produit héritent automatiquement, aucun HTML modifié.
+
+### ✅ FAIT — bloc `#product-info` injecté sous le bouton AJOUTER AU PANIER (1 commit, 1 hunk, `cart.js` 22 164 → 24 471 octets, 522 → 560 lignes)
+- Six lignes, toutes sourcées mot pour mot dans le site existant : **Disponibilité** ("vendu dans la limite des stocks disponibles", CGV), **Livraison** (France métropolitaine et Monaco 3 à 7 jours ouvrés, Union européenne 5 à 14 jours ouvrés, frais 6,90 € offerts dès 75 € — `livraison.html` + `faq.html`), **Discrétion** (colis neutre et discret), **Paiement** (Stripe, VISA et Mastercard uniquement), **Garantie** (garantie légale de conformité + garantie des vices cachés), **Retour** (rétractation 14 jours, biens scellés descellés non repris, art. L.221-28 6°). Deux liens en bas de bloc : `/livraison` et `/cgv`.
+- ⚠️ **Rien d'inventé** : aucun stock réel affiché (il n'existe aucun système de stock dans le dépôt), aucune contenance, aucune mensuration. Le bloc dit "vendu dans la limite des stocks disponibles", jamais "en stock". Aucun moyen de paiement au-delà de `payment_method_types: ["card"]`.
+- **Ciblage `.product-details > .add-to-cart[data-product-id]`, enfant DIRECT.** Vérifié sur les 43 URL du `sitemap.xml` : exactement 1 bouton visé sur chacune des 33 fiches produit, 0 sur la page d'accueil (qui porte pourtant 34 boutons de cartes), 0 sur les 5 blogs, 0 sur les pages de service. Le bouton de rappel en bas de fiche (`.cta-block > .add-to-cart`, présent sur 12 fiches) est volontairement écarté : un sélecteur descendant aurait dupliqué le bloc.
+- Fonction **idempotente** (`if (document.getElementById('product-info')) return;`) : une double exécution ne crée qu'un seul bloc.
+
+### ✅ PREUVES AVANT COMMIT
+- Delta calculé AVANT écriture : 22 164 + 2 307 = 24 471 octets. Résultat obtenu : 24 471 pile.
+- ⚠️ **Piège de comptage** : l'éditeur CodeMirror compte des CARACTÈRES (21 654 → 23 913), GitHub affiche des OCTETS (22 164 → 24 471). Les accents et les tirets cadratins créent l'écart. Toujours comparer octets avec octets via `new Blob([doc]).size`.
+- Arbre syntaxique Lezer : 4 823 nœuds, **0 erreur** sur le fichier entier.
+- Diff Preview : 1 seul hunk `@@ -519,3 +519,41 @@`, **38 ajouts / 0 suppression**.
+- Code testé EN LIGNE avant d'écrire dans le dépôt (injecté dans `/gel_cannabis_orgie` puis `/mini-robe-noire`) : bloc inséré entre le bouton et le `<hr class="separator">`, 0 débordement horizontal, deuxième exécution sans doublon.
+
+### ✅ VÉRIFIÉ EN LIGNE APRÈS COMMIT (Ctrl+Maj+R obligatoire, .js en cache 24 h)
+- `/cart.js` servi en 24 471 octets, contient `initProductInfo`.
+- `/le-flateur` : bloc présent, placé juste après `.add-to-cart`.
+- Page d'accueil : 34 boutons, **0 bloc injecté**. Aucun effet de bord.
+
+### 🔎 INVENTAIRE DES TAILLES (question de JLShop06 : "les tailles sont déjà référencées ?")
+- **Les 2 robes fonctionnent déjà.** `mini-robe-noire.html` et `robe-longue-noire-argentee.html` portent 4 `input[name="size"]` S / M / L / XL, chacun avec son **propre Price ID Stripe** (8 au total), consommés par `addToCartWithSize()` qui ajoute " – Taille X" au nom de l'article. Rien à faire.
+- **`deguisement-infirmière-sexy` : trou réel.** La description annonce "Tailles : S / M / L (36 / 38 / 40)" mais la fiche n'a AUCUN sélecteur et un seul Price ID. Le client ne peut pas choisir. BLOQUÉ : il faut 3 Price ID Stripe (S, M, L) créés par JLShop06 dans son compte Stripe. Rien d'inventable ici.
+- **Les 3 autres déguisements** (Bunny, étudiante, enseignante) annoncent "Taille unique" dans leur description : pas de sélecteur à ajouter, c'est cohérent.
+- **Guide des tailles impossible pour l'instant** : aucune mensuration (tour de poitrine / taille / hanches) n'existe nulle part dans le dépôt. Attendre les chiffres du fournisseur.
+
+### 🔎 INVENTAIRE DES CONTENANCES (préparation de l'étape 2)
+La contenance figure dans le texte descriptif de la plupart des fiches (100 ml, 60 ml, 50 ml, 15 ml, 31 cm...), mais jamais comme information produit structurée. **4 fiches n'en portent aucune** : `gel_cannabis_orgie`, `Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`.
+
+## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (nuit, après le chantier n°11)
 
 ### ▶️ REPRENDRE ICI
-1. **P1-12 — fiches produit incomplètes** : bloc standard sous le prix (contenance, disponibilité, délai, garantie légale, retour hygiène expliqué), + guide des tailles pour le textile.
-2. P1-13, P1-10, P1-14, P1-15.
-3. P2-16 à P2-22.
+1. **P1-12 étape 2 — contenance par produit** : afficher la contenance comme information produit, en dur dans le HTML (valeur SEO), à partir des valeurs DÉJÀ présentes dans les textes descriptifs. 4 fiches sans aucune contenance connue à documenter d'abord : `gel_cannabis_orgie`, `Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`.
+2. **P1-12 reliquat BLOQUÉ côté JLShop06** : sélecteur de taille S / M / L sur `deguisement-infirmière-sexy` (attend 3 Price ID Stripe) et guide des tailles (attend les mensurations du fournisseur).
+3. P1-13, P1-10, P1-14, P1-15.
+4. P2-16 à P2-22.
 
 ### ⚠️ POINTS OUVERTS (non bloquants)
 - **Écart entre le discours et la technique** : le site annonce 8 ou 9 destinations, alors que `allowed_countries` en autorise 14. L'Autriche, l'Irlande, le Danemark, la Suède et la Finlande peuvent payer et être livrées sans jamais être citées nulle part. Ce n'est pas un mensonge, contrairement à la Suisse, mais c'est un manque à gagner. À ouvrir comme sujet à part.
@@ -197,6 +229,7 @@ Règle inchangée : Claude prépare, JLShop06 clique "Commit changes". **Un seul
 - `i18n-legal.js` et `i18n-product.js` portent en tête "Généré automatiquement depuis i18n.js. Ne pas éditer à la main." Ils ont été édités à la main faute de générateur accessible. Si le générateur est un jour relancé, il ÉCRASERA ces corrections.
 - **Libellés du panier non traduits** : le panier affiche "Sous-total", "Livraison", "Colis neutre et discret", "conditions générales de vente"... en français en dur, dans les 5 langues. C'était déjà le cas avant le chantier n°10, qui n'a fait qu'ajouter des libellés au même endroit. À traiter en une fois via `i18n-common.js` (vérifier d'abord que les clés sont libres — cf. le bug `footer_livraison`).
 - **Regroupement des quantités côté `checkout()` NON fait** : deux exemplaires partent aujourd'hui en 2 lignes Stripe identiques au lieu d'une ligne `quantity: 2`. Le serveur sait déjà gérer `quantity`. Volontairement laissé pour un commit séparé : ne pas mélanger affichage et paiement.
+- **Le bloc `#product-info` des fiches produit est lui aussi en français en dur**, dans les 5 langues, exactement comme les libellés du panier. Même chantier, à traiter en une fois via `i18n-common.js`.
 
 ## 🛠️ MÉTHODE — à réutiliser, gros gain de fiabilité
 1. **Ctrl+F dans l'éditeur GitHub ouvre un panneau Find & Replace** (Next, Previous, All, Match Case, Regexp, By Word, Replace, Replace All). C'est LA méthode sûre : elle évite le bug connu "Ctrl+A puis Delete échoue en silence, le fichier double". Il faut parfois cliquer dans l'éditeur puis appuyer deux fois : le premier Ctrl+F est souvent avalé.
@@ -208,7 +241,7 @@ Règle inchangée : Claude prépare, JLShop06 clique "Commit changes". **Un seul
 7. **Toujours vérifier si le texte porte une clé i18n avant de croire le travail terminé.** Corriger le HTML seul ne sert à rien si un fichier i18n l'écrase au chargement, y compris en français.
 8. **Chercher les doublons JSON-LD** : faq.html dupliquait la phrase dans un bloc FAQPage lu par Google.
 
-> Fin de session du 08/08/2026 (nuit). P0-7, patch `pageSection()` et P1-11 sont CLOS et vérifiés en ligne. Reprendre à P1-12 (fiches produit : contenance, stock, délai, garantie, retour hygiène, guide des tailles).
+> Fin de session du 08/08/2026 (nuit). P0-7, patch `pageSection()`, P1-11 et P1-12 étape 1 sont CLOS et vérifiés en ligne. Reprendre à P1-12 étape 2 (contenance par produit, en dur dans le HTML).
 
 ---
 
