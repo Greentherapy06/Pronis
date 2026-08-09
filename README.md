@@ -371,7 +371,7 @@ Point de départ : 46 occurrences recensées sur le site. Point d arrivée : **0
 - `blog-choisir-premier-sextoy.html` × 3 et `i18n-blog.js` × 19 : tournures relativisantes (`sxt_5`, `sxt_24`, `evb_16`) et conseil comparatif légitime (`arm_12` : « il est préférable de privilégier une formule sans parabènes »).
 - `i18n-core.js` × 1, `api/retractation/submit.js` × 1, `api/veille/scraper.js` × 1 : commentaires de code et URL `lelo.com/fr/best-sellers`.
 - `veille-concurrents.html` × 5 : page interne de veille concurrentielle, ce n est pas une page de vente.
-- `i18n.js` × 106 : **fichier mort**. Vérifié : 0 page HTML du dépôt ne le référence, ces 106 occurrences ne sont jamais servies à un visiteur. À SUPPRIMER dans un chantier de ménage, pas à corriger.
+- `i18n.js` × 106 : ⚠️ **CONCLUSION ERRONÉE, CORRIGÉE AU CHANTIER n°15.** Aucune page HTML ne le référence, mais `cart.js` le charge en secours (`s.onerror = loadFull`) si un bundle de section échoue, et c est la SOURCE dont les bundles sont générés. Il ne doit PAS être supprimé ; il a été resynchronisé au chantier n°15.
 #### 🕳️ Pièges découverts pendant ce chantier (à relire AVANT le prochain)
 
 1. **GitHub gèle l onglet pendant ~2 minutes** quand on ouvre la boîte « Commit changes » sur un fichier i18n monoligne (34 Ko à 277 Ko sur une seule ligne). Pendant ce gel, TOUTE capture d écran et TOUTE injection de script échouent en « Script injection timed out after 5000ms ».
@@ -394,6 +394,79 @@ Point de départ : 46 occurrences recensées sur le site. Point d arrivée : **0
 
 Vérification finale en production sur les 18 fichiers touchés : toutes les tailles servies correspondent au dépôt à l octet près, les 10 fiches gardent leur `h1`, leurs boutons panier et un JSON-LD valide.
 
+## ✅ SESSION 09/08/2026 (suite 2) — CHANTIER n°15 « P2-21 en-têtes de sécurité + P2-20 hreflang + resynchronisation de i18n.js » (Claude)
+
+Autorisation JLShop06 : « continue je t autorise ». Claude clique lui-même les commits de ce chantier.
+
+### 🅰️ P2-21 — en-têtes de sécurité
+
+Constat avant : la seule protection réellement servie était `Strict-Transport-Security: max-age=63072000`, posé par Vercel lui-même. Le `X-Content-Type-Options: nosniff` déclaré dans `vercel.json` n était PAS servi : sa règle vise `"/(.*\.html|/)"`, or avec `cleanUrls: true` les pages sont servies sans extension, donc la règle ne s appliquait jamais. Le `Cache-Control` observé sur les pages venait du comportement par défaut de Vercel, pas de cette règle.
+
+`vercel.json` : 1 065 → 1 651 o (+586). Ajout d une règle globale `"/(.*)"` portant `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: SAMEORIGIN`, `Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()` et `X-DNS-Prefetch-Control: on`. Les trois règles de cache existantes sont inchangées : vérifié par comparaison JSON avant / après.
+
+Choix assumés :
+- **Pas de `Content-Security-Policy`.** Le site est plein de styles et de scripts inline ; une CSP posée à l aveugle casserait l affichage et le tunnel de paiement. À faire dans un chantier dédié, après inventaire des inline.
+- **HSTS laissé tel quel.** Vercel envoie déjà `max-age=63072000`. Ajouter `includeSubDomains` ou `preload` engage TOUS les sous-domaines, y compris ceux qu on ne contrôle pas ou qui ne sont pas en HTTPS. Sans inventaire DNS, on n invente pas.
+
+Vérification en production : les 5 en-têtes sont servis sur `/`, `/pink-star`, `/blog`, `/cgv`, `/style.css`, `/i18n-core.js`, `/logo.webp` et `/404.html`. Les règles de cache sont intactes (`max-age=0, must-revalidate` sur les pages, `max-age=86400, stale-while-revalidate=604800` sur css et js). `POST /api/stripe/checkout` répond toujours `400 {"error":"Cart empty or invalid"}`. 34 cartes produit affichées, 34 boutons panier, zéro erreur console.
+
+### 🅱️ P2-20 — hreflang
+
+Constat : 7 pages sur 55 portaient déjà les 6 balises `alternate` (accueil, `blog.html` et les 5 articles), sur le modèle `?lang=pt`. 37 pages avaient un `canonical` sans aucune alternate, 11 n avaient ni l un ni l autre.
+
+Le modèle d URL existe bel et bien : `getLang()` dans `i18n-core.js` lit `?lang=xx` AVANT le `localStorage`, donc `https://les-jardins-enchantes.com/pink-star.html?lang=de` sert réellement la version allemande.
+
+Mais il y avait un défaut de fond, y compris sur les 7 pages déjà annotées : sur `?lang=de`, le `canonical` de la page continuait de pointer vers l URL sans paramètre. Google aurait donc replié toutes les versions traduites sur la version française et ignoré les annotations. Poser des alternates sans corriger ce point n aurait rien produit.
+
+Deux corrections :
+1. `i18n-core.js` : 19 598 → 20 621 o (+1 023). Un bloc ajouté en fin de fichier rend le `canonical` auto-référent quand `?lang=xx` est présent et valide, puis injecte les 6 `alternate` (fr, pt, it, es, de, x-default) sur les pages qui n en ont pas. Garde-fou : si la page n a pas de `canonical`, le bloc ne fait RIEN. On ne fabrique pas une URL de référence à partir de `location.pathname`, cela produirait `/cgv` alors que le sitemap dit `/cgv.html`.
+2. `sitemap.xml` : 7 439 → 202 404 o. Les 43 URL deviennent 215 entrées (43 × 5 langues), chacune portant le jeu complet de 6 `xhtml:link`. C est la forme réciproque exigée par Google, et c est un canal 100 % statique qui ne dépend pas du rendu JavaScript.
+
+Vérifications : XML validé par `DOMParser` (215 `<url>`, 1 290 `<xhtml:link>`, 0 erreur de parsing, aucun caractère à échapper dans les URL). Le sitemap est servi en production à 202 404 o. Le bloc de `i18n-core.js` a été testé en l exécutant à la main sur `/pink-star.html?lang=de` : canonical réécrit en `?lang=de` et 6 alternates injectées, dans le bon ordre.
+
+⚠️ **Les visiteurs ne verront le nouveau `i18n-core.js` qu au renouvellement du cache CDN** (`max-age=86400`, `stale-while-revalidate=604800`) : il n y a AUCUN paramètre de version sur les scripts chargés par `cart.js`. À prévoir si on veut pouvoir pousser un correctif JS en urgence.
+
+Restent sans `canonical` : `404`, `cancel`, `cgv`, `confidentialite`, `cookies`, `erreur`, `mentions-legales`, `retractation`, `success`, `veille-concurrents` et le fichier de vérification Google. Pour `cgv`, `confidentialite`, `mentions-legales`, `cookies` et `retractation`, c est un vrai défaut SEO à corriger.
+### 🅲️ Correction d une ERREUR du chantier n°14 : `i18n.js` n est PAS mort
+
+⚠️ Le chantier n°14 concluait que `i18n.js` était un fichier mort à supprimer, au motif que 0 page HTML ne le référence. **C est faux, et le conseil était dangereux.** `cart.js` charge les bundles de section en séquence et pose `s.onerror = loadFull`, et `loadFull()` injecte `/i18n.js`. Ce fichier est donc le FILET DE SÉCURITÉ des traductions : si un seul bundle de section échoue à charger, c est lui qui prend le relais sur toutes les pages. Il ne doit surtout pas être supprimé.
+
+Pire : son en-tête dit que les bundles sont « générés automatiquement depuis i18n.js ». `i18n.js` est donc la SOURCE, et depuis plusieurs chantiers on éditait uniquement les fichiers GÉNÉRÉS. La source était en retard sur ses propres sorties : une régénération aurait effacé le travail des chantiers n°13 et n°14.
+
+Resynchronisation faite sans rien inventer : pour chaque clé de `i18n.js` dont la valeur contient un superlatif, on prend la valeur correspondante du bundle de section (même clé, même rang de langue) et on la substitue telle quelle. 85 valeurs remplacées via 65 paires uniques, aucune paire sans correspondance, 0 clé manquante.
+
+`i18n.js` : 674 165 → 673 568 o (−597, exactement la somme attendue). 5 265 clés avant, 5 265 après. `new Function()` passe. Contrôle fonctionnel : le fichier évalué renvoie `TRANSLATIONS` avec fr, pt, it, es, de et **1 022 clés par langue**, soit exactement le compte des bundles de section.
+
+Après resynchronisation il reste 21 occurrences dans `i18n.js` : `sxt_5` × 7, `sxt_24` × 5, `evb_16` × 5, `arm_12` × 2, `cgv_52` × 1 et un commentaire de code. Ce sont exactement celles conservées volontairement dans les bundles.
+
+🕳️ Piège : **deux formats de clé coexistent dans `i18n.js`**, des clés nues (`flateur_title: "..."`) et des clés entre guillemets (`"cannabis_desc4": "..."`). Un premier passage n avait vu que les premières et laissait 8 valeurs derrière. L expression à utiliser est `"?([A-Za-z0-9_]+)"?\s*:\s*"`.
+
+#### Les 4 commits du chantier n°15
+
+| # | Fichier | Avant | Après | Δ | Objet |
+|---|---|---|---|---|---|
+| 1 | `vercel.json` | 1 065 | 1 651 | +586 | 5 en-têtes de sécurité globaux |
+| 2 | `i18n-core.js` `428dc1b` | 19 598 | 20 621 | +1 023 | canonical par langue + alternates injectées |
+| 3 | `sitemap.xml` | 7 439 | 202 404 | +194 965 | 215 URL, 1 290 annotations hreflang réciproques |
+| 4 | `i18n.js` `cc6af3a` | 674 165 | 673 568 | −597 | resynchronisation sur les bundles de section |
+
+## 🔻 RESTE À FAIRE — mis à jour le 09/08/2026 (après le chantier n°15)
+
+### ▶️ REPRENDRE ICI (faisable seul)
+1. **Durcissement du webhook Stripe** : `api/stripe/webhook.js` ne vérifie pas `payment_status`. Devenu plus sensible depuis que les moyens de paiement dynamiques sont activés (chantier n°14). ⚠️ Touche au chemin de paiement : validation explicite de JLShop06 requise avant toute modification.
+2. **`canonical` manquant sur 5 pages légales** : `cgv`, `confidentialite`, `mentions-legales`, `cookies`, `retractation`. Sans `canonical`, le bloc hreflang du chantier n°15 ne s applique pas non plus sur ces pages.
+3. **Versionner les scripts chargés par `cart.js`** (`/i18n-core.js?v=...`) : aujourd hui un correctif JS met jusqu à 24 h à atteindre les visiteurs, et jusqu à 7 jours en `stale-while-revalidate`.
+4. **Écrire le générateur `i18n.js` → bundles de section**, ou inverser la règle et déclarer les bundles comme source. Tant que le générateur n existe pas, TOUTE correction de texte doit être faite dans les DEUX endroits (voir chantier n°15, partie C).
+5. **P1-13, seconde moitié** : la ligne format / contenance sur les cartes de l accueil.
+6. **P2-18 trous de traduction** : « Vous aimerez aussi » codé en dur en français sur 34 fiches, plus les libellés du panier, `#product-info` et `.product-format`.
+7. **P2-19 navigation** : pas de recherche, les catégories ne sont que des ancres.
+8. **Content-Security-Policy** : chantier dédié, après inventaire des scripts et styles inline.
+9. **P2-22 ménage** : archiver ce README. ⚠️ NE PAS supprimer `i18n.js`.
+
+### 🚧 TOUJOURS BLOQUÉ CÔTÉ JLSHOP06
+- **P1-12 reliquat** : les 3 contenances manquantes (`Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`), les Price ID S / M / L du déguisement infirmière, et le guide des tailles (0 page sur tout le site).
+- **P1-10 avis clients** : demande un choix de prestataire (Trustpilot bloqué).
+
 ## 🔻 RESTE À FAIRE — mis à jour le 09/08/2026 (après le chantier n°14)
 
 ### ▶️ REPRENDRE ICI (faisable seul, sans données fournisseur)
@@ -403,7 +476,7 @@ Vérification finale en production sur les 18 fichiers touchés : toutes les tai
 4. **P1-13, seconde moitié** : la ligne format / contenance n est pas reprise sur les cartes de l accueil.
 5. **P2-18 trous de traduction** : « Vous aimerez aussi » codé en dur en français sur 34 fiches, plus les libellés du panier, `#product-info` et `.product-format`.
 6. **P2-19 navigation** : pas de recherche, les catégories ne sont que des ancres.
-7. **P2-22 ménage** : archiver ce README (289 Ko, 3 111 lignes avant ce chantier) et SUPPRIMER `i18n.js`, fichier mort référencé par 0 page.
+7. **P2-22 ménage** : archiver ce README (289 Ko, 3 111 lignes avant ce chantier). ⚠️ NE PAS supprimer `i18n.js` : voir le chantier n°15.
 
 ### 🚧 TOUJOURS BLOQUÉ CÔTÉ JLSHOP06
 - **P1-12 reliquat** : les 3 contenances manquantes (`Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`), les Price ID S / M / L du déguisement infirmière, et le guide des tailles (0 page sur tout le site).
