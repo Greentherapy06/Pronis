@@ -313,6 +313,102 @@ Règle du dépôt modifiée POUR CE LOT UNIQUEMENT : JLShop06 a autorisé explic
 ### ✅ CORRECTION DE STATUT — P0-1 est en réalité RÉSOLU en production
 P0-1 est toujours listé en tête de ce README comme « LE PLUS GRAVE ». Vérifié le 09/08/2026 sur le site servi : **0 occurrence de « Vallonet »** dans `/cgv`, `/confidentialite`, `/mentions-legales`, `index.html` et `blog.html`, ni dans `i18n-legal.js`, ni même dans le legacy `i18n.js` (674 165 o) ; « Foch » présent 1 fois par page légale ; `index.html` et `blog.html` ne chargent plus `i18n.js`. **P0-1 CLOS.**
 
+## ✅ SESSION 09/08/2026 (suite) — CHANTIER n°14 « P1-15 moyens de paiement + P1-14 superlatifs non prouvés » (Claude)
+
+Règle du dépôt levée POUR CE CHANTIER : JLShop06 a autorisé explicitement Claude à cliquer lui-même « Commit changes » pour tout le chantier n°14. Les 3 premiers fichiers (index.html, api/stripe/checkout.js, entrée README du chantier n°13) restent cliqués par JLShop06.
+
+### 🅰️ Partie 1 — P1-15 « moyens de paiement » et variante transmise à Stripe
+
+Autorisation explicite JLShop06 : « j autorises à faire transiter la variante dans le metadata de la session ».
+
+`api/stripe/checkout.js` : 7 453 → 10 078 o (+2 625 = somme exacte des 3 blocs insérés : 412 + 267 + 1 946).
+- Un récapitulatif texte des articles (nom + variante choisie + quantité) est désormais construit côté serveur et envoyé dans `payment_intent_data.description`, dans `payment_intent_data.metadata` et dans le `metadata` de la session.
+- Le récapitulatif est découpé en tranches de 500 caractères (`articles_1`, `articles_2`, ...) pour respecter la limite Stripe de 500 caractères par valeur de metadata. Chaque nom est assaini et tronqué à 120 caractères. Tout le bloc est dans un `try / catch` : un récapitulatif raté ne doit JAMAIS faire échouer une session de paiement.
+- Essai à blanc du constructeur avant commit : 40 articles → 5 clés, valeur la plus longue 477 caractères.
+- `payment_method_types: ["card"]` a été RETIRÉ. Stripe sert maintenant les moyens de paiement dynamiques activés dans le Dashboard, selon le pays et le montant. Aucun moyen de paiement n est écrit en dur dans le code, donc aucune promesse invérifiable n est faite au client.
+- `cart.js` n a PAS eu besoin d être touché : il stocke déjà `{id, name, price, priceId}` et contient déjà `addToCartWithSize()`, en attente des Price ID par taille.
+
+Vérification en production : 10 078 o servis, `payment_method_types` ne subsiste plus que dans un commentaire, POST de fumée → `400 {"error":"Cart empty or invalid"}` (la route répond, elle ne plante pas en 500).
+
+⚠️ **Risque laissé ouvert** : `api/stripe/webhook.js` ne vérifie jamais `payment_status`. Avec des moyens de paiement à notification différée, la remise de bienvenue peut être consommée avant que le paiement soit réellement encaissé. À durcir dans un chantier dédié.
+
+### 🅱️ Partie 2 — P1-14 « superlatifs non prouvés »
+
+#### Doctrine retenue (arbitrage délégué à Claude)
+- On retire toute **allégation comparative ou superlative invérifiable** : « les meilleurs produits de plaisir intime », « le meilleur stimulateur clitoridien », « le meilleur compromis ».
+- On garde tout **fait vérifiable** : Bio Organic, Yuka 100/100, fabriqué en France, sans parabènes / PEG / phénoxyéthanol, marques européennes.
+- On garde les tournures qui **relativisent au lieu de classer** : « le meilleur premier sextoy est celui qui correspond à ce que vous recherchez », « il n y a pas de meilleur lubrifiant dans l absolu », « Quel est le meilleur sextoy pour débuter ? » (question de FAQ, pas une promesse).
+- On garde la formule de politesse « dans les meilleurs délais » (cgv, faq × 2, livraison, i18n-legal) : c est un engagement de diligence, pas un classement.
+- Une correction ne vaut que si elle est faite **dans les 5 langues** (fr, pt, it, es, de). Le HTML porte le français, les fichiers `i18n-*.js` portent les quatre autres : corriger le HTML seul ne change rien à ce que voit un visiteur non francophone.
+#### Les 19 commits du chantier (tous cliqués par Claude, sauf le n°1)
+
+| # | Fichier | Avant | Après | Δ | Ce qui a été retiré |
+|---|---|---|---|---|---|
+| 1 | `index.html` | 52 030 | 51 812 | −218 | boilerplate accueil + mots-clés (cliqué par JLShop06) |
+| 2 | `i18n-home.js` `a740c60` | 34 809 | 34 741 | −68 | 30 remplacements × 5 langues |
+| 3 | `le-flateur.html` `405767a` | 12 759 | 12 691 | −68 | 3 allégations non prouvées + JSON-LD aligné sur le nom canonique |
+| 4 | `i18n-product.js` `1c15c92` | 283 742 | 283 231 | −511 | 30 remplacements × 5 langues |
+| 5 | `lubrifiant_eau_tube_barbe_a_papa.html` | 19 128 | 19 066 | −62 | mots-clés + 3 paragraphes |
+| 6 | `lubrifiant_eau_lube_tube_chocolat_orgie.html` | 18 849 | 18 787 | −62 | idem |
+| 7 | `lubrifiant_eau_lube_tube_fraise_orgie.html` | 18 863 | 18 801 | −62 | idem |
+| 8 | `pink-star.html` | 14 176 | 14 133 | −43 | mots-clés + description |
+| 9 | `pink_star_sucette_cerise.html` | 13 898 | 13 855 | −43 | idem |
+| 10 | `pink-star-choco-fraise.html` | 14 044 | 14 001 | −43 | idem |
+| 11 | `gel_cannabis_orgie.html` | 16 644 | 16 634 | −10 | « les meilleurs gels » → « des gels » |
+| 12 | `Cockring-vibrant-Marry-Me-Wooomy.html` | 16 622 | 16 586 | −36 | mots-clés |
+| 13 | `deguisement-etudiante.html` | 16 583 | 16 547 | −36 | mots-clés |
+| 14 | `deguisement-enseignante.html` | 16 519 | 16 483 | −36 | mots-clés |
+| 15 | `i18n-product.js` `3dd9a69` | 283 231 | 283 109 | −122 | 15 résiduels : fr × 6, it × 3, es × 3, de × 3 |
+| 16 | `i18n-product.js` `69c033c` | 283 109 | 283 088 | −21 | 3 résiduels portugais (`um melhor estimulador clitoriano`) |
+| 17 | `blog-cockring-guide-utilisation.html` | 22 900 | 22 901 | +1 | « le meilleur compromis » → « un excellent compromis » |
+| 18 | `blog-choisir-premier-sextoy.html` | 22 712 | 22 685 | −27 | mots-clés |
+| 19 | `i18n-blog.js` `65a8b0a` | 180 985 | 181 004 | +19 | `ckr_12` neutralisé dans les 5 langues |
+
+Point de départ : 46 occurrences recensées sur le site. Point d arrivée : **0 allégation non prouvée**, dans les 5 langues.
+
+#### Ce qui reste volontairement en place
+- `cgv.html`, `faq.html` × 2, `livraison.html`, `i18n-legal.js` : « dans les meilleurs délais ».
+- `blog-choisir-premier-sextoy.html` × 3 et `i18n-blog.js` × 19 : tournures relativisantes (`sxt_5`, `sxt_24`, `evb_16`) et conseil comparatif légitime (`arm_12` : « il est préférable de privilégier une formule sans parabènes »).
+- `i18n-core.js` × 1, `api/retractation/submit.js` × 1, `api/veille/scraper.js` × 1 : commentaires de code et URL `lelo.com/fr/best-sellers`.
+- `veille-concurrents.html` × 5 : page interne de veille concurrentielle, ce n est pas une page de vente.
+- `i18n.js` × 106 : **fichier mort**. Vérifié : 0 page HTML du dépôt ne le référence, ces 106 occurrences ne sont jamais servies à un visiteur. À SUPPRIMER dans un chantier de ménage, pas à corriger.
+#### 🕳️ Pièges découverts pendant ce chantier (à relire AVANT le prochain)
+
+1. **GitHub gèle l onglet pendant ~2 minutes** quand on ouvre la boîte « Commit changes » sur un fichier i18n monoligne (34 Ko à 277 Ko sur une seule ligne). Pendant ce gel, TOUTE capture d écran et TOUTE injection de script échouent en « Script injection timed out after 5000ms ».
+   - Contournement : cliquer le bouton par `.click()` en JavaScript et non par coordonnées ; attendre ~120 s en enchaînant des `wait` **sur un autre onglet** ; ne jamais taper à l aveugle pendant le gel.
+   - Deux éditions de `i18n-home.js` ont été PERDUES parce qu un `Return` tapé à l aveugle pendant le gel a annulé la boîte de dialogue : le fichier était toujours à 34 809 o avec ses 22 superlatifs. Détecté uniquement par la re-vérification du fichier servi.
+2. **Copilot réécrit le message de commit APRÈS la frappe.** GitHub propose un message généré qui arrive 2 à 4 secondes après l ouverture de la boîte et écrase ce qui a été tapé au clavier. Trois messages français ont été remplacés par de l anglais générique du type « Refine product descriptions for clarity and flow ».
+   - Contournement fiable : écrire le message en JavaScript avec le setter natif, `Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,"value").set.call(input, msg)` suivi de `input.dispatchEvent(new Event("input",{bubbles:true}))`, et vider de la même façon le champ « Extended description » que Copilot remplit aussi.
+3. **La boîte de dialogue se déplace verticalement** selon la position de scroll : un clic en coordonnées sur « Commit changes » peut tomber sur le bouton radio « Create a new branch ». Toujours vérifier `input[value="direct"].checked` avant de confirmer.
+4. **`raw.githubusercontent.com` sert du cache même avec un paramètre anti-cache.** Après un commit, un lot de `fetch` a renvoyé `i18n-product.js` à son ANCIENNE taille (283 231 au lieu de 283 109). Croiser avec `api.github.com/repos/.../contents/<fichier>`, qui renvoie la taille réelle.
+5. **Les superlatifs ne sont pas seulement français.** Le site parle 5 langues : `meilleur` (fr), `melhor` (pt), `mejor` (es), `migliore` / `miglior` (it), `besten` / `besseren` (de). Un premier passage fait uniquement sur `meilleur` a laissé 18 occurrences invisibles dans `i18n-product.js`.
+6. **Faux positifs de `\b` en JavaScript** : `\bbest\b` matche dans « Bestätigung » et « Bestände », parce que `ä` n est pas un caractère de mot ASCII. Cela avait fait croire à 13 superlatifs dans `i18n-legal.js` alors qu il n y en a qu un. Utiliser `(?<!\p{L})...(?!\p{L})` avec le drapeau `u`.
+
+#### Protocole de vérification appliqué à chaque fichier
+1. Compter chaque chaîne à remplacer AVANT de remplacer, et exiger le nombre attendu.
+2. Calculer le delta d octets attendu (somme de n × (octets(nouveau) − octets(ancien))) AVANT d écrire, puis exiger `observé === attendu`.
+3. `new Function(texte)` sur les `.js` : l aperçu Diff de GitHub est inutilisable sur un fichier monoligne.
+4. Compter les clés de traduction avant / après : 2 460 pour `i18n-product.js`, 955 pour `i18n-blog.js`, inchangées.
+5. `DOMParser` sur les HTML : `h1` présent, boutons `.add-to-cart` comptés, JSON-LD qui parse, `<strong>` équilibrés.
+6. Après commit, re-télécharger le fichier SERVI et vérifier la taille exacte.
+
+Vérification finale en production sur les 18 fichiers touchés : toutes les tailles servies correspondent au dépôt à l octet près, les 10 fiches gardent leur `h1`, leurs boutons panier et un JSON-LD valide.
+
+## 🔻 RESTE À FAIRE — mis à jour le 09/08/2026 (après le chantier n°14)
+
+### ▶️ REPRENDRE ICI (faisable seul, sans données fournisseur)
+1. **P2-20 hreflang** : 40 pages sur 42 n ont aucune balise `hreflang`. Le site parle 5 langues et ne le dit pas aux moteurs.
+2. **P2-21 en-têtes de sécurité** : `vercel.json` ne pose que `Cache-Control` et `X-Content-Type-Options`. Manquent `Strict-Transport-Security`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options`.
+3. **Durcissement du webhook** : `api/stripe/webhook.js` ne vérifie pas `payment_status` (voir chantier n°14, partie 1). Devenu plus sensible depuis que les moyens de paiement dynamiques sont activés.
+4. **P1-13, seconde moitié** : la ligne format / contenance n est pas reprise sur les cartes de l accueil.
+5. **P2-18 trous de traduction** : « Vous aimerez aussi » codé en dur en français sur 34 fiches, plus les libellés du panier, `#product-info` et `.product-format`.
+6. **P2-19 navigation** : pas de recherche, les catégories ne sont que des ancres.
+7. **P2-22 ménage** : archiver ce README (289 Ko, 3 111 lignes avant ce chantier) et SUPPRIMER `i18n.js`, fichier mort référencé par 0 page.
+
+### 🚧 TOUJOURS BLOQUÉ CÔTÉ JLSHOP06
+- **P1-12 reliquat** : les 3 contenances manquantes (`Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`), les Price ID S / M / L du déguisement infirmière, et le guide des tailles (0 page sur tout le site).
+- **P1-10 avis clients** : demande un choix de prestataire (Trustpilot bloqué).
+
 ## 🔻 RESTE À FAIRE — mis à jour le 09/08/2026 (après le chantier n°13)
 
 ### ▶️ REPRENDRE ICI
