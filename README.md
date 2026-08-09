@@ -256,6 +256,76 @@ Règle inchangée : Claude prépare, JLShop06 clique Commit changes. 24 commits 
 - **NOUVEAU** : les libellés Contenance / Dimensions / Coffret sont en français en dur dans les 5 langues, exactement comme le bloc `#product-info` et les libellés du panier. Le chantier i18n commun grossit : panier + `#product-info` + `.product-format`, à traiter en une fois via `i18n-common.js` (vérifier d abord que les clés sont libres, cf. le bug `footer_livraison`).
 - **NOUVEAU** : rien n a été ajouté au JSON-LD. La contenance n est PAS dans le balisage Product, elle n existe que pour l œil humain et le texte de la page. Chantier à part si on veut l exposer en données structurées.
 
+## ✅ SESSION 09/08/2026 — CHANTIER n°13 « P1-13 : un seul nom par produit (carte = fiche = panier = alt) » (Claude)
+
+Règle du dépôt modifiée POUR CE LOT UNIQUEMENT : JLShop06 a autorisé explicitement Claude à cliquer lui-même « Commit changes » pour les 26 fiches catalogue de ce chantier. Tout le reste (index.html, i18n-home.js) a été préparé par Claude et cliqué par JLShop06. 32 commits au total.
+
+### 🎯 Doctrine de nommage retenue (arbitrage délégué à Claude : « le site doit être haut de gamme et cohérent pour une clientèle premium »)
+- **Un produit = UN seul nom**, strictement identique dans 4 couches : `<h3>` de la carte accueil, `data-product-name` de la carte, `data-product-name` de la fiche (toutes occurrences), `<h1>` de la fiche.
+- **Format canonique : « Marque – Type + Modèle »** (marque d abord, tiret demi-cadratin –).
+- Le `<h1>` de la fiche reste la source de vérité quand il était bon (on ne casse pas le SEO acquis) ; il n a été réécrit que lorsqu il nuisait à la boutique (nom opaque, marque absente, superlatif non prouvé, faute).
+- **Les `<title>` n ont PAS été alignés sur le nom canonique** : un title porte légitimement plus de mots-clés que le nom commercial. Seuls les titles factuellement faux ont été corrigés (« Tube Gel », « Sale » sans accent, « Blanc » manquant).
+- Aucune donnée inventée : contenances, tailles, stocks et moyens de paiement restent ceux du dépôt.
+
+### ✅ FAIT — 1) Corrections factuelles des alt / aria-label (index.html, 51 903 → 51 989 o, +86)
+- 3 tubes Orgie : les `alt` et `aria-label` annonçaient « 50ml » alors que les fiches disent 100 ml → corrigés (2 attributs × 3 cartes).
+- Carte dual-vibe : `alt` et `aria-label` disaient « Stimulateur Clitoridien Vibromasseur » pour un gel de 15 ml à 32,90 € → « Gel Vibrant Intime 15ml ».
+- 3 cockrings partageaient le même `alt` « Cockring vibrant rechargeable » → 3 alt distincts.
+- Contrôle : le gel cannabis dit légitimement « Orgie 50ml » (il fait vraiment 50 ml), il n a PAS été touché. 34 alt uniques après commit.
+
+### ✅ FAIT — 2) Nom canonique sur les 34 cartes (index.html, 51 989 → 52 030 o, +41)
+- 34 `<h3>` + 34 `data-product-name` réécrits ; après commit, `h3 === data-product-name` sur les 34 cartes, 34 noms uniques.
+- Les 34 Price ID carte ↔ fiche avaient été audités AVANT d écrire : aucun écart, donc aucun risque de facturation. Seuls 2 écarts de format de prix (52.9 vs 52.90), sans effet.
+
+### ✅ FAIT — 3) i18n-home.js (36 550 → 34 809 o, −1 741)
+- 116 valeurs sur 24 clés `home_prod_*` (23 clés × 5 langues + `home_prod_14` en FR seul). 170 clés préservées, syntaxe validée par `new Function()`.
+
+### ✅ FAIT — 4) 26 fiches catalogue (1 commit chacune) + i18n-product.js × 2
+- 26 fiches : `data-product-name` du bouton aligné sur le nom canonique ; 13 d entre elles avaient aussi un `<h1>` à changer.
+- **PIÈGE MAJEUR** : les `<h1>` de fiche portent des clés `data-i18n` (`caramel_title`, `dualvibe_title`, `magnum_title`, `indiana_title`…). Modifier le HTML ne suffit PAS, même en français : `i18n-product.js` réécrit le titre au chargement. Deux commits ont été nécessaires : 65 valeurs sur 13 clés (283 048 → 283 912 o, +864), puis 32 valeurs sur 14 clés supplémentaires trouvées à la vérification finale (283 912 → 283 742 o, −170).
+- Corrections d appoint passées au même endroit : « Salé » accentué (8 occurrences), « Tube Gel » remplacé (10 occurrences × 3 fiches), « Blanc » ajouté sur `pink-star-choco-fraise`, superlatif « Meilleur » retiré du `<h1>` de `le-flateur`.
+
+### ✅ FAIT — 5) tanga : le `baseName` du script inline (17 150 → 17 164 o, +14)
+- La fiche tanga a un sélecteur de couleur qui fait `btn.setAttribute('data-product-name', baseName + " (" + couleur + ")")`. `baseName` était une chaîne JS, donc invisible pour la regex qui cible l attribut HTML : le panier affichait encore l ancien nom. Aligné sur le nom canonique.
+- **À retenir** : `data-product-name` peut être écrasé par du JS. Chercher `setAttribute('data-product-name'` sur TOUTES les fiches, pas seulement l attribut dans le HTML. Une seule fiche sur 34 est concernée (tanga).
+
+### 🔎 VÉRIFICATION FINALE (demandée par JLShop06 : « tu vérifieras tout à la fin »)
+- 34 / 34 produits : `h3` carte = `data-product-name` carte = `data-product-name` fiche = `<h1>` fiche. **0 écart.**
+- 5 langues (fr / pt / it / es / de) : **0 divergence** entre le nom de carte et le `<h1>` de fiche sur les 34 produits.
+- Fichiers servis en production : `index.html` 52 030 o, `i18n-home.js` 34 809 o, `i18n-product.js` 283 742 o, `i18n-common.js` 10 172 o.
+
+### 🐛 3 COMMITS SILENCIEUSEMENT PERDUS
+- `lubrifiant_eau_lube_tube_fraise_orgie.html`, `pink-star.html`, `pink_star_sucette_cerise.html` : le clic sur « Commit changes » de la boîte de dialogue n a pas été enregistré, sans aucun message d erreur. Détecté UNIQUEMENT par la vérification de fin de lot (3 fiches encore à l ancien nom en production), puis refait avec 4 s d attente et une capture d écran de contrôle.
+- **Leçon** : ne jamais considérer un commit comme acquis parce que la boîte s est fermée. Contrôler l URL (`/edit/main/` → `/blob/main/`) puis re-télécharger le fichier servi.
+
+### 🧰 Leçons techniques nouvelles
+- **Contourner la limite de 60 requêtes/h de l API GitHub** : depuis l onglet github.com, `fetch('https://raw.githubusercontent.com/…')` passe (CORS autorisé). Et l audit complet des 34 fiches a été fait en `fetch` same-origin sur le site en production : 0 appel API.
+- `view.dispatch` seul n active toujours pas le bouton Commit (React ne voit pas la transaction) : il faut une vraie frappe clavier (clic dans l éditeur, End, « x », Backspace).
+- La Diff Preview de GitHub reste inutilisable sur les fichiers i18n monolignes : preuve par delta d octets calculé AVANT écriture, puis `doc === attendu`, puis compilation `new Function()`.
+- L accès à CodeMirror a changé : `document.querySelector('.cm-content').cmTile.view` (et non plus `cmView.view`).
+
+### 🚨 DÉCOUVERTE HORS PÉRIMÈTRE — la variante choisie n arrive JAMAIS chez le marchand
+- `cart.js` envoie bien `{cart, email}` à `/api/stripe/checkout`, mais le serveur ne lit que `item.priceId` et `item.quantity` (`validItems = cart.filter(item => typeof item.priceId === "string")`). Le nom du produit est ignoré, et le `metadata` de la session ne contient que `welcome_discount_applied` et `customer_email`.
+- **Conséquence concrète** : la couleur choisie sur le tanga (Bleu / Rose / Noir) n apparaît NULLE PART dans la commande Stripe. Le sélecteur est purement décoratif.
+- **Conséquence pour les robes** : `robe-longue-noire-argentee` et `mini-robe-noire` annoncent « Taille : du S au XL » mais n ont qu un seul Price ID et AUCUN sélecteur de taille, ni sur la carte ni sur la fiche. Ajouter un sélecteur qui ne changerait que le nom affiché serait un trompe-l oeil : le client croirait choisir sa taille, le marchand ne la recevrait pas.
+- **Deux corrections possibles, à arbitrer par JLShop06** : (a) un Price ID Stripe par taille / couleur — seul JLShop06 peut les créer ; (b) transmettre la variante dans le `metadata` de la session Stripe — modification de `cart.js` ET de `api/stripe/checkout.js`, donc du chemin de paiement : à ne toucher qu avec validation explicite.
+
+### ✅ CORRECTION DE STATUT — P0-1 est en réalité RÉSOLU en production
+P0-1 est toujours listé en tête de ce README comme « LE PLUS GRAVE ». Vérifié le 09/08/2026 sur le site servi : **0 occurrence de « Vallonet »** dans `/cgv`, `/confidentialite`, `/mentions-legales`, `index.html` et `blog.html`, ni dans `i18n-legal.js`, ni même dans le legacy `i18n.js` (674 165 o) ; « Foch » présent 1 fois par page légale ; `index.html` et `blog.html` ne chargent plus `i18n.js`. **P0-1 CLOS.**
+
+## 🔻 RESTE À FAIRE — mis à jour le 09/08/2026 (après le chantier n°13)
+
+### ▶️ REPRENDRE ICI
+1. **P1-13, seconde moitié** : la ligne format / contenance n est pas reprise sur les cartes de l accueil (elle n existe que sur les fiches depuis le chantier n°12).
+2. **Variante non transmise à Stripe** (voir ci-dessus) : arbitrage JLShop06 requis AVANT toute modification du chemin de paiement.
+3. **P1-12 reliquat, toujours bloqué côté JLShop06** : les 3 contenances manquantes (`Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`), les Price ID S / M / L du déguisement infirmière, le guide des tailles.
+4. Ensuite : P1-10 (avis clients), P1-14 (superlatifs), P1-15 (moyens de paiement), puis P2-16 à P2-22.
+
+### ⚠️ POINTS OUVERTS
+- Les fichiers `i18n-*.js` portent l en-tête « Généré automatiquement depuis i18n.js. Ne pas éditer à la main. » et ont, faute de générateur, été édités à la main une fois de plus (i18n-home.js, i18n-product.js × 2). Le générateur reste à écrire, sinon la dette grandit à chaque chantier.
+- Libellés encore en français en dur pour les 5 langues : panier, bloc `#product-info`, `.product-format`.
+- Le nom canonique n a PAS été répercuté sur les `<title>`, les `meta description` ni le JSON-LD : c est un choix assumé (SEO), pas un oubli.
+
 ## 🔻 RESTE À FAIRE — mis à jour le 08/08/2026 (nuit, après le chantier n°11)
 
 ### ▶️ REPRENDRE ICI
