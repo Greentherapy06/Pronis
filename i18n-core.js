@@ -373,3 +373,29 @@ if (document.readyState === "loading") {
   }
 })();
 /* <<< fin liens LIVRAISON et FAQ <<< */
+
+/* >>> hreflang + canonical par langue (P2-20) >>> */
+(function () {
+  var LANGS = ["fr", "pt", "it", "es", "de"];
+  try {
+    var head = document.head; if (!head) return;
+    var can = head.querySelector('link[rel="canonical"]');
+    if (!can) return;
+    var base = can.href.split("?")[0].split("#")[0];
+    var params = new URLSearchParams(location.search);
+    var cur = (params.get("lang") || "").slice(0, 2).toLowerCase();
+    if (LANGS.indexOf(cur) > 0) { can.href = base + "?lang=" + cur; }
+    if (!head.querySelector('link[rel="alternate"][hreflang]')) {
+      LANGS.forEach(function (l) {
+        var el = document.createElement("link");
+        el.rel = "alternate"; el.hreflang = l;
+        el.href = (l === "fr") ? base : base + "?lang=" + l;
+        head.appendChild(el);
+      });
+      var xd = document.createElement("link");
+      xd.rel = "alternate"; xd.hreflang = "x-default"; xd.href = base;
+      head.appendChild(xd);
+    }
+  } catch (e) {}
+})();
+/* <<< fin hreflang + canonical par langue <<< */
