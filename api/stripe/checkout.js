@@ -142,8 +142,63 @@ module.exports = async (req, res) => {
     }
 
     // ── 5) Création de la session Stripe ──
+    // ── 2 bis) Récapitulatif des articles (variante choisie incluse) ──
+    // Les Price ID Stripe ne portent PAS la variante choisie par le client
+    // (couleur du tanga, taille d'un textile) : elle n'existe que dans le nom
+    // envoyé par le panier. On le recopie ici pour qu'il apparaisse sur le
+    // paiement dans le tableau de bord Stripe, sinon la commande arrive sans
+    // l'information et le colis ne peut pas être préparé correctement.
+    // Purement informatif : n'influence AUCUN montant (les prix viennent de Stripe).
+    let articlesSummary = "";
+    const articlesMetadata = {};
+    try {
+      const counts = new Map();
+      for (const item of validItems) {
+        const label = String(item.name || "Article")
+          .replace(/[\r\n\t]+/g, " ")
+          .replace(/\s{2,}/g, " ")
+          .trim()
+          .slice(0, 120);
+        const qty =
+          Number.isInteger(item.quantity) && item.quantity > 0
+            ? item.quantity
+            : 1;
+        counts.set(label, (counts.get(label) || 0) + qty);
+      }
+
+      const parts = [];
+      counts.forEach(function (qty, label) {
+        parts.push(qty + " x " + label);
+      });
+      articlesSummary = parts.join(" | ").slice(0, 500);
+
+      // Limites Stripe : 500 caractères par valeur de métadonnée.
+      let bucket = "";
+      let chunk = 0;
+      for (const part of parts) {
+        if (bucket && bucket.length + 3 + part.length > 500) {
+          chunk += 1;
+          articlesMetadata["articles_" + chunk] = bucket;
+          bucket = "";
+          if (chunk >= 10) break;
+        }
+        bucket = bucket ? bucket + " | " + part : part.slice(0, 500);
+      }
+      if (bucket && chunk < 10) {
+        articlesMetadata["articles_" + (chunk + 1)] = bucket;
+      }
+    } catch (metaErr) {
+      // Un récapitulatif illisible ne doit JAMAIS empêcher un paiement.
+      console.error("Articles metadata error:", metaErr);
+    }
+
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      // ── Moyens de paiement dynamiques (P1-15) ──
+      // On n'impose plus payment_method_types: ["card"]. En l'omettant, Stripe
+      // affiche automatiquement les moyens activés dans le tableau de bord et
+      // compatibles avec le montant, la devise et le pays du client : carte,
+      // Apple Pay, Google Pay, Link, et les moyens locaux si tu les actives.
+      // Le réglage se fait donc chez Stripe, plus en dur dans le code.
       mode: "payment",
       line_items,
       // Réduction appliquée par Stripe (le montant facturé reste maître).
@@ -179,11 +234,19 @@ module.exports = async (req, res) => {
           optional: false,
         },
       ],
-      // Métadonnées lues par le webhook pour verrouiller la remise APRÈS paiement.
-      metadata: {
-        welcome_discount_applied: welcomeDiscountEligible ? "true" : "false",
-        customer_email: email,
+      // Récapitulatif lisible directement sur le paiement (tableau de bord).
+      payment_intent_data: {
+        description: articlesSummary || undefined,
+        metadata: articlesMetadata,
       },
+      // Métadonnées lues par le webhook pour verrouiller la remise APRÈS paiement.
+      metadata: Object.assign(
+        {
+          welcome_discount_applied: welcomeDiscountEligible ? "true" : "false",
+          customer_email: email,
+        },
+        articlesMetadata
+      ),
       success_url: `${origin}/success.html`,
       cancel_url: `${origin}/cancel.html`,
     });
