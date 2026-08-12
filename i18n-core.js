@@ -1,5 +1,7 @@
 // i18n-core.js — Moteur i18n partage (code seul, SANS les traductions) — Les Jardins Enchantes
-// Genere automatiquement depuis i18n.js (tout ce qui suit l objet TRANSLATIONS). Ne pas editer a la main.
+// SOURCE DE VERITE (avec i18n-common/home/blog/legal/product.js). Editable a la main.
+// i18n.js (bundle complet, fallback legacy) est GENERE depuis ce fichier par tools/build-i18n.js
+// -> apres toute modif ici, lancer : node tools/build-i18n.js
 // Charge par le loader de cart.js sur TOUTES les pages, avant i18n-common.js.
 (function(){
   var G = (typeof window !== "undefined") ? window : this;
