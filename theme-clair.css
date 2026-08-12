@@ -105,3 +105,43 @@ body{
 
 /* ---------- MOBILE ---------- */
 @media(max-width:900px){body{background-attachment:scroll,scroll!important}}
+
+
+/* ---------- MOBILE LUXE (12/08/2026) — meme rendu que le PC ----------
+   Aucun changement de mise en page : uniquement palette + picto panier.
+   Le header mobile avait ete dessine pour un fond sombre ; il est ici
+   aligne sur le theme clair dore du PC. */
+@media(max-width:560px){
+  header.lux-header{
+    background:linear-gradient(180deg,rgba(255,251,245,.96) 0%,rgba(253,246,236,.92) 100%)!important;
+    border-bottom:1px solid rgba(180,136,67,.32)!important;
+    box-shadow:0 2px 24px rgba(120,80,40,.12)!important;
+    padding:12px 18px 14px!important;gap:12px!important;
+  }
+  header.lux-header .header-logo-img{width:42px!important;height:42px!important;box-shadow:0 0 0 1px rgba(180,136,67,.45)!important}
+  header.lux-header .lux-mbrand{color:#8a5a1f!important;opacity:1!important;font-size:14px!important;letter-spacing:4px!important}
+  header.lux-header .lux-mbrand small{color:#a97c2f!important;opacity:.85!important}
+
+  header.lux-header .lux-mmenus{border:1px solid rgba(180,136,67,.30)!important;background:rgba(255,255,255,.45)!important;border-radius:999px!important}
+  header.lux-header .lux-mmenus .nav-dd+.nav-dd{border-left:1px solid rgba(180,136,67,.22)!important}
+  header.lux-header .lux-mmenus .dd__btn{color:#8a6830!important;font-size:10px!important;letter-spacing:2.4px!important;padding:11px 8px!important;border-radius:999px!important}
+  header.lux-header .lux-mmenus .dd__btn:hover,header.lux-header .lux-mmenus .dd__btn[aria-expanded="true"]{background:linear-gradient(135deg,#c9a24a 0%,#a97c2f 100%)!important;color:#fffaf0!important}
+  header.lux-header .lux-mmenus .dd__panel{background:#fffaf3!important;border:1px solid rgba(180,136,67,.35)!important;box-shadow:0 18px 40px rgba(120,80,40,.22)!important}
+  header.lux-header .lux-mmenus .dd__item{color:#6b4f2a!important}
+
+  /* Panier : picto dore dessine au lieu de l'emoji couleur du systeme */
+  header.lux-header .lux-cart{background:rgba(255,255,255,.65)!important;border:1px solid rgba(180,136,67,.45)!important;width:42px!important;height:42px!important;box-shadow:0 2px 10px rgba(120,80,40,.10)!important}
+  header.lux-header .lux-cart::before{
+    content:""!important;width:20px;height:20px;display:block;background-color:#8a5a1f;
+    -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='9' cy='20' r='1.4'/><circle cx='18' cy='20' r='1.4'/><path d='M2.5 3h2.2l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.3L21 7H6'/></svg>") center/contain no-repeat;
+    mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='9' cy='20' r='1.4'/><circle cx='18' cy='20' r='1.4'/><path d='M2.5 3h2.2l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.3L21 7H6'/></svg>") center/contain no-repeat;
+  }
+  header.lux-header .lux-cart #cartCount{background:linear-gradient(135deg,#c9a24a 0%,#a97c2f 100%)!important;color:#fffaf0!important;box-shadow:0 0 0 2px rgba(255,251,245,.9)!important}
+
+  /* Bandeau cookies : flex:1 1 320px devenait une hauteur de 320px en colonne */
+  .lje-cookie-bar{padding:14px 14px calc(14px + env(safe-area-inset-bottom))!important}
+  .lje-cookie-inner{gap:12px!important}
+  .lje-cookie-text{flex:0 0 auto!important;font-size:12px!important;line-height:1.5!important}
+  .lje-cookie-btns{gap:10px!important}
+  .lje-cookie-btns .lje-btn{padding:11px 14px!important;font-size:11px!important;letter-spacing:1.5px!important}
+}
