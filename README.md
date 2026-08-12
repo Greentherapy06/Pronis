@@ -85,17 +85,18 @@ Indicateur de contrôle : sur chaque page, un client doit trouver en moins de 10
 
 Le journal détaillé de chaque session (chantiers n°1 à n°17, audit initial, journal de bord 2026) a été déplacé dans [docs/journal-archive.md](docs/journal-archive.md) pour garder ce README lisible. Rien n'a été supprimé, uniquement déplacé (chantier n°18, 12/08/2026).
 
-# 🔻 ÉTAT ACTUEL — mis à jour le 12/08/2026 (après le chantier n°18)
+# 🔻 ÉTAT ACTUEL — mis à jour le 12/08/2026 (après le chantier n°19)
 
 ## ▶️ REPRENDRE ICI (faisable seul)
 1. **Durcissement du webhook Stripe** : `api/stripe/webhook.js` ne vérifie pas `payment_status`. Version corrigée déjà écrite et testée (syntaxe), envoyée à JLShop06 en téléchargement — pas encore appliquée au dépôt. ⚠️ Fichier de paiement : passe par une validation explicite de JLShop06 avant tout commit (l'éditeur GitHub sur ce fichier est aussi bloqué côté environnement Claude).
-2. **Écrire le générateur `i18n.js` → bundles de section** (ou inverser la règle et déclarer les bundles comme source). Tant que le générateur n'existe pas, toute correction de texte doit être faite dans les DEUX endroits.
-3. **P2-18 trous de traduction** : « Vous aimerez aussi » codé en dur en français sur 34 fiches, plus les libellés du panier, `#product-info` et `.product-format`.
-4. **P2-19 navigation** : pas de recherche, les catégories ne sont que des ancres.
-5. **Content-Security-Policy** : chantier dédié, après inventaire des scripts et styles inline.
+2. **P2-18 trous de traduction** : « Vous aimerez aussi » codé en dur en français sur 34 fiches, plus les libellés du panier, `#product-info` et `.product-format`.
+3. **P2-19 navigation** : pas de recherche, les catégories ne sont que des ancres.
+4. **Content-Security-Policy** : chantier dédié, après inventaire des scripts et styles inline.
 
 ## ✅ Déjà fait (résumé, détail dans l'archive)
 Chantiers n°1 à n°17 : i18n allégé, coordonnées harmonisées, pages légales/404/contact/livraison/FAQ, panier vivant, blocs d'informations produit + contenance/dimensions (fiches et cartes accueil), nom de produit unifié partout, moyens de paiement dynamiques, en-têtes de sécurité, hreflang 5 langues + sitemap réciproque, resynchronisation `i18n.js`, canonical sur les pages légales, cache-busting des scripts i18n.
+
+**Chantier n°19 (12/08/2026) — générateur `i18n.js` :** `i18n-core.js` + les 5 fichiers de section (`i18n-common/home/blog/legal/product.js`) sont désormais déclarés **source de vérité** (en-têtes mis à jour). `i18n.js` (bundle complet, chargé seulement en fallback par `cart.js` si un fichier de section échoue) est maintenant un **artefact généré** par `tools/build-i18n.js` (`npm run build:i18n`) — plus jamais édité à la main, plus jamais de désync entre les deux. Vérifié sans perte : 1022 clés × 5 langues, 0 clé manquante après régénération ; la régénération a aussi corrigé le fallback qui n'avait PAS les liens Contact/Livraison/FAQ ni le hreflang (ajoutés à `i18n-core.js` après la dernière mise à jour manuelle de `i18n.js`, jamais reportés).
 
 ## 🚧 Toujours bloqué côté JLShop06
 - **P1-12 reliquat** : 3 contenances manquantes (`Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`), les Price ID S/M/L du déguisement infirmière, et le guide des tailles.
