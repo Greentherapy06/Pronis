@@ -13,6 +13,7 @@
 
 /* >>> Chargeur i18n par section (optimise: commun + section de la page, fallback i18n.js complet) >>> */
 (function () {
+  var I18N_VER = "v1"; // bump ce numero pour forcer le rechargement des fichiers i18n (contourne le cache CDN/navigateur)
   function runI18n() {
     try { if (typeof initI18n === 'function') initI18n(); } catch (e) {}
     try { if (typeof window.applyTranslations === 'function') window.applyTranslations(); } catch (e) {}
@@ -31,13 +32,13 @@
   function loadFull() {
     if (fellBack) return; fellBack = true;
     var s = document.createElement('script');
-    s.src = '/i18n.js'; s.onload = runI18n;
+    s.src = '/i18n.js?v=' + I18N_VER; s.onload = runI18n;
     document.head.appendChild(s);
   }
   function loadSeq(i) {
     if (i >= sections.length) { runI18n(); return; }
     var s = document.createElement('script');
-    s.src = '/' + sections[i];
+    s.src = '/' + sections[i] + '?v=' + I18N_VER;
     s.onload = function () { loadSeq(i + 1); };
     s.onerror = loadFull;
     document.head.appendChild(s);
