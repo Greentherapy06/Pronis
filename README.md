@@ -452,28 +452,55 @@ Après resynchronisation il reste 21 occurrences dans `i18n.js` : `sxt_5` × 7, 
 
 ## ✅ SESSION 12/08/2026 — CHANTIER n°16 « P2-20 reliquat : canonical sur les 5 pages légales » (Claude)
 
-Autorisation JLShop06 : « Claude commit les 5 » (accord explicite en session). 5 commits, 1 fichier chacun, changement identique dans chacun : une ligne \`<link rel="canonical" href="https://les-jardins-enchantes.com/PAGE.html">\` insérée juste après la \`meta description\`, avant \`meta robots\` — même emplacement que sur \`livraison.html\` et \`faq.html\`. Rien d'autre touché, aucun texte visible modifié.
+Autorisation JLShop06 : « Claude commit les 5 » (accord explicite en session). 5 commits, 1 fichier chacun, changement identique dans chacun : une ligne `<link rel="canonical" href="https://les-jardins-enchantes.com/PAGE.html">` insérée juste après la `meta description`, avant `meta robots` — même emplacement que sur `livraison.html` et `faq.html`. Rien d'autre touché, aucun texte visible modifié.
 
-Fichiers : \`cgv.html\`, \`confidentialite.html\`, \`mentions-legales.html\`, \`cookies.html\`, \`retractation.html\`.
+Fichiers : `cgv.html`, `confidentialite.html`, `mentions-legales.html`, `cookies.html`, `retractation.html`.
 
-Effet indirect utile : ces 5 pages profitent maintenant du bloc hreflang injecté par \`i18n-core.js\` (chantier n°15), qui ne s'activait que si un \`canonical\` existait déjà sur la page — condition désormais remplie.
+Effet indirect utile : ces 5 pages profitent maintenant du bloc hreflang injecté par `i18n-core.js` (chantier n°15), qui ne s'activait que si un `canonical` existait déjà sur la page — condition désormais remplie.
 
 ✅ VÉRIFIÉ EN LIGNE (fetch raw après commit) : les 5 fichiers servent bien la balise canonical attendue, une seule occurrence par fichier.
+
+## ✅ SESSION 12/08/2026 (suite) — CHANTIER n°17 « cache-busting i18n + P1-13 seconde moitié » (Claude)
+
+Autorisation JLShop06 : go général sur la suite de la liste (Stripe confirmé fonctionnel par une première commande réelle, remise -10% bien appliquée). Item webhook Stripe non touché ici : l'éditeur GitHub sur `api/stripe/webhook.js` a été refusé par le classificateur de sécurité de la session Claude ; le fichier durci a été envoyé en téléchargement à JLShop06 pour application manuelle si souhaité.
+
+### 🅰️ Cache-busting sur les scripts i18n (`cart.js`)
+
+Ajout d'une constante `I18N_VER = "v1"` dans l'IIFE de chargement i18n. Les 4 `src` dynamiques (`i18n.js`, `i18n-core.js`, `i18n-common.js`, `i18n-{section}.js`) portent désormais `?v=` + I18N_VER. `cart.js` : 23 913 → 24 069 caractères (+156). Bumper cette valeur à chaque correction de contenu i18n force un rechargement immédiat coté navigateur/CDN, sans attendre le cache actuel (24h, 7j en stale-while-revalidate).
+
+Rien d'autre touché : la logique de fallback (`onerror = loadFull`) et le découpage par section restent identiques.
+
+✅ VÉRIFIÉ EN LIGNE (fetch depuis github.com, même origine) : 3 occurrences de `I18N_VER`, taille exacte attendue.
+
+### 🅱️ P1-13, seconde moitié : contenance/dimensions sur les 24 cartes accueil concernées
+
+Les 24 fiches produit qui portaient déjà une ligne `.product-format` (chantier n°12) l'ont maintenant aussi sur leur carte `index.html`, texte repris mot pour mot (aucune valeur inventée). Une ligne `<p class="product-format">...</p>` insérée entre le prix (`<strong>`) et le bouton `AJOUTER AU PANIER` de chaque carte concernée.
+
+`index.html` : 51 306 → 52 730 octets (+1 424, exactement la somme des 24 lignes insérées). Méthode : chaque `href` vérifié unique avant écriture, position d'insertion retrouvée par le premier bouton `add-to-cart` suivant ce lien. Diff Preview GitHub contrôlé : 24 hunks, 1 ligne ajoutée à chaque fois, rien d'autre modifié.
+
+Les 10 fiches restantes (3 bloquées côté JLShop06 + 7 articles textiles sans contenance documentée) n'ont rien reçu : aucune valeur à recopier.
+
+✅ VÉRIFIÉ EN LIGNE (fetch raw après commit) : 24 occurrences de `class="product-format"`, taille exacte attendue.
+
+### 🐛 Correction annexe : bug de formatage introduit au chantier n°16
+
+Le chantier n°16 avait laissé des séquences `\` + backtick au lieu de simples backticks dans ses 3 paragraphes et sa liste REPRENDRE ICI (erreur d'échappement JavaScript côté Claude, pas une erreur de contenu). 44 occurrences corrigées dans ce même commit.
+
 
 ## 🔻 RESTE À FAIRE — mis à jour le 12/08/2026 (après le chantier n°16)
 
 ### ▶️ REPRENDRE ICI (faisable seul)
-1. **Durcissement du webhook Stripe** : \`api/stripe/webhook.js\` ne vérifie pas \`payment_status\`. ⚠️ Touche au chemin de paiement : validation explicite de JLShop06 requise avant toute modification.
-2. **Versionner les scripts chargés par \`cart.js\`** (\`/i18n-core.js?v=...\`) : un correctif JS met aujourd hui jusqu à 24 h (7 j en stale-while-revalidate) à atteindre les visiteurs.
-3. **Écrire le générateur \`i18n.js\` → bundles de section** (ou inverser la règle) pour arrêter d éditer les deux à la main.
+1. **Durcissement du webhook Stripe** : `api/stripe/webhook.js` ne vérifie pas `payment_status`. ⚠️ Touche au chemin de paiement : validation explicite de JLShop06 requise avant toute modification.
+2. **Versionner les scripts chargés par `cart.js`** (`/i18n-core.js?v=...`) : un correctif JS met aujourd hui jusqu à 24 h (7 j en stale-while-revalidate) à atteindre les visiteurs.
+3. **Écrire le générateur `i18n.js` → bundles de section** (ou inverser la règle) pour arrêter d éditer les deux à la main.
 4. **P1-13, seconde moitié** : ligne format / contenance sur les cartes de l accueil.
-5. **P2-18 trous de traduction** : « Vous aimerez aussi », libellés du panier, \`#product-info\`, \`.product-format\`.
+5. **P2-18 trous de traduction** : « Vous aimerez aussi », libellés du panier, `#product-info`, `.product-format`.
 6. **P2-19 navigation** : pas de recherche, catégories seulement en ancres.
 7. **Content-Security-Policy** : chantier dédié, après inventaire des inline.
 8. **P2-22 ménage** : archiver ce README.
 
 ### 🚧 TOUJOURS BLOQUÉ CÔTÉ JLSHOP06
-- **P1-12 reliquat** : 3 contenances manquantes (\`Plug-Anal-Rosy-Gold\`, \`le-flateur\`, \`red-dolls-energy-pleasure\`), Price ID S/M/L du déguisement infirmière, guide des tailles.
+- **P1-12 reliquat** : 3 contenances manquantes (`Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`), Price ID S/M/L du déguisement infirmière, guide des tailles.
 - **P1-10 avis clients** : choix de prestataire (Trustpilot bloqué).
 
 ---
