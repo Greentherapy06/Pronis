@@ -170,6 +170,33 @@ body{
 .footer{background:rgba(255,250,243,.85)!important;border-top:1px solid rgba(180,136,67,.35)!important;color:#5a4436!important}
 .footer a{color:#8a6830!important}
 @media(max-width:900px){body{background-attachment:scroll,scroll!important}}
+
+<style>
+/* ===== MOBILE LUXE — aligne le mobile sur le rendu PC (12/08/2026) =====
+   Le reste de l'habillage mobile est dans theme-clair.css (toutes pages). */
+
+/* 1. Le bandeau promo n'est plus masque par le header fixe */
+.announce-bar{position:fixed!important;top:0;left:0;right:0;z-index:2100}
+.lux-header{top:33px!important}
+.hero{padding-top:calc(178px + 33px)!important}
+@media(max-width:768px){.hero{padding-top:calc(150px + 33px)!important}}
+@media(max-width:560px){
+  .announce-bar{font-size:11px!important;letter-spacing:.5px!important;padding:7px 10px!important}
+  .lux-header{top:30px!important}
+  .hero{padding-top:calc(132px + 30px)!important}
+}
+
+/* 2. Photo de fond visible sur mobile (comme sur PC) */
+@media(max-width:900px){
+  html{background-color:#f8f1e6!important}
+  html body{background-image:none!important;background-color:transparent!important}
+  html body::before{
+    content:"";position:fixed;inset:0;z-index:-1;
+    background-image:linear-gradient(180deg,rgba(255,251,244,.52) 0%,rgba(255,248,238,.42) 30%,rgba(255,247,235,.52) 65%,rgba(255,251,245,.66) 100%),url("/Suite%20romantique%20baign%C3%A9e%20de%20lumi%C3%A8re%20dor%C3%A9e.webp");
+    background-size:cover,cover;background-position:center center,center top;background-repeat:no-repeat,no-repeat;
+  }
+}
+</style>
 </style>
 </head>
 <body><a href="#contenu-principal" class="skip-link" data-i18n="skip_content">Aller au contenu</a>
