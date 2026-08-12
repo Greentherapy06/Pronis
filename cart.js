@@ -4,7 +4,7 @@
     if (document.querySelector('link[data-lje-theme]')) return;
     var l = document.createElement('link');
     l.rel = 'stylesheet';
-    l.href = '/theme-clair.css';
+    l.href = '/theme-clair.css?v=20260812b';
     l.setAttribute('data-lje-theme', '1');
     (document.head || document.documentElement).appendChild(l);
   } catch (e) {}
