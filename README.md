@@ -450,6 +450,34 @@ Après resynchronisation il reste 21 occurrences dans `i18n.js` : `sxt_5` × 7, 
 | 3 | `sitemap.xml` | 7 439 | 202 404 | +194 965 | 215 URL, 1 290 annotations hreflang réciproques |
 | 4 | `i18n.js` `cc6af3a` | 674 165 | 673 568 | −597 | resynchronisation sur les bundles de section |
 
+## ✅ SESSION 12/08/2026 — CHANTIER n°16 « P2-20 reliquat : canonical sur les 5 pages légales » (Claude)
+
+Autorisation JLShop06 : « Claude commit les 5 » (accord explicite en session). 5 commits, 1 fichier chacun, changement identique dans chacun : une ligne \`<link rel="canonical" href="https://les-jardins-enchantes.com/PAGE.html">\` insérée juste après la \`meta description\`, avant \`meta robots\` — même emplacement que sur \`livraison.html\` et \`faq.html\`. Rien d'autre touché, aucun texte visible modifié.
+
+Fichiers : \`cgv.html\`, \`confidentialite.html\`, \`mentions-legales.html\`, \`cookies.html\`, \`retractation.html\`.
+
+Effet indirect utile : ces 5 pages profitent maintenant du bloc hreflang injecté par \`i18n-core.js\` (chantier n°15), qui ne s'activait que si un \`canonical\` existait déjà sur la page — condition désormais remplie.
+
+✅ VÉRIFIÉ EN LIGNE (fetch raw après commit) : les 5 fichiers servent bien la balise canonical attendue, une seule occurrence par fichier.
+
+## 🔻 RESTE À FAIRE — mis à jour le 12/08/2026 (après le chantier n°16)
+
+### ▶️ REPRENDRE ICI (faisable seul)
+1. **Durcissement du webhook Stripe** : \`api/stripe/webhook.js\` ne vérifie pas \`payment_status\`. ⚠️ Touche au chemin de paiement : validation explicite de JLShop06 requise avant toute modification.
+2. **Versionner les scripts chargés par \`cart.js\`** (\`/i18n-core.js?v=...\`) : un correctif JS met aujourd hui jusqu à 24 h (7 j en stale-while-revalidate) à atteindre les visiteurs.
+3. **Écrire le générateur \`i18n.js\` → bundles de section** (ou inverser la règle) pour arrêter d éditer les deux à la main.
+4. **P1-13, seconde moitié** : ligne format / contenance sur les cartes de l accueil.
+5. **P2-18 trous de traduction** : « Vous aimerez aussi », libellés du panier, \`#product-info\`, \`.product-format\`.
+6. **P2-19 navigation** : pas de recherche, catégories seulement en ancres.
+7. **Content-Security-Policy** : chantier dédié, après inventaire des inline.
+8. **P2-22 ménage** : archiver ce README.
+
+### 🚧 TOUJOURS BLOQUÉ CÔTÉ JLSHOP06
+- **P1-12 reliquat** : 3 contenances manquantes (\`Plug-Anal-Rosy-Gold\`, \`le-flateur\`, \`red-dolls-energy-pleasure\`), Price ID S/M/L du déguisement infirmière, guide des tailles.
+- **P1-10 avis clients** : choix de prestataire (Trustpilot bloqué).
+
+---
+
 ## 🔻 RESTE À FAIRE — mis à jour le 09/08/2026 (après le chantier n°15)
 
 ### ▶️ REPRENDRE ICI (faisable seul)
