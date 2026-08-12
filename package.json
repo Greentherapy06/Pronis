@@ -1,4 +1,7 @@
 {
+    "scripts": {
+          "build:i18n": "node tools/build-i18n.js"
+    },
   "dependencies": {
     "stripe": "^18.1.1",
     "@vercel/kv": "^3.0.0",
