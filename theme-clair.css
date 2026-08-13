@@ -155,3 +155,8 @@ body{
   .lje-cookie-btns{gap:10px!important}
   .lje-cookie-btns .lje-btn{padding:11px 14px!important;font-size:11px!important;letter-spacing:1.5px!important}
 }
+
+/* ---------- KICKER HERO (13/08/2026) : plus grand + remonte, centre entre le bandeau et le logo ---------- */
+.hero-kicker{position:relative!important;font-size:14px!important;letter-spacing:5px!important;top:-73px!important}
+@media(max-width:768px){.hero-kicker{font-size:12px!important;letter-spacing:3.4px!important;line-height:1.9!important;top:-60px!important}}
+@media(max-width:560px){.hero-kicker{font-size:11.5px!important;letter-spacing:2.8px!important;top:-56px!important}}
