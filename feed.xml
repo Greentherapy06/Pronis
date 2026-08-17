@@ -452,5 +452,19 @@
       <g:condition>new</g:condition>
       <g:adult>yes</g:adult>
     </item>
+    <item>
+      <g:id>LJE-HUILE-MONOI</g:id>
+      <g:title>Divine Xtases – Huile de Massage Monoï BIO 100 ml</g:title>
+      <g:description>Huile de massage Monoï BIO comestible et sensuelle, hydratante à l'huile d'argan, sans effet gras. Labellisée Nature et Progrès, fabriquée en France. Flacon pompe 100 ml. Livraison discrète.</g:description>
+      <g:link>https://les-jardins-enchantes.com/huile-massage-monoi-bio-divine-xtases.html</g:link>
+      <g:image_link>https://les-jardins-enchantes.com/huile-massage-monoi-bio-divine-xtases.webp</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>19.99 EUR</g:price>
+      <g:brand>Divine Xtases</g:brand>
+      <g:mpn>LJE-HUILE-MONOI</g:mpn>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:condition>new</g:condition>
+      <g:adult>yes</g:adult>
+    </item>
   </channel>
 </rss>
