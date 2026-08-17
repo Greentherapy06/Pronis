@@ -104,3 +104,38 @@ Chantiers n°1 à n°17 : i18n allégé, coordonnées harmonisées, pages légal
 
 ## 🛠️ Méthode — à réutiliser (détail complet dans l'archive)
 Ctrl+F dans l'éditeur GitHub pour Find & Replace fiable ; toujours Match Case + vérifier l'unicité avant Replace All ; calculer le delta d'octets attendu avant de remplacer ; vérifier qu'un texte ne porte pas déjà une clé i18n avant de le croire figé.
+
+---
+# 🌺 Chantier n°20 (17/08/2026) — Catégorie « Huile de Massage Bio » + 1er parfum (monoï)
+
+## Ce qui a été fait
+Création d'une **nouvelle catégorie de produits** et de la **1re fiche** de la gamme, en ligne le 17/08/2026 (commits `5578e7b` puis `a0e4544`).
+
+- **Fiche produit** : `huile-massage-monoi-bio-divine-xtases.html` — Huile de Massage Monoï BIO 100 ml Divine Xtases, **19,99 €**, Stripe `price_1U5ONGF9c1lWA0Hy542gI4C7`, SKU `LJE-HUILE-MONOI-100ML`.
+- **Images** : `Huile de massage Monoï du Lagon.png` → `huile-massage-monoi-bio-divine-xtases.webp` (1024×1024, WebP q90) + 2e visuel `huile-massage-monoi-bio-divine-xtases-2.webp` (800×1200).
+- **Nouvelle catégorie** : section `#huiles-massage-bio` dans `index.html` (placée après la section gels bio, avant `#modes`) + lien de menu `menu_huiles_massage` ajouté dans la `cat-nav` des **51 pages** du site.
+- **CSS** : règle `article[data-category="huiles-massage-bio"] img` (cadre carré 1/1) dans `style.css`.
+- **i18n 5 langues** : `menu_huiles_massage` dans `i18n-common.js`, `home_cat_7` + `home_prod_35` dans `i18n-home.js`, puis régénération obligatoire de `i18n.js` via `node tools/build-i18n.js`. Le corps de la fiche est en français seul (même convention que `coffret-bien-etre-intime-bio.html`).
+- **SEO / GEO** : title, meta description, keywords, canonical, OG + Twitter avec `og:image` ; JSON-LD **Product** + **BreadcrumbList** + **FAQPage** (6 questions/réponses rédigées pour être citées par les IA) ; 5 URLs ajoutées à `sitemap.xml` avec hreflang complet ; nouvelle section « Huiles de massage bio » dans `llms.txt` ; nouvel `<item>` dans `feed.xml`.
+- **Contrôles passés** : JSON-LD valides, XML valides, 0 lien mort, 0 erreur console, 0 réponse HTTP ≥ 400, ajout au panier testé (bon priceId, bon prix), traductions vérifiées en DE/ES/IT, rendu identique PC et mobile.
+
+## ♻️ Procédure pour mettre en ligne le parfum suivant
+Parfums restants, visuels **déjà présents à la racine du dépôt** : fruit de la passion, noix de coco, pêche blanche, barbe à papa.
+
+**Ce que JLShop06 fournit** (sinon rien ne peut démarrer) :
+1. le titre, la description et les 5 puces façon Amazon (seul le parfum change d'une fiche à l'autre) ;
+2. le **prix** et la **contenance** ;
+3. le **Price ID Stripe** (`price_…`) créé dans le dashboard Stripe — sans lui le bouton panier ne fonctionne pas, le serveur lisant le prix officiel chez Stripe.
+
+**Ce que Claude fait ensuite**, en copiant la fiche monoï :
+1. Convertir le visuel : PNG 1254×1254 → WebP **qualité 90-92**, nom `huile-massage-<parfum>-bio-divine-xtases.webp` ; 2e visuel `-2.webp` si dispo.
+2. Dupliquer `huile-massage-monoi-bio-divine-xtases.html` → `huile-massage-<parfum>-bio-divine-xtases.html` et remplacer : titre, meta, keywords, canonical, OG/Twitter (dont `og:image`), JSON-LD (name, description, image, SKU, url, prix), Breadcrumb, H1, sous-titre, textes, 5 puces, FAQ, prix, `data-product-id`, `data-product-name`, `data-product-price`, sources d'images, et les « Vous aimerez aussi » (y ajouter les autres huiles).
+3. `index.html` : ajouter une `<article data-category="huiles-massage-bio">` dans la section existante — mêmes champs que la carte monoï, avec une nouvelle clé `home_prod_36`, `37`… (⚠️ `data-product-name` doit être **identique** entre la carte et la fiche).
+4. i18n : ajouter la clé `home_prod_XX` dans les **5 langues** de `i18n-home.js`, puis **régénérer** `i18n.js` (`node tools/build-i18n.js`). Jamais éditer `i18n.js` à la main.
+5. SEO : 5 URLs dans `sitemap.xml` (fr + 4 `?lang=`) avec les 6 `xhtml:link`, 1 ligne dans `llms.txt` (section Huiles de massage bio), 1 `<item>` dans `feed.xml`.
+6. Vérifier avant publication : JSON-LD valide, XML valide, images présentes, aucun lien mort, ajout au panier, rendu PC + mobile.
+
+**Mise en ligne** (l'environnement Claude ne peut pas pousser directement sur ce dépôt tant qu'il n'est pas autorisé dans les sources de la session) :
+- Voie utilisée le 17/08/2026 : page `github.com/JLShop06/Les-Jardins-Enchantes/upload/main`, dépôt des fichiers **à la racine** puis *Commit changes*. ⚠️ Ne jamais glisser le **dossier** décompressé : GitHub recrée le dossier dans le dépôt et Windows abîme les noms accentués (`Déguisement-Bunny.html`). Glisser le **contenu** du dossier.
+- Nettoyage d'un dossier créé par erreur : éditeur `github.dev` (clic droit sur le dossier → *Supprimer définitivement* → *Contrôle de code source* → message → `Ctrl+Entrée`).
+- Le plus simple à terme : autoriser `JLShop06/Les-Jardins-Enchantes` dans les sources de la session Claude, qui pousse alors le commit tout seul.
