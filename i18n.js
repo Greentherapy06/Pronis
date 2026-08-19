@@ -6,7 +6,7 @@
 
 const TRANSLATIONS = {
   "fr": {
-    "banner_livraison": "✦ LIVRAISON OFFERTE DÈS 75 € D'ACHAT ✦",
+    "banner_livraison": "✦ LIVRAISON 6,90 € — OFFERTE DÈS 75 € D'ACHAT ✦",
     "header_promo": "Les Jardins Enchantés vous offre -10% sur votre première commande",
     "prod_add": "AJOUTER AU PANIER",
     "prod_desc": "Description",
@@ -1038,7 +1038,7 @@ const TRANSLATIONS = {
     "tanga_li8": "Tailles disponibles : S, M, L, XL et XXL."
   },
   "de": {
-    "banner_livraison": "✦ KOSTENLOSER VERSAND AB 75 € EINKAUF ✦",
+    "banner_livraison": "✦ VERSAND 6,90 € — KOSTENLOS AB 75 € ✦",
     "header_promo": "Les Jardins Enchantés schenkt Ihnen -10% auf Ihre erste Bestellung",
     "prod_add": "IN DEN WARENKORB",
     "prod_desc": "Beschreibung",
@@ -2070,7 +2070,7 @@ const TRANSLATIONS = {
     "tanga_li8": "Verfügbare Größen: S, M, L, XL und XXL."
   },
   "es": {
-    "banner_livraison": "✦ ENVÍO GRATIS A PARTIR DE 75 € DE COMPRA ✦",
+    "banner_livraison": "✦ ENVÍO 6,90 € — GRATIS A PARTIR DE 75 € ✦",
     "header_promo": "Les Jardins Enchantés te ofrece -10% en tu primer pedido",
     "prod_add": "AÑADIR A LA CESTA",
     "prod_desc": "Descripción",
@@ -3102,7 +3102,7 @@ const TRANSLATIONS = {
     "tanga_li8": "Tallas disponibles: S, M, L, XL y XXL."
   },
   "it": {
-    "banner_livraison": "✦ SPEDIZIONE GRATUITA DA 75 € DI SPESA ✦",
+    "banner_livraison": "✦ SPEDIZIONE 6,90 € — GRATUITA DA 75 € ✦",
     "header_promo": "Les Jardins Enchantés ti offre -10% sul tuo primo ordine",
     "prod_add": "AGGIUNGI AL CARRELLO",
     "prod_desc": "Descrizione",
@@ -4134,7 +4134,7 @@ const TRANSLATIONS = {
     "tanga_li8": "Taglie disponibili: S, M, L, XL e XXL."
   },
   "pt": {
-    "banner_livraison": "✦ ENTREGA GRÁTIS A PARTIR DE 75 € DE COMPRA ✦",
+    "banner_livraison": "✦ ENTREGA 6,90 € — GRÁTIS A PARTIR DE 75 € ✦",
     "header_promo": "Les Jardins Enchantés oferece-lhe -10% na sua primeira encomenda",
     "prod_add": "ADICIONAR AO CARRINHO",
     "prod_desc": "Descrição",
