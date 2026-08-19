@@ -194,3 +194,26 @@ Les 3 derniers parfums de la gamme huiles de massage bio, mis en ligne d’un co
 ### Rappel méthode
 
 Claude édite directement dans l’éditeur GitHub via le navigateur et valide les commits. Seuls les **fichiers binaires (images)** passent encore par la page *upload* — et si le nom arrive déformé, Claude le renomme ensuite (l’éditeur GitHub accepte de renommer un binaire sans y toucher). Le `git push` direct depuis l’environnement Claude reste bloqué.
+
+---
+
+## 🍷 Chantier n°23 (19/08/2026) — cartes produits accueil : socle bordeaux
+
+### Pourquoi
+
+JLShop06 n’aimait pas les « carrés blancs » des cartes produits (boîte ivoire opaque + ombre) : ça masquait le fond photo doré. 4 maquettes proposées (écrin sans cadre / vitrine plein cadre / double filet or / socle bordeaux), il a choisi le **socle bordeaux**.
+
+### Ce qui a changé
+
+- **`index.html`** : chaque `<article>` de la grille produits a été restructuré — le `<h3>` et le `<p class="product-format">` sont regroupés dans `<div class="infos">`, le `<strong>` (prix) et le `<button class="add-to-cart">` dans `<div class="socle">`. **39 articles** traités. Aucun texte, titre, prix, image, `data-product-id` ou `data-i18n` modifié — uniquement des balises `<div>` ajoutées autour.
+- **`theme-clair.css`** : nouveau bloc en fin de fichier, portée limitée à `.product-grid article` (donc **accueil uniquement**, les fiches produits et les « Vous aimerez aussi » ne bougent pas). Photo bord à bord sans marge, panneau ivoire pour titre + contenance, puis socle en dégradé bordeaux `#7b1e2b → #5e1622` portant le prix en or clair `#f2dcae` et un bouton pleine largeur qui s’inverse au survol.
+- **Alignement** : `article` en `flex column` + `.socle{margin-top:auto}` — les socles restent alignés en bas même quand les titres n’ont pas le même nombre de lignes.
+- **Cache** : `theme-clair.css?v=20260813c` → `?v=20260819c` dans `index.html`.
+
+### Contrôles passés
+
+39 articles / 39 socles / 39 boutons bien à l’intérieur de leur socle, ajout au panier testé en direct sur le site, rendu vérifié en 1280×1000 et 390×844, 0 erreur console, 0 réponse HTTP ≥ 400.
+
+### Si un nouveau produit est ajouté plus tard
+
+Respecter la structure : `<a><img></a>` puis `<div class="infos">` (h3 + product-format) puis `<div class="socle">` (strong + button). Sans ces deux `div`, la carte s’affichera sans socle bordeaux.
