@@ -116,6 +116,12 @@
       opacity:1;
     }
 
+    .size-options{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:25px;}
+    .size-options input{display:none;}
+    .size-options label{padding:12px 18px;border:1px solid rgba(201,168,106,0.35);font-size:11px;letter-spacing:2px;cursor:pointer;transition:0.25s ease;color:#C9A86A;border-radius:2px;background:transparent;text-transform:uppercase;}
+    .size-options label:hover{border-color:#C9A86A;background:rgba(201,168,106,0.08);}
+    .size-options input:checked + label{background:linear-gradient(135deg,#e6c98a 0%,#caa86a 50%,#b89050 100%);color:#0c0a06;border-color:transparent;box-shadow:0 6px 20px rgba(201,168,106,0.25);}
+
     .separator{
       margin:40px 0;
       border:none;
@@ -298,6 +304,12 @@ Costume sexy 4 pièces avec body résille, mini jupe, coiffe et stéthoscope.
 </p>
 
 <p class="product-price">32,90 €</p>
+
+<div class="size-options">
+<input type="radio" name="size" id="inf-s" value="S"><label for="inf-s">S</label>
+<input type="radio" name="size" id="inf-m" value="M"><label for="inf-m">M</label>
+<input type="radio" name="size" id="inf-l" value="L"><label for="inf-l">L</label>
+</div>
 
 <button
 class="add-to-cart"
