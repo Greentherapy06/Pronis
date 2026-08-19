@@ -4,7 +4,7 @@
     if (document.querySelector('link[data-lje-theme]')) return;
     var l = document.createElement('link');
     l.rel = 'stylesheet';
-    l.href = '/theme-clair.css?v=20260819f';
+    l.href = '/theme-clair.css?v=20260819g';
     l.setAttribute('data-lje-theme', '1');
     (document.head || document.documentElement).appendChild(l);
   } catch (e) {}
@@ -13,7 +13,7 @@
 
 /* >>> Chargeur i18n par section (optimise: commun + section de la page, fallback i18n.js complet) >>> */
 (function () {
-  var I18N_VER = "20260819f"; // bump ce numero pour forcer le rechargement des fichiers i18n (contourne le cache CDN/navigateur)
+  var I18N_VER = "20260819g"; // bump ce numero pour forcer le rechargement des fichiers i18n (contourne le cache CDN/navigateur)
   function runI18n() {
     try { if (typeof initI18n === 'function') initI18n(); } catch (e) {}
     try { if (typeof window.applyTranslations === 'function') window.applyTranslations(); } catch (e) {}

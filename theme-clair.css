@@ -200,3 +200,19 @@ body{
    centre au milieu de la page par les marges auto. Panneau ivoire ajoute
    car il repose desormais sur la photo de fond. */
 #product-info{display:block!important;width:calc(100% - 32px)!important;max-width:520px!important;margin:0 auto 48px!important;background:linear-gradient(180deg,rgba(255,253,248,.94) 0%,rgba(255,250,242,.94) 100%)!important;border:1px solid rgba(180,136,67,.42)!important;border-radius:4px!important;box-shadow:0 14px 38px rgba(120,80,40,.15)!important;color:#4a3428!important;padding:20px 22px!important}
+
+/* ---------- FICHES PRODUIT : TEXTE CENTRE (19/08/2026) ----------
+   Toute la colonne de droite (titre, sous-titre, prix, descriptions, listes,
+   encadres) est centree, sur PC comme sur mobile. Les listes a puces passent
+   en list-style-position:inside, sinon la puce reste collee a gauche et le
+   texte parait decale. Aucun texte ni aucune structure HTML modifie. */
+.product-page .product-details{text-align:center!important}
+.product-page .product-details ul,
+.product-page .product-details ol,
+.product-page .product-details li{list-style-position:inside!important;padding-left:0!important;margin-left:0!important;text-align:center!important}
+.product-page .product-details .size-options{justify-content:center!important}
+.product-page .product-details .ingredients-grid,
+.product-page .product-details .sans-liste{justify-content:center!important}
+/* Ces deux blocs etaient forces a gauche sous 900 px par le style de page. */
+.product-page .product-details .cta-block,
+.product-page .product-details .faq-item{text-align:center!important}
