@@ -160,3 +160,28 @@ body{
 .hero-kicker{position:relative!important;font-size:14px!important;letter-spacing:3.5px!important;top:-73px!important}
 @media(max-width:768px){.hero-kicker{font-size:12px!important;letter-spacing:3.4px!important;line-height:1.9!important;top:-60px!important}}
 @media(max-width:560px){.hero-kicker{font-size:11.5px!important;letter-spacing:2.8px!important;top:-56px!important}}
+
+/* ---------- CARTES PRODUITS ACCUEIL — SOCLE BORDEAUX (19/08/2026) ---------- */
+.product-grid article{
+  display:flex!important;flex-direction:column!important;
+  background:linear-gradient(180deg,rgba(255,253,248,.94) 0%,rgba(255,250,242,.94) 100%)!important;
+  border:1px solid rgba(180,136,67,.42)!important;border-radius:2px!important;
+  box-shadow:0 14px 38px rgba(120,80,40,.15)!important;
+  overflow:hidden!important;padding:0!important;
+}
+.product-grid article:hover{box-shadow:0 22px 52px rgba(120,80,40,.24)!important;border-color:rgba(180,136,67,.62)!important}
+.product-grid article>a{display:block!important}
+.product-grid article img{border:none!important;border-radius:0!important;margin:0!important;max-height:none!important}
+.product-grid article .infos{padding:18px 18px 0!important;flex:1 1 auto!important;display:flex;flex-direction:column;justify-content:flex-start}
+.product-grid article .infos h3{margin-top:0!important;color:#4a3428!important}
+.product-grid article .infos .product-format{margin:6px 0 18px!important;color:#7a6553!important}
+.product-grid article .socle{
+  margin-top:auto!important;padding:14px 18px 16px!important;
+  background:linear-gradient(135deg,#7b1e2b 0%,#5e1622 100%)!important;
+}
+.product-grid article .socle strong{margin:0 0 10px!important;color:#f2dcae!important;font-size:17px!important}
+.product-grid article .socle button{
+  width:100%!important;margin-top:0!important;background:none!important;
+  border:1px solid rgba(242,220,174,.55)!important;color:#f8e7c8!important;border-radius:1px!important;
+}
+.product-grid article .socle button:hover{background:#f2dcae!important;color:#7b1e2b!important;border-color:#f2dcae!important}
