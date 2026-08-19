@@ -271,9 +271,6 @@ cartTotal.textContent = total.toFixed(2);
         '<div style="display:flex;justify-content:space-between;">' +
           '<span>Sous-total</span><span>' + _subtotal.toFixed(2).replace('.', ',') + ' €</span></div>' +
         '<div style="display:flex;justify-content:space-between;">' +
-          '<span>Réduction bienvenue (1re commande)</span>' +
-          '<span style="color:#2d7a30;">-10 % appliqués si éligible</span></div>' +
-        '<div style="display:flex;justify-content:space-between;">' +
           '<span>Livraison</span><span>' + _shipLabel + '</span></div>' +
         (_shipFree ? '' :
           '<div style="font-size:12px;opacity:.8;">Plus que ' +
@@ -281,9 +278,9 @@ cartTotal.textContent = total.toFixed(2);
           ' € pour la livraison offerte</div>') +
         '<hr style="border:none;border-top:1px solid #caa86a;margin:8px 0;" />' +
         '<div style="display:flex;justify-content:space-between;font-weight:bold;">' +
-          '<span>Total estimé</span><span>' + _total.toFixed(2).replace('.', ',') + ' €</span></div>' +
-        '<div style="font-size:11px;opacity:.7;margin-top:6px;">' +
-          'Le montant exact (avec réduction éventuelle) est confirmé au paiement sécurisé Stripe.</div>';
+          '<span>Total à payer</span><span>' + _total.toFixed(2).replace('.', ',') + ' €</span></div>' +
+        '<div style="font-size:12px;opacity:.85;margin-top:8px;line-height:1.5;">' +
+          'Si c\'est votre <strong>1re commande</strong>, une remise de <strong>-10 %</strong> est appliquée automatiquement à l\'étape de paiement sécurisé Stripe. Sinon, le total ci-dessus est le prix final.</div>';
     }
   } catch (e) { /* affichage récap non bloquant */ }
 
