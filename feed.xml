@@ -480,5 +480,47 @@
       <g:condition>new</g:condition>
       <g:adult>yes</g:adult>
     </item>
+    <item>
+      <g:id>LJE-HUILE-PASSION</g:id>
+      <g:title>Divine Xtases – Huile de Massage Fruit de la Passion BIO 100 ml</g:title>
+      <g:description>Huile de massage fruit de la passion BIO comestible et sensuelle, hydratante enrichie en huile de fruit de la passion BIO, sans effet gras. Certifiée Bio Organic, fabriquée en France. Flacon pompe 100 ml. Livraison discrète.</g:description>
+      <g:link>https://les-jardins-enchantes.com/huile-massage-fruit-de-la-passion-bio-divine-xtases.html</g:link>
+      <g:image_link>https://les-jardins-enchantes.com/huile-massage-fruit-de-la-passion-bio-divine-xtases.webp</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>19.99 EUR</g:price>
+      <g:brand>Divine Xtases</g:brand>
+      <g:mpn>LJE-HUILE-PASSION</g:mpn>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:condition>new</g:condition>
+      <g:adult>yes</g:adult>
+    </item>
+    <item>
+      <g:id>LJE-HUILE-PECHE</g:id>
+      <g:title>Divine Xtases – Huile de Massage Pêche Blanche BIO 100 ml</g:title>
+      <g:description>Huile de massage pêche blanche BIO comestible et sensuelle, hydratante enrichie en huile de pêche blanche BIO, sans effet gras. Certifiée Bio Organic, fabriquée en France. Flacon pompe 100 ml. Livraison discrète.</g:description>
+      <g:link>https://les-jardins-enchantes.com/huile-massage-peche-blanche-bio-divine-xtases.html</g:link>
+      <g:image_link>https://les-jardins-enchantes.com/huile-massage-peche-blanche-bio-divine-xtases.webp</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>19.99 EUR</g:price>
+      <g:brand>Divine Xtases</g:brand>
+      <g:mpn>LJE-HUILE-PECHE</g:mpn>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:condition>new</g:condition>
+      <g:adult>yes</g:adult>
+    </item>
+    <item>
+      <g:id>LJE-HUILE-BARBEPAPA</g:id>
+      <g:title>Divine Xtases – Huile de Massage Barbe à Papa BIO 100 ml</g:title>
+      <g:description>Huile de massage barbe à papa BIO comestible et sensuelle, hydratante enrichie en cire d'abeille BIO, sans effet gras. Certifiée Bio Organic, fabriquée en France. Flacon pompe 100 ml. Livraison discrète.</g:description>
+      <g:link>https://les-jardins-enchantes.com/huile-massage-barbe-a-papa-bio-divine-xtases.html</g:link>
+      <g:image_link>https://les-jardins-enchantes.com/huile-massage-barbe-a-papa-bio-divine-xtases.webp</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>19.99 EUR</g:price>
+      <g:brand>Divine Xtases</g:brand>
+      <g:mpn>LJE-HUILE-BARBEPAPA</g:mpn>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:condition>new</g:condition>
+      <g:adult>yes</g:adult>
+    </item>
   </channel>
 </rss>
