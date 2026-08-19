@@ -139,3 +139,28 @@ Parfums restants, visuels **déjà présents à la racine du dépôt** : fruit d
 - Voie utilisée le 17/08/2026 : page `github.com/JLShop06/Les-Jardins-Enchantes/upload/main`, dépôt des fichiers **à la racine** puis *Commit changes*. ⚠️ Ne jamais glisser le **dossier** décompressé : GitHub recrée le dossier dans le dépôt et Windows abîme les noms accentués (`Déguisement-Bunny.html`). Glisser le **contenu** du dossier.
 - Nettoyage d'un dossier créé par erreur : éditeur `github.dev` (clic droit sur le dossier → *Supprimer définitivement* → *Contrôle de code source* → message → `Ctrl+Entrée`).
 - Le plus simple à terme : autoriser `JLShop06/Les-Jardins-Enchantes` dans les sources de la session Claude, qui pousse alors le commit tout seul.
+
+---
+
+## 🥥 Chantier n°21 (19/08/2026) — 2e parfum de la gamme huiles : Noix de Coco
+
+### Ce qui a été fait
+
+Duplication de la fiche monoï vers le parfum **noix de coco**, en suivant la procédure « Parfum suivant » du chantier n°20. Tout a été écrit directement dans l'éditeur GitHub par Claude, JLShop06 n'a eu qu'à valider les commits.
+
+- **Fiche produit** : `huile-massage-noix-de-coco-bio-divine-xtases.html` — Huile de Massage Noix de Coco BIO 100 ml Divine Xtases, **19,99 €**, Stripe `price_1U5ORmF9c1lWA0HyDtpEm8kj`, SKU `LJE-HUILE-COCO-100ML`.
+- **Images** : `huile-massage-noix-de-coco-bio-divine-xtases.webp` (1024×1024, WebP q90, convertie depuis `Huile de massage noix de coco naturelle.png`) et `-2.webp` (800×1200). ⚠️ Seuls fichiers binaires : déposés via la page *upload*, impossible de les taper dans l'éditeur.
+- **Écarts factuels assumés vs monoï** (lus sur le packaging, rien d'inventé) : actif = **huile de noix de coco BIO** (et non huile d'argan) ; label affiché = **Bio Organic** (le packaging coco ne porte pas la mention Nature et Progrès) ; parfum « gourmand et exotique » au lieu de « solaire et exotique ». Yuka 100/100 confirmé par le 2e visuel.
+- **Accueil** : `<article data-category="huiles-massage-bio">` ajouté dans la section `#huiles-massage-bio`, clé `home_prod_36`, `data-product-name` identique entre la carte et la fiche.
+- **i18n 5 langues** : `home_prod_36` ajouté dans `i18n-home.js` (source de vérité) **et** dans `i18n.js` (bundle fallback), les deux restant synchronisés. À la prochaine session en local, relancer `node tools/build-i18n.js` pour vérifier qu'aucune désync ne subsiste.
+- **Maillage interne** : lien croisé « Vous aimerez aussi » ajouté dans les deux sens (monoï ↔ noix de coco).
+- **SEO / GEO** : title, meta description, keywords, canonical, OG + Twitter ; JSON-LD Product + BreadcrumbList + FAQPage (6 Q/R) ; **5 URLs** ajoutées à `sitemap.xml` avec les 6 `xhtml:link` ; 1 ligne dans `llms.txt` ; 1 `<item>` dans `feed.xml` (`LJE-HUILE-COCO`).
+- **Contrôles passés** : 3 blocs JSON-LD valides, `sitemap.xml` et `feed.xml` XML valides, 0 lien mort, 0 erreur console, 0 réponse HTTP ≥ 400, ajout au panier testé (bon priceId, bon prix), traductions vérifiées en DE/ES/IT/PT, rendu vérifié en 1440×900 et 390×844.
+
+### Méthode nouvelle — édition directe dans GitHub
+
+Claude peut écrire lui-même dans l'éditeur GitHub via le navigateur (lecture du fichier, remplacement ciblé, réinjection), fichier par fichier. Un commit par fichier. Seuls les **fichiers binaires (images)** doivent encore passer par la page *upload*. Le `git push` direct depuis l'environnement Claude reste bloqué.
+
+### Parfums restants
+
+Fruit de la passion, pêche blanche, barbe à papa — visuels déjà présents à la racine du dépôt. Même procédure ; il ne manque que le **Price ID Stripe** de chaque parfum.
