@@ -217,3 +217,33 @@ JLShop06 n’aimait pas les « carrés blancs » des cartes produits (boîte ivo
 ### Si un nouveau produit est ajouté plus tard
 
 Respecter la structure : `<a><img></a>` puis `<div class="infos">` (h3 + product-format) puis `<div class="socle">` (strong + button). Sans ces deux `div`, la carte s’affichera sans socle bordeaux.
+
+---
+
+## Chantier 24 (19/08/2026) - harmonisation des vignettes produits
+
+### Pourquoi
+
+Seules les sections "gel lubrifiant bio" et "huiles de massage bio" avaient des vignettes alignées. Partout ailleurs (modes, gels lubrifiants, sextoys, cockrings, déguisements) les images gardaient chacune leur hauteur naturelle : titres, prix et boutons se retrouvaient décalés d'une carte à l'autre.
+
+### Cause
+
+`style.css` posait `object-fit:contain` + `max-height:450px` sur `article img`, mais `theme-clair.css` écrasait le plafond avec `max-height:none!important`. Chaque image gardait donc sa hauteur native. Seules `huiles-massage-bio` (1:1) et `gamme-bio` (2:3) avaient une règle `aspect-ratio` dédiée, d'où les deux seules sections propres.
+
+### Ce qui a changé
+
+**`theme-clair.css`** : cadre image à ratio fixe pour toutes les catégories, `aspect-ratio:2/3` + `object-fit:cover`, et `1/1` pour `huiles-massage-bio`. Le ratio retenu est le ratio natif des visuels (800x1200 et 1024x1536), donc aucun recadrage, sauf 2 visuels cockrings quasi carrés (800x878 et 1199x1312).
+
+**Grille responsive** : 2 colonnes de 521 à 1100 px, 1 colonne sous 520 px. Avant, la bascule en 1 colonne dès 1100 px donnait des vignettes de 1089 px de haut sur tablette.
+
+**Cache** : `theme-clair.css?v=20260819d` vers `?v=20260819e` dans `index.html` et dans le loader de `cart.js`, qui était resté à `20260813c` (les pages autres que l'accueil chargeaient donc encore la version du 13/08).
+
+Aucun texte, titre, hero, prix ni structure HTML modifié : CSS uniquement.
+
+### Contrôles passés
+
+Hauteurs d'image mesurées dans les 7 sections (modes, gels-lubrifiants, sextoys, cockrings, deguisements, huiles-massage-bio, gamme-bio) en 390, 768, 1024 et 1280 px : identiques à l'intérieur de chaque section. 60 pages chargées, aucune réponse HTTP 400 ou plus sur les CSS/JS, et le CSS servi en production a été revérifié après mise en ligne.
+
+### Reste à faire
+
+Les visuels `gamme-bio` sont en paysage 1536x1024 affichés dans un cadre portrait 2:3, donc les côtés sont rognés. Section laissée telle quelle à la demande de JLShop06.
