@@ -173,8 +173,8 @@ body{
 .product-grid article>a{display:block!important}
 .product-grid article img{border:none!important;border-radius:0!important;margin:0!important;max-height:none!important}
 .product-grid article .infos{padding:18px 18px 0!important;flex:1 1 auto!important;display:flex;flex-direction:column;justify-content:flex-start}
-.product-grid article .infos h3{margin-top:0!important;color:#4a3428!important}
-.product-grid article .infos .product-format{margin:6px 0 18px!important;color:#7a6553!important}
+.product-grid article .infos h3{margin-top:0!important;color:#2e2018!important;font-weight:400!important}
+.product-grid article .infos .product-format{margin:6px 0 18px!important;color:#4a3428!important}
 .product-grid article .socle{
   margin-top:auto!important;padding:14px 18px 16px!important;
   background:linear-gradient(135deg,#7b1e2b 0%,#5e1622 100%)!important;
