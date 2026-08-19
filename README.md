@@ -87,6 +87,8 @@ Le journal détaillé de chaque session (chantiers n°1 à n°17, audit initial,
 
 # 🔻 ÉTAT ACTUEL — mis à jour le 12/08/2026 (après le chantier n°19)
 
+> ⚠️ Section périmée. L'état à jour du PLAN CONFIANCE est en bas de ce fichier, dans le **Chantier n°25 (19/08/2026)**.
+
 ## ▶️ REPRENDRE ICI (faisable seul)
 1. **Durcissement du webhook Stripe** : `api/stripe/webhook.js` ne vérifie pas `payment_status`. Version corrigée déjà écrite et testée (syntaxe), envoyée à JLShop06 en téléchargement — pas encore appliquée au dépôt. ⚠️ Fichier de paiement : passe par une validation explicite de JLShop06 avant tout commit (l'éditeur GitHub sur ce fichier est aussi bloqué côté environnement Claude).
 2. **P2-18 trous de traduction** : « Vous aimerez aussi » codé en dur en français sur 34 fiches, plus les libellés du panier, `#product-info` et `.product-format`.
@@ -247,3 +249,50 @@ Hauteurs d'image mesurées dans les 7 sections (modes, gels-lubrifiants, sextoys
 ### Reste à faire
 
 Les visuels `gamme-bio` sont en paysage 1536x1024 affichés dans un cadre portrait 2:3, donc les côtés sont rognés. Section laissée telle quelle à la demande de JLShop06.
+
+---
+
+## 🛡️ Chantier n°25 (19/08/2026) — reprise du PLAN CONFIANCE : P0-5, P0-4, P2-21, P1-12
+
+### Point de départ
+
+Audit de l'état réel du plan de confiance, vérifié fichier par fichier dans le dépôt (et non d'après le README, dont la section « ÉTAT ACTUEL » datait du 12/08 et était périmée sur deux points : P2-18 était en fait terminé, P0-5 était toujours ouvert).
+
+### Ce qui a été corrigé et mis en ligne
+
+**P0-5 — remise -10 % (commit `7b6ce3e`).** `cart.js` affichait encore la ligne « Réduction bienvenue (1re commande) : -10 % appliqués si éligible » dans un récapitulatif dont le total ne contenait aucune remise : le client lisait une promesse non tenue. La ligne est supprimée. Le récap est maintenant Sous-total → Livraison → **Total à payer**, suivi de la phrase « Si c'est votre 1re commande, une remise de -10 % est appliquée automatiquement à l'étape de paiement sécurisé Stripe. Sinon, le total ci-dessus est le prix final. » Le libellé du bas est passé de « Total estimé » à « Total à payer » pour ne plus être confondu avec le TOTAL produits affiché plus haut dans la modal. Rien changé côté serveur : l'éligibilité restait déjà vérifiée sur le Customer Stripe.
+
+**P0-4 — frais de port visibles (commit `7fc4727`).** Correction du diagnostic initial : les fiches produit affichaient **déjà** « Frais 6,90 €, offerts dès 75 € d'achat » dans leur bloc Livraison (texte i18n, invisible à un grep sur le HTML brut). Seul l'accueil ne le disait pas. Le bandeau haut de page passe donc de « ✦ LIVRAISON OFFERTE DÈS 75 € D'ACHAT ✦ » à « ✦ LIVRAISON 6,90 € — OFFERTE DÈS 75 € D'ACHAT ✦ », sur les 40 pages qui le portent, plus la clé `banner_livraison` dans `i18n-common.js` et `i18n.js` — soit 42 occurrences remplacées, dans les 5 langues (fr, pt, it, es, de).
+
+**P2-21 — HSTS (commit `7b6ce3e`).** `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload` ajouté aux en-têtes globaux de `vercel.json`. Vérifié sur securityheaders.com après déploiement : le site est noté **A**. Seule la CSP reste absente.
+
+**Cache — bug découvert en vérifiant (commit `58f35b1`).** Le bandeau restait à l'ancien texte sur le site live alors que le commit était bien déployé. Cause : `cart.js` était appelé en `src="cart.js"` sans numéro de version alors que Vercel sert les `.js` avec `max-age=86400`, et `I18N_VER` (qui versionne le chargement des fichiers i18n) était resté à `20260819b`. Les visiteurs récurrents auraient donc gardé l'ancien texte et l'ancien panier pendant 24 h. Les 55 pages appellent maintenant `cart.js?v=20260819e` et `I18N_VER` vaut `20260819e`.
+
+**P1-12 — tailles du déguisement infirmière (commit `f853f1f`).** La fiche annonçait « Tailles : S / M / L (36 / 38 / 40) » sans aucun sélecteur : le client ne pouvait pas indiquer sa taille. Le prix étant identique pour les trois tailles (confirmé par JLShop06), un bloc `.size-options` S/M/L a été ajouté **sans** `data-price-id` : `cart.js` retombe alors sur le `data-product-id` du bouton et ajoute « — Taille X » au nom du produit. Testé en direct : sans taille choisie l'ajout est refusé, avec M la ligne de commande porte « J Lingerie – Déguisement Infirmière Coquine – Taille M ». Le CSS `.size-options` a été recopié depuis `mini-robe-noire.html`.
+
+### Contrôles passés
+
+60 pages chargées sans réponse HTTP 400 ou plus sur les CSS/JS ; 0 erreur console ; bandeau vérifié dans les 5 langues ; panier testé en réel sur le site en production (19,90 € + 6,90 € = 26,80 €) ; `vercel.json` validé en JSON ; `cart.js` validé par `node --check` ; rendu revérifié en 390, 768, 1024 et 1280 px.
+
+### État du PLAN CONFIANCE au 19/08/2026
+
+- **P0 — 9 sur 9 traités.** Reste une réserve sur P0-2 : il n'y a plus qu'une seule adresse e-mail sur tout le site (la contradiction est levée), mais c'est toujours une adresse Gmail, pas `contact@les-jardins-enchantes.com`.
+- **P1 — 4 sur 6.** P1-11, P1-13, P1-14 et P1-15 sont clos (les 4 superlatifs pointés par l'audit ont disparu ; `payment_method_types` a été retiré, donc Apple Pay / Google Pay / Link sont actifs).
+- **P2 — 4 sur 7.** P2-18, P2-20, P2-21 et P2-22 sont clos.
+- **Webhook Stripe** : JLShop06 a confirmé le 19/08 que le sujet est réglé de son côté. Point retiré de « REPRENDRE ICI ».
+
+### Reste à faire
+
+**Côté JLShop06 (bloquant, rien ne peut démarrer sans) :**
+1. **P1-12, 3 contenances manquantes** : `Plug-Anal-Rosy-Gold`, `le-flateur`, `red-dolls-energy-pleasure`. Aucun bloc contenance/dimensions sur ces 3 fiches.
+2. **P1-12, guide des tailles** : toujours absent du site.
+3. **P1-10, avis clients** : JLShop06 veut des **avis Google**. Vérifié le 19/08 — il n'existe **aucune fiche Google Business** pour la boutique (seuls Instagram et Facebook ressortent). Sans fiche, aucun avis Google à afficher. Or une fiche Business exige un contact en personne avec les clients (adresse physique ou zone d'intervention) : une boutique 100 % en ligne n'y est en principe pas éligible, et une fiche ouverte avec une adresse personnelle peut être suspendue. **Décision attendue** : adresse pro utilisable, ou repli sur des avis collectés en direct après commande et affichés en témoignages attribués. Dans tous les cas, ne PAS poser de JSON-LD `AggregateRating` sur sa propre boutique tant que les avis ne sont pas réels et vérifiables — c'est contraire aux règles Google.
+4. **P0-2** : créer `contact@les-jardins-enchantes.com` et remplacer l'adresse Gmail partout (HTML, i18n, Stripe). Reporté par JLShop06.
+
+**Côté Claude, quand JLShop06 le demandera :**
+5. **CSP (reliquat P2-21)** : chantier dédié. À poser d'abord en `Content-Security-Policy-Report-Only` pour observer, car une CSP stricte casserait Stripe et les nombreux styles inline des fiches. Ne pas la passer en mode bloquant sans cette étape.
+6. **P2-19 navigation** : ni recherche, ni vraies pages catégories (le menu ne pointe que sur 7 ancres de l'accueil). Mis en attente par JLShop06 le 19/08. C'est le plus gros trou restant, avec un impact SEO autant que confiance.
+
+### Méthode — mise en ligne par remplacement global
+
+Le `git push` direct reste bloqué (le dépôt n'est pas autorisé dans les sources de la session Claude). Pour un changement qui touche des dizaines de fichiers, l'éditeur GitHub fichier par fichier n'est pas tenable : passer par **github.dev** (Rechercher → Remplacer, puis Contrôle de code source → message → Ctrl+Entrée pour valider et pousser). Deux réflexes qui ont servi ici : renseigner « fichiers à exclure » avec `**/*.md` pour ne pas réécrire l'historique du README et de `docs/journal-archive.md` au passage ; et vérifier que le nombre d'occurrences annoncé par github.dev correspond exactement au compte obtenu en local avant de confirmer le remplacement.
