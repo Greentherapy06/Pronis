@@ -216,3 +216,19 @@ body{
 /* Ces deux blocs etaient forces a gauche sous 900 px par le style de page. */
 .product-page .product-details .cta-block,
 .product-page .product-details .faq-item{text-align:center!important}
+
+/* ---------- FICHES PRODUIT : MISE EN PAGE 1 COLONNE (19/08/2026) ----------
+   Photo en haut, tout le texte dessous, sur PC comme sur mobile.
+   Le cadre image passe en grille : le visuel principal occupe toute la
+   largeur sur sa propre ligne, les visuels suivants s'alignent en vignettes
+   juste dessous. height:auto neutralise l'attribut height="" du HTML, sinon
+   l'image est etiree et letterboxee.
+   Aucun texte ni aucune structure HTML modifie. */
+.product-page .product-container{flex-direction:column!important;align-items:center!important;gap:40px!important;max-width:820px!important;width:100%!important}
+.product-page .product-image-frame{flex:none!important;display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:14px!important;justify-items:center!important;align-items:center!important;width:100%!important;max-width:640px!important}
+.product-page .product-image-frame img{height:auto!important;max-height:none!important}
+.product-page .product-image-frame img:first-child{grid-column:1/-1!important;width:auto!important;max-width:100%!important;max-height:520px!important}
+.product-page .product-image-frame img:not(:first-child){width:auto!important;height:150px!important;max-width:100%!important;object-fit:contain!important}
+.product-page .product-details{flex:none!important;width:100%!important;max-width:720px!important}
+@media(max-width:620px){.product-page .product-image-frame{grid-template-columns:repeat(3,1fr)!important}.product-page .product-image-frame img:first-child{max-height:420px!important}.product-page .product-image-frame img:not(:first-child){height:100px!important}}
+.product-page + #product-info,#product-info{text-align:center!important}
