@@ -4,7 +4,7 @@
     if (document.querySelector('link[data-lje-theme]')) return;
     var l = document.createElement('link');
     l.rel = 'stylesheet';
-    l.href = '/theme-clair.css?v=20260819e';
+    l.href = '/theme-clair.css?v=20260819f';
     l.setAttribute('data-lje-theme', '1');
     (document.head || document.documentElement).appendChild(l);
   } catch (e) {}
@@ -13,7 +13,7 @@
 
 /* >>> Chargeur i18n par section (optimise: commun + section de la page, fallback i18n.js complet) >>> */
 (function () {
-  var I18N_VER = "20260819e"; // bump ce numero pour forcer le rechargement des fichiers i18n (contourne le cache CDN/navigateur)
+  var I18N_VER = "20260819f"; // bump ce numero pour forcer le rechargement des fichiers i18n (contourne le cache CDN/navigateur)
   function runI18n() {
     try { if (typeof initI18n === 'function') initI18n(); } catch (e) {}
     try { if (typeof window.applyTranslations === 'function') window.applyTranslations(); } catch (e) {}
@@ -547,7 +547,14 @@ return '<div style="margin:0 0 8px;"><strong style="color:#caa86a;letter-spacing
 '<div style="margin-top:10px;font-size:12px;opacity:.85;">' +
 '<a href="/livraison" style="color:#caa86a;">Livraison et retours</a> · ' +
 '<a href="/cgv" style="color:#caa86a;">Conditions générales de vente</a></div>';
+// Le bloc est sorti de la colonne de droite : on le pose apres la section
+// produit (.product-page) pour qu'il soit centre au milieu de la page.
+var wrap = btn.closest ? btn.closest('.product-page') : null;
+if (wrap && wrap.parentNode) {
+wrap.parentNode.insertBefore(box, wrap.nextSibling);
+} else {
 btn.parentNode.insertBefore(box, btn.nextSibling);
+}
 }
 if (document.readyState === 'loading') {
 document.addEventListener('DOMContentLoaded', buildProductInfo);
