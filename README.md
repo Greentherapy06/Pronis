@@ -164,3 +164,33 @@ Claude peut écrire lui-même dans l'éditeur GitHub via le navigateur (lecture 
 ### Parfums restants
 
 Fruit de la passion, pêche blanche, barbe à papa — visuels déjà présents à la racine du dépôt. Même procédure ; il ne manque que le **Price ID Stripe** de chaque parfum.
+
+---
+
+## 🍬 Chantier n°22 (19/08/2026) — gamme huiles complète : passion, pêche blanche, barbe à papa
+
+### Ce qui a été fait
+
+Les 3 derniers parfums de la gamme huiles de massage bio, mis en ligne d’un coup. **Claude a tout écrit et commité lui-même dans l’éditeur GitHub** ; JLShop06 n’a fourni que les Price ID Stripe.
+
+| Parfum | Fichier | Price ID | SKU | Actif (lu sur le packaging) |
+|---|---|---|---|---|
+| Fruit de la passion | `huile-massage-fruit-de-la-passion-bio-divine-xtases.html` | `price_1U5OVdF9c1lWA0HybSuEAEBF` | `LJE-HUILE-PASSION-100ML` | huile de fruit de la passion BIO |
+| Pêche blanche | `huile-massage-peche-blanche-bio-divine-xtases.html` | `price_1U5OYLF9c1lWA0HyqieMKV8a` | `LJE-HUILE-PECHE-100ML` | huile de pêche blanche BIO |
+| Barbe à papa | `huile-massage-barbe-a-papa-bio-divine-xtases.html` | `price_1U5OXBF9c1lWA0HykjXALY7s` | `LJE-HUILE-BARBEPAPA-100ML` | **cire d’abeille BIO** (pas une huile de fruit) |
+
+- **Prix / contenance** : 19,99 € le flacon pompe 100 ml, comme le monoï et la noix de coco.
+- **Images** : visuels de présentation convertis en WebP q90 1024×1024 (`huile-massage-<parfum>-bio-divine-xtases.webp`). 2e visuel : packshot déjà présent au dépôt (`Huile de massage gourmande BIO …webp`, référencé avec `%20`). ⚠️ **Barbe à papa n’a qu’un seul visuel** — le 2e `<img>` a été retiré de sa fiche ; si un packshot arrive un jour, le rajouter.
+- **Accueil** : 3 `<article data-category="huiles-massage-bio">` avec les clés `home_prod_37`, `home_prod_38`, `home_prod_39`.
+- **i18n 5 langues** : les 3 clés ajoutées dans `i18n-home.js` **et** dans `i18n.js` (bundle fallback), pour garder les deux synchronisés sans passer par `node tools/build-i18n.js`.
+- **Maillage interne** : les 5 huiles se pointent mutuellement dans « Vous aimerez aussi ».
+- **SEO / GEO** : title, meta, canonical, OG/Twitter, JSON-LD Product + BreadcrumbList + FAQPage sur chaque fiche ; **15 URLs** ajoutées au `sitemap.xml` avec hreflang complet ; 3 lignes dans `llms.txt` ; 3 `<item>` dans `feed.xml`.
+- **Contrôles passés** (rendu local avant mise en ligne) : JSON-LD valides, XML valides, 0 lien mort, 0 erreur console, 0 réponse HTTP ≥ 400, ajout au panier testé sur les 3 fiches, traductions vérifiées en DE/ES/IT/PT, rendu PC 1440×900 et mobile 390×844.
+
+### État de la gamme
+
+5 parfums en ligne : monoï, noix de coco, fruit de la passion, pêche blanche, barbe à papa. Plus aucun parfum en attente.
+
+### Rappel méthode
+
+Claude édite directement dans l’éditeur GitHub via le navigateur et valide les commits. Seuls les **fichiers binaires (images)** passent encore par la page *upload* — et si le nom arrive déformé, Claude le renomme ensuite (l’éditeur GitHub accepte de renommer un binaire sans y toucher). Le `git push` direct depuis l’environnement Claude reste bloqué.
