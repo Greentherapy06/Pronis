@@ -318,3 +318,6 @@ cartes produit de l'accueil. Le libelle des liens n'est pas modifie. */
 .related-products .related-card:hover .related-card__name{color:#7b1e2b!important}
 @media(max-width:900px){.related-products ul.related-grid{grid-template-columns:repeat(2,1fr)!important;gap:18px!important}}
 @media(max-width:420px){.related-products .related-card__name{font-size:15px!important;padding:12px 8px 14px!important}}
+/* Nettete des vignettes : masque de nettete SVG applique apres reduction par
+   le navigateur (les visuels sources sont conserves tels quels). */
+.related-products .related-card__img img{filter:url(#lje-sharpen)!important}
