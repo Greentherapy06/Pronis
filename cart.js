@@ -4,7 +4,7 @@
     if (document.querySelector('link[data-lje-theme]')) return;
     var l = document.createElement('link');
     l.rel = 'stylesheet';
-    l.href = '/theme-clair.css?v=20260820d';
+    l.href = '/theme-clair.css?v=20260820e';
     l.setAttribute('data-lje-theme', '1');
     (document.head || document.documentElement).appendChild(l);
   } catch (e) {}
@@ -585,7 +585,7 @@ buildProductInfo();
     var c = document.createElementNS(ns, 'feConvolveMatrix');
     c.setAttribute('order', '3');
     c.setAttribute('preserveAlpha', 'true');
-    c.setAttribute('kernelMatrix', '0 -0.45 0 -0.45 2.8 -0.45 0 -0.45 0');
+    c.setAttribute('kernelMatrix', '-0.2 -0.6 -0.2 -0.6 4.2 -0.6 -0.2 -0.6 -0.2');
     c.setAttribute('divisor', '1');
     c.setAttribute('edgeMode', 'duplicate');
     f.appendChild(c);
