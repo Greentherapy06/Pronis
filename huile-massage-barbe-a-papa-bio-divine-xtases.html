@@ -74,6 +74,16 @@
 .faq-item h3{font-size:15px;font-weight:600;color:#C9A86A;margin:0 0 6px 0;line-height:1.5;}
 .faq-item p{font-size:14px;color:#444;line-height:1.8;margin:0;}
 @media(max-width:900px){.product-container{flex-direction:column;text-align:center;align-items:center;}.product-details{text-align:center;max-width:600px;}.cta-block{text-align:left;}.ingredients-grid{grid-template-columns:1fr;}.faq-item{text-align:left;}}
+
+/* ===== Fiche produit : 1 colonne — image en tete, textes centres ===== */
+.product-container{max-width:860px;flex-direction:column;align-items:center;gap:40px;text-align:center;}
+.product-image-frame{flex:none;width:100%;}
+.product-details{flex:none;width:100%;max-width:860px;text-align:center;}
+.product-details .product-list,.product-details ul{padding-left:0;list-style-position:inside;text-align:center;}
+.product-details .cta-block,.product-details .faq-item,.product-details .ingredient-item{text-align:center;}
+.product-details .sans-liste{justify-content:center;}
+.product-details .yuka-badge{display:flex;width:fit-content;margin-left:auto;margin-right:auto;}
+@media(max-width:900px){.product-details{max-width:860px;text-align:center;}.product-details .cta-block,.product-details .faq-item{text-align:center;}}
 </style>
 </head>
 <body>
