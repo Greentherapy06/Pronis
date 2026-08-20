@@ -4,7 +4,7 @@
     if (document.querySelector('link[data-lje-theme]')) return;
     var l = document.createElement('link');
     l.rel = 'stylesheet';
-    l.href = '/theme-clair.css?v=20260820c';
+    l.href = '/theme-clair.css?v=20260820d';
     l.setAttribute('data-lje-theme', '1');
     (document.head || document.documentElement).appendChild(l);
   } catch (e) {}
@@ -567,6 +567,31 @@ buildProductInfo();
    au-dessus du libelle existant. Aucun texte de lien modifie. >>> */
 (function () {
   var IMG = {"pink-star-choco-fraise.html":"pink-star-lubrifiant_comestible_fraise_chocolat_blanc-60ml.webp","deguisement-enseignante.html":"Déguisement d'enseignante.webp","gel_lubrifiant_bio_neutre_divine_xtases.html":"gel-lubrifiant-bio-coco.webp","robe-longue-noire-argentee.html":"Robe longue à décolleté plongeant noire argentée-v2.webp","monster-pussy-strocker.html":"monster.webp","gel_lubrifiant_bio_neutre_sans_parfum_divine_xtases.html":"gel lubrifiant neutre 1.webp","Cockring-vibrant-Marry-Me-Wooomy.html":"Cockring-vibrant-Marry-Me-Wooomy.webp","coffret-bien-etre-intime-bio.html":"Pack intime plaisir et bien-être.webp","anneau_vibrant_telecommande.html":"anneau_vibrant_telecommande_love_connection-xocoon.webp","cockring-vibrant-saturn-hueman.html":"cockring-vibrant-saturn-hueman.webp","huile-massage-peche-blanche-bio-divine-xtases.html":"huile-massage-peche-blanche-bio-divine-xtases.webp","deguisement-infirmière-sexy.html":"Déguisement infirmière sexy.webp","black-empire-my-duchess.html":"vibro-elegance-3.webp","gel_lubrifiant_bio_neutre_framboise_divine_xtases.html":"gel lubrifiant bio miel framboise.webp","mini-robe-noire.html":"Mini robe noire-v2.webp","tanga-taille-haute-dentelle-bleue.html":"Tanga-bleu.webp","deguisement-etudiante.html":"Déguisement d'étudiante.webp","huile-massage-fruit-de-la-passion-bio-divine-xtases.html":"huile-massage-fruit-de-la-passion-bio-divine-xtases.webp","vibro-rechargeable-Indiana.html":"Vibro rechargeable Indiana1.webp","pink_star_sucette_cerise.html":"pink_star_sucette_cerise.webp","huile-massage-barbe-a-papa-bio-divine-xtases.html":"huile-massage-barbe-a-papa-bio-divine-xtases.webp","lubrifiant_eau_lube_tube_fraise_orgie.html":"lubrifiant_eau_lube_tube_fraise_orgie_1.webp","lubrifiant_eau_lube_tube_chocolat_orgie.html":"lubrifiant_eau_tube_chocolat_3.webp","gel_cannabis_orgie.html":"gel-cannabis.webp","orgie-pinacolada.html":"orgie_gel_excitation_pina_colada.webp","red-dolls-energy-pleasure.html":"masturbateur-vaginal-red-dolls-energy.webp","huile-massage-monoi-bio-divine-xtases.html":"huile-massage-monoi-bio-divine-xtases.webp","gel_lubrifiant_bio_neutre_monoi_divine_xtases.html":"gel lubrifiant bio miel monoi.webp","hemp-intense-orgasm.html":"gel-intime-d-excitation-hemp-1.webp","Plug-Anal-Rosy-Gold.html":"plug_anal-rosy_gold.webp","lubrifiant_eau_tube_barbe_a_papa.html":"lubrifiant_eau_tube_barbe_a_papa.webp","dual-vibe-sex-on-the-beach.html":"gel-intime-sex-on-the-beach.webp","le-flateur.html":"le-flateur-6.webp","pink-star.html":"pink-star_lubrifiant_arome_sangria-60_ml.webp","gel_lubrifiant_bio_neutre_vanille_divine_xtases.html":"gel lubrifiant bio miel vanille.webp","huile-massage-noix-de-coco-bio-divine-xtases.html":"huile-massage-noix-de-coco-bio-divine-xtases.webp","Magnum-Opus-vibro.html":"Magnum-Opus-vibro1.webp","Déguisement-Bunny.html":"Déguisement Bunny.webp","gel_lubrifiant_bio_caramel_beurre_sale_divine_xtases.html":"gel lubrifiant bio caramel beurre sale.webp"};
+  function ensureFilter() {
+    if (document.getElementById('lje-sharpen-defs')) return;
+    var ns = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('id', 'lje-sharpen-defs');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    svg.setAttribute('width', '0');
+    svg.setAttribute('height', '0');
+    svg.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
+    var f = document.createElementNS(ns, 'filter');
+    f.setAttribute('id', 'lje-sharpen');
+    f.setAttribute('color-interpolation-filters', 'sRGB');
+    f.setAttribute('x', '0'); f.setAttribute('y', '0');
+    f.setAttribute('width', '100%'); f.setAttribute('height', '100%');
+    var c = document.createElementNS(ns, 'feConvolveMatrix');
+    c.setAttribute('order', '3');
+    c.setAttribute('preserveAlpha', 'true');
+    c.setAttribute('kernelMatrix', '0 -0.45 0 -0.45 2.8 -0.45 0 -0.45 0');
+    c.setAttribute('divisor', '1');
+    c.setAttribute('edgeMode', 'duplicate');
+    f.appendChild(c);
+    svg.appendChild(f);
+    document.body.appendChild(svg);
+  }
   function upgrade() {
     var sec = document.querySelector('.related-products');
     if (!sec || sec.getAttribute('data-lje-cards') === '1') return;
@@ -576,6 +601,7 @@ buildProductInfo();
     if (!links.length) return;
     var done = 0;
     ul.removeAttribute('style');
+    ensureFilter();
     ul.className = 'related-grid';
     Array.prototype.forEach.call(links, function (a) {
       var file = a.getAttribute('href').split('/').pop().split('#')[0].split('?')[0];
