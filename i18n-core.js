@@ -11,6 +11,8 @@
   /* Dans i18n.js ces fonctions etaient au niveau global : on les re-expose. */
   /* (declarations de fonctions hoistees : disponibles des maintenant) */
   G.getLang = getLang;
+  G.pathLang = pathLang;
+  G.langUrl = langUrl;
   G.applyTranslations = applyTranslations;
   G.translateProduct = translateProduct;
   G.translateCart = translateCart;
@@ -28,7 +30,27 @@ window.t = function(key){
 };
 
 
+/* Prefixe de langue dans le chemin : /pt/, /it/, /es/, /de/.
+   Ces pages sont prerendues et servies deja traduites (tools/build-static-i18n.js) :
+   le chemin fait donc foi, avant ?lang= et avant la preference enregistree. */
+function pathLang() {
+  var m = (location.pathname || "").match(/^\/(pt|it|es|de)(?=\/|$)/);
+  return m ? m[1] : "";
+}
+
+/* URL equivalente de la page courante dans une autre langue. */
+function langUrl(lang) {
+  var p = (location.pathname || "/").replace(/^\/(pt|it|es|de)(?=\/|$)/, "");
+  if (!p) p = "/";
+  return (lang === "fr" ? "" : "/" + lang) + p + (location.hash || "");
+}
+
 function getLang() {
+  /* Le prefixe de chemin fait foi meme si le dictionnaire de la langue n'est
+     pas encore charge : les fichiers i18n-*.js sont injectes par cart.js APRES
+     i18n-core.js, et les menus sont construits avant leur arrivee. */
+  var pLang = pathLang();
+  if (pLang) { try { localStorage.setItem("lang", pLang); } catch(e){} return pLang; }
   var params = new URLSearchParams(location.search);
   var urlLang = (params.get("lang") || "").slice(0, 2).toLowerCase();
   if (urlLang && TRANSLATIONS[urlLang]) { try { localStorage.setItem("lang", urlLang); } catch(e){} return urlLang; }
@@ -103,10 +125,31 @@ if (document.readyState === "loading") {
   var SUPPORTED = ['fr','pt','es','it','de'];
   var LANG_ORDER = ['fr','pt','es','de','it'];
   var LABELS = { fr:'FR', pt:'PT', es:'ES', it:'IT', de:'DE' };
+  /* Libelles des deux menus deroulants, traduits : ils sont construits en JS
+     et n'ont donc pas d'attribut data-i18n dans le HTML. */
+  var DD_LABELS = {
+    fr: { cat: 'Cat\u00e9gories', lang: 'Langue' },
+    pt: { cat: 'Categorias',      lang: 'Idioma' },
+    es: { cat: 'Categor\u00edas', lang: 'Idioma' },
+    it: { cat: 'Categorie',       lang: 'Lingua' },
+    de: { cat: 'Kategorien',      lang: 'Sprache' }
+  };
+  function ddLabel(kind){
+    var l = (typeof getLang === 'function') ? getLang() : 'fr';
+    return (DD_LABELS[l] || DD_LABELS.fr)[kind];
+  }
 
   window.setLang = function(lang){
     if (SUPPORTED.indexOf(lang) === -1) lang = 'fr';
     try { localStorage.setItem('lang', lang); } catch(e){}
+    /* Le selecteur envoie vers la vraie page traduite (/pt/..., /it/...) et
+       non plus vers ?lang= : ce sont ces URL-la qui sont indexables. */
+    try {
+      if (typeof langUrl === 'function') {
+        var __t = langUrl(lang);
+        if (__t && __t.split('#')[0] !== location.pathname) { location.href = __t; return; }
+      }
+    } catch(e){}
     try { var __u = new URL(location.href); if (lang === 'fr') { __u.searchParams.delete('lang'); } else { __u.searchParams.set('lang', lang); } history.replaceState(null, '', __u); } catch(e){}
     document.documentElement.lang = lang;
     if (typeof initI18n === 'function') initI18n();
@@ -202,7 +245,7 @@ if (document.readyState === "loading") {
         var key=a.getAttribute('data-i18n')||'';
         return '<a class="dd__item" href="'+a.getAttribute('href')+'"'+(key?' data-i18n="'+key+'"':'')+'>'+a.textContent+'</a>';
       }).join('');
-      catDD=makeDD('dd--cat','Cat\u00e9gories',items);
+      catDD=makeDD('dd--cat',ddLabel('cat'),items);
       nav.textContent=''; nav.appendChild(catDD);
     });
 
@@ -212,7 +255,7 @@ if (document.readyState === "loading") {
       var items=LANG_ORDER.map(function(l){
         return '<button type="button" class="dd__item'+(l===cur?' is-active':'')+'" data-lang="'+l+'">'+LABELS[l]+'</button>';
       }).join('');
-      langDD=makeDD('dd--lang','Langue',items);
+      langDD=makeDD('dd--lang',ddLabel('lang'),items);
       box.textContent=''; box.appendChild(langDD);
       langDD.querySelectorAll('.dd__item').forEach(function(b){ b.addEventListener('click',function(ev){ ev.stopPropagation(); window.setLang(b.getAttribute('data-lang')); }); });
     });
