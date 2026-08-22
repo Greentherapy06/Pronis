@@ -75,6 +75,56 @@ Les cinq huiles de massage BIO listées ci-dessus n'existent qu'en français.
 - [Mentions légales](https://les-jardins-enchantes.com/mentions-legales): informations légales de l'éditeur.
 - [Droit de rétractation](https://les-jardins-enchantes.com/retractation): formulaire et conditions de rétractation.
 
+## Questions fréquentes
+
+### Les Jardins Enchantés livre-t-il en dehors de la France ?
+
+Oui. Les Jardins Enchantés livre en France métropolitaine, à Monaco et dans l'ensemble de l'Union européenne, Belgique, Luxembourg, Italie, Espagne, Allemagne, Pays-Bas et Portugal compris. Les délais indicatifs sont de 3 à 7 jours ouvrés pour la France métropolitaine et Monaco, et de 5 à 14 jours ouvrés pour l'Union européenne. Les colis sont confiés à La Poste / Colissimo ; une livraison en Mondial Relay est possible sur demande.
+
+### Combien coûtent les frais de livraison ?
+
+Les frais de livraison sont de 6,90 € et sont offerts à partir de 75 € d'achat. Le montant exact est affiché dans le panier et rappelé avant la validation finale de la commande.
+
+### La livraison est-elle discrète ?
+
+Oui. Toutes les commandes sont expédiées dans un colis neutre, sans aucune mention extérieure du contenu ni du nom de la boutique.
+
+### Quels moyens de paiement sont acceptés ?
+
+Le paiement s'effectue exclusivement en ligne via Stripe, par carte bancaire (Visa, Mastercard, American Express, CB) et les autres moyens proposés par Stripe selon les pays. Les transactions sont chiffrées en SSL/TLS et certifiées PCI-DSS niveau 1 ; aucune donnée bancaire n'est stockée sur les serveurs de la boutique.
+
+### Faut-il être majeur pour commander ?
+
+Oui. Les produits sont réservés aux personnes majeures de 18 ans ou plus.
+
+### Peut-on retourner un produit ?
+
+Le droit de rétractation est de 14 jours calendaires à compter de la réception, sans justification. Exception d'hygiène prévue à l'article L.221-28 6° du Code de la consommation : un produit scellé qui a été descellé après la livraison ne peut être ni repris ni échangé. Tant que l'emballage scellé d'hygiène est intact, le retour reste possible.
+
+### Comment choisir un bon lubrifiant intime bio ?
+
+Privilégier une composition courte et naturelle, une base à l'eau compatible avec les préservatifs, et une certification bio. Les gels lubrifiants de Les Jardins Enchantés sont bio, fabriqués en France et notés 100/100 sur Yuka.
+
+### Quelle différence entre un lubrifiant à l'eau et un lubrifiant à la silicone ?
+
+Un lubrifiant à base d'eau est compatible avec les préservatifs et avec la plupart des sextoys, et donne une sensation naturelle. Un lubrifiant à base de silicone, lui, peut endommager les jouets en silicone.
+
+### À quoi sert un gel lubrifiant intime ?
+
+Il réduit les frictions et apporte une sensation de glissement plus naturelle. Il aide à limiter les inconforts liés à la sécheresse. Quelques gouttes suffisent, sur les zones intimes externes et sur les accessoires, à renouveler si besoin.
+
+### Les huiles de massage sont-elles comestibles ?
+
+Oui. Les huiles de massage bio de Les Jardins Enchantés sont comestibles, fabriquées en France, notées 100/100 sur Yuka, vendues en flacon pompe de 100 ml à 19,99 €. Elles sont sans paraben et sans colorant, ne tachent pas les draps et conviennent aux massages en couple. Cinq parfums sont disponibles : monoï, noix de coco, fruit de la passion, pêche blanche et barbe à papa.
+
+### Le site existe-t-il dans d'autres langues ?
+
+Oui. Le français est la langue par défaut. Quarante-quatre pages sont également publiées en allemand sous /de/, en espagnol sous /es/, en italien sous /it/ et en portugais sous /pt/.
+
+### Comment contacter Les Jardins Enchantés ?
+
+Par la page Contact ou par e-mail à lesjardinsenchantes06@gmail.com. Toute demande reçoit une réponse sous 5 jours ouvrés maximum.
+
 ## Optional
 
 - Paiement sécurisé via Stripe. Livraison discrète, emballage neutre. Zones desservies : France, Monaco, Belgique, Luxembourg, Italie, Espagne, Allemagne, Pays-Bas, Portugal.
