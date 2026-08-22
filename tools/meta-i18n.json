@@ -1,0 +1,92 @@
+{
+  "_readme": "Surcharges manuelles de <title> et <meta name=description> pour les pages traduites. Utilise par tools/build-static-i18n.js. Toute page absente de ce fichier voit son titre derive du <h1> traduit et sa description derivee du premier paragraphe traduit. N'ajouter ici que ce qui doit etre redige a la main : page d'accueil, titres trop longs, pages sans paragraphe exploitable.",
+
+  "index.html": {
+    "pt": {
+      "title": "Sextoys e Gel Lubrificante Bio | Les Jardins Enchantés",
+      "description": "Loja online de sextoys, géis lubrificantes íntimos bio Yuka 100/100, óleos de massagem e estimuladores do clítoris. Entrega discreta em Portugal e na Europa."
+    },
+    "it": {
+      "title": "Sextoys e Gel Lubrificante Bio | Les Jardins Enchantés",
+      "description": "Negozio online di sextoys, gel lubrificanti intimi bio Yuka 100/100, oli da massaggio e stimolatori clitoridei. Consegna discreta in Italia e in Europa."
+    },
+    "es": {
+      "title": "Sextoys y Gel Lubricante Bio | Les Jardins Enchantés",
+      "description": "Tienda online de sextoys, geles lubricantes íntimos bio Yuka 100/100, aceites de masaje y estimuladores del clítoris. Envío discreto a España y Europa."
+    },
+    "de": {
+      "title": "Sextoys & Bio-Gleitgel | Les Jardins Enchantés",
+      "description": "Onlineshop für Sextoys, intime Bio-Gleitgele mit Yuka 100/100, Massageöle und Klitoris-Stimulatoren. Diskreter Versand nach Deutschland und Europa."
+    }
+  },
+
+  "cookies.html": {
+    "pt": { "description": "Política de cookies de Les Jardins Enchantés: nenhum cookie publicitário, apenas os cookies técnicos estritamente necessários ao funcionamento do site." },
+    "it": { "description": "Politica sui cookie di Les Jardins Enchantés: nessun cookie pubblicitario, solo i cookie tecnici strettamente necessari al funzionamento del sito." },
+    "es": { "description": "Política de cookies de Les Jardins Enchantés: ninguna cookie publicitaria, solo las cookies técnicas estrictamente necesarias para el funcionamiento del sitio." },
+    "de": { "description": "Cookie-Richtlinie von Les Jardins Enchantés: keine Werbe-Cookies, nur die technisch notwendigen Cookies für den Betrieb der Website." }
+  },
+
+  "mini-robe-noire.html": {
+    "pt": { "description": "Mini vestido preto sensual e elástico, costas nuas em decote profundo, corte justo, mangas compridas e fecho de duplo sentido." },
+    "it": { "description": "Mini abito nero sexy ed elasticizzato, schiena nuda con scollo profondo, taglio aderente, maniche lunghe e zip a doppio senso." },
+    "es": { "description": "Minivestido negro sexy y elástico, espalda descubierta con escote profundo, corte ajustado, mangas largas y cremallera de doble sentido." },
+    "de": { "description": "Sexy schwarzes Minikleid aus elastischem Stoff, tiefer Rückenausschnitt, figurbetonter Schnitt, lange Ärmel und Zweiwege-Reißverschluss." }
+  },
+
+  "blog-gel-lubrifiant-aromatise.html": {
+    "it": { "title": "Gel lubrificante aromatizzato: piacere goloso e precauzioni" },
+    "pt": { "title": "Gel lubrificante aromatizado: prazer guloso e precauções" },
+    "es": { "title": "Gel lubricante aromatizado: placer goloso y precauciones" },
+    "de": { "title": "Aromatisiertes Gleitgel: Genuss und Vorsichtsmaßnahmen" }
+  },
+
+  "blog-choisir-premier-sextoy.html": {
+    "pt": { "title": "Como escolher o primeiro sextoy: guia para iniciantes" },
+    "it": { "title": "Come scegliere il primo sextoy: guida per principianti" },
+    "es": { "title": "Cómo elegir tu primer sextoy: guía para principiantes" },
+    "de": { "title": "Das erste Sextoy wählen: Ratgeber für Einsteiger" }
+  },
+
+  "blog-lubrifiant-eau-vs-bio.html": {
+    "pt": { "title": "Lubrificante à base de água ou bio: qual escolher?" },
+    "it": { "title": "Lubrificante a base d'acqua o bio: quale scegliere?" },
+    "es": { "title": "Lubricante a base de agua o bio: ¿cuál elegir?" },
+    "de": { "title": "Gleitgel auf Wasserbasis oder Bio: was wählen?" }
+  },
+
+  "blog-gel-lubrifiant-bio.html": {
+    "pt": { "title": "Gel lubrificante bio: guia completo para escolher bem" },
+    "it": { "title": "Gel lubrificante bio: guida completa per scegliere bene" },
+    "es": { "title": "Gel lubricante bio: guía completa para elegir bien" },
+    "de": { "title": "Bio-Gleitgel: der komplette Ratgeber zur Wahl" }
+  },
+
+  "orgie-pinacolada.html": {
+    "pt": { "title": "Gel Lubrificante Piña Colada Orgie 50 ml" },
+    "it": { "title": "Gel Lubrificante Piña Colada Orgie 50 ml" },
+    "es": { "title": "Gel Lubricante Piña Colada Orgie 50 ml" },
+    "de": { "title": "Gleitgel Piña Colada Orgie 50 ml" }
+  },
+
+  "pink-star-choco-fraise.html": {
+    "pt": { "title": "Pink Star Morango-Chocolate Branco – Gel Lubrificante" },
+    "it": { "title": "Pink Star Fragola-Cioccolato Bianco – Gel Lubrificante" },
+    "es": { "title": "Pink Star Fresa-Chocolate Blanco – Gel Lubricante" },
+    "de": { "title": "Pink Star Erdbeere-Weiße Schokolade – Gleitgel" }
+  },
+
+  "robe-longue-noire-argentee.html": {
+    "pt": { "title": "Vestido longo preto e prateado com decote profundo" },
+    "it": { "title": "Abito lungo nero e argento con scollo profondo" },
+    "es": { "title": "Vestido largo negro y plateado con escote profundo" },
+    "de": { "title": "Langes schwarz-silbernes Kleid mit tiefem Ausschnitt" }
+  },
+
+  "tanga-taille-haute-dentelle-bleue.html": {
+    "pt": { "title": "Tanga de cintura subida em renda azul, atado ajustável" },
+    "it": { "title": "Tanga a vita alta in pizzo blu, lacci regolabili" },
+    "es": { "title": "Tanga de talle alto en encaje azul, cordones ajustables" },
+    "de": { "title": "High-Waist-Tanga aus blauer Spitze, verstellbar" }
+  }
+}
