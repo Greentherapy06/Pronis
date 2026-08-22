@@ -389,8 +389,8 @@ function buildSitemap(plan) {
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
   ];
-  for (const { file, langs } of plan) {
-    const available = ["fr", ...LANGS.filter((l) => langs.has(l))];
+  for (const { file, avail } of plan) {
+    const available = ["fr", ...LANGS.filter((l) => avail.has(l))];
     const alternates = available
       .map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${urlFor(file, l)}"/>`)
       .concat([`    <xhtml:link rel="alternate" hreflang="x-default" href="${urlFor(file, "fr")}"/>`])
@@ -426,24 +426,29 @@ function main() {
     const html = fs.readFileSync(path.join(ROOT, file), "utf8");
     const keys = contentKeys(html);
     const langs = new Set(LANGS.filter((l) => translatableIn(keys, T, l)));
-    return { file, html, keys, langs };
+    /* Pages ecrites en dur (sans cles data-i18n) : si une version traduite existe
+       deja sur le disque, elle compte pour les hreflang, le sitemap et les liens
+       internes, mais n'est jamais regeneree ni ecrasee. */
+    const onDisk = LANGS.filter((l) => fs.existsSync(path.join(ROOT, l, file)));
+    const avail = new Set([...langs, ...onDisk]);
+    return { file, html, keys, langs, avail };
   });
 
   /* Index inverse : quelles pages existent dans quelle langue (pour les liens). */
   const generatedByLang = {};
   for (const l of LANGS) generatedByLang[l] = new Set();
-  for (const { file, langs } of plan) for (const l of langs) generatedByLang[l].add(file);
+  for (const { file, avail } of plan) for (const l of avail) generatedByLang[l].add(file);
 
   const report = { generated: 0, skipped: [], missingTitle: [], missingDesc: [], longTitle: [], perLang: {} };
   for (const l of LANGS) report.perLang[l] = 0;
 
-  for (const { file, html, langs } of plan) {
+  for (const { file, html, langs, avail } of plan) {
     if (langs.size === 0) {
       report.skipped.push(file);
     }
     for (const lang of langs) {
       const { html: out, title, description } = buildPage(
-        html, file, lang, T, overrides, langs, generatedByLang[lang]
+        html, file, lang, T, overrides, avail, generatedByLang[lang]
       );
       if (!title) report.missingTitle.push(`${lang}/${file}`);
       if (!description) report.missingDesc.push(`${lang}/${file}`);
@@ -458,7 +463,7 @@ function main() {
     }
     /* Page FR : hreflang remis a jour (contenu inchange). */
     if (!CHECK_ONLY) {
-      fs.writeFileSync(path.join(ROOT, file), updateFrenchPage(html, file, langs), "utf8");
+      fs.writeFileSync(path.join(ROOT, file), updateFrenchPage(html, file, avail), "utf8");
     }
   }
 
@@ -467,7 +472,7 @@ function main() {
   }
 
   /* --- Rapport --- */
-  const totalUrls = plan.reduce((n, p) => n + 1 + p.langs.size, 0);
+  const totalUrls = plan.reduce((n, p) => n + 1 + p.avail.size, 0);
   console.log("");
   console.log("Prerendu multilingue " + (CHECK_ONLY ? "(simulation)" : "(ecriture)"));
   console.log("-------------------------------------------");
