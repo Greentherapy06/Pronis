@@ -64,18 +64,6 @@ Boutique certifiée Bio Organic et Yuka 100/100 sur les produits bio. Paiement s
 - [Mentions légales](https://les-jardins-enchantes.com/mentions-legales.html): informations légales de l'éditeur.
 - [Droit de rétractation](https://les-jardins-enchantes.com/retractation.html): formulaire et conditions de rétractation.
 
-## Versions linguistiques
-
-Le site est disponible en 5 langues. Chaque version a ses propres URL indexables :
-
-- Français (version de référence) : https://les-jardins-enchantes.com/
-- Português : https://les-jardins-enchantes.com/pt/
-- Italiano : https://les-jardins-enchantes.com/it/
-- Español : https://les-jardins-enchantes.com/es/
-- Deutsch : https://les-jardins-enchantes.com/de/
-
-Règle d'URL : la version traduite d'une page reprend son adresse française précédée du code langue. Exemple : https://les-jardins-enchantes.com/gel_lubrifiant_bio_neutre_monoi_divine_xtases devient https://les-jardins-enchantes.com/pt/gel_lubrifiant_bio_neutre_monoi_divine_xtases en portugais.
-
 ## Optional
 
 - Paiement sécurisé via Stripe. Livraison discrète, emballage neutre. Zones desservies : France, Monaco, Belgique, Luxembourg, Italie, Espagne, Allemagne, Pays-Bas, Portugal.

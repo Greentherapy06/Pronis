@@ -14,11 +14,5 @@ Disallow: /api/
 Disallow: /veille-concurrents.html
 Disallow: /veille-concurrents
 
-# Page interne (veille concurrentielle) — toutes langues
-Disallow: /pt/veille-concurrents
-Disallow: /it/veille-concurrents
-Disallow: /es/veille-concurrents
-Disallow: /de/veille-concurrents
-
 # Sitemap
 Sitemap: https://les-jardins-enchantes.com/sitemap.xml
