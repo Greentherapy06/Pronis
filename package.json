@@ -1,10 +1,15 @@
 {
-    "scripts": {
-          "build:i18n": "node tools/build-i18n.js"
-    },
+  "scripts": {
+    "build:i18n": "node tools/build-i18n.js",
+    "build:static-i18n": "node tools/build-static-i18n.js",
+    "check:static-i18n": "node tools/check-static-i18n.js"
+  },
   "dependencies": {
     "stripe": "^18.1.1",
     "@vercel/kv": "^3.0.0",
     "resend": "^4.0.0"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0"
   }
 }
