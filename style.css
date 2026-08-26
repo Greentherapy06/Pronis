@@ -458,6 +458,8 @@ article strong {
     font-family: 'Inter', sans-serif;
 }
 
+.blog-article strong{display:inline;margin-top:0;font-size:inherit;font-weight:600;font-family:inherit}
+
 /* BUTTON AJOUT PANIER */
 button {
     margin-top: 14px;
