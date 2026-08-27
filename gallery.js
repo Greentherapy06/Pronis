@@ -2,10 +2,12 @@
    Charge uniquement sur les fiches qui appellent ce script. Aucune dependance. */
 (function () {
   'use strict';
+  if (window.__ljeGalleryReady) return;
+  window.__ljeGalleryReady = 1;
   var frame = document.querySelector('.product-image-frame');
   if (!frame) return;
   var imgs = [].slice.call(frame.querySelectorAll('img'));
-  if (imgs.length < 2) return;
+  if (!imgs.length) return;
 
   var CSS = ''
     + '.product-image-frame img{cursor:zoom-in}'
