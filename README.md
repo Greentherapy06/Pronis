@@ -328,3 +328,29 @@ Aperçu validé par JLShop06 **avant tout commit** : les nouveaux visuels ont é
 ### Reste à faire sur ce sujet
 
 - Rien de bloquant. Si des vignettes `<img>` sont ajoutées un jour dans « Vous aimerez aussi » sur les fiches huiles, penser au cadre `.related-card__img` qui est en 1:1.
+
+---
+
+## 🔍 Chantier n°27 (27/08/2026) — galerie photo sur les fiches huiles
+
+### Pourquoi
+
+Depuis le chantier n°26, chaque fiche huile a 2 photos, mais la 2e n'était qu'une vignette de 150 px : impossible de la regarder en grand. JLShop06 a demandé qu'un clic l'ouvre.
+
+### Ce qui a été fait
+
+- Nouveau fichier **`gallery.js`** (4,7 Ko, sans dépendance, CSS injecté par le script lui-même) :
+  - clic sur une vignette → elle prend la place de la grande photo (échange des attributs `src`, `alt`, `width`, `height`, `loading`, `fetchpriority` : le CSS place les images par position, donc l'échange suffit) ;
+  - clic sur la grande photo → ouverture en plein écran, fond sombre ;
+  - fermeture par la croix, la touche Échap ou un clic à côté ; flèches ‹ › et touches gauche/droite pour passer d'une photo à l'autre ; défilement de la page bloqué pendant l'ouverture ;
+  - accessibilité : vignettes au clavier (`tabindex`, `role=button`, Entrée/Espace), `role=dialog` + `aria-modal` sur la fenêtre, `aria-label` sur chaque bouton.
+- Le script s'auto-désactive s'il n'y a pas de `.product-image-frame` ou moins de 2 images : aucun risque sur une page sans galerie.
+- **Activé sur les 5 fiches huiles uniquement** (choix de JLShop06 : on teste avant d'étendre), par une ligne `<script src=gallery.js defer>` avant `</body>`. Aucun autre fichier touché, aucun texte modifié.
+
+### Contrôles passés
+
+`node --check` sur gallery.js ; comportement testé en direct sur le site avant activation (script injecté dans la page, sans commit) puis revérifié après mise en ligne sur la fiche barbe à papa : échange vignette ↔ grande photo OK, plein écran OK, Échap OK, flèche suivante OK, défilement bien rétabli à la fermeture. 5 fiches sur 5 servent bien le script. Aucune erreur JavaScript côté site.
+
+### Pour étendre au reste du site
+
+Deux voies : ajouter la même ligne `<script>` sur les autres fiches, ou déplacer l'appel dans `cart.js` (chargé partout) — dans ce cas le script se chargera aussi sur l'accueil et les pages légales, où il ne fera rien (garde-fou intégré). Penser au cache-bust si `gallery.js` est modifié.
