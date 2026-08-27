@@ -245,7 +245,11 @@ function rewriteLinks($, lang, generatedForLang) {
      si elle a ete generee, sinon on laisse la version francaise. */
   $("a[href]").each((i, el) => {
     const $el = $(el);
-    const raw = $el.attr("href");
+    let raw = $el.attr("href");
+    /* Les liens ecrits en absolu vers le site (https://.../page.html) restaient
+       toujours francais sur les pages traduites : on les ramene a un chemin
+       interne pour qu'ils soient prefixes par la langue comme les autres. */
+    if (raw && raw.startsWith(BASE + "/")) raw = raw.slice(BASE.length);
     if (!raw || !raw.startsWith("/")) return;
     const [pathPart, rest] = [raw.split(/[?#]/)[0], raw.slice(raw.split(/[?#]/)[0].length)];
     let slug = decodeURI(pathPart.replace(/^\//, "").replace(/\.html$/, ""));
