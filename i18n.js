@@ -2,7 +2,7 @@
 // NE PAS EDITER A LA MAIN. Genere par tools/build-i18n.js a partir de :
 //   i18n-common.js, i18n-home.js, i18n-blog.js, i18n-legal.js, i18n-product.js (traductions) + i18n-core.js (moteur, copie verbatim)
 // Regenerer : node tools/build-i18n.js — puis committer i18n.js.
-// Genere le 2026-08-26 — 5 langues x 1237 cles (fr).
+// Genere le 2026-08-27 — 5 langues x 1237 cles (fr).
 
 const TRANSLATIONS = {
   "fr": {
@@ -1751,6 +1751,12 @@ const TRANSLATIONS = {
     "blog_c10_tag": "Verstehen",
     "blog_c10_title": "Perimenopause und Scheidentrockenheit: verstehen und handeln",
     "blog_c10_desc": "Dauer der Perimenopause, warum die Schleimhaut zuerst reagiert, begleitende Anzeichen und konkrete Schritte für mehr Komfort.",
+    "blog_c6_tag": "Ratgeber",
+    "blog_c6_title": "Bio-Massageöl: richtig auswählen und zu zweit anwenden",
+    "blog_c6_desc": "Zusammensetzung, Textur, Duft: die Kriterien für die Wahl eines Bio-Massageöls, die Methode in 6 Schritten für eine Massage zu zweit und die zu beachtenden Vorsichtsmaßnahmen.",
+    "blog_c7_tag": "Sicherheit",
+    "blog_c7_title": "Gleitmittel und Kondom: welche Kombinationen sind verträglich?",
+    "blog_c7_desc": "Wasser-, Silikon- oder Ölbasis: die vollständige Verträglichkeitstabelle mit Kondomen und Sextoys und die Sicherheitsregeln, die man nicht vergessen sollte.",
     "cgv_0": "Allgemeine Geschäftsbedingungen",
     "cgv_1": "Gültig für jede auf der Website aufgegebene Bestellung",
     "cgv_2": "Mit der Bestätigung Ihrer Bestellung bei Les Jardins Enchantés bestätigen Sie, dass Sie die vorliegenden Allgemeinen Geschäftsbedingungen (AGB) zur Kenntnis genommen haben und diese vorbehaltlos akzeptieren.",
@@ -2990,6 +2996,12 @@ const TRANSLATIONS = {
     "blog_c10_tag": "Entender",
     "blog_c10_title": "Perimenopausia y sequedad íntima: entender y actuar",
     "blog_c10_desc": "Duración de la perimenopausia, por qué la mucosa reacciona primero, signos asociados y gestos concretos para recuperar el confort.",
+    "blog_c6_tag": "Guía",
+    "blog_c6_title": "Aceite de masaje bio: cómo elegirlo y usarlo en pareja",
+    "blog_c6_desc": "Composición, textura, aroma: los criterios para elegir un aceite de masaje bio, el método en 6 pasos para un masaje a dos y las precauciones que hay que conocer.",
+    "blog_c7_tag": "Seguridad",
+    "blog_c7_title": "Lubricante y preservativo: ¿qué compatibilidades?",
+    "blog_c7_desc": "Base agua, silicona o aceite: la tabla de compatibilidad completa con preservativos y sextoys, y las reglas de seguridad que no hay que olvidar.",
     "cgv_0": "Condiciones Generales de Venta",
     "cgv_1": "Aplicables a todo pedido realizado en el sitio",
     "cgv_2": "Al validar su pedido en Les Jardins Enchantés, reconoce haber tomado conocimiento de las presentes Condiciones Generales de Venta (CGV) y aceptarlas sin reservas.",
@@ -4229,6 +4241,12 @@ const TRANSLATIONS = {
     "blog_c10_tag": "Capire",
     "blog_c10_title": "Perimenopausa e secchezza intima: capire e agire",
     "blog_c10_desc": "Durata della perimenopausa, perché la mucosa reagisce per prima, segnali associati e gesti concreti per ritrovare comfort.",
+    "blog_c6_tag": "Guida",
+    "blog_c6_title": "Olio da massaggio bio: come sceglierlo e usarlo in coppia",
+    "blog_c6_desc": "Composizione, consistenza, profumo: i criteri per scegliere un olio da massaggio bio, il metodo in 6 passaggi per un massaggio in due e le precauzioni da conoscere.",
+    "blog_c7_tag": "Sicurezza",
+    "blog_c7_title": "Lubrificante e preservativo: quali compatibilità?",
+    "blog_c7_desc": "Base acquosa, silicone o olio: la tabella di compatibilità completa con preservativi e sextoys, e le regole di sicurezza da non dimenticare.",
     "cgv_0": "Condizioni Generali di Vendita",
     "cgv_1": "Applicabili a qualsiasi ordine effettuato sul sito",
     "cgv_2": "Convalidando il tuo ordine su Les Jardins Enchantés, riconosci di aver preso visione delle presenti Condizioni Generali di Vendita (CGV) e di accettarle senza riserve.",
@@ -5468,6 +5486,12 @@ const TRANSLATIONS = {
     "blog_c10_tag": "Compreender",
     "blog_c10_title": "Perimenopausa e secura íntima: compreender e agir",
     "blog_c10_desc": "Duração da perimenopausa, porque a mucosa reage primeiro, sinais associados e gestos concretos para recuperar o conforto.",
+    "blog_c6_tag": "Guia",
+    "blog_c6_title": "Óleo de massagem bio: como escolher e usar a dois",
+    "blog_c6_desc": "Composição, textura, perfume: os critérios para escolher um óleo de massagem bio, o método em 6 etapas para uma massagem a dois e as precauções a conhecer.",
+    "blog_c7_tag": "Segurança",
+    "blog_c7_title": "Lubrificante e preservativo: que compatibilidades?",
+    "blog_c7_desc": "Base de água, silicone ou óleo: a tabela de compatibilidade completa com preservativos e sextoys, e as regras de segurança a não esquecer.",
     "cgv_0": "Condições Gerais de Venda",
     "cgv_1": "Aplicáveis a qualquer encomenda efetuada no site",
     "cgv_2": "Ao validar a sua encomenda em Les Jardins Enchantés, reconhece ter tomado conhecimento das presentes Condições Gerais de Venda (CGV) e aceitá-las sem reservas.",
