@@ -611,3 +611,16 @@ buildProductInfo();
   } else { upgrade(); }
 })();
 /* <<< fin vignettes "Vous aimerez aussi" <<< */
+
+/* >>> Galerie photo : charge gallery.js sur les fiches produit >>> */
+(function () {
+  try {
+    if (!document.querySelector('.product-image-frame')) return;
+    if (document.querySelector('script[src*="gallery.js"]')) return;
+    var s = document.createElement('script');
+    s.src = '/gallery.js?v=20260827b';
+    s.defer = true;
+    (document.body || document.documentElement).appendChild(s);
+  } catch (e) {}
+})();
+/* <<< fin galerie photo <<< */
