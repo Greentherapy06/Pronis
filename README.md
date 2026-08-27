@@ -354,3 +354,25 @@ Depuis le chantier n°26, chaque fiche huile a 2 photos, mais la 2e n'était qu'
 ### Pour étendre au reste du site
 
 Deux voies : ajouter la même ligne `<script>` sur les autres fiches, ou déplacer l'appel dans `cart.js` (chargé partout) — dans ce cas le script se chargera aussi sur l'accueil et les pages légales, où il ne fera rien (garde-fou intégré). Penser au cache-bust si `gallery.js` est modifié.
+
+---
+
+## 🖼️ Chantier n°28 (27/08/2026) — galerie photo étendue à tout le catalogue
+
+### Ce qui a été fait
+
+- **`gallery.js`** : ajout d'une garde `window.__ljeGalleryReady` (aucun risque de double initialisation si le script est chargé deux fois) et le seuil passe de 2 à 1 image — les fiches à une seule photo ont désormais elles aussi le plein écran au clic.
+- **`cart.js`** : nouveau bloc en fin de fichier qui charge `/gallery.js` sur toute page contenant un `.product-image-frame`, et **seulement** si aucune balise `gallery.js` n'est déjà présente. La galerie est donc active sur les 39 fiches du site sans avoir à éditer chaque page.
+- **Balise `<script src=gallery.js>` posée directement sur 14 fiches** (les 5 huiles + robe longue, mini robe, tanga, le flateur, red dolls, cockring Marry Me, plug anal Rosy Gold, anneau vibrant, black empire) : sur celles-là la galerie est active immédiatement, sans attendre l'expiration du cache.
+
+### ⚠️ Le point de vigilance : cache de `cart.js`
+
+Vercel sert les `.js` avec `max-age=86400`. Les pages appellent `cart.js` avec un numéro de version figé (`?v=20260819e` / `?v=20260819g` selon les pages) : tant que ce numéro ne change pas, un visiteur déjà venu garde l'ancien `cart.js` jusqu'à 24 h. Conséquence sur ce chantier : sur les 25 fiches qui n'ont pas reçu la balise en direct, la galerie apparaît pour les nouveaux visiteurs tout de suite, et pour les autres au plus tard le lendemain. Pour un déploiement instantané, il faut soit poser la balise sur chaque fiche, soit incrémenter le `?v=` de `cart.js` sur toutes les pages (remplacement global via github.dev).
+
+### Reste à faire (optionnel)
+
+- Poser la balise `<script src=gallery.js?v=20260827b defer>` avant `</body>` sur les 25 fiches restantes : Déguisement-Bunny, Magnum-Opus-vibro, cockring-vibrant-saturn-hueman, coffret-bien-etre-intime-bio, deguisement-enseignante, deguisement-etudiante, deguisement-infirmière-sexy, dual-vibe-sex-on-the-beach, gel_cannabis_orgie, les 6 gels lubrifiants bio, hemp-intense-orgasm, les 3 lubrifiants Orgie en tube, monster-pussy-strocker, orgie-pinacolada, les 3 pink star, vibro-rechargeable-Indiana.
+
+### Contrôles passés
+
+`node --check` sur `cart.js` et `gallery.js` après commit, diff de `cart.js` vérifié (uniquement le bloc ajouté, aucune autre ligne touchée), présence de la balise vérifiée fiche par fiche dans le dépôt. Aucun texte, prix, image ni structure de contenu modifié dans ce chantier.
