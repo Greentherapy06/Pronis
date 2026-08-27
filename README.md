@@ -296,3 +296,35 @@ Audit de l'état réel du plan de confiance, vérifié fichier par fichier dans 
 ### Méthode — mise en ligne par remplacement global
 
 Le `git push` direct reste bloqué (le dépôt n'est pas autorisé dans les sources de la session Claude). Pour un changement qui touche des dizaines de fichiers, l'éditeur GitHub fichier par fichier n'est pas tenable : passer par **github.dev** (Rechercher → Remplacer, puis Contrôle de code source → message → Ctrl+Entrée pour valider et pousser). Deux réflexes qui ont servi ici : renseigner « fichiers à exclure » avec `**/*.md` pour ne pas réécrire l'historique du README et de `docs/journal-archive.md` au passage ; et vérifier que le nombre d'occurrences annoncé par github.dev correspond exactement au compte obtenu en local avant de confirmer le remplacement.
+
+---
+
+## 🖼️ Chantier n°26 (27/08/2026) — nouveaux visuels de la gamme huiles de massage bio
+
+### Pourquoi
+
+JLShop06 a déposé à la racine du dépôt 5 nouveaux visuels « L'ART DU PLAISIR » (photos d'ambiance dorées, 1023×1537) et voulait les passer en image principale des 5 huiles, en gardant les visuels existants en 2e image.
+
+### Ce qui a été fait
+
+- **Renommage des 5 binaires** : `Huile de massage monoi.webp`, `huile de massage Coco.webp`, etc. → `huile-massage-<parfum>-bio-divine-xtases-v2.webp`. Noms sans espace ni accent, cohérents avec le reste du site. Un commit par fichier.
+- **`theme-clair.css`** : la règle `.product-grid article[data-category=huiles-massage-bio] img` passe de `aspect-ratio:1/1` à `2/3`. Les nouveaux visuels sont en portrait ; dans un cadre carré ils auraient été rognés en haut et en bas. La section utilise désormais le même cadre que les autres.
+- **`index.html`** : les 5 cartes de la section `#huiles-massage-bio` pointent sur les `-v2.webp` ; `width`/`height` corrigés de 1024×1024 à 1023×1537 (évite le décalage de mise en page au chargement) ; cache-bust `theme-clair.css` en `?v=20260827a`.
+- **Les 5 fiches produit** : image 1 = nouveau visuel, image 2 = ancien visuel principal. `og:image`, `twitter:image` et le champ `image` du JSON-LD Product pointent sur le nouveau visuel. La fiche barbe à papa passe de 1 à 2 images — le trou signalé au chantier n°22 est comblé.
+- **Choix de JLShop06 : 2 images par fiche.** Les 4 packshots `Huile de massage gourmande BIO ….webp` ne sont donc plus affichés nulle part. Fichiers conservés au dépôt, rien de supprimé.
+- **Attributs `alt` des 2e images réécrits** — seul texte modifié de ce chantier : l'ancien `alt` décrivait le packshot qui n'est plus à cette place. Aucun titre, prix, description, puce, FAQ ni structure touché.
+- **`feed.xml`** : les 5 `<item>` des huiles pointent sur les nouveaux visuels.
+
+### Contrôles passés
+
+Aperçu validé par JLShop06 **avant tout commit** : les nouveaux visuels ont été injectés en direct dans le DOM du site live (aucune écriture, un F5 annulait tout). Après mise en ligne : 15 images en HTTP 200, 0 lien mort, JSON-LD valide sur les 5 fiches, `feed.xml` valide en XML, hauteurs d'image identiques sur les 5 cartes (447×670 en 1280 px), 0 erreur console. Rendu mobile réel non revérifié (la fenêtre du navigateur de la session ne descend pas sous 980 px) — la règle appliquée est celle déjà en production sur toutes les autres sections.
+
+### Méthode — deux déblocages réutilisables
+
+1. **Renommer un fichier binaire dans GitHub** : ouvrir `github.com/<repo>/edit/main/<fichier>`. L'éditeur affiche « Binary file content is not editable » mais le champ **File name** reste actif : renommer puis Commit changes. C'est ainsi que les 5 `.webp` ont été renommés sans passer par la page upload.
+2. **Édition fiable des fichiers texte** : l'instance CodeMirror de l'éditeur GitHub est joignable via `document.querySelector('.cm-content').cmTile.view`. Claude lit le document, compte les occurrences de chaque chaîne à remplacer, s'arrête si le compte ne correspond pas à ce qui est attendu, puis écrit. Bien plus sûr que la saisie clavier, et ça évite de retaper un fichier entier.
+   - ⚠️ Piège rencontré sur la fiche barbe à papa : la 2e image insérée contenait la chaîne recherchée pour l'image principale, elle a donc été écrasée au passage du remplacement suivant. **Faire les insertions après les remplacements**, et toujours relire le document produit avant de commiter.
+
+### Reste à faire sur ce sujet
+
+- Rien de bloquant. Si des vignettes `<img>` sont ajoutées un jour dans « Vous aimerez aussi » sur les fiches huiles, penser au cadre `.related-card__img` qui est en 1:1.
