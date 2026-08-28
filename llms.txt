@@ -78,7 +78,7 @@ Le site est en français par défaut. Chaque fiche traduite existe sous /de/, /e
 - [Version italienne](https://les-jardins-enchantes.com/it/): 52 pages en italien.
 - [Version portugaise](https://les-jardins-enchantes.com/pt/): 52 pages en portugais.
 
-Les cinq huiles de massage BIO listées ci-dessus n'existent qu'en français.
+Les cinq huiles de massage BIO listées ci-dessus existent aussi en allemand, espagnol, italien et portugais, sous /de/, /es/, /it/ et /pt/.
 
 ## Informations pratiques
 
