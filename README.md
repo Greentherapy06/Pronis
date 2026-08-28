@@ -376,3 +376,52 @@ Vercel sert les `.js` avec `max-age=86400`. Les pages appellent `cart.js` avec u
 ### Contrôles passés
 
 `node --check` sur `cart.js` et `gallery.js` après commit, diff de `cart.js` vérifié (uniquement le bloc ajouté, aucune autre ligne touchée), présence de la balise vérifiée fiche par fiche dans le dépôt. Aucun texte, prix, image ni structure de contenu modifié dans ce chantier.
+
+---
+
+## 🧴 Chantier n°29 (28/08/2026) — logo d'en-tête + textes éditoriaux bio / made in France sur l'accueil
+
+### Ce qui a été fait
+
+- **Logo d'en-tête** : les 238 pages (fr + de/es/it/pt) pointaient encore sur `les-jardins-enchantes.webp` (bannière 1536×1024). Remplacé par `logo.webp` (400×400), `width/height` passés à `80×80` pour supprimer le décalage au chargement. Commit `34b596e`.
+- **Bloc éditorial sous « Gel Lubrifiant Bio »** (accueil, 5 langues) : deux paragraphes + un CTA, sans encart, sans mot en gras. Commits `3517822` puis `2c2f959` (correction factuelle).
+- **Bloc éditorial identique sous « Huile de Massage Bio »** (accueil, 5 langues). Commit `17889db`.
+- **Liens des 5 vignettes d'huiles** sur `/de/ /es/ /it/ /pt/` : ils pointaient vers les pages françaises alors que les traductions existent et sont au sitemap → corrigés vers la bonne langue. `llms.txt` : la ligne « les cinq huiles n'existent qu'en français » était fausse, corrigée. Commit `a5dcb38`.
+- **Bump du cache i18n** : sans lui, aucune des traductions ci-dessus n'était visible. Commit `6ef0f47`.
+
+### ♻️ Procédure pour ajouter un bloc éditorial sous une autre catégorie
+
+1. **Lire les fiches produit concernées** et n'écrire que ce qu'elles disent (voir « erreurs à ne pas refaire »).
+2. `style.css` : la classe `.tstory` (paragraphes + CTA doré) existe déjà. Rien à créer.
+3. Dans chaque `index.html` (racine + `de/ es/ it/ pt/`), insérer juste après le `<h2 class="cat-section__title" data-i18n="home_cat_X">` :
+   `<div class="tstory"><p data-i18n="home_XXX_p1">…</p><p data-i18n="home_XXX_p2">…</p><a class="tstory__cta" href="…" data-i18n="home_XXX_cta">…</a></div>`
+   avec le texte **traduit en dur dans la langue du dossier** (c'est ce que lit Googlebot) et le lien CTA préfixé par la langue (`/de/…`).
+4. `i18n-home.js` : ajouter les 3 clés dans les 5 blocs de langue. ⚠️ L'ordre réel dans le fichier est **`fr, pt, it, es, de`** — boucler sur `fr, de, es, it, pt` met l'allemand dans le slot portugais (erreur commise le 28/08, vue à la relecture avant publication).
+5. La surcharge de couleur du thème clair est **dans le `<style>` de chaque index.html**, pas dans `theme-clair.css`. Couleur du texte : `#33241b` (le `#5a4232` initial était trop pâle).
+6. **Bump du cache i18n** — obligatoire, voir ci-dessous.
+7. `node tools/build-i18n.js` pour régénérer `i18n.js`.
+
+### ⚠️ Le piège qui a coûté deux publications : le cache i18n
+
+`cart.js` charge `i18n-core.js`, `i18n-common.js` et `i18n-home.js` avec `?v=I18N_VER`. Tant que ce numéro ne bouge pas, le CDN Vercel et les navigateurs servent l'ancienne copie pendant 24 h : les nouvelles clés n'existent pas côté client et **le texte reste en français alors que le titre, lui, se traduit** (sa clé était déjà dans le fichier mis en cache). Après toute modification d'un `i18n-*.js` :
+
+1. `cart.js` → `var I18N_VER = "AAAAMMJJx"` ;
+2. remplacement global sur toutes les pages : `cart.js?v=…` → le même numéro.
+
+(28/08 : `20260822a` → `20260828a`, 269 fichiers.)
+
+### 🚫 Erreurs à ne pas refaire (commises le 28/08)
+
+- **Ne jamais écrire une caractéristique produit de mémoire.** Les gels bio ont d'abord été décrits « à base d'eau » et « compatibles avec les préservatifs » : c'est faux — ils sont à la **cire d'abeille**, donc **incompatibles avec le latex**. Les fiches produit disaient juste depuis le début.
+- **Vérifier chaque affirmation par script, fiche par fiche.** Exemple huiles : 4 sont « certifiées Bio Organic », la Monoï est « labellisée Nature et Progrès » et la seule à l'huile d'argan — généraliser aurait été faux.
+- **Ne garder une formulation que si elle est vraie pour tous les produits cités** : « se rince facilement » retenu, « se rince à l'eau » écarté (seules 2 fiches sur 5 l'écrivent).
+
+### Contrôles passés
+
+`node --check i18n-home.js`, chargement des 5 dictionnaires et lecture des clés une par une, `node tools/check-static-i18n.js` (208 pages traduites, 0 anomalie), existence sur disque de chaque cible de lien, captures de rendu ordi + mobile + une langue étrangère, diff relu ligne à ligne. Aucun texte, titre, hero ni structure de contenu existants modifiés.
+
+### Reste à faire
+
+- `node tools/build-i18n.js` : le fallback `i18n.js` n'a pas les clés `home_bio_*` / `home_oil_*` (impossible à régénérer depuis github.dev, le fichier fait 890 Ko).
+- Sur `/de/ /es/ /it/ /pt/`, `coffret-bien-etre-intime-bio`, `gel_lubrifiant_bio_neutre_sans_parfum`, `contact`, `faq` et `livraison` pointent encore vers le français : ces pages n'existent pas traduites, il faut d'abord les créer.
+- Reformuler dans la FAQ de l'accueil les deux phrases génériques sur les lubrifiants à base d'eau « compatibles préservatifs », placées juste sous une question sur les gels bio maison — un lecteur ou une IA peut faire le raccourci.
